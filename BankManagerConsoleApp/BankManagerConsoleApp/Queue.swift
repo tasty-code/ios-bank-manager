@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Queue<T> {
-    private var queue: [T] = []
+struct Queue<Type> {
+    private var queue: [Type] = []
     
     var count: Int {
         queue.count
@@ -18,15 +18,15 @@ struct Queue<T> {
         queue.isEmpty
     }
     
-    var peek: T? {
+    var peek: Type? {
         isEmpty ? nil : queue.first
     }
     
-    mutating func enqueue(_ element: T) {
+    mutating func enqueue(_ element: Type) {
         queue.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Type? {
         isEmpty ? nil : queue.removeFirst()
     }
     
