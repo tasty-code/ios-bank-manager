@@ -8,29 +8,25 @@
 import Foundation
 
 struct Queue<Type> {
-    private var queue: [Type] = []
-    
-    var count: Int {
-        queue.count
-    }
+    private var linkedList: LinkedList<Type> = LinkedList<Type>()
     
     var isEmpty: Bool {
-        queue.isEmpty
+        linkedList.isEmpty
     }
     
     var peek: Type? {
-        isEmpty ? nil : queue.first
+        isEmpty ? nil : linkedList.peek
     }
     
     mutating func enqueue(_ element: Type) {
-        queue.append(element)
+        linkedList.append(element)
     }
     
     mutating func dequeue() -> Type? {
-        isEmpty ? nil : queue.removeFirst()
+        isEmpty ? nil : linkedList.removeFirst()
     }
     
     mutating func clear() {
-        queue.removeAll()
+        linkedList.removeAll()
     }
 }
