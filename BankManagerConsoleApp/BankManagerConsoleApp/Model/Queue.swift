@@ -15,7 +15,7 @@ struct Queue<T> {
     }
     
     var peek: T? {
-        isEmpty ? nil : linkedList.peek
+        linkedList.first
     }
     
     mutating func enqueue(_ element: T) {
@@ -23,7 +23,7 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T? {
-        isEmpty ? nil : linkedList.removeFirst()
+        linkedList.removeFirst()
     }
     
     mutating func clear() {
