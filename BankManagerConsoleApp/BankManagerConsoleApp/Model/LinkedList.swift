@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct LinkedList<Type> {
-    var head: Node<Type>?
-    var tail: Node<Type>?
+struct LinkedList<T> {
+    var head: Node<T>?
+    var tail: Node<T>?
     
     init() { }
     
-    var peek: Type? {
+    var peek: T? {
         head != nil ? head?.data : nil
     }
     
@@ -21,7 +21,7 @@ struct LinkedList<Type> {
         head == nil
     }
     
-    mutating func append(_ element: Type) {
+    mutating func append(_ element: T) {
         if isEmpty {
             head = Node(data: element)
             tail = head
@@ -32,7 +32,7 @@ struct LinkedList<Type> {
         }
     }
     
-    mutating func removeFirst() -> Type? {
+    mutating func removeFirst() -> T? {
         guard !isEmpty else { return nil }
         
         let data = head?.data
