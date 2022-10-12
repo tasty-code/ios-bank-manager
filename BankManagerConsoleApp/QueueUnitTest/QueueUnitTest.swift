@@ -35,19 +35,39 @@ final class QueueUnitTest: XCTestCase {
     }
     
     func TestDequeue() {
+        sut.enqueue(10)
         
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, 10)
     }
     
     func TestClesr() {
+        sut.enqueue(10)
+        sut.enqueue(20)
+        sut.enqueue(15)
+        sut.enqueue(5)
         
+        sut.clear()
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
     }
     
     func TestIsEmpty() {
+        sut.enqueue(10)
+        sut.enqueue(20)
         
+        let result = sut.isEmpty
+        XCTAssertFalse(result)
     }
     
     func TestPeek() {
-       
+        sut.enqueue(10)
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, 10)
     }
 
 }
