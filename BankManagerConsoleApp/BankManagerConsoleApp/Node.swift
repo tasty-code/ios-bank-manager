@@ -10,4 +10,3 @@ import Foundation
 class Node<T> {
     
 }
-
