@@ -26,48 +26,63 @@ final class QueueUnitTest: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue() {
-        sut.enqueue(10)
+    func test_큐에_10을_인큐했을_때_정상적으로_값이_들어가는지() {
+        // Given
+        let enqueueNumber = 10
         
-        let result = sut.peek()
+        // When
+        sut.enqueue(enqueueNumber)
         
-        XCTAssertEqual(result, 10)
+        // Then
+        XCTAssertEqual(sut.peek(), 10)
     }
     
-    func test_dequeue() {
-        sut.enqueue(10)
+    func test_큐에_10을_인큐하고_디큐했을_때_정상적으로_값을_반환하는지() {
+        // Given
+        let enqueueNumber = 10
         
-        let result = sut.dequeue()
+        // When
+        sut.enqueue(enqueueNumber)
         
-        XCTAssertEqual(result, 10)
+        // Then
+        XCTAssertEqual(sut.dequeue(), 10)
     }
     
-    func test_clesr() {
-        sut.enqueue(10)
-        sut.enqueue(20)
-        sut.enqueue(15)
-        sut.enqueue(5)
+    func test_큐에_여러값들을_인큐하고_클리어했을_때_큐가_비어있는지() {
+        // Given
+        let enqueueNumbers = [10, 20, 15, 5]
         
+        // When
+        for enqueueNumber in enqueueNumbers {
+            sut.enqueue(enqueueNumber)
+        }
         sut.clear()
-        let result = sut.isEmpty
         
-        XCTAssertTrue(result)
+        // Then
+        XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_IsEmpty() {
-        sut.enqueue(10)
-        sut.enqueue(20)
+    func test_큐에_여러값들을_인큐하고_큐가_비어있는것이_거짓인지() {
+        // Given
+        let enqueueNumbers = [10, 20, 15, 5]
         
-        let result = sut.isEmpty
-        XCTAssertFalse(result)
+        // When
+        for enqueueNumber in enqueueNumbers {
+            sut.enqueue(enqueueNumber)
+        }
+        
+        // Then
+        XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_Peek() {
-        sut.enqueue(10)
+    func test_큐에_인큐했을_떄_peek한_값이_정상적으로_나오는지() {
+        // Given
+        let enqueueNumber = 10
         
-        let result = sut.peek()
+        // When
+        sut.enqueue(enqueueNumber)
         
-        XCTAssertEqual(result, 10)
+        // Then
+        XCTAssertEqual(sut.peek(), 10)
     }
-
 }
