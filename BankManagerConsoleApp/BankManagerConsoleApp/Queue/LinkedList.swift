@@ -36,6 +36,8 @@ class LinkedList<T> {
         head?.next?.prev = head?.prev
         head = head?.next
     }
+    
+    
 }
 
 
