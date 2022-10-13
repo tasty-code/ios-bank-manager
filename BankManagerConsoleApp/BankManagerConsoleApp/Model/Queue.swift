@@ -9,7 +9,7 @@ import Foundation
 
 struct Queue<T> {
     private var linkedList: LinkedList<T> = LinkedList<T>()
-    
+
     var isEmpty: Bool {
         linkedList.isEmpty
     }

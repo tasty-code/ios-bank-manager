@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2612813328F7A2A500343462 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5E28F64D6E00432819 /* BankManager.swift */; };
 		35D4EC5828F64D6000432819 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5728F64D6000432819 /* main.swift */; };
 		35D4EC5F28F64D6E00432819 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5E28F64D6E00432819 /* BankManager.swift */; };
 		35D4EC6128F64D7300432819 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC6028F64D7300432819 /* LinkedList.swift */; };
@@ -82,7 +83,6 @@
 			children = (
 				35D4EC7D28F6996700432819 /* Model */,
 				35D4EC5728F64D6000432819 /* main.swift */,
-				35D4EC5E28F64D6E00432819 /* BankManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -101,6 +101,7 @@
 				35D4EC6028F64D7300432819 /* LinkedList.swift */,
 				35D4EC6228F64D7700432819 /* Node.swift */,
 				35D4EC6428F64D7B00432819 /* Queue.swift */,
+				35D4EC5E28F64D6E00432819 /* BankManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35D4EC6D28F64D9800432819 /* LinkedQueueTest.swift in Sources */,
+				2612813328F7A2A500343462 /* BankManager.swift in Sources */,
 				35D4EC7228F64DA200432819 /* Queue.swift in Sources */,
 				35D4EC7328F64DA500432819 /* LinkedList.swift in Sources */,
 				35D4EC7128F64DA000432819 /* Node.swift in Sources */,
@@ -333,7 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 45K89U54K6;
+				DEVELOPMENT_TEAM = W7588LM9FP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -344,7 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 45K89U54K6;
+				DEVELOPMENT_TEAM = W7588LM9FP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
