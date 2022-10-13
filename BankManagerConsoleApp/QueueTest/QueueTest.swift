@@ -20,9 +20,10 @@ final class QueueTest: XCTestCase {
     
     func test() {
         list.append(data: 3)
-        let a = list.head?.data
+        list.append(data: 4)
+        let a = list.returnFirstValue()
         
-        XCTAssertEqual(a, 3)
+        print(a)
     }
 
 }
