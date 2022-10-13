@@ -8,11 +8,12 @@
 import Foundation
 
 struct Queue<T> {
+    private var queue: LinkedList<T> = LinkedList<T>()
     
-    var queue: LinkedList<T> = LinkedList<T>()
     var isEmpty: Bool {
         queue.isEmptyReturnTrue
     }
+    
     var peek: T? {
         queue.returnFirstValue()
     }

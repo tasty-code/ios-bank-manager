@@ -8,8 +8,8 @@
 import Foundation
 
 class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmptyReturnTrue: Bool {
         head == nil

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3257CCA628F7A7B300613120 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3257CCA528F7A7B300613120 /* Queue.swift */; };
+		3257CCA728F7AAC100613120 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3257CCA528F7A7B300613120 /* Queue.swift */; };
 		325A9F2C28F65AF2009FFD5B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A9F2B28F65AF2009FFD5B /* Node.swift */; };
 		325A9F2E28F65B08009FFD5B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A9F2D28F65B08009FFD5B /* LinkedList.swift */; };
 		AA89523228F6ABD500C39485 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89523128F6ABD500C39485 /* QueueTest.swift */; };
@@ -195,6 +196,7 @@
 				AA89523828F6ABE900C39485 /* LinkedList.swift in Sources */,
 				AA89523228F6ABD500C39485 /* QueueTest.swift in Sources */,
 				AA89523728F6ABE700C39485 /* Node.swift in Sources */,
+				3257CCA728F7AAC100613120 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
