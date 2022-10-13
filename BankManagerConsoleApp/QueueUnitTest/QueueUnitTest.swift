@@ -26,7 +26,7 @@ final class QueueUnitTest: XCTestCase {
         sut = nil
     }
 
-    func test_큐에_10을_인큐했을_때_정상적으로_값이_들어가는지() {
+    func test_큐에_10을_인큐했을_때_정상적으로_값이_들어간다() {
         // Given
         let enqueueNumber = 10
         
@@ -37,7 +37,7 @@ final class QueueUnitTest: XCTestCase {
         XCTAssertEqual(sut.peek(), 10)
     }
     
-    func test_큐에_10을_인큐하고_디큐했을_때_정상적으로_값을_반환하는지() {
+    func test_큐에_10을_인큐하고_디큐했을_때_정상적으로_값을_반환한다() {
         // Given
         let enqueueNumber = 10
         
@@ -48,7 +48,7 @@ final class QueueUnitTest: XCTestCase {
         XCTAssertEqual(sut.dequeue(), 10)
     }
     
-    func test_큐에_여러값들을_인큐하고_클리어했을_때_큐가_비어있는지() {
+    func test_큐에_여러값들을_인큐하고_클리어했을_때_큐가_비어있다() {
         // Given
         let enqueueNumbers = [10, 20, 15, 5]
         
@@ -62,7 +62,7 @@ final class QueueUnitTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_큐에_여러값들을_인큐하고_큐가_비어있는것이_거짓인지() {
+    func test_큐에_여러값들을_인큐하고_큐가_비어있는것이_거짓이다() {
         // Given
         let enqueueNumbers = [10, 20, 15, 5]
         
@@ -75,7 +75,7 @@ final class QueueUnitTest: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_큐에_인큐했을_떄_peek한_값이_정상적으로_나오는지() {
+    func test_큐에_인큐했을_떄_peek한_값이_정상적으로_나온다() {
         // Given
         let enqueueNumber = 10
         

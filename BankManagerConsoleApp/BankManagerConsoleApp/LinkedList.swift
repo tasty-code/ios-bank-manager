@@ -8,20 +8,18 @@
 import Foundation
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    
-    init() {}
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
     }
     
-    var peek: T? {
+    var firstValue: T? {
         return head?.value
     }
     
-    mutating func push(_ value: T) {
+    private mutating func push(_ value: T) {
         head = Node(value: value, next: head)
         if tail == nil {
             tail = head
@@ -38,37 +36,16 @@ struct LinkedList<T> {
         tail = tail?.next
     }
     
-    mutating func pop() -> T? {
-        let returnValue = head?.value
-        head = head?.next
-        if isEmpty {
-            tail = nil
+    mutating func removeFirst() -> T? {
+            guard head != nil else {
+                return nil
+            }
+        
+            let Node = self.head
+            self.head = head?.next
+
+        return Node?.value
         }
-        
-        return returnValue
-    }
-    
-    mutating func removeLast() -> T? {
-        guard let head = head else {
-            return nil
-        }
-        
-        guard head.next != nil else {
-            return pop()
-        }
-        
-        var prev = head
-        var current = head
-        while let next = current.next {
-            prev = current
-            current = next
-        }
-        
-        prev.next = nil
-        tail = prev
-        
-        return current.value
-    }
     
     mutating func removeAll() {
         head = nil
