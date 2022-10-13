@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3257CCA628F7A7B300613120 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3257CCA528F7A7B300613120 /* Queue.swift */; };
 		325A9F2C28F65AF2009FFD5B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A9F2B28F65AF2009FFD5B /* Node.swift */; };
 		325A9F2E28F65B08009FFD5B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A9F2D28F65B08009FFD5B /* LinkedList.swift */; };
 		AA89523228F6ABD500C39485 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89523128F6ABD500C39485 /* QueueTest.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3257CCA528F7A7B300613120 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		325A9F2B28F65AF2009FFD5B /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		325A9F2D28F65B08009FFD5B /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		AA89522F28F6ABD500C39485 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +63,7 @@
 			children = (
 				325A9F2B28F65AF2009FFD5B /* Node.swift */,
 				325A9F2D28F65B08009FFD5B /* LinkedList.swift */,
+				3257CCA528F7A7B300613120 /* Queue.swift */,
 			);
 			path = Queue;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3257CCA628F7A7B300613120 /* Queue.swift in Sources */,
 				325A9F2C28F65AF2009FFD5B /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				325A9F2E28F65B08009FFD5B /* LinkedList.swift in Sources */,
