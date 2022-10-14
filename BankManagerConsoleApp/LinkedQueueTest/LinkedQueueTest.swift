@@ -22,21 +22,27 @@ class LinkedQueueTest: XCTestCase {
     }
 
     func test_enqueue() {
+        let result = 1
+        
         linkedQueue?.enqueue(1)
 
-        XCTAssertEqual(linkedQueue?.peek, 1)
+        XCTAssertEqual(linkedQueue?.peek, result)
     }
 
     func test_dequeue() {
+        let result = 1
+        
         linkedQueue?.enqueue(1)
 
-        XCTAssertEqual(linkedQueue?.dequeue(), 1)
+        XCTAssertEqual(linkedQueue?.dequeue(), result)
     }
 
     func test_peek() {
+        let result = 1
+        
         linkedQueue?.enqueue(1)
 
-        XCTAssertEqual(linkedQueue?.peek, 1)
+        XCTAssertEqual(linkedQueue?.peek, result)
     }
 
     func test_clear_isEmpty() {

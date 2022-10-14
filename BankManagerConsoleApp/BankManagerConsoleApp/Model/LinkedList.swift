@@ -8,13 +8,11 @@
 import Foundation
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
-    init() { }
-    
-    var peek: T? {
-        head != nil ? head?.data : nil
+    var first: T? {
+        head?.data
     }
     
     var isEmpty: Bool {
@@ -34,15 +32,8 @@ struct LinkedList<T> {
     
     mutating func removeFirst() -> T? {
         guard !isEmpty else { return nil }
-        
         let data = head?.data
-        
-        if head?.next != nil {
-            head = head?.next
-        } else {
-            head = nil
-        }
-        
+        head = head?.next
         return data
     }
     
