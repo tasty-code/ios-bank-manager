@@ -37,15 +37,15 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-            guard head != nil else {
-                return nil
-            }
-        
-            let Node = self.head
-            self.head = head?.next
-
-        return Node?.value
+        guard head != nil else {
+            return nil
         }
+        
+        let node = self.head
+        self.head = head?.next
+
+        return node?.value
+    }
     
     mutating func removeAll() {
         head = nil
