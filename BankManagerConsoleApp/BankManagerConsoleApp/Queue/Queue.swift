@@ -8,27 +8,25 @@
 import Foundation
 
 struct Queue<T> {
-    private var queue: LinkedList<T> = LinkedList<T>()
+    private var queueList = LinkedList<T>()
     
     var isEmpty: Bool {
-        queue.isEmptyReturnTrue
+        queueList.isEmpty
     }
     
     var peek: T? {
-        queue.returnFirstValue()
+        queueList.returnFirstValue
     }
     
     func enqueue(data: T) {
-        queue.append(data: data)
+        queueList.addLast(data: data)
     }
     
     func dequeue() -> T? {
-        let returnValue = peek
-        queue.removeFirst()
-        return returnValue
+        queueList.removeFirst()
     }
     
     func clear() {
-        queue.removeAll()
+        queueList.removeAll()
     }
 }

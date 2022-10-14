@@ -9,7 +9,7 @@ import XCTest
 
 final class QueueTest: XCTestCase {
     var list = LinkedList<Int>()
-    var queue = Queue<Int>()
+    var queueList = Queue<Int>()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -20,38 +20,37 @@ final class QueueTest: XCTestCase {
     }
     
     func test_LinkedList테스트() {
-        list.append(data: 3)
-        list.append(data: 4)
+        list.addLast(data: 3)
+        list.addLast(data: 4)
         
-        let returnFirstValue = list.returnFirstValue()
+        let returnFirstValue = list.returnFirstValue
         
         XCTAssertEqual(returnFirstValue, 3)
     }
     
     func test_Queue_peek테스트() {
-        queue.enqueue(data: 3)
-        queue.enqueue(data: 4)
+        queueList.enqueue(data: 3)
+        queueList.enqueue(data: 4)
         
-        let peek = queue.peek
+        let peek = queueList.peek
         
        XCTAssertEqual(peek, 3)
     }
     
     func test_Queue_dequeue테스트() {
-        queue.enqueue(data: 3)
-        queue.enqueue(data: 4)
+        queueList.enqueue(data: 3)
         
-        let dequeue = queue.dequeue()
+        let dequeue = queueList.dequeue()
         
         XCTAssertEqual(dequeue, 3)
     }
     
     func test_Queue_clear테스트() {
-        queue.enqueue(data: 3)
-        queue.enqueue(data: 4)
-        queue.clear()
+        queueList.enqueue(data: 3)
+        queueList.enqueue(data: 4)
+        queueList.clear()
         
-        let clear = queue.isEmpty
+        let clear = queueList.isEmpty
         
         XCTAssertTrue(clear)
     }

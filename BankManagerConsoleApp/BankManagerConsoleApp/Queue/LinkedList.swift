@@ -7,51 +7,41 @@
 
 import Foundation
 
-class LinkedList<T> {
+final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    var isEmptyReturnTrue: Bool {
+    var isEmpty: Bool {
         head == nil
     }
     
-    func returnFirstValue() -> T? {
-        let returnValue = head?.data
-        return returnValue
+    var returnFirstValue: T? {
+        head?.data
     }
     
-    func append(data: T?) {
-        if head == nil || tail == nil {
-            head = Node.init(data: data)
+    func addLast(data: T) {
+        if isEmpty {
+            head = Node(data: data)
             tail = head
             return
         }
         
-        let newNode = Node.init(data: data)
+        let newNode = Node(data: data)
         tail?.next = newNode
-        newNode.prev = tail
         tail = newNode
     }
     
-    func removeFirst() {
-        if head == nil || tail == nil { return }
+    func removeFirst() -> T? {
+        if isEmpty { return nil }
         
-        if head?.next == nil {
-            head = nil
-            tail = nil
-        }
-        
-        head?.next?.prev = head?.prev
+        let returnValue = head?.data
         head = head?.next
+        
+        return returnValue
     }
     
     func removeAll() {
         head = nil
         tail = nil
-        return
     }
 }
-
-
-
-
