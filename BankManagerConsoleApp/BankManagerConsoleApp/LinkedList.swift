@@ -15,6 +15,10 @@ struct LinkedList<T> {
         head == nil
     }
     
+    var peek: T? {
+        head?.data
+    }
+    
     mutating func push(data: T) {
         head = Node(data: data, next: head)
         
