@@ -9,6 +9,10 @@ import Foundation
 enum Menu: String {
     case bankOpen = "1"
     case BankClose = "2"
+    
+    var description: String {
+        self.rawValue
+    }
 }
 
 struct Bank: BankManager {

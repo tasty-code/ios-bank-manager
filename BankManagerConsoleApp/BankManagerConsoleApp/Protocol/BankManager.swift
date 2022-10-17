@@ -24,9 +24,9 @@ extension BankManager {
         guard let input = readLine() else { return }
             
         switch input {
-        case Menu.bankOpen.rawValue:
+        case Menu.bankOpen.description:
             startWork()
-        case Menu.BankClose.rawValue:
+        case Menu.BankClose.description:
             break
         default:
             print("잘못 입력하셨습니다.")
