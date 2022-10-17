@@ -13,31 +13,28 @@ enum Menu: String {
 
 struct Bank: BankManager {
     
-    var clientNumber: Int = 0
     var workTime: Double = 0.0
-    var clientQueue: Queue<Int>?
-    
+    var clientQueue: Queue<Client>?
+    var bankClerk = BankClerk()
+
     mutating func openBank() {
         showMenu()
     }
     
     mutating func startWork() {
-        clientNumber = generateRandomClientNumber()
+        let clientNumber = generateRandomClientNumber()
         clientQueue = inputClient(clientNumber: clientNumber)
         guard var queue = clientQueue else { return }
         
-        for _ in 1...clientNumber {
-            
-            guard let client = queue.dequeue() else { return }
-            bankService(for: client)
+        while ((clientQueue?.isEmpty) != nil) {
+            guard let client = queue.dequeue() else {
+                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientNumber)명이며, 총 업무시간은 \(roundToString(in: workTime))초 입니다.")
+                return
+            }
+            bankClerk.bankService(for: client)
+            workTime += Double.processingTime
         }
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientNumber)명이며, 총 업무시간은 \(String(format: "%.2f", workTime))초 입니다.")
     }
     
-    mutating func bankService(for client: Int) {
-        print("\(client) 번 고객 업무시작")
-        print("\(client) 번 고객 업무종료")
-        workTime += 0.7
-    }
+    
 }

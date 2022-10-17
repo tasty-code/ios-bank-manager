@@ -8,13 +8,12 @@
 import Foundation
 
 protocol BankManager {
-    var clientNumber: Int { get set}
     var workTime: Double { get set }
-    var clientQueue: Queue<Int>? { get set }
+    var clientQueue: Queue<Client>? { get set }
     
     mutating func openBank()
     mutating func startWork()
-    mutating func bankService(for client: Int)
+    
 }
 
 extension BankManager {
@@ -36,16 +35,20 @@ extension BankManager {
     }
     
     func generateRandomClientNumber() -> Int {
-        Int.random(in: 10...30)
+        Int.random(in: Int.minRange...Int.maxRange)
     }
     
-    mutating func inputClient(clientNumber: Int) -> Queue<Int> {
-        var queue = Queue<Int>()
+    mutating func inputClient(clientNumber: Int) -> Queue<Client> {
+        var queue = Queue<Client>()
         
-        for i in 1...clientNumber {
-            queue.enqueue(i)
+        for i in Int.first...clientNumber {
+            queue.enqueue(Client(waitNumber: i))
         }
         
         return queue
+    }
+    
+    func roundToString(in workTime: Double) -> String {
+            String(format: "%.2f", workTime)
     }
 }
