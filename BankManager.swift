@@ -7,13 +7,13 @@
 import Foundation
 
 struct BankManager {
-    func work() {
+    func workStart() {
         let clientNumber = Client().randomClientNumber()
         let clientList = Queue<Int>()
         let workTime: Double = 0.7
         
-        for i in 1...clientNumber {
-            clientList.enqueue(data: i)
+        for client in 1...clientNumber {
+            clientList.enqueue(data: client)
             guard let client = clientList.dequeue() else { return }
             print("\(client) 번 고객 업무 시작")
             print("\(client) 번 고객 업무 종료")

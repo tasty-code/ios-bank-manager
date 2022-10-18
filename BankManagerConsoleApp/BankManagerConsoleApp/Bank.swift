@@ -13,8 +13,14 @@ class Bank {
         print("2 : 종료")
         print("입력 : ", terminator: "")
         
-        guard let inputMenu = Int(readLine()!) else {
-            return
+        if let inputMenu = Int(readLine()!) {
+            let bankManager = BankManager()
+            if inputMenu == 1 {
+                bankManager.workStart()
+            } else {
+                return
+            }
         }
     }
+    
 }

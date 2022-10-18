@@ -6,10 +6,9 @@
 
 import Foundation
 
-let bankManager = BankManager()
-bankManager.work()
+let menu = Bank()
 
-let client = Client()
+menu.choiceMenu()
 
-
+    
 
