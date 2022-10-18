@@ -5,3 +5,11 @@
 // 
 
 import Foundation
+
+let bankManager = BankManager()
+bankManager.work()
+
+let client = Client()
+
+
+
