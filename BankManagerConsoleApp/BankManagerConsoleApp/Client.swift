@@ -8,8 +8,10 @@
 import Foundation
 
 struct Client {
-    func randomClientNumber() -> Int {
-        let clientNumber = Int.random(in: 10...30)
+    func generateClientRandomNumber() -> Int {
+        let startNumber: Int = 10
+        let finishNumber: Int = 30
+        let clientNumber = Int.random(in: startNumber...finishNumber)
         return clientNumber
     }
 }

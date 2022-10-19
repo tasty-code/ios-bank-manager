@@ -13,14 +13,19 @@ class Bank {
         print("2 : 종료")
         print("입력 : ", terminator: "")
         
-        if let inputMenu = Int(readLine()!) {
+        if let inputMenu = readLine(),
+           let inputMenu = Int(inputMenu) {
             let bankManager = BankManager()
             if inputMenu == 1 {
                 bankManager.workStart()
-            } else {
+                bankManager.workFinish()
+            } else if inputMenu == 2 {
                 return
+            } else {
+                choiceMenu()
             }
         }
     }
+    func
     
 }
