@@ -8,8 +8,5 @@
 import Foundation
 struct Client {
     let waitNumber: Int
-    
-    init(waitNumber: Int) {
-        self.waitNumber = waitNumber
-    }
+    let workType: WorkType
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2612813328F7A2A500343462 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5E28F64D6E00432819 /* Bank.swift */; };
+		2664889028FF957B0091EC33 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2664888F28FF957B0091EC33 /* Menu.swift */; };
+		2664889228FF959E0091EC33 /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2664889128FF959E0091EC33 /* WorkType.swift */; };
 		351512E528F9324700FC9DD9 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351512E428F9324700FC9DD9 /* BankManager.swift */; };
 		351512E728F9524F00FC9DD9 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351512E628F9524F00FC9DD9 /* Client.swift */; };
 		3560422E28FCE1AB00C15D49 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560422D28FCE1AB00C15D49 /* Extension+Double.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2664888F28FF957B0091EC33 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		2664889128FF959E0091EC33 /* WorkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
 		351512E428F9324700FC9DD9 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		351512E628F9524F00FC9DD9 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		3560422D28FCE1AB00C15D49 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				35D4EC5E28F64D6E00432819 /* Bank.swift */,
 				351512E628F9524F00FC9DD9 /* Client.swift */,
 				3560423428FCE67D00C15D49 /* BankClerk.swift */,
+				2664888F28FF957B0091EC33 /* Menu.swift */,
+				2664889128FF959E0091EC33 /* WorkType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,9 +234,11 @@
 			files = (
 				35D4EC6528F64D7B00432819 /* Queue.swift in Sources */,
 				351512E728F9524F00FC9DD9 /* Client.swift in Sources */,
+				2664889228FF959E0091EC33 /* WorkType.swift in Sources */,
 				3560423328FCE4CE00C15D49 /* Extension+Int.swift in Sources */,
 				35D4EC6128F64D7300432819 /* LinkedList.swift in Sources */,
 				35D4EC5828F64D6000432819 /* main.swift in Sources */,
+				2664889028FF957B0091EC33 /* Menu.swift in Sources */,
 				3560422E28FCE1AB00C15D49 /* Extension+Double.swift in Sources */,
 				35D4EC5F28F64D6E00432819 /* Bank.swift in Sources */,
 				35D4EC6328F64D7700432819 /* Node.swift in Sources */,
