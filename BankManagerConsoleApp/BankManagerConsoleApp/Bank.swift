@@ -8,6 +8,19 @@
 import Foundation
 
 class Bank {
+    let waitingNumberQueue = Queue<Int>()
+    let clientNumber = Client().generateClientRandomNumber()
+    
+    func setClientOfWaitingNumber() -> Queue<Int> {
+        let firstClient: Int = 1
+        let lastClient: Int = clientNumber
+        
+        for bringWaitingNumber in firstClient...lastClient {
+            waitingNumberQueue.enqueue(data: bringWaitingNumber)
+        }
+        return waitingNumberQueue
+    }
+    
     func choiceMenu() {
         print("1 : 은행 개점" )
         print("2 : 종료")
@@ -26,6 +39,4 @@ class Bank {
             }
         }
     }
-    func
-    
 }

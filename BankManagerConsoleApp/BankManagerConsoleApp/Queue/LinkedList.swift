@@ -11,6 +11,8 @@ final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
+    var count: Int = 0
+    
     var isEmpty: Bool {
         head == nil
     }
@@ -23,12 +25,14 @@ final class LinkedList<T> {
         if isEmpty {
             head = Node(data: data)
             tail = head
+            count += 1
             return
         }
         
         let newNode = Node(data: data)
         tail?.next = newNode
         tail = newNode
+        count += 1
     }
     
     func removeFirst() -> T? {
@@ -36,6 +40,7 @@ final class LinkedList<T> {
         
         let returnValue = head?.data
         head = head?.next
+        count -= 1
         
         return returnValue
     }
@@ -43,5 +48,6 @@ final class LinkedList<T> {
     func removeAll() {
         head = nil
         tail = nil
+        count = 0
     }
 }
