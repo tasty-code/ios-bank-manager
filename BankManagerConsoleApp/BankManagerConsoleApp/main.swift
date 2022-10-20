@@ -6,9 +6,6 @@
 
 import Foundation
 
-let menu = Bank()
-
-menu.choiceMenu()
-
-    
+private let menu = Bank()
+menu.runApp()
 

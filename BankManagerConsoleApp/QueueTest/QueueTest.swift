@@ -31,6 +31,9 @@ final class QueueTest: XCTestCase {
     func test_Queue_peek테스트() {
         queueList.enqueue(data: 3)
         queueList.enqueue(data: 4)
+        queueList.enqueue(data: 4)
+        
+        print(queueList.count)
         
         let peek = queueList.peek
         
@@ -41,6 +44,7 @@ final class QueueTest: XCTestCase {
         queueList.enqueue(data: 3)
         
         let dequeue = queueList.dequeue()
+        print(queueList.count)
         
         XCTAssertEqual(dequeue, 3)
     }
@@ -49,6 +53,8 @@ final class QueueTest: XCTestCase {
         queueList.enqueue(data: 3)
         queueList.enqueue(data: 4)
         queueList.clear()
+        
+        print(queueList.count)
         
         let clear = queueList.isEmpty
         
