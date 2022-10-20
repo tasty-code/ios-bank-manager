@@ -17,20 +17,23 @@ protocol BankManager {
 }
 
 extension BankManager {
-    mutating func showMenu() {
+    func showMenu() {
         print("1 : 은행개점")
         print("2 : 종료")
         print("입력 :", terminator: " ")
+    }
+    
+    mutating func input() {
         guard let input = readLine() else { return }
             
         switch input {
         case Menu.bankOpen.description:
-            startWork()
-        case Menu.BankClose.description:
+            self.startWork()
+        case Menu.bankClose.description:
             break
         default:
             print("잘못 입력하셨습니다.")
-            showMenu()
+            self.showMenu()
         }
     }
     
@@ -42,7 +45,13 @@ extension BankManager {
         var queue = Queue<Client>()
         
         for i in Int.first...clientNumber {
-            queue.enqueue(Client(waitNumber: i))
+            let workType = Int.random(in: 1...2)
+            if workType == 1 {
+                queue.enqueue(Client(waitNumber: i, workType: WorkType.loan))
+            } else {
+                queue.enqueue(Client(waitNumber: i, workType: WorkType.deposit))
+            }
+            
         }
         
         return queue

@@ -8,9 +8,11 @@
 import Foundation
 
 struct BankClerk {
+    var workType: WorkType
     
-    mutating func bankService(for client: Client) {
-        print("\(client.waitNumber) 번 고객 업무시작")
-        print("\(client.waitNumber) 번 고객 업무종료")
+    func bankService(for client: Client) {
+        print("\(client.waitNumber)번 고객 \(workType.description) 시작")
+            Thread.sleep(forTimeInterval: client.workType.time)
+            print("\(client.waitNumber)번 고객 \(workType.description) 종료")
     }
 }

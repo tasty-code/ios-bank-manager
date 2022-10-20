@@ -19,4 +19,13 @@ enum WorkType {
             return 0.7
         }
     }
+    
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출업무"
+        case .deposit:
+            return "예금업무"
+        }
+    }
 }
