@@ -30,8 +30,7 @@ class Bank {
            let inputMenu = Int(inputMenu) {
             let bankManager = BankManager()
             if inputMenu == 1 {
-                bankManager.workStart()
-                bankManager.workFinish()
+                bankManager.work()
             } else if inputMenu == 2 {
                 return
             } else {
