@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<T> {
-    var queueList = LinkedList<T>()
+    private var queueList = LinkedList<T>()
     
     var count: Int {
         queueList.count

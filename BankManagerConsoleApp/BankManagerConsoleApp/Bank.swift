@@ -8,8 +8,9 @@
 import Foundation
 
 class Bank {
-    let waitingNumberQueue = Queue<Int>()
-    let clientNumber = Client().generateClientRandomNumber()
+    var bankManager: Int = 1
+    private let waitingNumberQueue = Queue<Int>()
+    private let clientNumber = Client().generateClientRandomNumber()
     
     func setClientOfWaitingNumber() -> Queue<Int> {
         let firstClient: Int = 1
@@ -21,20 +22,23 @@ class Bank {
         return waitingNumberQueue
     }
     
-    func choiceMenu() {
+    private func showMenu() {
         print("1 : 은행 개점" )
         print("2 : 종료")
         print("입력 : ", terminator: "")
-        
-        if let inputMenu = readLine(),
-           let inputMenu = Int(inputMenu) {
+    }
+    
+    func runApp() {
+        showMenu()
+        if let inputStringMenu = readLine(),
+           let inputIntMenu = Int(inputStringMenu) {
             let bankManager = BankManager()
-            if inputMenu == 1 {
+            if inputIntMenu == 1 {
                 bankManager.work()
-            } else if inputMenu == 2 {
+            } else if inputIntMenu == 2 {
                 return
             } else {
-                choiceMenu()
+                runApp()
             }
         }
     }

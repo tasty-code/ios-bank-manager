@@ -7,8 +7,8 @@
 import Foundation
 
 struct BankManager {
-    let waitingNumberQueue = Bank().setClientOfWaitingNumber()
-    let workTime: Double = 0.7
+    private let waitingNumberQueue = Bank().setClientOfWaitingNumber()
+    private let workTime: Double = 0.7
     
     func work() {
         let waitingNumber = waitingNumberQueue.count
@@ -16,13 +16,13 @@ struct BankManager {
         func workStart() {
             let firstWaitingNumber: Int = 1
             let lastWaitingNumber: Int = waitingNumber
-            for client in firstWaitingNumber...lastWaitingNumber {
+            for _ in firstWaitingNumber...lastWaitingNumber {
                 guard let client = waitingNumberQueue.dequeue() else { return }
                 print("\(client)번 고객 업무 시작")
                 print("\(client)번 고객 업무 종료")
             }
         }
-        
+            
         func workFinish() {
             let totalWorkTime: Double = workTime * Double(waitingNumber)
             let strTotalWorkTime = String(format: "%.2f", totalWorkTime)
