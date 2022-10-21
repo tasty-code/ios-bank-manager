@@ -6,6 +6,5 @@
 
 import Foundation
 
-private let menu = Bank()
-menu.runApp()
-
+private let bankManager = BankManager()
+bankManager.bankOpen()

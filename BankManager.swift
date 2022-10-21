@@ -6,29 +6,60 @@
 
 import Foundation
 
-struct BankManager {
-    private let waitingNumberQueue = Bank().setClientOfWaitingNumber()
-    private let workTime: Double = 0.7
+class BankManager {
+    enum Menu: String {
+        case open = "1"
+        case close = "2"
+    }
     
-    func work() {
-        let waitingNumber = waitingNumberQueue.count
+    enum ClientNumber: Int {
+        case minimumNumber = 10
+        case maximumNumber = 30
+    }
+    
+    func setClientOfWaitingNumber(clientQueue: Queue<Client>) -> Queue<Client> {
+        let clientNumber: Int = Int.random(in: ClientNumber.minimumNumber.rawValue...ClientNumber.maximumNumber.rawValue)
+        let firstClient: Int = 1
+        let lastClient: Int = clientNumber
         
-        func workStart() {
-            let firstWaitingNumber: Int = 1
-            let lastWaitingNumber: Int = waitingNumber
-            for _ in firstWaitingNumber...lastWaitingNumber {
-                guard let client = waitingNumberQueue.dequeue() else { return }
-                print("\(client)번 고객 업무 시작")
-                print("\(client)번 고객 업무 종료")
+        for getWaitingNumber in firstClient...lastClient {
+            clientQueue.enqueue(data: Client(waitingNumber: getWaitingNumber))
+        }
+        return clientQueue
+    }
+    
+    private func showMenu() {
+        print("1 : 은행 개점" )
+        print("2 : 종료")
+        print("입력 : ", terminator: "")
+    }
+    
+    private func inputMenu() -> Menu? {
+        guard let inputStringMenu = readLine() else {
+            return nil
+        }
+        return Menu(rawValue: inputStringMenu)
+    }
+    
+    private func selectedMenu() {
+        while true {
+            showMenu()
+            let menu = inputMenu()
+            switch menu {
+            case .open:
+                let bankClerk = BankClerk()
+                bankClerk.work(waitingNumberQueue: BankManager())
+                return
+            case .close:
+                return
+            default:
+                bankOpen()
+                return
             }
         }
-            
-        func workFinish() {
-            let totalWorkTime: Double = workTime * Double(waitingNumber)
-            let strTotalWorkTime = String(format: "%.2f", totalWorkTime)
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(waitingNumber)명 이며, 총 업무시간은 \(strTotalWorkTime)초입니다.")
-        }
-        workStart()
-        workFinish()
+    }
+    
+    func bankOpen() {
+        selectedMenu()
     }
 }
