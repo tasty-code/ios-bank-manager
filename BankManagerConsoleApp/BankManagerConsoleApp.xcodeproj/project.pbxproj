@@ -81,7 +81,7 @@
 		351512E328F9323200FC9DD9 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				351512E428F9324700FC9DD9 /* BankManager.swift */,
+				3560423428FCE67D00C15D49 /* BankClerk.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -108,7 +108,6 @@
 		35AF2D99290244BB00B74492 /* BankCLerk */ = {
 			isa = PBXGroup;
 			children = (
-				3560423428FCE67D00C15D49 /* BankClerk.swift */,
 				35AF2D9A2902457100B74492 /* LoanClerk.swift */,
 				35AF2D9C2902457F00B74492 /* DespositClerk.swift */,
 			);
@@ -156,6 +155,7 @@
 		35D4EC7D28F6996700432819 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				351512E428F9324700FC9DD9 /* BankManager.swift */,
 				35AF2D99290244BB00B74492 /* BankCLerk */,
 				35D4EC5E28F64D6E00432819 /* Bank.swift */,
 				351512E628F9524F00FC9DD9 /* Client.swift */,

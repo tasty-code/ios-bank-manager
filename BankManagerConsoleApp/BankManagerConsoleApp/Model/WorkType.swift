@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum WorkType {
-    case loan
-    case deposit
+enum WorkType: Int, CaseIterable {
+    case loan = 1
+    case deposit = 2
     
     var time: Double {
         switch self {

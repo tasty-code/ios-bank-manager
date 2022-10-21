@@ -6,5 +6,7 @@
 //
 import Foundation
 
-var bank = Bank()
+let bankManager = BankManager()
+
+bankManager.openBank()
 

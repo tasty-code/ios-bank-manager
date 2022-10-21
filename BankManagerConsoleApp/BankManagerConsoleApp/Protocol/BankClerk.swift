@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BankClerk {
-    var workType: WorkType { get set }
+    var count: Int { get set }
     
     func bankService(in client: Client)
 }
