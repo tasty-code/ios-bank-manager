@@ -15,6 +15,8 @@
 		3560422E28FCE1AB00C15D49 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560422D28FCE1AB00C15D49 /* Extension+Double.swift */; };
 		3560423328FCE4CE00C15D49 /* Extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560423228FCE4CE00C15D49 /* Extension+Int.swift */; };
 		3560423528FCE67D00C15D49 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560423428FCE67D00C15D49 /* BankClerk.swift */; };
+		35AF2D9B2902457100B74492 /* LoanClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AF2D9A2902457100B74492 /* LoanClerk.swift */; };
+		35AF2D9D2902457F00B74492 /* DespositClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AF2D9C2902457F00B74492 /* DespositClerk.swift */; };
 		35D4EC5828F64D6000432819 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5728F64D6000432819 /* main.swift */; };
 		35D4EC5F28F64D6E00432819 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC5E28F64D6E00432819 /* Bank.swift */; };
 		35D4EC6128F64D7300432819 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D4EC6028F64D7300432819 /* LinkedList.swift */; };
@@ -46,6 +48,8 @@
 		3560422D28FCE1AB00C15D49 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		3560423228FCE4CE00C15D49 /* Extension+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Int.swift"; sourceTree = "<group>"; };
 		3560423428FCE67D00C15D49 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		35AF2D9A2902457100B74492 /* LoanClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanClerk.swift; sourceTree = "<group>"; };
+		35AF2D9C2902457F00B74492 /* DespositClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DespositClerk.swift; sourceTree = "<group>"; };
 		35D4EC5428F64D6000432819 /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D4EC5728F64D6000432819 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		35D4EC5E28F64D6E00432819 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -101,6 +105,16 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		35AF2D99290244BB00B74492 /* BankCLerk */ = {
+			isa = PBXGroup;
+			children = (
+				3560423428FCE67D00C15D49 /* BankClerk.swift */,
+				35AF2D9A2902457100B74492 /* LoanClerk.swift */,
+				35AF2D9C2902457F00B74492 /* DespositClerk.swift */,
+			);
+			path = BankCLerk;
+			sourceTree = "<group>";
+		};
 		35D4EC4B28F64D6000432819 = {
 			isa = PBXGroup;
 			children = (
@@ -142,9 +156,9 @@
 		35D4EC7D28F6996700432819 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35AF2D99290244BB00B74492 /* BankCLerk */,
 				35D4EC5E28F64D6E00432819 /* Bank.swift */,
 				351512E628F9524F00FC9DD9 /* Client.swift */,
-				3560423428FCE67D00C15D49 /* BankClerk.swift */,
 				2664888F28FF957B0091EC33 /* Menu.swift */,
 				2664889128FF959E0091EC33 /* WorkType.swift */,
 			);
@@ -240,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AF2D9D2902457F00B74492 /* DespositClerk.swift in Sources */,
 				35D4EC6528F64D7B00432819 /* Queue.swift in Sources */,
 				351512E728F9524F00FC9DD9 /* Client.swift in Sources */,
 				2664889228FF959E0091EC33 /* WorkType.swift in Sources */,
@@ -247,6 +262,7 @@
 				35D4EC6128F64D7300432819 /* LinkedList.swift in Sources */,
 				35D4EC5828F64D6000432819 /* main.swift in Sources */,
 				2664889028FF957B0091EC33 /* Menu.swift in Sources */,
+				35AF2D9B2902457100B74492 /* LoanClerk.swift in Sources */,
 				3560422E28FCE1AB00C15D49 /* Extension+Double.swift in Sources */,
 				35D4EC5F28F64D6E00432819 /* Bank.swift in Sources */,
 				35D4EC6328F64D7700432819 /* Node.swift in Sources */,
