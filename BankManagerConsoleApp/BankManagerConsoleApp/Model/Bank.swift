@@ -6,32 +6,39 @@
 
 import Foundation
 
-
-
-struct Bank: BankManager {
+struct Bank {
+    let dispatchGroup = DispatchGroup()
+    var totalTime: Double = 0
     
-    var workTime: Double = 0.0
-    var clientQueue: Queue<Client>?
-    var bankClerk = BankClerk()
-
-    mutating func openBank() {
-        showMenu()
-    }
-    
-    mutating func startWork() {
-        let clientNumber = generateRandomClientNumber()
-        clientQueue = inputClient(clientNumber: clientNumber)
-        guard var queue = clientQueue else { return }
+    mutating func startBank(clientQueue: Queue<Client>, bankClerks: [WorkType: BankClerk]) {
+        var queue = clientQueue
         
-        while ((clientQueue?.isEmpty) != nil) {
-            guard let client = queue.dequeue() else {
-                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientNumber)명이며, 총 업무시간은 \(roundToString(in: workTime))초 입니다.")
-                return
+        guard let depoitClerks = bankClerks[.deposit],
+              let loanClerks = bankClerks[.loan] else { return }
+        
+        let despositClerkSemaphore = DispatchSemaphore(value: depoitClerks.count)
+        let loanClerkSemaphore = DispatchSemaphore(value: loanClerks.count)
+        
+        while !clientQueue.isEmpty {
+            guard let client = queue.dequeue() else { return }
+            
+            switch client.workType {
+            case .loan:
+                working(banker: loanClerks, client: client, semaphore: loanClerkSemaphore)
+                totalTime += WorkType.loan.time
+            case .deposit:
+                working(banker: depoitClerks, client: client, semaphore: despositClerkSemaphore)
+                totalTime += WorkType.deposit.time
             }
-            bankClerk.bankService(for: client)
-            workTime += Double.processingTime
         }
     }
     
-    
+    private func working(banker: BankClerk, client: Client, semaphore: DispatchSemaphore) {
+        let work = DispatchWorkItem {
+            semaphore.wait()
+            banker.bankService(in: client)
+            semaphore.signal()
+        }
+        DispatchQueue.global().async(group: self.dispatchGroup, execute: work)
+    }
 }

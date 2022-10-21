@@ -4,9 +4,9 @@
 //
 //  Created by 정재근 on 2022/10/12.
 //
-
 import Foundation
 
-var bank = Bank()
+let bankManager = BankManager()
 
-bank.openBank()
+bankManager.openBank()
+

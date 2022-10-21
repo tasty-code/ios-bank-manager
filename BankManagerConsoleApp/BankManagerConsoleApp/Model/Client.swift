@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Client {
     let waitNumber: Int
     let workType: WorkType
