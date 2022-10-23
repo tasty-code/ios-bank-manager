@@ -8,6 +8,23 @@
 은행 창구 매니저 콘솔 앱입니다.
 
 ## 배운 점 & 아쉬운 점
-- 배운 점 : Linked-list 자료구조의 이해 및 구현\n
-Queue 자료구조의 이해 및 구현
-Generics 개념이해 및 적용
+### 배운 점
+- Linked-list 자료구조의 이해 및 구현
+- Queue 자료구조의 이해 및 구현
+- Generics 개념이해 및 적용
+- Queue의 활용
+- 타입 추상화 및 일반화
+
+## 구현 기능
+
+
+
+### 아쉬운 점
+- 동기(Synchronous)와 비동기(Asynchronous)의 이해
+- 동시성 프로그래밍 개념의 이해
+- 동시성 프로그래밍을 위한 기반기술(GCD, Operation) 등의 이해
+- 스레드(Thread) 개념에 대한 이해
+- GCD를 활용한 동시성 프로그래밍 구현
+- 동기(Synchronous)와 비동기(Asynchronous) 동작의 구현 및 적용
+
+  **STEP3을 진행하면서 겪어야 할 핵심 경험들을 겪어보지 못함**
