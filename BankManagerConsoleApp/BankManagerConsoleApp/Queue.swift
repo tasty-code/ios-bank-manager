@@ -23,8 +23,12 @@ class Queue<Element> {
         elements.tail = nil
     }
     
-    func peek() -> Node<Element>? {
+    func peekFirst() -> Node<Element>? {
         return elements.head
+    }
+    
+    func peekLast() -> Node<Element>? {
+        return elements.tail
     }
     
     func isEmpty() -> Bool {
