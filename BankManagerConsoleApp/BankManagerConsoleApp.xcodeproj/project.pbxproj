@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BC82CAB29A45E5A00D0B86A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC82CAA29A45E5A00D0B86A /* Queue.swift */; };
 		87BAAE6329A455A9006D578A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6229A455A9006D578A /* Node.swift */; };
 		87BAAE6529A455CC006D578A /* SinglyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BC82CAA29A45E5A00D0B86A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		87BAAE6229A455A9006D578A /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglyLinkedList.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				87BAAE6229A455A9006D578A /* Node.swift */,
 				87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */,
+				3BC82CAA29A45E5A00D0B86A /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BC82CAB29A45E5A00D0B86A /* Queue.swift in Sources */,
 				87BAAE6329A455A9006D578A /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				87BAAE6529A455CC006D578A /* SinglyLinkedList.swift in Sources */,

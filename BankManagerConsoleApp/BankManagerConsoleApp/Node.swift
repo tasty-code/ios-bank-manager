@@ -15,11 +15,11 @@ class Node<Element> {
         self.data = data
     }
     
-    func getNext() -> Node<Element>? {
+    func nextNode() -> Node<Element>? {
         return next
     }
     
-    func setNext(_ node: Node<Element>?) {
+    func setNextNode(_ node: Node<Element>?) {
         self.next = node
     }
 }
