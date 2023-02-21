@@ -40,6 +40,7 @@ struct LinkedList<Value: Equatable> {
             currentNode = currentNode?.next
             currentIndex += 1
         }
+        
         return currentNode
     }
     
@@ -52,6 +53,7 @@ struct LinkedList<Value: Equatable> {
         }
         
         node.next = Node(value: value, next: node.next)
+        
         return node.next!
     }
     
@@ -62,6 +64,7 @@ struct LinkedList<Value: Equatable> {
         if isEmpty {
             tail = nil
         }
+        
         return excludeData
     }
     
