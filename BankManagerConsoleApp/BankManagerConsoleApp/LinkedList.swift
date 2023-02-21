@@ -45,5 +45,4 @@ final class LinkedList<T> {
     func showFirst() -> T? {
         return self.head?.value
     }
-    
 }

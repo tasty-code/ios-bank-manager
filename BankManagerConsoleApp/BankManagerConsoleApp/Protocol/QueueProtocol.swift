@@ -10,9 +10,9 @@ import Foundation
 protocol Queue {
     associatedtype T
     
-    func enqueue(_ newNode: T)
+    func enqueue(_ newData: T)
     func dequeue() -> T?
     func clear()
-    func peek()
+    func peek() -> T?
     func isEmpty() -> Bool
 }
