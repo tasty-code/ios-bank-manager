@@ -21,4 +21,19 @@ class LinkedList<T> {
         }
         node?.next = Node(data: data)
     }
+    
+    func dequeue() {
+        guard head == nil else { return }
+        
+        if head?.next == nil {
+            head = nil
+            return
+        }
+        
+        var node = head
+        while node?.next?.next != nil {
+            node = node?.next
+        }
+        node?.next = node?.next?.next
+    }
 }
