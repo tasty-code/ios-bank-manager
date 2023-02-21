@@ -30,4 +30,15 @@ final class BankManagerConsoleAppTests: XCTestCase {
         
         XCTAssertEqual([head, tail], [firstExpectedValue, secondExpectedValue])
     }
+    
+    func test_queue를_clear하면_isEmpty함수가_true를반환한다() {
+        let (firstGivenValue, secondGivenValue) = (Node(1), Node(2))
+        sut.enqueue(firstGivenValue)
+        sut.enqueue(secondGivenValue)
+        
+        sut.clear()
+        let givenValue = sut.isEmpty()
+        
+        XCTAssertTrue(givenValue)
+    }
 }
