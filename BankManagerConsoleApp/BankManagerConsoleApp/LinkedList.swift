@@ -10,6 +10,7 @@ import Foundation
 struct LinkedList<Value: Equatable> {
     private(set) var head: Node<Value>?
     private(set) var tail: Node<Value>?
+    private(set) var count: Int = 0
             
     var first: Value? {
         return head?.value
@@ -41,6 +42,7 @@ struct LinkedList<Value: Equatable> {
         if tail == nil {
             tail = head
         }
+        count += 1
     }
     
     mutating func append(_ value: Value) {
@@ -50,6 +52,7 @@ struct LinkedList<Value: Equatable> {
         }
         tail?.next = Node(value: value)
         tail = tail?.next
+        count += 1
     }
     
     @discardableResult
@@ -61,6 +64,7 @@ struct LinkedList<Value: Equatable> {
         }
         
         node.next = Node(value: value, next: node.next)
+        count += 1
         
         return node.next!
     }
@@ -73,8 +77,21 @@ struct LinkedList<Value: Equatable> {
         if isEmpty {
             tail = nil
         }
+        count -= 1
         
         return excludeData
+    }
+    
+    @discardableResult
+    mutating func remove(after node: Node<Value>) -> Value? {
+        if node.next === tail {
+            tail = node
+        }
+        
+        node.next = node.next?.next
+        count -= 1
+        
+        return node.next?.value
     }
     
     @discardableResult
@@ -94,6 +111,7 @@ struct LinkedList<Value: Equatable> {
         
         prev.next = nil
         tail = prev
+        count -= 1
         
         return current.value
     }
@@ -101,5 +119,6 @@ struct LinkedList<Value: Equatable> {
     mutating func removeAll() {
         head = nil
         tail = nil
+        count = 0
     }
 }
