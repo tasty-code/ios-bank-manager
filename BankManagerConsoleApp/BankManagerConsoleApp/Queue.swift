@@ -18,7 +18,7 @@ struct Queue<Value: Equatable> {
         return queue.isEmpty
     }
     
-    mutating func euquueue(_ item: Value) {
+    mutating func euqueue(_ item: Value) {
         queue.append(item)
     }
     
