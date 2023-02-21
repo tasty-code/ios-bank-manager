@@ -15,25 +15,25 @@ class LinkedList<T> {
         head == nil
     }
     
-    func push(_ data: T) {
-        head = Node(data: data, next: head)
+    func push(_ value: T) {
+        head = Node(value: value, next: head)
         
         if tail == nil {
             tail = head
         }
     }
     
-    func append(data: T) {
+    func append(value: T) {
         guard !isEmpty else {
-            push(data)
+            push(value)
             return
         }
-        tail?.next = Node(data: data)
+        tail?.next = Node(value: value)
         tail = tail?.next
     }
     
     func pop() -> T? {
-        let excludeData = head?.data
+        let excludeData = head?.value
         head = head?.next
         
         if isEmpty {
@@ -42,7 +42,7 @@ class LinkedList<T> {
         return excludeData
     }
     
-    func removaLast() -> T? {
+    func removeLast() -> T? {
         
     }
     
