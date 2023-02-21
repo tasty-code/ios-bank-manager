@@ -8,11 +8,31 @@
 import Foundation
 
 struct LinkedList<Value: Equatable> {
-    private var head: Node<Value>?
-    private var tail: Node<Value>?
+    private(set) var head: Node<Value>?
+    private(set) var tail: Node<Value>?
+            
+    var first: Value? {
+        return head?.value
+    }
+    
+    var last: Value? {
+        return tail?.value
+    }
     
     var isEmpty: Bool {
-        head == nil
+        return head == nil
+    }
+    
+    func node(at index: Int) -> Node<Value>? {
+        var currentNode = head
+        var currentIndex = 0
+        
+        while currentNode != nil && currentIndex < index {
+            currentNode = currentNode?.next
+            currentIndex += 1
+        }
+        
+        return currentNode
     }
     
     mutating func push(_ value: Value) {
@@ -30,18 +50,6 @@ struct LinkedList<Value: Equatable> {
         }
         tail?.next = Node(value: value)
         tail = tail?.next
-    }
-    
-    func node(at index: Int) -> Node<Value>? {
-        var currentNode = head
-        var currentIndex = 0
-        
-        while currentNode != nil && currentIndex < index {
-            currentNode = currentNode?.next
-            currentIndex += 1
-        }
-        
-        return currentNode
     }
     
     @discardableResult
