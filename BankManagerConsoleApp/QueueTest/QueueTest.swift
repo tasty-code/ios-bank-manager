@@ -57,4 +57,30 @@ final class QueueTest: XCTestCase {
         //then
         XCTAssertEqual(firstGivenNumber, dequeuedData)
     }
+    
+    func test_peek시_큐의_첫번째값_반환하는지() {
+        //given
+        let firstGivenNumber = 3
+        let secondGivenNumber = 4
+        sut.euqueue(firstGivenNumber)
+        sut.euqueue(secondGivenNumber)
+        
+        //when
+        let peekedData = sut.peek()
+        
+        //then
+        XCTAssertEqual(firstGivenNumber, peekedData)
+    }
+    
+    func test_clear시_isEmpty가_true를반환하는지() {
+        //given
+        let firstGivenNumber = 3
+        sut.euqueue(firstGivenNumber)
+        
+        //when
+        sut.clear()
+        
+        //then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
