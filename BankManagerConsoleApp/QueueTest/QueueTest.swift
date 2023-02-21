@@ -35,28 +35,26 @@ final class QueueTest: XCTestCase {
         XCTAssertEqual(actualCountNumber, givenCountNumber)
     }
     
-    func test_3을_enque했을때_Queue안에_Node가_존재하는지() {
+    func test_비어있는Queue에_isEmpty했을때_True를_반환하는지() {
         //given
         
         //when
-        sut.euqueue(3)
         
         //then
-        XCTAssertFalse(sut.isEmpty)
+        XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_enque메서드_호출뒤_deque했을때_카운트가_0개인지() {
+    func test_3_4를_enque후_deque했을때_첫번째_노드가_삭제되는지() {
         //given
-        let givenCountNumber = 0
+        let firstGivenNumber = 3
+        let secondGivenNumber = 4
+        sut.euqueue(firstGivenNumber)
+        sut.euqueue(secondGivenNumber)
         
         //when
-        sut.euqueue(3)
-        sut.euqueue(4)
+        let dequeuedData = sut.dequeue()
         
-        let _ = sut.dequeue()
-        let _ = sut.dequeue()
-        let actualCountNumber = sut.count
         //then
-        XCTAssertEqual(actualCountNumber, givenCountNumber)
+        XCTAssertEqual(firstGivenNumber, dequeuedData)
     }
 }
