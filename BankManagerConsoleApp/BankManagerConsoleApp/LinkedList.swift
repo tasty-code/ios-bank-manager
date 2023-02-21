@@ -57,6 +57,7 @@ struct LinkedList<Value: Equatable> {
         return node.next!
     }
     
+    @discardableResult
     mutating func pop() -> Value? {
         let excludeData = head?.value
         head = head?.next
@@ -68,6 +69,7 @@ struct LinkedList<Value: Equatable> {
         return excludeData
     }
     
+    @discardableResult
     mutating func removeLast() -> Value? {
         guard let head = head else { return nil }
         
