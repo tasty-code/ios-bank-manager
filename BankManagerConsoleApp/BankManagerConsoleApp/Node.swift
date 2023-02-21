@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Node<Value: Equatable> {
+final class Node<Value: Equatable> {
     let value: Value
     var next: Node?
     
