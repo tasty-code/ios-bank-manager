@@ -7,9 +7,15 @@
 
 import Foundation
 
-class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    var isEmpty: Bool {
+        return head == nil && tail == nil
+    }
+    var peek: T? {
+        return head?.value
+    }
 
     func append(_ value: T) {
         guard head != nil else {
@@ -31,10 +37,6 @@ class LinkedList<T> {
             tail = nil
         }
         return node.value
-    }
-
-    func isEmpty() -> Bool {
-        return head == nil && tail == nil
     }
 
     func clear() {

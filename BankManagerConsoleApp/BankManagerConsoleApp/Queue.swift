@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<T> {
-    var list = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     mutating func enqueue(_ value: T) {
         list.append(value)
@@ -23,10 +23,10 @@ struct Queue<T> {
     }
     
     func peek() -> T? {
-        return list.head?.value
+        return list.peek
     }
     
     func isEmpty() -> Bool {
-        return list.isEmpty()
+        return list.isEmpty
     }
 }
