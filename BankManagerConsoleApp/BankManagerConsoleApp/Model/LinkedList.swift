@@ -32,6 +32,7 @@ struct LinkedList<T> {
         if head == nil {
             head = newNode
             tail = head
+
             return
         }
 
