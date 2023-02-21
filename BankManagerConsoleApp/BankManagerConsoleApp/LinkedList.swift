@@ -29,6 +29,7 @@ final class LinkedList<T> {
             return
         }
         self.tail?.next = newItem
+        self.tail = newItem
     }
     
     func removeFirst() -> T? {
