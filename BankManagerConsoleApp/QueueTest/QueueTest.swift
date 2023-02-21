@@ -44,6 +44,16 @@ final class QueueTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
+    func test_비어있는Queue에_dequeue했을때_nil을반환하는지() {
+        //given
+        
+        //when
+        let dequeuedData = sut.dequeue()
+        
+        //then
+        XCTAssertNil(dequeuedData)
+    }
+    
     func test_3_4를_enque후_dequeue했을때_첫번째_노드가_삭제되는지() {
         //given
         let firstGivenNumber = 3
