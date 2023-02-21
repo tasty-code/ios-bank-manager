@@ -30,7 +30,7 @@ class SinglyLinkedList<Element> {
         if isEmpty() {
             head = node
         } else {
-            tail?.setNextNode(node)
+            tail?.nextNode = node
         }
         tail = node
         nodeCount += 1
@@ -38,7 +38,7 @@ class SinglyLinkedList<Element> {
     
     func removeFirstNode() {
         guard !isEmpty() else { return }
-        head = head?.nextNode()
+        head = head?.nextNode
         nodeCount -= 1
     }
 }
