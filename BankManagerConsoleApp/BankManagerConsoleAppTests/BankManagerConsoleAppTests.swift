@@ -25,10 +25,23 @@ final class BankManagerConsoleAppTests: XCTestCase {
         sut.enqueue(firstGivenValue)
         sut.enqueue(secondGivenValue)
         
-        guard let head = sut.peekFirst()?.data,
-              let tail = sut.peekLast()?.data else { return }
+        guard let headValue = sut.peekFirst()?.data,
+              let tailValue = sut.peekLast()?.data else { return }
         
-        XCTAssertEqual([head, tail], [firstExpectedValue, secondExpectedValue])
+        XCTAssertEqual([headValue, tailValue], [firstExpectedValue, secondExpectedValue])
+    }
+    
+    func test_Node1과Node2를_enqueue한뒤_dequeue하면_head는_Node2가된다() {
+        let (firstGivenValue, secondGivenValue) = (Node(1), Node(2))
+        let expectedValue = 2
+        
+        sut.enqueue(firstGivenValue)
+        sut.enqueue(secondGivenValue)
+        sut.dequeue()
+        
+        guard let headValue = sut.peekFirst()?.data else { return }
+        
+        XCTAssertEqual(headValue, expectedValue)
     }
     
     func test_queue를_clear하면_isEmpty함수가_true를반환한다() {
