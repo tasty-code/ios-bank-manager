@@ -9,10 +9,9 @@ import Foundation
 
 protocol Queue {
     associatedtype T
-    var head: T? { get set }
     
-    mutating func enqueue(_ newNode: T)
-    mutating func dequeue() -> T?
+    func enqueue(_ newNode: T)
+    func dequeue() -> T?
     func clear()
     func peek()
     func isEmpty() -> Bool
