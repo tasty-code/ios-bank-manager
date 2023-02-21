@@ -25,8 +25,9 @@ struct LinkedQueue<T> {
     mutating func clear() {
         guard nodes.count != 0 else { return }
 
-        self.nodes.head = nil
-        self.nodes.tail = nil
+        nodes.head = nil
+        nodes.tail = nil
+        nodes.count = 0
     }
 
     func peek() -> T? {
