@@ -9,31 +9,48 @@ import Foundation
 
 class LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
     
-    func enqueue(data: T) {
-        guard head == nil else {
-            head = Node(data: data)
-            return
-        }
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: data)
+    var isEmpty: Bool {
+        head == nil
     }
     
-    func dequeue() {
-        guard head == nil else { return }
+    func push(_ data: T) {
+        head = Node(data: data, next: head)
         
-        if head?.next == nil {
-            head = nil
+        if tail == nil {
+            tail = head
+        }
+    }
+    
+    func append(data: T) {
+        guard !isEmpty else {
+            push(data)
             return
         }
+        tail?.next = Node(data: data)
+        tail = tail?.next
+    }
+    
+    func pop() -> T? {
+        let excludeData = head?.data
+        head = head?.next
         
-        var node = head
-        while node?.next?.next != nil {
-            node = node?.next
+        if isEmpty {
+            tail = nil
         }
-        node?.next = node?.next?.next
+        return excludeData
+    }
+    
+    func removaLast() -> T? {
+        
+    }
+    
+    func insert(data: T) {
+        
+    }
+    
+    func removeAll() {
+        
     }
 }
