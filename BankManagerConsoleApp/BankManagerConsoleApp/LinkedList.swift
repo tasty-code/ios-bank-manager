@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LinkedList<Value> {
+struct LinkedList<Value> {
     private var head: Node<Value>?
     private var tail: Node<Value>?
     
@@ -15,7 +15,7 @@ class LinkedList<Value> {
         head == nil
     }
     
-    func push(_ value: Value) {
+    mutating func push(_ value: Value) {
         head = Node(value: value, next: head)
         
         if tail == nil {
@@ -23,7 +23,7 @@ class LinkedList<Value> {
         }
     }
     
-    func append(_ value: Value) {
+    mutating func append(_ value: Value) {
         guard !isEmpty else {
             push(value)
             return
@@ -44,7 +44,7 @@ class LinkedList<Value> {
     }
     
     @discardableResult
-    func insert(_ value: Value, after node: Node<Value>) -> Node<Value> {
+    mutating func insert(_ value: Value, after node: Node<Value>) -> Node<Value> {
         
         guard tail !== node else {
             append(value)
@@ -55,7 +55,7 @@ class LinkedList<Value> {
         return node.next!
     }
     
-    func pop() -> Value? {
+    mutating func pop() -> Value? {
         let excludeData = head?.value
         head = head?.next
         
@@ -65,7 +65,7 @@ class LinkedList<Value> {
         return excludeData
     }
     
-    func removeLast() -> Value? {
+    mutating func removeLast() -> Value? {
         guard let head = head else { return nil }
         
         guard head.next != nil else {
@@ -85,7 +85,7 @@ class LinkedList<Value> {
         return current.value
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }
