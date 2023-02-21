@@ -22,7 +22,7 @@ final class QueueTest: XCTestCase {
         sut = nil
     }
     
-    func test_3_4를_enque했을때_카운트가_2개인지() {
+    func test_3_4를_enqueue했을때_카운트가_2개인지() {
         //given
         let givenCountNumber = 2
         
@@ -44,7 +44,7 @@ final class QueueTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_3_4를_enque후_deque했을때_첫번째_노드가_삭제되는지() {
+    func test_3_4를_enque후_dequeue했을때_첫번째_노드가_삭제되는지() {
         //given
         let firstGivenNumber = 3
         let secondGivenNumber = 4
