@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedList<Value> {
+struct LinkedList<Value: Equatable> {
     private var head: Node<Value>?
     private var tail: Node<Value>?
     
