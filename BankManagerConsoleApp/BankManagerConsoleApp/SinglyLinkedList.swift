@@ -7,13 +7,13 @@
 
 import Foundation
 
-class SinglyLinkedList<Element> {
+final class SinglyLinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
     private var nodeCount: Int {
         var count: Int = head == nil ? 0 : 1
         var nodeForCount = head
-        while nodeForCount?.next != nil {
+        while nodeForCount?.nextNode != nil {
             count += 1
             nodeForCount = nodeForCount?.nextNode
         }

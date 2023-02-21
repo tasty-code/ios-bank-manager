@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Node<Element> {
-    var data: Element
-    var next: Node?
+final class Node<Element> {
+    private(set) var data: Element
+    private var next: Node?
     var nextNode: Node? {
         get {
             return next
