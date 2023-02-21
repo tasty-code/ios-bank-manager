@@ -10,15 +10,15 @@ import Foundation
 struct Queue<T> {
     private var list = LinkedList<T>()
     
-    mutating func enqueue(_ value: T) {
+    func enqueue(_ value: T) {
         list.append(value)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         return list.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         list.clear()
     }
     
