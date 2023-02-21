@@ -35,4 +35,12 @@ final class BankManagerConsoleAppTests: XCTestCase {
         sut.append(input3)
         XCTAssertEqual(sut.tail?.value, expected)
     }
+    
+    func test_3을_append하고_removeFirst_하면_3이_나오는지_확인하다() throws {
+        let input = 3
+        let expected = 3
+        sut.append(input)
+        let result = sut.removeFirst()
+        XCTAssertEqual(expected, result)
+    }
 }
