@@ -10,6 +10,10 @@ import Foundation
 struct Queue<Value: Equatable> {
     private var queue: LinkedList = LinkedList<Value>()
     
+    var count: Int {
+        return queue.count
+    }
+    
     var isEmpty: Bool {
         return queue.isEmpty
     }
