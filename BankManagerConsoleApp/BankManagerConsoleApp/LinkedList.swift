@@ -38,4 +38,15 @@ final class LinkedList<Value> {
         tail?.next = Node(value)
         tail = tail?.next
     }
+
+    func removeFirst() -> Value? {
+        let headValue = head?.value
+        head = head?.next
+        
+        if isEmpty {
+            tail = nil
+        }
+
+        return headValue
+    }
 }
