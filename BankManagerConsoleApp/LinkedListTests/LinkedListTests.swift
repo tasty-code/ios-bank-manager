@@ -48,6 +48,7 @@ final class LinkedListTests: XCTestCase {
     func test_하나의_값을_넣고_removeFirst시_peek는_nil이다() {
         let value = "iYeah"
         sut.append(value)
+        sut.removeFirst()
 
         let expectation = sut.peek
         XCTAssertNil(expectation)

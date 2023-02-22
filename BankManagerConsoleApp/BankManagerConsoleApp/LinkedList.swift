@@ -16,7 +16,7 @@ final class Node<Value> {
     }
 }
 
-final class LinkedList<Value> {
+struct LinkedList<Value> {
     private var head: Node<Value>?
     private var tail: Node<Value>?
 
@@ -28,7 +28,7 @@ final class LinkedList<Value> {
         return head?.value
     }
 
-    func append(_ value: Value) {
+    mutating func append(_ value: Value) {
         guard !isEmpty else {
             head = Node(value)
             tail = head
@@ -40,7 +40,7 @@ final class LinkedList<Value> {
     }
 
     @discardableResult
-    func removeFirst() -> Value? {
+    mutating func removeFirst() -> Value? {
         let headValue = head?.value
         head = head?.next
         
@@ -51,7 +51,7 @@ final class LinkedList<Value> {
         return headValue
     }
 
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
     }
 }
