@@ -8,6 +8,6 @@
 import Foundation
 
 protocol Waitable {
-    
+
     var waitingOrder: Int { get }
 }
