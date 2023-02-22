@@ -39,7 +39,7 @@ final class LinkedList<T> {
         return node.value
     }
 
-    func clear() {
+    func removeAll() {
         head = nil
         tail = nil
     }

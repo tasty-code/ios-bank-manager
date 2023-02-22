@@ -25,7 +25,10 @@ final class BankManagerConsoleAppTests: XCTestCase {
     func test_append_입력_3에_대해서_추가되었는지_확인한다() throws {
         let input = 3
         sut.append(input)
-        XCTAssertFalse(sut.isEmpty)
+
+        let expected = 3
+        let result = sut.peek
+        XCTAssertEqual(expected, result)
     }
 
     func test_3을_append하고_removeFirst_하면_3이_나오는지_확인하다() throws {
@@ -64,13 +67,13 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(expected3, result3)
     }
 
-    func test_clear로_Linkedlist를_초기화_시키는지_확인한다() throws {
+    func test_removeAll로_Linkedlist를_초기화_시키는지_확인한다() throws {
         let inputs = [3, 6, 9]
         for input in inputs {
             sut.append(input)
         }
 
-        sut.clear()
+        sut.removeAll()
         XCTAssertTrue(sut.isEmpty)
     }
 }

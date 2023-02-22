@@ -19,7 +19,7 @@ struct Queue<T> {
     }
     
     func clear() {
-        list.clear()
+        list.removeAll()
     }
     
     func peek() -> T? {
