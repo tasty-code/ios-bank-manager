@@ -9,7 +9,7 @@ import XCTest
 
 final class LinkedListTests: XCTestCase {
 
-    var sut: LinkedList<Any>!
+    var sut: LinkedList<String>!
 
     override func setUpWithError() throws {
         sut = LinkedList()
@@ -23,4 +23,15 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.peek)
     }
 
+    func test_비어있는_리스트의_isEmpty가_true이다() {
+        XCTAssertTrue(sut.isEmpty)
+    }
+
+    func test_처음_append한_head의_값이_peek가_된다() {
+        let value = "iYeah"
+        sut.append(value)
+
+        let expectation = sut.peek
+        XCTAssertEqual(value, expectation)
+    }
 }
