@@ -15,6 +15,7 @@ final class WaitingManager<T>: Queue {
         queue.append(newData)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         return queue.removeFirst()
     }
