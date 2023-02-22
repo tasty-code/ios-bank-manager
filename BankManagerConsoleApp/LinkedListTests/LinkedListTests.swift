@@ -20,11 +20,13 @@ final class LinkedListTests: XCTestCase {
     }
 
     func test_비어있는_리스트의_peek가_nil이다() {
-        XCTAssertNil(sut.peek)
+        let expectation = sut.peek
+        XCTAssertNil(expectation)
     }
 
     func test_비어있는_리스트의_isEmpty가_true이다() {
-        XCTAssertTrue(sut.isEmpty)
+        let expectation = sut.isEmpty
+        XCTAssertTrue(expectation)
     }
 
     func test_처음_append한_head의_값이_peek가_된다() {
@@ -46,7 +48,9 @@ final class LinkedListTests: XCTestCase {
     func test_하나의_값을_넣고_removeFirst시_peek는_nil이다() {
         let value = "iYeah"
         sut.append(value)
-        XCTAssertNil(sut.peek)
+
+        let expectation = sut.peek
+        XCTAssertNil(expectation)
     }
 
     func test_removeFirst시_먼저_넣은_값의_순서대로_반환된다() {
@@ -69,5 +73,23 @@ final class LinkedListTests: XCTestCase {
 
             sut.removeFirst()
         }
+    }
+
+    func test_removeAll시_isEmpty가_true이다() {
+        let values = ["iYeah", "Mason", "vivi"]
+        values.forEach { sut.append($0) }
+
+        sut.removeAll()
+        let expectation = sut.isEmpty
+        XCTAssertTrue(expectation)
+    }
+
+    func test_removeAll시_peek이_nil이다() {
+        let values = ["iYeah", "Mason", "vivi"]
+        values.forEach { sut.append($0) }
+
+        sut.removeAll()
+        let expectation = sut.peek
+        XCTAssertNil(expectation)
     }
 }

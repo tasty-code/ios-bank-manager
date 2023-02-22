@@ -50,4 +50,8 @@ final class LinkedList<Value> {
 
         return headValue
     }
+
+    func removeAll() {
+        head = nil
+    }
 }
