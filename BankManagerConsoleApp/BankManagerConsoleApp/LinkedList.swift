@@ -39,6 +39,7 @@ final class LinkedList<Value> {
         tail = tail?.next
     }
 
+    @discardableResult
     func removeFirst() -> Value? {
         let headValue = head?.value
         head = head?.next

@@ -43,6 +43,12 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(value, expectation)
     }
 
+    func test_하나의_값을_넣고_removeFirst시_peek는_nil이다() {
+        let value = "iYeah"
+        sut.append(value)
+        XCTAssertNil(sut.peek)
+    }
+
     func test_removeFirst시_먼저_넣은_값의_순서대로_반환된다() {
         let values = ["iYeah", "Mason", "vivi"]
         values.forEach { sut.append($0) }
@@ -53,9 +59,15 @@ final class LinkedListTests: XCTestCase {
         }
     }
 
-    func test_하나의_값을_넣고_removeFirst시_peek는_nil이다() {
-        let value = "iYeah"
-        sut.append(value)
-        XCTAssertNil(sut.peek)
+    func test_removeFirst시_peek가_다음값으로_변경된다() {
+        let values = ["iYeah", "Mason", "vivi"]
+        values.forEach { sut.append($0) }
+
+        values.forEach { value in
+            let expectation = sut.peek
+            XCTAssertEqual(value, expectation)
+
+            sut.removeFirst()
+        }
     }
 }
