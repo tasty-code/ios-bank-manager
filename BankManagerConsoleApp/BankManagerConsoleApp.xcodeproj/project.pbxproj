@@ -11,6 +11,8 @@
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D9E3203B29A6016A005E265C /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203A29A6016A005E265C /* Customer.swift */; };
 		D9E3203E29A60187005E265C /* Waitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203D29A60187005E265C /* Waitable.swift */; };
+		F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB529A602DA00F6DBC3 /* Workable.swift */; };
+		F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB729A6034600F6DBC3 /* Banker.swift */; };
 		F0FA9CDC29A47DC2008B2044 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA9CDB29A47DC2008B2044 /* LinkedList.swift */; };
 		F0FA9CF629A49A01008B2044 /* LinkedQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA9CF529A49A01008B2044 /* LinkedQueueTest.swift */; };
 		F0FA9CFA29A49A27008B2044 /* LinkedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA9CDD29A47DF0008B2044 /* LinkedQueue.swift */; };
@@ -36,6 +38,8 @@
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		D9E3203A29A6016A005E265C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		D9E3203D29A60187005E265C /* Waitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waitable.swift; sourceTree = "<group>"; };
+		F0B9DFB529A602DA00F6DBC3 /* Workable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workable.swift; sourceTree = "<group>"; };
+		F0B9DFB729A6034600F6DBC3 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F0FA9CDB29A47DC2008B2044 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F0FA9CDD29A47DF0008B2044 /* LinkedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedQueue.swift; sourceTree = "<group>"; };
 		F0FA9CF329A49A01008B2044 /* BankManagerConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,10 +85,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				D9E3203C29A60177005E265C /* Protocol */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				F0FA9CDF29A480EB008B2044 /* Model */,
+				D9E3203C29A60177005E265C /* Protocol */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E3203D29A60187005E265C /* Waitable.swift */,
+				F0B9DFB529A602DA00F6DBC3 /* Workable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 				F0FA9CDB29A47DC2008B2044 /* LinkedList.swift */,
 				F0FA9CDD29A47DF0008B2044 /* LinkedQueue.swift */,
 				D9E3203A29A6016A005E265C /* Customer.swift */,
+				F0B9DFB729A6034600F6DBC3 /* Banker.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,10 +211,12 @@
 			files = (
 				D9E3203E29A60187005E265C /* Waitable.swift in Sources */,
 				F0FA9CFB29A49A28008B2044 /* LinkedQueue.swift in Sources */,
+				F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */,
 				D9E3203B29A6016A005E265C /* Customer.swift in Sources */,
 				F0FA9CDC29A47DC2008B2044 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

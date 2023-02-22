@@ -8,6 +8,6 @@
 import Foundation
 
 struct Customer: Waitable {
-    var waitingOrder: Int
 
+    var waitingOrder: Int
 }
