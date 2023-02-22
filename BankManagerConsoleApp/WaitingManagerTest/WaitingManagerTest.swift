@@ -20,6 +20,11 @@ final class WaitingManagerTest: XCTestCase {
         sut = nil
     }
     
+    func test_WaitingManager의_isEmpty가_최초_데이터가_없을때_True를_반환하는지() {
+        let result = sut.isEmpty()
+        XCTAssertTrue(result)
+    }
+    
     func test_WaitingManager의_enqueue메서드가_Queue에_데이터를_저장하는지() {
         sut.enqueue(1)
         let result = sut.isEmpty()
