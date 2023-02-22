@@ -21,7 +21,11 @@ final class LinkedList<Value> {
     private var tail: Node<Value>?
 
     var isEmpty: Bool {
-        head == nil
+        return head == nil
+    }
+
+    var peek: Value? {
+        return head?.value
     }
 
     func append(_ value: Value) {
