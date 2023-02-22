@@ -45,13 +45,13 @@ struct LinkedList<T> {
 
         let removedValue = head?.data
 
-        head = head?.next
-
-        if head == nil {
+        if head?.next != nil {
+            head = head?.next
+            count -= 1
+        } else {
+            head = nil
             tail = nil
             count = 0
-        } else {
-            count -= 1
         }
 
         return removedValue
