@@ -32,14 +32,16 @@ struct BankManager {
     }
     
     private static func beginWork() {
-        let teller = Teller(identifier: "Teller1")
+        var teller = Teller(identifier: "Teller1")
         let totalCustomCount = Int.random(in: Requirement.CustomerCount.minimum...Requirement.CustomerCount.maxmimum)
         
-        for customNumber in Requirement.CustomerCount.defaultCustomer..<totalCustomCount {
+        for customNumber in Requirement.CustomerCount.defaultCustomer...totalCustomCount {
             OutputMessage.work(start: customNumber)
             
-
-            OutputMessage.work(finish: customNumber)
+            teller.working(responsibility: customNumber)
+            let finishCustomNumber = teller.finishing()
+            
+            OutputMessage.work(finish: finishCustomNumber)
         }
         let totalSpend = calculate(spend: totalCustomCount)
 
