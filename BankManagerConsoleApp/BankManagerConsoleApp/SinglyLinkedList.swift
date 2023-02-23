@@ -10,15 +10,7 @@ import Foundation
 final class SinglyLinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
-    private var nodeCount: Int {
-        var count: Int = head == nil ? 0 : 1
-        var nodeForCount = head
-        while nodeForCount?.nextNode != nil {
-            count += 1
-            nodeForCount = nodeForCount?.nextNode
-        }
-        return count
-    }
+    private(set) var nodeCount: Int = 0
     
     init(_ node: Node<Element>? = nil) {
         self.head = node
@@ -36,12 +28,20 @@ final class SinglyLinkedList<Element> {
             tail?.nextNode = node
         }
         tail = node
+        nodeCount += 1
     }
     
     func removeFirstNode() -> Node<Element>? {
         guard !isEmpty() else { return nil }
         let firstNode = head
         head = head?.nextNode
+        nodeCount -= 1
         return firstNode
+    }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
+        nodeCount = 0
     }
 }

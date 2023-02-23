@@ -19,8 +19,7 @@ final class Queue<Element> {
     }
     
     func clear() {
-        elements.head = nil
-        elements.tail = nil
+        elements.removeAll()
     }
     
     func peekFirst() -> Node<Element>? {
