@@ -37,6 +37,7 @@ struct BankManager {
         
         for customNumber in Requirement.CustomerCount.defaultCustomer..<totalCustomCount {
             OutputMessage.work(start: customNumber)
+            
 
             OutputMessage.work(finish: customNumber)
         }
@@ -46,7 +47,6 @@ struct BankManager {
     }
     
     private static func calculate(spend toalCount: Int) -> String {
-        
         let numberFormatter = NumberFormatter()
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumSignificantDigits = 4
