@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5BE473D929A7494F00F3A58E /* WorkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473D829A7494F00F3A58E /* WorkList.swift */; };
 		5BE473DB29A7496900F3A58E /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473DA29A7496900F3A58E /* Requirement.swift */; };
+		5BE473E129A752ED00F3A58E /* ErrorProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473E029A752ED00F3A58E /* ErrorProcess.swift */; };
 		5BEBEF8A29A7235900EBBC6E /* OutputMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */; };
 		5BEBEF8D29A72B7600EBBC6E /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8C29A72B7600EBBC6E /* Workable.swift */; };
 		5BEBEF8F29A72EFE00EBBC6E /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8E29A72EFE00EBBC6E /* Teller.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		5BE473D829A7494F00F3A58E /* WorkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkList.swift; sourceTree = "<group>"; };
 		5BE473DA29A7496900F3A58E /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
+		5BE473E029A752ED00F3A58E /* ErrorProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorProcess.swift; sourceTree = "<group>"; };
 		5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputMessage.swift; sourceTree = "<group>"; };
 		5BEBEF8C29A72B7600EBBC6E /* Workable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workable.swift; sourceTree = "<group>"; };
 		5BEBEF8E29A72EFE00EBBC6E /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = DataStructure;
 			sourceTree = "<group>";
 		};
+		5BE473DF29A752CD00F3A58E /* ErrorHandling */ = {
+			isa = PBXGroup;
+			children = (
+				5BE473E029A752ED00F3A58E /* ErrorProcess.swift */,
+			);
+			path = ErrorHandling;
+			sourceTree = "<group>";
+		};
 		5BEBEF8B29A7270B00EBBC6E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 				5BE473DD29A7498900F3A58E /* Protocol */,
 				5BE473DC29A7497F00F3A58E /* Enum */,
 				5BE473DE29A749B900F3A58E /* DataStructure */,
+				5BE473DF29A752CD00F3A58E /* ErrorHandling */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				5BEBEF8E29A72EFE00EBBC6E /* Teller.swift */,
 			);
@@ -254,6 +265,7 @@
 				5BEBEF8A29A7235900EBBC6E /* OutputMessage.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				5BEBEF8D29A72B7600EBBC6E /* Workable.swift in Sources */,
+				5BE473E129A752ED00F3A58E /* ErrorProcess.swift in Sources */,
 				5BEBEF8F29A72EFE00EBBC6E /* Teller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
