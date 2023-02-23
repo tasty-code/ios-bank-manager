@@ -9,15 +9,15 @@ import Foundation
 
 protocol Receivable {
 
-    func getUserInput() -> String?
+    func getUserInput() -> Int?
 }
 
 extension Receivable {
 
-    func getUserInput() -> String? {
+    func getUserInput() -> Int? {
         guard let userInput = readLine() else {
             return nil
         }
-        return userInput
+        return Int(userInput)
     }
 }
