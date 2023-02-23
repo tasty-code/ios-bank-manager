@@ -21,7 +21,7 @@ struct BankManager {
             switch WorkList(rawValue: userInput) {
             case .openBank:
                 OutputMessage.conform(userInput)
-                return beginWork()
+                beginWork()
             case .closeBank:
                 OutputMessage.conform(userInput)
                 isContinue = false
