@@ -7,38 +7,18 @@
 
 import Foundation
 
-struct LinkedQueue<T> {
+class LinkedQueue<Value>: LinkedList<Value> {
 
-    private var nodes = LinkedList<T>()
-    var front: Node<T>? { nodes.head }
-    var rear: Node<T>? { nodes.tail }
-    var count: Int { nodes.count }
+    func enqueue(data: Value) { append(data) }
 
-    mutating func enqueue(data: T) {
-        nodes.append(data)
+    func dequeue() -> Value? { removeFirst() }
+
+    func clear() {
+        guard head != nil else { return }
+
+        head = nil
+        tail = nil
     }
 
-    mutating func dequeue() -> T? {
-        nodes.removeFirst()
-    }
-
-    mutating func clear() {
-        guard nodes.count != 0 else { return }
-
-        nodes.head = nil
-        nodes.tail = nil
-        nodes.count = 0
-    }
-
-    func peek() -> T? {
-        guard let firstNode = nodes.head else { return nil }
-
-        return firstNode.data
-    }
-
-    func isEmpty() -> Bool {
-        guard nodes.count == 0 else { return false }
-
-        return true
-    }
+    func isEmpty() -> Bool { head == nil ? true : false }
 }

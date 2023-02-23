@@ -7,27 +7,24 @@
 
 import Foundation
 
-final class Node<T> {
+final class Node<Value> {
 
-    var data: T
+    fileprivate var value: Value
     var next: Node?
 
-    init(data: T, next: Node? = nil) {
-        self.data = data
+    init(data: Value, next: Node? = nil) {
+        self.value = data
         self.next = next
     }
 }
 
-struct LinkedList<T> {
+class LinkedList<Value> {
 
-    var head: Node<T>?
-    var tail: Node<T>?
-    var count = 0
+    var head: Node<Value>?
+    var tail: Node<Value>?
 
-    mutating func append(_ data: T) {
+    func append(_ data: Value) {
         let newNode = Node(data: data)
-
-        count += 1
 
         if head == nil {
             head = newNode
@@ -40,20 +37,20 @@ struct LinkedList<T> {
         tail = newNode
     }
 
-    mutating func removeFirst() -> T? {
-        guard count != 0 else { return nil }
+    func removeFirst() -> Value? {
+        guard head != nil else { return nil }
 
-        let removedValue = head?.data
+        let removedValue = head?.value
 
         if head?.next != nil {
             head = head?.next
-            count -= 1
         } else {
             head = nil
             tail = nil
-            count = 0
         }
 
         return removedValue
     }
+
+    func peek() -> Value? { head != nil ? head?.value: nil }
 }
