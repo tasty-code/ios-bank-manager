@@ -34,12 +34,16 @@ struct Bank {
         }
         let customers = createCustomer()
         let openTime = Double(Date().timeIntervalSince1970)
-        while !queue.isEmpty() {
-            bankmanager.assist(queue: queue)
+        while let customer = dequeue(from: queue) {
+            bankmanager.assist(customer)
         }
         let closeTime = Double(Date().timeIntervalSince1970)
         let takenTime = String(format: "%.1f", closeTime - openTime)
         BankMessage.endBanking(customers: customers, takenTime: takenTime).description()
+    }
+    
+    private func dequeue(from customerQueue: Queue<Int>) -> Int? {
+        return customerQueue.dequeue()
     }
 
     private func createCustomer() -> Int {
