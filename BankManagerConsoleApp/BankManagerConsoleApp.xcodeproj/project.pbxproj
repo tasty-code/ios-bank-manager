@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BEBEF8A29A7235900EBBC6E /* OutputMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */; };
 		5BFB001629A454B500EE9F4D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFB001529A454B500EE9F4D /* LinkedList.swift */; };
 		5BFB002929A485F200EE9F4D /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFB002829A485F200EE9F4D /* QueueTest.swift */; };
 		5BFB003129A4864F00EE9F4D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60BCCC29A4541C00595FA2 /* Node.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputMessage.swift; sourceTree = "<group>"; };
 		5BFB001529A454B500EE9F4D /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		5BFB002629A485F200EE9F4D /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFB002829A485F200EE9F4D /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				8E60BCCC29A4541C00595FA2 /* Node.swift */,
 				5BFB001529A454B500EE9F4D /* LinkedList.swift */,
 				8E60BCCE29A4793500595FA2 /* Queue.swift */,
+				5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				8E60BCCD29A4541C00595FA2 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				5BFB001629A454B500EE9F4D /* LinkedList.swift in Sources */,
+				5BEBEF8A29A7235900EBBC6E /* OutputMessage.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
