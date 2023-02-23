@@ -14,6 +14,7 @@ struct Queue<T> {
         list.append(value)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         return list.removeFirst()
     }
