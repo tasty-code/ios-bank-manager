@@ -9,7 +9,16 @@ import Foundation
 
 struct Teller: Workable {
     var identifier: String
-    private let customerLinkedList = LinkedList<Int>()
+    private(set) var customerLinkedList = Queue<Int>()
     
+    mutating func working(responsibility: Int) {
+        customerLinkedList.euqueue(responsibility)
+    }
     
+    mutating func finishing() -> Int {
+        guard let finishCustomNumber = customerLinkedList.dequeue() else {
+            return 0
+        }
+        return finishCustomNumber
+    }
 }
