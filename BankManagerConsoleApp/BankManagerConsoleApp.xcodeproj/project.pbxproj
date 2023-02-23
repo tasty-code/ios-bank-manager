@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		762BC8B429A72370000F8845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48592FB29A5B3C400A20764 /* LinkedList.swift */; };
+		762BC8B829A748ED000F8845 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762BC8B729A748ED000F8845 /* BankTeller.swift */; };
 		763F627F29A721E50077AC72 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F627E29A721E50077AC72 /* QueueTests.swift */; };
 		763F628329A722140077AC72 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4206D9629A6041B00CDA204 /* Queue.swift */; };
 		768C7C1629A5B76E00D72285 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C7C1529A5B76E00D72285 /* LinkedListTests.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		762BC8B729A748ED000F8845 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		763F627C29A721E50077AC72 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		763F627E29A721E50077AC72 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		768C7C1329A5B76E00D72285 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 				B4206D9629A6041B00CDA204 /* Queue.swift */,
 				B4722EFF29A73C3D00A81C22 /* Bank.swift */,
 				B4722F0129A73CAB00A81C22 /* Customer.swift */,
+				762BC8B729A748ED000F8845 /* BankTeller.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				B4722F0229A73CAB00A81C22 /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				B4206D9729A6041B00CDA204 /* Queue.swift in Sources */,
+				762BC8B829A748ED000F8845 /* BankTeller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

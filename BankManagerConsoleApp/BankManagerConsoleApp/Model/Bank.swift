@@ -8,14 +8,18 @@
 import Foundation
 
 struct Bank {
-    private var numberOfBankTellers: UInt
-    private var customersQueue: Queue<Customer> = Queue()
+    private var bankTellers: [BankTeller]
 
-    mutating func visit(customer: Customer) {
-        customersQueue.enqueue(customer)
+    init(bankTellers: [BankTeller]) {
+        self.bankTellers = bankTellers
     }
 
-    mutating func performTask() {
-        customersQueue.dequeue()
+    mutating func visit(customer: Customer) {
+        guard !bankTellers.isEmpty else { return }
+        bankTellers[0].assign(customer: customer)
+    }
+
+    mutating func startWorking() {
+        bankTellers[0].performTask()
     }
 }
