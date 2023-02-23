@@ -9,5 +9,5 @@ import Foundation
 
 struct Banker: Workable {
 
-    var processingTime = 0.7
+    static var processingTime = 0.7
 }

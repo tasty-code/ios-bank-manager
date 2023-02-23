@@ -9,7 +9,7 @@ import Foundation
 
 protocol Workable {
 
-    var processingTime: Double { get }
+    static var processingTime: Double { get }
 
     func work(for who: Customer)
 }
