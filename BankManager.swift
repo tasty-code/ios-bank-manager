@@ -14,7 +14,11 @@ struct BankManager {
             print(OutputMessage.programStart)
             
             guard let userInput = readLine() else {
-                //TODO: Error Handling
+                return
+            }
+            
+            guard userInput == WorkList.openBank.rawValue || userInput == WorkList.closeBank.rawValue else {
+                print(UserInputError.invalidUserInput.localizedDescription)
                 return
             }
             
@@ -56,7 +60,7 @@ struct BankManager {
         let totalLeadTime = Requirement.leadTime * Double(toalCount)
         
         guard let totalSpend = numberFormatter.string(for: totalLeadTime) else {
-            return ""
+            return FailFormatting.failOfFormatToString.localizedDescription
         }
         
         return totalSpend
