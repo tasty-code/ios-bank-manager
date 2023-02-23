@@ -25,6 +25,7 @@ struct BankManager {
             guard let userInput = readLine() else {
                 return
             }
+            
             switch WorkList(rawValue: userInput) {
             case .openBank:
                 return
@@ -34,7 +35,6 @@ struct BankManager {
             default:
                 return
             }
-            
         } while isContinue == true
     }
 }
