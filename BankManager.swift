@@ -6,26 +6,6 @@
 
 import Foundation
 
-enum WorkList: String, CustomStringConvertible {
-    case openBank = "1"
-    case closeBank = "2"
-    
-    var description: String {
-        return self.rawValue
-    }
-}
-
-enum Requirement {
-    
-    enum CustomerCount {
-        static let defaultCustomer: Int = 1
-        static let minimum: Int = 10
-        static let maxmimum: Int = 30
-    }
-    
-    static let leadTime: Double = 0.7
-}
-
 struct BankManager {
     static func startProcess() {
         var isContinue = true
