@@ -11,10 +11,12 @@ final class BankManagerConsoleAppTests: XCTestCase {
     private var sut: Queue<Int>!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = Queue<Int>()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
