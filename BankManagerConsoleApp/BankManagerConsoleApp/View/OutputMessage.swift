@@ -22,6 +22,10 @@ enum OutputMessage: String, CustomStringConvertible {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer)명이며, 총 업무시간은 \(leadTime)초입니다.")
     }
     
+    static func exitProgram(_ userInput: String) {
+        print("입력 : \(userInput)")
+    }
+    
     var description: String {
         return self.rawValue
     }
