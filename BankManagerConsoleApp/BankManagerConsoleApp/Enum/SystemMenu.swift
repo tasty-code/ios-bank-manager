@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum SystemMenu: Int, CaseIterable, CustomStringConvertible {
+enum SystemMenu: Int, CustomStringConvertible {
+
     case open = 1
     case close = 2
 

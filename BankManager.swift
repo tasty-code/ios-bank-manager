@@ -6,3 +6,12 @@
 
 import Foundation
 
+class BankManager: Receivable {
+
+    func startBusiness() {
+        print(Message.menu)
+        print(Message.inputLabel, terminator: "")
+
+        guard let userInput = getUserInput() else { return }
+    }
+}

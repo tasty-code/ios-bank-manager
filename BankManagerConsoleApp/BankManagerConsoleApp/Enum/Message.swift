@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum Message: CaseIterable {
+enum Message: CustomStringConvertible {
+
     case menu
     case inputLabel
 
@@ -16,7 +17,8 @@ enum Message: CaseIterable {
         case .menu:
             let open = SystemMenu.open
             let close = SystemMenu.close
-            return "\(open.rawValue). \(open)\n\(close.rawValue). \(close)"
+
+            return "\(open.rawValue) : \(open)\n\(close.rawValue) : \(close)"
         case .inputLabel:
             return "입력 : "
         }
