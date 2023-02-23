@@ -14,8 +14,8 @@ final class Queue<Element> {
         elements.append(node)
     }
     
-    func dequeue() {
-        elements.removeFirstNode()
+    func dequeue() -> Node<Element>? {
+        return elements.removeFirstNode()
     }
     
     func clear() {

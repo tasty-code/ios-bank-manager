@@ -38,8 +38,10 @@ final class SinglyLinkedList<Element> {
         tail = node
     }
     
-    func removeFirstNode() {
-        guard !isEmpty() else { return }
+    func removeFirstNode() -> Node<Element>? {
+        guard !isEmpty() else { return nil }
+        let firstNode = head
         head = head?.nextNode
+        return firstNode
     }
 }
