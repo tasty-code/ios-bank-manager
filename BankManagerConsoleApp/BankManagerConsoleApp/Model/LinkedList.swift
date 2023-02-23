@@ -22,12 +22,9 @@ struct LinkedList<Value> {
 
     var head: Node<Value>?
     var tail: Node<Value>?
-    var count = 0
 
     mutating func append(_ data: Value) {
         let newNode = Node(data: data)
-
-        count += 1
 
         if head == nil {
             head = newNode
@@ -41,17 +38,15 @@ struct LinkedList<Value> {
     }
 
     mutating func removeFirst() -> Value? {
-        guard count != 0 else { return nil }
+        guard head != nil else { return nil }
 
         let removedValue = head?.value
 
         if head?.next != nil {
             head = head?.next
-            count -= 1
         } else {
             head = nil
             tail = nil
-            count = 0
         }
 
         return removedValue
