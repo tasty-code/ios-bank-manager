@@ -24,7 +24,7 @@ struct LinkedList<Value> {
         return head == nil
     }
 
-    var peek: Value? {
+    var headValue: Value? {
         return head?.value
     }
 

@@ -11,7 +11,7 @@ struct Queue<Value> {
     private var linkedList = LinkedList<Value>()
 
     var peek: Value? {
-        return linkedList.peek
+        return linkedList.headValue
     }
 
     var isEmpty: Bool {
