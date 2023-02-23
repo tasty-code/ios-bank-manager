@@ -92,13 +92,21 @@
 		B4722EFE29A724A200A81C22 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B48592FB29A5B3C400A20764 /* LinkedList.swift */,
-				B4206D9629A6041B00CDA204 /* Queue.swift */,
+				B4722F0329A74E8400A81C22 /* DataStructure */,
 				B4722EFF29A73C3D00A81C22 /* Bank.swift */,
-				B4722F0129A73CAB00A81C22 /* Customer.swift */,
 				762BC8B729A748ED000F8845 /* BankTeller.swift */,
+				B4722F0129A73CAB00A81C22 /* Customer.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B4722F0329A74E8400A81C22 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				B48592FB29A5B3C400A20764 /* LinkedList.swift */,
+				B4206D9629A6041B00CDA204 /* Queue.swift */,
+			);
+			path = DataStructure;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {

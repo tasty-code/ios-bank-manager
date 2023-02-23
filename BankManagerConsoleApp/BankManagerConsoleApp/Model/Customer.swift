@@ -8,7 +8,7 @@
 import Foundation
 
 struct Customer {
-    private var id: Int
+    private(set) var id: Int
     private(set) var totalTime: TimeInterval
 
     init(id: Int, withTotalTime totalTime: TimeInterval) {

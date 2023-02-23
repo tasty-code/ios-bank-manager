@@ -14,11 +14,18 @@ struct BankTeller {
         customersQueue.enqueue(customer)
     }
 
-    mutating func performTask() {
+    mutating func performTask(completion: @escaping () -> Void) {
         while !customersQueue.isEmpty {
-            let milliSeconds = (customersQueue.peek?.totalTime ?? 0 * 1_000_000.0)
+            guard let customer = customersQueue.peek else { continue }
+            let milliSeconds = (customer.totalTime * 1_000_000.0)
+
+            print("\(customer.id)번 고객 업무 시작")
             usleep(useconds_t(milliSeconds))
+
+            print("\(customer.id)번 고객 업무 완료")
             customersQueue.dequeue()
         }
+
+        completion()
     }
 }
