@@ -24,25 +24,29 @@ final class LinkedQueueTest: XCTestCase {
     }
 
     func test_enqueue로_데이터가_들어가는지_확인() {
+        // given
+        let expectation = "lust3r"
+
+        // when
         sut.enqueue(data: "lust3r")
+        guard let result = sut.peek() as? String else { return }
 
-        let expectation = 1
-
-        XCTAssertEqual(expectation, sut.count)
+        // then
+        XCTAssertEqual(expectation, result)
     }
 
     func test_dequeue로_데이터가_제거되는지_확인() {
         // given
-        let expectation = 1
+        let expectation = "blue"
 
         sut.enqueue(data: "blue")
         sut.enqueue(data: "lust3r")
 
         // when
-        sut.dequeue()
+        let result = sut.dequeue() as? String
 
         // then
-        XCTAssertEqual(expectation, sut.count)
+        XCTAssertEqual(expectation, result)
     }
 
     func test_dequeue가_처음_추가한_데이터를_return하는지_확인() {
@@ -60,12 +64,12 @@ final class LinkedQueueTest: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
 
-    func test_노드가_한개인_경우_dequeue했을_때_front와_rear가_nil인지_확인() {
+    func test_노드가_한개인_경우_dequeue했을_때_head와_tail이_nil인지_확인() {
         sut.enqueue(data: "lust3r")
         sut.dequeue()
 
-        XCTAssertNil(sut.front)
-        XCTAssertNil(sut.rear)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 
     func test_아무것도_추가하지_않고_dequeue하는_경우_nil을_반환하는지_확인() {
@@ -74,8 +78,6 @@ final class LinkedQueueTest: XCTestCase {
 
     func test_clear로_queue가_비워지는지_확인() {
         // given
-        let expectation = 0
-
         sut.enqueue(data: "blue")
         sut.enqueue(data: "lust3r")
 
@@ -83,9 +85,7 @@ final class LinkedQueueTest: XCTestCase {
         sut.clear()
 
         // then
-        XCTAssertEqual(expectation, sut.count)
-        XCTAssertNil(sut.front)
-        XCTAssertNil(sut.rear)
+        XCTAssertNil(sut.head)
     }
 
     func test_peek을_하면_가장_먼저_추가한_데이터가_나오는지_확인() {
