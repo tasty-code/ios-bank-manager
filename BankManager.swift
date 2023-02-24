@@ -23,7 +23,7 @@ struct BankManager {
     
     enum ExpectedNumberOfCustomers: Int {
         case maximum = 30
-        case minimum = 20
+        case minimum = 10
         
         static var random: Int {
             return Int.random(in: Self.minimum.rawValue...Self.maximum.rawValue)
