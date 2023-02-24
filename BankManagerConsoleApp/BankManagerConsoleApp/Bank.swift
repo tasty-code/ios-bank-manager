@@ -14,7 +14,7 @@ enum BankState: String, CaseIterable{
 
 struct Bank {
     let queue = Queue<Int>()
-    let bankmanager = BankManager()
+    let bankmanager = Teller()
 
     func execute() {
         BankMessage.startBanking.description()

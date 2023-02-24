@@ -19,5 +19,4 @@ enum ConsoleMessage {
     static func endAssist(_ client: Int) -> String {
         return "\(client)번 고객 업무 완료"
     }
-    static let managerExcutionTime: UInt32 = 700000
 }

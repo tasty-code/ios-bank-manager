@@ -1,15 +1,15 @@
 //
-//  BankManager.swift
+//  Teller.swift
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
 
 import Foundation
 
-struct BankManager {
+struct Teller {
     func assist(_ client: Int){
         print(ConsoleMessage.startAssist(client))
-        usleep(ConsoleMessage.managerExcutionTime)
+        usleep(Constants.managerExcutionTime)
         print(ConsoleMessage.endAssist(client))
     }
 }
