@@ -9,12 +9,12 @@ import Foundation
 
 struct Bank {
     private let queue: Queue<String>
-    private let clerk: BankClerk
+    private let clerks: [BankClerk]
     private var numberOfCustomers: Int = 0
     
     init() {
         self.queue = Queue<String>()
-        self.clerk = BankClerk()
+        self.clerks = [BankClerk()]
     }
     
     mutating func receive(numberOfCustomers: Int) {
@@ -37,7 +37,7 @@ struct Bank {
     func handleAllCustomers() {
         while !queue.isEmpty() {
             guard let customer = distributeCustomersToClerk() else { return }
-            clerk.serve(customer: customer)
+            clerks[0].serve(customer: customer)
         }
         let totalTime = calculateTotalTime()
         BankManager.closingMessage(totalNumberOfCustomers: numberOfCustomers, totalTime: totalTime)
