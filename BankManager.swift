@@ -52,7 +52,7 @@ struct BankManager {
     
     private static func calculate(spend toalCount: Int) -> String {
         let numberFormatter = NumberFormatter()
-        numberFormatter.roundingMode = .floor
+        numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 4
         
         let totalLeadTime = Requirement.leadTime * Double(toalCount)
