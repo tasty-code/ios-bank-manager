@@ -9,8 +9,13 @@ import Foundation
 
 struct Bank {
     let queue: Queue<String>
-    var clerk: BankClerk
+    let clerk: BankClerk
     var numberOfCustomers: Int = 0
+    
+    init() {
+        self.queue = Queue<String>()
+        self.clerk = BankClerk()
+    }
     
     mutating func receive(numberOfCustomers: Int) {
         self.numberOfCustomers = numberOfCustomers
