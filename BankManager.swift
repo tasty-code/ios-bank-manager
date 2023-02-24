@@ -32,7 +32,7 @@ struct BankManager {
             default:
                 return
             }
-        } while isContinue == true
+        } while isContinue
     }
     
     private static func beginWork() {
