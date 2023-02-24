@@ -36,10 +36,12 @@ struct BankManager {
 
     private func notifyWorkCompleted(of customers: [Customer]) {
         let numberOfCustomers = customers.count
-        let totalTimeOfCustomers = customers.reduce(0.0) { partialResult, customer in
-            partialResult + customer.totalTime
-        }
-        let roundedTotalTimeOfCustomers = round(totalTimeOfCustomers * 100) / 100
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(roundedTotalTimeOfCustomers)초입니다.")
+
+        let totalTimeOfCustomers = customers
+            .map { $0.totalTime }
+            .reduce(0, +)
+            .round(toPlaces: 3)
+
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalTimeOfCustomers)초입니다.")
     }
 }
