@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		762BC8B429A72370000F8845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48592FB29A5B3C400A20764 /* LinkedList.swift */; };
 		762BC8B829A748ED000F8845 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762BC8B729A748ED000F8845 /* BankTeller.swift */; };
+		762BC8BA29A859B8000F8845 /* ConsolePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762BC8B929A859B8000F8845 /* ConsolePresenter.swift */; };
 		763F627F29A721E50077AC72 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F627E29A721E50077AC72 /* QueueTests.swift */; };
 		763F628329A722140077AC72 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4206D9629A6041B00CDA204 /* Queue.swift */; };
 		768C7C1629A5B76E00D72285 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C7C1529A5B76E00D72285 /* LinkedListTests.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		762BC8B729A748ED000F8845 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
+		762BC8B929A859B8000F8845 /* ConsolePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolePresenter.swift; sourceTree = "<group>"; };
 		763F627C29A721E50077AC72 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		763F627E29A721E50077AC72 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		768C7C1329A5B76E00D72285 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +49,7 @@
 		B4AE3F8329A855B600C1D02F /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		762BC8BB29A859D8000F8845 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				762BC8B929A859B8000F8845 /* ConsolePresenter.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		763F627D29A721E50077AC72 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,7 +155,7 @@
 			children = (
 				B4AE3F8229A855A700C1D02F /* Extensions */,
 				B4722EFE29A724A200A81C22 /* Model */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				762BC8BB29A859D8000F8845 /* Manager */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -289,6 +300,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				B4722F0029A73C3D00A81C22 /* Bank.swift in Sources */,
 				B4722F0229A73CAB00A81C22 /* Customer.swift in Sources */,
+				762BC8BA29A859B8000F8845 /* ConsolePresenter.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				B4206D9729A6041B00CDA204 /* Queue.swift in Sources */,
 				B4AE3F8429A855B600C1D02F /* Double+.swift in Sources */,
