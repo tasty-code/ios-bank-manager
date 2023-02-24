@@ -7,18 +7,11 @@
 
 import Foundation
 
-enum UserInputError: LocalizedError {
+enum Errors: LocalizedError {
     case invalidUserInput
-    
-    var errorDescription: String? {
-        return NSLocalizedString("Description of invalid user Input Value", comment: "Invalid User Input")
-    }
-}
-
-enum FailFormatting: LocalizedError {
     case failOfFormatToString
     
     var errorDescription: String? {
-        return NSLocalizedString("Description of fail formatting to String", comment: "Fail to format String")
+        return NSLocalizedString("Error Type: \(self)", comment: "")
     }
 }
