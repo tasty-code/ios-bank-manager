@@ -6,6 +6,4 @@
 
 import Foundation
 
-while true {
-    Bank().startBanking()
-}
+Bank().execute()
