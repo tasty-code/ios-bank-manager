@@ -9,6 +9,11 @@ import Foundation
 
 enum OutputMessage: String, CustomStringConvertible {
     case programStart = "1 : 은행 개점 \n2 : 종료"
+    case menu = "1 : 은행 개점 \n2 : 종료"
+    
+    var description: String {
+        return self.rawValue
+    }
     
     static func work(start waitNumber: Int) {
         print("\(waitNumber)번 고객 업무 시작")
@@ -24,9 +29,5 @@ enum OutputMessage: String, CustomStringConvertible {
     
     static func conform(_ userInput: String) {
         print("입력 : \(userInput)")
-    }
-    
-    var description: String {
-        return self.rawValue
     }
 }
