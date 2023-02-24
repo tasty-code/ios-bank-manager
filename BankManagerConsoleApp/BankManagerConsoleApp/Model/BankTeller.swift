@@ -8,24 +8,11 @@
 import Foundation
 
 struct BankTeller {
-    private var customersQueue: Queue<Customer> = Queue()
+    func performTask(of customer: Customer) {
+        print("\(customer.id)번 고객 업무 시작")
 
-    mutating func assign(customer: Customer) {
-        customersQueue.enqueue(customer)
-    }
-
-    mutating func performTask(completion: @escaping () -> Void) {
-        while !customersQueue.isEmpty {
-            guard let customer = customersQueue.peek else { continue }
-            let milliSeconds = (customer.totalTime * 1_000_000.0)
-
-            print("\(customer.id)번 고객 업무 시작")
-            usleep(useconds_t(milliSeconds))
-
-            print("\(customer.id)번 고객 업무 완료")
-            customersQueue.dequeue()
-        }
-
-        completion()
+        let milliSeconds = (customer.totalTime * 1_000_000.0)
+        usleep(useconds_t(milliSeconds))
+        print("\(customer.id)번 고객 업무 완료")
     }
 }

@@ -9,22 +9,24 @@ import Foundation
 
 struct Bank {
     private var bankTellers: [BankTeller]
+    private var customersQueue: Queue<Customer> = Queue()
 
     init(bankTellers: [BankTeller]) {
         self.bankTellers = bankTellers
     }
 
     mutating func visit(customers: [Customer]) {
-        guard !bankTellers.isEmpty else { return }
-
         customers.forEach {
-            bankTellers[0].assign(customer: $0)
+            customersQueue.enqueue($0)
         }
     }
 
     mutating func startWorking() {
-        bankTellers[0].performTask {
-            print("대충 업무 완료 일단...")
+        while !customersQueue.isEmpty {
+            guard let customer = customersQueue.peek else { continue }
+
+            bankTellers.first?.performTask(of: customer)
+            customersQueue.dequeue()
         }
     }
 }
