@@ -8,9 +8,11 @@
 import Foundation
 
 struct BankClerk {
+    let timeSpent: useconds_t = 100000
+    
     func serve(customer: Node<String>) {
         print("\(customer.data) 업무 시작")
-        usleep(700000)
+        usleep(timeSpent)
         print("\(customer.data) 업무 완료")
     }
 }
