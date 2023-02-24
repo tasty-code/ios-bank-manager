@@ -9,7 +9,7 @@ import Foundation
 
 class LinkedQueue<Value>: LinkedList<Value> {
 
-    func enqueue(data: Value) { append(data) }
+    func enqueue(value: Value) { append(value) }
 
     func dequeue() -> Value? { removeFirst() }
 

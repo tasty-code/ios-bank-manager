@@ -16,7 +16,7 @@ class BankManager: Receivable {
 
         switch SystemMenu(rawValue: userInput) {
         case .open:
-            break
+            bankOpen()
         case .close:
             break
         case .none:
@@ -25,4 +25,21 @@ class BankManager: Receivable {
     }
 
     func makeRandomNumber() -> Int { Int.random(in: (10...30)) }
+
+    func bankOpen() {
+        let randomNumber = makeRandomNumber()
+        let customerQueue = LinkedQueue<Any>()
+        for waitingNumber in 1...randomNumber {
+            customerQueue.enqueue(value: Node(value: Customer(waitingOrder: waitingNumber)))
+        }
+
+        while !customerQueue.isEmpty() {
+            var currentCustomer = customerQueue.dequeue() as? Customer // Customer
+            guard let currentCustomerNumber = currentCustomer?.waitingOrder else { return }
+            print(Message.workStart(currentCustomerNumber))
+            
+            print(Message.workComplete(currentCustomerNumber))
+        }
+        print(Message.bankClose(randomNumber))
+    }
 }
