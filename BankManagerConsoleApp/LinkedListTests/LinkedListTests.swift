@@ -30,24 +30,24 @@ final class LinkedListTests: XCTestCase {
     }
 
     func test_처음_append한_head의_값이_headValue가_된다() {
-        let value = "iYeah"
-        sut.append(value)
+        let given = "iYeah"
+        sut.append(given)
 
         let expectation = sut.headValue
-        XCTAssertEqual(value, expectation)
+        XCTAssertEqual(given, expectation)
     }
 
     func test_removeFirst시_첫번째_값이_반환된다() {
-        let value = "iYeah"
-        sut.append(value)
+        let given = "iYeah"
+        sut.append(given)
 
         let expectation = sut.removeFirst()
-        XCTAssertEqual(value, expectation)
+        XCTAssertEqual(given, expectation)
     }
 
     func test_하나의_값을_넣고_removeFirst시_headValue는_nil이다() {
-        let value = "iYeah"
-        sut.append(value)
+        let given = "iYeah"
+        sut.append(given)
         sut.removeFirst()
 
         let expectation = sut.headValue
@@ -55,30 +55,30 @@ final class LinkedListTests: XCTestCase {
     }
 
     func test_removeFirst시_먼저_넣은_값의_순서대로_반환된다() {
-        let values = ["iYeah", "Mason", "vivi"]
-        values.forEach { sut.append($0) }
+        let givens = ["iYeah", "Mason", "vivi"]
+        givens.forEach { sut.append($0) }
 
-        values.forEach { value in
+        givens.forEach { given in
             let expectation = sut.removeFirst()
-            XCTAssertEqual(value, expectation)
+            XCTAssertEqual(given, expectation)
         }
     }
 
     func test_removeFirst시_headValue가_다음값으로_변경된다() {
-        let values = ["iYeah", "Mason", "vivi"]
-        values.forEach { sut.append($0) }
+        let givens = ["iYeah", "Mason", "vivi"]
+        givens.forEach { sut.append($0) }
 
-        values.forEach { value in
+        givens.forEach { given in
             let expectation = sut.headValue
-            XCTAssertEqual(value, expectation)
+            XCTAssertEqual(given, expectation)
 
             sut.removeFirst()
         }
     }
 
     func test_removeAll시_isEmpty가_true이다() {
-        let values = ["iYeah", "Mason", "vivi"]
-        values.forEach { sut.append($0) }
+        let givens = ["iYeah", "Mason", "vivi"]
+        givens.forEach { sut.append($0) }
 
         sut.removeAll()
         let expectation = sut.isEmpty
@@ -86,8 +86,8 @@ final class LinkedListTests: XCTestCase {
     }
 
     func test_removeAll시_headValue이_nil이다() {
-        let values = ["iYeah", "Mason", "vivi"]
-        values.forEach { sut.append($0) }
+        let givens = ["iYeah", "Mason", "vivi"]
+        givens.forEach { sut.append($0) }
 
         sut.removeAll()
         let expectation = sut.headValue
