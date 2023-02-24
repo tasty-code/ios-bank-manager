@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum BankState: String, CaseIterable{
+enum BankState: String {
     case open = "1"
     case close = "2"
 }
 
 struct Bank {
     let queue = Queue<Int>()
-    let bankmanager = Teller()
+    let teller = Teller()
 
     func execute() {
         BankMessage.startBanking.description()
@@ -44,7 +44,7 @@ struct Bank {
         let visitedCustomers = visitedCustomers()
         let openTime = Double(Date().timeIntervalSince1970)
         while let customer = dequeue(from: queue) {
-            bankmanager.assist(customer)
+            teller.assist(customer)
         }
         let closeTime = Double(Date().timeIntervalSince1970)
         let takenTime = String(format: "%.1f", closeTime - openTime)
