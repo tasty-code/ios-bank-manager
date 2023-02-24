@@ -18,7 +18,13 @@
 		5BFB003129A4864F00EE9F4D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60BCCC29A4541C00595FA2 /* Node.swift */; };
 		5BFB003229A4865100EE9F4D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFB001529A454B500EE9F4D /* LinkedList.swift */; };
 		5BFB003329A4865300EE9F4D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60BCCE29A4793500595FA2 /* Queue.swift */; };
-		5BFB003429A4865E00EE9F4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
+		8E03D3BC29A8536A00CF7BF5 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		8E03D3BD29A8537D00CF7BF5 /* OutputMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8929A7235900EBBC6E /* OutputMessage.swift */; };
+		8E03D3BE29A8538300CF7BF5 /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8C29A72B7600EBBC6E /* Workable.swift */; };
+		8E03D3BF29A8538500CF7BF5 /* WorkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473D829A7494F00F3A58E /* WorkList.swift */; };
+		8E03D3C029A8538700CF7BF5 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473DA29A7496900F3A58E /* Requirement.swift */; };
+		8E03D3C129A8538C00CF7BF5 /* ErrorProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE473E029A752ED00F3A58E /* ErrorProcess.swift */; };
+		8E03D3C229A8539100CF7BF5 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEBEF8E29A72EFE00EBBC6E /* Teller.swift */; };
 		8E60BCCD29A4541C00595FA2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60BCCC29A4541C00595FA2 /* Node.swift */; };
 		8E60BCCF29A4793500595FA2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60BCCE29A4793500595FA2 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -244,11 +250,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E03D3C129A8538C00CF7BF5 /* ErrorProcess.swift in Sources */,
+				8E03D3BF29A8538500CF7BF5 /* WorkList.swift in Sources */,
+				8E03D3C029A8538700CF7BF5 /* Requirement.swift in Sources */,
 				5BFB002929A485F200EE9F4D /* QueueTest.swift in Sources */,
-				5BFB003429A4865E00EE9F4D /* main.swift in Sources */,
 				5BFB003329A4865300EE9F4D /* Queue.swift in Sources */,
+				8E03D3BD29A8537D00CF7BF5 /* OutputMessage.swift in Sources */,
 				5BFB003229A4865100EE9F4D /* LinkedList.swift in Sources */,
 				5BFB003129A4864F00EE9F4D /* Node.swift in Sources */,
+				8E03D3BC29A8536A00CF7BF5 /* BankManager.swift in Sources */,
+				8E03D3C229A8539100CF7BF5 /* Teller.swift in Sources */,
+				8E03D3BE29A8538300CF7BF5 /* Workable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

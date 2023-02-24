@@ -11,14 +11,12 @@ struct BankManager {
         var isContinue = true
         
         repeat {
-            print(OutputMessage.programStart)
+            print(OutputMessage.menu)
             
-            guard let userInput = readLine() else {
-                return
-            }
+            guard let userInput = readLine() else { return }
             
             guard userInput == WorkList.openBank.rawValue || userInput == WorkList.closeBank.rawValue else {
-                print(UserInputError.invalidUserInput.localizedDescription)
+                print(Errors.invalidUserInput.localizedDescription)
                 return
             }
             
@@ -38,16 +36,16 @@ struct BankManager {
     private static func beginWork() {
         var teller = Teller(identifier: "Teller1")
         let totalCustomCount = Int.random(in: Requirement.CustomerCount.minimum...Requirement.CustomerCount.maxmimum)
-        
+        let totalSpend = calculate(spend: totalCustomCount)
+
         for customNumber in Requirement.CustomerCount.defaultCustomer...totalCustomCount {
             OutputMessage.work(start: customNumber)
             
             teller.working(responsibility: customNumber)
-            let finishCustomNumber = teller.finishing()
+            guard let finishCustomNumber = teller.finishing() else { return }
             
             OutputMessage.work(finish: finishCustomNumber)
         }
-        let totalSpend = calculate(spend: totalCustomCount)
 
         OutputMessage.todayWorkDeadline(customer: totalCustomCount, leadTime: totalSpend)
     }
@@ -60,7 +58,7 @@ struct BankManager {
         let totalLeadTime = Requirement.leadTime * Double(toalCount)
         
         guard let totalSpend = numberFormatter.string(for: totalLeadTime) else {
-            return FailFormatting.failOfFormatToString.localizedDescription
+            return Errors.failOfFormatToString.localizedDescription
         }
         
         return totalSpend

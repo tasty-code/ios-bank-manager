@@ -8,7 +8,7 @@
 import Foundation
 
 enum OutputMessage: String, CustomStringConvertible {
-    case programStart = "1 : 은행 개점 \n2 : 종료"
+    
     case menu = "1 : 은행 개점 \n2 : 종료"
     
     var description: String {
