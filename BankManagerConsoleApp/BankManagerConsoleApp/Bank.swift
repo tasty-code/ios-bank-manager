@@ -16,7 +16,7 @@ struct Bank {
         self.numberOfCustomers = numberOfCustomers
     }
     
-    mutating func lineUpCustomersInQueue() {
+    func lineUpCustomersInQueue() {
         (1...numberOfCustomers).forEach {
             let customer = "\($0)번 고객"
             let node = Node(customer)
@@ -24,12 +24,12 @@ struct Bank {
         }
     }
     
-    mutating func distributeCustomersToClerk() -> Node<String>? {
+    func distributeCustomersToClerk() -> Node<String>? {
         let node = queue.dequeue()
         return node
     }
     
-    mutating func handleAllCustomers() {
+    func handleAllCustomers() {
         while !queue.isEmpty() {
             guard let customer = distributeCustomersToClerk() else { return }
             clerk.serve(customer: customer)
