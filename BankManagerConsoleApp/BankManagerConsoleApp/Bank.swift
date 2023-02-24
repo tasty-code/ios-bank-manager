@@ -7,38 +7,9 @@
 
 import Foundation
 
-enum BankMessage {
-    case startBanking
-    case endBanking(customers: Int, takenTime: String)
-}
-
-extension BankMessage {
-    func description() {
-        switch self {
-        case .startBanking:
-            print("1 : 은행개점\n2 : 종료\n입력 : ", terminator: "")
-        case .endBanking(let customers, let takenTime):
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(takenTime)초입니다.")
-        }
-    }
-}
-
 enum BankState: String, CaseIterable{
     case open = "1"
     case close = "2"
-}
-
-enum BankError {
-    case invalidCommand
-}
-
-extension BankError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .invalidCommand:
-            return "선택이 잘못되었습니다. 확인 후 다시 입력해주세요."
-        }
-    }
 }
 
 struct Bank {
