@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankClerk {
-    let timeSpent: useconds_t = 700000
+    private let timeSpent: useconds_t = 700000
     
     func serve(customer: Node<String>) {
         print("\(customer.data) 업무 시작")

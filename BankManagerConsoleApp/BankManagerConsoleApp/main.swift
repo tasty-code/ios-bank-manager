@@ -6,9 +6,6 @@
 
 import Foundation
 
-//let queue = Queue<String>()
-//let clerk = BankClerk()
-//var bank = Bank(queue: queue, clerk: clerk)
 var bank = Bank()
 
 BankManager.askMenu()

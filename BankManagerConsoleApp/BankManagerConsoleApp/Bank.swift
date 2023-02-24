@@ -8,9 +8,9 @@
 import Foundation
 
 struct Bank {
-    let queue: Queue<String>
-    let clerk: BankClerk
-    var numberOfCustomers: Int = 0
+    private let queue: Queue<String>
+    private let clerk: BankClerk
+    private var numberOfCustomers: Int = 0
     
     init() {
         self.queue = Queue<String>()
@@ -29,7 +29,7 @@ struct Bank {
         }
     }
     
-    func distributeCustomersToClerk() -> Node<String>? {
+    private func distributeCustomersToClerk() -> Node<String>? {
         let node = queue.dequeue()
         return node
     }
@@ -43,7 +43,7 @@ struct Bank {
         BankManager.closingMessage(totalNumberOfCustomers: numberOfCustomers, totalTime: totalTime)
     }
     
-    func calculateTotalTime() -> Double {
+    private func calculateTotalTime() -> Double {
         return Double(numberOfCustomers) * 0.7
     }
 }
