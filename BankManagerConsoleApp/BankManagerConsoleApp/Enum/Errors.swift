@@ -1,5 +1,5 @@
 //
-//  ErrorProcess.swift
+//  Errors.swift
 //  BankManagerConsoleApp
 //
 //  Created by Jason on 2023/02/23.
