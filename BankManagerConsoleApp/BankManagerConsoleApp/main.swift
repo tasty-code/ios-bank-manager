@@ -10,24 +10,17 @@ let queue = Queue<String>()
 let clerk = BankClerk()
 var bank = Bank(queue: queue, clerk: clerk)
 
-print("""
-        1:은행개점
-        2:종료
-        """)
-print("입력: ", terminator: "")
+BankManager.askMenu()
 var chosenMenu = readLine()!
 
-while chosenMenu != String(2) {
-    let numberOfCustomers = randomNumberOfCustomers()
+while chosenMenu != BankManager.Menu.close.rawValue {
+    let numberOfCustomers = BankManager.ExpectedNumberOfCustomers.random
     
     bank.receive(numberOfCustomers: numberOfCustomers)
     bank.lineUpCustomersInQueue()
     bank.handleAllCustomers()
-    print("""
-            1:은행개점
-            2:종료
-            """)
-    print("입력: ", terminator: "")
+    BankManager.askMenu()
+    
     chosenMenu = readLine()!
 }
 
