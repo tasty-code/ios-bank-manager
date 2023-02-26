@@ -13,6 +13,5 @@ typealias customerInfo = (number: waitingNumber, customer: Customer)
 protocol BankProtocol {
 
     func open()
-    
     func close()
 }

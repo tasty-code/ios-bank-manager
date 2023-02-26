@@ -81,9 +81,10 @@
 		4FAD6C5629A46725009809E4 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				F1151A0229ABB9B200F9EB02 /* BankProtocol.swift */,
 				4FAD6C5729A46747009809E4 /* QueueProtocol.swift */,
-				F11519FF29ABB87D00F9EB02 /* Enum */,
 				F1151A0A29ABBCBA00F9EB02 /* TellerProvidable.swift */,
+				F11519FF29ABB87D00F9EB02 /* Enum */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -129,7 +130,6 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				F1151A0229ABB9B200F9EB02 /* BankProtocol.swift */,
 				F1151A0829ABBB8100F9EB02 /* InputOutputManager.swift */,
 				F1151A0429ABB9D900F9EB02 /* Customer.swift */,
 				F1151A0C29ABBCD100F9EB02 /* Teller.swift */,
