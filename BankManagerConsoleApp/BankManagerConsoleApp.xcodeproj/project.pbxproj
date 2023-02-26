@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4FAD6C5829A46747009809E4 /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAD6C5729A46747009809E4 /* QueueProtocol.swift */; };
 		4FAD6C5C29A4BF27009809E4 /* WaitingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAD6C5B29A4BF27009809E4 /* WaitingManager.swift */; };
+		4FEFD32B29ABB79600CC136F /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFD32A29ABB79600CC136F /* NameSpace.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		F139FFC029A62D1700BCA81B /* WaitingManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F139FFBF29A62D1700BCA81B /* WaitingManagerTest.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		4FAD6C5729A46747009809E4 /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4FAD6C5B29A4BF27009809E4 /* WaitingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingManager.swift; sourceTree = "<group>"; };
+		4FEFD32A29ABB79600CC136F /* NameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSpace.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -70,6 +72,16 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		4FEFD32929ABB77000CC136F /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				F13AC2CC29A495AE007FD746 /* Node.swift */,
+				F13AC2CE29A4964F007FD746 /* LinkedList.swift */,
+				4FAD6C5B29A4BF27009809E4 /* WaitingManager.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -93,10 +105,9 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				F13AC2CC29A495AE007FD746 /* Node.swift */,
-				F13AC2CE29A4964F007FD746 /* LinkedList.swift */,
-				4FAD6C5B29A4BF27009809E4 /* WaitingManager.swift */,
+				4FEFD32929ABB77000CC136F /* Queue */,
 				4FAD6C5629A46725009809E4 /* Protocol */,
+				4FEFD32A29ABB79600CC136F /* NameSpace.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -201,6 +212,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				F13AC2CD29A495AE007FD746 /* Node.swift in Sources */,
 				4FAD6C5C29A4BF27009809E4 /* WaitingManager.swift in Sources */,
+				4FEFD32B29ABB79600CC136F /* NameSpace.swift in Sources */,
 				4FAD6C5829A46747009809E4 /* QueueProtocol.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
