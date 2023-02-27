@@ -20,7 +20,7 @@ struct BankManager {
 
         bank.startWorking()
 
-        notifyWorkCompleted(of: customers)
+        ConsoleManager.presentAllTaskFinished(of: customers)
     }
 
     private func generateRandomCustomers() -> [Customer] {
@@ -32,16 +32,5 @@ struct BankManager {
         }
 
         return customers
-    }
-
-    private func notifyWorkCompleted(of customers: [Customer]) {
-        let numberOfCustomers = customers.count
-
-        let totalTimeOfCustomers = customers
-            .map { $0.totalTime }
-            .reduce(0, +)
-            .round(toPlaces: 3)
-
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalTimeOfCustomers)초입니다.")
     }
 }

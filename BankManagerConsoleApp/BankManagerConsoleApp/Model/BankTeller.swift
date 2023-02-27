@@ -9,10 +9,10 @@ import Foundation
 
 struct BankTeller {
     func performTask(of customer: Customer) {
-        ConsolePresenter.startWorking(customerID: customer.id)
+        ConsoleManager.presentTaskStarted(of: customer)
 
-        let milliSeconds = (customer.totalTime * 1_000_000.0)
-        usleep(useconds_t(milliSeconds))
-        ConsolePresenter.finishedWorking(customerID: customer.id)
+        let secondsOfTask = useconds_t(customer.totalTime * 1_000_000.0)
+        usleep(secondsOfTask)
+        ConsoleManager.presentTaskFinished(of: customer)
     }
 }
