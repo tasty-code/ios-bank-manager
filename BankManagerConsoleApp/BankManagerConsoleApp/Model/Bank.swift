@@ -22,9 +22,9 @@ struct Bank {
     }
 
     mutating func startWorking() {
-        while !customersQueue.isEmpty {
+        for _ in 0..<customersQueue.count {
             guard let customer = customersQueue.peek else { continue }
-
+            
             bankTellers.first?.performTask(of: customer)
             customersQueue.dequeue()
         }

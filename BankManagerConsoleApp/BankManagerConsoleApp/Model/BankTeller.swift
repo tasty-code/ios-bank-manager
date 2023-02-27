@@ -12,5 +12,6 @@ struct BankTeller {
         ConsoleManager.presentTaskStarted(of: customer)
 
         Thread.sleep(forTimeInterval: customer.timespent)
+        ConsoleManager.presentTaskFinished(of: customer)
     }
 }

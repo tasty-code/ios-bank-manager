@@ -39,7 +39,7 @@ func execute() {
             break
         }
     } catch {
-        print(error)
+        print(error.localizedDescription)
         execute()
     }
 }
