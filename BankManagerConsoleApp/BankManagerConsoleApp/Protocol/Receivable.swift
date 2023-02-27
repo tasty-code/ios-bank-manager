@@ -18,6 +18,7 @@ extension Receivable {
         guard let userInput = readLine() else {
             return nil
         }
+
         return Int(userInput)
     }
 }
