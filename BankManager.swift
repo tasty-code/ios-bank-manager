@@ -9,18 +9,18 @@ import Foundation
 struct BankManager {
     
     private let numberOfGuest: UInt = BankAbility.CustomerAmount.numberOfCustomer
-    private let waitingQueue: WaitingManager<CustomerInfo>
+    private let waitingQueue: WaitingQueue<CustomerInfo>
     
     // MARK: - init
     
-    init(waitingQueue: WaitingManager<CustomerInfo>) {
+    init(waitingQueue: WaitingQueue<CustomerInfo>) {
         self.waitingQueue = waitingQueue
     }
     
 }
 
 extension BankManager {
-    private func greeting(customers: UInt, to waitingQueue: WaitingManager<CustomerInfo>) {
+    private func greeting(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
         (1...customers).forEach { number in
             let newCustomer = Customer()
             let newData: CustomerInfo = CustomerInfo(number: number, customer: newCustomer)

@@ -24,7 +24,7 @@ func run() {
 }
 
 private func start() {
-    let queue: WaitingManager<CustomerInfo> = WaitingManager()
+    let queue: WaitingQueue<CustomerInfo> = WaitingQueue()
     
     BankManager(waitingQueue: queue).open()
 }
