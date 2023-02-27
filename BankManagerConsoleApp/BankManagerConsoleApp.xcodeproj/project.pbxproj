@@ -13,6 +13,7 @@
 		4FEFD32E29ABBAB200CC136F /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFD32D29ABBAB200CC136F /* DoubleExtension.swift */; };
 		4FEFD33029ABBC3600CC136F /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFD32F29ABBC3600CC136F /* Menu.swift */; };
 		4FEFD33229AC39C100CC136F /* BankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFD33129AC39C100CC136F /* BankTextCollection.swift */; };
+		4FEFD33A29AC4E7300CC136F /* TellerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFD33929AC4E7300CC136F /* TellerProtocol.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		F1151A0329ABB9B200F9EB02 /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1151A0229ABB9B200F9EB02 /* BankProtocol.swift */; };
@@ -47,6 +48,7 @@
 		4FEFD32D29ABBAB200CC136F /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		4FEFD32F29ABBC3600CC136F /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		4FEFD33129AC39C100CC136F /* BankTextCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTextCollection.swift; sourceTree = "<group>"; };
+		4FEFD33929AC4E7300CC136F /* TellerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellerProtocol.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				F1151A0229ABB9B200F9EB02 /* BankProtocol.swift */,
 				4FAD6C5729A46747009809E4 /* QueueProtocol.swift */,
+				4FEFD33929AC4E7300CC136F /* TellerProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				F13AC2CD29A495AE007FD746 /* Node.swift in Sources */,
 				4FEFD33229AC39C100CC136F /* BankTextCollection.swift in Sources */,
 				F1151A0329ABB9B200F9EB02 /* BankProtocol.swift in Sources */,
+				4FEFD33A29AC4E7300CC136F /* TellerProtocol.swift in Sources */,
 				4FAD6C5C29A4BF27009809E4 /* WaitingManager.swift in Sources */,
 				F1151A0F29AC3B9D00F9EB02 /* BankState.swift in Sources */,
 				4FEFD33029ABBC3600CC136F /* Menu.swift in Sources */,
