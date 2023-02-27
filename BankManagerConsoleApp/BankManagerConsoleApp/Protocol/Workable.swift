@@ -11,12 +11,15 @@ protocol Workable {
 
     static var processingTime: Double { get }
 
-    func work(for who: Customer)
+    func work(for currentCustomerNumber: Int)
 }
 
 extension Workable {
 
-    func work(for who: Customer) {
-        
+    func work(for currentCustomerNumber: Int) {
+        print(Message.workStart(currentCustomerNumber))
+        Thread.sleep(forTimeInterval: Banker.processingTime)
+        print(Message.workComplete(currentCustomerNumber))
     }
 }
+

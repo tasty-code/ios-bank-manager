@@ -13,6 +13,8 @@
 		D9E3203B29A6016A005E265C /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203A29A6016A005E265C /* Customer.swift */; };
 		D9E3203E29A60187005E265C /* Waitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203D29A60187005E265C /* Waitable.swift */; };
 		D9E3204029A604B6005E265C /* Receivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203F29A604B6005E265C /* Receivable.swift */; };
+		F015B9F529AC4E5D00B823C2 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015B9F429AC4E5D00B823C2 /* Bank.swift */; };
+		F015B9F729AC89A800B823C2 /* Manageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015B9F629AC89A800B823C2 /* Manageable.swift */; };
 		F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB529A602DA00F6DBC3 /* Workable.swift */; };
 		F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB729A6034600F6DBC3 /* Banker.swift */; };
 		F0E5EFE529A741CC00F7E2BA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E5EFE429A741CC00F7E2BA /* Message.swift */; };
@@ -43,6 +45,8 @@
 		D9E3203A29A6016A005E265C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		D9E3203D29A60187005E265C /* Waitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waitable.swift; sourceTree = "<group>"; };
 		D9E3203F29A604B6005E265C /* Receivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receivable.swift; sourceTree = "<group>"; };
+		F015B9F429AC4E5D00B823C2 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		F015B9F629AC89A800B823C2 /* Manageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manageable.swift; sourceTree = "<group>"; };
 		F0B9DFB529A602DA00F6DBC3 /* Workable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workable.swift; sourceTree = "<group>"; };
 		F0B9DFB729A6034600F6DBC3 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F0E5EFE429A741CC00F7E2BA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				D9E3203D29A60187005E265C /* Waitable.swift */,
 				F0B9DFB529A602DA00F6DBC3 /* Workable.swift */,
 				D9E3203F29A604B6005E265C /* Receivable.swift */,
+				F015B9F629AC89A800B823C2 /* Manageable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				F0FA9CDD29A47DF0008B2044 /* LinkedQueue.swift */,
 				D9E3203A29A6016A005E265C /* Customer.swift */,
 				F0B9DFB729A6034600F6DBC3 /* Banker.swift */,
+				F015B9F429AC4E5D00B823C2 /* Bank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F015B9F729AC89A800B823C2 /* Manageable.swift in Sources */,
 				D9E3203E29A60187005E265C /* Waitable.swift in Sources */,
 				F0FA9CFB29A49A28008B2044 /* LinkedQueue.swift in Sources */,
 				F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */,
@@ -235,6 +242,7 @@
 				F0FA9CDC29A47DC2008B2044 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				F0E5EFE529A741CC00F7E2BA /* Message.swift in Sources */,
+				F015B9F529AC4E5D00B823C2 /* Bank.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */,
 			);
