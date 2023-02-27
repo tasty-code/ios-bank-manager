@@ -6,9 +6,8 @@
 
 import Foundation
 
-class BankManager: Receivable {
-
-    func startBusiness() {
+final class BankManager: Receivable {
+    func execute() {
         print(Message.menu)
         print(Message.inputLabel, terminator: "")
 
@@ -16,7 +15,8 @@ class BankManager: Receivable {
 
         switch SystemMenu(rawValue: userInput) {
         case .open:
-            bankOpen()
+            openBank()
+            execute()
         case .close:
             break
         case .none:
@@ -26,7 +26,7 @@ class BankManager: Receivable {
 
     func makeRandomNumber() -> Int { Int.random(in: (10...30)) }
 
-    func bankOpen() {
+    func openBank() {
         let processingTimePerPerson = Banker.processingTime
         let randomNumber = makeRandomNumber()
         let customerQueue = LinkedQueue<Customer>()
@@ -39,7 +39,7 @@ class BankManager: Receivable {
             let currentCustomer = customerQueue.dequeue()
 
             guard let currentCustomerNumber = currentCustomer?.waitingOrder else { return }
- 
+
             print(Message.workStart(currentCustomerNumber))
             Thread.sleep(forTimeInterval: processingTimePerPerson)
             print(Message.workComplete(currentCustomerNumber))
