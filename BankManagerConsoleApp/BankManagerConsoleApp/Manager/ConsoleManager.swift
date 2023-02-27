@@ -20,7 +20,7 @@ enum ConsoleManager {
         let numberOfCustomers = customers.count
 
         let totalTimeOfCustomers = customers
-            .map { $0.totalTime }
+            .map { $0.timespent }
             .reduce(0, +)
             .round(toPlaces: 3)
 

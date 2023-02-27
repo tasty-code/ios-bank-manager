@@ -9,15 +9,15 @@ import Foundation
 
 struct Customer {
     private(set) var id: Int
-    private(set) var totalTime: TimeInterval
+    private(set) var timespent: TimeInterval
 
-    init(id: Int, withTotalTime totalTime: TimeInterval) {
+    init(id: Int, withTimespent timespent: TimeInterval) {
         self.id = id
 
-        guard totalTime >= 0 else {
-            self.totalTime = 0
+        guard timespent >= 0 else {
+            self.timespent = 0
             return
         }
-        self.totalTime = totalTime
+        self.timespent = timespent
     }
 }

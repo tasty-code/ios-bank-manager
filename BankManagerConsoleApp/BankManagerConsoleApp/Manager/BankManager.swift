@@ -9,6 +9,12 @@ import Foundation
 struct BankManager {
     private var bank: Bank
 
+    private enum Constants {
+        static let minimumValueOfRandomCustomers = 10
+        static let maximumValueOfRandomCustomers = 30
+        static let defaultTimespent = 0.7
+    }
+
     init() {
         let bankTeller = BankTeller()
         self.bank = Bank(bankTellers: [bankTeller])
@@ -24,11 +30,12 @@ struct BankManager {
     }
 
     private func generateRandomCustomers() -> [Customer] {
-        let randomNumber = Int.random(in: 10...30)
+        let range = Constants.minimumValueOfRandomCustomers...Constants.maximumValueOfRandomCustomers
+        let randomNumber = Int.random(in: range)
 
         var customers: [Customer] = []
         for id in 1...randomNumber {
-            customers.append(Customer(id: id, withTotalTime: 0.7))
+            customers.append(Customer(id: id, withTimespent: Constants.defaultTimespent))
         }
 
         return customers
