@@ -19,11 +19,12 @@ struct Bank: ConsoleMessagable {
     func execute() {
         printMessage(message: .startBanking)
         do {
-            let command = try command()
-            guard command == .open else {
+            switch try command(){
+            case .open:
+                startBanking()
+            case .close:
                 return
             }
-            startBanking()
         } catch {
             print(error.localizedDescription)
         }
