@@ -9,7 +9,7 @@ import Foundation
 
 enum ConsoleMessage {
     case startBanking
-    case endBanking(customers: Int, takenTime: String)
+    case endBanking(customers: Int, takenTime: Double)
     case invalidCommandError
     case startAssist(_ client: Int)
     case endAssist(_ client: Int)

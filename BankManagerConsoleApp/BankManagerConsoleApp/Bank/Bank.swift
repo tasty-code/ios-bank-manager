@@ -42,25 +42,46 @@ struct Bank: ConsoleMessagable {
     }
 
     private func startBanking() {
-        let visitedCustomers = visitedCustomers()
-        let openTime = Double(Date().timeIntervalSince1970)
+        enqueueCustomers()
+        var customersPerDay = 0
+        let openTime = Date().now()
+
         while let customer = dequeue(from: queue) {
             teller.assist(customer)
+            customersPerDay += 1
         }
-        let closeTime = Double(Date().timeIntervalSince1970)
-        let takenTime = String(format: "%.1f", closeTime - openTime)
-        printMessage(message: .endBanking(customers: visitedCustomers, takenTime: takenTime))
+
+        let takenTime = Date().takenTime(from: openTime)
+        printMessage(message: .endBanking(customers: customersPerDay, takenTime: takenTime))
     }
 
     private func dequeue(from customerQueue: Queue<Int>) -> Int? {
         return customerQueue.dequeue()
     }
 
-    private func visitedCustomers() -> Int {
-        let customers = Int.random(in: 10...30)
+    private func enqueueCustomers() {
+        let customers = Int.random(in: Constants.rangeOfCustomers)
         for customer in 1...customers {
             queue.enqueue(customer)
         }
-        return customers
+    }
+}
+
+extension Date {
+    fileprivate func now() -> Double {
+        return Double(self.timeIntervalSince1970)
+    }
+
+    fileprivate func takenTime(from openTime: Double) -> Double {
+        let takenTime = Double(self.timeIntervalSince1970) - openTime
+        return takenTime.floor()
+    }
+}
+
+extension Double {
+    fileprivate func floor() -> Double {
+        var tmp = self * 10
+        tmp.round(.down)
+        return tmp / 10
     }
 }
