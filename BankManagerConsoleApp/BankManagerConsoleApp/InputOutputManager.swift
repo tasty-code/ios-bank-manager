@@ -30,11 +30,11 @@ fileprivate extension BankState {
     var text: String {
         switch self {
         case .open:
-            return Namespace.printText.state
+            return BankTextCollection.state
         case .close(let numberOfCustomer, let customerTime):
-            return Namespace.printText.cloase(numberOfCustomer: numberOfCustomer, customerTime: customerTime)
+            return BankTextCollection.close(numberOfCustomer: numberOfCustomer, customerTime: customerTime)
         case .working(let order, let result):
-            return Namespace.printText.working(order: order, result: result)
+            return BankTextCollection.working(order: order, result: result)
         }
     }
 }

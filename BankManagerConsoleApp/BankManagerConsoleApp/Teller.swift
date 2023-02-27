@@ -10,7 +10,7 @@ import Foundation
 struct Teller: TellerProvidable {
     // MARK: - Private property
     func working() {
-        Namespace.workTime.sleep()
+        BankAbility.workTime.sleep()
     }
     
     func call(waitingNumber: UInt, result: Bool) {

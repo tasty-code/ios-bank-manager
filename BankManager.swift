@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager: BankProtocol {
        private let teller: TellerProvidable = Teller()
-       private let numberOfGuest: UInt = Namespace.numberOfCustomer
+    private let numberOfGuest: UInt = BankAbility.CustomerAmount.numberOfCustomer
        private let waitingQueue: WaitingManager<customerInfo>
        
        // MARK: - init
@@ -21,6 +21,8 @@ struct BankManager: BankProtocol {
        // MARK: - Public
        
        func open() {
+           
+           // teller count + 1
            
            (1...numberOfGuest).forEach { number in
                let newCustomer = Customer()
@@ -39,6 +41,6 @@ struct BankManager: BankProtocol {
        }
        
        func close() {
-           InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Namespace.workTime))
+           InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.workTime))
        }
 }
