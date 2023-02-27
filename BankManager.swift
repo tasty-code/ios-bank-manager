@@ -21,13 +21,7 @@ struct BankManager: BankProtocol {
     // MARK: - Public
     
     func open() {
-        
-        (1...numberOfGuest).forEach { number in
-            let newCustomer = Customer()
-            let newData: customerInfo = (number, newCustomer)
-            waitingQueue.enqueue(newData)
-        }
-        
+        greeting(customers: numberOfGuest, to: waitingQueue)
         while let waitingNumber = waitingQueue.dequeue()?.number {
             self.report(waitingNumber: waitingNumber, inProgress: true)
             self.working()
@@ -37,14 +31,29 @@ struct BankManager: BankProtocol {
     }
     
     func close() {
-        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.workTime))
+        finalReport()
     }
     
     func working() {
-        BankAbility.workTime.sleep()
+        BankAbility.taskDuration.sleep()
     }
     
     func report(waitingNumber: UInt, inProgress: Bool) {
         InputOutputManager.output(state: .working(waitingNumber, inProgress))
+    }
+    
+}
+
+extension BankManager {
+    private func greeting(customers: UInt, to waitingQueue: WaitingManager<customerInfo>) {
+        (1...customers).forEach { number in
+            let newCustomer = Customer()
+            let newData: customerInfo = (number, newCustomer)
+            waitingQueue.enqueue(newData)
+        }
+    }
+    
+    private func finalReport() {
+        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.taskDuration))
     }
 }

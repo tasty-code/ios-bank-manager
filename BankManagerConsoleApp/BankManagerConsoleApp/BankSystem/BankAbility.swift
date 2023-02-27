@@ -18,6 +18,6 @@ enum BankAbility {
         }
     }
     
-    static var workTime: Double = 0.7
+    static var taskDuration: Double = 0.7
     
 }
