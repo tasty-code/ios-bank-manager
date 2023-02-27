@@ -13,9 +13,7 @@ struct BankManager {
     
     // MARK: - init
     
-    init(
-        waitingQueue: WaitingManager<CustomerInfo>
-    ) {
+    init(waitingQueue: WaitingManager<CustomerInfo>) {
         self.waitingQueue = waitingQueue
     }
     
@@ -33,6 +31,7 @@ extension BankManager {
     private func finalReport() {
         InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.taskDuration))
     }
+    
 }
 
 extension BankManager: BankProtocol {
@@ -60,4 +59,5 @@ extension BankManager: TellerProtocol {
     func working() {
         BankAbility.taskDuration.sleep()
     }
+    
 }
