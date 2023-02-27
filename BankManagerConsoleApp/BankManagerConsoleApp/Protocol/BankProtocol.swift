@@ -7,12 +7,9 @@
 
 import Foundation
 
-typealias waitingNumber = UInt
-typealias customerInfo = (number: waitingNumber, customer: Customer)
-
 protocol BankProtocol {
-
     func open()
     func close()
     func report(waitingNumber: UInt, inProgress: Bool)
+    
 }

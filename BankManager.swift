@@ -9,12 +9,12 @@ import Foundation
 struct BankManager {
     
     private let numberOfGuest: UInt = BankAbility.CustomerAmount.numberOfCustomer
-    private let waitingQueue: WaitingManager<customerInfo>
+    private let waitingQueue: WaitingManager<CustomerInfo>
     
     // MARK: - init
     
     init(
-        waitingQueue: WaitingManager<customerInfo>
+        waitingQueue: WaitingManager<CustomerInfo>
     ) {
         self.waitingQueue = waitingQueue
     }
@@ -22,10 +22,10 @@ struct BankManager {
 }
 
 extension BankManager {
-    private func greeting(customers: UInt, to waitingQueue: WaitingManager<customerInfo>) {
+    private func greeting(customers: UInt, to waitingQueue: WaitingManager<CustomerInfo>) {
         (1...customers).forEach { number in
             let newCustomer = Customer()
-            let newData: customerInfo = (number, newCustomer)
+            let newData: CustomerInfo = CustomerInfo(number: number, customer: newCustomer)
             waitingQueue.enqueue(newData)
         }
     }
