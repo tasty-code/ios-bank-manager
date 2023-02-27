@@ -42,6 +42,8 @@ struct BankManager {
             OutputMessage.work(start: customNumber)
             
             teller.working(responsibility: customNumber)
+            Thread.sleep(forTimeInterval: Requirement.leadTime)
+            
             guard let finishCustomNumber = teller.finishing() else { return }
             
             OutputMessage.work(finish: finishCustomNumber)
