@@ -1,5 +1,5 @@
 //
-//  WaitingManager.swift
+//  WaitingQueue.swift
 //  BankManagerConsoleApp
 //
 //  Created by 송선진 on 2023/02/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class WaitingManager<T>: Queue {
+final class WaitingQueue<T> {
     
     private let queue: LinkedList = LinkedList<T>()
     
