@@ -21,7 +21,7 @@ extension BankState {
         case .close(let numberOfCustomer, let customerTime):
             return BankTextCollection.close(numberOfCustomer: numberOfCustomer, customerTime: customerTime)
         case .working(let order, let result):
-            return BankTextCollection.working(order: order, result: result)
+            return BankTextCollection.working(order: order, inProgress: result)
         }
     }
 }
