@@ -8,7 +8,8 @@ import Foundation
 
 run()
 
-func run() {
+private func run() {
+    
     InputOutputManager.output(state: .open)
     let userInput = InputOutputManager.input()
 

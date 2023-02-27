@@ -8,7 +8,9 @@
 import Foundation
 
 enum BankAbility {
+    
     enum CustomerAmount: UInt {
+        
         case min = 10
         case max = 30
         
@@ -16,6 +18,7 @@ enum BankAbility {
             guard let customerSum = (CustomerAmount.min.rawValue...CustomerAmount.max.rawValue).randomElement() else { return 0 }
             return customerSum
         }
+        
     }
     
     static var taskDuration: Double = 0.7

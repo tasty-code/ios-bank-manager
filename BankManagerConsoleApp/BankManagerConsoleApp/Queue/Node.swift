@@ -8,6 +8,7 @@
 import Foundation
 
 final class Node<T> {
+    
     let value: T
     var next: Node<T>?
     
@@ -15,4 +16,5 @@ final class Node<T> {
         self.value = value
         self.next = next
     }
+    
 }

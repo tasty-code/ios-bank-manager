@@ -22,7 +22,6 @@ final class LinkedList<T> {
     
     func append(_ item: T) {
         let newItem = Node(value: item)
-        
         if isEmpty {
             self.head = newItem
             self.tail = self.head
@@ -35,7 +34,6 @@ final class LinkedList<T> {
     func removeFirst() -> T? {
         let result = self.head?.value
         self.head = self.head?.next
-        
         return result
     }
     
@@ -46,4 +44,5 @@ final class LinkedList<T> {
     func showFirst() -> T? {
         return self.head?.value
     }
+    
 }

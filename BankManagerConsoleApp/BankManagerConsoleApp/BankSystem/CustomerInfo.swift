@@ -8,6 +8,8 @@
 import Foundation
 
 struct CustomerInfo {
+    
     let number: UInt
     let customer: Customer
+    
 }

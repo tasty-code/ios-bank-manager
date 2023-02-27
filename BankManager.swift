@@ -20,6 +20,7 @@ struct BankManager {
 }
 
 extension BankManager {
+    
     private func greeting(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
         (1...customers).forEach { number in
             let newCustomer = Customer()
@@ -35,6 +36,7 @@ extension BankManager {
 }
 
 extension BankManager: BankProtocol {
+    
     func open() {
         greeting(customers: numberOfGuest, to: waitingQueue)
         while let waitingNumber = waitingQueue.dequeue()?.number {
@@ -56,6 +58,7 @@ extension BankManager: BankProtocol {
 }
 
 extension BankManager: TellerProtocol {
+    
     func working() {
         BankAbility.taskDuration.sleep()
     }

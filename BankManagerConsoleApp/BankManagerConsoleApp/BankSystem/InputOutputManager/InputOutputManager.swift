@@ -8,6 +8,7 @@
 import Foundation
 
 enum InputOutputManager {
+    
     static func output(state: BankState) {
         print(state.text, terminator: "")
     }

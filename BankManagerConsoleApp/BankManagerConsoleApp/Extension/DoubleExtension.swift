@@ -8,8 +8,10 @@
 import Foundation
 
 extension Double {
+    
     func sleep() {
         let usecondsTime = useconds_t(self * 1000000)
         usleep(usecondsTime)
     }
+    
 }
