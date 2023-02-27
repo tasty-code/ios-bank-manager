@@ -28,10 +28,10 @@ enum Message: CustomStringConvertible {
 
     static func workComplete(_ orderNumber: Int) -> String { "\(orderNumber)번 고객 업무 완료" }
 
-    static func bankClose(_ totalNumber: Int) -> String {
-        let processingTimePerPerson = Banker.processingTime
-        let totalTime = Double(totalNumber) * processingTimePerPerson
+    static func bankClose(_ totalNumber: Int, _ eachProcessingSecond: Double) -> String {
+        let totalTime = Double(totalNumber) * eachProcessingSecond
+        let convertDoubleToString = String(format: "%.2f", totalTime)
 
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(totalTime)초입니다." }
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertDoubleToString)초입니다." }
 }
 

@@ -33,7 +33,7 @@ class LinkedList<Value> {
             return
         }
 
-        head?.next = newNode
+        tail?.next = newNode
         tail = newNode
     }
 
