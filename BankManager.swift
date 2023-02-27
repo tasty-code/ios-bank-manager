@@ -27,19 +27,24 @@ class BankManager: Receivable {
     func makeRandomNumber() -> Int { Int.random(in: (10...30)) }
 
     func bankOpen() {
+        let processingTimePerPerson = Banker.processingTime
         let randomNumber = makeRandomNumber()
-        let customerQueue = LinkedQueue<Any>()
+        let customerQueue = LinkedQueue<Customer>()
+
         for waitingNumber in 1...randomNumber {
-            customerQueue.enqueue(value: Node(value: Customer(waitingOrder: waitingNumber)))
+            customerQueue.enqueue(value: Customer(waitingOrder: waitingNumber))
         }
 
         while !customerQueue.isEmpty() {
-            var currentCustomer = customerQueue.dequeue() as? Customer // Customer
+            let currentCustomer = customerQueue.dequeue()
+
             guard let currentCustomerNumber = currentCustomer?.waitingOrder else { return }
+ 
             print(Message.workStart(currentCustomerNumber))
-            
+            Thread.sleep(forTimeInterval: processingTimePerPerson)
             print(Message.workComplete(currentCustomerNumber))
         }
-        print(Message.bankClose(randomNumber))
+
+        print(Message.bankClose(randomNumber, processingTimePerPerson))
     }
 }
