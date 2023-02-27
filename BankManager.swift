@@ -19,7 +19,7 @@ final class BankManager: Receivable {
         switch SystemMenu(rawValue: userInput) {
         case .open:
             bank.open()
-            execute()
+            return execute()
         case .close:
             break
         case .none:
