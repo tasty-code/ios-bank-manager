@@ -15,7 +15,7 @@ extension BankError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidCommand:
-            return ConsoleMessage.invalidCommandError
+            return ConsoleMessage.invalidCommandError.description
         }
     }
 }

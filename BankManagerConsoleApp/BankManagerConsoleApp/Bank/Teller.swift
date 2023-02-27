@@ -6,10 +6,10 @@
 
 import Foundation
 
-struct Teller {
+struct Teller: ConsoleMessagable {
     func assist(_ client: Int){
-        print(ConsoleMessage.startAssist(client))
+        printMessage(message: .startAssist(client))
         usleep(Constants.managerExcutionTime)
-        print(ConsoleMessage.endAssist(client))
+        printMessage(message: .endAssist(client))
     }
 }

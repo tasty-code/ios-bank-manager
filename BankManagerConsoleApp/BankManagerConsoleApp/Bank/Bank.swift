@@ -12,12 +12,12 @@ enum BankState: String {
     case close = "2"
 }
 
-struct Bank {
+struct Bank: ConsoleMessagable {
     let queue = Queue<Int>()
     let teller = Teller()
 
     func execute() {
-        BankMessage.startBanking.description()
+        printMessage(message: .startBanking)
         do {
             let command = try command()
             guard command == .open else {
@@ -48,7 +48,7 @@ struct Bank {
         }
         let closeTime = Double(Date().timeIntervalSince1970)
         let takenTime = String(format: "%.1f", closeTime - openTime)
-        BankMessage.endBanking(customers: visitedCustomers, takenTime: takenTime).description()
+        printMessage(message: .endBanking(customers: visitedCustomers, takenTime: takenTime))
     }
 
     private func dequeue(from customerQueue: Queue<Int>) -> Int? {
