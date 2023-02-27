@@ -8,13 +8,9 @@
 import Foundation
 
 struct BankTeller {
-    private let microSecondsPerSeconds = 1_000_000.0
-
     func performTask(of customer: Customer) {
         ConsoleManager.presentTaskStarted(of: customer)
 
-        let secondsOfTask = useconds_t(customer.timespent * microSecondsPerSeconds)
-        usleep(secondsOfTask)
-        ConsoleManager.presentTaskFinished(of: customer)
+        Thread.sleep(forTimeInterval: customer.timespent)
     }
 }

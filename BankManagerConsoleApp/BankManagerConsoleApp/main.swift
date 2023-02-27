@@ -6,23 +6,40 @@
 
 import Foundation
 
+private enum UserMenu {
+    case openBank
+    case exit
+
+    init(input: String) throws {
+        switch input {
+        case "1":
+            self = .openBank
+        case "2":
+            self = .exit
+        default:
+            throw InputError.invalidInput
+        }
+    }
+}
+
 var bankManager = BankManager()
 
 func execute() {
-    print("1 : 은행개점")
-    print("2 : 종료")
-    print("입력 : ", terminator: "")
+    ConsoleManager.presentUserMenu()
     let input = readLine() ?? ""
 
-    switch input {
-    case "1":
-        print("은행개점")
-        bankManager.open()
-        execute()
-    case "2":
-        print("종료")
-    default:
-        print("입력이 잘못되었습니다.")
+    do {
+        let menu = try UserMenu(input: input)
+
+        switch menu {
+        case .openBank:
+            bankManager.open()
+            execute()
+        case .exit:
+            break
+        }
+    } catch {
+        print(error)
         execute()
     }
 }

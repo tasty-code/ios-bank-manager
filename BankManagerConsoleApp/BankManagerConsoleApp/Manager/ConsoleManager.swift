@@ -8,6 +8,12 @@
 import Foundation
 
 enum ConsoleManager {
+    static func presentUserMenu() {
+        print("1 : 은행개점")
+        print("2 : 종료")
+        print("입력 : ", terminator: "")
+    }
+
     static func presentTaskStarted(of customer: Customer) {
         print("\(customer.id)번 고객 업무 시작")
     }
