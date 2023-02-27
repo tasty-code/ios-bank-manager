@@ -6,4 +6,4 @@
 
 import Foundation
 
-BankManager().startBusiness()
+BankManager().execute()
