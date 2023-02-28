@@ -20,16 +20,7 @@ struct ConsoleManager {
             }
         }
     }
-    
-    enum ExpectedNumberOfCustomers: Int {
-        case maximum = 30
-        case minimum = 10
         
-        static var random: Int {
-            return Int.random(in: Self.minimum.rawValue...Self.maximum.rawValue)
-        }
-    }
-    
     static func askMenu() {
         print("\(Menu.open.description)")
         print("\(Menu.close.description)")

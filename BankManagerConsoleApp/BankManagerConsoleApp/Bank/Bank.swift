@@ -10,15 +10,13 @@ import Foundation
 struct Bank {
     private let queue: Queue<String>
     private let clerks: [BankClerk]
-    private var numberOfCustomers: Int = 0
+    private var numberOfCustomers: Int
+    private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     
     init(clerks: [BankClerk]) {
         self.queue = Queue<String>()
         self.clerks = clerks
-    }
-    
-    mutating func receive(numberOfCustomers: Int) {
-        self.numberOfCustomers = numberOfCustomers
+        self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
     }
     
     func lineUpCustomersInQueue() {

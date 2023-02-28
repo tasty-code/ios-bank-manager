@@ -12,9 +12,6 @@ ConsoleManager.askMenu()
 var chosenMenu = readLine()
 
 while (chosenMenu ?? "") != ConsoleManager.Menu.close.rawValue {
-    let numberOfCustomers = ConsoleManager.ExpectedNumberOfCustomers.random
-    
-    bank.receive(numberOfCustomers: numberOfCustomers)
     bank.lineUpCustomersInQueue()
     bank.handleAllCustomers()
     ConsoleManager.askMenu()
