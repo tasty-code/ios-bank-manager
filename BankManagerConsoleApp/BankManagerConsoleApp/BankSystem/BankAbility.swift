@@ -17,7 +17,6 @@ enum BankAbility {
     enum taskType: CaseIterable {
         case deposit
         case loan
-        case none
     }
 }
 
@@ -31,7 +30,7 @@ extension BankAbility {
     
     static func getRandomTask() -> taskType {
         let tasks = taskType.allCases
-        guard let task = tasks.randomElement() else { return taskType.none }
+        guard let task = tasks.randomElement() else { return taskType.deposit }
         return task
     }
     
@@ -41,8 +40,6 @@ extension BankAbility {
             return 0.7
         case .loan:
             return 1.1
-        default :
-            return 0.0
         }
     }
     
