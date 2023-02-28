@@ -29,15 +29,15 @@ struct Bank {
         }
     }
     
-    private func distributeCustomersToClerk() -> Node<String>? {
+    private func extractCustomerFromQueue() -> Node<String>? {
         let node = queue.dequeue()
         return node
     }
     
     func handleAllCustomers() {
         while !queue.isEmpty() {
-            guard let customer = distributeCustomersToClerk() else { return }
-            clerks[0].serve(customer: customer)
+            guard let customer = extractCustomerFromQueue() else { return }
+            clerks[0].serve(customer)
         }
         let totalTime = calculateTotalTime()
         ConsoleManager.printingClosingMessage(about: numberOfCustomers, with: totalTime)
