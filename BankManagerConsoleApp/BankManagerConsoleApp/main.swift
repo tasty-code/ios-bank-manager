@@ -8,16 +8,16 @@ import Foundation
 
 var bank = Bank()
 
-BankManager.askMenu()
+ConsoleManager.askMenu()
 var chosenMenu = readLine()
 
-while (chosenMenu ?? "") != BankManager.Menu.close.rawValue {
-    let numberOfCustomers = BankManager.ExpectedNumberOfCustomers.random
+while (chosenMenu ?? "") != ConsoleManager.Menu.close.rawValue {
+    let numberOfCustomers = ConsoleManager.ExpectedNumberOfCustomers.random
     
     bank.receive(numberOfCustomers: numberOfCustomers)
     bank.lineUpCustomersInQueue()
     bank.handleAllCustomers()
-    BankManager.askMenu()
+    ConsoleManager.askMenu()
     
     chosenMenu = readLine()
 }

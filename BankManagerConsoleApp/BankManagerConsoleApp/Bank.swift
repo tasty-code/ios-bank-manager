@@ -40,7 +40,7 @@ struct Bank {
             clerks[0].serve(customer: customer)
         }
         let totalTime = calculateTotalTime()
-        BankManager.closingMessage(totalNumberOfCustomers: numberOfCustomers, totalTime: totalTime)
+        ConsoleManager.closingMessage(totalNumberOfCustomers: numberOfCustomers, totalTime: totalTime)
     }
     
     private func calculateTotalTime() -> Double {

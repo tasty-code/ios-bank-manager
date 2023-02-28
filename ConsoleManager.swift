@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct BankManager {
+struct ConsoleManager {
     enum Menu: String {
         case open = "1"
         case close = "2"
