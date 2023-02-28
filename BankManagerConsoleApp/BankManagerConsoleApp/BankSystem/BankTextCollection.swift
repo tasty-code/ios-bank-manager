@@ -10,8 +10,9 @@ import Foundation
 enum BankTextCollection {
     
     static var consoleMenu: String {
-        let menus = Menu.allCases.map{ menu in
-            "\(menu.rawValue) : \(menu)\n"}.joined()
+        let menus = Menu.allCases.map { menu in
+            "\(menu.rawValue) : \(menu)\n"
+        }.joined()
         return menus + "입력 : "
     }
     
