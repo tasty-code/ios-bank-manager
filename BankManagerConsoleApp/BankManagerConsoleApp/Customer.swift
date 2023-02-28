@@ -9,5 +9,15 @@ import Foundation
 
 
 struct Customer {
-
+    
+    //MARK: - Properties
+    
+    let task: BankAbility.taskType
+    
+    //MARK: - LifeCycle
+    
+    init() {
+        self.task =  BankAbility.getRandomTask()
+    }
+    
 }
