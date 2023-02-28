@@ -9,6 +9,6 @@ import Foundation
 
 protocol TellerProtocol {
     
-    func working()
+    func work()
     
 }

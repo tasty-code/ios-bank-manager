@@ -41,7 +41,7 @@ extension BankManager: BankProtocol {
         generateWaitingCustomers(customers: numberOfGuest, to: waitingQueue)
         while let waitingNumber = waitingQueue.dequeue()?.number {
             self.report(waitingNumber: waitingNumber, inProgress: true)
-            self.working()
+            self.work()
             self.report(waitingNumber: waitingNumber, inProgress: false)
         }
         close()
@@ -59,7 +59,7 @@ extension BankManager: BankProtocol {
 
 extension BankManager: TellerProtocol {
     
-    func working() {
+    func work() {
         BankAbility.taskDuration.sleep()
     }
     
