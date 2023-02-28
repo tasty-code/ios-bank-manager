@@ -39,10 +39,11 @@ extension BankManager: BankProtocol {
     
     func open() {
         generateWaitingCustomers(customers: numberOfGuest, to: waitingQueue)
-        while let waitingNumber = waitingQueue.dequeue()?.number {
-            self.report(waitingNumber: waitingNumber, inProgress: true)
+        while let customer = waitingQueue.dequeue() {
+            
+            self.report(waitingNumber: customer.number,taskType: customer.customer.task ,inProgress: true)
             self.work()
-            self.report(waitingNumber: waitingNumber, inProgress: false)
+            self.report(waitingNumber: customer.number,taskType: customer.customer.task ,inProgress: false)
         }
         close()
     }
@@ -51,8 +52,8 @@ extension BankManager: BankProtocol {
         finalReport()
     }
     
-    func report(waitingNumber: UInt, inProgress: Bool) {
-        InputOutputManager.output(state: .working(waitingNumber, inProgress))
+    func report(waitingNumber: UInt, taskType: BankAbility.taskType, inProgress: Bool) {
+        InputOutputManager.output(state: .working(waitingNumber, taskType.rawValue, inProgress))
     }
 
 }
@@ -61,7 +62,6 @@ extension BankManager: TellerProtocol {
     
     func work() {
         BankAbility.taskDuration(of: .loan).sleep()
-
     }
     
 }

@@ -16,10 +16,10 @@ enum BankAbility {
 
     }
     
-    enum taskType: CaseIterable {
+    enum taskType: String, CaseIterable {
         
-        case deposit
-        case loan
+        case deposit = "예금"
+        case loan = "대출"
         
     }
     
