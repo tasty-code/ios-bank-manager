@@ -14,14 +14,24 @@ enum BankAbility {
         case max = 30
     }
     
-    enum taskType {
+    enum taskType: CaseIterable {
         case deposit
         case loan
     }
+}
+
+
+extension BankAbility {
     
     static var numberOfCustomer: UInt {
         guard let customerSum = (CustomerConstant.min.rawValue...CustomerConstant.max.rawValue).randomElement() else { return 0 }
         return customerSum
+    }
+    
+    static func getRandomTask() -> taskType? {
+        let tasks = taskType.allCases
+        guard let task = tasks.randomElement() else { return nil }
+        return task
     }
     
     static func taskDuration(of taskType:BankAbility.taskType) -> Double {
