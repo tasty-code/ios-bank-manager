@@ -9,13 +9,13 @@ import Foundation
 
 enum BankAbility {
     
-    enum CustomerAmount: UInt {
+    enum CustomerAmount {
         
-        case min = 10
-        case max = 30
+        static let min: UInt = 10
+        static let max: UInt  = 30
         
         static var numberOfCustomer: UInt {
-            guard let customerSum = (CustomerAmount.min.rawValue...CustomerAmount.max.rawValue).randomElement() else { return 0 }
+            guard let customerSum = (CustomerAmount.min...CustomerAmount.max).randomElement() else { return 0 }
             return customerSum
         }
         
