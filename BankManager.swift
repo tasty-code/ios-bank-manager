@@ -21,7 +21,7 @@ struct BankManager {
 
 extension BankManager {
     
-    private func greeting(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
+    private func generateWaitingCustomers(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
         (1...customers).forEach { number in
             let newCustomer = Customer()
             let newData: CustomerInfo = CustomerInfo(number: number, customer: newCustomer)
@@ -38,7 +38,7 @@ extension BankManager {
 extension BankManager: BankProtocol {
     
     func open() {
-        greeting(customers: numberOfGuest, to: waitingQueue)
+        generateWaitingCustomers(customers: numberOfGuest, to: waitingQueue)
         while let waitingNumber = waitingQueue.dequeue()?.number {
             self.report(waitingNumber: waitingNumber, inProgress: true)
             self.working()
