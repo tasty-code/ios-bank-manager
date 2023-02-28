@@ -12,9 +12,9 @@ struct Bank {
     private let clerks: [BankClerk]
     private var numberOfCustomers: Int = 0
     
-    init() {
+    init(clerks: [BankClerk]) {
         self.queue = Queue<String>()
-        self.clerks = [BankClerk()]
+        self.clerks = clerks
     }
     
     mutating func receive(numberOfCustomers: Int) {
