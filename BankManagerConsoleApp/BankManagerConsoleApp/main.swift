@@ -6,7 +6,7 @@
 
 import Foundation
 
-var bank = Bank(clerks: [BankClerk()])
+var bank = Bank(clerks: [BankClerkForDeposit()])
 
 ConsoleManager.askMenu()
 var chosenMenu = readLine()

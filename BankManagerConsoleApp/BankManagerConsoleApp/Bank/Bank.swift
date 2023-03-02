@@ -9,11 +9,11 @@ import Foundation
 
 struct Bank {
     private let queue: Queue<String>
-    private let clerks: [BankClerk]
+    private let clerks: [BankClerkForDeposit]
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     
-    init(clerks: [BankClerk]) {
+    init(clerks: [BankClerkForDeposit]) {
         self.queue = Queue<String>()
         self.clerks = clerks
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
