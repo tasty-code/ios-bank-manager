@@ -44,6 +44,7 @@ extension BankManager: BankProtocol {
             self.report(waitingNumber: customer.number,taskType: customer.customer.task ,inProgress: true)
             self.work()
             self.report(waitingNumber: customer.number,taskType: customer.customer.task ,inProgress: false)
+            
         }
         close()
     }

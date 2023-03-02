@@ -8,18 +8,27 @@
 import Foundation
 
 enum BankAbility {
-
+    
     enum CustomerConstant {
         
         static let min: UInt = 10
         static let max: UInt = 30
-
+        
     }
     
     enum taskType: String, CaseIterable {
         
         case deposit = "예금"
         case loan = "대출"
+        
+        var numberOfTeller: UInt {
+            switch self {
+            case .deposit:
+                return 1
+            case .loan:
+                return 1
+            }
+        }
         
     }
     
@@ -28,10 +37,14 @@ enum BankAbility {
 
 extension BankAbility {
     
+    //MARK: - Properties
+    
     static var numberOfCustomer: UInt {
         guard let customerSum = (CustomerConstant.min...CustomerConstant.max).randomElement() else { return 0 }
         return customerSum
     }
+    
+    //MARK: - Methodes
     
     static func getRandomTask() -> taskType {
         let tasks = taskType.allCases
@@ -49,3 +62,4 @@ extension BankAbility {
     }
     
 }
+
