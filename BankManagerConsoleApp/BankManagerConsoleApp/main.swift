@@ -12,8 +12,8 @@ ConsoleManager.askMenu()
 var chosenMenu = readLine()
 
 while (chosenMenu ?? "") != ConsoleManager.Menu.close.rawValue {
-    bank.lineUpCustomersInQueue()
-    bank.handleAllCustomers()
+    bank.open()
+    bank.close()
     ConsoleManager.askMenu()
     
     chosenMenu = readLine()

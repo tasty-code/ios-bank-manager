@@ -19,7 +19,12 @@ struct Bank {
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
     }
     
-    func lineUpCustomersInQueue() {
+    func open() {
+        lineUpCustomersInQueue()
+        handleAllCustomers()
+    }
+    
+    private func lineUpCustomersInQueue() {
         (1...numberOfCustomers).forEach {
             let customer = "\($0)번 고객"
             let node = Node(customer)
@@ -32,11 +37,14 @@ struct Bank {
         return node
     }
     
-    func handleAllCustomers() {
+    private func handleAllCustomers() {
         while !queue.isEmpty() {
             guard let customer = extractCustomerFromQueue() else { return }
             clerks[0].serve(customer)
         }
+    }
+    
+    func close() {
         let totalTime = calculateTotalTime()
         printClosingMessage(about: numberOfCustomers, with: totalTime)
     }
