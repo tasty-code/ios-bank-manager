@@ -26,9 +26,8 @@ struct Bank {
     
     private func lineUpCustomersInQueue() {
         (1...numberOfCustomers).forEach {
-            let customer = "\($0)번 고객"
-            let node = Node(customer)
-            queue.enqueue(node)
+            let customer = Customer("\($0)번 고객")
+            queue.enqueue(customer)
         }
     }
     
@@ -39,7 +38,7 @@ struct Bank {
     
     private func handleAllCustomers() {
         while !queue.isEmpty() {
-            guard let customer = extractCustomerFromQueue() else { return }
+            guard let customer = extractCustomerFromQueue() as? Customer else { return }
             clerks[0].serve(customer)
         }
     }
