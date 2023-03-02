@@ -1,24 +1,23 @@
 //
-//  CustomerInfo.swift
+//  Customer.swift
 //  BankManagerConsoleApp
 //
-//  Created by 송선진 on 2023/02/27.
+//  Created by DONGWOOK SEO on 2023/02/27.
 //
 
 import Foundation
 
-struct CustomerInfo {
+
+struct Customer {
     
     //MARK: - Properties
     
-    let number: UInt
     let task: Task
     
     //MARK: - LifeCycle
     
-    init(number: UInt) {
+    init() {
         self.task =  Task.getRandomTask()
-        self.number = number
     }
     
 }

@@ -11,7 +11,7 @@ enum BankState {
     
     case open
     case close(UInt, Double)
-    case working(UInt, Bool)
+    case working(UInt, String, Bool)
     
 }
 
@@ -23,8 +23,8 @@ extension BankState {
             return BankTextCollection.consoleMenu
         case .close(let numberOfCustomer, let customerTime):
             return BankTextCollection.close(numberOfCustomer: numberOfCustomer, customerTime: customerTime)
-        case .working(let order, let result):
-            return BankTextCollection.working(order: order, inProgress: result)
+        case .working(let order, let task, let result):
+            return BankTextCollection.working(order: order, task: task , inProgress: result)
         }
     }
     

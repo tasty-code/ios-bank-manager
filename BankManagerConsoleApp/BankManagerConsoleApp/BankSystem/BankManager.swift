@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager {
     
-    private let numberOfGuest: UInt = BankAbility.numberOfCustomer
+    private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
     private let waitingQueue: WaitingQueue<CustomerInfo>
     
     // MARK: - init
@@ -29,7 +29,7 @@ extension BankManager {
     }
     
     private func finalReport() {
-        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.taskDuration(of: .deposit)))
+        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
     }
     
 }
@@ -46,7 +46,7 @@ extension BankManager: BankProtocol {
 
         while let customer = waitingQueue.dequeue() {
             group.enter()
-            if customer.task == BankAbility.taskType.deposit {
+            if customer.task == Task.deposit {
                 DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle1))
                 group.leave()
             } else {
@@ -59,11 +59,11 @@ extension BankManager: BankProtocol {
         close()
     }
     
-    func makeWorkItem(number: UInt, task: BankAbility.taskType, semaphore: DispatchSemaphore) -> DispatchWorkItem {
+    func makeWorkItem(number: UInt, task: Task, semaphore: DispatchSemaphore) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             semaphore.wait()
             print("\(number) : \(task)실행중")
-            BankAbility.taskDuration(of: task).sleep()
+            Task.duration(of: task).sleep()
             semaphore.signal()
         }
         return workItem
@@ -73,8 +73,8 @@ extension BankManager: BankProtocol {
         finalReport()
     }
     
-    func report(waitingNumber: UInt, inProgress: Bool) {
-        InputOutputManager.output(state: .working(waitingNumber, inProgress))
+    func report(waitingNumber: UInt, taskType: Task, inProgress: Bool) {
+        InputOutputManager.output(state: .working(waitingNumber, taskType.rawValue, inProgress))
     }
 
 }
@@ -82,8 +82,7 @@ extension BankManager: BankProtocol {
 extension BankManager: TellerProtocol {
     
     func work() {
-        BankAbility.taskDuration(of: .loan).sleep()
-
+        Task.duration(of: .loan).sleep()
     }
     
 }
