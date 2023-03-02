@@ -62,7 +62,7 @@ extension BankManager: BankProtocol {
     func makeWorkItem(number: UInt, task: Task, semaphore: DispatchSemaphore) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             semaphore.wait()
-            print("\(number) : \(task)실행중")
+            print("\(number) : \(task.rawValue)실행중")
             Task.duration(of: task).sleep()
             semaphore.signal()
         }
@@ -73,8 +73,8 @@ extension BankManager: BankProtocol {
         finalReport()
     }
     
-    func report(waitingNumber: UInt, taskType: Task, inProgress: Bool) {
-        InputOutputManager.output(state: .working(waitingNumber, taskType.rawValue, inProgress))
+    func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
+        InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
     }
 
 }

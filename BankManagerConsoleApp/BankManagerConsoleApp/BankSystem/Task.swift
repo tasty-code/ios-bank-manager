@@ -15,7 +15,7 @@ enum Task: String, CaseIterable {
     var numberOfTeller: UInt {
         switch self {
         case .deposit:
-            return 1
+            return 2
         case .loan:
             return 1
         }
