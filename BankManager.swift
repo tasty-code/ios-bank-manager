@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class BankManager: Receivable {
+final class BankManager: UserInputReceivable {
 
     let bank = Bank()
 

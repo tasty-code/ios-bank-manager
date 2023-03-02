@@ -1,5 +1,5 @@
 //
-//  Workable.swift
+//  BankerProtocol.swift
 //  BankManagerConsoleApp
 //
 //  Created by Blu on 2023/02/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Workable {
+protocol BankerProtocol {
 
     static var processingTime: Double { get }
 
@@ -16,7 +16,7 @@ protocol Workable {
     func workComplete(_ orderNumber: Int) -> String
 }
 
-extension Workable {
+extension BankerProtocol {
 
     func work(for currentCustomerNumber: Int) {
         print(workStart(currentCustomerNumber))

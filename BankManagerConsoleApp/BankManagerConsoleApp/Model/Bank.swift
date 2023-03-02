@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank: Manageable {
+struct Bank: CustomerManageable {
     
     let banker = Banker()
     let processingTimePerPerson = Banker.processingTime

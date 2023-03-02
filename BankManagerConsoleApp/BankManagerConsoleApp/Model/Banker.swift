@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Banker: Workable {
+struct Banker: BankerProtocol {
 
     static var processingTime = 0.7
 }

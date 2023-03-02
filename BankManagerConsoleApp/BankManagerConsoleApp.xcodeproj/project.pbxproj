@@ -12,10 +12,10 @@
 		D941987229A741020010A251 /* SystemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941987129A741020010A251 /* SystemMenu.swift */; };
 		D9E3203B29A6016A005E265C /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203A29A6016A005E265C /* Customer.swift */; };
 		D9E3203E29A60187005E265C /* Waitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203D29A60187005E265C /* Waitable.swift */; };
-		D9E3204029A604B6005E265C /* Receivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203F29A604B6005E265C /* Receivable.swift */; };
+		D9E3204029A604B6005E265C /* UserInputReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3203F29A604B6005E265C /* UserInputReceivable.swift */; };
 		F015B9F529AC4E5D00B823C2 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015B9F429AC4E5D00B823C2 /* Bank.swift */; };
-		F015B9F729AC89A800B823C2 /* Manageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015B9F629AC89A800B823C2 /* Manageable.swift */; };
-		F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB529A602DA00F6DBC3 /* Workable.swift */; };
+		F015B9F729AC89A800B823C2 /* CustomerManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015B9F629AC89A800B823C2 /* CustomerManageable.swift */; };
+		F0B9DFB629A602DA00F6DBC3 /* BankerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB529A602DA00F6DBC3 /* BankerProtocol.swift */; };
 		F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9DFB729A6034600F6DBC3 /* Banker.swift */; };
 		F0FA9CDC29A47DC2008B2044 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA9CDB29A47DC2008B2044 /* LinkedList.swift */; };
 		F0FA9CF629A49A01008B2044 /* LinkedQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA9CF529A49A01008B2044 /* LinkedQueueTest.swift */; };
@@ -43,10 +43,10 @@
 		D941987129A741020010A251 /* SystemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMenu.swift; sourceTree = "<group>"; };
 		D9E3203A29A6016A005E265C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		D9E3203D29A60187005E265C /* Waitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waitable.swift; sourceTree = "<group>"; };
-		D9E3203F29A604B6005E265C /* Receivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receivable.swift; sourceTree = "<group>"; };
+		D9E3203F29A604B6005E265C /* UserInputReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputReceivable.swift; sourceTree = "<group>"; };
 		F015B9F429AC4E5D00B823C2 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		F015B9F629AC89A800B823C2 /* Manageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manageable.swift; sourceTree = "<group>"; };
-		F0B9DFB529A602DA00F6DBC3 /* Workable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workable.swift; sourceTree = "<group>"; };
+		F015B9F629AC89A800B823C2 /* CustomerManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerManageable.swift; sourceTree = "<group>"; };
+		F0B9DFB529A602DA00F6DBC3 /* BankerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankerProtocol.swift; sourceTree = "<group>"; };
 		F0B9DFB729A6034600F6DBC3 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F0FA9CDB29A47DC2008B2044 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F0FA9CDD29A47DF0008B2044 /* LinkedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedQueue.swift; sourceTree = "<group>"; };
@@ -114,9 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				D9E3203D29A60187005E265C /* Waitable.swift */,
-				F0B9DFB529A602DA00F6DBC3 /* Workable.swift */,
-				D9E3203F29A604B6005E265C /* Receivable.swift */,
-				F015B9F629AC89A800B823C2 /* Manageable.swift */,
+				F0B9DFB529A602DA00F6DBC3 /* BankerProtocol.swift */,
+				D9E3203F29A604B6005E265C /* UserInputReceivable.swift */,
+				F015B9F629AC89A800B823C2 /* CustomerManageable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -229,18 +229,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F015B9F729AC89A800B823C2 /* Manageable.swift in Sources */,
+				F015B9F729AC89A800B823C2 /* CustomerManageable.swift in Sources */,
 				D9E3203E29A60187005E265C /* Waitable.swift in Sources */,
 				F0FA9CFB29A49A28008B2044 /* LinkedQueue.swift in Sources */,
 				F0B9DFB829A6034600F6DBC3 /* Banker.swift in Sources */,
-				D9E3204029A604B6005E265C /* Receivable.swift in Sources */,
+				D9E3204029A604B6005E265C /* UserInputReceivable.swift in Sources */,
 				D941987229A741020010A251 /* SystemMenu.swift in Sources */,
 				D9E3203B29A6016A005E265C /* Customer.swift in Sources */,
 				F0FA9CDC29A47DC2008B2044 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				F015B9F529AC4E5D00B823C2 /* Bank.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
-				F0B9DFB629A602DA00F6DBC3 /* Workable.swift in Sources */,
+				F0B9DFB629A602DA00F6DBC3 /* BankerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

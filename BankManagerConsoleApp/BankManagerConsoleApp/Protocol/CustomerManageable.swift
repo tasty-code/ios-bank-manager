@@ -1,5 +1,5 @@
 //
-//  Manageable.swift
+//  CustomerManageable.swift
 //  BankManagerConsoleApp
 //
 //  Created by Blu on 2023/02/27.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol Manageable {
+protocol CustomerManageable {
 
     func makeAcceptableNumber() -> Int
 
     func makeCustomerQueue(maxCount: Int) -> LinkedQueue<Customer>
 }
 
-extension Manageable {
+extension CustomerManageable {
 
     func makeAcceptableNumber() -> Int { Int.random(in: (10...30)) }
 
