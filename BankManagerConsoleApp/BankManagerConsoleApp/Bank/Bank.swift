@@ -9,13 +9,15 @@ import Foundation
 
 struct Bank {
     private let queue: Queue<String>
-    private let clerks: [BankClerkForDeposit]
+    private let clerksForDeposit: [BankClerkForDeposit]
+    private let clerksForLoan: [BankClerkForLoan]
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     
-    init(clerks: [BankClerkForDeposit]) {
+    init(clerksForDeposit: [BankClerkForDeposit], clerksForLoan: [BankClerkForLoan]) {
         self.queue = Queue<String>()
-        self.clerks = clerks
+        self.clerksForDeposit = clerksForDeposit
+        self.clerksForLoan = clerksForLoan
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
     }
     
@@ -39,7 +41,7 @@ struct Bank {
     private func handleAllCustomers() {
         while !queue.isEmpty() {
             guard let customer = extractCustomerFromQueue() as? Customer else { return }
-            clerks[0].serve(customer)
+            clerksForDeposit[0].serve(customer)
         }
     }
     
