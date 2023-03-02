@@ -20,8 +20,9 @@ extension CustomerManageable {
 
     func makeCustomerQueue(maxCount: Int) -> LinkedQueue<Customer> {
         let customerQueue = LinkedQueue<Customer>()
+        let waitingNumberRange = 1...maxCount
 
-        for waitingNumber in 1...maxCount {
+        waitingNumberRange.forEach { waitingNumber in
             customerQueue.enqueue(value: Customer(waitingOrder: waitingNumber))
         }
 
