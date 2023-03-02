@@ -11,8 +11,7 @@ final class BankManager: Receivable {
     let bank = Bank()
 
     func execute() {
-        print(Message.menu)
-        print(Message.inputLabel, terminator: "")
+        SystemMenu.show()
 
         guard let userInput = getUserInput() else { return }
 

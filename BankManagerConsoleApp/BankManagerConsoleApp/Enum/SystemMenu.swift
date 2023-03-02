@@ -21,7 +21,7 @@ enum SystemMenu: Int, CustomStringConvertible {
         }
     }
 
-    static func printSystemMenu() {
+    static func show() {
         let open = SystemMenu.open
         let close = SystemMenu.close
 
