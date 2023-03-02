@@ -23,10 +23,10 @@ struct Bank: Manageable {
             banker.work(for: numberOfCurrentCustomer)
         }
 
-        printWorkFinishMessage(numberOfTodayCustomers, processingTimePerPerson)
+        showWorkFinishMessage(numberOfTodayCustomers, processingTimePerPerson)
     }
 
-    func printWorkFinishMessage(_ totalNumber: Int, _ eachProcessingSecond: Double) {
+    func showWorkFinishMessage(_ totalNumber: Int, _ eachProcessingSecond: Double) {
         let totalTime = Double(totalNumber) * eachProcessingSecond
         let convertDoubleToString = String(format: "%.2f", totalTime)
 
