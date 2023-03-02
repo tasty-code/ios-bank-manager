@@ -9,6 +9,6 @@ import Foundation
 
 protocol Workable {
     var identifier: String { get }
-    mutating func working(responsibility: Int)
-    mutating func finishing() -> Int?
+    func working(responsibility: Int)
+    func finishing() -> Int?
 }

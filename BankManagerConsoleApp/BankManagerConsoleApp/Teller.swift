@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Teller: Workable {
+final class Teller: Workable {
     var identifier: String = ""
     private(set) var customerQueue = Queue<Int>()
     
-    mutating func working(responsibility: Int) {
+    func working(responsibility: Int) {
         customerQueue.euqueue(responsibility)
     }
     
-    mutating func finishing() -> Int? {
+    func finishing() -> Int? {
         guard let finishCustomNumber = customerQueue.dequeue() else { return nil }
         return finishCustomNumber
     }
