@@ -13,7 +13,7 @@ protocol BankClerkProtocol {
 }
 
 extension BankClerkProtocol {
-    func serve(_ customer: Customer){
+    func serve(_ customer: Customer) {
         guard let purposeOfVisit = customer.purposeOfVisit else { return }
         print("\(customer.data) \(purposeOfVisit.rawValue) 업무 시작")
         usleep(timeSpent)

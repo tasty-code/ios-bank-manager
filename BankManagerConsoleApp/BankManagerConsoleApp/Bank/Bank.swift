@@ -39,10 +39,50 @@ struct Bank {
     }
     
     private func handleAllCustomers() {
-        while !queue.isEmpty() {
-            guard let customer = extractCustomerFromQueue() as? Customer else { return }
-            clerksForDeposit[0].serve(customer)
+        let tasks = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        let task1 = DispatchWorkItem {
+            while !queue.isEmpty() {
+                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
+                
+                semaphore.wait()
+                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                semaphore.signal()
+                
+                clerksForDeposit[0].serve(customer)
+            }
         }
+        
+        let task2 = DispatchWorkItem {
+            while !queue.isEmpty() {
+                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
+                
+                semaphore.wait()
+                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                semaphore.signal()
+
+                clerksForDeposit[1].serve(customer)
+            }
+        }
+        
+        let task3 = DispatchWorkItem {
+            while !queue.isEmpty() {
+                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .loan else { continue }
+
+                semaphore.wait()
+                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                semaphore.signal()
+                
+                clerksForLoan[0].serve(customer)
+            }
+        }
+        
+        DispatchQueue.global().async(group: tasks, execute: task1)
+        DispatchQueue.global().async(group: tasks, execute: task2)
+        DispatchQueue.global().async(group: tasks, execute: task3)
+
+        tasks.wait()
     }
     
     func close() {
