@@ -21,7 +21,7 @@ struct BankManager {
 
 extension BankManager {
     
-    private func generateWaitingCustomers(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
+    private func generateWaiting(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
         (1...customers).forEach { number in
             let newCustomer = CustomerInfo(number: number)
             waitingQueue.enqueue(newCustomer)
@@ -37,7 +37,7 @@ extension BankManager {
 extension BankManager: BankProtocol {
     
     func open() {
-        generateWaitingCustomers(customers: numberOfGuest, to: waitingQueue)
+        generateWaiting(customers: numberOfGuest, to: waitingQueue)
         
         let group = DispatchGroup()
         
