@@ -12,14 +12,20 @@ protocol Workable {
     static var processingTime: Double { get }
 
     func work(for currentCustomerNumber: Int)
+    func workStart(_ orderNumber: Int) -> String
+    func workComplete(_ orderNumber: Int) -> String
 }
 
 extension Workable {
 
     func work(for currentCustomerNumber: Int) {
-        print(Message.workStart(currentCustomerNumber))
+        print(workStart(currentCustomerNumber))
         Thread.sleep(forTimeInterval: Banker.processingTime)
-        print(Message.workComplete(currentCustomerNumber))
+        print(workComplete(currentCustomerNumber))
     }
+
+    func workStart(_ orderNumber: Int) -> String { "\(orderNumber)번 고객 업무 시작" }
+
+    func workComplete(_ orderNumber: Int) -> String { "\(orderNumber)번 고객 업무 완료" }
 }
 

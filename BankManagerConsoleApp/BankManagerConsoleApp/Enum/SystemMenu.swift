@@ -20,4 +20,12 @@ enum SystemMenu: Int, CustomStringConvertible {
             return "종료"
         }
     }
+
+    static func printSystemMenu() {
+        let open = SystemMenu.open
+        let close = SystemMenu.close
+
+        print("\(open.rawValue) : \(open)\n\(close.rawValue) : \(close)")
+        print("입력 : ", terminator: "")
+    }
 }
