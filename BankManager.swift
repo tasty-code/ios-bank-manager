@@ -39,12 +39,39 @@ extension BankManager: BankProtocol {
     
     func open() {
         generateWaitingCustomers(customers: numberOfGuest, to: waitingQueue)
-        while let waitingNumber = waitingQueue.dequeue()?.number {
-            self.report(waitingNumber: waitingNumber, inProgress: true)
-            self.work()
-            self.report(waitingNumber: waitingNumber, inProgress: false)
+        
+        let group = DispatchGroup()
+        
+        let telle1 = DispatchSemaphore(value: 1)
+        let telle2 = DispatchSemaphore(value: 3)
+
+        while let customer = waitingQueue.dequeue() {
+            
+            group.enter()
+            if customer.customer.task == BankAbility.taskType.deposit {
+                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.customer.task, semaphore: telle1))
+                group.leave()
+            } else {
+                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.customer.task, semaphore: telle2))
+                group.leave()
+            }
+            
+//            self.report(waitingNumber: customer.number, inProgress: true)
+//            self.work()
+//            self.report(waitingNumber: customer.number, inProgress: false)
         }
+        group.wait()
         close()
+    }
+    
+    func makeWorkItem(number: UInt, task: BankAbility.taskType, semaphore: DispatchSemaphore) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem {
+            semaphore.wait()
+            print("\(number) : \(task)실행중")
+            BankAbility.taskDuration(of: task).sleep()
+            semaphore.signal()
+        }
+        return workItem
     }
     
     func close() {
