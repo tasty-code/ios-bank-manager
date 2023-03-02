@@ -23,9 +23,8 @@ extension BankManager {
     
     private func generateWaitingCustomers(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
         (1...customers).forEach { number in
-            let newCustomer = Customer()
-            let newData: CustomerInfo = CustomerInfo(number: number, customer: newCustomer)
-            waitingQueue.enqueue(newData)
+            let newCustomer = CustomerInfo(number: number)
+            waitingQueue.enqueue(newCustomer)
         }
     }
     
@@ -46,19 +45,15 @@ extension BankManager: BankProtocol {
         let telle2 = DispatchSemaphore(value: 3)
 
         while let customer = waitingQueue.dequeue() {
-            
             group.enter()
-            if customer.customer.task == BankAbility.taskType.deposit {
-                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.customer.task, semaphore: telle1))
+            if customer.task == BankAbility.taskType.deposit {
+                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle1))
                 group.leave()
             } else {
-                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.customer.task, semaphore: telle2))
+                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle2))
                 group.leave()
             }
-            
-//            self.report(waitingNumber: customer.number, inProgress: true)
-//            self.work()
-//            self.report(waitingNumber: customer.number, inProgress: false)
+
         }
         group.wait()
         close()

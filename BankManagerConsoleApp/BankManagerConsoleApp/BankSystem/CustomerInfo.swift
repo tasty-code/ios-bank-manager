@@ -9,7 +9,16 @@ import Foundation
 
 struct CustomerInfo {
     
+    //MARK: - Properties
+    
     let number: UInt
-    let customer: Customer
+    let task: BankAbility.taskType
+    
+    //MARK: - LifeCycle
+    
+    init(number: UInt) {
+        self.task =  BankAbility.getRandomTask()
+        self.number = number
+    }
     
 }
