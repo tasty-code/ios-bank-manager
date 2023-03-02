@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager {
     
-    private let numberOfGuest: UInt = BankAbility.numberOfCustomer
+    private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
     private let waitingQueue: WaitingQueue<CustomerInfo>
     
     // MARK: - init
@@ -30,7 +30,7 @@ extension BankManager {
     }
     
     private func finalReport() {
-        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * BankAbility.taskDuration(of: .deposit)))
+        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
     }
     
 }
@@ -53,7 +53,7 @@ extension BankManager: BankProtocol {
         finalReport()
     }
     
-    func report(waitingNumber: UInt, taskType: BankAbility.taskType, inProgress: Bool) {
+    func report(waitingNumber: UInt, taskType: Task, inProgress: Bool) {
         InputOutputManager.output(state: .working(waitingNumber, taskType.rawValue, inProgress))
     }
 
@@ -62,7 +62,7 @@ extension BankManager: BankProtocol {
 extension BankManager: TellerProtocol {
     
     func work() {
-        BankAbility.taskDuration(of: .loan).sleep()
+        Task.duration(of: .loan).sleep()
     }
     
 }

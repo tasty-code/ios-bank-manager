@@ -12,12 +12,12 @@ struct Customer {
     
     //MARK: - Properties
     
-    let task: BankAbility.taskType
+    let task: Task
     
     //MARK: - LifeCycle
     
     init() {
-        self.task =  BankAbility.getRandomTask()
+        self.task =  Task.getRandomTask()
     }
     
 }
