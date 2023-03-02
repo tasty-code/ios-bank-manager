@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer: Waitable {
+struct Customer {
 
-    var waitingOrder: Int
+    let waitingOrder: Int
 }
