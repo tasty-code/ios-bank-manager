@@ -75,17 +75,5 @@ extension BankManager: BankProtocol {
     func close() {
         finalReport()
     }
-    
-    func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
-        InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
-    }
 
-}
-
-extension BankManager: TellerProtocol {
-    
-    func work() {
-        Task.duration(of: .loan).sleep()
-    }
-    
 }
