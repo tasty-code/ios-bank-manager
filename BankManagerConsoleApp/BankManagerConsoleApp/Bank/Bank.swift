@@ -37,12 +37,32 @@ struct Bank {
             queue.enqueue(customer)
         }
     }
+
+    private func handleAllCustomers() {
+        let works = makeWorkGroup()
+        works.wait()
+    }
+    
+    private func makeWorkGroup() -> DispatchGroup {
+        let group = DispatchGroup()
+        
+        let depositWorks = Array(repeating: makeWorkItem(for: .deposit), count: clerksForDeposit.count)
+        let loanWorks = Array(repeating: makeWorkItem(for: .loan), count: clerksForLoan.count)
+        
+        var workItems: [DispatchWorkItem] = depositWorks + loanWorks
+        
+        workItems.forEach {
+            DispatchQueue.global().async(group: group, execute: $0)
+        }
+
+        return group
+    }
     
     private func makeWorkItem(for service: BankingService, by index: Int = 0) -> DispatchWorkItem {
-        var clerk: BankClerkProtocol
+        var clerk: BankClerkProtocol?
         switch service {
-        case .deposit: clerk = clerksForDeposit[safe: index]!
-        case .loan: clerk = clerksForLoan[safe: index]!
+        case .deposit: clerk = clerksForDeposit[safe: index]
+        case .loan: clerk = clerksForLoan[safe: index]
         }
         let workItem = DispatchWorkItem {
             while !queue.isEmpty() {
@@ -52,30 +72,15 @@ struct Bank {
                 guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
-                clerk.serve(customer)
+                clerk?.serve(customer)
             }
         }
         return workItem
     }
-
+    
     private func extractCustomerFromQueue() -> Node<String>? {
         let node = queue.dequeue()
         return node
-    }
-    
-    private func handleAllCustomers() {
-        let tasks = DispatchGroup()
-        
-        let task1 = makeWorkItem(for: .deposit)
-        let task2 = makeWorkItem(for: .deposit, by: 1)
-        let task3 = makeWorkItem(for: .loan)
-        
-        
-        DispatchQueue.global().async(group: tasks, execute: task1)
-        DispatchQueue.global().async(group: tasks, execute: task2)
-        DispatchQueue.global().async(group: tasks, execute: task3)
-
-        tasks.wait()
     }
     
     mutating func close() {
