@@ -51,7 +51,7 @@ struct Bank {
                 guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
                 
                 semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
                 guard let clerk = clerksForDeposit[safe: 0] else { return }
@@ -64,7 +64,7 @@ struct Bank {
                 guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
                 
                 semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
                 guard let clerk = clerksForDeposit[safe: 1] else { return }
@@ -77,7 +77,7 @@ struct Bank {
                 guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .loan else { continue }
 
                 semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { return }
+                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
                 guard let clerk = clerksForLoan[safe: 0] else { return }
