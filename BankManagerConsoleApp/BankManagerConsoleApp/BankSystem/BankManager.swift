@@ -46,10 +46,12 @@ extension BankManager: BankProtocol {
 
         while let customer = waitingQueue.dequeue() {
             group.enter()
-            if customer.task == Task.deposit {
+            
+            switch customer.task {
+            case .deposit:
                 DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle1))
                 group.leave()
-            } else {
+            case .loan:
                 DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle2))
                 group.leave()
             }
@@ -62,9 +64,10 @@ extension BankManager: BankProtocol {
     func makeWorkItem(number: UInt, task: Task, semaphore: DispatchSemaphore) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             semaphore.wait()
-            print("\(number) : \(task.rawValue)실행중")
+            print("\(number) : \(task.rawValue) 실행")
             Task.duration(of: task).sleep()
             semaphore.signal()
+            print("\(number) : \(task.rawValue) 종료")
         }
         return workItem
     }

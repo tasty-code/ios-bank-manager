@@ -11,6 +11,5 @@ protocol BankProtocol {
     
     func open()
     func close()
-    func report(waitingNumber: UInt, task: Task, inProgress: Bool)
     
 }

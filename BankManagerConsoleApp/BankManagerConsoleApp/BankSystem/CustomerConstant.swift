@@ -7,17 +7,12 @@
 
 import Foundation
 
-
-
 enum CustomerConstant {
     
     static let min: UInt = 10
     static let max: UInt = 30
     
 }
-
-
-
 
 extension CustomerConstant {
     
@@ -27,7 +22,6 @@ extension CustomerConstant {
         guard let customerSum = (CustomerConstant.min...CustomerConstant.max).randomElement() else { return 0 }
         return customerSum
     }
-    
     
 }
 

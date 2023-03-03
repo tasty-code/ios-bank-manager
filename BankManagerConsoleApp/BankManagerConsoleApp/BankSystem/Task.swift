@@ -20,6 +20,7 @@ enum Task: String, CaseIterable {
             return 1
         }
     }
+    
 }
 
 extension Task {
@@ -37,6 +38,5 @@ extension Task {
             return 1.1
         }
     }
-    
     
 }

@@ -26,7 +26,6 @@
 		F139FFC629A62EDC00BCA81B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13AC2CC29A495AE007FD746 /* Node.swift */; };
 		F13AC2CD29A495AE007FD746 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13AC2CC29A495AE007FD746 /* Node.swift */; };
 		F13AC2CF29A4964F007FD746 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13AC2CE29A4964F007FD746 /* LinkedList.swift */; };
-		F151EC5929B0367800B96BBA /* TellerCountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151EC5829B0367800B96BBA /* TellerCountProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,7 +59,6 @@
 		F139FFBF29A62D1700BCA81B /* WaitingManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingManagerTest.swift; sourceTree = "<group>"; };
 		F13AC2CC29A495AE007FD746 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F13AC2CE29A4964F007FD746 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		F151EC5829B0367800B96BBA /* TellerCountProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellerCountProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,10 +143,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				4FEFD32A29ABB79600CC136F /* CustomerConstant.swift */,
 				F1356C2F29B08B1C004F8764 /* Task.swift */,
-				4FEFD32F29ABBC3600CC136F /* Menu.swift */,
-				4FEFD33129AC39C100CC136F /* BankTextCollection.swift */,
 				4FEFD33B29AC8AB700CC136F /* CustomerInfo.swift */,
-				F151EC5829B0367800B96BBA /* TellerCountProvider.swift */,
 			);
 			path = BankSystem;
 			sourceTree = "<group>";
@@ -156,8 +151,10 @@
 		F1151A1029AC3D2900F9EB02 /* InputOutputManager */ = {
 			isa = PBXGroup;
 			children = (
+				4FEFD32F29ABBC3600CC136F /* Menu.swift */,
 				F1151A0829ABBB8100F9EB02 /* InputOutputManager.swift */,
 				F1151A0E29AC3B9D00F9EB02 /* BankState.swift */,
+				4FEFD33129AC39C100CC136F /* BankTextCollection.swift */,
 			);
 			path = InputOutputManager;
 			sourceTree = "<group>";
@@ -258,7 +255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F151EC5929B0367800B96BBA /* TellerCountProvider.swift in Sources */,
 				4FEFD32E29ABBAB200CC136F /* DoubleExtension.swift in Sources */,
 				F13AC2CF29A4964F007FD746 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,

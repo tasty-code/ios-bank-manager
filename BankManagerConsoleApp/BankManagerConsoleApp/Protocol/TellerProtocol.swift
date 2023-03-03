@@ -10,5 +10,6 @@ import Foundation
 protocol TellerProtocol {
     
     func work()
+    func report(waitingNumber: UInt, task: Task, inProgress: Bool)
     
 }
