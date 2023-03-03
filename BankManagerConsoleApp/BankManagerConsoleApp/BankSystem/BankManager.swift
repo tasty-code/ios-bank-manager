@@ -10,11 +10,13 @@ struct BankManager {
     
     private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
     private let waitingQueue: WaitingQueue<CustomerInfo>
+    private let tellers: [Teller]
     
     // MARK: - init
     
     init(waitingQueue: WaitingQueue<CustomerInfo>) {
         self.waitingQueue = waitingQueue
+        self.tellers = Task.allCases.map { Teller(task: $0) }
     }
     
 }
@@ -40,34 +42,30 @@ extension BankManager: BankProtocol {
         generateWaiting(customers: numberOfGuest, to: waitingQueue)
         
         let group = DispatchGroup()
-        
-        let telle1 = DispatchSemaphore(value: 1)
-        let telle2 = DispatchSemaphore(value: 3)
-
         while let customer = waitingQueue.dequeue() {
             group.enter()
             
-            switch customer.task {
-            case .deposit:
-                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle1))
-                group.leave()
-            case .loan:
-                DispatchQueue.global().async(group: group, execute: makeWorkItem(number: customer.number, task: customer.task, semaphore: telle2))
-                group.leave()
-            }
-
+            let teller = tellers.filter { teller in
+                teller.task == customer.task
+            }.first
+            
+            DispatchQueue.global().async(
+                group: group,
+                execute: makeWorkItem(number: customer.number, teller: teller!)
+            )
+            group.leave()
         }
         group.wait()
         close()
     }
     
-    func makeWorkItem(number: UInt, task: Task, semaphore: DispatchSemaphore) -> DispatchWorkItem {
+    func makeWorkItem(number: UInt, teller: Teller) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
-            semaphore.wait()
-            print("\(number) : \(task.rawValue) 실행")
-            Task.duration(of: task).sleep()
-            semaphore.signal()
-            print("\(number) : \(task.rawValue) 종료")
+            teller.semaphore.wait()
+            teller.report(waitingNumber: number, task: teller.task, inProgress: true)
+            teller.work()
+            teller.semaphore.signal()
+            teller.report(waitingNumber: number, task: teller.task, inProgress: false)
         }
         return workItem
     }
@@ -75,5 +73,5 @@ extension BankManager: BankProtocol {
     func close() {
         finalReport()
     }
-
+    
 }

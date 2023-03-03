@@ -7,11 +7,18 @@
 
 import Foundation
 
-struct Teller: TellerProtocol {
+struct Teller: TellerProvidable {
     
+    let task: Task
+    let semaphore: DispatchSemaphore
+    
+    init(task: Task) {
+        self.task = task
+        self.semaphore = DispatchSemaphore(value: Int(task.numberOfTeller))
+    }
     
     func work() {
-        Task.duration(of: .loan).sleep()
+        Task.duration(of: task).sleep()
     }
     
     func report(waitingNumber: UInt, task: Task, inProgress: Bool) {

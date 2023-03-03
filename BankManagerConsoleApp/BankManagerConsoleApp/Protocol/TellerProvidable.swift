@@ -1,5 +1,5 @@
 //
-//  TellerProtocol.swift
+//  TellerProvidable.swift
 //  BankManagerConsoleApp
 //
 //  Created by 송선진 on 2023/02/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TellerProtocol {
+protocol TellerProvidable {
     
     func work()
     func report(waitingNumber: UInt, task: Task, inProgress: Bool)
