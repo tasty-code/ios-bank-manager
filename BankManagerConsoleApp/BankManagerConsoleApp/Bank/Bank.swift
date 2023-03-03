@@ -14,6 +14,7 @@ struct Bank {
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     private var timer: Timer
+    private let semaphore = DispatchSemaphore(value: 1)
     
     init(numberOfClerksForDeposit: Int, numberOfClerksForLoan: Int) {
         self.queue = Queue<String>()
@@ -37,6 +38,26 @@ struct Bank {
         }
     }
     
+    private func makeWorkItem(for service: BankingService, by index: Int = 0) -> DispatchWorkItem {
+        var clerk: BankClerkProtocol
+        switch service {
+        case .deposit: clerk = clerksForDeposit[safe: index]!
+        case .loan: clerk = clerksForLoan[safe: index]!
+        }
+        let workItem = DispatchWorkItem {
+            while !queue.isEmpty() {
+                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == service else { continue }
+                
+                semaphore.wait()
+                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
+                semaphore.signal()
+                
+                clerk.serve(customer)
+            }
+        }
+        return workItem
+    }
+
     private func extractCustomerFromQueue() -> Node<String>? {
         let node = queue.dequeue()
         return node
@@ -44,46 +65,11 @@ struct Bank {
     
     private func handleAllCustomers() {
         let tasks = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 1)
         
-        let task1 = DispatchWorkItem {
-            while !queue.isEmpty() {
-                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
-                
-                semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
-                semaphore.signal()
-                
-                guard let clerk = clerksForDeposit[safe: 0] else { return }
-                clerk.serve(customer)
-            }
-        }
+        let task1 = makeWorkItem(for: .deposit)
+        let task2 = makeWorkItem(for: .deposit, by: 1)
+        let task3 = makeWorkItem(for: .loan)
         
-        let task2 = DispatchWorkItem {
-            while !queue.isEmpty() {
-                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .deposit else { continue }
-                
-                semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
-                semaphore.signal()
-                
-                guard let clerk = clerksForDeposit[safe: 1] else { return }
-                clerk.serve(customer)
-            }
-        }
-        
-        let task3 = DispatchWorkItem {
-            while !queue.isEmpty() {
-                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == .loan else { continue }
-
-                semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
-                semaphore.signal()
-                
-                guard let clerk = clerksForLoan[safe: 0] else { return }
-                clerk.serve(customer)
-            }
-        }
         
         DispatchQueue.global().async(group: tasks, execute: task1)
         DispatchQueue.global().async(group: tasks, execute: task2)
