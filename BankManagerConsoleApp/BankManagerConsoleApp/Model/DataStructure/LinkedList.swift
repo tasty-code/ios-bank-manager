@@ -28,6 +28,20 @@ struct LinkedList<Value> {
         return head?.value
     }
 
+    var count: Int {
+        guard var node = head else {
+            return 0
+        }
+
+        var count = 1
+        while let next = node.next {
+            node = next
+            count += 1
+        }
+
+        return count
+    }
+
     mutating func append(_ value: Value) {
         guard !isEmpty else {
             head = Node(value)

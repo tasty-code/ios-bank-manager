@@ -18,6 +18,10 @@ struct Queue<Value> {
         return linkedList.isEmpty
     }
 
+    var count: Int {
+        return linkedList.count
+    }
+
     mutating func enqueue(_ value: Value) {
         linkedList.append(value)
     }
