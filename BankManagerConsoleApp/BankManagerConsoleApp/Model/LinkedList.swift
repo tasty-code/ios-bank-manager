@@ -12,8 +12,8 @@ final class Node<Value> {
     fileprivate var value: Value
     var next: Node?
 
-    init(data: Value, next: Node? = nil) {
-        self.value = data
+    init(value: Value, next: Node? = nil) {
+        self.value = value
         self.next = next
     }
 }
@@ -23,8 +23,8 @@ class LinkedList<Value> {
     var head: Node<Value>?
     var tail: Node<Value>?
 
-    func append(_ data: Value) {
-        let newNode = Node(data: data)
+    func append(_ value: Value) {
+        let newNode = Node(value: value)
 
         if head == nil {
             head = newNode

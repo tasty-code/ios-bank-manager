@@ -1,6 +1,9 @@
-## iOS 커리어 스타터 캠프
+# ios-bank-manager
 
-### 은행 매니저 프로젝트 저장소
+## 💫 Team BLUST3R 💫
+🏃🏻🏃🏻‍♂️💨 **프로젝트 기간:** `23.02.20` ~ `23.03.10`
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+|<img src="https://avatars.githubusercontent.com/u/71758542?v=4" width=200>|<img src="https://avatars.githubusercontent.com/u/45708630?v=4" width=200>|
+|:---:|:---:|
+|[Blu](https://github.com/bomyuniverse)|[Lust3r](https://github.com/llimental)|
 

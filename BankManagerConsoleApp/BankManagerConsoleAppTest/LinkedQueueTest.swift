@@ -28,7 +28,7 @@ final class LinkedQueueTest: XCTestCase {
         let expectation = "lust3r"
 
         // when
-        sut.enqueue(data: "lust3r")
+        sut.enqueue(value: "lust3r")
         guard let result = sut.peek() as? String else { return }
 
         // then
@@ -39,8 +39,8 @@ final class LinkedQueueTest: XCTestCase {
         // given
         let expectation = "blue"
 
-        sut.enqueue(data: "blue")
-        sut.enqueue(data: "lust3r")
+        sut.enqueue(value: "blue")
+        sut.enqueue(value: "lust3r")
 
         // when
         let result = sut.dequeue() as? String
@@ -53,8 +53,8 @@ final class LinkedQueueTest: XCTestCase {
         // given
         let expectation = "blue"
 
-        sut.enqueue(data: "blue")
-        sut.enqueue(data: "lust3r")
+        sut.enqueue(value: "blue")
+        sut.enqueue(value: "lust3r")
 
         // when
         guard let dequeueResult = sut.dequeue() else { return }
@@ -65,7 +65,7 @@ final class LinkedQueueTest: XCTestCase {
     }
 
     func test_노드가_한개인_경우_dequeue했을_때_head와_tail이_nil인지_확인() {
-        sut.enqueue(data: "lust3r")
+        sut.enqueue(value: "lust3r")
         sut.dequeue()
 
         XCTAssertNil(sut.head)
@@ -78,8 +78,8 @@ final class LinkedQueueTest: XCTestCase {
 
     func test_clear로_queue가_비워지는지_확인() {
         // given
-        sut.enqueue(data: "blue")
-        sut.enqueue(data: "lust3r")
+        sut.enqueue(value: "blue")
+        sut.enqueue(value: "lust3r")
 
         // when
         sut.clear()
@@ -92,9 +92,9 @@ final class LinkedQueueTest: XCTestCase {
         // given
         let expectation = "corn"
 
-        sut.enqueue(data: "corn")
-        sut.enqueue(data: "finnn")
-        sut.enqueue(data: "jamking")
+        sut.enqueue(value: "corn")
+        sut.enqueue(value: "finnn")
+        sut.enqueue(value: "jamking")
 
         // when
         guard let peekResult = sut.peek() else { return }
@@ -113,9 +113,9 @@ final class LinkedQueueTest: XCTestCase {
     }
 
     func test_데이터를_넣었을_때_isEmpty가_false인지_확인() {
-        sut.enqueue(data: "corn")
-        sut.enqueue(data: "finnn")
-        sut.enqueue(data: "jamking")
+        sut.enqueue(value: "corn")
+        sut.enqueue(value: "finnn")
+        sut.enqueue(value: "jamking")
 
         XCTAssertFalse(sut.isEmpty())
     }
