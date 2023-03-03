@@ -54,7 +54,8 @@ struct Bank {
                 guard let customer = extractCustomerFromQueue() as? Customer else { return }
                 semaphore.signal()
                 
-                clerksForDeposit[0].serve(customer)
+                guard let clerk = clerksForDeposit[safe: 0] else { return }
+                clerk.serve(customer)
             }
         }
         
@@ -65,8 +66,9 @@ struct Bank {
                 semaphore.wait()
                 guard let customer = extractCustomerFromQueue() as? Customer else { return }
                 semaphore.signal()
-
-                clerksForDeposit[1].serve(customer)
+                
+                guard let clerk = clerksForDeposit[safe: 1] else { return }
+                clerk.serve(customer)
             }
         }
         
@@ -78,7 +80,8 @@ struct Bank {
                 guard let customer = extractCustomerFromQueue() as? Customer else { return }
                 semaphore.signal()
                 
-                clerksForLoan[0].serve(customer)
+                guard let clerk = clerksForLoan[safe: 0] else { return }
+                clerk.serve(customer)
             }
         }
         

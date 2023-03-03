@@ -14,6 +14,7 @@
 		3BC82CBA29A47E6D00D0B86A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6229A455A9006D578A /* Node.swift */; };
 		3BC82CBF29A735D400D0B86A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC82CBE29A735D400D0B86A /* Bank.swift */; };
 		3BC82CCC29B1880C00D0B86A /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC82CCB29B1880C00D0B86A /* Timer.swift */; };
+		8745838B29B18C98002813F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745838A29B18C98002813F4 /* ArrayExtension.swift */; };
 		876A7DF629A7335700D26878 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A7DF529A7335700D26878 /* BankClerk.swift */; };
 		87BAAE6329A455A9006D578A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6229A455A9006D578A /* Node.swift */; };
 		87BAAE6529A455CC006D578A /* SinglyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */; };
@@ -45,6 +46,7 @@
 		3BC82CB229A47E2B00D0B86A /* BankManagerConsoleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTests.swift; sourceTree = "<group>"; };
 		3BC82CBE29A735D400D0B86A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		3BC82CCB29B1880C00D0B86A /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		8745838A29B18C98002813F4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		876A7DF529A7335700D26878 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		87BAAE6229A455A9006D578A /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglyLinkedList.swift; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		8745838929B18C42002813F4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8745838A29B18C98002813F4 /* ArrayExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		87D41D4729B039E7000291F6 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				8745838929B18C42002813F4 /* Extensions */,
 				3BC82CCA29B187F500D0B86A /* Timer */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				3BC82CC929AD979E00D0B86A /* Console */,
@@ -269,6 +280,7 @@
 				C7D65D1B259C8190005510E0 /* ConsoleManager.swift in Sources */,
 				3BC82CBF29A735D400D0B86A /* Bank.swift in Sources */,
 				87D41D4B29B03A82000291F6 /* BankingService.swift in Sources */,
+				8745838B29B18C98002813F4 /* ArrayExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
