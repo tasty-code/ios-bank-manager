@@ -30,10 +30,6 @@ extension BankManager {
         }
     }
     
-    private func finalReport() {
-        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
-    }
-    
     private func makeWorkItem(number: UInt, teller: Teller) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             teller.semaphore.wait()
@@ -45,8 +41,28 @@ extension BankManager {
         return workItem
     }
     
+    private func dealCustomer(group: DispatchGroup) {
+        
+        let queue = DispatchQueue.global()
+        
+        while let customer = waitingQueue.dequeue() {
+            group.enter()
+            guard let teller = tellers.first(where: { $0.task == customer.task }) else { return }
+            
+            queue.async(
+                group: group,
+                execute: makeWorkItem(number: customer.number, teller: teller)
+            )
+            group.leave()
+        }
+    }
+    
     private func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
         InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
+    }
+    
+    private func finalReport() {
+        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
     }
     
 }
@@ -57,19 +73,7 @@ extension BankManager: BankProtocol {
         generateWaiting(customers: numberOfGuest, to: waitingQueue)
         
         let group = DispatchGroup()
-        while let customer = waitingQueue.dequeue() {
-            group.enter()
-            
-            let teller = tellers.filter { teller in
-                teller.task == customer.task
-            }.first
-            
-            DispatchQueue.global().async(
-                group: group,
-                execute: makeWorkItem(number: customer.number, teller: teller!)
-            )
-            group.leave()
-        }
+        dealCustomer(group: group)
         group.wait()
         close()
     }
