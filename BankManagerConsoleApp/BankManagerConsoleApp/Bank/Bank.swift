@@ -13,17 +13,21 @@ struct Bank {
     private let clerksForLoan: [BankClerkForLoan]
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
+    private var timer: Timer
     
     init(clerksForDeposit: [BankClerkForDeposit], clerksForLoan: [BankClerkForLoan]) {
         self.queue = Queue<String>()
         self.clerksForDeposit = clerksForDeposit
         self.clerksForLoan = clerksForLoan
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
+        self.timer = Timer()
     }
     
-    func open() {
+    mutating func open() {
+        timer.start()
         lineUpCustomersInQueue()
         handleAllCustomers()
+        timer.finish()
     }
     
     private func lineUpCustomersInQueue() {
@@ -85,16 +89,12 @@ struct Bank {
         tasks.wait()
     }
     
-    func close() {
-        let totalTime = calculateTotalTime()
-        printClosingMessage(about: numberOfCustomers, with: totalTime)
+    mutating func close() {
+        let totalSpentTime = timer.sum()
+        printClosingMessage(with: totalSpentTime)
     }
     
-    private func calculateTotalTime() -> Double {
-        return Double(numberOfCustomers) * 0.7
-    }
-    
-    private func printClosingMessage(about totalNumberOfCustomers: Int, with totalConsumedTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumberOfCustomers)명이며, 총 업무시간은 \(totalConsumedTime)초입니다.")
+    private func printClosingMessage(with totalSpentTime: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalSpentTime)초입니다.")
     }
 }
