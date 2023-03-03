@@ -15,10 +15,10 @@ struct Bank {
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     private var timer: Timer
     
-    init(clerksForDeposit: [BankClerkForDeposit], clerksForLoan: [BankClerkForLoan]) {
+    init(numberOfClerksForDeposit: Int, numberOfClerksForLoan: Int) {
         self.queue = Queue<String>()
-        self.clerksForDeposit = clerksForDeposit
-        self.clerksForLoan = clerksForLoan
+        self.clerksForDeposit = Array(repeating: BankClerkForDeposit(), count: numberOfClerksForDeposit)
+        self.clerksForLoan = Array(repeating: BankClerkForLoan(), count: numberOfClerksForLoan)
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
         self.timer = Timer()
     }
