@@ -34,6 +34,21 @@ extension BankManager {
         InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
     }
     
+    private func makeWorkItem(number: UInt, teller: Teller) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem {
+            teller.semaphore.wait()
+            report(waitingNumber: number, task: teller.task, inProgress: true)
+            teller.work()
+            teller.semaphore.signal()
+            report(waitingNumber: number, task: teller.task, inProgress: false)
+        }
+        return workItem
+    }
+    
+    private func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
+        InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
+    }
+    
 }
 
 extension BankManager: BankProtocol {
@@ -57,17 +72,6 @@ extension BankManager: BankProtocol {
         }
         group.wait()
         close()
-    }
-    
-    func makeWorkItem(number: UInt, teller: Teller) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem {
-            teller.semaphore.wait()
-            teller.report(waitingNumber: number, task: teller.task, inProgress: true)
-            teller.work()
-            teller.semaphore.signal()
-            teller.report(waitingNumber: number, task: teller.task, inProgress: false)
-        }
-        return workItem
     }
     
     func close() {

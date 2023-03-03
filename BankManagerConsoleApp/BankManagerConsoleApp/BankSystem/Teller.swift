@@ -21,8 +21,4 @@ struct Teller: TellerProvidable {
         Task.duration(of: task).sleep()
     }
     
-    func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
-        InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
-    }
-    
 }

@@ -10,6 +10,5 @@ import Foundation
 protocol TellerProvidable {
     
     func work()
-    func report(waitingNumber: UInt, task: Task, inProgress: Bool)
     
 }
