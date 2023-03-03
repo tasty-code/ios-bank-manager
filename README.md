@@ -215,7 +215,7 @@
     - 대기중인 고객이 없으면 타이머가 멈춤
     - 고객이 추가되어 다시 업무를 실행하면 타이머가 동작
         - 초기화 전까지 업무시간은 초기화되지 않고 누적
-- 🗝️ keyword: Code-base, StackView
+- 🗝️ keyword: `Code-base`, `StackView`
 - [STEP 4 PR 🔗]()
 
 </br>
@@ -223,58 +223,58 @@
 ## 🚀 트러블 슈팅
 
 ### 1. Console App의 Unit Test Target 추가
-: Unit Test를 위해 프로젝트에서 New Unit Test Target으로 Test Unit을 추가하고 코드를 작성했습니다. 그런데 `@testable import BankManagerConsoleApp` 을 했음에도 `undefined symbol` 오류가 발생하였습니다.
+- Unit Test를 위해 프로젝트에서 New Unit Test Target으로 Test Unit을 추가하고 코드를 작성했습니다. 그런데 `@testable import BankManagerConsoleApp` 을 했음에도 `undefined symbol` 오류가 발생하였습니다.
 이유를 찾아본 결과 Application(iOS) 프로젝트의 경우에는 target으로 프로젝트를 선택하여 진행할 수 있지만, command line 프로젝트는 선택할 수 없어 테스트하고자 하는 파일에서 Test Unit에 `target membership`을 설정해 주어야 했습니다.
 테스트를 진행하고자 하는 코드가 있는 LinkedList.swift, LinkedQueue.swift 파일에서 Test Unit을 `target membership`에서 설정해준 후 문제를 해결할 수 있었습니다.
   
 
 ### 2. Queue를 Linked-list로 구현 시의 시간복잡도
 
-: STEP 1이 공개된 후 학습해야 할 키워드를 추출하고, 개인적으로 학습하는 것을 우선으로 진행하였습니다. 그리고 코드 이해도를 위하여 각자 `LinkedQueue`(Linked-list로 구현된 Queue)를 구현해본 후 서로의 코드에 대해 질문하고 논의해 보았습니다.    
+- STEP 1이 공개된 후 학습해야 할 키워드를 추출하고, 개인적으로 학습하는 것을 우선으로 진행하였습니다. 그리고 코드 이해도를 위하여 각자 `LinkedQueue`(Linked-list로 구현된 Queue)를 구현해본 후 서로의 코드에 대해 질문하고 논의해 보았습니다.    
 논의한 내용을 바탕으로 추가로 이해가 필요한 부분에 대해 함께 학습하고, 기존에 작성한 코드를 전부 삭제한 후 짝 프로그래밍으로 코드를 작성하였습니다.
-- 👨🏻‍💻 **Lust3r's Code (단방향 Linked-list)**
-    ```swift
-    func enqueue(data: T) {
-        var head: Node<T>?
-        var node = head
+    - 👨🏻‍💻 **Lust3r's Code (단방향 Linked-list)**
+        ```swift
+        func enqueue(data: T) {
+            var head: Node<T>?
+            var node = head
 
-        if head == nil {
-            head = Node(data: data)
+            if head == nil {
+                head = Node(data: data)
 
-            return
+                return
+            }
+
+            while node.next != nil {
+                node = node.next
+            }
+            node.next = Node(data: data)
+        }
+        ```
+    - 💙 **Blue's Code (단방향 Linked-list + rear 프로퍼티)**
+        ```swift
+        // LinkedQueue의 enqueue
+        mutating func enqueue(data: T) {
+            nodes.append(data)
         }
 
-        while node.next != nil {
-            node = node.next
+        // LinkedList의 append 기능
+        mutating func append(_ data: T) {
+            let newNode = Node(data: data)
+
+            count += 1
+
+            if head == nil {
+                head = newNode
+                tail = head
+
+                return
+            }
+
+            tail?.next = newNode
+            tail = newNode
         }
-        node.next = Node(data: data)
-    }
-    ```
-- 💙 **Blue's Code (단방향 Linked-list + rear 프로퍼티)**
-    ```swift
-    // LinkedQueue의 enqueue
-    mutating func enqueue(data: T) {
-        nodes.append(data)
-    }
-
-    // LinkedList의 append 기능
-    mutating func append(_ data: T) {
-        let newNode = Node(data: data)
-
-        count += 1
-
-        if head == nil {
-            head = newNode
-            tail = head
-
-            return
-        }
-
-        tail?.next = newNode
-        tail = newNode
-    }
-    ```
-단방향 Linked-list만 사용한 첫 번째 코드는 `rear`(제일 나중에 추가된 노드를 확인하는)프로퍼티가 없어서 `while` 반복문을 사용하여 노드의 `next`가 `nil`이 될 때까지 탐색하는 코드라서 시간복잡도가 $O(n)$이 될 것이라 판단하였습니다.
+        ```
+- 단방향 Linked-list만 사용한 첫 번째 코드는 `rear`(제일 나중에 추가된 노드를 확인하는)프로퍼티가 없어서 `while` 반복문을 사용하여 노드의 `next`가 `nil`이 될 때까지 탐색하는 코드라서 시간복잡도가 $O(n)$이 될 것이라 판단하였습니다.
 시간복잡도가 $O(n)$이 된다면, 자료의 추가와 삭제가 $O(1)$의 시간복잡도를 가진다는 Linked-list의 장점이 사라진다고 생각하여 논의 후 새로운 코드를 작성 시 시간복잡도가 $O(1)$이 될 수 있도록 작성해 보았습니다.
 
 ### 3. Queue 연결 타입 문제 해결
@@ -316,6 +316,7 @@
 코멘트 주신 부분에 대해서 더 고민해보고 수정하도록 하겠습니다.
 
     > **리뷰어 🍿콘(@protocorn93)의 의견**
+    >
     > 음~ 저는 뭐 이런 네이밍도 크게 나쁘다고 생각이 들진 않아요. 물론 어느정도 역할을 유추할 수 있는 네이밍이 들어가면 좋죠! 이런 경우에는 Value 와 같은 네이밍을 사용할 것 같아요. 변수도 data보단 value가 더 어울리는 것 같구요.
 
 
@@ -324,6 +325,7 @@
 그래서 `Thread`의 `sleep` 기능을 활용하여 은행원이 갖고 있는 `processingTime`을 파라미터로 메세지 출력간 delay를 주는 방식을 사용하게 되었습니다.
 
     > **리뷰어 🍿콘(@protocorn93)의 의견**
+    >
     > LinkedList와 LinkedQueue는 사실 엄연히 다른 객체라고 봐요. LinkedQueue가 LinkedList를 활용할 뿐이죠. LinkedQueue가 내부적으로 다른 형태의 LinkedList를 사용할 수도 있어요.
 
 ### 3. Generic Type 사용 시 Type Parameter 네이밍 질문
@@ -331,6 +333,7 @@
 하지만 위와 같은 네이밍을 피하고 명확히 작성해야 한다는 의견도 있어 Type Parameter를 사용할 때 네이밍을 어떻게 하면 좋을지 궁금합니다!
 
     > **리뷰어 🍿콘(@protocorn93)의 의견**
+    >
     > 네이밍이 너무 모호해요. 추상화를 학습하고 연습하시다보니 이렇게 너무 많은것을 축약해버린 것 같기도 해요. 그리고 추상화를 진행하는 이유에 대해서도 고민해볼 필요가 있어요.
 
 ### 4. Unit Test 진행 시 중복되는 기능에 대한 질문
@@ -340,4 +343,5 @@
 (**LinkedQueue**: `enqueue(data:)`, `dequeue()`)
 
     > **리뷰어 🍿콘(@protocorn93)의 의견**
+    >
     > 이 두 선택지에서 현재 프로그램에서 무엇을 사용하는지는 딱히 크게 중요한 것 같지는 않아요. 두 분이 말씀해주신 의도대로 Thread.sleep이 좀 더 편리해보이긴 해요!
