@@ -47,13 +47,8 @@ struct Bank {
         let group = DispatchGroup()
         var workItems = [DispatchWorkItem]()
         
-        clerksForDeposit.enumerated().forEach { (index, clerk) in
-            workItems.append(makeWorkItem(by: clerk, at: index))
-        }
-        clerksForLoan.enumerated().forEach { (index, clerk) in
-            workItems.append(makeWorkItem(by: clerk, at: index))
-        }
-        
+        workItems.append(contentsOf: clerksForDeposit.actionMap(makeWorkItem))
+        workItems.append(contentsOf: clerksForLoan.actionMap(makeWorkItem))
         workItems.forEach {
             DispatchQueue.global().async(group: group, execute: $0)
         }
