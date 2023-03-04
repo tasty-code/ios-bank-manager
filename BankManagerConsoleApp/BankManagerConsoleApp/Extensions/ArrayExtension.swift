@@ -9,7 +9,7 @@ import Foundation
 
 extension Array where Element: BankClerkProtocol {
     subscript(safe index: Int) -> Element? {
-        guard index <= self.count else { return nil }
+        guard index < self.count else { return nil }
         return self[index]
     }
 }

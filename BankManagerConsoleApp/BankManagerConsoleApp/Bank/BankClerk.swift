@@ -8,6 +8,7 @@
 import Foundation
 
 protocol BankClerkProtocol {
+    var service: BankingService { get }
     func serve(_ customer: Customer)
 }
 
@@ -21,9 +22,9 @@ extension BankClerkProtocol {
 }
 
 struct BankClerkForDeposit: BankClerkProtocol {
-    
+    let service: BankingService = .deposit
 }
 
 struct BankClerkForLoan: BankClerkProtocol {
-    
+    let service: BankingService = .loan
 }

@@ -45,11 +45,14 @@ struct Bank {
     
     private func makeWorkGroup() -> DispatchGroup {
         let group = DispatchGroup()
+        var workItems = [DispatchWorkItem]()
         
-        let depositWorks = Array(repeating: makeWorkItem(for: .deposit), count: clerksForDeposit.count)
-        let loanWorks = Array(repeating: makeWorkItem(for: .loan), count: clerksForLoan.count)
-        
-        var workItems: [DispatchWorkItem] = depositWorks + loanWorks
+        clerksForDeposit.enumerated().forEach { (index, clerk) in
+            workItems.append(makeWorkItem(by: clerk, at: index))
+        }
+        clerksForLoan.enumerated().forEach { (index, clerk) in
+            workItems.append(makeWorkItem(by: clerk, at: index))
+        }
         
         workItems.forEach {
             DispatchQueue.global().async(group: group, execute: $0)
@@ -58,29 +61,24 @@ struct Bank {
         return group
     }
     
-    private func makeWorkItem(for service: BankingService, by index: Int = 0) -> DispatchWorkItem {
-        var clerk: BankClerkProtocol?
-        switch service {
-        case .deposit: clerk = clerksForDeposit[safe: index]
-        case .loan: clerk = clerksForLoan[safe: index]
-        }
+    private func makeWorkItem(by clerk: BankClerkProtocol, at index: Int = 0) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             while !queue.isEmpty() {
-                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == service else { continue }
+                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == clerk.service else { continue }
                 
                 semaphore.wait()
                 guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
-                clerk?.serve(customer)
+                clerk.serve(customer)
             }
         }
         return workItem
     }
     
     private func extractCustomerFromQueue() -> Node<String>? {
-        let node = queue.dequeue()
-        return node
+        let customer = queue.dequeue()
+        return customer
     }
     
     mutating func close() {
