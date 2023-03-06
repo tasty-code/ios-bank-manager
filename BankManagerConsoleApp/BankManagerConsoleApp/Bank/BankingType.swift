@@ -19,4 +19,13 @@ extension BankingType {
         }
         return type
     }
+    
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
 }

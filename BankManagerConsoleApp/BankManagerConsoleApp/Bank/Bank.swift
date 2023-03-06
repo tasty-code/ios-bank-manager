@@ -14,7 +14,7 @@ enum BankState: String {
 
 struct Bank: ConsoleMessagable {
     let queue = Queue<Int>()
-    let teller = Teller()
+    let teller = Teller(type: .deposit)
 
     func execute() {
         printMessage(message: .startBanking)
