@@ -13,7 +13,7 @@ enum BankState: String {
 }
 
 struct Bank: ConsoleMessagable {
-    let queue = Queue<Int>()
+    let queue = Queue<Client>()
     let teller = Teller(type: .deposit)
 
     func execute() {
@@ -46,8 +46,8 @@ struct Bank: ConsoleMessagable {
         var customersPerDay = 0
         let openTime = Date().now()
 
-        while let customer = dequeue(from: queue) {
-            teller.assist(customer)
+        while let customer = queue.dequeue() {
+            teller.assist(customer.waitingNumber)
             customersPerDay += 1
         }
 
@@ -55,14 +55,11 @@ struct Bank: ConsoleMessagable {
         printMessage(message: .endBanking(customers: customersPerDay, takenTime: takenTime))
     }
 
-    private func dequeue(from customerQueue: Queue<Int>) -> Int? {
-        return customerQueue.dequeue()
-    }
-
     private func enqueueCustomers() {
-        let customers = Int.random(in: Constants.rangeOfCustomers)
-        for customer in 1...customers {
-            queue.enqueue(customer)
+        let visitedClients = Int.random(in: Constants.rangeOfCustomers)
+        for waitingNumber in 1...visitedClients {
+            let client = Client(waitingNumber: waitingNumber)
+            queue.enqueue(client)
         }
     }
 }
