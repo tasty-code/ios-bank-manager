@@ -7,8 +7,7 @@
 
 import Foundation
 
-extension Array where Element: BankClerkProtocol {
-    typealias WorkItem = DispatchWorkItem
+extension Array<BankClerkProtocol> {
     typealias Clerk = Element
     
     subscript(safe index: Int) -> Clerk? {
@@ -16,7 +15,14 @@ extension Array where Element: BankClerkProtocol {
         return self[index]
     }
     
-    func actionMap(_ action: @escaping (Clerk, Int) -> WorkItem) -> [WorkItem] {
-        return self.enumerated().map { action($1, $0) }
+    init(clerksPerType: [BankingService]) {
+        let clerks: [[Clerk]] = clerksPerType.map { clerkType in
+            switch clerkType {
+            case .deposit(let count): return Array(repeating: BankClerkForDeposit(), count: count)
+            case .loan(let count): return Array(repeating: BankClerkForLoan(), count: count)
+            @unknown case _: break
+            }
+        }
+        self = clerks.flatMap { $0 }
     }
 }

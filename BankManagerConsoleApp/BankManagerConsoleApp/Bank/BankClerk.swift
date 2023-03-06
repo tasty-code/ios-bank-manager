@@ -15,16 +15,16 @@ protocol BankClerkProtocol {
 extension BankClerkProtocol {
     func serve(_ customer: Customer) {
         guard let purposeOfVisit = customer.purposeOfVisit else { return }
-        print("\(customer.data) \(purposeOfVisit.rawValue) 업무 시작")
+        print("\(customer.data) \(purposeOfVisit.title) 업무 시작")
         Thread.sleep(forTimeInterval: purposeOfVisit.timeSpent)
-        print("\(customer.data) \(purposeOfVisit.rawValue) 업무 완료")
+        print("\(customer.data) \(purposeOfVisit.title) 업무 완료")
     }
 }
 
 struct BankClerkForDeposit: BankClerkProtocol {
-    let service: BankingService = .deposit
+    let service: BankingService = .deposit()
 }
 
 struct BankClerkForLoan: BankClerkProtocol {
-    let service: BankingService = .loan
+    let service: BankingService = .loan()
 }

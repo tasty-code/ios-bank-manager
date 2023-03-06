@@ -8,18 +8,16 @@
 import Foundation
 
 struct Bank {
-    private let queue: Queue<String>
-    private let clerksForDeposit: [BankClerkForDeposit]
-    private let clerksForLoan: [BankClerkForLoan]
+    private let customers: Queue<String>
+    private let clerks: [BankClerkProtocol]
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     private var timer: Timer
     private let semaphore = DispatchSemaphore(value: 1)
     
-    init(numberOfClerksForDeposit: Int, numberOfClerksForLoan: Int) {
-        self.queue = Queue<String>()
-        self.clerksForDeposit = Array(repeating: BankClerkForDeposit(), count: numberOfClerksForDeposit)
-        self.clerksForLoan = Array(repeating: BankClerkForLoan(), count: numberOfClerksForLoan)
+    init(clerks: BankingService...) {
+        self.customers = Queue<String>()
+        self.clerks = Array(clerksPerType: clerks)
         self.numberOfCustomers = Int.random(in: rangeOfNumberOfCustomers.minimum...rangeOfNumberOfCustomers.maximum)
         self.timer = Timer()
     }
@@ -34,7 +32,7 @@ struct Bank {
     private func lineUpCustomersInQueue() {
         (1...numberOfCustomers).forEach {
             let customer = Customer("\($0)번 고객")
-            queue.enqueue(customer)
+            customers.enqueue(customer)
         }
     }
 
@@ -47,8 +45,7 @@ struct Bank {
         let group = DispatchGroup()
         var workItems = [DispatchWorkItem]()
         
-        workItems.append(contentsOf: clerksForDeposit.actionMap(makeWorkItem))
-        workItems.append(contentsOf: clerksForLoan.actionMap(makeWorkItem))
+        workItems.append(contentsOf: clerks.map(makeWorkItem))
         workItems.forEach {
             DispatchQueue.global().async(group: group, execute: $0)
         }
@@ -56,10 +53,10 @@ struct Bank {
         return group
     }
     
-    private func makeWorkItem(by clerk: BankClerkProtocol, at index: Int = 0) -> DispatchWorkItem {
+    private func makeWorkItem(by clerk: BankClerkProtocol) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
-            while !queue.isEmpty() {
-                guard (queue.peekFirst() as? Customer)?.purposeOfVisit == clerk.service else { continue }
+            while !customers.isEmpty() {
+                guard (customers.peekFirst() as? Customer)?.purposeOfVisit == clerk.service else { continue }
                 
                 semaphore.wait()
                 guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
@@ -72,7 +69,7 @@ struct Bank {
     }
     
     private func extractCustomerFromQueue() -> Node<String>? {
-        let customer = queue.dequeue()
+        let customer = customers.dequeue()
         return customer
     }
     

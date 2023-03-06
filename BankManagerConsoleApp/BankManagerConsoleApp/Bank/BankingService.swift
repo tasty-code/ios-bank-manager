@@ -7,9 +7,18 @@
 
 import Foundation
 
-enum BankingService: String, CaseIterable {
-    case deposit = "예금"
-    case loan = "대출"
+enum BankingService: CaseIterable, Equatable {
+    static var allCases: [BankingService] = [deposit(), loan()]
+    
+    case deposit(Int = 0)
+    case loan(Int = 0)
+    
+    var title: String {
+        switch self {
+        case .deposit: return "예금"
+        case .loan: return "적금"
+        }
+    }
     
     var timeSpent: Double {
         switch self {
