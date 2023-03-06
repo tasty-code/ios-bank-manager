@@ -10,11 +10,6 @@ import Foundation
 extension Array<BankClerkProtocol> {
     typealias Clerk = Element
     
-    subscript(safe index: Int) -> Clerk? {
-        guard index < self.count else { return nil }
-        return self[index]
-    }
-    
     init(clerksPerType: [BankingService]) {
         let clerks: [[Clerk]] = clerksPerType.map { clerkType in
             switch clerkType {
@@ -24,5 +19,10 @@ extension Array<BankClerkProtocol> {
             }
         }
         self = clerks.flatMap { $0 }
+    }
+    
+    subscript(safe index: Int) -> Clerk? {
+        guard index < self.count else { return nil }
+        return self[index]
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 struct Bank {
-    private let customers: Queue<String>
     private let clerks: [BankClerkProtocol]
+    private let customers: Queue<String>
     private var numberOfCustomers: Int
     private let rangeOfNumberOfCustomers = (minimum: 10, maximum: 30)
     private var timer: Timer
@@ -43,9 +43,8 @@ struct Bank {
     
     private func makeWorkGroup() -> DispatchGroup {
         let group = DispatchGroup()
-        var workItems = [DispatchWorkItem]()
+        let workItems = clerks.map(makeWorkItem)
         
-        workItems.append(contentsOf: clerks.map(makeWorkItem))
         workItems.forEach {
             DispatchQueue.global().async(group: group, execute: $0)
         }
