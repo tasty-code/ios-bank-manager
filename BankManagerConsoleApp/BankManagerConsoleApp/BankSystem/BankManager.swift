@@ -31,11 +31,14 @@ extension BankManager {
     private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool)->Void) {
         
         let queue = DispatchQueue.global()
-        let tellers = Task.allCases.map { Teller(task: $0) }
+        var tellers = [Task:Teller]()
+        Task.allCases.forEach { task in
+            tellers[task] = Teller(task: task)
+        }
         
         while let customer = waitingQueue.dequeue() {
             group.enter()
-            guard let teller = tellers.first(where: { $0.task == customer.task }) else { return }
+            guard let teller = tellers[customer.task] else { return }
             
             queue.async(group: group) {
                 teller.makeWorkItem() { bool in
