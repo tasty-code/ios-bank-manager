@@ -10,13 +10,11 @@ struct BankManager {
     
     private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
     private let waitingQueue: WaitingQueue<CustomerInfo>
-    private let tellers: [Teller]
     
     // MARK: - init
     
     init(waitingQueue: WaitingQueue<CustomerInfo>) {
         self.waitingQueue = waitingQueue
-        self.tellers = Task.allCases.map { Teller(task: $0) }
     }
     
 }
@@ -30,29 +28,21 @@ extension BankManager {
         }
     }
     
-    private func makeWorkItem(number: UInt, teller: Teller) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem {
-            teller.semaphore.wait()
-            report(waitingNumber: number, task: teller.task, inProgress: true)
-            teller.work()
-            teller.semaphore.signal()
-            report(waitingNumber: number, task: teller.task, inProgress: false)
-        }
-        return workItem
-    }
-    
-    private func dealCustomer(group: DispatchGroup) {
+    private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool)->Void) {
         
         let queue = DispatchQueue.global()
+        let tellers = Task.allCases.map { Teller(task: $0) }
         
         while let customer = waitingQueue.dequeue() {
             group.enter()
             guard let teller = tellers.first(where: { $0.task == customer.task }) else { return }
             
-            queue.async(
-                group: group,
-                execute: makeWorkItem(number: customer.number, teller: teller)
-            )
+            queue.async(group: group) {
+                teller.makeWorkItem() { bool in
+                    completion(customer, bool)
+                }
+            }
+            
             group.leave()
         }
     }
@@ -73,7 +63,9 @@ extension BankManager: BankProtocol {
         generateWaiting(customers: numberOfGuest, to: waitingQueue)
         
         let group = DispatchGroup()
-        dealCustomer(group: group)
+        dealCustomer(group: group) { result,bool  in
+            report(waitingNumber: result.number, task: result.task, inProgress: bool)
+        }
         group.wait()
         close()
     }

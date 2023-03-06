@@ -10,7 +10,7 @@ import Foundation
 enum CustomerConstant {
     
     static let min: UInt = 10
-    static let max: UInt = 30
+    static let max: UInt = 13
     
 }
 

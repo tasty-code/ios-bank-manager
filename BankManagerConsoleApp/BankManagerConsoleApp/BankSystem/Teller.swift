@@ -21,4 +21,12 @@ struct Teller: TellerProvidable {
         Task.duration(of: task).sleep()
     }
     
+    func makeWorkItem(completion: (Bool)->Void) {
+        semaphore.wait()
+        completion(true)
+        work()
+        completion(false)
+        semaphore.signal()
+    }
+    
 }
