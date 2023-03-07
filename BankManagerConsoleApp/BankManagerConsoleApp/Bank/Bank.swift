@@ -13,6 +13,8 @@ enum BankState: String {
 }
 
 struct Bank: ConsoleMessagable {
+    let dispatchGroup = DispatchGroup()
+    private static var clientsPerDay = 0
     private let bankQueue = BankQueue()
     private let bankTeller: [Teller] = {
         var tellers: [Teller] = []
@@ -24,15 +26,16 @@ struct Bank: ConsoleMessagable {
         }
         return tellers
     }()
-    
-    private static var clientsPerDay = 0
 
     func execute() {
         printMessage(message: .startBanking)
         do {
             switch try command(){
             case .open:
+                enqueueClients()
+                let openTime = Date().now()
                 startBanking()
+                closeBank(from: openTime)
             case .close:
                 return
             }
@@ -40,6 +43,12 @@ struct Bank: ConsoleMessagable {
             print(error.localizedDescription)
         }
         execute()
+    }
+
+    private func closeBank(from openTime: Double) {
+        let takenTime = Date().takenTime(from: openTime)
+        printMessage(message: .endBanking(clients: Bank.clientsPerDay, takenTime: takenTime))
+        Bank.clientsPerDay = 0
     }
 
     private func command() throws -> BankState {
@@ -53,26 +62,21 @@ struct Bank: ConsoleMessagable {
     }
 
     private func startBanking() {
-        enqueueClients()
-        Bank.clientsPerDay = 0
-        let openTime = Date().now()
         assignBanking()
-        let takenTime = Date().takenTime(from: openTime)
-        printMessage(message: .endBanking(clients: Bank.clientsPerDay, takenTime: takenTime))
+        dispatchGroup.wait()
     }
 
     private func assignBanking() {
-        let group = DispatchGroup()
         bankTeller.forEach { teller in
-            serveClient(teller, group: group)
+            serveClient(teller)
         }
-        group.wait()
     }
 
-    private func serveClient(_ teller: Teller, group: DispatchGroup) {
-        DispatchQueue.global().async(group: group) {
+    private func serveClient(_ teller: Teller) {
+        DispatchQueue.global().async(group: dispatchGroup) {
             let queue = bankQueue.queue(type: teller.type)
             let semaphore = bankQueue.semaphore(type: teller.type)
+
             while !queue.isEmpty() {
                 semaphore.wait()
                 guard let client = queue.dequeue() else { return }
