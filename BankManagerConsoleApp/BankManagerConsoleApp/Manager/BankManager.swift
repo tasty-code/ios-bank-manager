@@ -22,9 +22,9 @@ struct BankManager {
 
     init() {
         let bankTellers = [
-            BankTeller(workType: .deposit),
-            BankTeller(workType: .deposit),
-            BankTeller(workType: .loan)
+            BankTeller(id: 0, workType: .deposit),
+            BankTeller(id: 1, workType: .deposit),
+            BankTeller(id: 2, workType: .loan)
         ]
 
         self.bank = Bank(bankTellers: bankTellers)
@@ -40,7 +40,7 @@ struct BankManager {
 
         bank.startWorking(completion: {
             let closedTime = DispatchTime.now()
-            let totalTime = calculateWorkTime(openedTime: openedTime, closedTime: closedTime)
+            let totalTime = calculateTotalWorkTime(openedTime: openedTime, closedTime: closedTime)
 
             ConsoleManager.presentAllTaskFinished(totalTime: totalTime, numberOfCustomers: customers.count)
             completion()
@@ -62,7 +62,7 @@ struct BankManager {
         return customers
     }
 
-    private func calculateWorkTime(openedTime: DispatchTime, closedTime: DispatchTime) -> TimeInterval {
+    private func calculateTotalWorkTime(openedTime: DispatchTime, closedTime: DispatchTime) -> TimeInterval {
         let nanoTime = closedTime.uptimeNanoseconds - openedTime.uptimeNanoseconds
         let passedTime = Double(nanoTime) / 1_000_000_000
         return passedTime.round(toPlaces: 2)

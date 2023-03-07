@@ -8,9 +8,11 @@
 import Foundation
 
 struct BankTeller {
+    let id: Int
     let workType: WorkType
 
     func performTask(of customer: Customer) {
+        print("bankTeller ID: \(id)")
         ConsoleManager.presentTaskStarted(of: customer)
         Thread.sleep(forTimeInterval: customer.timespent)
         ConsoleManager.presentTaskFinished(of: customer)

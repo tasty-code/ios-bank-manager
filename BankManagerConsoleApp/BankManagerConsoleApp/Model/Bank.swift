@@ -15,6 +15,7 @@ final class Bank {
     private var customersQueue: Queue<Customer> = Queue()
 
     private let bankWorkDispatchGroup = DispatchGroup()
+    private var bankTellerAssignIndexCount: [WorkType: Int] = [:]
 
     private lazy var bankTellersByWorkType: [WorkType: [BankTeller]] = {
         return WorkType.allCases.reduce(into: [WorkType: [BankTeller]]()) { dictionary, workType in
@@ -58,8 +59,8 @@ final class Bank {
         let workType = customer.workType
 
         guard let semaphore = semaphoreByWorkType[workType],
-              // TODO: bankTeller 에게 번갈아가며 업무 시킬 수 있게 로직 구현 필요
-              let bankTeller = bankTellersByWorkType[workType]?.first else { return }
+              let bankTeller = bankTellerToAssignTask(of: workType) else { return }
+        addBankTellerAssignIndexCount(of: workType)
 
         DispatchQueue.global().async(group: bankWorkDispatchGroup) {
             semaphore.wait()
@@ -72,5 +73,19 @@ final class Bank {
         bankWorkDispatchGroup.notify(queue: DispatchQueue.main) {
             completion()
         }
+    }
+
+    private func bankTellerToAssignTask(of type: WorkType) -> BankTeller? {
+        let numberOfBankTellers = numberOfBankTellers(of: type)
+        let index = (bankTellerAssignIndexCount[type] ?? 0) % numberOfBankTellers
+        return bankTellersByWorkType[type]?[index]
+    }
+
+    private func numberOfBankTellers(of type: WorkType) -> Int {
+        return bankTellersByWorkType[type]?.count ?? 0
+    }
+
+    private func addBankTellerAssignIndexCount(of type: WorkType) {
+        bankTellerAssignIndexCount[type] = (bankTellerAssignIndexCount[type] ?? 0) + 1
     }
 }
