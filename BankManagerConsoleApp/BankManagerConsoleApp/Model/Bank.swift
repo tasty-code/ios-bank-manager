@@ -9,8 +9,9 @@ import Foundation
 
 struct Bank: CustomerManageable {
     
-    let banker = Banker()
-    let processingTimePerPerson = Banker.processingTime
+    let accountBanker = Banker(processingTime: 0.7)
+    let loanBanker = Banker(processingTime: 1.1)
+    let processingTimePerPerson = Banker(processingTime: 0.7).processingTime
 
     func open() {
         let numberOfTodayCustomers = makeAcceptableNumber()
@@ -20,7 +21,7 @@ struct Bank: CustomerManageable {
             let currentCustomer = customerQueue.dequeue()
             guard let numberOfCurrentCustomer = currentCustomer?.waitingOrder else { return }
 
-            banker.work(for: numberOfCurrentCustomer)
+            accountBanker.work(of: numberOfCurrentCustomer, for: "account")
         }
 
         showWorkFinishMessage(numberOfTodayCustomers, processingTimePerPerson)
