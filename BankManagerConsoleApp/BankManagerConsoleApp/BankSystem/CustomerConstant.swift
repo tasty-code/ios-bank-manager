@@ -12,12 +12,6 @@ enum CustomerConstant {
     static let min: UInt = 10
     static let max: UInt = 13
     
-}
-
-extension CustomerConstant {
-    
-    //MARK: - Properties
-    
     static var numberOfCustomer: UInt {
         guard let customerSum = (CustomerConstant.min...CustomerConstant.max).randomElement() else { return 0 }
         return customerSum

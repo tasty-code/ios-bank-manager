@@ -29,9 +29,9 @@ extension BankManager {
     }
     
     private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool)->Void) {
-        
         let queue = DispatchQueue.global()
         var tellers = [Task:Teller]()
+        
         Task.allCases.forEach { task in
             tellers[task] = Teller(task: task)
         }
@@ -41,7 +41,7 @@ extension BankManager {
             guard let teller = tellers[customer.task] else { return }
             
             queue.async(group: group) {
-                teller.makeWorkItem() { bool in
+                teller.work() { bool in
                     completion(customer, bool)
                 }
             }

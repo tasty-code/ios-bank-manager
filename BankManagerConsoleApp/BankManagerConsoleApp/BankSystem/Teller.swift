@@ -17,14 +17,10 @@ struct Teller: TellerProvidable {
         self.semaphore = DispatchSemaphore(value: Int(task.numberOfTeller))
     }
     
-    func work() {
-        Task.duration(of: task).sleep()
-    }
-    
-    func makeWorkItem(completion: (Bool)->Void) {
+    func work(completion: (Bool)->Void) {
         semaphore.wait()
         completion(true)
-        work()
+        Task.duration(of: task).sleep()
         completion(false)
         semaphore.signal()
     }

@@ -9,6 +9,9 @@ import Foundation
 
 protocol TellerProvidable {
     
-    func work()
+    var task: Task { get }
+    var semaphore: DispatchSemaphore { get }
     
+    func work(completion: (Bool)->Void)
+                                                
 }

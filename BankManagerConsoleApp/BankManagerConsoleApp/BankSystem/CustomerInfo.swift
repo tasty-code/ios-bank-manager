@@ -9,12 +9,8 @@ import Foundation
 
 struct CustomerInfo {
     
-    //MARK: - Properties
-    
     let number: UInt
     let task: Task
-    
-    //MARK: - LifeCycle
     
     init(number: UInt) {
         self.task =  Task.getRandomTask()

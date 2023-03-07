@@ -24,6 +24,7 @@ enum Task: String, CaseIterable {
 }
 
 extension Task {
+    
     static func getRandomTask() -> Task {
         let tasks = Task.allCases
         guard let task = tasks.randomElement() else { return Task.deposit }

@@ -21,8 +21,8 @@ extension BankState {
         switch self {
         case .open:
             return BankTextCollection.consoleMenu
-        case .close(let numberOfCustomer, let customerTime):
-            return BankTextCollection.close(numberOfCustomer: numberOfCustomer, customerTime: customerTime)
+        case .close(let numberOfCustomer, let totalDuration):
+            return BankTextCollection.close(numberOfCustomer: numberOfCustomer, customerTime: totalDuration)
         case .working(let order, let task, let result):
             return BankTextCollection.working(order: order, task: task , inProgress: result)
         }

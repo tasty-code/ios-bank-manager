@@ -8,7 +8,7 @@
 import Foundation
 
 enum Menu: String {
-    
+
     case open = "1"
     case close = "2"
     
