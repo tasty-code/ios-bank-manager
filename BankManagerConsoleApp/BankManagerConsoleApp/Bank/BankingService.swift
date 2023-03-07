@@ -16,7 +16,7 @@ enum BankingService: CaseIterable, Equatable {
     var title: String {
         switch self {
         case .deposit: return "예금"
-        case .loan: return "적금"
+        case .loan: return "대출"
         }
     }
     
