@@ -37,7 +37,7 @@ func execute() {
                 execute()
             })
         case .exit:
-            break
+            exit(EXIT_SUCCESS)
         }
     } catch {
         print(error.localizedDescription)

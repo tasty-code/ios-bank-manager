@@ -12,7 +12,6 @@ struct BankTeller {
     let workType: WorkType
 
     func performTask(of customer: Customer) {
-        print("bankTeller ID: \(id)")
         ConsoleManager.presentTaskStarted(of: customer)
         Thread.sleep(forTimeInterval: customer.timespent)
         ConsoleManager.presentTaskFinished(of: customer)
