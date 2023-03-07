@@ -14,9 +14,8 @@ enum BankState: String {
 
 struct Bank: ConsoleMessagable {
     let bankQueue = BankQueue()
-    let loanTeller = Teller(type: .loan)
-    let depositTeller = Teller(type: .deposit)
     private static var bankTeller = [Teller]()
+    private static var clientsPerDay = 0
 
     func execute() {
         printMessage(message: .startBanking)
@@ -35,6 +34,7 @@ struct Bank: ConsoleMessagable {
     }
 
     private func seatedTeller() {
+        Bank.bankTeller.removeAll()
         Constants.tellerStaffing.forEach { (bankingType, tellerCount) in
             for _ in 1...tellerCount {
                 let teller = Teller.init(type: bankingType)
@@ -55,27 +55,33 @@ struct Bank: ConsoleMessagable {
 
     private func startBanking() {
         enqueueClients()
-        var clientsPerDay = 0
+        Bank.clientsPerDay = 0
         let openTime = Date().now()
+        assignBanking()
+        let takenTime = Date().takenTime(from: openTime)
+        printMessage(message: .endBanking(clients: Bank.clientsPerDay, takenTime: takenTime))
+    }
+
+    private func assignBanking() {
         let group = DispatchGroup()
-        
-        DispatchQueue.global().async(group: group) {
-            while let client = bankQueue.queue(type: .loan).dequeue() {
-                loanTeller.assist(client)
-                clientsPerDay += 1
-            }
-        }
-        
-        DispatchQueue.global().async(group: group) {
-            while let client = bankQueue.queue(type: .deposit).dequeue() {
-                depositTeller.assist(client)
-                clientsPerDay += 1
-            }
+        Bank.bankTeller.forEach { teller in
+            serveClient(teller, group: group)
         }
         group.wait()
+    }
 
-        let takenTime = Date().takenTime(from: openTime)
-        printMessage(message: .endBanking(clients: clientsPerDay, takenTime: takenTime))
+    private func serveClient(_ teller: Teller, group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            let queue = bankQueue.queue(type: teller.type)
+            let semaphore = bankQueue.semaphore(type: teller.type)
+            while !queue.isEmpty() {
+                semaphore.wait()
+                guard let client = queue.dequeue() else { return }
+                Bank.clientsPerDay += 1
+                semaphore.signal()
+                teller.assist(client)
+            }
+        }
     }
 
     private func enqueueClients() {
