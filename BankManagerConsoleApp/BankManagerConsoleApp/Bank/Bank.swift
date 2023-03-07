@@ -48,12 +48,12 @@ struct Bank: ConsoleMessagable {
         let openTime = Date().now()
         
         while let customer = bankQueue.queue(type: .loan).dequeue() {
-            loanTeller.assist(customer.waitingNumber)
+            loanTeller.assist(customer)
             customersPerDay += 1
         }
         
         while let customer = bankQueue.queue(type: .deposit).dequeue() {
-            depositTeller.assist(customer.waitingNumber)
+            depositTeller.assist(customer)
             customersPerDay += 1
         }
 

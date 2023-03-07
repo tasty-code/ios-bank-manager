@@ -13,9 +13,9 @@ struct Teller: ConsoleMessagable {
         self.type = type
     }
     
-    func assist(_ client: Int){
-        printMessage(message: .startAssist(client))
+    func assist(_ client: Client){
+        printMessage(message: .startAssist(client.waitingNumber, type: client.type))
         usleep(Constants.managerExcutionTime)
-        printMessage(message: .endAssist(client))
+        printMessage(message: .endAssist(client.waitingNumber, type: client.type))
     }
 }

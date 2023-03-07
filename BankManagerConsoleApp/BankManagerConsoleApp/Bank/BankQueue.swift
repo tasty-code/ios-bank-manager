@@ -17,11 +17,11 @@ struct BankQueue {
             semaphore[bankingType] = DispatchSemaphore(value: 1)
         }
     }
-    
+
     func queue(type: BankingType) -> Queue<Client> {
         return queue[type] ?? Queue<Client>()
     }
-    
+
     func semaphore(type: BankingType) -> DispatchSemaphore {
         return semaphore[type] ?? DispatchSemaphore(value: 1)
     }
