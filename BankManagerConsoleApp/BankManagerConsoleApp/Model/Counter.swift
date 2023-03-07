@@ -7,16 +7,16 @@
 
 import Foundation
 
-class Counter {
+final class Counter {
     private var numberOfAccountCustomers = 0
     private var numberOfLoanCustomers = 0
 
-    func addAccountCustomer(with AccountCustomers: Int) {
-        numberOfAccountCustomers += AccountCustomers
+    func addAccountCustomer() {
+        numberOfAccountCustomers += 1
     }
 
-    func addLoanCustomer(with LoanCustomers: Int) {
-        numberOfLoanCustomers += LoanCustomers
+    func addLoanCustomer() {
+        numberOfLoanCustomers += 1
     }
 
     func getAccountCustomerCount() -> Int {

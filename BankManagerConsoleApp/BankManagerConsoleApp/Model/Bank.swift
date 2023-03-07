@@ -25,18 +25,19 @@ struct Bank: CustomerManageable {
 
             let currentCustomerWorkType = currentCustomer.workType
 
-            if currentCustomerWorkType == WorkList.account.rawValue {
+            switch currentCustomerWorkType {
+            case WorkList.account.rawValue :
                 DispatchQueue.global().async(group: group) {
                     accountSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    todayCounter.addAccountCustomer(with: 1)
+                    todayCounter.addAccountCustomer()
                     accountSemaphore.signal()
                 }
-            } else {
+            default:
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    todayCounter.addLoanCustomer(with: 1)
+                    todayCounter.addLoanCustomer()
                     loanSemaphore.signal()
                 }
             }
