@@ -13,7 +13,7 @@ enum BankState: String {
 }
 
 struct Bank: ConsoleMessagable {
-    let dispatchGroup = DispatchGroup()
+    private let dispatchGroup = DispatchGroup()
     private static var clientsPerDay = 0
     private let bankQueue = BankQueue()
     private let bankTeller: [Teller] = {
