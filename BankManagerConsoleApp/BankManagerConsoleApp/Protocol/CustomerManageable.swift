@@ -23,7 +23,8 @@ extension CustomerManageable {
         let waitingNumberRange = 1...maxCount
 
         waitingNumberRange.forEach { waitingNumber in
-            customerQueue.enqueue(value: Customer(waitingOrder: waitingNumber))
+            let customerWork = WorkList.setRandomWork()
+            customerQueue.enqueue(value: Customer(waitingOrder: waitingNumber, workType: customerWork))
         }
 
         return customerQueue

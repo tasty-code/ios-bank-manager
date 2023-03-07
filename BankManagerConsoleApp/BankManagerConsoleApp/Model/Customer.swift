@@ -10,4 +10,5 @@ import Foundation
 struct Customer {
 
     let waitingOrder: Int
+    let workType: String
 }
