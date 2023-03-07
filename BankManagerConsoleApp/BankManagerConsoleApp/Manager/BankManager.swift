@@ -35,7 +35,8 @@ struct BankManager {
 
         var customers: [Customer] = []
         for id in 1...randomNumber {
-            customers.append(Customer(id: id, withTimespent: Constants.defaultTimespent))
+            let workType = WorkType.allCases.randomElement() ?? .deposit
+            customers.append(Customer(id: id, workType: workType))
         }
 
         return customers
