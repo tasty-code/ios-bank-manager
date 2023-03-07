@@ -54,8 +54,8 @@ extension BankManager {
         InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
     }
     
-    private func finalReport() {
-        InputOutputManager.output(state: .close(numberOfGuest, Double(numberOfGuest) * Task.duration(of: .deposit)))
+    private func finalReport(time: Double) {
+        InputOutputManager.output(state: .close(numberOfGuest, time))
     }
     
 }
@@ -66,15 +66,17 @@ extension BankManager: BankProtocol {
         generateWaiting(customers: numberOfGuest, to: waitingQueue)
         
         let group = DispatchGroup()
+        var totalDuration = 0.0
         dealCustomer(group: group) { result,bool  in
             report(waitingNumber: result.number, task: result.task, inProgress: bool)
+            totalDuration += Task.duration(of: result.task)
         }
         group.wait()
-        close()
+        close(time: totalDuration)
     }
     
-    func close() {
-        finalReport()
+    func close(time: Double) {
+        finalReport(time: time)
     }
     
 }

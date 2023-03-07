@@ -10,6 +10,6 @@ import Foundation
 protocol BankProtocol {
     
     func open()
-    func close()
+    func close(time: Double)
     
 }
