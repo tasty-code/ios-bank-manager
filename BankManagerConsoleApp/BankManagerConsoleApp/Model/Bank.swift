@@ -8,12 +8,20 @@
 import Foundation
 
 struct Bank {
+
+    // MARK: - Private property
+
     private var bankTellers: [BankTeller]
     private var customersQueue: Queue<Customer> = Queue()
+
+
+    // MARK: - Lifecycle
 
     init(bankTellers: [BankTeller]) {
         self.bankTellers = bankTellers
     }
+
+    // MARK: - Public
 
     mutating func visit(customers: [Customer]) {
         customers.forEach {
@@ -29,4 +37,6 @@ struct Bank {
             customersQueue.dequeue()
         }
     }
+
+    // MARK: - Private
 }

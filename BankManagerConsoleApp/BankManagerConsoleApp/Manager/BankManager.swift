@@ -7,6 +7,9 @@
 import Foundation
 
 struct BankManager {
+
+    // MARK: - Private property
+
     private var bank: Bank
 
     private enum Constants {
@@ -15,10 +18,14 @@ struct BankManager {
         static let defaultTimespent = 0.7
     }
 
+    // MARK: - Lifecycle
+
     init() {
         let bankTeller = BankTeller()
         self.bank = Bank(bankTellers: [bankTeller])
     }
+
+    // MARK: - Public
 
     mutating func open() {
         let customers = generateRandomCustomers()
@@ -28,6 +35,8 @@ struct BankManager {
 
         ConsoleManager.presentAllTaskFinished(of: customers)
     }
+
+    // MARK: - Private
 
     private func generateRandomCustomers() -> [Customer] {
         let range = Constants.minimumValueOfRandomCustomers...Constants.maximumValueOfRandomCustomers
