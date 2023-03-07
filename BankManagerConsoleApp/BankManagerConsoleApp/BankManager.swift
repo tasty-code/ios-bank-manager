@@ -27,7 +27,7 @@ extension BankManager {
         }
     }
 
-    private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool)->Void) {
+    private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool) -> Void) {
         let queue = DispatchQueue.global()
         var tellers = [Task:Teller]()
 
