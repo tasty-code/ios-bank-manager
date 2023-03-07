@@ -11,6 +11,7 @@
 		C7D65D1B259C8190005510E0 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* Teller.swift */; };
 		E71DD48729A84D2000BD9BAC /* BankError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71DD48629A84D2000BD9BAC /* BankError.swift */; };
 		E74951AB29A854F600B432AC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74951AA29A854F600B432AC /* Constants.swift */; };
+		E771359529B6C29000A83E02 /* BankQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771359429B6C29000A83E02 /* BankQueue.swift */; };
 		E7BA4C1D29A463B8009755E9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BA4C1C29A463B8009755E9 /* Queue.swift */; };
 		F62293F729A73C4A0050908A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62293F629A73C4A0050908A /* Bank.swift */; };
 		F62293F929A84E380050908A /* ConsoleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62293F829A84E380050908A /* ConsoleMessage.swift */; };
@@ -39,6 +40,7 @@
 		C7D65D1A259C8190005510E0 /* Teller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
 		E71DD48629A84D2000BD9BAC /* BankError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankError.swift; sourceTree = "<group>"; };
 		E74951AA29A854F600B432AC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E771359429B6C29000A83E02 /* BankQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankQueue.swift; sourceTree = "<group>"; };
 		E7BA4C1C29A463B8009755E9 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		F62293F629A73C4A0050908A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		F62293F829A84E380050908A /* ConsoleMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleMessage.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				C7D65D1A259C8190005510E0 /* Teller.swift */,
 				F67594CD29B5D16E00FE74DA /* BankingType.swift */,
 				F67594CF29B5D1A600FE74DA /* Client.swift */,
+				E771359429B6C29000A83E02 /* BankQueue.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				C7D65D1B259C8190005510E0 /* Teller.swift in Sources */,
 				E7BA4C1D29A463B8009755E9 /* Queue.swift in Sources */,
 				F62293F929A84E380050908A /* ConsoleMessage.swift in Sources */,
+				E771359529B6C29000A83E02 /* BankQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
