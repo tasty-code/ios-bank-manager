@@ -57,16 +57,22 @@ struct Bank: ConsoleMessagable {
         enqueueClients()
         var clientsPerDay = 0
         let openTime = Date().now()
+        let group = DispatchGroup()
         
-        while let client = bankQueue.queue(type: .loan).dequeue() {
-            loanTeller.assist(client)
-            clientsPerDay += 1
+        DispatchQueue.global().async(group: group) {
+            while let client = bankQueue.queue(type: .loan).dequeue() {
+                loanTeller.assist(client)
+                clientsPerDay += 1
+            }
         }
         
-        while let client = bankQueue.queue(type: .deposit).dequeue() {
-            depositTeller.assist(client)
-            clientsPerDay += 1
+        DispatchQueue.global().async(group: group) {
+            while let client = bankQueue.queue(type: .deposit).dequeue() {
+                depositTeller.assist(client)
+                clientsPerDay += 1
+            }
         }
+        group.wait()
 
         let takenTime = Date().takenTime(from: openTime)
         printMessage(message: .endBanking(clients: clientsPerDay, takenTime: takenTime))
