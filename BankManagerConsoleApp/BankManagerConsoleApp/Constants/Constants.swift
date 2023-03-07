@@ -9,5 +9,5 @@ import Foundation
 
 enum Constants {
     static let managerExcutionTime: UInt32 = 700000
-    static let rangeOfCustomers = 10...30
+    static let rangeOfClients = 10...30
 }

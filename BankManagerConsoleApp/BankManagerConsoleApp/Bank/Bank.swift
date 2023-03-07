@@ -43,26 +43,26 @@ struct Bank: ConsoleMessagable {
     }
 
     private func startBanking() {
-        enqueueCustomers()
-        var customersPerDay = 0
+        enqueueClients()
+        var clientsPerDay = 0
         let openTime = Date().now()
         
-        while let customer = bankQueue.queue(type: .loan).dequeue() {
-            loanTeller.assist(customer)
-            customersPerDay += 1
+        while let client = bankQueue.queue(type: .loan).dequeue() {
+            loanTeller.assist(client)
+            clientsPerDay += 1
         }
         
-        while let customer = bankQueue.queue(type: .deposit).dequeue() {
-            depositTeller.assist(customer)
-            customersPerDay += 1
+        while let client = bankQueue.queue(type: .deposit).dequeue() {
+            depositTeller.assist(client)
+            clientsPerDay += 1
         }
 
         let takenTime = Date().takenTime(from: openTime)
-        printMessage(message: .endBanking(customers: customersPerDay, takenTime: takenTime))
+        printMessage(message: .endBanking(clients: clientsPerDay, takenTime: takenTime))
     }
 
-    private func enqueueCustomers() {
-        let visitedClients = Int.random(in: Constants.rangeOfCustomers)
+    private func enqueueClients() {
+        let visitedClients = Int.random(in: Constants.rangeOfClients)
         for waitingNumber in 1...visitedClients {
             let client = Client(waitingNumber: waitingNumber)
             let queue = bankQueue.queue(type: client.type)
