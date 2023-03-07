@@ -29,7 +29,7 @@ extension BankManager {
 
     private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool) -> Void) {
         let queue = DispatchQueue.global()
-        var tellers = [Task:Teller]()
+        var tellers = [Task: Teller]()
 
         Task.allCases.forEach { task in
             tellers[task] = Teller(task: task)
