@@ -21,8 +21,13 @@ struct BankManager {
     // MARK: - Lifecycle
 
     init() {
-        let bankTeller = BankTeller(workType: .deposit)
-        self.bank = Bank(bankTellers: [bankTeller])
+        let bankTellers = [
+            BankTeller(workType: .deposit),
+            BankTeller(workType: .deposit),
+            BankTeller(workType: .loan)
+        ]
+
+        self.bank = Bank(bankTellers: bankTellers)
     }
 
     // MARK: - Public

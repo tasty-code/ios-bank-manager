@@ -12,7 +12,6 @@ struct BankTeller {
 
     func performTask(of customer: Customer) {
         ConsoleManager.presentTaskStarted(of: customer)
-
         Thread.sleep(forTimeInterval: customer.timespent)
         ConsoleManager.presentTaskFinished(of: customer)
     }

@@ -14,6 +14,8 @@ final class Bank {
     private var bankTellers: [BankTeller]
     private var customersQueue: Queue<Customer> = Queue()
 
+    private let bankWorkDispatchGroup = DispatchGroup()
+
     private lazy var bankTellersByWorkType: [WorkType: [BankTeller]] = {
         return WorkType.allCases.reduce(into: [WorkType: [BankTeller]]()) { dictionary, workType in
             dictionary[workType] = bankTellers.filter { $0.workType == workType }
@@ -25,8 +27,6 @@ final class Bank {
             DispatchSemaphore(value: bankTellers.count)
         }
     }()
-
-    private let bankWorkDispatchGroup = DispatchGroup()
 
 
     // MARK: - Lifecycle
@@ -45,11 +45,11 @@ final class Bank {
 
     func startWorking() {
         for _ in 0..<customersQueue.count {
-            guard let customer = customersQueue.peek else { continue }
-            
-            bankTellers.first?.performTask(of: customer)
-            customersQueue.dequeue()
+            guard let customer = customersQueue.dequeue() else { continue }
+            assignTask(of: customer)
         }
+
+        setNotifyAllTaskFinished()
     }
 
     // MARK: - Private
@@ -58,12 +58,19 @@ final class Bank {
         let workType = customer.workType
 
         guard let semaphore = semaphoreByWorkType[workType],
+              // TODO: bankTeller 에게 번갈아가며 업무 시킬 수 있게 로직 구현 필요
               let bankTeller = bankTellersByWorkType[workType]?.first else { return }
 
         DispatchQueue.global().async(group: bankWorkDispatchGroup) {
             semaphore.wait()
             bankTeller.performTask(of: customer)
             semaphore.signal()
+        }
+    }
+
+    private func setNotifyAllTaskFinished() {
+        bankWorkDispatchGroup.notify(queue: DispatchQueue.main) {
+            print("모든 업무 종료")
         }
     }
 }
