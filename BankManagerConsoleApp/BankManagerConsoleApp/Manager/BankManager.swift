@@ -21,7 +21,7 @@ struct BankManager {
     // MARK: - Lifecycle
 
     init() {
-        let bankTeller = BankTeller()
+        let bankTeller = BankTeller(workType: .deposit)
         self.bank = Bank(bankTellers: [bankTeller])
     }
 

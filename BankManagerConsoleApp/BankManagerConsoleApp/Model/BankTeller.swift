@@ -8,6 +8,8 @@
 import Foundation
 
 struct BankTeller {
+    let workType: WorkType
+
     func performTask(of customer: Customer) {
         ConsoleManager.presentTaskStarted(of: customer)
 
