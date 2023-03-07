@@ -33,11 +33,17 @@ struct BankManager {
     // MARK: - Public
 
     func open(completion: @escaping () -> Void) {
+        let openedTime = DispatchTime.now()
+
         let customers = generateRandomCustomers()
         bank.visit(customers: customers)
 
         bank.startWorking(completion: {
-            ConsoleManager.presentAllTaskFinished(of: customers)
+            let closedTime = DispatchTime.now()
+            let totalTime = calculateWorkTime(openedTime: openedTime, closedTime: closedTime)
+
+            ConsoleManager.presentAllTaskFinished(totalTime: totalTime, numberOfCustomers: customers.count)
+            completion()
         })
     }
 
@@ -54,5 +60,11 @@ struct BankManager {
         }
 
         return customers
+    }
+
+    private func calculateWorkTime(openedTime: DispatchTime, closedTime: DispatchTime) -> TimeInterval {
+        let nanoTime = closedTime.uptimeNanoseconds - openedTime.uptimeNanoseconds
+        let passedTime = Double(nanoTime) / 1_000_000_000
+        return passedTime.round(toPlaces: 2)
     }
 }
