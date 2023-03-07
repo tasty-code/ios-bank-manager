@@ -32,13 +32,13 @@ struct BankManager {
 
     // MARK: - Public
 
-    mutating func open() {
+    func open(completion: @escaping () -> Void) {
         let customers = generateRandomCustomers()
         bank.visit(customers: customers)
 
-        bank.startWorking()
-
-        ConsoleManager.presentAllTaskFinished(of: customers)
+        bank.startWorking(completion: {
+            ConsoleManager.presentAllTaskFinished(of: customers)
+        })
     }
 
     // MARK: - Private

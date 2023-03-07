@@ -43,13 +43,13 @@ final class Bank {
         }
     }
 
-    func startWorking() {
+    func startWorking(completion: @escaping () -> Void) {
         for _ in 0..<customersQueue.count {
             guard let customer = customersQueue.dequeue() else { continue }
             assignTask(of: customer)
         }
 
-        setNotifyAllTaskFinished()
+        setNotifyAllTaskFinished(completion: completion)
     }
 
     // MARK: - Private
@@ -68,9 +68,9 @@ final class Bank {
         }
     }
 
-    private func setNotifyAllTaskFinished() {
+    private func setNotifyAllTaskFinished(completion: @escaping () -> Void) {
         bankWorkDispatchGroup.notify(queue: DispatchQueue.main) {
-            print("모든 업무 종료")
+            completion()
         }
     }
 }
