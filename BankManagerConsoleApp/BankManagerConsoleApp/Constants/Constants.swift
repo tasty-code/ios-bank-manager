@@ -8,6 +8,7 @@
 import Foundation
 
 enum Constants {
-    static let managerExcutionTime: UInt32 = 700000
+    static let tellerProcessingTime: [BankingType: UInt32] = [.loan: 1100000, .deposit: 700000]
+    static let tellerStaffing: [BankingType: Int] = [.loan: 1, .deposit: 2]
     static let rangeOfClients = 10...30
 }

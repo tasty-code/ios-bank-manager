@@ -15,7 +15,11 @@ struct Teller: ConsoleMessagable {
     
     func assist(_ client: Client){
         printMessage(message: .startAssist(client.waitingNumber, type: client.type))
-        usleep(Constants.managerExcutionTime)
+        usleep(processingTime)
         printMessage(message: .endAssist(client.waitingNumber, type: client.type))
+    }
+
+    private var processingTime: UInt32 {
+        return Constants.tellerProcessingTime[type] ?? 0
     }
 }

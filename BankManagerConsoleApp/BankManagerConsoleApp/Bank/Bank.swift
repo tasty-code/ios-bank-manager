@@ -16,12 +16,14 @@ struct Bank: ConsoleMessagable {
     let bankQueue = BankQueue()
     let loanTeller = Teller(type: .loan)
     let depositTeller = Teller(type: .deposit)
+    private static var bankTeller = [Teller]()
 
     func execute() {
         printMessage(message: .startBanking)
         do {
             switch try command(){
             case .open:
+                seatedTeller()
                 startBanking()
             case .close:
                 return
@@ -30,6 +32,15 @@ struct Bank: ConsoleMessagable {
             print(error.localizedDescription)
         }
         execute()
+    }
+
+    private func seatedTeller() {
+        Constants.tellerStaffing.forEach { (bankingType, tellerCount) in
+            for _ in 1...tellerCount {
+                let teller = Teller.init(type: bankingType)
+                Bank.bankTeller.append(teller)
+            }
+        }
     }
 
     private func command() throws -> BankState {
