@@ -13,8 +13,18 @@ enum BankState: String {
 }
 
 struct Bank: ConsoleMessagable {
-    let bankQueue = BankQueue()
-    private static var bankTeller = [Teller]()
+    private let bankQueue = BankQueue()
+    private let bankTeller: [Teller] = {
+        var tellers: [Teller] = []
+        Constants.tellerStaffing.forEach { (bankingType, tellerCount) in
+            for _ in 1...tellerCount {
+                let teller = Teller.init(type: bankingType)
+                tellers.append(teller)
+            }
+        }
+        return tellers
+    }()
+    
     private static var clientsPerDay = 0
 
     func execute() {
@@ -22,7 +32,6 @@ struct Bank: ConsoleMessagable {
         do {
             switch try command(){
             case .open:
-                seatedTeller()
                 startBanking()
             case .close:
                 return
@@ -31,16 +40,6 @@ struct Bank: ConsoleMessagable {
             print(error.localizedDescription)
         }
         execute()
-    }
-
-    private func seatedTeller() {
-        Bank.bankTeller.removeAll()
-        Constants.tellerStaffing.forEach { (bankingType, tellerCount) in
-            for _ in 1...tellerCount {
-                let teller = Teller.init(type: bankingType)
-                Bank.bankTeller.append(teller)
-            }
-        }
     }
 
     private func command() throws -> BankState {
@@ -64,7 +63,7 @@ struct Bank: ConsoleMessagable {
 
     private func assignBanking() {
         let group = DispatchGroup()
-        Bank.bankTeller.forEach { teller in
+        bankTeller.forEach { teller in
             serveClient(teller, group: group)
         }
         group.wait()
