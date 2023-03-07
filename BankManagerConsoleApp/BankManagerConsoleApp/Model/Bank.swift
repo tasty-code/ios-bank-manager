@@ -8,7 +8,8 @@
 import Foundation
 
 struct Bank: CustomerManageable {
-    
+
+    let todayCounter = Counter()
     let accountBanker = Banker(processingTime: 0.7)
     let loanBanker = Banker(processingTime: 1.1)
 
@@ -18,26 +19,24 @@ struct Bank: CustomerManageable {
         let loanSemaphore = DispatchSemaphore(value: 1)
         let accountSemaphore = DispatchSemaphore(value: 2)
         let group = DispatchGroup()
-        var numberOfAccountCustomers = 0
-        var numberOfLoanCustomers = 0
 
         while !customerQueue.isEmpty() {
             guard let currentCustomer = customerQueue.dequeue() else { return }
 
-            var currentCustomerWorkType = currentCustomer.workType
+            let currentCustomerWorkType = currentCustomer.workType
 
             if currentCustomerWorkType == WorkList.account.rawValue {
                 DispatchQueue.global().async(group: group) {
                     accountSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    numberOfAccountCustomers += 1
+                    todayCounter.addAccountCustomer(with: 1)
                     accountSemaphore.signal()
                 }
             } else {
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    numberOfLoanCustomers += 1
+                    todayCounter.addLoanCustomer(with: 1)
                     loanSemaphore.signal()
                 }
             }
@@ -45,14 +44,13 @@ struct Bank: CustomerManageable {
 
         group.wait()
 
-        let totalWorkTime = calculateTotalWorkTime(customers: numberOfAccountCustomers, numberOfLoanCustomers, processingTimes: accountBanker.processingTime, loanBanker.processingTime)
-
-        showWorkFinishMessage(numberOfTodayCustomers, totalWorkTime)
+        showWorkFinishMessage(numberOfTodayCustomers)
+        todayCounter.resetCounter()
     }
 
-    func showWorkFinishMessage(_ totalNumber: Int, _ eachProcessingSecond: Double) {
-        let totalTime = Double(totalNumber) * eachProcessingSecond
-        let convertDoubleToString = String(format: "%.2f", totalTime)
+    func showWorkFinishMessage(_ totalNumber: Int) {
+        let calculateWorkTime = calculateTotalWorkTime(customers: todayCounter.getAccountCustomerCount(), todayCounter.getLoanCustomerCount(), processingTimes: accountBanker.processingTime, loanBanker.processingTime)
+        let convertDoubleToString = String(format: "%.2f", calculateWorkTime)
 
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertDoubleToString)초입니다.")
     }
