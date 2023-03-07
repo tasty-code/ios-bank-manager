@@ -94,19 +94,19 @@ struct Bank: ConsoleMessagable {
     }
 }
 
-extension Date {
-    fileprivate func now() -> Double {
+private extension Date {
+    func now() -> Double {
         return Double(self.timeIntervalSince1970)
     }
 
-    fileprivate func takenTime(from openTime: Double) -> Double {
+    func takenTime(from openTime: Double) -> Double {
         let takenTime = Double(self.timeIntervalSince1970) - openTime
         return takenTime.floor()
     }
 }
 
-extension Double {
-    fileprivate func floor() -> Double {
+private extension Double {
+    func floor() -> Double {
         var tmp = self * 10
         tmp.round(.down)
         return tmp / 10
