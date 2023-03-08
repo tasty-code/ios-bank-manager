@@ -40,7 +40,7 @@ extension BankManager {
             guard let teller = tellers[customer.task] else { return }
 
             queue.async(group: group) {
-                teller.work() { bool in
+                teller.work(task: customer.task) { bool in
                     completion(customer, bool)
                 }
             }
