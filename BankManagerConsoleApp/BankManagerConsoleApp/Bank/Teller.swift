@@ -7,6 +7,9 @@
 import Foundation
 
 struct Teller: ConsoleMessagable {
+    enum Constants {
+        static let tellerProcessingTime: [BankingType: UInt32] = [.loan: 1100000, .deposit: 700000]
+    }
     let type: BankingType
     
     init(type: BankingType) {
