@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CustomerInfo {
+struct Customer {
     
     let number: UInt
     let task: Task

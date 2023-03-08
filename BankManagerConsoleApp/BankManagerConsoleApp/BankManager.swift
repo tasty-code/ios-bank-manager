@@ -8,11 +8,11 @@ import Foundation
 struct BankManager {
 
     private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
-    private let waitingQueue: WaitingQueue<CustomerInfo>
+    private let waitingQueue: WaitingQueue<Customer>
 
     // MARK: - init
         
-    init(waitingQueue: WaitingQueue<CustomerInfo>) {
+    init(waitingQueue: WaitingQueue<Customer>) {
         self.waitingQueue = waitingQueue
     }
 
@@ -20,14 +20,14 @@ struct BankManager {
 
 extension BankManager {
 
-    private func generateWaiting(customers: UInt, to waitingQueue: WaitingQueue<CustomerInfo>) {
+    private func generateWaiting(customers: UInt, to waitingQueue: WaitingQueue<Customer>) {
         (1...customers).forEach { number in
-            let newCustomer = CustomerInfo(number: number)
+            let newCustomer = Customer(number: number)
             waitingQueue.enqueue(newCustomer)
         }
     }
 
-    private func dealCustomer(group: DispatchGroup, completion: @escaping (CustomerInfo, Bool) -> Void) {
+    private func dealCustomer(group: DispatchGroup, completion: @escaping (Customer, Bool) -> Void) {
         let queue = DispatchQueue.global()
         var tellers = [Task: Teller]()
 
