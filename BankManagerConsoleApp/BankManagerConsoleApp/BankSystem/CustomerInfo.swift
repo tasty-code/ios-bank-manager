@@ -13,7 +13,7 @@ struct CustomerInfo {
     let task: Task
     
     init(number: UInt) {
-        self.task =  Task.getRandomTask()
+        self.task =  Task.randomTask()
         self.number = number
     }
     
