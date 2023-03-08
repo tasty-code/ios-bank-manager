@@ -11,7 +11,7 @@ final class Bank {
 
     // MARK: - Private property
 
-    private var bankTellers: [BankTeller]
+    private let bankTellers: [BankTeller]
     private var customersQueue: Queue<Customer> = Queue()
 
     private let bankWorkDispatchGroup = DispatchGroup()
@@ -19,7 +19,9 @@ final class Bank {
 
     private lazy var bankTellersByWorkType: [WorkType: [BankTeller]] = {
         return WorkType.allCases.reduce(into: [WorkType: [BankTeller]]()) { dictionary, workType in
-            dictionary[workType] = bankTellers.filter { $0.workType == workType }
+            dictionary[workType] = bankTellers.filter {
+                $0.workType == workType
+            }
         }
     }()
 

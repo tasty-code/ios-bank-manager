@@ -8,8 +8,13 @@
 import Foundation
 
 struct BankTeller {
+
+    // MARK: - Properties
+
     let id: Int
     let workType: WorkType
+
+    // MARK: - Public
 
     func performTask(of customer: Customer) {
         ConsoleManager.presentTaskStarted(of: customer)
