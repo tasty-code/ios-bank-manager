@@ -22,7 +22,7 @@ extension BankManager {
 
     private func generateWaiting(customers: UInt, to waitingQueue: WaitingQueue<Customer>) {
         (1...customers).forEach { number in
-            let newCustomer = CustomerInfo(number: number, task: Task.randomTask())
+            let newCustomer = Customer(number: number, task: Task.randomTask())
             waitingQueue.enqueue(newCustomer)
         }
     }
