@@ -18,7 +18,7 @@ struct BankQueue {
         }
     }
 
-    func queue(for type: BankingType) -> Queue<Client> {
+    func get(of type: BankingType) -> Queue<Client> {
         return queue[type] ?? Queue<Client>()
     }
 

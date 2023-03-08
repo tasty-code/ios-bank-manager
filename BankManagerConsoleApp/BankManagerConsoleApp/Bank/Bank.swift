@@ -74,7 +74,7 @@ class Bank: ConsoleMessagable {
 
     private func serveClient(_ teller: Teller) {
         DispatchQueue.global().async(group: dispatchGroup) { [self] in
-            let queue = bankQueue.queue(for: teller.type)
+            let queue = bankQueue.get(of: teller.type)
             let semaphore = bankQueue.semaphore(for: teller.type)
 
             while !queue.isEmpty() {
@@ -91,7 +91,7 @@ class Bank: ConsoleMessagable {
         let visitedClients = Int.random(in: Constants.rangeOfClients)
         for waitingNumber in 1...visitedClients {
             let client = Client(waitingNumber: waitingNumber)
-            let queue = bankQueue.queue(for: client.type)
+            let queue = bankQueue.get(of: client.type)
             queue.enqueue(client)
         }
     }
