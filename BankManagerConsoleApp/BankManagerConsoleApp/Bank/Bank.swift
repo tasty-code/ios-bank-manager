@@ -13,7 +13,7 @@ enum BankState: String {
 }
 
 class Bank: ConsoleMessagable {
-    private static var clientsPerDay = 0
+    private var clientsPerDay = 0
     private let dispatchGroup = DispatchGroup()
     private let bankQueue = BankQueue()
     private let bankTeller: [Teller] = {
@@ -47,8 +47,8 @@ class Bank: ConsoleMessagable {
 
     private func closeBank(from openTime: Double) {
         let takenTime = Date().takenTime(from: openTime)
-        printMessage(message: .endBanking(clients: Bank.clientsPerDay, takenTime: takenTime))
-        Bank.clientsPerDay = 0
+        printMessage(message: .endBanking(clients: clientsPerDay, takenTime: takenTime))
+        clientsPerDay = 0
     }
 
     private func command() throws -> BankState {
@@ -80,7 +80,7 @@ class Bank: ConsoleMessagable {
             while !queue.isEmpty() {
                 semaphore.wait()
                 guard let client = queue.dequeue() else { return }
-                Bank.clientsPerDay += 1
+                clientsPerDay += 1
                 semaphore.signal()
                 teller.assist(client)
             }
