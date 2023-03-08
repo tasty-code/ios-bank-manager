@@ -10,7 +10,7 @@ struct BankManager {
 
     // MARK: - Private property
 
-    private var bank: Bank
+    private let bank: Bank
 
     private enum Constants {
         static let minimumValueOfRandomCustomers: Int = 10
@@ -52,13 +52,10 @@ struct BankManager {
         let range = Constants.minimumValueOfRandomCustomers...Constants.maximumValueOfRandomCustomers
         let randomNumber = Int.random(in: range)
 
-        var customers: [Customer] = []
-        for id in 1...randomNumber {
+        return (1...randomNumber).map { id in
             let workType = WorkType.allCases.randomElement() ?? .deposit
-            customers.append(Customer(id: id, workType: workType))
+            return Customer(id: id, workType: workType)
         }
-
-        return customers
     }
 
     private func calculateTotalWorkTime(openedTime: DispatchTime, closedTime: DispatchTime) -> TimeInterval {

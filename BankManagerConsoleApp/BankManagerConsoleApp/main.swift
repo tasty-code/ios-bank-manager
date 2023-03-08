@@ -6,7 +6,7 @@
 
 import Foundation
 
-var bankManager = BankManager()
+let bankManager = BankManager()
 
 func execute() {
     ConsoleManager.presentUserMenu()
