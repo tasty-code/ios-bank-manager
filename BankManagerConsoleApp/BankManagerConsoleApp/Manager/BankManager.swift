@@ -13,9 +13,8 @@ struct BankManager {
     private var bank: Bank
 
     private enum Constants {
-        static let minimumValueOfRandomCustomers = 10
-        static let maximumValueOfRandomCustomers = 30
-        static let defaultTimespent = 0.7
+        static let minimumValueOfRandomCustomers: Int = 10
+        static let maximumValueOfRandomCustomers: Int = 30
     }
 
     // MARK: - Lifecycle
