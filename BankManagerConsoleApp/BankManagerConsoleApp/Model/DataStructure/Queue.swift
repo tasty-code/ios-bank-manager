@@ -22,16 +22,16 @@ struct Queue<Value> {
         return linkedList.count
     }
 
-    mutating func enqueue(_ value: Value) {
+    func enqueue(_ value: Value) {
         linkedList.append(value)
     }
 
     @discardableResult
-    mutating func dequeue() -> Value? {
+    func dequeue() -> Value? {
         linkedList.removeFirst()
     }
 
-    mutating func clear() {
+    func clear() {
         linkedList.removeAll()
     }
 }
