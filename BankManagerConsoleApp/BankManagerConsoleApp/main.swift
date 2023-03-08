@@ -6,9 +6,9 @@
 
 import Foundation
 
-let bankManager = BankManager()
+private let bankManager = BankManager()
 
-func execute() {
+private func execute() {
     ConsoleManager.presentUserMenu()
     let input = readLine() ?? ""
 
