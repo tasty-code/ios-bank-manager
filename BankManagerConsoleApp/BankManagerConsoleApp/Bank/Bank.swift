@@ -74,8 +74,8 @@ struct Bank: ConsoleMessagable {
 
     private func serveClient(_ teller: Teller) {
         DispatchQueue.global().async(group: dispatchGroup) {
-            let queue = bankQueue.queue(type: teller.type)
-            let semaphore = bankQueue.semaphore(type: teller.type)
+            let queue = bankQueue.queue(for: teller.type)
+            let semaphore = bankQueue.semaphore(for: teller.type)
 
             while !queue.isEmpty() {
                 semaphore.wait()
@@ -91,7 +91,7 @@ struct Bank: ConsoleMessagable {
         let visitedClients = Int.random(in: Constants.rangeOfClients)
         for waitingNumber in 1...visitedClients {
             let client = Client(waitingNumber: waitingNumber)
-            let queue = bankQueue.queue(type: client.type)
+            let queue = bankQueue.queue(for: client.type)
             queue.enqueue(client)
         }
     }

@@ -18,11 +18,11 @@ struct BankQueue {
         }
     }
 
-    func queue(type: BankingType) -> Queue<Client> {
+    func queue(for type: BankingType) -> Queue<Client> {
         return queue[type] ?? Queue<Client>()
     }
 
-    func semaphore(type: BankingType) -> DispatchSemaphore {
+    func semaphore(for type: BankingType) -> DispatchSemaphore {
         return semaphore[type] ?? DispatchSemaphore(value: 1)
     }
 }
