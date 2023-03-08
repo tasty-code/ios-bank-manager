@@ -40,8 +40,8 @@ extension BankManager {
             guard let teller = tellers[customer.task] else { return }
             
             queue.async(group: group) {
-                teller.work(task: customer.task) { bool in
-                    completion(customer, bool)
+                teller.work(task: customer.task) { processState in
+                    completion(customer, processState)
                 }
             }
 
@@ -66,9 +66,9 @@ extension BankManager: BankProtocol {
 
         let group = DispatchGroup()
         var totalDuration = 0.0
-        dealCustomer(group: group) { result,bool  in
-            report(waitingNumber: result.number, task: result.task, inProgress: bool)
-            totalDuration += Task.duration(of: result.task)
+        dealCustomer(group: group) { customer, processState  in
+            report(waitingNumber: customer.number, task: customer.task, inProgress: processState)
+            totalDuration += Task.duration(of: customer.task)
         }
         group.wait()
         close(time: totalDuration)
