@@ -9,5 +9,15 @@ import Foundation
 
 
 struct Customer {
-
+    
+    //MARK: - Properties
+    
+    let task: Task
+    
+    //MARK: - LifeCycle
+    
+    init() {
+        self.task =  Task.getRandomTask()
+    }
+    
 }

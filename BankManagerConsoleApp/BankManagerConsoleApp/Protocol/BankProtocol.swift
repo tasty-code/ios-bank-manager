@@ -10,7 +10,6 @@ import Foundation
 protocol BankProtocol {
     
     func open()
-    func close()
-    func report(waitingNumber: UInt, inProgress: Bool)
+    func close(time: Double)
     
 }
