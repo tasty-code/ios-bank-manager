@@ -9,8 +9,7 @@ import Foundation
 
 enum ConsoleManager {
     static func presentUserMenu() {
-        print("1 : 은행개점")
-        print("2 : 종료")
+        print(UserMenu.consoleMenuDescription)
         print("입력 : ", terminator: "")
     }
 
