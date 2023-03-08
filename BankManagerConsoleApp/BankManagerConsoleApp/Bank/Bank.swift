@@ -12,7 +12,7 @@ enum BankState: String {
     case close = "2"
 }
 
-struct Bank: ConsoleMessagable {
+class Bank: ConsoleMessagable {
     private static var clientsPerDay = 0
     private let dispatchGroup = DispatchGroup()
     private let bankQueue = BankQueue()
@@ -73,7 +73,7 @@ struct Bank: ConsoleMessagable {
     }
 
     private func serveClient(_ teller: Teller) {
-        DispatchQueue.global().async(group: dispatchGroup) {
+        DispatchQueue.global().async(group: dispatchGroup) { [self] in
             let queue = bankQueue.queue(for: teller.type)
             let semaphore = bankQueue.semaphore(for: teller.type)
 
