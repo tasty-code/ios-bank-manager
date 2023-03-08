@@ -14,7 +14,13 @@ final class Bank {
     private let bankTellers: [BankTeller]
     private let bankWorkDispatchGroup = DispatchGroup()
 
-    private var customerQueueByWorkType: [WorkType: Queue<Customer>] = {
+    private let semaphoreByWorkType: [WorkType: DispatchSemaphore] = {
+        WorkType.allCases.reduce(into: [WorkType: DispatchSemaphore]()) { dictionary, workType in
+            dictionary[workType] = DispatchSemaphore(value: 1)
+        }
+    }()
+
+    private let customerQueueByWorkType: [WorkType: Queue<Customer>] = {
         WorkType.allCases.reduce(into: [WorkType: Queue<Customer>]()) { dictionary, workType in
             dictionary[workType] = Queue()
         }
@@ -47,10 +53,14 @@ final class Bank {
     // MARK: - Private
 
     private func assignTask(to bankTeller: BankTeller) {
-        guard let queue = self.customerQueueByWorkType[bankTeller.workType] else { return }
+        guard let queue = self.customerQueueByWorkType[bankTeller.workType],
+              let semaphore = semaphoreByWorkType[bankTeller.workType] else { return }
 
         while !queue.isEmpty {
+            semaphore.wait()
             guard let customer = queue.dequeue() else { return }
+            semaphore.signal()
+
             bankTeller.performTask(of: customer)
         }
     }
