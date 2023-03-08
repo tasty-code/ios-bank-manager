@@ -12,16 +12,30 @@ enum BankState: String {
     case close = "2"
 }
 
-struct Bank: ConsoleMessagable {
-    let queue = Queue<Int>()
-    let teller = Teller()
+class Bank: ConsoleMessagable {
+    private var clientsPerDay = 0
+    private let dispatchGroup = DispatchGroup()
+    private let bankQueue = BankQueue()
+    private let bankTeller: [Teller] = {
+        var tellers: [Teller] = []
+        Constants.tellerStaffing.forEach { (bankingType, tellerCount) in
+            for _ in 1...tellerCount {
+                let teller = Teller.init(type: bankingType)
+                tellers.append(teller)
+            }
+        }
+        return tellers
+    }()
 
     func execute() {
         printMessage(message: .startBanking)
         do {
             switch try command(){
             case .open:
+                enqueueClients()
+                let openTime = Date().now()
                 startBanking()
+                closeBank(from: openTime)
             case .close:
                 return
             }
@@ -29,6 +43,12 @@ struct Bank: ConsoleMessagable {
             print(error.localizedDescription)
         }
         execute()
+    }
+
+    private func closeBank(from openTime: Double) {
+        let takenTime = Date().takenTime(from: openTime)
+        printMessage(message: .endBanking(clients: clientsPerDay, takenTime: takenTime))
+        clientsPerDay = 0
     }
 
     private func command() throws -> BankState {
@@ -42,44 +62,54 @@ struct Bank: ConsoleMessagable {
     }
 
     private func startBanking() {
-        enqueueCustomers()
-        var customersPerDay = 0
-        let openTime = Date().now()
+        assignBanking()
+        dispatchGroup.wait()
+    }
 
-        while let customer = dequeue(from: queue) {
-            teller.assist(customer)
-            customersPerDay += 1
+    private func assignBanking() {
+        bankTeller.forEach { teller in
+            serveClient(teller)
         }
-
-        let takenTime = Date().takenTime(from: openTime)
-        printMessage(message: .endBanking(customers: customersPerDay, takenTime: takenTime))
     }
 
-    private func dequeue(from customerQueue: Queue<Int>) -> Int? {
-        return customerQueue.dequeue()
+    private func serveClient(_ teller: Teller) {
+        DispatchQueue.global().async(group: dispatchGroup) { [self] in
+            let queue = bankQueue.get(of: teller.type)
+            let semaphore = bankQueue.semaphore(for: teller.type)
+
+            while !queue.isEmpty() {
+                semaphore.wait()
+                guard let client = queue.dequeue() else { return }
+                clientsPerDay += 1
+                semaphore.signal()
+                teller.assist(client)
+            }
+        }
     }
 
-    private func enqueueCustomers() {
-        let customers = Int.random(in: Constants.rangeOfCustomers)
-        for customer in 1...customers {
-            queue.enqueue(customer)
+    private func enqueueClients() {
+        let visitedClients = Int.random(in: Constants.rangeOfClients)
+        for waitingNumber in 1...visitedClients {
+            let client = Client(waitingNumber: waitingNumber)
+            let queue = bankQueue.get(of: client.type)
+            queue.enqueue(client)
         }
     }
 }
 
-extension Date {
-    fileprivate func now() -> Double {
+private extension Date {
+    func now() -> Double {
         return Double(self.timeIntervalSince1970)
     }
 
-    fileprivate func takenTime(from openTime: Double) -> Double {
+    func takenTime(from openTime: Double) -> Double {
         let takenTime = Double(self.timeIntervalSince1970) - openTime
         return takenTime.floor()
     }
 }
 
-extension Double {
-    fileprivate func floor() -> Double {
+private extension Double {
+    func floor() -> Double {
         var tmp = self * 10
         tmp.round(.down)
         return tmp / 10

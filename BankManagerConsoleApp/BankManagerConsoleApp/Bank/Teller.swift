@@ -7,9 +7,26 @@
 import Foundation
 
 struct Teller: ConsoleMessagable {
-    func assist(_ client: Int){
-        printMessage(message: .startAssist(client))
-        usleep(Constants.managerExcutionTime)
-        printMessage(message: .endAssist(client))
+    let type: BankingType
+    
+    init(type: BankingType) {
+        self.type = type
     }
+    
+    func assist(_ client: Client){
+        printMessage(message: .startAssist(client.waitingNumber, type: client.type))
+        usleep(type.processingTime)
+        printMessage(message: .endAssist(client.waitingNumber, type: client.type))
+    }
+}
+
+private extension BankingType {
+   var processingTime: UInt32 {
+      switch self {
+      case .loan:
+          return 1100000
+      case .deposit:
+          return 700000
+      }
+   }
 }
