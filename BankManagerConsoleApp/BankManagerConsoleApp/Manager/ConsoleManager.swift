@@ -14,11 +14,11 @@ enum ConsoleManager {
     }
 
     static func presentTaskStarted(of customer: Customer) {
-        print("\(customer.id)번 고객 업무 시작")
+        print("\(customer.id)번 고객 \(customer.workType.rawValue)업무 시작")
     }
 
     static func presentTaskFinished(of customer: Customer) {
-        print("\(customer.id)번 고객 업무 완료")
+        print("\(customer.id)번 고객 \(customer.workType.rawValue)업무 완료")
     }
 
     static func presentAllTaskFinished(totalTime: TimeInterval, numberOfCustomers: Int) {
