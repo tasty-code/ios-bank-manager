@@ -36,7 +36,7 @@ struct Bank: CustomerManageable {
             default:
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
-                    accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
+                    loanBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
                     todayCounter.addLoanCustomer()
                     loanSemaphore.signal()
                 }
