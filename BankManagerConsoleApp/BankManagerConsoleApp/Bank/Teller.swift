@@ -7,9 +7,6 @@
 import Foundation
 
 struct Teller: ConsoleMessagable {
-    enum Constants {
-        static let tellerProcessingTime: [BankingType: UInt32] = [.loan: 1100000, .deposit: 700000]
-    }
     let type: BankingType
     
     init(type: BankingType) {
@@ -18,11 +15,18 @@ struct Teller: ConsoleMessagable {
     
     func assist(_ client: Client){
         printMessage(message: .startAssist(client.waitingNumber, type: client.type))
-        usleep(processingTime)
+        usleep(type.processingTime)
         printMessage(message: .endAssist(client.waitingNumber, type: client.type))
     }
+}
 
-    private var processingTime: UInt32 {
-        return Constants.tellerProcessingTime[type] ?? 0
-    }
+private extension BankingType {
+   var processingTime: UInt32 {
+      switch self {
+      case .loan:
+          return 1100000
+      case .deposit:
+          return 700000
+      }
+   }
 }
