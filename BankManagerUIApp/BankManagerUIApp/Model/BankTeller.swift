@@ -13,11 +13,10 @@ struct BankTeller {
 
     let id: Int
     let workType: WorkType
-    let presenter: BankPresentable
 
     // MARK: - Public
 
-    func performTask(of customer: Customer) {
+    func performTask(of customer: Customer, presenter: BankPresentable) {
         presenter.presentTaskStarted(of: customer)
         Thread.sleep(forTimeInterval: customer.timespent)
         presenter.presentTaskFinished(of: customer)

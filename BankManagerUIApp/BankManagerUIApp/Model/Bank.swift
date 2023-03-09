@@ -11,6 +11,8 @@ final class Bank {
 
     // MARK: - Private property
 
+    private let presenter: BankPresentable
+
     private let bankTellers: [BankTeller]
     private var customersQueue: Queue<Customer> = Queue()
 
@@ -34,8 +36,12 @@ final class Bank {
 
     // MARK: - Lifecycle
 
-    init(bankTellers: [BankTeller]) {
+    init(
+        bankTellers: [BankTeller],
+        presenter: BankPresentable
+    ) {
         self.bankTellers = bankTellers
+        self.presenter = presenter
     }
 
     // MARK: - Public
@@ -66,7 +72,7 @@ final class Bank {
 
         DispatchQueue.global().async(group: bankWorkDispatchGroup) {
             semaphore.wait()
-            bankTeller.performTask(of: customer)
+            bankTeller.performTask(of: customer, presenter: self.presenter)
             semaphore.signal()
         }
     }
