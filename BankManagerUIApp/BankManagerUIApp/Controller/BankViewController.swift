@@ -1,12 +1,12 @@
 //
-//  BankManagerUIApp - ViewController.swift
+//  BankManagerUIApp - BankViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom academy. All rights reserved.
 // 
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class BankViewController: UIViewController {
 
     private enum Constants {
         static let addCustomerButtonTitle = "고객 10명 추가"
@@ -27,7 +27,12 @@ final class ViewController: UIViewController {
 
     private lazy var bank = Bank(bankTellers: bankTellers, presenter: self)
 
+    private var lastCustomerID: Int = 1
+    private var isWorking = false
+
     // MARK: - UI Properties
+
+    private var customerLabels: [CustomerStatusLabel] = []
 
     private lazy var addCustomerButton: UIButton = {
         let button = UIButton()
@@ -115,15 +120,45 @@ final class ViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func addCustomers() {
-        print("addCustomers")
-        
-        bank.startWorking {
+        let customers = generateVisitCustomers()
 
+        bank.visit(customers: customers)
+        updateViews(addedCustomers: customers)
+
+        //        guard !isWorking else { return }
+        //        print("뱅크 일 시작")
+        bank.startWorking {
+            print("finished")
         }
     }
 
     @objc private func resetAllTasks() {
-        print("resetAllTasks")
+        customerLabels = []
+        lastCustomerID = 1
+        bank.stopWorking() // TODO: 리셋 로직 구현 필요
+    }
+
+    // MARK: - Helpers
+
+    private func updateViews(addedCustomers: [Customer]) {
+        addedCustomers
+            .map { CustomerStatusLabel(customer: $0) }
+            .forEach { customerLabel in
+                waitingStackView.addArrangedSubview(customerLabel)
+                customerLabels.append(customerLabel)
+            }
+    }
+
+    private func generateVisitCustomers() -> [Customer] {
+        let customers = (lastCustomerID...(lastCustomerID + 9))
+            .map {
+                let workType = WorkType.allCases.randomElement() ?? .deposit
+                return Customer(id: $0, workType: workType)
+            }
+
+        lastCustomerID += 10
+
+        return customers
     }
 
 }
@@ -132,7 +167,7 @@ final class ViewController: UIViewController {
 
 // MARK: - Layout
 
-extension ViewController {
+extension BankViewController {
     private func configureLayout() {
         let headerStackView = UIStackView(arrangedSubviews: [
             buttonStackView,
@@ -166,28 +201,35 @@ extension ViewController {
             workingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             workingStackView.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
         ])
-
-        let testLabel1 = UILabel()
-        testLabel1.textColor = .black
-        testLabel1.text = "5 - 예금"
-        waitingStackView.addArrangedSubview(testLabel1)
-
-        let testLabel2 = UILabel()
-        testLabel2.textColor = .black
-        testLabel2.text = "2 - 예금"
-        workingStackView.addArrangedSubview(testLabel2)
     }
 }
 
 // MARK: - BankPresentable
 
-extension ViewController: BankPresentable {
+extension BankViewController: BankPresentable {
     func presentTaskStarted(of customer: Customer) {
-        print("업무 시작")
+        print("고객 업무 시작 \(customer.id) \(customer.workType.rawValue)")
+
+        guard let customerLabel = customerLabels.first(where: {
+            $0.customer.id == customer.id
+        }) else { return }
+
+        DispatchQueue.main.async { [weak self] in
+            customerLabel.removeFromSuperview()
+            self?.workingStackView.addArrangedSubview(customerLabel)
+        }
     }
 
     func presentTaskFinished(of customer: Customer) {
-        print("업무 종료")
+        print("고객 업무 종료 \(customer.id) \(customer.workType.rawValue)")
+        
+        guard let customerLabel = customerLabels.first(where: {
+            $0.customer.id == customer.id
+        }) else { return }
+
+        DispatchQueue.main.async {
+            customerLabel.removeFromSuperview()
+        }
     }
 
     func presentAllTaskFinished() {

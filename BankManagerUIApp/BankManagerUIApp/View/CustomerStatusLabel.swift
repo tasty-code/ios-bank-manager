@@ -9,13 +9,16 @@ import UIKit
 
 final class CustomerStatusLabel: UILabel {
 
+    let customer: Customer
+
     // MARK: - Lifecycle
 
     init(customer: Customer) {
+        self.customer = customer
         super.init(frame: .zero)
 
-        configureText(with: customer)
-        configureTextColor(with: customer)
+        configureText()
+        configureTextColor()
     }
 
     required init?(coder: NSCoder) {
@@ -24,12 +27,12 @@ final class CustomerStatusLabel: UILabel {
 
     // MARK: - Private
 
-    private func configureText(with customer: Customer) {
+    private func configureText() {
         text = "\(customer.id) - \(customer.workType.rawValue)"
         font = .preferredFont(forTextStyle: .body)
     }
 
-    private func configureTextColor(with customer: Customer) {
+    private func configureTextColor() {
         switch customer.workType {
         case .loan:
             textColor = .systemPurple

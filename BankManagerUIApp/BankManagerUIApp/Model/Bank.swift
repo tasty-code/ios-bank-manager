@@ -61,6 +61,10 @@ final class Bank {
         setNotifyAllTaskFinished(completion: completion)
     }
 
+    func stopWorking() {
+
+    }
+
     // MARK: - Private
 
     private func assignTask(of customer: Customer) {
