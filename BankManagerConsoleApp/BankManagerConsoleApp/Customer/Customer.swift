@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Customer: Node<String> {
+final class Customer: Node<String> {
     let purpose: BankingService?
     
     override init(_ data: String) {
