@@ -26,21 +26,26 @@ extension BankManager {
             waitingQueue.enqueue(newCustomer)
         }
     }
-
-    private func dealCustomer(group: DispatchGroup, completion: @escaping (Customer, Bool) -> Void) {
-        let queue = DispatchQueue.global()
+    
+    private func makeTeller() -> [Task: Teller] {
         var tellers = [Task: Teller]()
 
         Task.allCases.forEach { task in
             tellers[task] = Teller(task: task)
         }
+        return tellers
+    }
+
+    private func dealCustomer(group: DispatchGroup, completion: @escaping (Customer, Bool) -> Void) {
+        let queue = DispatchQueue.global()
+        let tellers = makeTeller()
 
         while let customer = waitingQueue.dequeue() {
             group.enter()
             guard let teller = tellers[customer.task] else { return }
-            
+    
             queue.async(group: group) {
-                teller.work(task: customer.task) { processState in
+                teller.work() { processState in
                     completion(customer, processState)
                 }
             }
