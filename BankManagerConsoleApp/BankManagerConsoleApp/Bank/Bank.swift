@@ -37,34 +37,9 @@ struct Bank {
     }
 
     private func handleAllCustomers() {
-        let works = makeWorkGroup()
+        let serviceManager = ServiceAsynchronizer(queue: customers)
+        let works = serviceManager.makeWorkGroup(by: clerks)
         works.wait()
-    }
-    
-    private func makeWorkGroup() -> DispatchGroup {
-        let group = DispatchGroup()
-        let workItems = clerks.map(makeWorkItem)
-        
-        workItems.forEach {
-            DispatchQueue.global().async(group: group, execute: $0)
-        }
-
-        return group
-    }
-    
-    private func makeWorkItem(by clerk: BankClerkProtocol) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem {
-            while !customers.isEmpty() {
-                guard (customers.peekFirst() as? Customer)?.purpose == clerk.service else { continue }
-                
-                semaphore.wait()
-                guard let customer = customers.dequeue() as? Customer else { semaphore.signal(); return }
-                semaphore.signal()
-                
-                clerk.serve(customer)
-            }
-        }
-        return workItem
     }
     
     mutating func close() {

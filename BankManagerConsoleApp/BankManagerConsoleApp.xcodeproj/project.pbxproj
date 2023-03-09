@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BC37E0329B9A8B8002B72A0 /* ServiceAsynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC37E0229B9A8B8002B72A0 /* ServiceAsynchronizer.swift */; };
 		3BC82CAB29A45E5A00D0B86A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC82CAA29A45E5A00D0B86A /* Queue.swift */; };
 		3BC82CB329A47E2B00D0B86A /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC82CB229A47E2B00D0B86A /* BankManagerConsoleAppTests.swift */; };
 		3BC82CB829A47E6700D0B86A /* SinglyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BAAE6429A455CC006D578A /* SinglyLinkedList.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BC37E0229B9A8B8002B72A0 /* ServiceAsynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAsynchronizer.swift; sourceTree = "<group>"; };
 		3BC82CAA29A45E5A00D0B86A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		3BC82CB029A47E2B00D0B86A /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC82CB229A47E2B00D0B86A /* BankManagerConsoleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTests.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				876A7DF529A7335700D26878 /* BankClerk.swift */,
 				3BC82CBE29A735D400D0B86A /* Bank.swift */,
 				87D41D4A29B03A82000291F6 /* BankingService.swift */,
+				3BC37E0229B9A8B8002B72A0 /* ServiceAsynchronizer.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC82CAB29A45E5A00D0B86A /* Queue.swift in Sources */,
+				3BC37E0329B9A8B8002B72A0 /* ServiceAsynchronizer.swift in Sources */,
 				876A7DF629A7335700D26878 /* BankClerk.swift in Sources */,
 				87BAAE6329A455A9006D578A /* Node.swift in Sources */,
 				3BC82CCC29B1880C00D0B86A /* Timer.swift in Sources */,
