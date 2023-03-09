@@ -96,6 +96,28 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    //MARK: - Properties: CustomerWaiting&Inprogress Stack
+    
+    private let customerWaitingStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 0
+        
+        return stackView
+    }()
+    
+    private let customerInprogressStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 0
+        
+        return stackView
+    }()
+    
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -150,6 +172,14 @@ class ViewController: UIViewController {
         progressStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         progressStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
         progressStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+    }
+    
+    private func setCustomerWaitingStack() {
+        customerWaitingStackView.addArrangedSubview(CustomerInfoView())
+    }
+    
+    private func setCustomerInprogressStack() {
+        customerInprogressStackView.addArrangedSubview(CustomerInfoView())
     }
     
     //MARK: - UI Action
