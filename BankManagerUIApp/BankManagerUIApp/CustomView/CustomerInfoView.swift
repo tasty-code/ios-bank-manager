@@ -15,27 +15,26 @@ class CustomerInfoView: UIView {
     
     let infoStackVIew: UIStackView = {
        let sv = UIStackView()
-        sv.distribution = .fillEqually
-        sv.spacing = 0
+        sv.spacing = 5
         sv.axis = .horizontal
-        sv.alignment = .center
+        sv.alignment = .fill
+        sv.distribution = .equalSpacing
         return sv
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .white
+        
         ticketNumber.text = "0"
-        ticketNumber.font = UIFont.systemFont(ofSize: 30)
-        ticketNumber.textAlignment = .right
+        ticketNumber.font = UIFont.systemFont(ofSize: 25)
         
         hyphenLabel.text = "-"
-        hyphenLabel.font = UIFont.systemFont(ofSize: 30)
-        hyphenLabel.textAlignment = .center
+        hyphenLabel.font = UIFont.systemFont(ofSize: 25)
         
         taskTypeLabel.text = "Task"
-        taskTypeLabel.textAlignment = .left
-        taskTypeLabel.font = UIFont.systemFont(ofSize: 30)
+        taskTypeLabel.font = UIFont.systemFont(ofSize: 25)
         
         setLabelLayout()
     }
