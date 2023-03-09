@@ -58,18 +58,13 @@ struct Bank {
                 guard (customers.peekFirst() as? Customer)?.purpose == clerk.service else { continue }
                 
                 semaphore.wait()
-                guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
+                guard let customer = customers.dequeue() as? Customer else { semaphore.signal(); return }
                 semaphore.signal()
                 
                 clerk.serve(customer)
             }
         }
         return workItem
-    }
-    
-    private func extractCustomerFromQueue() -> Node<String>? {
-        let customer = customers.dequeue()
-        return customer
     }
     
     mutating func close() {
