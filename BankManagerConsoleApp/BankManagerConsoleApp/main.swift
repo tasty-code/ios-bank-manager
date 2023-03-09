@@ -6,14 +6,14 @@
 
 import Foundation
 
-var bank = Bank(clerks: [BankClerk()])
+var bank = Bank(clerks: .deposit(2), .loan(1))
 
 ConsoleManager.askMenu()
 var chosenMenu = readLine()
 
 while (chosenMenu ?? "") != ConsoleManager.Menu.close.rawValue {
-    bank.lineUpCustomersInQueue()
-    bank.handleAllCustomers()
+    bank.open()
+    bank.close()
     ConsoleManager.askMenu()
     
     chosenMenu = readLine()
