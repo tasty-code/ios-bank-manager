@@ -135,7 +135,6 @@ class ViewController: UIViewController {
     private func setInterfaceStackView() {
         interfaceStackView.addArrangedSubviews([buttonStackView, timerLabelStackView, progressStackView])
         
-        interfaceStackView.translatesAutoresizingMaskIntoConstraints = false
         interfaceStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
         interfaceStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         interfaceStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
@@ -143,7 +142,6 @@ class ViewController: UIViewController {
     }
     
     private func setCustomerWaitingStack() {
-        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         waitingStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 15).isActive = true
         waitingStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         waitingStackView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width/2).isActive = true
@@ -151,7 +149,6 @@ class ViewController: UIViewController {
     }
     
     private func setCustomerInprogressStack() {
-        inprogressStackView.translatesAutoresizingMaskIntoConstraints = false
         inprogressStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 15).isActive = true
         inprogressStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
         inprogressStackView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width/2).isActive = true

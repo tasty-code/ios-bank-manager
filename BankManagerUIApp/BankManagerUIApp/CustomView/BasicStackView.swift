@@ -27,9 +27,10 @@ final class BasicStackView: UIStackView {
     }
     
     func setupConfiguration() {
-        self.spacing = 0
+        spacing = 0
         distribution = .fillEqually
         alignment = .fill
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init(coder: NSCoder) {
