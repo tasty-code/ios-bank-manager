@@ -109,16 +109,8 @@ class ViewController: UIViewController {
     //MARK: - UI Setting
     
     private func setUI() {
-        view.addSubview(addCustomersButton)
-        view.addSubview(resetButton)
         view.addSubview(buttonStackView)
-        
-        view.addSubview(timerLabel)
-        view.addSubview(taskLabel)
         view.addSubview(timerLabelStackView)
-        
-        view.addSubview(standbyLabel)
-        view.addSubview(inprogressLabel)
         view.addSubview(progressStackView)
     }
     
