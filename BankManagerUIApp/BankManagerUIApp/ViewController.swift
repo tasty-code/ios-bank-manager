@@ -82,16 +82,26 @@ class ViewController: UIViewController {
         return label
     }()
     
+    //MARK: - Properties: progress Stack
+    
     private let progressStackView = CustomStackView(axis: .horizontal)
     
     //MARK: - Properties: Interface Stack
     
     private let interfaceStackView = CustomStackView(axis: .vertical, spacing: 5)
     
-    //MARK: - Properties: CustomerWaiting&Inprogress Stack
-    private let waitingInprogressStackView = CustomStackView(axis: .horizontal)
+    //MARK: - Properties: Waiting & Inprogress Stack
     
-    private let waitingStackView = CustomStackView(axis: .vertical)
+    private let waitingStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 0
+        stack.alignment = .center
+        stack.distribution = .fillProportionally
+        
+        return stack
+    }()
+    
     private let inprogressStackView = CustomStackView(axis: .vertical)
     
     //MARK: - LifeCycle
@@ -99,14 +109,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-
     }
     
     //MARK: - UI Setting
     
     private func setUI() {
         view.addSubview(interfaceStackView)
-        view.addSubview(waitingInprogressStackView)
+        view.addSubview(waitingStackView)
+        view.addSubview(inprogressStackView)
         
         setButtonStack()
         setTimerLabelStackView()
@@ -114,7 +124,6 @@ class ViewController: UIViewController {
         setInterfaceStackView()
         setCustomerWaitingStack()
         setCustomerInprogressStack()
-        setWaitingAndInprogressStack()
     }
     
     private func setButtonStack() {
@@ -140,45 +149,37 @@ class ViewController: UIViewController {
         interfaceStackView.addArrangedSubview(progressStackView)
         
         interfaceStackView.translatesAutoresizingMaskIntoConstraints = false
+        interfaceStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
         interfaceStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         interfaceStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         interfaceStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
     }
     
     private func setCustomerWaitingStack() {
-        let customer: CustomerInfoView = {
-            let label = CustomerInfoView(frame: .zero)
-            label.taskTypeLabel.font = UIFont.systemFont(ofSize: 30)
-            
-            return label
-        }()
-        waitingStackView.addArrangedSubview(customer)
+        
+        waitingStackView.backgroundColor = .gray
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        waitingStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 0).isActive = true
+        waitingStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
+        waitingStackView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width/2).isActive = true
+        
     }
     
     private func setCustomerInprogressStack() {
-        let customer: CustomerInfoView = {
-            let label = CustomerInfoView(frame: .zero)
-            label.taskTypeLabel.font = UIFont.systemFont(ofSize: 30)
-            
-            return label
-        }()
-        waitingStackView.addArrangedSubview(customer)
-    }
-    
-    private func setWaitingAndInprogressStack() {
-        waitingInprogressStackView.addArrangedSubview(waitingStackView)
-        waitingInprogressStackView.addArrangedSubview(inprogressStackView)
+        inprogressStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
+        inprogressStackView.backgroundColor = .gray
+        inprogressStackView.translatesAutoresizingMaskIntoConstraints = false
+        inprogressStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 0).isActive = true
+        inprogressStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+        inprogressStackView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width/2).isActive = true
         
-        waitingInprogressStackView.translatesAutoresizingMaskIntoConstraints = false
-        waitingInprogressStackView.topAnchor.constraint(equalTo: interfaceStackView.topAnchor, constant: 0).isActive = true
-        waitingInprogressStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        waitingInprogressStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
     }
     
     //MARK: - UI Action
     
     @objc
     private func addCustomerButtonTapped() {
+        waitingStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
         print(#function)
         startTimer()
     }
