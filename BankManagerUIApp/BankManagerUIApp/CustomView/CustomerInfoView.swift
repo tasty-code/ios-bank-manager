@@ -13,10 +13,8 @@ class CustomerInfoView: UIView {
     let hyphenLabel = UILabel()
     let taskTypeLabel = UILabel()
     
-    let infoStackVIew: UIStackView = {
-       let sv = UIStackView()
-        sv.axis = .horizontal
-        sv.alignment = .fill
+    let infoStackView: BasicStackView = {
+        let sv = BasicStackView(axis: .horizontal)
         sv.distribution = .equalSpacing
         return sv
     }()
@@ -41,15 +39,15 @@ class CustomerInfoView: UIView {
     }
     
     private func setLabelLayout() {
-        addSubview(infoStackVIew)
+        addSubview(infoStackView)
         
-        infoStackVIew.addArrangedSubviews([ticketNumber, hyphenLabel, taskTypeLabel])
+        infoStackView.addArrangedSubviews([ticketNumber, hyphenLabel, taskTypeLabel])
         
-        infoStackVIew.translatesAutoresizingMaskIntoConstraints = false
-        infoStackVIew.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
-        infoStackVIew.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        infoStackVIew.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        infoStackVIew.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3).isActive = true
+        infoStackView.translatesAutoresizingMaskIntoConstraints = false
+        infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
+        infoStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        infoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3).isActive = true
     }
     
 }
