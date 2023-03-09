@@ -10,19 +10,19 @@ class ViewController: UIViewController {
 
     //MARK: - Properties: Button
     
-    private let addCustomersButton: UIButton = {
+    private lazy var addCustomersButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button.addTarget(ViewController.self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private let resetButton: UIButton = {
+    private lazy var resetButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.addTarget(ViewController.self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 35)
         label.text = "대기중"
         label.textColor = .white
-        label.backgroundColor = UIColor(red: 80/255, green: 200/255, blue: 85/255, alpha: 1.0)
+        label.backgroundColor = .designSystem(.mainGreen)
         label.textAlignment = .center
         
         return label
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 35)
         label.text = "업무중"
         label.textColor = .white
-        label.backgroundColor = UIColor(red: 110/255, green: 100/255, blue: 240/255, alpha: 1.0)
+        label.backgroundColor = .designSystem(.mainPurple)
         label.textAlignment = .center
         
         return label
