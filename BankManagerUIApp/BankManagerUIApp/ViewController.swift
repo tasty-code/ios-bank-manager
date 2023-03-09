@@ -250,7 +250,7 @@ class ViewController: UIViewController {
     
     // MARK: - Timer
     
-    func startTimer() {
+    private func startTimer() {
         self.timer?.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { time in
             
@@ -259,12 +259,12 @@ class ViewController: UIViewController {
         
     }
     
-    func stopTimer() {
+    private func stopTimer() {
         self.timer?.invalidate()
         
     }
     
-    func updateTimerLabel() {
+    private func updateTimerLabel() {
         // 분
         let minutes = self.time / 60000
         // 초
