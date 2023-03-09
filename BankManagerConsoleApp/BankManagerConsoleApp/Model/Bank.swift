@@ -9,7 +9,6 @@ import Foundation
 
 struct Bank: CustomerManageable {
 
-    let todayCounter = Counter()
     let accountBanker = Banker(processingTime: 0.7)
     let loanBanker = Banker(processingTime: 1.1)
 
@@ -30,14 +29,12 @@ struct Bank: CustomerManageable {
                 DispatchQueue.global().async(group: group) {
                     accountSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    todayCounter.addAccountCustomer()
                     accountSemaphore.signal()
                 }
             default:
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
                     loanBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
-                    todayCounter.addLoanCustomer()
                     loanSemaphore.signal()
                 }
             }
@@ -46,25 +43,15 @@ struct Bank: CustomerManageable {
         group.wait()
 
         showWorkFinishMessage(numberOfTodayCustomers)
-        todayCounter.resetCounter()
     }
 
     func showWorkFinishMessage(_ totalNumber: Int) {
-        let calculateWorkTime = calculateTotalWorkTime(customers: todayCounter.getAccountCustomerCount(), todayCounter.getLoanCustomerCount(), processingTimes: accountBanker.processingTime, loanBanker.processingTime)
+        let calculateWorkTime = calculateTotalWorkTime(customers: totalNumber, processingTimes: accountBanker.processingTime)
         let convertDoubleToString = String(format: "%.2f", calculateWorkTime)
 
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertDoubleToString)초입니다.")
     }
 
-    func calculateTotalWorkTime(customers: Int..., processingTimes: Double...) -> Double {
-        var result = 0.0
-
-        customers.enumerated().forEach {
-            let partialResult = Double($1) * processingTimes[$0]
-            result += partialResult
-        }
-
-        return result
-    }
+    func calculateTotalWorkTime(customers: Int, processingTimes: Double) -> Double { Double(customers) * processingTimes }
 
 }
