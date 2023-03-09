@@ -36,15 +36,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private let buttonStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
-
-        return stackView
-    }()
+    private let buttonStackView = CustomStackView(axis: .horizontal)
     
     //MARK: - Properties: TimerLabels & Stack
     
@@ -64,15 +56,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let timerLabelStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-        stackView.spacing = 0
-
-        return stackView
-    }()
+    private let timerLabelStackView = CustomStackView(axis: .horizontal)
 
     //MARK: - Properties: StateLabels & Stack
     
@@ -98,59 +82,17 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let progressStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
-        
-        return stackView
-    }()
+    private let progressStackView = CustomStackView(axis: .horizontal)
     
     //MARK: - Properties: Interface Stack
     
-    private let interfaceStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 5
-        
-        return stackView
-    }()
+    private let interfaceStackView = CustomStackView(axis: .vertical, spacing: 5)
     
     //MARK: - Properties: CustomerWaiting&Inprogress Stack
-    private let waitingInprogressStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
-        
-        return stackView
-    }()
+    private let waitingInprogressStackView = CustomStackView(axis: .horizontal)
     
-    
-    private let waitingStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
-        
-        return stackView
-    }()
-    
-    private let inprogressStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 0
-        
-        return stackView
-    }()
+    private let waitingStackView = CustomStackView(axis: .vertical)
+    private let inprogressStackView = CustomStackView(axis: .vertical)
     
     //MARK: - LifeCycle
     
