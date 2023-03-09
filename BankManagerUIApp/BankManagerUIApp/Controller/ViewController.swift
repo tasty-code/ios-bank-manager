@@ -17,19 +17,31 @@ final class ViewController: UIViewController {
 
     }
 
+    // MARK: - Private
+
+    private let bankTellers = [
+        BankTeller(workType: .deposit),
+        BankTeller(workType: .deposit),
+        BankTeller(workType: .loan)
+    ]
+
+    private lazy var bank = Bank(bankTellers: bankTellers, presenter: self)
+
     // MARK: - UI Properties
 
-    private let addCustomerButton: UIButton = {
+    private lazy var addCustomerButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constants.addCustomerButtonTitle, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(addCustomers), for: .touchUpInside)
         return button
     }()
 
-    private let resetButton: UIButton = {
+    private lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constants.resetButtonTitle, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
+        button.addTarget(self, action: #selector(resetAllTasks), for: .touchUpInside)
         return button
     }()
 
@@ -100,7 +112,27 @@ final class ViewController: UIViewController {
         configureLayout()
     }
 
-    // MARK: - Layout
+    // MARK: - Actions
+
+    @objc private func addCustomers() {
+        print("addCustomers")
+        
+        bank.startWorking {
+
+        }
+    }
+
+    @objc private func resetAllTasks() {
+        print("resetAllTasks")
+    }
+
+}
+
+
+
+// MARK: - Layout
+
+extension ViewController {
     private func configureLayout() {
         let headerStackView = UIStackView(arrangedSubviews: [
             buttonStackView,
@@ -147,3 +179,20 @@ final class ViewController: UIViewController {
     }
 }
 
+// MARK: - BankPresentable
+
+extension ViewController: BankPresentable {
+    func presentTaskStarted(of customer: Customer) {
+        print("업무 시작")
+    }
+
+    func presentTaskFinished(of customer: Customer) {
+        print("업무 종료")
+    }
+
+    func presentAllTaskFinished() {
+        print("은행 업무 완전 종료")
+    }
+
+
+}

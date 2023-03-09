@@ -11,7 +11,7 @@ struct BankTeller {
 
     // MARK: - Properties
 
-    let id: Int
+    let id: UUID = UUID()
     let workType: WorkType
 
     // MARK: - Public
