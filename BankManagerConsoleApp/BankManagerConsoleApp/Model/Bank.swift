@@ -26,7 +26,7 @@ struct Bank: CustomerManageable {
             let currentCustomerWorkType = currentCustomer.workType
 
             switch currentCustomerWorkType {
-            case WorkList.account.rawValue :
+            case WorkType.account.rawValue :
                 DispatchQueue.global().async(group: group) {
                     accountSemaphore.wait()
                     accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
