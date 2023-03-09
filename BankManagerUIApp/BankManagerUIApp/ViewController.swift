@@ -7,6 +7,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: - Properties: Timer
+    
+    private lazy var time: Int = 0 {
+        didSet {
+            updateTimerLabel()
+        }
+    }
+    
+    weak var timer: Timer?
 
     //MARK: - Properties: Button
     
@@ -45,9 +55,10 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let timerLabel: UILabel = {
+    private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
+//        label.text = "\(minutes):\(seconds):\(microSeconds)"
         label.text = "00:00:000"
         return label
     }()
@@ -149,13 +160,41 @@ class ViewController: UIViewController {
     @objc
     private func addCustomerButtonTapped() {
         print(#function)
+        startTimer()
     }
     
     @objc
     private func resetButtonTapped() {
         print(#function)
+        stopTimer()
     }
     
     
+    // MARK: - Timer
+    
+    func startTimer() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { time in
+            
+            self.time += 1
+        }
+        
+    }
+    
+    func stopTimer() {
+        self.timer?.invalidate()
+        
+    }
+    
+    func updateTimerLabel() {
+        // 분
+        let minutes = self.time / 60000
+        // 초
+        let seconds = (self.time / 1000) % 60
+        // 마이크로초
+        let microseconds = self.time % 1000
+        
+        self.timerLabel.text = String(format: "%02d:%02d:%03d", minutes, seconds, microseconds)
+    }
 }
 
