@@ -13,12 +13,19 @@ struct BankTeller {
 
     let id: UUID = UUID()
     let workType: WorkType
+    let serialQueue = DispatchQueue(label: "bankTellerQueue")
 
     // MARK: - Public
 
-    func performTask(of customer: Customer, presenter: BankPresentable) {
-        presenter.presentTaskStarted(of: customer)
-        Thread.sleep(forTimeInterval: customer.timespent)
-        presenter.presentTaskFinished(of: customer)
+    func performTask(
+        of customer: Customer,
+        presenter: BankPresentable,
+        group: DispatchGroup
+    ) {
+        serialQueue.async(group: group) {
+            presenter.presentTaskStarted(of: customer)
+            Thread.sleep(forTimeInterval: customer.timespent)
+            presenter.presentTaskFinished(of: customer)
+        }
     }
 }

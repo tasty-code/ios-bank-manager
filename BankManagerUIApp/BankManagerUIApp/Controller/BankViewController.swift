@@ -127,14 +127,20 @@ final class BankViewController: UIViewController {
 
         //        guard !isWorking else { return }
         //        print("뱅크 일 시작")
-        bank.startWorking {
-            print("finished")
-        }
+        bank.startWorking()
     }
 
     @objc private func resetAllTasks() {
         customerLabels = []
         lastCustomerID = 1
+        
+        workingStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        waitingStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        
         bank.stopWorking() // TODO: 리셋 로직 구현 필요
     }
 
