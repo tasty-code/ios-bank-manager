@@ -7,8 +7,17 @@
 
 import Foundation
 
-enum WorkType: String, CaseIterable {
+enum WorkType: CaseIterable, CustomStringConvertible {
 
-    case account = "예금"
-    case loan = "대출"
+    case account
+    case loan
+
+    var description: String {
+        switch self {
+        case .account:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
 }

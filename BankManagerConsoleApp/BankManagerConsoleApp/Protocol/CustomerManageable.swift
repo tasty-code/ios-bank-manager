@@ -24,7 +24,7 @@ extension CustomerManageable {
         let works = WorkType.allCases
         guard let pickRandomWork = works.randomElement() else { return "" }
 
-        return pickRandomWork.rawValue
+        return pickRandomWork.description
     }
 
     func makeCustomerQueue(maxCount: Int) -> LinkedQueue<Customer> {
