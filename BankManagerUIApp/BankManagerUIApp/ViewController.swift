@@ -95,14 +95,22 @@ class ViewController: UIViewController {
     private let waitingStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 0
+        stack.spacing = 5
         stack.alignment = .center
-        stack.distribution = .fillProportionally
+        stack.distribution = .fillEqually
         
         return stack
     }()
     
-    private let inprogressStackView = CustomStackView(axis: .vertical)
+    private let inprogressStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        
+        return stack
+    }()
     
     //MARK: - LifeCycle
     
@@ -156,8 +164,6 @@ class ViewController: UIViewController {
     }
     
     private func setCustomerWaitingStack() {
-        
-        waitingStackView.backgroundColor = .gray
         waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         waitingStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 0).isActive = true
         waitingStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
@@ -166,8 +172,6 @@ class ViewController: UIViewController {
     }
     
     private func setCustomerInprogressStack() {
-        inprogressStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
-        inprogressStackView.backgroundColor = .gray
         inprogressStackView.translatesAutoresizingMaskIntoConstraints = false
         inprogressStackView.topAnchor.constraint(equalTo: interfaceStackView.bottomAnchor, constant: 0).isActive = true
         inprogressStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
