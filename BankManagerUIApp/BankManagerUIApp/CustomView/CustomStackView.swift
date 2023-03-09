@@ -9,19 +9,21 @@ import UIKit
 
 class CustomStackView: UIStackView {
     
-    init(axis: NSLayoutConstraint.Axis) {
-        super.init(frame: .zero)
-        self.axis = axis
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         basicConfiguration()
     }
     
-    init(axis: NSLayoutConstraint.Axis, spacing: CGFloat ) {
-        super.init(frame: .zero)
+    convenience init(axis: NSLayoutConstraint.Axis) {
+        self.init(frame: .zero)
+        self.axis = axis
+    }
+    
+    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat ) {
+        self.init(frame: .zero)
         self.axis = axis
         self.spacing = spacing
-        
-        basicConfiguration()
     }
     
     func basicConfiguration() {
