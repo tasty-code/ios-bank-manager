@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private let buttonStackView = CustomStackView(axis: .horizontal)
+    private let buttonStackView = BasicStackView(axis: .horizontal)
     
     //MARK: - Properties: TimerLabels & Stack
     
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let timerLabelStackView = CustomStackView(axis: .horizontal)
+    private let timerLabelStackView = BasicStackView(axis: .horizontal)
 
     //MARK: - Properties: StateLabels & Stack
     
@@ -84,33 +84,17 @@ class ViewController: UIViewController {
     
     //MARK: - Properties: progress Stack
     
-    private let progressStackView = CustomStackView(axis: .horizontal)
+    private let progressStackView = BasicStackView(axis: .horizontal)
     
     //MARK: - Properties: Interface Stack
     
-    private let interfaceStackView = CustomStackView(axis: .vertical, spacing: 5)
+    private let interfaceStackView = BasicStackView(axis: .vertical)
     
     //MARK: - Properties: Waiting & Inprogress Stack
     
-    private let waitingStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        stack.alignment = .center
-        stack.distribution = .fillEqually
-        
-        return stack
-    }()
+    private let waitingStackView = BasicStackView(axis: .vertical, alignment: .center)
     
-    private let inprogressStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        stack.alignment = .center
-        stack.distribution = .fillEqually
-        
-        return stack
-    }()
+    private let inprogressStackView = BasicStackView(axis: .vertical, alignment: .center)
     
     //MARK: - LifeCycle
     

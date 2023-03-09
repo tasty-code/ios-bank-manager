@@ -7,12 +7,12 @@
 
 import UIKit
 
-class CustomStackView: UIStackView {
+final class BasicStackView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        basicConfiguration()
+        setupConfiguration()
     }
     
     convenience init(axis: NSLayoutConstraint.Axis) {
@@ -20,16 +20,16 @@ class CustomStackView: UIStackView {
         self.axis = axis
     }
     
-    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat ) {
+    convenience init(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment) {
         self.init(frame: .zero)
         self.axis = axis
-        self.spacing = spacing
+        self.alignment = alignment
     }
     
-    func basicConfiguration() {
+    func setupConfiguration() {
+        self.spacing = 5
         distribution = .fillEqually
         alignment = .fill
-        spacing = 0
     }
     
     required init(coder: NSCoder) {
