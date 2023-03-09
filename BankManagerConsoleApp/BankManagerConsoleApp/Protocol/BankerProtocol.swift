@@ -9,7 +9,7 @@ import Foundation
 
 protocol BankerProtocol {
 
-    func work(of currentCustomerNumber: Int, for workType: String)
+    func work(for customer: Customer)
     func workStart(of orderNumber: Int, for workType: String) -> String
     func workComplete(of orderNumber: Int, for workType: String) -> String
 }

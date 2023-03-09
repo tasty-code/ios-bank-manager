@@ -22,19 +22,17 @@ struct Bank: CustomerManageable {
         while !customerQueue.isEmpty() {
             guard let currentCustomer = customerQueue.dequeue() else { return }
 
-            let currentCustomerWorkType = currentCustomer.workType
-
-            switch currentCustomerWorkType {
+            switch currentCustomer.workType {
             case WorkType.account.description :
                 DispatchQueue.global().async(group: group) {
                     accountSemaphore.wait()
-                    accountBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
+                    accountBanker.work(for: currentCustomer)
                     accountSemaphore.signal()
                 }
             default:
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
-                    loanBanker.work(of: currentCustomer.waitingOrder, for: currentCustomerWorkType)
+                    loanBanker.work(for: currentCustomer)
                     loanSemaphore.signal()
                 }
             }

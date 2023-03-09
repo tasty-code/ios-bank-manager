@@ -11,9 +11,9 @@ struct Banker: BankerProtocol {
 
     var processingTime: Double
 
-     func work(of currentCustomerNumber: Int, for workType: String) {
-         print(workStart(of: currentCustomerNumber, for: workType))
-         Thread.sleep(forTimeInterval: processingTime)
-         print(workComplete(of: currentCustomerNumber, for: workType))
-     }
+    func work(for customer: Customer) {
+        print(workStart(of: customer.waitingOrder, for: customer.workType))
+        Thread.sleep(forTimeInterval: processingTime)
+        print(workComplete(of: customer.waitingOrder, for: customer.workType))
+    }
 }
