@@ -24,7 +24,7 @@ struct Timer {
         finishTime = CFAbsoluteTimeGetCurrent()
     }
     
-    func sum() -> Double {
+    func totalTime() -> Double {
         return finishTime - startTime
     }
 }

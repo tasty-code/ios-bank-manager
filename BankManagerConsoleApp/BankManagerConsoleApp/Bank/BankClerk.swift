@@ -14,7 +14,7 @@ protocol BankClerkProtocol {
 
 extension BankClerkProtocol {
     func serve(_ customer: Customer) {
-        guard let purposeOfVisit = customer.purposeOfVisit else { return }
+        guard let purposeOfVisit = customer.purpose else { return }
         print("\(customer.data) \(purposeOfVisit.title) 업무 시작")
         Thread.sleep(forTimeInterval: purposeOfVisit.timeSpent)
         print("\(customer.data) \(purposeOfVisit.title) 업무 완료")

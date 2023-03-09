@@ -55,7 +55,7 @@ struct Bank {
     private func makeWorkItem(by clerk: BankClerkProtocol) -> DispatchWorkItem {
         let workItem = DispatchWorkItem {
             while !customers.isEmpty() {
-                guard (customers.peekFirst() as? Customer)?.purposeOfVisit == clerk.service else { continue }
+                guard (customers.peekFirst() as? Customer)?.purpose == clerk.service else { continue }
                 
                 semaphore.wait()
                 guard let customer = extractCustomerFromQueue() as? Customer else { semaphore.signal(); return }
@@ -73,7 +73,7 @@ struct Bank {
     }
     
     mutating func close() {
-        let totalSpentTime = timer.sum()
+        let totalSpentTime = timer.totalTime()
         printClosingMessage(with: totalSpentTime)
     }
     

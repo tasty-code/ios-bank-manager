@@ -8,11 +8,11 @@
 import Foundation
 
 class Customer: Node<String> {
-    let purposeOfVisit: BankingService?
+    let purpose: BankingService?
     
     override init(_ data: String) {
         let bankServices = BankingService.allCases
-        self.purposeOfVisit = bankServices.randomElement()
+        self.purpose = bankServices.randomElement()
         super.init(data)
     }
 }
