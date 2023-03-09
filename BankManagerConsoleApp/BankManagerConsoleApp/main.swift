@@ -6,25 +6,9 @@
 
 import Foundation
 
-private enum UserMenu {
-    case openBank
-    case exit
+private let bankManager = BankManager()
 
-    init(input: String) throws {
-        switch input {
-        case "1":
-            self = .openBank
-        case "2":
-            self = .exit
-        default:
-            throw InputError.invalidInput
-        }
-    }
-}
-
-var bankManager = BankManager()
-
-func execute() {
+private func execute() {
     ConsoleManager.presentUserMenu()
     let input = readLine() ?? ""
 
@@ -33,10 +17,11 @@ func execute() {
 
         switch menu {
         case .openBank:
-            bankManager.open()
-            execute()
+            bankManager.open(completion: {
+                execute()
+            })
         case .exit:
-            break
+            exit(EXIT_SUCCESS)
         }
     } catch {
         print(error.localizedDescription)
@@ -45,3 +30,4 @@ func execute() {
 }
 
 execute()
+dispatchMain()

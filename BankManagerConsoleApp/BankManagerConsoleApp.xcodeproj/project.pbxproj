@@ -15,6 +15,8 @@
 		768C7C1629A5B76E00D72285 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C7C1529A5B76E00D72285 /* LinkedListTests.swift */; };
 		768C7C1A29A5B77400D72285 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48592FB29A5B3C400A20764 /* LinkedList.swift */; };
 		B4206D9729A6041B00CDA204 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4206D9629A6041B00CDA204 /* Queue.swift */; };
+		B447380329B71D5A001D3FD4 /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B447380229B71D5A001D3FD4 /* WorkType.swift */; };
+		B447380529B81701001D3FD4 /* UserMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B447380429B81701001D3FD4 /* UserMenu.swift */; };
 		B4625E7D29AC47560068DA80 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4625E7C29AC47560068DA80 /* InputError.swift */; };
 		B4722F0029A73C3D00A81C22 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4722EFF29A73C3D00A81C22 /* Bank.swift */; };
 		B4722F0229A73CAB00A81C22 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4722F0129A73CAB00A81C22 /* Customer.swift */; };
@@ -44,6 +46,8 @@
 		768C7C1329A5B76E00D72285 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		768C7C1529A5B76E00D72285 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		B4206D9629A6041B00CDA204 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		B447380229B71D5A001D3FD4 /* WorkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
+		B447380429B81701001D3FD4 /* UserMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenu.swift; sourceTree = "<group>"; };
 		B4625E7C29AC47560068DA80 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		B4722EFF29A73C3D00A81C22 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		B4722F0129A73CAB00A81C22 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -104,14 +108,24 @@
 			path = LinkedListTests;
 			sourceTree = "<group>";
 		};
+		B447380629B81899001D3FD4 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				B4625E7C29AC47560068DA80 /* InputError.swift */,
+				B447380229B71D5A001D3FD4 /* WorkType.swift */,
+				B447380429B81701001D3FD4 /* UserMenu.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		B4722EFE29A724A200A81C22 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B447380629B81899001D3FD4 /* Enum */,
 				B4722F0329A74E8400A81C22 /* DataStructure */,
 				B4722EFF29A73C3D00A81C22 /* Bank.swift */,
 				762BC8B729A748ED000F8845 /* BankTeller.swift */,
 				B4722F0129A73CAB00A81C22 /* Customer.swift */,
-				B4625E7C29AC47560068DA80 /* InputError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B48592FC29A5B3C400A20764 /* LinkedList.swift in Sources */,
+				B447380329B71D5A001D3FD4 /* WorkType.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				B4722F0029A73C3D00A81C22 /* Bank.swift in Sources */,
 				B4625E7D29AC47560068DA80 /* InputError.swift in Sources */,
@@ -307,6 +322,7 @@
 				762BC8BA29A859B8000F8845 /* ConsoleManager.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				B4206D9729A6041B00CDA204 /* Queue.swift in Sources */,
+				B447380529B81701001D3FD4 /* UserMenu.swift in Sources */,
 				B4AE3F8429A855B600C1D02F /* Double+.swift in Sources */,
 				762BC8B829A748ED000F8845 /* BankTeller.swift in Sources */,
 			);

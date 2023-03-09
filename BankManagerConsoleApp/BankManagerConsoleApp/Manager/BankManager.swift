@@ -7,37 +7,60 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank
+
+    // MARK: - Private property
+
+    private let bank: Bank
 
     private enum Constants {
-        static let minimumValueOfRandomCustomers = 10
-        static let maximumValueOfRandomCustomers = 30
-        static let defaultTimespent = 0.7
+        static let minimumValueOfRandomCustomers: Int = 10
+        static let maximumValueOfRandomCustomers: Int = 30
     }
+
+    // MARK: - Lifecycle
 
     init() {
-        let bankTeller = BankTeller()
-        self.bank = Bank(bankTellers: [bankTeller])
+        let bankTellers = [
+            BankTeller(id: 0, workType: .deposit),
+            BankTeller(id: 1, workType: .deposit),
+            BankTeller(id: 2, workType: .loan)
+        ]
+
+        self.bank = Bank(bankTellers: bankTellers)
     }
 
-    mutating func open() {
+    // MARK: - Public
+
+    func open(completion: @escaping () -> Void) {
+        let openedTime = DispatchTime.now()
+
         let customers = generateRandomCustomers()
         bank.visit(customers: customers)
 
-        bank.startWorking()
+        bank.startWorking(completion: {
+            let closedTime = DispatchTime.now()
+            let totalTime = calculateTotalWorkTime(openedTime: openedTime, closedTime: closedTime)
 
-        ConsoleManager.presentAllTaskFinished(of: customers)
+            ConsoleManager.presentAllTaskFinished(totalTime: totalTime, numberOfCustomers: customers.count)
+            completion()
+        })
     }
+
+    // MARK: - Private
 
     private func generateRandomCustomers() -> [Customer] {
         let range = Constants.minimumValueOfRandomCustomers...Constants.maximumValueOfRandomCustomers
         let randomNumber = Int.random(in: range)
 
-        var customers: [Customer] = []
-        for id in 1...randomNumber {
-            customers.append(Customer(id: id, withTimespent: Constants.defaultTimespent))
+        return (1...randomNumber).map { id in
+            let workType = WorkType.allCases.randomElement() ?? .deposit
+            return Customer(id: id, workType: workType)
         }
+    }
 
-        return customers
+    private func calculateTotalWorkTime(openedTime: DispatchTime, closedTime: DispatchTime) -> TimeInterval {
+        let nanoTime = closedTime.uptimeNanoseconds - openedTime.uptimeNanoseconds
+        let passedTime = Double(nanoTime) / 1_000_000_000
+        return passedTime.round(toPlaces: 2)
     }
 }
