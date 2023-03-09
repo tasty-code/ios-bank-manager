@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "00:00:000"
+        label.text = " 00:00:000"
         return label
     }()
     
@@ -119,26 +119,21 @@ class ViewController: UIViewController {
     }
     
     private func setButtonStack() {
-        buttonStackView.addArrangedSubview(addCustomersButton)
-        buttonStackView.addArrangedSubview(resetButton)
+        buttonStackView.addArrangedSubviews([addCustomersButton, resetButton])
         
     }
     
     private func setTimerLabelStackView() {
-        timerLabelStackView.addArrangedSubview(taskLabel)
-        timerLabelStackView.addArrangedSubview(timerLabel)
+        timerLabelStackView.addArrangedSubviews([taskLabel, timerLabel])
 
     }
     
     private func setProgressStackView() {
-        progressStackView.addArrangedSubview(standbyLabel)
-        progressStackView.addArrangedSubview(inprogressLabel)
+        progressStackView.addArrangedSubviews([standbyLabel, inprogressLabel])
     }
     
     private func setInterfaceStackView() {
-        interfaceStackView.addArrangedSubview(buttonStackView)
-        interfaceStackView.addArrangedSubview(timerLabelStackView)
-        interfaceStackView.addArrangedSubview(progressStackView)
+        interfaceStackView.addArrangedSubviews([buttonStackView, timerLabelStackView, progressStackView])
         
         interfaceStackView.translatesAutoresizingMaskIntoConstraints = false
         interfaceStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
@@ -203,7 +198,7 @@ class ViewController: UIViewController {
         // 마이크로초
         let microseconds = self.time % 1000
         
-        self.timerLabel.text = String(format: "%02d:%02d:%03d", minutes, seconds, microseconds)
+        self.timerLabel.text = String(format: " %02d:%02d:%03d", minutes, seconds, microseconds)
     }
 }
 

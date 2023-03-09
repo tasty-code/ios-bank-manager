@@ -15,7 +15,6 @@ class CustomerInfoView: UIView {
     
     let infoStackVIew: UIStackView = {
        let sv = UIStackView()
-        sv.spacing = 5
         sv.axis = .horizontal
         sv.alignment = .fill
         sv.distribution = .equalSpacing
@@ -24,8 +23,6 @@ class CustomerInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.backgroundColor = .white
         
         ticketNumber.text = "0"
         ticketNumber.font = UIFont.systemFont(ofSize: 25)
@@ -46,15 +43,13 @@ class CustomerInfoView: UIView {
     private func setLabelLayout() {
         addSubview(infoStackVIew)
         
-        infoStackVIew.addArrangedSubview(ticketNumber)
-        infoStackVIew.addArrangedSubview(hyphenLabel)
-        infoStackVIew.addArrangedSubview(taskTypeLabel)
+        infoStackVIew.addArrangedSubviews([ticketNumber, hyphenLabel, taskTypeLabel])
         
         infoStackVIew.translatesAutoresizingMaskIntoConstraints = false
-        infoStackVIew.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        infoStackVIew.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
         infoStackVIew.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         infoStackVIew.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        infoStackVIew.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        infoStackVIew.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3).isActive = true
     }
     
 }

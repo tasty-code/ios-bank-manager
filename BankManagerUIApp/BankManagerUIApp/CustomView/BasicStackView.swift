@@ -27,7 +27,7 @@ final class BasicStackView: UIStackView {
     }
     
     func setupConfiguration() {
-        self.spacing = 5
+        self.spacing = 0
         distribution = .fillEqually
         alignment = .fill
     }
