@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F538D1629BB033F0035C65A /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
 		4FBA51C629B976C40003D8CC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51C529B976C40003D8CC /* Palette.swift */; };
 		4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FBA51C729B9771C0003D8CC /* Color.xcassets */; };
 		4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */; };
@@ -484,6 +485,7 @@
 				F18CADCE29BAE3EB00169BB8 /* InputOutputManager.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				F18CADD029BAE3EB00169BB8 /* Task.swift in Sources */,
+				4F538D1629BB033F0035C65A /* BankManager.swift in Sources */,
 				F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */,
 				F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */,
 				F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */,

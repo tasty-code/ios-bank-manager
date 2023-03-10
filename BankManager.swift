@@ -19,11 +19,19 @@ struct BankManager {
 }
 
 extension BankManager {
-
-    private func generateWaiting(customers: UInt) {
-        (1...customers).forEach { number in
-            waitingQueue.enqueue(Customer(number: number, task: Task.randomTask()))
+    
+    func makeCustomer(number: UInt) -> Customer {
+        let newCustomer = Customer(number: number, task: Task.randomTask())
+        return newCustomer
+        
+    }
+    
+    func generateWaiting(range: ClosedRange<UInt>) {
+        range.forEach { number in
+            let newCustomer = makeCustomer(number: number)
+            waitingQueue.enqueue(newCustomer)
         }
+        
     }
     
     private func makeTeller() -> [Task: Teller] {
@@ -66,7 +74,7 @@ extension BankManager {
 extension BankManager: BankProtocol {
 
     func open() {
-        generateWaiting(customers: numberOfGuest)
+        generateWaiting(range: 0...numberOfGuest)
 
         let group = DispatchGroup()
         var totalDuration = 0.0

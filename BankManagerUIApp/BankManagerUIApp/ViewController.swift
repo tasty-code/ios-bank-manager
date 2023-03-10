@@ -8,6 +8,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private let queue = WaitingQueue<Customer>()
+    private lazy var bankManager = BankManager(waitingQueue: queue)
+    private var waitingNumber: UInt = 0
+    
     // MARK: - Properties: Timer
     
     private lazy var time: Int = 0 {
@@ -159,6 +163,10 @@ class ViewController: UIViewController {
     
     @objc
     private func addCustomerButtonTapped() {
+        
+        bankManager.generateWaiting(range: waitingNumber...waitingNumber + 10)
+        self.waitingNumber += 10
+        
         waitingStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
     }
     
