@@ -10,7 +10,7 @@
 		4FBA51C629B976C40003D8CC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51C529B976C40003D8CC /* Palette.swift */; };
 		4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FBA51C729B9771C0003D8CC /* Color.xcassets */; };
 		4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */; };
-		4FBA51D029B9A8FD0003D8CC /* BankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CF29B9A8FD0003D8CC /* BankTextCollection.swift */; };
+		4FBA51D029B9A8FD0003D8CC /* UIBankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */; };
 		4FBA51D329B9C2A30003D8CC /* BasicStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */; };
 		4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51D429BA492A0003D8CC /* Extension+StackView.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
@@ -22,7 +22,6 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F146708329B973C900A867FF /* CustomerInfoView.swift */; };
-		F18CADC729BAE3EB00169BB8 /* WaitingManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADA729BAE3EB00169BB8 /* WaitingManagerTest.swift */; };
 		F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADAD29BAE3EB00169BB8 /* DoubleExtension.swift */; };
 		F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADAF29BAE3EB00169BB8 /* Customer.swift */; };
 		F18CADCA29BAE3EB00169BB8 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB029BAE3EB00169BB8 /* Teller.swift */; };
@@ -32,13 +31,11 @@
 		F18CADCE29BAE3EB00169BB8 /* InputOutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB529BAE3EB00169BB8 /* InputOutputManager.swift */; };
 		F18CADCF29BAE3EB00169BB8 /* CustomerConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB629BAE3EB00169BB8 /* CustomerConstant.swift */; };
 		F18CADD029BAE3EB00169BB8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB729BAE3EB00169BB8 /* Task.swift */; };
-		F18CADD129BAE3EB00169BB8 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB829BAE3EB00169BB8 /* Customer.swift */; };
 		F18CADD229BAE3EB00169BB8 /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBA29BAE3EB00169BB8 /* BankProtocol.swift */; };
 		F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBB29BAE3EB00169BB8 /* TellerProvidable.swift */; };
 		F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBD29BAE3EB00169BB8 /* WaitingQueue.swift */; };
 		F18CADD529BAE3EB00169BB8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBE29BAE3EB00169BB8 /* Node.swift */; };
 		F18CADD629BAE3EB00169BB8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBF29BAE3EB00169BB8 /* LinkedList.swift */; };
-		F18CADD729BAE3EB00169BB8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADC029BAE3EB00169BB8 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +73,7 @@
 		4FBA51C529B976C40003D8CC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4FBA51C729B9771C0003D8CC /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
-		4FBA51CF29B9A8FD0003D8CC /* BankTextCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTextCollection.swift; sourceTree = "<group>"; };
+		4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBankTextCollection.swift; sourceTree = "<group>"; };
 		4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStackView.swift; sourceTree = "<group>"; };
 		4FBA51D429BA492A0003D8CC /* Extension+StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+StackView.swift"; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +103,6 @@
 		F18CADB529BAE3EB00169BB8 /* InputOutputManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputOutputManager.swift; sourceTree = "<group>"; };
 		F18CADB629BAE3EB00169BB8 /* CustomerConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerConstant.swift; sourceTree = "<group>"; };
 		F18CADB729BAE3EB00169BB8 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		F18CADB829BAE3EB00169BB8 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		F18CADBA29BAE3EB00169BB8 /* BankProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankProtocol.swift; sourceTree = "<group>"; };
 		F18CADBB29BAE3EB00169BB8 /* TellerProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TellerProvidable.swift; sourceTree = "<group>"; };
 		F18CADBD29BAE3EB00169BB8 /* WaitingQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingQueue.swift; sourceTree = "<group>"; };
@@ -160,7 +156,7 @@
 		4FBA51CE29B9A8C90003D8CC /* BankSystem */ = {
 			isa = PBXGroup;
 			children = (
-				4FBA51CF29B9A8FD0003D8CC /* BankTextCollection.swift */,
+				4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */,
 			);
 			path = BankSystem;
 			sourceTree = "<group>";
@@ -266,7 +262,6 @@
 			children = (
 				F18CADAC29BAE3EB00169BB8 /* Extension */,
 				F18CADAE29BAE3EB00169BB8 /* BankSystem */,
-				F18CADB829BAE3EB00169BB8 /* Customer.swift */,
 				F18CADB929BAE3EB00169BB8 /* Protocol */,
 				F18CADBC29BAE3EB00169BB8 /* Queue */,
 				F18CADC029BAE3EB00169BB8 /* main.swift */,
@@ -492,18 +487,15 @@
 				F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */,
 				F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */,
 				F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */,
-				F18CADD729BAE3EB00169BB8 /* main.swift in Sources */,
 				F18CADCD29BAE3EB00169BB8 /* BankState.swift in Sources */,
 				F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */,
-				F18CADD129BAE3EB00169BB8 /* Customer.swift in Sources */,
 				4FBA51C629B976C40003D8CC /* Palette.swift in Sources */,
 				F18CADCF29BAE3EB00169BB8 /* CustomerConstant.swift in Sources */,
 				F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */,
 				4FBA51D329B9C2A30003D8CC /* BasicStackView.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */,
-				4FBA51D029B9A8FD0003D8CC /* BankTextCollection.swift in Sources */,
-				F18CADC729BAE3EB00169BB8 /* WaitingManagerTest.swift in Sources */,
+				4FBA51D029B9A8FD0003D8CC /* UIBankTextCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

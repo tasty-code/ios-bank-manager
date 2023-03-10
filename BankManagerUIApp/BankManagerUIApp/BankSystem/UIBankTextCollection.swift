@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum BankTextCollection {
+enum UIBankTextCollection {
     
     static let addCustomer: String = "고객 10명 추가"
     static let reset: String = "초기화"

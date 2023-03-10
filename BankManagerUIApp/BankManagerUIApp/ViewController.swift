@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     private lazy var addCustomersButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(BankTextCollection.addCustomer, for: .normal)
+        button.setTitle(UIBankTextCollection.addCustomer, for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
         return button
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     private lazy var resetButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(BankTextCollection.reset, for: .normal)
+        button.setTitle(UIBankTextCollection.reset, for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.text = BankTextCollection.task
+        label.text = UIBankTextCollection.task
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 20)
         return label
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     private let standbyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 35)
-        label.text = BankTextCollection.standby
+        label.text = UIBankTextCollection.standby
         label.textColor = .white
         label.backgroundColor = .designSystem(.mainGreen)
         label.textAlignment = .center
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     private let inprogressLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 35)
-        label.text = BankTextCollection.inprogress
+        label.text = UIBankTextCollection.inprogress
         label.textColor = .white
         label.backgroundColor = .designSystem(.mainPurple)
         label.textAlignment = .center
