@@ -60,7 +60,9 @@ final class Bank {
     }
 
     func stopWorking() {
-
+        WorkType.allCases.forEach { workType in
+            customerQueueByWorkType[workType]?.clear()
+        }
     }
 
     // MARK: - Private
