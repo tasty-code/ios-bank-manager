@@ -7,10 +7,9 @@
 
 import UIKit
 
-class CustomerInfoView: UIView {
+final class CustomerInfoView: UIView {
     
     var ticketNumber = BasicLabel(systemFontSize: 25)
-    
     let hyphenLabel = BasicLabel(systemFontSize: 25)
     let taskTypeLabel = BasicLabel(systemFontSize: 25)
     
@@ -22,17 +21,21 @@ class CustomerInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        ticketNumber.text = "0"
-        hyphenLabel.text = "-"
-        taskTypeLabel.text = "Task"
-        
         setLabelLayout()
+    }
+    
+    convenience init(ticketNumber: UInt, task: String) {
+        self.init(frame: .zero)
+        self.ticketNumber.text = String(ticketNumber)
+        self.hyphenLabel.text = "-"
+        self.taskTypeLabel.text = task
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     private func setLabelLayout() {
         addSubview(infoStackView)
