@@ -15,6 +15,12 @@ final class BankViewController: UIViewController {
         static let waitingStateLabelText = "대기중"
         static let workingStateLabelText = "업무중"
 
+        static let timeInterval: TimeInterval = 0.01
+        static let initialCustomerID: Int = 1
+        static let numberOfVisitingCustomer: Int = 10
+
+        static let headerStackViewHeight: CGFloat = 150
+        static let defaultMargin: CGFloat = 8
     }
 
     // MARK: - Private
@@ -27,10 +33,10 @@ final class BankViewController: UIViewController {
 
     private lazy var bank = Bank(bankTellers: bankTellers, presenter: self)
 
-    private var lastCustomerID: Int = 1
+    private var lastCustomerID: Int = Constants.initialCustomerID
     private var isWorking = false
 
-    private let timerUtil = TimerUtil(timeInterval: 0.01)
+    private let timerUtil = TimerUtil(timeInterval: Constants.timeInterval)
 
     // MARK: - UI Properties
 
@@ -123,7 +129,7 @@ final class BankViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func addCustomers() {
-        let customers = generateVisitCustomers(withCount: 10)
+        let customers = generateVisitCustomers(withCount: Constants.numberOfVisitingCustomer)
 
         bank.visit(customers: customers)
         addCustomerLabels(of: customers, to: waitingStackView)
@@ -134,7 +140,7 @@ final class BankViewController: UIViewController {
 
     @objc private func resetAllTasks() {
         customerLabels = []
-        lastCustomerID = 1
+        lastCustomerID = Constants.initialCustomerID
 
         resetStackView()
         bank.stopWorking()
@@ -182,7 +188,9 @@ extension BankViewController {
         view.addSubview(headerStackView)
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            headerStackView.heightAnchor.constraint(equalToConstant: 150),
+            headerStackView.heightAnchor.constraint(
+                equalToConstant: Constants.headerStackViewHeight
+            ),
             headerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -191,7 +199,7 @@ extension BankViewController {
         view.addSubview(waitingStackView)
         waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            waitingStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 8),
+            waitingStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: Constants.defaultMargin),
             waitingStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             waitingStackView.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
         ])
@@ -199,7 +207,7 @@ extension BankViewController {
         view.addSubview(workingStackView)
         workingStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            workingStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 8),
+            workingStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: Constants.defaultMargin),
             workingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             workingStackView.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
         ])
@@ -224,7 +232,7 @@ extension BankViewController {
         }
     }
 
-    private func removeCustomerLabel(of customer: Customer) {
+    private func removeCustomerLabelFromSuperView(of customer: Customer) {
         guard let customerLabel = customerLabels.first(where: {
             $0.customer.id == customer.id
         }) else { return }
@@ -248,12 +256,12 @@ extension BankViewController {
 
 extension BankViewController: BankPresentable {
     func presentTaskStarted(of customer: Customer) {
-        removeCustomerLabel(of: customer)
+        removeCustomerLabelFromSuperView(of: customer)
         moveCustomerLabel(of: customer, to: workingStackView)
     }
 
     func presentTaskFinished(of customer: Customer) {
-        removeCustomerLabel(of: customer)
+        removeCustomerLabelFromSuperView(of: customer)
     }
 
     func presentAllTaskFinished() {
