@@ -45,17 +45,13 @@ class ViewController: UIViewController {
     //MARK: - Properties: TimerLabels & Stack
     
     private let taskLabel: UILabel = {
-        let label = UILabel()
+        let label = BasicLabel(systemFontSize: 20, textAlignnment: .right)
         label.text = UIBankTextCollection.task
-        label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     
     private lazy var timerLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 20)
+        let label = BasicLabel(systemFontSize: 20, textAlignnment: .left)
         label.text = " 00:00:000"
         return label
     }()
@@ -65,24 +61,18 @@ class ViewController: UIViewController {
     //MARK: - Properties: StateLabels & Stack
     
     private let standbyLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 35)
+        let label = BasicLabel(systemFontSize: 35, textAlignnment: .center)
         label.text = UIBankTextCollection.standby
         label.textColor = .white
         label.backgroundColor = .designSystem(.mainGreen)
-        label.textAlignment = .center
-        
         return label
     }()
     
     private let inprogressLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 35)
+        let label = BasicLabel(systemFontSize: 35, textAlignnment: .center)
         label.text = UIBankTextCollection.inprogress
         label.textColor = .white
         label.backgroundColor = .designSystem(.mainPurple)
-        label.textAlignment = .center
-        
         return label
     }()
     

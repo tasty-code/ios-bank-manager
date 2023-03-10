@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F538D1629BB033F0035C65A /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1729BB075A0035C65A /* BasicLabel.swift */; };
 		4FBA51C629B976C40003D8CC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51C529B976C40003D8CC /* Palette.swift */; };
 		4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FBA51C729B9771C0003D8CC /* Color.xcassets */; };
 		4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F538D1729BB075A0035C65A /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		4FBA51C529B976C40003D8CC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4FBA51C729B9771C0003D8CC /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				F146708329B973C900A867FF /* CustomerInfoView.swift */,
 				4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */,
+				4F538D1729BB075A0035C65A /* BasicLabel.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				4F538D1629BB033F0035C65A /* BankManager.swift in Sources */,
 				F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */,
 				F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */,
+				4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */,
 				F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */,
 				F18CADCD29BAE3EB00169BB8 /* BankState.swift in Sources */,
 				F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */,

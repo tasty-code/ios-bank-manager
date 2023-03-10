@@ -9,9 +9,10 @@ import UIKit
 
 class CustomerInfoView: UIView {
     
-    let ticketNumber = UILabel()
-    let hyphenLabel = UILabel()
-    let taskTypeLabel = UILabel()
+    var ticketNumber = BasicLabel(systemFontSize: 25)
+    
+    let hyphenLabel = BasicLabel(systemFontSize: 25)
+    let taskTypeLabel = BasicLabel(systemFontSize: 25)
     
     let infoStackView: BasicStackView = {
         let sv = BasicStackView(axis: .horizontal)
@@ -23,13 +24,8 @@ class CustomerInfoView: UIView {
         super.init(frame: frame)
         
         ticketNumber.text = "0"
-        ticketNumber.font = UIFont.systemFont(ofSize: 25)
-        
         hyphenLabel.text = "-"
-        hyphenLabel.font = UIFont.systemFont(ofSize: 25)
-        
         taskTypeLabel.text = "Task"
-        taskTypeLabel.font = UIFont.systemFont(ofSize: 25)
         
         setLabelLayout()
     }
