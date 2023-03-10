@@ -9,8 +9,12 @@ import Foundation
 
 struct Bank: CustomerManageable {
 
-    let accountBanker = Banker(processingTime: 0.7)
-    let loanBanker = Banker(processingTime: 1.1)
+    let accountBanker, loanBanker: Banker
+
+    init() {
+        self.accountBanker = Banker(workType: .account)
+        self.loanBanker = Banker(workType: .loan)
+    }
 
     func open() {
         let numberOfTodayCustomers = makeAcceptableNumber()

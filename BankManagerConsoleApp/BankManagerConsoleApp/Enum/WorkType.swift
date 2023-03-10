@@ -20,4 +20,13 @@ enum WorkType: CaseIterable, CustomStringConvertible {
             return "대출"
         }
     }
+
+    var processingTime: Double {
+        switch self {
+        case .account:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
 }
