@@ -28,7 +28,7 @@ final class CustomerStatusLabel: UILabel {
     // MARK: - Private
 
     private func configureText() {
-        text = "\(customer.id) - \(customer.workType.rawValue)"
+        text = "\(customer.id) - \(customer.workType.description)"
         font = .preferredFont(forTextStyle: .body)
     }
 

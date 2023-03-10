@@ -7,9 +7,18 @@
 
 import Foundation
 
-enum WorkType: String, CaseIterable {
-    case loan = "대출"
-    case deposit = "예금"
+enum WorkType: CaseIterable {
+    case loan
+    case deposit
+
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
 
     var timespent: TimeInterval {
         switch self {

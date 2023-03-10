@@ -214,7 +214,7 @@ extension BankViewController {
 
 extension BankViewController: BankPresentable {
     func presentTaskStarted(of customer: Customer) {
-        print("고객 업무 시작 \(customer.id) \(customer.workType.rawValue)")
+        print("고객 업무 시작 \(customer.id) \(customer.workType.description)")
 
         guard let customerLabel = customerLabels.first(where: {
             $0.customer.id == customer.id
@@ -227,7 +227,7 @@ extension BankViewController: BankPresentable {
     }
 
     func presentTaskFinished(of customer: Customer) {
-        print("고객 업무 종료 \(customer.id) \(customer.workType.rawValue)")
+        print("고객 업무 종료 \(customer.id) \(customer.workType.description)")
         
         guard let customerLabel = customerLabels.first(where: {
             $0.customer.id == customer.id

@@ -11,7 +11,6 @@ struct BankTeller {
 
     // MARK: - Properties
 
-    let id: UUID = UUID()
     let workType: WorkType
     let serialQueue = DispatchQueue(label: "bankTellerQueue")
 
