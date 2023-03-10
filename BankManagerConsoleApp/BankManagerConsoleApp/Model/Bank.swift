@@ -22,6 +22,7 @@ struct Bank: CustomerManageable {
         let loanSemaphore = DispatchSemaphore(value: 1)
         let accountSemaphore = DispatchSemaphore(value: 2)
         let group = DispatchGroup()
+        let startDate = Date()
 
         while !customerQueue.isEmpty() {
             guard let currentCustomer = customerQueue.dequeue() else { return }
@@ -44,16 +45,14 @@ struct Bank: CustomerManageable {
 
         group.wait()
 
-        showWorkFinishMessage(numberOfTodayCustomers)
+        let elapsedTime = Date().timeIntervalSince(startDate)
+
+        showWorkFinishMessage(numberOfTodayCustomers, elapsedTime)
     }
 
-    func showWorkFinishMessage(_ totalNumber: Int) {
-        let calculateWorkTime = calculateTotalWorkTime(customers: totalNumber, processingTimes: accountBanker.processingTime)
-        let convertDoubleToString = String(format: "%.2f", calculateWorkTime)
+    func showWorkFinishMessage(_ totalNumber: Int, _ workTime: TimeInterval) {
+        let convertTimeIntervalToString = String(format: "%.2f", workTime)
 
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertDoubleToString)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertTimeIntervalToString)초입니다.")
     }
-
-    func calculateTotalWorkTime(customers: Int, processingTimes: Double) -> Double { Double(customers) * processingTimes }
-
 }
