@@ -22,6 +22,23 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F146708329B973C900A867FF /* CustomerInfoView.swift */; };
+		F18CADC729BAE3EB00169BB8 /* WaitingManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADA729BAE3EB00169BB8 /* WaitingManagerTest.swift */; };
+		F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADAD29BAE3EB00169BB8 /* DoubleExtension.swift */; };
+		F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADAF29BAE3EB00169BB8 /* Customer.swift */; };
+		F18CADCA29BAE3EB00169BB8 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB029BAE3EB00169BB8 /* Teller.swift */; };
+		F18CADCB29BAE3EB00169BB8 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB229BAE3EB00169BB8 /* Menu.swift */; };
+		F18CADCC29BAE3EB00169BB8 /* BankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB329BAE3EB00169BB8 /* BankTextCollection.swift */; };
+		F18CADCD29BAE3EB00169BB8 /* BankState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB429BAE3EB00169BB8 /* BankState.swift */; };
+		F18CADCE29BAE3EB00169BB8 /* InputOutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB529BAE3EB00169BB8 /* InputOutputManager.swift */; };
+		F18CADCF29BAE3EB00169BB8 /* CustomerConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB629BAE3EB00169BB8 /* CustomerConstant.swift */; };
+		F18CADD029BAE3EB00169BB8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB729BAE3EB00169BB8 /* Task.swift */; };
+		F18CADD129BAE3EB00169BB8 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADB829BAE3EB00169BB8 /* Customer.swift */; };
+		F18CADD229BAE3EB00169BB8 /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBA29BAE3EB00169BB8 /* BankProtocol.swift */; };
+		F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBB29BAE3EB00169BB8 /* TellerProvidable.swift */; };
+		F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBD29BAE3EB00169BB8 /* WaitingQueue.swift */; };
+		F18CADD529BAE3EB00169BB8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBE29BAE3EB00169BB8 /* Node.swift */; };
+		F18CADD629BAE3EB00169BB8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADBF29BAE3EB00169BB8 /* LinkedList.swift */; };
+		F18CADD729BAE3EB00169BB8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18CADC029BAE3EB00169BB8 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +55,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = C7694E36259C3E9F0053667F;
 			remoteInfo = BankManagerUIApp;
+		};
+		F18CADC329BAE3EB00169BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F18CADA829BAE3EB00169BB8 /* BankManagerConsoleApp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C7694E76259C3EC00053667F;
+			remoteInfo = BankManagerConsoleApp;
+		};
+		F18CADC529BAE3EB00169BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F18CADA829BAE3EB00169BB8 /* BankManagerConsoleApp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F139FFBD29A62D1700BCA81B;
+			remoteInfo = WaitingManagerTest;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -64,6 +95,24 @@
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		F146708329B973C900A867FF /* CustomerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerInfoView.swift; sourceTree = "<group>"; };
+		F18CADA729BAE3EB00169BB8 /* WaitingManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingManagerTest.swift; sourceTree = "<group>"; };
+		F18CADA829BAE3EB00169BB8 /* BankManagerConsoleApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = BankManagerConsoleApp.xcodeproj; sourceTree = "<group>"; };
+		F18CADAD29BAE3EB00169BB8 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		F18CADAF29BAE3EB00169BB8 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		F18CADB029BAE3EB00169BB8 /* Teller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
+		F18CADB229BAE3EB00169BB8 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		F18CADB329BAE3EB00169BB8 /* BankTextCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankTextCollection.swift; sourceTree = "<group>"; };
+		F18CADB429BAE3EB00169BB8 /* BankState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankState.swift; sourceTree = "<group>"; };
+		F18CADB529BAE3EB00169BB8 /* InputOutputManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputOutputManager.swift; sourceTree = "<group>"; };
+		F18CADB629BAE3EB00169BB8 /* CustomerConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerConstant.swift; sourceTree = "<group>"; };
+		F18CADB729BAE3EB00169BB8 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		F18CADB829BAE3EB00169BB8 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		F18CADBA29BAE3EB00169BB8 /* BankProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankProtocol.swift; sourceTree = "<group>"; };
+		F18CADBB29BAE3EB00169BB8 /* TellerProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TellerProvidable.swift; sourceTree = "<group>"; };
+		F18CADBD29BAE3EB00169BB8 /* WaitingQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingQueue.swift; sourceTree = "<group>"; };
+		F18CADBE29BAE3EB00169BB8 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		F18CADBF29BAE3EB00169BB8 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		F18CADC029BAE3EB00169BB8 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +177,7 @@
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
+				F18CADA529BAE3EB00169BB8 /* BankManagerConsoleApp */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
 				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
@@ -181,6 +231,97 @@
 				C7694E5E259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIAppUITests;
+			sourceTree = "<group>";
+		};
+		F18CADA529BAE3EB00169BB8 /* BankManagerConsoleApp */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADA629BAE3EB00169BB8 /* WaitingManagerTest */,
+				F18CADA829BAE3EB00169BB8 /* BankManagerConsoleApp.xcodeproj */,
+				F18CADAB29BAE3EB00169BB8 /* BankManagerConsoleApp */,
+			);
+			name = BankManagerConsoleApp;
+			path = ../BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		F18CADA629BAE3EB00169BB8 /* WaitingManagerTest */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADA729BAE3EB00169BB8 /* WaitingManagerTest.swift */,
+			);
+			path = WaitingManagerTest;
+			sourceTree = "<group>";
+		};
+		F18CADA929BAE3EB00169BB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADC429BAE3EB00169BB8 /* BankManagerConsoleApp */,
+				F18CADC629BAE3EB00169BB8 /* WaitingManagerTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F18CADAB29BAE3EB00169BB8 /* BankManagerConsoleApp */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADAC29BAE3EB00169BB8 /* Extension */,
+				F18CADAE29BAE3EB00169BB8 /* BankSystem */,
+				F18CADB829BAE3EB00169BB8 /* Customer.swift */,
+				F18CADB929BAE3EB00169BB8 /* Protocol */,
+				F18CADBC29BAE3EB00169BB8 /* Queue */,
+				F18CADC029BAE3EB00169BB8 /* main.swift */,
+			);
+			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		F18CADAC29BAE3EB00169BB8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADAD29BAE3EB00169BB8 /* DoubleExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F18CADAE29BAE3EB00169BB8 /* BankSystem */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADAF29BAE3EB00169BB8 /* Customer.swift */,
+				F18CADB029BAE3EB00169BB8 /* Teller.swift */,
+				F18CADB129BAE3EB00169BB8 /* InputOutputManager */,
+				F18CADB629BAE3EB00169BB8 /* CustomerConstant.swift */,
+				F18CADB729BAE3EB00169BB8 /* Task.swift */,
+			);
+			path = BankSystem;
+			sourceTree = "<group>";
+		};
+		F18CADB129BAE3EB00169BB8 /* InputOutputManager */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADB229BAE3EB00169BB8 /* Menu.swift */,
+				F18CADB329BAE3EB00169BB8 /* BankTextCollection.swift */,
+				F18CADB429BAE3EB00169BB8 /* BankState.swift */,
+				F18CADB529BAE3EB00169BB8 /* InputOutputManager.swift */,
+			);
+			path = InputOutputManager;
+			sourceTree = "<group>";
+		};
+		F18CADB929BAE3EB00169BB8 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADBA29BAE3EB00169BB8 /* BankProtocol.swift */,
+				F18CADBB29BAE3EB00169BB8 /* TellerProvidable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F18CADBC29BAE3EB00169BB8 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				F18CADBD29BAE3EB00169BB8 /* WaitingQueue.swift */,
+				F18CADBE29BAE3EB00169BB8 /* Node.swift */,
+				F18CADBF29BAE3EB00169BB8 /* LinkedList.swift */,
+			);
+			path = Queue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +413,12 @@
 			mainGroup = C7694E2E259C3E9F0053667F;
 			productRefGroup = C7694E38259C3E9F0053667F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F18CADA929BAE3EB00169BB8 /* Products */;
+					ProjectRef = F18CADA829BAE3EB00169BB8 /* BankManagerConsoleApp.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C7694E36259C3E9F0053667F /* BankManagerUIApp */,
@@ -280,6 +427,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F18CADC429BAE3EB00169BB8 /* BankManagerConsoleApp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BankManagerConsoleApp;
+			remoteRef = F18CADC329BAE3EB00169BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F18CADC629BAE3EB00169BB8 /* WaitingManagerTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WaitingManagerTest.xctest;
+			remoteRef = F18CADC529BAE3EB00169BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C7694E35259C3E9F0053667F /* Resources */ = {
@@ -316,13 +480,30 @@
 			files = (
 				4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				F18CADD629BAE3EB00169BB8 /* LinkedList.swift in Sources */,
+				F18CADCB29BAE3EB00169BB8 /* Menu.swift in Sources */,
+				F18CADD529BAE3EB00169BB8 /* Node.swift in Sources */,
+				F18CADCA29BAE3EB00169BB8 /* Teller.swift in Sources */,
+				F18CADCC29BAE3EB00169BB8 /* BankTextCollection.swift in Sources */,
+				F18CADD229BAE3EB00169BB8 /* BankProtocol.swift in Sources */,
+				F18CADCE29BAE3EB00169BB8 /* InputOutputManager.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				F18CADD029BAE3EB00169BB8 /* Task.swift in Sources */,
+				F18CADD329BAE3EB00169BB8 /* TellerProvidable.swift in Sources */,
+				F18CADC929BAE3EB00169BB8 /* Customer.swift in Sources */,
+				F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */,
+				F18CADD729BAE3EB00169BB8 /* main.swift in Sources */,
+				F18CADCD29BAE3EB00169BB8 /* BankState.swift in Sources */,
+				F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */,
+				F18CADD129BAE3EB00169BB8 /* Customer.swift in Sources */,
 				4FBA51C629B976C40003D8CC /* Palette.swift in Sources */,
+				F18CADCF29BAE3EB00169BB8 /* CustomerConstant.swift in Sources */,
 				F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */,
 				4FBA51D329B9C2A30003D8CC /* BasicStackView.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */,
 				4FBA51D029B9A8FD0003D8CC /* BankTextCollection.swift in Sources */,
+				F18CADC729BAE3EB00169BB8 /* WaitingManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
