@@ -160,14 +160,10 @@ class ViewController: UIViewController {
     @objc
     private func addCustomerButtonTapped() {
         waitingStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
-        print(#function)
-        startTimer()
     }
     
     @objc
     private func resetButtonTapped() {
-        print(#function)
-        stopTimer()
     }
     
     
