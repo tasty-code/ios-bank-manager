@@ -137,7 +137,7 @@ final class BankViewController: UIViewController {
         lastCustomerID = 1
 
         resetStackView()
-        bank.stopWorking() // TODO: 리셋 로직 구현 필요
+        bank.stopWorking()
         timerUtil.reset()
     }
 
