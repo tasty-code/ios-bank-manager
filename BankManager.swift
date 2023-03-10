@@ -26,12 +26,15 @@ extension BankManager {
         
     }
     
-    func generateWaiting(range: ClosedRange<UInt>) {
+    @discardableResult
+    func generateWaiting(range: ClosedRange<UInt>) -> [Customer] {
+        var newCustomers: [Customer] = []
         range.forEach { number in
             let newCustomer = makeCustomer(number: number)
             waitingQueue.enqueue(newCustomer)
+            newCustomers.append(newCustomer)
         }
-        
+        return newCustomers
     }
     
     private func makeTeller() -> [Task: Teller] {

@@ -153,11 +153,14 @@ class ViewController: UIViewController {
     
     @objc
     private func addCustomerButtonTapped() {
-        
-        bankManager.generateWaiting(range: waitingNumber...waitingNumber + 10)
+        let newCustomers = bankManager.generateWaiting(range: waitingNumber...waitingNumber + 10)
         self.waitingNumber += 10
         
-        waitingStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
+        newCustomers.forEach { newCustomer in
+            waitingStackView.addArrangedSubview(CustomerInfoView(
+                ticketNumber: newCustomer.number,
+                task: newCustomer.task.rawValue))
+        }
     }
     
     @objc
