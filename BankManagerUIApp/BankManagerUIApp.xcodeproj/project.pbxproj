@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B458191D29BAE15100D37DE5 /* TimerUtl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B458191C29BAE15100D37DE5 /* TimerUtl.swift */; };
 		B482F2F029B9F9FE0077F94C /* CustomerStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B482F2EF29B9F9FE0077F94C /* CustomerStatusLabel.swift */; };
 		B482F36629BA03DA0077F94C /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B482F36529BA03DA0077F94C /* WorkType.swift */; };
 		B482F36829BA03F50077F94C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B482F36729BA03F50077F94C /* LinkedList.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B458191C29BAE15100D37DE5 /* TimerUtl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUtl.swift; sourceTree = "<group>"; };
 		B482F2EF29B9F9FE0077F94C /* CustomerStatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomerStatusLabel.swift; path = BankManagerUIApp/View/CustomerStatusLabel.swift; sourceTree = SOURCE_ROOT; };
 		B482F36529BA03DA0077F94C /* WorkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
 		B482F36729BA03F50077F94C /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B458191B29BAE13D00D37DE5 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B458191C29BAE15100D37DE5 /* TimerUtl.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		B482F2EC29B9F8000077F94C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +183,7 @@
 				B482F36029BA02EF0077F94C /* Model */,
 				B482F2F129B9FA050077F94C /* View */,
 				B482F2EC29B9F8000077F94C /* Controller */,
+				B458191B29BAE13D00D37DE5 /* Util */,
 				B482F2EE29B9F8100077F94C /* Resources */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
@@ -335,6 +346,7 @@
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				B482F36629BA03DA0077F94C /* WorkType.swift in Sources */,
 				B482F2F029B9F9FE0077F94C /* CustomerStatusLabel.swift in Sources */,
+				B458191D29BAE15100D37DE5 /* TimerUtl.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				B482F37229BA04570077F94C /* BankPresentable.swift in Sources */,
 			);

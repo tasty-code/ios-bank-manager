@@ -30,6 +30,8 @@ final class BankViewController: UIViewController {
     private var lastCustomerID: Int = 1
     private var isWorking = false
 
+    private let timerUtil = TimerUtil(timeInterval: 0.01)
+
     // MARK: - UI Properties
 
     private var customerLabels: [CustomerStatusLabel] = []
@@ -115,6 +117,7 @@ final class BankViewController: UIViewController {
 
         view.backgroundColor = .white
         configureLayout()
+        configureTimer()
     }
 
     // MARK: - Actions
@@ -123,34 +126,27 @@ final class BankViewController: UIViewController {
         let customers = generateVisitCustomers(withCount: 10)
 
         bank.visit(customers: customers)
-        updateViews(addedCustomers: customers)
+        addCustomerLabels(of: customers, to: waitingStackView)
 
         bank.startWorking()
+        timerUtil.start()
     }
 
     @objc private func resetAllTasks() {
         customerLabels = []
         lastCustomerID = 1
-        
-        workingStackView.subviews.forEach { view in
-            view.removeFromSuperview()
-        }
-        waitingStackView.subviews.forEach { view in
-            view.removeFromSuperview()
-        }
-        
+
+        resetStackView()
         bank.stopWorking() // TODO: 리셋 로직 구현 필요
+        timerUtil.reset()
     }
 
     // MARK: - Helpers
 
-    private func updateViews(addedCustomers: [Customer]) {
-        addedCustomers
-            .map { CustomerStatusLabel(customer: $0) }
-            .forEach { customerLabel in
-                waitingStackView.addArrangedSubview(customerLabel)
-                customerLabels.append(customerLabel)
-            }
+    private func configureTimer() {
+        timerUtil.setPresenter { [weak self] time in
+            self?.workTimeLabel.text = "\(Constants.workTimeLabelFormText) \(time)"
+        }
     }
 
     private func generateVisitCustomers(withCount count: Int) -> [Customer] {
@@ -208,27 +204,27 @@ extension BankViewController {
             workingStackView.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
         ])
     }
-}
 
-// MARK: - BankPresentable
+    private func addCustomerLabels(of customers: [Customer], to stackView: UIStackView) {
+        customers
+            .map { CustomerStatusLabel(customer: $0) }
+            .forEach { customerLabel in
+                stackView.addArrangedSubview(customerLabel)
+                customerLabels.append(customerLabel)
+            }
+    }
 
-extension BankViewController: BankPresentable {
-    func presentTaskStarted(of customer: Customer) {
-        print("고객 업무 시작 \(customer.id) \(customer.workType.description)")
-
+    private func moveCustomerLabel(of customer: Customer, to stackView: UIStackView) {
         guard let customerLabel = customerLabels.first(where: {
             $0.customer.id == customer.id
         }) else { return }
 
-        DispatchQueue.main.async { [weak self] in
-            customerLabel.removeFromSuperview()
-            self?.workingStackView.addArrangedSubview(customerLabel)
+        DispatchQueue.main.async {
+            stackView.addArrangedSubview(customerLabel)
         }
     }
 
-    func presentTaskFinished(of customer: Customer) {
-        print("고객 업무 종료 \(customer.id) \(customer.workType.description)")
-        
+    private func removeCustomerLabel(of customer: Customer) {
         guard let customerLabel = customerLabels.first(where: {
             $0.customer.id == customer.id
         }) else { return }
@@ -238,9 +234,29 @@ extension BankViewController: BankPresentable {
         }
     }
 
-    func presentAllTaskFinished() {
-        print("은행 업무 완전 종료")
+    private func resetStackView() {
+        workingStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        waitingStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+}
+
+// MARK: - BankPresentable
+
+extension BankViewController: BankPresentable {
+    func presentTaskStarted(of customer: Customer) {
+        removeCustomerLabel(of: customer)
+        moveCustomerLabel(of: customer, to: workingStackView)
     }
 
+    func presentTaskFinished(of customer: Customer) {
+        removeCustomerLabel(of: customer)
+    }
 
+    func presentAllTaskFinished() {
+        timerUtil.stop()
+    }
 }

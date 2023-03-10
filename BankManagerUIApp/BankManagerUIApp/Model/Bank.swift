@@ -47,7 +47,7 @@ final class Bank {
 
     func startWorking() {
         bankTellers.forEach { bankTeller in
-            guard bankTeller.status == .finished else { return print("일하는 중이라 지시X") }
+            guard bankTeller.status == .finished else { return }
 
             DispatchQueue.global().async(group: bankWorkDispatchGroup) {
                 self.assignTask(to: bankTeller)
