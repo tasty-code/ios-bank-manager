@@ -27,7 +27,6 @@ final class Bank {
         }
     }()
 
-
     // MARK: - Lifecycle
 
     init(
@@ -48,6 +47,8 @@ final class Bank {
 
     func startWorking() {
         bankTellers.forEach { bankTeller in
+            guard bankTeller.status == .finished else { return print("일하는 중이라 지시X") }
+
             DispatchQueue.global().async(group: bankWorkDispatchGroup) {
                 self.assignTask(to: bankTeller)
             }
@@ -65,13 +66,17 @@ final class Bank {
     // MARK: - Private
 
     private func assignTask(to bankTeller: BankTeller) {
-        var queue = self.customerQueueByWorkType[bankTeller.workType]
+        guard var queue = self.customerQueueByWorkType[bankTeller.workType],
+              let semaphoreOfWorkType = semaphoreByWorkType[bankTeller.workType] else { return }
 
-        while let customer = queue?.dequeue() {
+        while !queue.isEmpty {
+            semaphoreOfWorkType.wait()
+            guard let customer = queue.dequeue() else { return }
+            semaphoreOfWorkType.signal()
+
             bankTeller.performTask(
                 of: customer,
-                presenter: self.presenter,
-                group: self.bankWorkDispatchGroup
+                presenter: self.presenter
             )
         }
     }

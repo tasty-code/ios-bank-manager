@@ -120,13 +120,11 @@ final class BankViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func addCustomers() {
-        let customers = generateVisitCustomers()
+        let customers = generateVisitCustomers(withCount: 10)
 
         bank.visit(customers: customers)
         updateViews(addedCustomers: customers)
 
-        //        guard !isWorking else { return }
-        //        print("뱅크 일 시작")
         bank.startWorking()
     }
 
@@ -155,14 +153,16 @@ final class BankViewController: UIViewController {
             }
     }
 
-    private func generateVisitCustomers() -> [Customer] {
-        let customers = (lastCustomerID...(lastCustomerID + 9))
+    private func generateVisitCustomers(withCount count: Int) -> [Customer] {
+        let startIndex = lastCustomerID
+        let endIndex = lastCustomerID + (count - 1)
+        let customers = (startIndex...endIndex)
             .map {
                 let workType = WorkType.allCases.randomElement() ?? .deposit
                 return Customer(id: $0, workType: workType)
             }
 
-        lastCustomerID += 10
+        lastCustomerID += count
 
         return customers
     }

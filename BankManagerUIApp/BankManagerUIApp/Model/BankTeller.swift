@@ -7,24 +7,31 @@
 
 import Foundation
 
-struct BankTeller {
+final class BankTeller {
+    enum Status {
+        case working
+        case finished
+    }
 
     // MARK: - Properties
 
     let workType: WorkType
-    let serialQueue = DispatchQueue(label: "bankTellerQueue")
+    var status: Status = .finished
+
+    init(workType: WorkType) {
+        self.workType = workType
+    }
 
     // MARK: - Public
 
     func performTask(
         of customer: Customer,
-        presenter: BankPresentable,
-        group: DispatchGroup
+        presenter: BankPresentable
     ) {
-        serialQueue.async(group: group) {
-            presenter.presentTaskStarted(of: customer)
-            Thread.sleep(forTimeInterval: customer.timespent)
-            presenter.presentTaskFinished(of: customer)
-        }
+        status = .working
+        presenter.presentTaskStarted(of: customer)
+        Thread.sleep(forTimeInterval: customer.timespent)
+        presenter.presentTaskFinished(of: customer)
+        status = .finished
     }
 }
