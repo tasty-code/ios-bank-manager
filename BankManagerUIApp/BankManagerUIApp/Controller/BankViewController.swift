@@ -9,16 +9,19 @@ import UIKit
 final class BankViewController: UIViewController {
 
     private enum Constants {
+        // MARK: - UI Strings
         static let addCustomerButtonTitle = "고객 10명 추가"
         static let resetButtonTitle = "초기화"
         static let workTimeLabelFormText = "업무시간 - "
         static let waitingStateLabelText = "대기중"
         static let workingStateLabelText = "업무중"
 
+        // MARK: - Logic
         static let timeInterval: TimeInterval = 0.01
         static let initialCustomerID: Int = 1
         static let numberOfVisitingCustomer: Int = 10
 
+        // MARK: - UI Floats
         static let headerStackViewHeight: CGFloat = 150
         static let defaultMargin: CGFloat = 8
     }

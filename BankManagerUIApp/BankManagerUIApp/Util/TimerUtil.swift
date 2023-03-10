@@ -33,8 +33,8 @@ final class TimerUtil {
     func start() {
         guard !isRunning && timer == nil else { return }
 
-        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { _ in
-            self.updateTimeText()
+        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self] _ in
+            self?.updateTimeText()
         }
 
         isRunning = true
@@ -51,8 +51,8 @@ final class TimerUtil {
         elapsedTime = 0
     }
 
-    func setPresenter(closure: @escaping (String) -> Void) {
-        self.presenter = closure
+    func setPresenter(presenter: @escaping (String) -> Void) {
+        self.presenter = presenter
     }
 
     // MARK: - Private

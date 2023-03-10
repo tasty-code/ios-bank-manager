@@ -49,13 +49,13 @@ final class Bank {
         bankTellers.forEach { bankTeller in
             guard bankTeller.status == .finished else { return }
 
-            DispatchQueue.global().async(group: bankWorkDispatchGroup) {
-                self.assignTask(to: bankTeller)
+            DispatchQueue.global().async(group: bankWorkDispatchGroup) { [weak self] in
+                self?.assignTask(to: bankTeller)
             }
         }
 
-        setNotifyAllTaskFinished(completion: {
-            self.presenter.presentAllTaskFinished()
+        setNotifyAllTaskFinished(completion: { [weak self] in
+            self?.presenter.presentAllTaskFinished()
         })
     }
 
@@ -68,7 +68,7 @@ final class Bank {
     // MARK: - Private
 
     private func assignTask(to bankTeller: BankTeller) {
-        guard var queue = self.customerQueueByWorkType[bankTeller.workType],
+        guard var queue = customerQueueByWorkType[bankTeller.workType],
               let semaphoreOfWorkType = semaphoreByWorkType[bankTeller.workType] else { return }
 
         while !queue.isEmpty {
@@ -78,7 +78,7 @@ final class Bank {
 
             bankTeller.performTask(
                 of: customer,
-                presenter: self.presenter
+                presenter: presenter
             )
         }
     }
