@@ -199,8 +199,8 @@
         - 예금: 0.7초
     - 고객 업무 시작/완료 시 안내 메세지에 고객 대기번호와 함께 업무도 함께 출력
 - 🗝️ keyword: `Concurrency`, `Thread`, `Sync/Async`, `추상화`, `일반화`
-- [STEP 3 PR 🔗]()
-
+- [STEP 3 PR 🔗](https://github.com/tasty-code/ios-bank-manager/pull/26)
+<!--
 ### STEP 4
 - **UI 구현**
     - 코드만 사용하여 구현
@@ -217,7 +217,7 @@
         - 초기화 전까지 업무시간은 초기화되지 않고 누적
 - 🗝️ keyword: `Code-base`, `StackView`
 - [STEP 4 PR 🔗]()
-
+-->
 </br>
 
 ## 🚀 트러블 슈팅
