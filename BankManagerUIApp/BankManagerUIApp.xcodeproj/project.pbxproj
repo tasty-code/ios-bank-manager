@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2D793A29BB1C9700C30BE2 /* TimeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */; };
 		4F538D1629BB033F0035C65A /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
 		4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1729BB075A0035C65A /* BasicLabel.swift */; };
+		4F538D1C29BB0F870035C65A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1B29BB0F870035C65A /* TimerModel.swift */; };
 		4FBA51C629B976C40003D8CC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51C529B976C40003D8CC /* Palette.swift */; };
 		4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FBA51C729B9771C0003D8CC /* Color.xcassets */; };
 		4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */; };
@@ -72,7 +74,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDelegate.swift; sourceTree = "<group>"; };
 		4F538D1729BB075A0035C65A /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
+		4F538D1B29BB0F870035C65A /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		4FBA51C529B976C40003D8CC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4FBA51C729B9771C0003D8CC /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -139,9 +143,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F538D1A29BB0F740035C65A /* BankModel */ = {
+			isa = PBXGroup;
+			children = (
+				4F538D1B29BB0F870035C65A /* TimerModel.swift */,
+			);
+			path = BankModel;
+			sourceTree = "<group>";
+		};
 		4FBA51C429B976B50003D8CC /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				4FBA51D129B9C2930003D8CC /* CustomView */,
 				4FBA51C529B976C40003D8CC /* Palette.swift */,
 			);
 			path = DesignSystem;
@@ -160,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */,
+				4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */,
 			);
 			path = BankSystem;
 			sourceTree = "<group>";
@@ -198,6 +212,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F538D1A29BB0F740035C65A /* BankModel */,
 				4FBA51CE29B9A8C90003D8CC /* BankSystem */,
 				4FBA51CB29B978CA0003D8CC /* Extension */,
 				4FBA51C429B976B50003D8CC /* DesignSystem */,
@@ -205,7 +220,6 @@
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
-				4FBA51D129B9C2930003D8CC /* CustomView */,
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				4FBA51C729B9771C0003D8CC /* Color.xcassets */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
@@ -479,6 +493,7 @@
 			files = (
 				4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				4F2D793A29BB1C9700C30BE2 /* TimeDelegate.swift in Sources */,
 				F18CADD629BAE3EB00169BB8 /* LinkedList.swift in Sources */,
 				F18CADCB29BAE3EB00169BB8 /* Menu.swift in Sources */,
 				F18CADD529BAE3EB00169BB8 /* Node.swift in Sources */,
@@ -494,6 +509,7 @@
 				4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */,
 				F18CADD429BAE3EB00169BB8 /* WaitingQueue.swift in Sources */,
 				F18CADCD29BAE3EB00169BB8 /* BankState.swift in Sources */,
+				4F538D1C29BB0F870035C65A /* TimerModel.swift in Sources */,
 				F18CADC829BAE3EB00169BB8 /* DoubleExtension.swift in Sources */,
 				4FBA51C629B976C40003D8CC /* Palette.swift in Sources */,
 				F18CADCF29BAE3EB00169BB8 /* CustomerConstant.swift in Sources */,

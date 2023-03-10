@@ -10,17 +10,11 @@ class ViewController: UIViewController {
     
     private let queue = WaitingQueue<Customer>()
     private lazy var bankManager = BankManager(waitingQueue: queue)
-    private var waitingNumber: UInt = 0
+    private var waitingNumber: UInt = 1
     
     // MARK: - Properties: Timer
     
-    private lazy var time: Int = 0 {
-        didSet {
-            updateTimerLabel()
-        }
-    }
-    
-    weak var timer: Timer?
+    private let timer = TimerModel()
 
     //MARK: - Properties: Button
     
@@ -95,9 +89,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setupDelegate()
     }
     
     //MARK: - UI Setting
+    
+    private func setupDelegate() {
+        timer.timerDelegate = self
+    }
     
     private func setUI() {
         view.addSubview(interfaceStackView)
@@ -153,43 +152,26 @@ class ViewController: UIViewController {
     
     @objc
     private func addCustomerButtonTapped() {
-        
-        bankManager.generateWaiting(range: waitingNumber...waitingNumber + 10)
-        self.waitingNumber += 10
-        
         waitingStackView.addArrangedSubview(CustomerInfoView(frame: .zero))
+        
+    }
+    
+    func addCustomer() {
+        let range = waitingNumber...waitingNumber + (UIBankTextCollection.customerRange - 1)
+        bankManager.generateWaiting(range: range)
+        self.waitingNumber += UIBankTextCollection.customerRange
     }
     
     @objc
     private func resetButtonTapped() {
     }
-    
-    
-    // MARK: - Timer
-    
-    private func startTimer() {
-        self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { time in
-            
-            self.time += 1
-        }
         
-    }
-    
-    private func stopTimer() {
-        self.timer?.invalidate()
-        
-    }
-    
-    private func updateTimerLabel() {
-        // 분
-        let minutes = self.time / 60000
-        // 초
-        let seconds = (self.time / 1000) % 60
-        // 마이크로초
-        let microseconds = self.time % 1000
-        
-        self.timerLabel.text = String(format: " %02d:%02d:%03d", minutes, seconds, microseconds)
-    }
 }
 
+
+// MARK: - Timer
+extension ViewController: TimerDelegate {
+    func updateTime() {
+        self.timerLabel.text = timer.updateTimerLabel()
+    }
+}

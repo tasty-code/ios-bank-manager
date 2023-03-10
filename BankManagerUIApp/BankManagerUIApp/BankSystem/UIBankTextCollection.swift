@@ -16,4 +16,5 @@ enum UIBankTextCollection {
     static let standby: String = "대기중"
     static let inprogress: String = "업무중"
     
+    static let customerRange: UInt = 10
 }
