@@ -26,12 +26,12 @@ final class BankTeller {
 
     func performTask(
         of customer: Customer,
-        presenter: BankPresentable
+        presenter: BankPresentable?
     ) {
         status = .working
-        presenter.presentTaskStarted(of: customer)
+        presenter?.presentTaskStarted(of: customer)
         Thread.sleep(forTimeInterval: customer.timespent)
-        presenter.presentTaskFinished(of: customer)
+        presenter?.presentTaskFinished(of: customer)
         status = .finished
     }
 }

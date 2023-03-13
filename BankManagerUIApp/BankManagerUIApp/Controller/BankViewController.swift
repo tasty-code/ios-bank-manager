@@ -171,10 +171,7 @@ final class BankViewController: UIViewController {
 
         return customers
     }
-
 }
-
-
 
 // MARK: - Layout
 

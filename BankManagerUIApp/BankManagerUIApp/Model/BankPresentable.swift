@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BankPresentable {
+protocol BankPresentable: AnyObject {
     func presentTaskStarted(of customer: Customer)
     func presentTaskFinished(of customer: Customer)
     func presentAllTaskFinished()

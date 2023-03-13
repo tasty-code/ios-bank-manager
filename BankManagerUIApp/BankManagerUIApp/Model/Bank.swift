@@ -11,7 +11,7 @@ final class Bank {
 
     // MARK: - Private property
 
-    private let presenter: BankPresentable
+    private weak var presenter: BankPresentable?
     private let bankTellers: [BankTeller]
     private let bankWorkDispatchGroup = DispatchGroup()
 
@@ -55,7 +55,7 @@ final class Bank {
         }
 
         setNotifyAllTaskFinished(completion: { [weak self] in
-            self?.presenter.presentAllTaskFinished()
+            self?.presenter?.presentAllTaskFinished()
         })
     }
 
