@@ -8,28 +8,51 @@
 import Foundation
 
 struct Bank: CustomerManageable {
-    
-    let banker = Banker()
-    let processingTimePerPerson = Banker.processingTime
+
+    let accountBanker, loanBanker: Banker
+
+    init() {
+        self.accountBanker = Banker(workType: .account)
+        self.loanBanker = Banker(workType: .loan)
+    }
 
     func open() {
         let numberOfTodayCustomers = makeAcceptableNumber()
         let customerQueue = makeCustomerQueue(maxCount: numberOfTodayCustomers)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        let accountSemaphore = DispatchSemaphore(value: 2)
+        let group = DispatchGroup()
+        let startDate = Date()
 
         while !customerQueue.isEmpty() {
-            let currentCustomer = customerQueue.dequeue()
-            guard let numberOfCurrentCustomer = currentCustomer?.waitingOrder else { return }
+            guard let currentCustomer = customerQueue.dequeue() else { return }
 
-            banker.work(for: numberOfCurrentCustomer)
+            switch currentCustomer.workType {
+            case WorkType.account.description :
+                DispatchQueue.global().async(group: group) {
+                    accountSemaphore.wait()
+                    accountBanker.work(for: currentCustomer)
+                    accountSemaphore.signal()
+                }
+            default:
+                DispatchQueue.global().async(group: group) {
+                    loanSemaphore.wait()
+                    loanBanker.work(for: currentCustomer)
+                    loanSemaphore.signal()
+                }
+            }
         }
 
-        showWorkFinishMessage(numberOfTodayCustomers, processingTimePerPerson)
+        group.wait()
+
+        let elapsedTime = Date().timeIntervalSince(startDate)
+
+        showWorkFinishMessage(numberOfTodayCustomers, elapsedTime)
     }
 
-    func showWorkFinishMessage(_ totalNumber: Int, _ eachProcessingSecond: Double) {
-        let totalTime = Double(totalNumber) * eachProcessingSecond
-        let convertDoubleToString = String(format: "%.2f", totalTime)
+    func showWorkFinishMessage(_ totalNumber: Int, _ workTime: TimeInterval) {
+        let convertTimeIntervalToString = String(format: "%.2f", workTime)
 
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertDoubleToString)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumber)명이며, 총 업무시간은 \(convertTimeIntervalToString)초입니다.")
     }
 }
