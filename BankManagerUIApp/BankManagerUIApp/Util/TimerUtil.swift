@@ -51,7 +51,7 @@ final class TimerUtil {
         elapsedTime = 0
     }
 
-    func setPresenter(presenter: @escaping (String) -> Void) {
+    func setPresenter(_ presenter: @escaping (String) -> Void) {
         self.presenter = presenter
     }
 
@@ -61,6 +61,5 @@ final class TimerUtil {
         elapsedTime += timeInterval
         let formattedTime = dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: elapsedTime))
         presenter?(formattedTime)
-        print(formattedTime)
     }
 }
