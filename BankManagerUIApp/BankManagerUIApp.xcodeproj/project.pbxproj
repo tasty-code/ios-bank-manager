@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F2D793A29BB1C9700C30BE2 /* TimeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */; };
+		4F2D793A29BB1C9700C30BE2 /* TimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */; };
 		4F538D1629BB033F0035C65A /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
 		4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1729BB075A0035C65A /* BasicLabel.swift */; };
 		4F538D1C29BB0F870035C65A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1B29BB0F870035C65A /* TimerModel.swift */; };
@@ -74,7 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDelegate.swift; sourceTree = "<group>"; };
+		4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDelegate.swift; sourceTree = "<group>"; };
 		4F538D1729BB075A0035C65A /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		4F538D1B29BB0F870035C65A /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		4FBA51C529B976C40003D8CC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */,
-				4F2D793929BB1C9700C30BE2 /* TimeDelegate.swift */,
+				4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */,
 			);
 			path = BankSystem;
 			sourceTree = "<group>";
@@ -493,7 +493,7 @@
 			files = (
 				4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
-				4F2D793A29BB1C9700C30BE2 /* TimeDelegate.swift in Sources */,
+				4F2D793A29BB1C9700C30BE2 /* TimerDelegate.swift in Sources */,
 				F18CADD629BAE3EB00169BB8 /* LinkedList.swift in Sources */,
 				F18CADCB29BAE3EB00169BB8 /* Menu.swift in Sources */,
 				F18CADD529BAE3EB00169BB8 /* Node.swift in Sources */,
