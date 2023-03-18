@@ -152,6 +152,7 @@ class ViewController: UIViewController {
     
     @objc
     private func addCustomerButtonTapped() {
+        let group = DispatchGroup()
         let range = waitingNumber...waitingNumber + (UIBankTextCollection.customerRange - 1)
         let newCustomers = bankManager.generateWaiting(range: range)
         
@@ -161,6 +162,16 @@ class ViewController: UIViewController {
         
         self.waitingNumber += UIBankTextCollection.customerRange
         timer.startTimer()
+        // 대기중 스택에서 제거 -> 업무중 스택에서 추가 -> 완료후 제거
+        bankManager.dealCustomer(group: group) { customer, taskState in
+            if taskState {
+                self.eliminateLabel(from: self.waitingStackView, by: customer.number)
+                self.addLabel(into: self.inprogressStackView, with: customer)
+            }
+            if !taskState {
+                self.eliminateLabel(from: self.inprogressStackView, by: customer.number)
+            }
+        }
     }
     
     @objc
@@ -169,19 +180,23 @@ class ViewController: UIViewController {
     }
     
     private func addLabel(into stackView: UIStackView, with data: Customer) {
-        stackView.addArrangedSubview(CustomerInfoView(ticketNumber: data.number, task: data.task.rawValue))
+        DispatchQueue.main.async {
+            stackView.addArrangedSubview(CustomerInfoView(ticketNumber: data.number, task: data.task.rawValue))
+        }
     }
     
     private func eliminateLabel(from stackView: UIStackView, by ticketNumber: UInt) {
-        stackView.arrangedSubviews.forEach { view in
-            guard let customerView = view as? CustomerInfoView,
-                  let ticketLabel = customerView.ticketNumber.text,
-                  let ticketLabelNumber = UInt(ticketLabel) else { return }
-            
-            if ticketLabelNumber == ticketNumber {
-                stackView.removeArrangedSubview(view)
-                view.removeFromSuperview()
-                return
+        DispatchQueue.main.async {
+            stackView.arrangedSubviews.forEach { view in
+                guard let customerView = view as? CustomerInfoView,
+                      let ticketLabel = customerView.ticketNumber.text,
+                      let ticketLabelNumber = UInt(ticketLabel) else { return }
+                
+                if ticketLabelNumber == ticketNumber {
+                    stackView.removeArrangedSubview(view)
+                    view.removeFromSuperview()
+                    return
+                }
             }
         }
     }
