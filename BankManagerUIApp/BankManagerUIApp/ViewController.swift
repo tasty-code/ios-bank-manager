@@ -156,18 +156,22 @@ class ViewController: UIViewController {
         let newCustomers = bankManager.generateWaiting(range: range)
         
         newCustomers.forEach { newCustomer in
-            waitingStackView.addArrangedSubview(CustomerInfoView(
-                ticketNumber: newCustomer.number,
-                task: newCustomer.task.rawValue))
+            addLabel(into: waitingStackView, with: newCustomer)
         }
         
         self.waitingNumber += UIBankTextCollection.customerRange
         timer.startTimer()
+        
+        
     }
     
     @objc
     private func resetButtonTapped() {
         timer.stopTimer()
+    }
+    
+    private func addLabel(into stackView: UIStackView, with data: Customer) {
+        stackView.addArrangedSubview(CustomerInfoView(ticketNumber: data.number, task: data.task.rawValue))
     }
         
 }

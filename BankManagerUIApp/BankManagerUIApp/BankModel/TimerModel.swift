@@ -12,7 +12,7 @@ final class TimerModel {
     weak var timerDelegate: TimerDelegate?
     weak var timer: Timer?
     
-    private var time: Int = 0 {
+    private var time: Int = .zero {
         didSet {
             timerDelegate?.updateTime()
         }
@@ -28,6 +28,7 @@ final class TimerModel {
     
     func stopTimer() {
         self.timer?.invalidate()
+        self.time = .zero
     }
     
     func updateTimerLabel() -> String {
