@@ -10,6 +10,6 @@ import Foundation
 protocol TellerProvidable {
 
     var semaphore: DispatchSemaphore { get }    
-    func work(task: Task, completion: (Bool) -> Void)
+    func work(completion: (Bool) -> Void)
                                                 
 }

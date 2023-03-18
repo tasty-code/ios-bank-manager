@@ -42,7 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F1EC89329B765AF00938130 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
+		4F1EC89329B765AF00938130 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		4FAD6C5B29A4BF27009809E4 /* WaitingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQueue.swift; sourceTree = "<group>"; };
 		4FEFD32A29ABB79600CC136F /* CustomerConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerConstant.swift; sourceTree = "<group>"; };
 		4FEFD32D29ABBAB200CC136F /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };

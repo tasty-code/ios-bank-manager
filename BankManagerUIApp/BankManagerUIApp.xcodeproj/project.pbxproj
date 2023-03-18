@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2D793A29BB1C9700C30BE2 /* TimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */; };
+		4F538D1629BB033F0035C65A /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1729BB075A0035C65A /* BasicLabel.swift */; };
+		4F538D1C29BB0F870035C65A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F538D1B29BB0F870035C65A /* TimerModel.swift */; };
+		4FBA51C629B976C40003D8CC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51C529B976C40003D8CC /* Palette.swift */; };
+		4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FBA51C729B9771C0003D8CC /* Color.xcassets */; };
+		4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */; };
+		4FBA51D029B9A8FD0003D8CC /* UIBankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */; };
+		4FBA51D329B9C2A30003D8CC /* BasicStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */; };
+		4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBA51D429BA492A0003D8CC /* Extension+StackView.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
 		C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3C259C3E9F0053667F /* SceneDelegate.swift */; };
 		C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3E259C3E9F0053667F /* ViewController.swift */; };
@@ -15,7 +25,21 @@
 		C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7694E45259C3EA20053667F /* LaunchScreen.storyboard */; };
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
-		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F146708329B973C900A867FF /* CustomerInfoView.swift */; };
+		F1EFDF4929C5AB8F00AD2446 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3629C5AB8F00AD2446 /* DoubleExtension.swift */; };
+		F1EFDF4A29C5AB8F00AD2446 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3829C5AB8F00AD2446 /* Customer.swift */; };
+		F1EFDF4B29C5AB8F00AD2446 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3929C5AB8F00AD2446 /* Teller.swift */; };
+		F1EFDF4C29C5AB8F00AD2446 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3B29C5AB8F00AD2446 /* Menu.swift */; };
+		F1EFDF4D29C5AB8F00AD2446 /* BankTextCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3C29C5AB8F00AD2446 /* BankTextCollection.swift */; };
+		F1EFDF4E29C5AB8F00AD2446 /* BankState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3D29C5AB8F00AD2446 /* BankState.swift */; };
+		F1EFDF4F29C5AB8F00AD2446 /* InputOutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3E29C5AB8F00AD2446 /* InputOutputManager.swift */; };
+		F1EFDF5029C5AB8F00AD2446 /* CustomerConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF3F29C5AB8F00AD2446 /* CustomerConstant.swift */; };
+		F1EFDF5129C5AB8F00AD2446 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4029C5AB8F00AD2446 /* Task.swift */; };
+		F1EFDF5229C5AB8F00AD2446 /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4229C5AB8F00AD2446 /* BankProtocol.swift */; };
+		F1EFDF5329C5AB8F00AD2446 /* TellerProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4329C5AB8F00AD2446 /* TellerProvidable.swift */; };
+		F1EFDF5429C5AB8F00AD2446 /* WaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4529C5AB8F00AD2446 /* WaitingQueue.swift */; };
+		F1EFDF5529C5AB8F00AD2446 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4629C5AB8F00AD2446 /* Node.swift */; };
+		F1EFDF5629C5AB8F00AD2446 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EFDF4729C5AB8F00AD2446 /* LinkedList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +60,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDelegate.swift; sourceTree = "<group>"; };
+		4F538D1729BB075A0035C65A /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
+		4F538D1B29BB0F870035C65A /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		4FBA51C529B976C40003D8CC /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		4FBA51C729B9771C0003D8CC /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBankTextCollection.swift; sourceTree = "<group>"; };
+		4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStackView.swift; sourceTree = "<group>"; };
+		4FBA51D429BA492A0003D8CC /* Extension+StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+StackView.swift"; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E3A259C3E9F0053667F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7694E3C259C3E9F0053667F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +83,23 @@
 		C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		F146708329B973C900A867FF /* CustomerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerInfoView.swift; sourceTree = "<group>"; };
+		F1EFDF3629C5AB8F00AD2446 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		F1EFDF3829C5AB8F00AD2446 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		F1EFDF3929C5AB8F00AD2446 /* Teller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
+		F1EFDF3B29C5AB8F00AD2446 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		F1EFDF3C29C5AB8F00AD2446 /* BankTextCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankTextCollection.swift; sourceTree = "<group>"; };
+		F1EFDF3D29C5AB8F00AD2446 /* BankState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankState.swift; sourceTree = "<group>"; };
+		F1EFDF3E29C5AB8F00AD2446 /* InputOutputManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputOutputManager.swift; sourceTree = "<group>"; };
+		F1EFDF3F29C5AB8F00AD2446 /* CustomerConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerConstant.swift; sourceTree = "<group>"; };
+		F1EFDF4029C5AB8F00AD2446 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		F1EFDF4229C5AB8F00AD2446 /* BankProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankProtocol.swift; sourceTree = "<group>"; };
+		F1EFDF4329C5AB8F00AD2446 /* TellerProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TellerProvidable.swift; sourceTree = "<group>"; };
+		F1EFDF4529C5AB8F00AD2446 /* WaitingQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingQueue.swift; sourceTree = "<group>"; };
+		F1EFDF4629C5AB8F00AD2446 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		F1EFDF4729C5AB8F00AD2446 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		F1EFDF4829C5AB8F00AD2446 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +127,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F538D1A29BB0F740035C65A /* BankModel */ = {
+			isa = PBXGroup;
+			children = (
+				4F538D1B29BB0F870035C65A /* TimerModel.swift */,
+			);
+			path = BankModel;
+			sourceTree = "<group>";
+		};
+		4FBA51C429B976B50003D8CC /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				4FBA51D129B9C2930003D8CC /* CustomView */,
+				4FBA51C529B976C40003D8CC /* Palette.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		4FBA51CB29B978CA0003D8CC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4FBA51CC29B978D90003D8CC /* Extension+UIColor.swift */,
+				4FBA51D429BA492A0003D8CC /* Extension+StackView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4FBA51CE29B9A8C90003D8CC /* BankSystem */ = {
+			isa = PBXGroup;
+			children = (
+				4FBA51CF29B9A8FD0003D8CC /* UIBankTextCollection.swift */,
+				4F2D793929BB1C9700C30BE2 /* TimerDelegate.swift */,
+			);
+			path = BankSystem;
+			sourceTree = "<group>";
+		};
+		4FBA51D129B9C2930003D8CC /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				F146708329B973C900A867FF /* CustomerInfoView.swift */,
+				4FBA51D229B9C2A30003D8CC /* BasicStackView.swift */,
+				4F538D1729BB075A0035C65A /* BasicLabel.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
+				F1EFDF3429C5AB8F00AD2446 /* BankManagerConsoleApp */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
 				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
@@ -101,11 +196,16 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F538D1A29BB0F740035C65A /* BankModel */,
+				4FBA51CE29B9A8C90003D8CC /* BankSystem */,
+				4FBA51CB29B978CA0003D8CC /* Extension */,
+				4FBA51C429B976B50003D8CC /* DesignSystem */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
+				4FBA51C729B9771C0003D8CC /* Color.xcassets */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
@@ -129,6 +229,69 @@
 				C7694E5E259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIAppUITests;
+			sourceTree = "<group>";
+		};
+		F1EFDF3429C5AB8F00AD2446 /* BankManagerConsoleApp */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF3529C5AB8F00AD2446 /* Extension */,
+				F1EFDF3729C5AB8F00AD2446 /* BankSystem */,
+				F1EFDF4129C5AB8F00AD2446 /* Protocol */,
+				F1EFDF4429C5AB8F00AD2446 /* Queue */,
+				F1EFDF4829C5AB8F00AD2446 /* main.swift */,
+			);
+			name = BankManagerConsoleApp;
+			path = ../BankManagerConsoleApp/BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		F1EFDF3529C5AB8F00AD2446 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF3629C5AB8F00AD2446 /* DoubleExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F1EFDF3729C5AB8F00AD2446 /* BankSystem */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF3829C5AB8F00AD2446 /* Customer.swift */,
+				F1EFDF3929C5AB8F00AD2446 /* Teller.swift */,
+				F1EFDF3A29C5AB8F00AD2446 /* InputOutputManager */,
+				F1EFDF3F29C5AB8F00AD2446 /* CustomerConstant.swift */,
+				F1EFDF4029C5AB8F00AD2446 /* Task.swift */,
+			);
+			path = BankSystem;
+			sourceTree = "<group>";
+		};
+		F1EFDF3A29C5AB8F00AD2446 /* InputOutputManager */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF3B29C5AB8F00AD2446 /* Menu.swift */,
+				F1EFDF3C29C5AB8F00AD2446 /* BankTextCollection.swift */,
+				F1EFDF3D29C5AB8F00AD2446 /* BankState.swift */,
+				F1EFDF3E29C5AB8F00AD2446 /* InputOutputManager.swift */,
+			);
+			path = InputOutputManager;
+			sourceTree = "<group>";
+		};
+		F1EFDF4129C5AB8F00AD2446 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF4229C5AB8F00AD2446 /* BankProtocol.swift */,
+				F1EFDF4329C5AB8F00AD2446 /* TellerProvidable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F1EFDF4429C5AB8F00AD2446 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				F1EFDF4529C5AB8F00AD2446 /* WaitingQueue.swift */,
+				F1EFDF4629C5AB8F00AD2446 /* Node.swift */,
+				F1EFDF4729C5AB8F00AD2446 /* LinkedList.swift */,
+			);
+			path = Queue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */,
+				4FBA51C829B9771C0003D8CC /* Color.xcassets in Resources */,
 				C7694E44259C3EA20053667F /* Assets.xcassets in Resources */,
 				C7694E42259C3E9F0053667F /* Main.storyboard in Resources */,
 			);
@@ -261,10 +425,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FBA51D529BA492A0003D8CC /* Extension+StackView.swift in Sources */,
+				F1EFDF5429C5AB8F00AD2446 /* WaitingQueue.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				4F2D793A29BB1C9700C30BE2 /* TimerDelegate.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				F1EFDF5529C5AB8F00AD2446 /* Node.swift in Sources */,
+				F1EFDF5129C5AB8F00AD2446 /* Task.swift in Sources */,
+				4F538D1629BB033F0035C65A /* BankManager.swift in Sources */,
+				4F538D1829BB075A0035C65A /* BasicLabel.swift in Sources */,
+				F1EFDF5629C5AB8F00AD2446 /* LinkedList.swift in Sources */,
+				F1EFDF4A29C5AB8F00AD2446 /* Customer.swift in Sources */,
+				4F538D1C29BB0F870035C65A /* TimerModel.swift in Sources */,
+				F1EFDF5329C5AB8F00AD2446 /* TellerProvidable.swift in Sources */,
+				4FBA51C629B976C40003D8CC /* Palette.swift in Sources */,
+				F146708429B973C900A867FF /* CustomerInfoView.swift in Sources */,
+				F1EFDF4D29C5AB8F00AD2446 /* BankTextCollection.swift in Sources */,
+				4FBA51D329B9C2A30003D8CC /* BasicStackView.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
-				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
+				4FBA51CD29B978D90003D8CC /* Extension+UIColor.swift in Sources */,
+				F1EFDF4C29C5AB8F00AD2446 /* Menu.swift in Sources */,
+				F1EFDF4F29C5AB8F00AD2446 /* InputOutputManager.swift in Sources */,
+				F1EFDF4E29C5AB8F00AD2446 /* BankState.swift in Sources */,
+				F1EFDF4929C5AB8F00AD2446 /* DoubleExtension.swift in Sources */,
+				4FBA51D029B9A8FD0003D8CC /* UIBankTextCollection.swift in Sources */,
+				F1EFDF4B29C5AB8F00AD2446 /* Teller.swift in Sources */,
+				F1EFDF5029C5AB8F00AD2446 /* CustomerConstant.swift in Sources */,
+				F1EFDF5229C5AB8F00AD2446 /* BankProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
