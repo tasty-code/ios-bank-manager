@@ -6,16 +6,25 @@
 import Foundation
 
 struct BankManager {
-
+    
     private let numberOfGuest: UInt = CustomerConstant.numberOfCustomer
     private let waitingQueue: WaitingQueue<Customer>
-
+    private let tellers: [Task: Teller]
+    
     // MARK: - init
-        
+    
     init(waitingQueue: WaitingQueue<Customer>) {
         self.waitingQueue = waitingQueue
+        self.tellers = {
+            var tellers = [Task: Teller]()
+            
+            Task.allCases.forEach { task in
+                tellers[task] = Teller(task: task)
+            }
+            return tellers
+        }()
     }
-
+    
 }
 
 extension BankManager {
@@ -36,49 +45,39 @@ extension BankManager {
         }
         return newCustomers
     }
+
     
-    private func makeTeller() -> [Task: Teller] {
-        var tellers = [Task: Teller]()
-
-        Task.allCases.forEach { task in
-            tellers[task] = Teller(task: task)
-        }
-        return tellers
-    }
-
     func dealCustomer(group: DispatchGroup, completion: @escaping (Customer, Bool) -> Void) {
         let queue = DispatchQueue.global()
-        let tellers = makeTeller()
-
+        
         while let customer = waitingQueue.dequeue() {
             group.enter()
             guard let teller = tellers[customer.task] else { return }
-    
+            
             queue.async(group: group) {
                 teller.work() { processState in
                     completion(customer, processState)
                 }
             }
-
             group.leave()
         }
     }
-
+    
     private func report(waitingNumber: UInt, task: Task, inProgress: Bool) {
         InputOutputManager.output(state: .working(waitingNumber, task.rawValue, inProgress))
     }
-
+    
     private func finalReport(time: Double) {
         InputOutputManager.output(state: .close(numberOfGuest, time))
     }
-
+    
 }
 
 extension BankManager: BankProtocol {
-
+    
     func open() {
         generateWaiting(range: 0...numberOfGuest)
-
+        
         let group = DispatchGroup()
         var totalDuration = 0.0
         dealCustomer(group: group) { customer, processState  in
@@ -88,9 +87,9 @@ extension BankManager: BankProtocol {
         group.wait()
         close(time: totalDuration)
     }
-
+    
     func close(time: Double) {
         finalReport(time: time)
     }
-
+    
 }
