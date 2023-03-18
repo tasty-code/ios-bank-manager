@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     // MARK: - Properties: Timer
     
     private let timer = TimerModel()
-
+    
     //MARK: - Properties: Button
     
     private lazy var addCustomersButton: UIButton = {
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
     }()
     
     private let timerLabelStackView = BasicStackView(axis: .horizontal)
-
+    
     //MARK: - Properties: StateLabels & Stack
     
     private let standbyLabel: UILabel = {
@@ -118,7 +118,7 @@ class ViewController: UIViewController {
     
     private func setTimerLabelStackView() {
         timerLabelStackView.addArrangedSubviews([taskLabel, timerLabel])
-
+        
     }
     
     private func setProgressStackView() {
@@ -161,8 +161,6 @@ class ViewController: UIViewController {
         
         self.waitingNumber += UIBankTextCollection.customerRange
         timer.startTimer()
-        
-        
     }
     
     @objc
@@ -173,7 +171,21 @@ class ViewController: UIViewController {
     private func addLabel(into stackView: UIStackView, with data: Customer) {
         stackView.addArrangedSubview(CustomerInfoView(ticketNumber: data.number, task: data.task.rawValue))
     }
-        
+    
+    private func eliminateLable(from stackView: UIStackView, by ticketNumber: UInt) {
+        stackView.arrangedSubviews.forEach { view in
+            guard let customerView = view as? CustomerInfoView,
+                  let ticketLabel = customerView.ticketNumber.text,
+                  let ticketLabelNumber = UInt(ticketLabel) else { return }
+            
+            if ticketLabelNumber == ticketNumber {
+                stackView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+                return
+            }
+        }
+    }
+    
 }
 
 
