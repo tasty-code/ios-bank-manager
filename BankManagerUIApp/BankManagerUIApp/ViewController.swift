@@ -172,7 +172,7 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(CustomerInfoView(ticketNumber: data.number, task: data.task.rawValue))
     }
     
-    private func eliminateLable(from stackView: UIStackView, by ticketNumber: UInt) {
+    private func eliminateLabel(from stackView: UIStackView, by ticketNumber: UInt) {
         stackView.arrangedSubviews.forEach { view in
             guard let customerView = view as? CustomerInfoView,
                   let ticketLabel = customerView.ticketNumber.text,
