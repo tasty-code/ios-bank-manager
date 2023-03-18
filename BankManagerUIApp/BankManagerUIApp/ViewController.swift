@@ -162,10 +162,12 @@ class ViewController: UIViewController {
         }
         
         self.waitingNumber += UIBankTextCollection.customerRange
+        timer.startTimer()
     }
     
     @objc
     private func resetButtonTapped() {
+        timer.stopTimer()
     }
         
 }

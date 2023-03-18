@@ -10,8 +10,8 @@ import UIKit
 final class TimerModel {
     
     weak var timerDelegate: TimerDelegate?
-    
     weak var timer: Timer?
+    
     private var time: Int = 0 {
         didSet {
             timerDelegate?.updateTime()
@@ -24,12 +24,10 @@ final class TimerModel {
             
             self.time += 1
         }
-        
     }
     
     func stopTimer() {
         self.timer?.invalidate()
-        
     }
     
     func updateTimerLabel() -> String {
@@ -44,4 +42,5 @@ final class TimerModel {
 
         return timeToString
     }
+    
 }
