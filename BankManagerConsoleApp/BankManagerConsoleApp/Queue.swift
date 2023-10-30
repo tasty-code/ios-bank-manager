@@ -7,19 +7,9 @@
 
 import Foundation
 
-class Node<Element> {
-    var data: Element
-    var pointer: Node<Element>?
-    
-    init(data: Element, pointer: Node<Element>? = nil) {
-        self.data = data
-        self.pointer = pointer
-    }
-}
-
 struct Queue<Element> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+    private var head: Node?
+    private var tail: Node?
     
     var count = 0
     var peek: Element? { head?.data }
@@ -50,5 +40,17 @@ struct Queue<Element> {
         }
         
         return element
+    }
+}
+
+extension Queue {
+    private class Node {
+        var data: Element
+        var pointer: Node?
+        
+        init(data: Element, pointer: Node? = nil) {
+            self.data = data
+            self.pointer = pointer
+        }
     }
 }
