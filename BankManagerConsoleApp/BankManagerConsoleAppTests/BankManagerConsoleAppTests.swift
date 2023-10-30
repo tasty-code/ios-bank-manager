@@ -8,30 +8,51 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-
 final class BankManagerConsoleAppTests: XCTestCase {
-
+    private var queue : Queue<Int>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.queue = Queue<Int>()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.queue = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_10추가하기() {
+        let num = 10
+        queue.enqueue(num)
+        guard let result = queue.peek() else { return }
+        XCTAssertEqual(num, result)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_15빼보기() {
+        let num = 15
+        queue.enqueue(num)
+        guard let result = queue.dequeue() else {return}
+        XCTAssertEqual(result, 15)
+    }
+    
+    func test_요소확인하기() {
+        let array = [10, 20, 30]
+        
+        for item in array {
+            queue.enqueue(item)
         }
+        let result = queue.check()
+        print(result)
+        XCTAssertEqual(array, result)
     }
-
+    
+    func test_청소하기() {
+        let num = 5
+        queue.enqueue(num)
+        queue.clear()
+        let result = queue.check()
+        XCTAssertEqual([], result)
+    }
+    
+    func test_빈값확인하기() {
+        XCTAssertEqual(true, queue.isEmpty)
+    }
 }

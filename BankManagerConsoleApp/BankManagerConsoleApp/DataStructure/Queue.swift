@@ -33,4 +33,7 @@ final class Queue<Element>: QueueProtocol {
     func peek() -> Element? {
         self.container.peek()
     }
+    func check() -> [Element] {
+        self.container.getAllElements()
+    }
 }

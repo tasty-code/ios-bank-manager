@@ -67,3 +67,16 @@ extension LinkedList: QueueProtocol {
         return self.tail?.value
     }
 }
+
+// MARK: 공부용으로 만듬
+extension LinkedList {
+    func getAllElements() -> [Value] {
+        var result = [Value]()
+        var indicator = head
+        while indicator != nil {
+            result.append(indicator!.value)
+            indicator = indicator?.next
+        }
+        return result
+    }
+}
