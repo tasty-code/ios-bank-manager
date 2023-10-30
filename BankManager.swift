@@ -22,15 +22,19 @@ final class Queue<T> {
     }
     
     func clear() {
-        
+        head = nil
     }
     
-    func peek() {
-        
+    func peek() -> T? {
+        return head?.data
     }
-    
-    func isEmpty() {
-        
+
+    func isEmpty() -> Bool {
+        if head == nil {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
