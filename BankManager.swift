@@ -1,5 +1,22 @@
 import Foundation
 
+final class BankManager<T> {
+    private var queues: [Queue<T>]
+    
+    init(queues: [Queue<T>] = []) {
+        self.queues = queues
+    }
+    
+    func makeQueue() {
+        let queue: Queue<T> = Queue<T>()
+        queues.append(queue)
+    }
+    
+    func getQueue(index: Int) -> Queue<T> {
+        return queues[index]
+    }
+}
+
 final class Queue<T> {
     private var head: Person<T>?
     private var tail: Person<T>?
@@ -9,7 +26,7 @@ final class Queue<T> {
         self.tail = tail
     }
     
-    func enqueue(person: Person<T>) {
+    func enqueue(_ person: Person<T>) {
         if head == nil {
             head = person
             tail = person
@@ -19,19 +36,24 @@ final class Queue<T> {
         }
     }
     
-    func dequeue() -> Person<T>? {
-        var currentHead: Person<T>?
+    func dequeue() -> T? {
+        let toDequeuePerson: Person<T>? = head
         if head == nil {
             return nil
         }
         
-        currentHead = head
         head = head?.next
-        return currentHead
+        
+        if head == nil {
+            tail = nil
+        }
+        
+        return toDequeuePerson?.data
     }
     
     func clear() {
         head = nil
+        tail = nil
     }
     
     func peek() -> T? {
@@ -51,7 +73,7 @@ final class Person<T> {
     let data: T
     var next: Person<T>?
     
-    init(data: T, next: Person) {
+    init(data: T, next: Person<T>? = nil) {
         self.data = data
         self.next = next
     }

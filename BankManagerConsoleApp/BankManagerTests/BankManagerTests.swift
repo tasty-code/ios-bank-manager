@@ -1,35 +1,96 @@
-//
-//  BankManagerTests.swift
-//  BankManagerTests
-//
-//  Created by JaeHyeok Sim on 10/30/23.
-//
-
 import XCTest
 
+@testable import BankManagerConsoleApp
+
 final class BankManagerTests: XCTestCase {
-
+    var sut: BankManager<Int>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = BankManager()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_큐에_아무것도_없을_때_dequeue() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let result = queue.dequeue()
+        XCTAssertNil(result)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_큐에_아무것도_없을_때_peek() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let result = queue.peek()
+        XCTAssertNil(result)
+    }
+    
+    func test_큐에_아무것도_없을_때_isEmpty() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let result = queue.isEmpty()
+        XCTAssertTrue(result)
+    }
+    
+    func test_큐에_대기하는_사람이_0명일_때_enqueue() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let person = Person(data: 999)
+        queue.enqueue(person)
+        let result = queue.peek()
+        
+        XCTAssertEqual(result, 999)
+    }
+    
+    func test_큐에_대기하는_사람이_1명일_때_clear() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let person = Person(data: 999)
+        queue.clear()
+        let result = queue.isEmpty()
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_큐에_대기하는_사람이_1명일_때_dequeue() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let person = Person(data: 999)
+        queue.enqueue(person)
+        queue.dequeue()
+        let result = queue.peek()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_큐에_대기하는_사람이_1명일_때_dequeue_결과() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        let person = Person(data: 999)
+        queue.enqueue(person)
+        let result = queue.dequeue()
+        
+        XCTAssertEqual(result, 999)
+    }
+    
+    func test_큐에_대기하는_사람이_8명일_때_6명_dequeue_결과() {
+        sut.makeQueue()
+        let queue = sut.getQueue(index: 0)
+        
+        let queueData : [Int] = [111, 222, 333, 444, 555, 666, 777, 888]
+        queueData.forEach {
+            queue.enqueue(Person(data: $0))
         }
+        
+        for _ in 1...6 {
+            queue.dequeue()
+        }
+        
+        let result = queue.peek()
+        XCTAssertEqual(result, 777)
     }
-
 }
