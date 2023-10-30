@@ -8,11 +8,17 @@ final class Queue<T> {
     }
     
     func enqueue(person: Person<T>) {
-//        if peek()
     }
     
-    func dequeue() {
- 
+    func dequeue() -> Person<T>? {
+        var currentHead: Person<T>?
+        if head == nil {
+            return nil
+        }
+        
+        currentHead = head
+        head = head?.next
+        return currentHead
     }
     
     func clear() {
@@ -30,7 +36,7 @@ final class Queue<T> {
 
 final class Person<T> {
     let data: T
-    var next: Person?
+    var next: Person<T>?
     
     init(data: T, next: Person) {
         self.data = data
