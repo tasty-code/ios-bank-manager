@@ -11,7 +11,6 @@ struct Queue<Element> {
     private var head: Node?
     private var tail: Node?
     
-    var count = 0
     var peek: Element? { head?.data }
     var isEmpty: Bool { head == nil && tail == nil }
     
