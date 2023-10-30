@@ -1,13 +1,22 @@
 import Foundation
 
 final class Queue<T> {
-    private var head: Person<T>?;
+    private var head: Person<T>?
+    private var tail: Person<T>?
     
-    init(head: Person<T>) {
+    init(head: Person<T>? = nil, tail: Person<T>? = nil) {
         self.head = head
+        self.tail = tail
     }
     
     func enqueue(person: Person<T>) {
+        if head == nil {
+            head = person
+            tail = person
+        } else {
+            tail?.next = person
+            tail = person
+        }
     }
     
     func dequeue() -> Person<T>? {
