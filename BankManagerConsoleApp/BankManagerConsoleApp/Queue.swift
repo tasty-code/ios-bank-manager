@@ -20,7 +20,7 @@ struct Queue<T> {
     }
     
     mutating func enqueue(data: T) {
-        let node: Node<T> = Node(data: data)
+        let node: Node<T> = Node(with: data)
         if isEmpty {
             self.head = node
         }
