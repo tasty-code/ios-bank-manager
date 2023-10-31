@@ -7,6 +7,10 @@
 
 import Foundation
 
-final class Bank {
+struct Customer {
+    let id: Int
     
+    init(id: Int) {
+        self.id = id
+    }
 }
