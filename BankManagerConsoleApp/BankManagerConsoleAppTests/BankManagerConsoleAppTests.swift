@@ -58,8 +58,19 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual([], result)
     }
     
+    func test_String큐_청소하기() {
+        let word = "MacOS"
+        stringQueue.enqueue(word)
+        stringQueue.clear()
+        let result = stringQueue.check()
+        XCTAssertEqual([], result)
+    }
+    
     func test_빈값확인하기() {
         XCTAssertEqual(true, intQueue.isEmpty)
+        stringQueue.enqueue("tastyCode")
+        XCTAssertEqual(false, stringQueue.isEmpty)
+        XCTAssertEqual(false, doubleQueue.isEmpty)
     }
     
     func test_String추가하기() {
