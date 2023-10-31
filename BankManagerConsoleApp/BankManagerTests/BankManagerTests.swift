@@ -18,6 +18,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_아무것도_없을_때_dequeue() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let result = queue.dequeue()
         XCTAssertNil(result)
     }
@@ -25,6 +26,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_아무것도_없을_때_peek() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let result = queue.peek()
         XCTAssertNil(result)
     }
@@ -32,6 +34,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_아무것도_없을_때_isEmpty() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let result = queue.isEmpty()
         XCTAssertTrue(result)
     }
@@ -39,6 +42,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_0명일_때_enqueue() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let node = Node(data: 999)
         queue.enqueue(node)
         let result = queue.peek()
@@ -49,7 +53,9 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_clear() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let node = Node(data: 999)
+        queue.enqueue(node)
         queue.clear()
         let result = queue.isEmpty()
         
@@ -59,6 +65,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_dequeue() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let node = Node(data: 999)
         queue.enqueue(node)
         queue.dequeue()
@@ -70,6 +77,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_dequeue_결과() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         let node = Node(data: 999)
         queue.enqueue(node)
         let result = queue.dequeue()
@@ -80,6 +88,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_8명일_때_6명_dequeue_결과() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
+        guard let queue = queue else { return }
         
         let queueData : [Int] = [111, 222, 333, 444, 555, 666, 777, 888]
         queueData.forEach {
