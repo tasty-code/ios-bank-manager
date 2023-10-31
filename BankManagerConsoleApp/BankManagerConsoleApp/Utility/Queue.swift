@@ -27,6 +27,18 @@ struct Queue<T> {
         self.tail = self.tail?.nextNode
     }
     
+    mutating func dequeue() -> T? {
+        let data = self.head?.data
+        
+        guard let newHead = head?.nextNode else {
+            self.head = nil
+            self.tail = nil
+            return data
+        }
+        
+        self.head = newHead
+        return data
+    }
 }
 
 
