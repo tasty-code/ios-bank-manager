@@ -7,7 +7,7 @@ final class BankManagerTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = BankManager()
+        sut = BankManager<Int>()
     }
     
     override func tearDownWithError() throws {
