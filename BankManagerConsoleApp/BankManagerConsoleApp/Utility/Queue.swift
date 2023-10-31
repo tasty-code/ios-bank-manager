@@ -43,8 +43,11 @@ struct Queue<T> {
         self.head = nil
         self.tail = nil
     }
+    
+    func peek() -> T? {
+        return head?.data
+    }
 }
-
 
 extension Queue {
     private class Node {
