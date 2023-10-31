@@ -36,7 +36,6 @@ struct Queue<T> {
         if self.head == nil {
             tail = nil
         }
-        
         return data
     }
     
