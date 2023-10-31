@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		535DD4282AEF447A0000BAE7 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4272AEF447A0000BAE7 /* Node.swift */; };
 		535DD42A2AEF45C20000BAE7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4292AEF45C20000BAE7 /* Queue.swift */; };
 		535DD4322AEF7F440000BAE7 /* BankManagerConsoleAppUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4312AEF7F440000BAE7 /* BankManagerConsoleAppUnitTest.swift */; };
-		535DD4362AEF81730000BAE7 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4272AEF447A0000BAE7 /* Node.swift */; };
 		535DD4382AEF817A0000BAE7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4292AEF45C20000BAE7 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -29,7 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		535DD4272AEF447A0000BAE7 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		535DD4292AEF45C20000BAE7 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		535DD42F2AEF7F440000BAE7 /* BankManagerConsoleAppUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		535DD4312AEF7F440000BAE7 /* BankManagerConsoleAppUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppUnitTest.swift; sourceTree = "<group>"; };
@@ -87,7 +84,6 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				535DD4272AEF447A0000BAE7 /* Node.swift */,
 				535DD4292AEF45C20000BAE7 /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -183,7 +179,6 @@
 			files = (
 				535DD4322AEF7F440000BAE7 /* BankManagerConsoleAppUnitTest.swift in Sources */,
 				535DD4382AEF817A0000BAE7 /* Queue.swift in Sources */,
-				535DD4362AEF81730000BAE7 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +188,6 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
-				535DD4282AEF447A0000BAE7 /* Node.swift in Sources */,
 				535DD42A2AEF45C20000BAE7 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
