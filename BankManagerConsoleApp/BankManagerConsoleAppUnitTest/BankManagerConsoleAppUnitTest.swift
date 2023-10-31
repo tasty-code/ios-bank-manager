@@ -36,7 +36,7 @@ final class BankManagerConsoleAppUnitTest: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_peek_dequeue_return_1_false() {
+    func test_dequeue연산후_peek을_검사() {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
         sut.dequeue()
