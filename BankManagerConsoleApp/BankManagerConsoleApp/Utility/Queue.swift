@@ -61,3 +61,19 @@ extension Queue {
     }
 }
 
+extension Queue {
+    func fetchQueue() -> [T]? {
+        var array = [T]()
+        if isEmpty {
+            return nil
+        }
+        
+        var pointer = head
+        
+        while let next = pointer {
+            array.append(next.data)
+            pointer = next.nextNode
+        }
+        return array
+    }
+}
