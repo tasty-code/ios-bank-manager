@@ -12,6 +12,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
     private var intQueue: Queue<Int>!
     private var stringQueue: Queue<String>!
     private var doubleQueue: Queue<Double>!
+    private var customerQueue: Queue<Customer>!
     
     override func setUpWithError() throws {
         self.intQueue = Queue<Int>()
@@ -70,7 +71,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(true, intQueue.isEmpty)
         stringQueue.enqueue("tastyCode")
         XCTAssertEqual(false, stringQueue.isEmpty)
-        XCTAssertEqual(false, doubleQueue.isEmpty)
+        XCTAssertEqual(true, doubleQueue.isEmpty)
     }
     
     func test_String추가하기() {
