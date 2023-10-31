@@ -39,8 +39,8 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_0명일_때_enqueue() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
-        let person = Person(data: 999)
-        queue.enqueue(person)
+        let node = Node(data: 999)
+        queue.enqueue(node)
         let result = queue.peek()
         
         XCTAssertEqual(result, 999)
@@ -49,7 +49,7 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_clear() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
-        let person = Person(data: 999)
+        let node = Node(data: 999)
         queue.clear()
         let result = queue.isEmpty()
         
@@ -59,8 +59,8 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_dequeue() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
-        let person = Person(data: 999)
-        queue.enqueue(person)
+        let node = Node(data: 999)
+        queue.enqueue(node)
         queue.dequeue()
         let result = queue.peek()
         
@@ -70,8 +70,8 @@ final class BankManagerTests: XCTestCase {
     func test_큐에_대기하는_사람이_1명일_때_dequeue_결과() {
         sut.makeQueue()
         let queue = sut.getQueue(index: 0)
-        let person = Person(data: 999)
-        queue.enqueue(person)
+        let node = Node(data: 999)
+        queue.enqueue(node)
         let result = queue.dequeue()
         
         XCTAssertEqual(result, 999)
@@ -83,7 +83,7 @@ final class BankManagerTests: XCTestCase {
         
         let queueData : [Int] = [111, 222, 333, 444, 555, 666, 777, 888]
         queueData.forEach {
-            queue.enqueue(Person(data: $0))
+            queue.enqueue(Node(data: $0))
         }
         
         for _ in 1...6 {

@@ -1,24 +1,24 @@
 final class Queue<T> {
-    private var head: Person<T>?
-    private var tail: Person<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
-    init(head: Person<T>? = nil, tail: Person<T>? = nil) {
+    init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
         self.tail = tail
     }
     
-    func enqueue(_ person: Person<T>) {
+    func enqueue(_ Node: Node<T>) {
         if head == nil {
-            head = person
-            tail = person
+            head = Node
+            tail = Node
         } else {
-            tail?.next = person
-            tail = person
+            tail?.next = Node
+            tail = Node
         }
     }
     
     func dequeue() -> T? {
-        let toDequeuePerson: Person<T>? = head
+        let Node: Node<T>? = head
         if head == nil {
             return nil
         }
@@ -29,7 +29,7 @@ final class Queue<T> {
             tail = nil
         }
         
-        return toDequeuePerson?.data
+        return Node?.data
     }
     
     func clear() {
