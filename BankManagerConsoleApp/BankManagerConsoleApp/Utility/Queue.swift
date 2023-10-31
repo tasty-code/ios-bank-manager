@@ -31,13 +31,17 @@ struct Queue<T> {
         let data = self.head?.data
         
         guard let newHead = head?.nextNode else {
-            self.head = nil
-            self.tail = nil
+            self.clear()
             return data
         }
         
         self.head = newHead
         return data
+    }
+    
+    mutating func clear() {
+        self.head = nil
+        self.tail = nil
     }
 }
 
