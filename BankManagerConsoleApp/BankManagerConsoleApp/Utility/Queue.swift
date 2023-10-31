@@ -50,7 +50,7 @@ struct Queue<T> {
 }
 
 extension Queue {
-    private class Node {
+    private final class Node {
         var data: T
         var nextNode: Node?
         
