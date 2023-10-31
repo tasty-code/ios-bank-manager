@@ -61,7 +61,7 @@ final class Queue<T> {
     }
 
     func isEmpty() -> Bool {
-        if head == nil {
+        if head == nil && tail == nil {
             return true
         } else {
             return false
