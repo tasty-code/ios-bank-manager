@@ -9,6 +9,24 @@ import Foundation
 
 
 struct Queue<T> {
+    private var head: Node?
+    private var tail: Node?
+    
+    var isEmpty: Bool {
+        self.head == nil
+    }
+    
+    mutating func enqueue(_ data: T) {
+        if isEmpty {
+            self.head = Node(data: data)
+            self.tail = self.head
+            return
+        }
+        
+        self.tail?.nextNode = Node(data: data)
+        self.tail = self.tail?.nextNode
+    }
+    
 }
 
 
