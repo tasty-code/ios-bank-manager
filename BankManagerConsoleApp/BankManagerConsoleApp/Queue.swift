@@ -8,8 +8,8 @@
 import Foundation
 
 struct Queue<T> {
-    var head: Node<T>? = nil
-    var tail: Node<T>? = nil
+    private var head: Node<T>? = nil
+    private var tail: Node<T>? = nil
     
     var isEmpty: Bool {
         return head == nil && tail == nil
@@ -43,6 +43,16 @@ struct Queue<T> {
     mutating func clear() {
         head = nil
         tail = nil
+    }
+    
+    private class Node<T> {
+        var data: T
+        var next: Node?
+        
+        init(with data: T, next: Node? = nil) {
+            self.data = data
+            self.next = next
+        }
     }
 }
 
