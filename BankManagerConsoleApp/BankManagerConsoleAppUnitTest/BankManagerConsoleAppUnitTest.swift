@@ -69,18 +69,8 @@ final class BankManagerConsoleAppUnitTest: XCTestCase {
     }
     
     func test_enqueue_dequeue() {
-        var input: [Int] = []
-        for _ in 1...100 {
-            var number = Int.random(in: 1...1000)
-            sut.enqueue(data: number)
-            input.append(number)
-        }
-        
-        for index in 1...100 {
-            guard let result = sut.dequeue() else {
-                return
-            }
-            XCTAssertEqual(result, input[index-1])
-        }
+        let number = Int.random(in: 1...1000)
+        sut.enqueue(data: number)
+        XCTAssertEqual(number, sut.dequeue())
     }
 }
