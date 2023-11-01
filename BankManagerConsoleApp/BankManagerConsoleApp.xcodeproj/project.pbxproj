@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043F41B52AF1ECDB00A404E6 /* InterfaceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5A57B2AF0BDB90043FF9F /* InterfaceMessage.swift */; };
+		043F41B62AF1ECE800A404E6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E23EA2AF0DCF900312EF1 /* String.swift */; };
 		047E23EB2AF0DCF900312EF1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E23EA2AF0DCF900312EF1 /* String.swift */; };
 		04923AFB2AEF433300D9637C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04923AFA2AEF433300D9637C /* Queue.swift */; };
 		04923AFD2AEF433F00D9637C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04923AFC2AEF433F00D9637C /* LinkedList.swift */; };
@@ -226,8 +228,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E079102AEF831C00C3F8AF /* Queue.swift in Sources */,
+				043F41B52AF1ECDB00A404E6 /* InterfaceMessage.swift in Sources */,
 				04D5A57E2AF0C2660043FF9F /* Customer.swift in Sources */,
 				37E079112AEF831F00C3F8AF /* LinkedList.swift in Sources */,
+				043F41B62AF1ECE800A404E6 /* String.swift in Sources */,
 				374985212AEF91230074EF44 /* BankManagerConsoleAppTests.swift in Sources */,
 				37E0790E2AEF830300C3F8AF /* BankManager.swift in Sources */,
 			);
@@ -423,8 +427,10 @@
 		C7694E7E259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				INFOPLIST_FILE = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -434,8 +440,10 @@
 		C7694E7F259C3EC00053667F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = P85DW78LYM;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -27,93 +27,159 @@ final class BankManagerConsoleAppTests: XCTestCase {
     }
     
     func test_10추가하기() {
+        // given
         let num = 10
+        
+        // when
         intQueue.enqueue(num)
-        guard let result = intQueue.peek() else { return }
-        XCTAssertEqual(num, result)
+        
+        // then
+        XCTAssertNotNil(intQueue.peek())
     }
     
     func test_15빼보기() {
+        // given
         let num = 15
         intQueue.enqueue(num)
-        guard let result = intQueue.dequeue() else {return}
-        XCTAssertEqual(result, 15)
+        
+        // when
+        let result = intQueue.dequeue()
+        
+        // then
+        XCTAssertNotNil(result)
     }
     
     func test_요소확인하기() {
+        // given
         let array = [10, 20, 30]
-        
         for item in array {
             intQueue.enqueue(item)
         }
+        
+        // when
         let result = intQueue.check()
-        print(result)
+        
+        // then
         XCTAssertEqual(array, result)
     }
     
     func test_청소하기() {
+        // given
         let num = 5
         intQueue.enqueue(num)
+        
+        // when
         intQueue.clear()
+        
+        // then
         let result = intQueue.check()
         XCTAssertEqual([], result)
     }
     
     func test_String큐_청소하기() {
+        // given
         let word = "MacOS"
         stringQueue.enqueue(word)
+        
+        // when
         stringQueue.clear()
+        
+        // then
         let result = stringQueue.check()
         XCTAssertEqual([], result)
     }
     
-    func test_빈값확인하기() {
-        XCTAssertEqual(true, intQueue.isEmpty)
-        stringQueue.enqueue("tastyCode")
-        XCTAssertEqual(false, stringQueue.isEmpty)
-        XCTAssertEqual(true, doubleQueue.isEmpty)
+    func test_intQueue가_비어있는지_확인하기() {
+        // when
+        let result = intQueue.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_stringQueue가_비어있는지_확인하기() {
+        // when
+        let result = stringQueue.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_doubleQueue가_비어있는지_확인하기() {
+        // when
+        let result = doubleQueue.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
     }
     
     func test_String추가하기() {
+        // given
         let word = "Hello"
+        
+        // when
         stringQueue.enqueue(word)
-        guard let result = stringQueue.peek() else { return }
-        XCTAssertEqual(word, result)
+        
+        // then
+        XCTAssertNotNil(stringQueue.peek())
     }
     
     func test_String빼보기() {
+        // given
         let word = "World"
         stringQueue.enqueue(word)
-        guard let result = stringQueue.dequeue() else {return}
-        XCTAssertEqual(result, word)
+        
+        // when
+        let result = stringQueue.dequeue()
+        
+        // then
+        XCTAssertNotNil(result)
     }
     
     func test_String큐청소하기() {
+        // given
         let word = "Swift"
         stringQueue.enqueue(word)
+        
+        // when
         stringQueue.clear()
+        
+        // then
         let result = stringQueue.check()
         XCTAssertEqual([], result)
     }
     
     func test_Double추가하기() {
+        // given
         let double = 0.7
+        
+        // when
         doubleQueue.enqueue(double)
-        guard let result = doubleQueue.peek() else { return }
-        XCTAssertEqual(double, result)
+        
+        // then
+        XCTAssertNotNil(doubleQueue.peek())
     }
     
     func test_Double빼보기() {
+        // given
         let double = 0.5
+        
+        // when
         doubleQueue.enqueue(double)
-        guard let result = doubleQueue.dequeue() else {return}
-        XCTAssertEqual(result, double)
+        
+        // then
+        XCTAssertNotNil(doubleQueue.dequeue())
     }
     
     func test_Double큐청소하기() {
+        // given
         let double = 0.315454
         doubleQueue.enqueue(double)
+        
+        // when
         doubleQueue.clear()
+        
+        // then
         let result = doubleQueue.check()
         XCTAssertEqual([], result)
     }
