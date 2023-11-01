@@ -48,15 +48,9 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    // MARK: enqueue, peek확인
+    // MARK: - enqueue, peek확인
     func test_enqueue_아무것도_안하고_peek로_값이_있는지_확인() throws {
         XCTAssertNil(sut.peek())
-    }
-    
-    func test_1_enqueue_하고_peek로_값이_있는지_확인() throws {
-        sut.enqueue(data: 1)
-        
-        XCTAssertNotNil(sut.peek())
     }
     
     func test_1_enqueue_하고_peek로_값_확인() throws {
@@ -65,7 +59,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertEqual(sut.peek(), 1)
     }
     
-    //MARK: clear
+    //MARK: - clear
     
     func test_1_2_enqueue하고_안비어있다() {
         sut.enqueue(data: 1)
@@ -87,15 +81,16 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    // MARK: isEmpthy?
+// MARK: - isEmpty?
+    
     func test_아무것도_추가안했을때_비어있을까() {
-        XCTAssertTrue(sut.isEmpthy())
+        XCTAssertTrue(sut.isEmpty())
     }
     
     func test_1_추가했을때_안비어있나() {
         sut.enqueue(data: 1)
         
-        XCTAssertFalse(sut.isEmpthy())
+        XCTAssertFalse(sut.isEmpty())
     }
     
 }

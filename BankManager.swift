@@ -33,9 +33,9 @@ final class LinkedList<T> {
     }
     
     func dequeue() -> Node<T>? {
-        let outNode = head
+        let node = head
         head = head?.next
-        return outNode
+        return node
     }
     
     func clear() {
@@ -46,7 +46,7 @@ final class LinkedList<T> {
         return head?.data
     }
     
-    func isEmpthy() -> Bool {
+    func isEmpty() -> Bool {
         if head == nil {
             return true
         } else {
