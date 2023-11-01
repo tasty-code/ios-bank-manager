@@ -3,11 +3,11 @@ import XCTest
 
 final class BankManagerConsoleAppTest: XCTestCase {
     
-    var sut: LinkedList<Int>!
+    var sut: Queue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList()
+        sut = Queue()
     }
     
     override func tearDownWithError() throws {

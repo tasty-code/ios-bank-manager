@@ -8,13 +8,9 @@ final class Node<T> {
         self.data = data
         self.next = next
     }
-    
-    deinit {
-        print("\(data)끝")
-    }
 }
 
-final class LinkedList<T> {
+final class Queue<T> {
     private var head: Node<T>?
     
     func enqueue(data: T) {
