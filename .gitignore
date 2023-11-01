@@ -131,4 +131,4 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos
+# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos.DS_Store
