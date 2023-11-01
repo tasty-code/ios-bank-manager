@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+let queue = Queue<Customer>()
+BankManager(queue: queue).run()
