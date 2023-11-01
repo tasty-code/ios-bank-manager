@@ -67,19 +67,22 @@ extension BankManager {
             let customer = Customer(id: count)
             queue.enqueue(customer)
         }
-        
         return customerCount
     }
     
     private func work() -> Double {
         var totalSeconds: Double = 0
         while queue.isEmpty == false {
+            
             guard let customer = self.queue.dequeue() else { return totalSeconds }
-            printStartWorkMessage(customer.id)
-            totalSeconds += 0.7
-            printCompleteWorkMessage(customer.id)
+            
+            DispatchQueue.global().sync {
+                self.printStartWorkMessage(customer.id)
+                Thread.sleep(forTimeInterval: 0.7)
+                self.printCompleteWorkMessage(customer.id)
+                totalSeconds += 0.7
+            }
         }
-        
         return totalSeconds
     }
     
