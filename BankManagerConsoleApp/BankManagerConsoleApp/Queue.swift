@@ -44,7 +44,7 @@ struct Queue<T> {
         tail = nil
     }
     
-    private class Node<T> {
+    private final class Node<T> {
         var data: T
         var next: Node?
         
