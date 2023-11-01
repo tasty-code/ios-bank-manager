@@ -30,10 +30,7 @@ final class BankManagerConsoleAppUnitTest: XCTestCase {
     func test_peek_return_1() {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
-        guard let result = sut.peek else {
-            return
-        }
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(1, sut.peek)
     }
     
     func test_dequeue연산후_peek을_검사() {
