@@ -8,7 +8,18 @@
 import Foundation
 
 class Bank: Bankable {
-    private var customerQueue = Queue<Customer>()
+    private var customerQueue: Queue<Customer>
+    var bankClerk: Int
+    var processingTime: Double
+    private var refinedProcessingTime: UInt32 {
+        UInt32(processingTime * 1000000)
+    }
+    
+    init(customerQueue: Queue<Customer> = Queue<Customer>(), bankClerk: Int, processingTime: Double) {
+        self.customerQueue = customerQueue
+        self.bankClerk = bankClerk
+        self.processingTime = processingTime
+    }
     
     func taskBegin(customerCount: Int) -> (taskProcessingTime: Double, handledCustomer: Int) {
         configureQueue(customerCount: customerCount)
@@ -20,13 +31,15 @@ class Bank: Bankable {
             guard let customer = customerQueue.dequeue() else {
                 break
             }
+            
             print(BankDialogue.start(customer))
-            taskProcessingTime += 0.7
+            taskProcessingTime += processingTime
+            usleep(refinedProcessingTime)
             print(BankDialogue.finish(customer))
             handledCustomer += 1
         }
         
-        freeQueue()
+        clearQueue()
         
         return (taskProcessingTime, handledCustomer)
     }
@@ -39,7 +52,7 @@ class Bank: Bankable {
         customerQueue = queue
     }
     
-    private func freeQueue() {
+    private func clearQueue() {
         customerQueue.clear()
     }
 }

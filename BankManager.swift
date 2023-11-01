@@ -18,7 +18,7 @@ class BankManager {
         }
     }
     
-    init(bank: any Bankable) {
+    init(bank: Bankable) {
         self.bank = bank
     }
     
