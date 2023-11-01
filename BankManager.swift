@@ -17,7 +17,7 @@ class BankManager {
         }
     }
     
-    func run() {
+    func businessStart() {
         while true {
             print(BankDialogue.menu)
             print(BankDialogue.input, terminator: "")
@@ -28,16 +28,16 @@ class BankManager {
             userChoice = number
             
             if isStart {
-                open(customerCount: Int.random(in: 10...30))
+                taskBegin(customerCount: Int.random(in: 10...30))
             } else {
                 break
             }
         }
     }
     
-    private func open(customerCount: Int) {
-        var workTime: Double = 0
-        var count = 0
+    private func taskBegin(customerCount: Int) {
+        var taskProcessingTime: Double = 0
+        var handledCustomer = 0
         
         configureQueue(1..<customerCount + 1)
         while !customerQueue.isEmpty {
@@ -45,12 +45,12 @@ class BankManager {
                 break
             }
             print(BankDialogue.start(customer))
-            workTime += 0.7
+            taskProcessingTime += 0.7
             print(BankDialogue.finish(customer))
-            count += 1
+            handledCustomer += 1
         }
         
-        print(BankDialogue.close(count, workTime: workTime))
+        print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
     }
     
     private func configureQueue(_ range: Range<Int>) {
