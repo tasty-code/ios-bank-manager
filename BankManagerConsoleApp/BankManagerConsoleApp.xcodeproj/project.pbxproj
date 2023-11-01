@@ -12,6 +12,8 @@
 		535DD4382AEF817A0000BAE7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DD4292AEF45C20000BAE7 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		DEF7AA302AF1E4420063935C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF7AA2F2AF1E4420063935C /* Client.swift */; };
+		DEF7AA322AF1E6720063935C /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF7AA312AF1E6720063935C /* Prompt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,8 @@
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		DEF7AA2F2AF1E4420063935C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		DEF7AA312AF1E6720063935C /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +86,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				DEF7AA2F2AF1E4420063935C /* Client.swift */,
+				DEF7AA312AF1E6720063935C /* Prompt.swift */,
 				535DD4292AEF45C20000BAE7 /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -188,7 +194,9 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				DEF7AA302AF1E4420063935C /* Client.swift in Sources */,
 				535DD42A2AEF45C20000BAE7 /* Queue.swift in Sources */,
+				DEF7AA322AF1E6720063935C /* Prompt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
