@@ -11,8 +11,8 @@ struct Banker<T>: Identifiable, Hashable {
         
         print("\(customerCount)번 고객 업무 시작")
         
-        Thread.sleep(forTimeInterval: 0.7)
-        queue.dequeue()
+//        Thread.sleep(forTimeInterval: 0.7)
+        queue.dequeue()                         
         
         print("\(customerCount)번 고객 업무 완료")
     }
