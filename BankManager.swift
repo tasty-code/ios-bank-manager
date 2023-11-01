@@ -1,53 +1,36 @@
 import Foundation
 
-final class Node<T> {
-    var data: T
-    var next: Node<T>?
+class BankManager {
+    private let customer: Int
+    private let bankClerk: BankClerk
+    private let queue: Queue<Int>
     
-    init(data: T, next: Node? = nil) {
-        self.data = data
-        self.next = next
+    init(bankClerk: Int) {
+        self.customer = Int.random(in: 10...30)
+        self.bankClerk = BankClerk(bankClerk: bankClerk)
+        self.queue = Queue<Int>()
     }
-}
-
-final class Queue<T> {
-    private var head: Node<T>?
     
-    func enqueue(data: T) {
-        if head == nil {
-            head = Node(data: data)
-            return
+    
+    
+    private func createCustomerQueue(customer: Int) {
+        for n in 1...customer {
+            queue.enqueue(data: n)
         }
-        
-        var node = head
-        
-        while node?.next != nil {
-            node = node?.next
-        }
-        
-        node?.next = Node(data: data)
     }
     
-    func dequeue() -> Node<T>? {
-        let node = head
-        head = head?.next
-        return node
+    func start() {
+        createCustomerQueue(customer: customer)
+        bankClerk.doTask(queue: queue, customer: customer)
     }
     
-    func clear() {
-        head = nil
-    }
-    
-    func peek() -> T? {
-        return head?.data
-    }
-    
-    func isEmpty() -> Bool {
-        if head == nil {
-            return true
-        } else {
-            return false
-        }
+   func finishTask() {
+       
+       let second = String(format: "%.2f", Double(customer) * 0.7)
+       print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer)명이며, 총 업무시간은 \(second)초 입니다.")
     }
 
 }
+
+
+

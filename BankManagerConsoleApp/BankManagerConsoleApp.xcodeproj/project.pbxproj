@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B0F7DA12AF23763001136F0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F7DA02AF23763001136F0 /* Queue.swift */; };
 		6B5515DF2AEFC58600ADC5BF /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		6B5515E02AEFC5A400ADC5BF /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		6BEFD0762AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFD0752AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B0F7DA02AF23763001136F0 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		6BEFD0732AEF7EC3007BBAAC /* BankManagerConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BEFD0752AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTest.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +66,6 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
-				D0BDB0822AF22F4000007539 /* BankClerk.swift */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				6BEFD0742AEF7EC3007BBAAC /* BankManagerConsoleAppTest */,
 				C7694E77259C3EC00053667F /* Products */,
@@ -83,6 +84,8 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				6B0F7DA02AF23763001136F0 /* Queue.swift */,
+				D0BDB0822AF22F4000007539 /* BankClerk.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
@@ -189,6 +192,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				D0BDB0832AF22F4000007539 /* BankClerk.swift in Sources */,
 				6B5515E02AEFC5A400ADC5BF /* BankManager.swift in Sources */,
+				6B0F7DA12AF23763001136F0 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

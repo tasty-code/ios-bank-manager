@@ -25,7 +25,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
         
-        guard let result = sut.dequeue()?.data else { return }
+        guard let result = sut.dequeue() else { return }
         
         XCTAssertEqual(result, 1)
     }
@@ -34,7 +34,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
         
-        let result = sut.dequeue()?.data
+        let result = sut.dequeue()
         
         XCTAssertNotEqual(result, 2)
     }
