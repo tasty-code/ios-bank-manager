@@ -20,14 +20,10 @@ struct LinkedList<Value> {
     
     /// 리스트의 머리에서 노드를 삭제하기
     mutating func pop() -> Value? {
-        defer {
-            self.head = self.head?.next
-            if self.isEmpty {
-                self.tail = nil
-            }
-        }
-        
-        return self.head?.value
+        let value = self.head?.value
+        self.head = self.head?.next
+        if self.isEmpty { self.tail = nil }
+        return value
     }
     
     /// 리스트의 꼬리에 노드를 추가하기
@@ -74,8 +70,10 @@ extension LinkedList {
         var result = [Value]()
         var indicator = head
         while indicator != nil {
-            result.append(indicator!.value)
-            indicator = indicator?.next
+            if let value = indicator?.value {
+                result.append(value)
+                indicator = indicator?.next
+            }
         }
         return result
     }
