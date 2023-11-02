@@ -11,9 +11,6 @@ class Bank: Bankable {
     private var customerQueue: Queue<Customer>
     private(set) var bankClerk: Int
     private(set) var processingTime: Double
-    private var refinedProcessingTime: UInt32 {
-        UInt32(processingTime * 1000000)
-    }
     
     init(customerQueue: Queue<Customer> = Queue<Customer>(), bankClerk: Int, processingTime: Double) {
         self.customerQueue = customerQueue
@@ -34,7 +31,7 @@ class Bank: Bankable {
             
             print(BankDialogue.start(customer))
             taskProcessingTime += processingTime
-            usleep(refinedProcessingTime)
+            Thread.sleep(forTimeInterval: processingTime)
             print(BankDialogue.finish(customer))
             handledCustomer += 1
         }
