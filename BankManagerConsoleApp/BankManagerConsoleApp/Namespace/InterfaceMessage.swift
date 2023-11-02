@@ -21,7 +21,7 @@ enum InterfaceMessage: CustomStringConvertible {
         case .inputMenu:
             "입력 : "
         case .bankDidClose(let totalCustomerCount, let totalSeconds):
-            "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(totalCustomerCount)명이며, 총 업무시간은 \(totalSeconds.asStringWithTwoDecimals())초입니다."
+            "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(totalCustomerCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalSeconds))초입니다."
         case .startWork(let customerId, let workType):
             "\(customerId)번 고객 \(workType.description) 시작"
         case .completeWork(let customerId):
