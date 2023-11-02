@@ -27,16 +27,6 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(result, peek)
     }
     
-    func test_Queue에_dequeue호출_시_맨앞에_값이_반환되는지() {
-        queue.enqueue(4)
-        queue.enqueue(9)
-        queue.enqueue(23)
-        
-        let dequeueValue = queue.dequeue()
-        
-        XCTAssertEqual(dequeueValue, 4)
-    }
-    
     func test_Queue에_여러번_enqueue시에_값이_모두_들어가는지() {
         for i in 1..<10 {
             queue.enqueue(i)
@@ -50,6 +40,23 @@ final class BankManagerConsoleAppTests: XCTestCase {
     }
     
     //MARK: - dequeue
+    func test_Queue에_dequeue호출_시_맨앞에_값이_반환되는지() {
+        queue.enqueue(4)
+        queue.enqueue(9)
+        queue.enqueue(23)
+        
+        let dequeueValue = queue.dequeue()
+        
+        XCTAssertEqual(dequeueValue, 4)
+    }
+    
+    func test_Queue가_비어있을_때_dequeue호출시_nil이_반환되는지() {
+        
+        let result = queue.dequeue()
+        
+        XCTAssertNil(result)
+    }
+    
     func test_Queue에_dequeue호출_시_맨앞에값이_삭제되는지() {
         queue.enqueue(4)
         queue.enqueue(9)
@@ -89,6 +96,15 @@ final class BankManagerConsoleAppTests: XCTestCase {
     }
     
     //MARK: - peek
+    func test_Queue가_비어있을_때_peek호출_시_nil을_반환하는지() {
+        
+        let result = queue.peek()
+        
+        if queue.isEmpty {
+            XCTAssertNil(result)
+        }
+    }
+    
     func test_Queue에_peek호출_시에_첫번째노드의_값을_반환하는지() {
         queue.enqueue(4)
         queue.enqueue(9)
