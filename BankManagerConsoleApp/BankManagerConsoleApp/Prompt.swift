@@ -9,6 +9,7 @@ import Foundation
 
 enum Prompt: CustomStringConvertible {
     case menu
+    case wrongInput
     case taskStart(with: Client)
     case taskComplete(with: Client)
     case close(number: Int, time: Double)
@@ -21,6 +22,8 @@ enum Prompt: CustomStringConvertible {
                     2 : 종료
                     입력 : 
                     """
+        case .wrongInput:
+            return "잘못된 입력입니다. 다시 입력해 주세요!!"
         case .taskStart(let client):
             return "\(client.id)번 고객 업무 시작"
         case .taskComplete(let client):
