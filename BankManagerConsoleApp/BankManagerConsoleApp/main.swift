@@ -10,7 +10,7 @@ while isBankOpen {
     
     switch userInput {
         case "1":
-            let bankManager = BankManager(tellerCount: 2)
+            let bankManager = BankManager(tellerCount: 1)
             bankManager.startTask()
             bankManager.finishTask()
         case "2":
