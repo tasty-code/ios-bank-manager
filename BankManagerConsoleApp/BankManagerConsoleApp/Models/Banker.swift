@@ -12,7 +12,7 @@ struct Banker: Identifiable, Hashable {
     
         print(Task.start(customerCount))
         
-//        Thread.sleep(forTimeInterval: Banker.delay)
+        Thread.sleep(forTimeInterval: Banker.delay)
         queue.dequeue()
         
         print(Task.complete(customerCount))
