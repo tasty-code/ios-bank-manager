@@ -19,14 +19,6 @@ final class BankManager {
         return input
     }
     
-    func run() {
-        while true {
-            showMenu()
-            let input = checkInput()
-            startMenu(input)
-        }
-    }
-    
     func startMenu(_ input: Int) {
         switch input {
         case 1:
@@ -37,6 +29,14 @@ final class BankManager {
             exit(0)
         default:
             inputError()
+        }
+    }
+    
+    func run() {
+        while true {
+            showMenu()
+            let input = checkInput()
+            startMenu(input)
         }
     }
 }
