@@ -1,20 +1,21 @@
 import Foundation
 
-while true {
+var isBankOpen = true
+
+while isBankOpen {
     print("1 : 은행 개점 \n2 : 종료")
     print("입력 : ", terminator: "")
+    
     guard let userInput = readLine() else { break }
     
-    if userInput == "1" {
-        let bankManager = BankManager(bankClerk: 1)
-        
-        bankManager.start()
-        bankManager.finishTask()
-
-        
-    } else if userInput == "2" {
-        break
-    } else {
-        // 에러 처리
+    switch userInput {
+        case "1":
+            let bankManager = BankManager(tellerCount: 2)
+            bankManager.startTask()
+            bankManager.finishTask()
+        case "2":
+            isBankOpen = false
+        default:
+            print("잘못된 입력")
     }
 }
