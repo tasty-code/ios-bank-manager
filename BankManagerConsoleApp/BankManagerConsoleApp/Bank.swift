@@ -9,8 +9,8 @@ import Foundation
 
 class Bank: Bankable {
     private var customerQueue: Queue<Customer>
-    var bankClerk: Int
-    var processingTime: Double
+    private(set) var bankClerk: Int
+    private(set) var processingTime: Double
     private var refinedProcessingTime: UInt32 {
         UInt32(processingTime * 1000000)
     }
