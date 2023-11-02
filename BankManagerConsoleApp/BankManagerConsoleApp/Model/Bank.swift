@@ -30,7 +30,7 @@ final class Bank {
                 assignTask(to: teller)
             }
         }
-        print(Prompt.close(number: count, time: totalTaskTime))
+        print(Prompt.close(numOfClient: visitCount))
     }
     
     private func assignTask(to teller: Teller) {
