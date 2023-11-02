@@ -36,8 +36,8 @@ extension BankManager {
         print(InterfaceMessage.bankDidClose(totalCustomerCount: totalCustomerCount, totalSeconds: totalSeconds))
     }
     
-    private func printStartWorkMessage(_ customerId: Int) {
-        print(InterfaceMessage.startWork(customerId: customerId))
+    private func printStartWorkMessage(_ customerId: Int, workType: WorkType) {
+        print(InterfaceMessage.startWork(customerId: customerId, workType: workType))
     }
     
     private func printCompleteWorkMessage(_ customerId: Int) {
@@ -77,7 +77,7 @@ extension BankManager {
             guard let customer = self.queue.dequeue() else { return totalSeconds }
             
             DispatchQueue.global().sync {
-                self.printStartWorkMessage(customer.id)
+                self.printStartWorkMessage(customer.id, workType: .work)
                 Thread.sleep(forTimeInterval: 0.7)
                 self.printCompleteWorkMessage(customer.id)
                 totalSeconds += 0.7
