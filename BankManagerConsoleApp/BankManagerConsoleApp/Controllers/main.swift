@@ -5,3 +5,7 @@
 // 
 
 import Foundation
+
+var test = BankManager()
+
+test.run()
