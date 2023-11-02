@@ -1,4 +1,1 @@
-import Foundation
-
-let bm = BankManager<Int>()
-bm.run()
+BankManager().run()

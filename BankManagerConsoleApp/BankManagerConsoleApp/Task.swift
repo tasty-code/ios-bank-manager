@@ -13,4 +13,9 @@ enum Task: String {
             return "대출"
         }
     }
+    
+    static func start(_ orderNumber: Int) -> String { "\(orderNumber)번 고객 업무 시작" }
+
+    static func complete(_ orderNumber: Int) -> String { "\(orderNumber)번 고객 업무 완료" }
+    
 }
