@@ -17,7 +17,7 @@ final class Bank {
         tellers = (1...numOfTellers).map({ Teller(id: $0) })
     }
     
-    func makeClientQueue() {
+    func visitClient() {
         let totalClient = Int.random(in: 10...30)
         for num in 1...totalClient {
             clientQueue.enqueue(data: Client(id: num))

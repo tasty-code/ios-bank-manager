@@ -23,7 +23,7 @@ struct BankManager {
     
     private func run() {
         let bank = Bank(numOfTellers: 1)
-        bank.makeClientQueue()
+        bank.visitClient()
         bank.open()
         self.input()
     }
