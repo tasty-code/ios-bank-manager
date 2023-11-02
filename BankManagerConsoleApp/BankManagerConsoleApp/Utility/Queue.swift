@@ -17,7 +17,7 @@ struct Queue<T> {
     }
     
     mutating func enqueue(_ data: T) {
-        if isEmpty {
+        if self.isEmpty {
             self.head = Node(data: data)
             self.tail = self.head
             return
@@ -30,7 +30,7 @@ struct Queue<T> {
     mutating func dequeue() -> T? {
         let data = self.head?.data
         
-        guard let newHead = head?.nextNode else {
+        guard let newHead = self.head?.nextNode else {
             self.clear()
             return data
         }
@@ -45,7 +45,7 @@ struct Queue<T> {
     }
     
     func peek() -> T? {
-        return head?.data
+        return self.head?.data
     }
 }
 
@@ -64,11 +64,11 @@ extension Queue {
 extension Queue {
     func fetchQueue() -> [T]? {
         var array = [T]()
-        if isEmpty {
+        if self.isEmpty {
             return nil
         }
         
-        var pointer = head
+        var pointer = self.head
         
         while let next = pointer {
             array.append(next.data)
