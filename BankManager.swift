@@ -1,6 +1,6 @@
 import Foundation
 
-final class BankManager {
+struct BankManager {
     private var bank: Bank
     
     init(bank: Bank = Bank()) {

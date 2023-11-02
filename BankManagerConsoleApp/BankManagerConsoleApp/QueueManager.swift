@@ -1,4 +1,4 @@
-final class QueueManager {
+struct QueueManager {
     private var queue: Queue<Customer>
 
     init(queue: Queue<Customer> = Queue<Customer>()) {

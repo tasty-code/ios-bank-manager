@@ -1,6 +1,6 @@
 import Foundation
 
-struct Banker: Identifiable, Hashable {
+struct Banker: Identifiable {
     var id: Int
     private(set) var task: String
     static let delay: Double = 0.7
