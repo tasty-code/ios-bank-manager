@@ -9,8 +9,7 @@ import Foundation
 
 final class Bank {
     private var tellers: [Teller] = []
-    private var count: Int = 0
-    private var totalTaskTime: Double = 0.0
+    private var visitCount: Int = 0
     private var clientQueue: Queue<Client> = Queue()
     
     init(numOfTellers: Int) {
@@ -36,8 +35,7 @@ final class Bank {
     private func assignTask(to teller: Teller) {
         guard let client = clientQueue.dequeue() else { return }
         teller.performTask(with: client)
-        count += 1
-        totalTaskTime += Client.taskTime
+        visitCount += 1
     }
     
     private struct Teller {
