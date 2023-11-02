@@ -1,5 +1,3 @@
-import Foundation
-
 final class Bank {
     private var queueManager: QueueManager
     private var bankers: [Banker]
