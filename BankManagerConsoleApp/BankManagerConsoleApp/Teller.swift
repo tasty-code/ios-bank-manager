@@ -8,23 +8,22 @@ struct Teller {
     init(tellerCount: Int) {
         self.tellerCount = tellerCount
     }
-    
-    
-    
-    func doTask(queue: Queue<Int>, customer: Int) {
+
+    func doTask(queue: Queue<Int>, customer: Int,group: DispatchGroup) {
         for n in 1...tellerCount {
-            DispatchQueue.global().async(group: normalTask) {
-                for _ in 1...(customer / tellerCount) {
+            DispatchQueue.global().async {
+                while !queue.isEmpty() {
                     semaphore.wait()
-                    guard let data = queue.peek() else { return }
-                    print("\(n)번 은행원 \(data)번 고객 업무 시작")
+                    guard let data = queue.dequeue() else { return }
+                    print("\(n) \(data)번 고객 업무 시작")
                     usleep(700000)
-                    let _ = queue.dequeue()
-                    print("\(n)번 은행원 \(data)번 고객 업무 완료 \n")
+                    print("\(n) \(data)번 고객 업무 완료 \n")
                     semaphore.signal()
+
                 }
+                group.leave()
             }
         }
-        normalTask.wait()
     }
+    
 }

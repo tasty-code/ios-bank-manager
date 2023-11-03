@@ -12,14 +12,15 @@ class BankManager {
     }
     
     private func createCustomerQueue(customer: Int) {
+        print(">>> \(customer)")
         for n in 1...customer {
             queue.enqueue(data: n)
         }
     }
 
-    func startTask() {
+    func startTask(group: DispatchGroup) {
         createCustomerQueue(customer: customer)
-        teller.doTask(queue: queue, customer: customer)
+        teller.doTask(queue: queue, customer: customer,group: group)
     }
     
    func finishTask() {

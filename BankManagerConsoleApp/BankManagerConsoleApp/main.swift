@@ -7,11 +7,13 @@ while isBankOpen {
     print("입력 : ", terminator: "")
     
     guard let userInput = readLine() else { break }
-    
+    let group = DispatchGroup()
     switch userInput {
         case "1":
-            let bankManager = BankManager(tellerCount: 1)
-            bankManager.startTask()
+            let bankManager = BankManager(tellerCount: 3)
+            group.enter()
+            bankManager.startTask(group: group)
+            group.wait()
             bankManager.finishTask()
         case "2":
             isBankOpen = false
