@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    func input() {
+    func menu() {
         print(Prompt.menu, terminator: "")
         guard let input = readLine() else { return }
         switch input {
@@ -17,7 +17,7 @@ struct BankManager {
             break
         default:
             print(Prompt.wrongInput)
-            self.input()
+            menu()
         }
     }
     

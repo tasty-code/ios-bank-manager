@@ -6,4 +6,4 @@
 
 import Foundation
 
-BankManager().input()
+BankManager().menu()
