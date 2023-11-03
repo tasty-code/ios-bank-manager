@@ -22,7 +22,7 @@ class BankManager {
         self.bank = bank
     }
     
-    func businessStart() {
+    func startBusiness() {
         while true {
             print(BankDialogue.menu)
             print(BankDialogue.input, terminator: "")
@@ -33,7 +33,7 @@ class BankManager {
             userChoice = number
             
             if isStart {
-                let (taskProcessingTime, handledCustomer) = bank.taskBegin(customerCount: Int.random(in: 10...30))
+                let (taskProcessingTime, handledCustomer) = bank.beginTask(customerCount: Int.random(in: 10...30))
                 print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
             } else {
                 break

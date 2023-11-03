@@ -18,7 +18,7 @@ class Bank: Bankable {
         self.processingTime = processingTime
     }
     
-    func taskBegin(customerCount: Int) -> (taskProcessingTime: Double, handledCustomer: Int) {
+    func beginTask(customerCount: Int) -> (taskProcessingTime: Double, handledCustomer: Int) {
         configureQueue(customerCount: customerCount)
         
         var taskProcessingTime: Double = 0
