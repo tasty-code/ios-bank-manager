@@ -29,7 +29,7 @@ enum Prompt: CustomStringConvertible {
         case .taskComplete(let client):
             return "\(client.id)번 고객 업무 완료"
         case .close(let numOfClient):
-            let time = Double(numOfClient) * Client.taskTime
+            let time = String(format: "%.2f", Double(numOfClient) * Client.taskTime)
             return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numOfClient)명이며, 총 업무시간은 \(time)초입니다."
         }
     }
