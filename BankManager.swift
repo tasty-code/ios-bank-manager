@@ -6,7 +6,7 @@
 
 import Foundation
 
-class BankManager {
+final class BankManager {
     private let bank: Bankable
     private var userChoice: Int = 0
     
