@@ -9,8 +9,12 @@ import Foundation
 
 final class BankManager {
     private var clientQueue = Queue<Client>()
-    private(set) var totalWorkTime = 0.0
+    private var _totalWorkTime = 0.0
     private let semaphore: DispatchSemaphore
+    
+    var totalWorkTime: String {
+        String(format: "%.2f", self._totalWorkTime)
+    }
     
     init(_ clerkCount: Int) {
         self.semaphore = DispatchSemaphore(value: clerkCount)
@@ -37,7 +41,7 @@ final class BankManager {
     
     private func task(for client: Client) {
         print(Script.WorkState.start(client: client))
-        self.totalWorkTime += client.task()
+        self._totalWorkTime += client.task()
         print(Script.WorkState.end(client: client))
     }
 }

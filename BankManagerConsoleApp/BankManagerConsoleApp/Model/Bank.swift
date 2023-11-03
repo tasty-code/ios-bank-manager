@@ -26,7 +26,7 @@ struct Bank {
             case "1":
                 self.beginReception(count: clientCount)
                 self.bankManager.startWork()
-                print(Script.bankSettlementMessage(count: clientCount, totalWorkTime: "\(self.bankManager.totalWorkTime)"))
+                print(Script.bankSettlementMessage(count: clientCount, totalWorkTime: self.bankManager.totalWorkTime))
             case "2":
                 return
             default:
