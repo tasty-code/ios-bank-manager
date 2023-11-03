@@ -19,4 +19,10 @@ struct Client: CustomStringConvertible {
     var description: String {
         "\(self.id)번 고객"
     }
+    
+    func task() -> Double {
+        Thread.sleep(forTimeInterval: self.spendTime)
+        return self.spendTime
+    }
 }
+
