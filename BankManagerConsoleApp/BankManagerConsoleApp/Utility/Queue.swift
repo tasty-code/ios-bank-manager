@@ -16,6 +16,10 @@ struct Queue<T> {
         self.head == nil
     }
     
+    var peek: T? {
+        self.head?.data
+    }
+    
     mutating func enqueue(_ data: T) {
         if self.isEmpty {
             self.head = Node(data: data)
@@ -43,10 +47,7 @@ struct Queue<T> {
         self.head = nil
         self.tail = nil
     }
-    
-    func peek() -> T? {
-        return self.head?.data
-    }
+ 
 }
 
 extension Queue {
