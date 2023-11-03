@@ -22,9 +22,18 @@ struct BankManager {
     }
     
     private func run() {
-        let bank = Bank(numOfTellers: 1)
+        let bank = Bank(numberOfTellers: 1)
         bank.visitClient()
-        bank.open()
-        self.input()
+        let time = measureTime {
+            bank.open()
+        }
+        bank.close(time: time)
+        menu()
+    }
+    
+    private func measureTime(_ closure: () -> ()) -> TimeInterval {
+        let startDate = Date()
+        closure()
+        return Date().timeIntervalSince(startDate)
     }
 }
