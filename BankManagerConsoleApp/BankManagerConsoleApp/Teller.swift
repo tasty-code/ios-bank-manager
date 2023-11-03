@@ -9,7 +9,7 @@ struct Teller {
         self.semaphore = DispatchSemaphore(value: tellerCount) 
     }
     
-    func doTask(queue: Queue<Int>, customer: Int) {
+    func doTask(queue: Queue<Int>) {
         let group = DispatchGroup()
 
         for n in 1...tellerCount {
