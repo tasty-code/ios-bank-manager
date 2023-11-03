@@ -16,17 +16,12 @@ struct Bank {
     
     func open() {
         while true {
-            let clientCount = Int.random(in: 10...30)
-            
-            print(Script.menu)
-            print(Script.inputField, terminator: "")
+            showMenuScript()
             
             guard let input = readLine() else { return }
             switch input {
             case "1":
-                self.beginReception(count: clientCount)
-                self.bankManager.startWork()
-                print(Script.bankSettlementMessage(count: clientCount, totalWorkTime: self.bankManager.totalWorkTime))
+                proceedBanking()
             case "2":
                 return
             default:
@@ -35,9 +30,26 @@ struct Bank {
         }
     }
     
+    private func proceedBanking() {
+        let clientCount = Int.random(in: 10...30)
+        
+        self.beginReception(count: clientCount)
+        self.bankManager.startWork()
+        self.showBankSettlement(count: clientCount)
+    }
+    
+    private func showMenuScript() {
+        print(Script.menu)
+        print(Script.inputField, terminator: "")
+    }
+    
     private func beginReception(count: Int) {
         for i in 1...count {
             self.bankManager.recept(client: Client(id: i, spendTime: 0.7))
         }
+    }
+    
+    private func showBankSettlement(count: Int) {
+        print(Script.bankSettlementMessage(count: count, totalWorkTime: self.bankManager.totalWorkTime))
     }
 }
