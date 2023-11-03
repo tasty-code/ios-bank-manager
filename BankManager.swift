@@ -17,9 +17,9 @@ class BankManager {
         }
     }
     
-    func startTask(group: DispatchGroup) {
+    func startTask() {
         createCustomerQueue(customer: customer)
-        teller.doTask(queue: queue, customer: customer,group: group)
+        teller.doTask(queue: queue, customer: customer)
     }
     
     func finishTask() {

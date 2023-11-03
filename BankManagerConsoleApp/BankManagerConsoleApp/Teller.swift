@@ -2,14 +2,18 @@ import Foundation
 
 struct Teller {
     private let tellerCount: Int
-    private let semaphore = DispatchSemaphore(value: 1)
+    private let semaphore: DispatchSemaphore
     
     init(tellerCount: Int) {
         self.tellerCount = tellerCount
+        self.semaphore = DispatchSemaphore(value: tellerCount) 
     }
     
-    func doTask(queue: Queue<Int>, customer: Int, group: DispatchGroup) {
+    func doTask(queue: Queue<Int>, customer: Int) {
+        let group = DispatchGroup()
+
         for n in 1...tellerCount {
+            group.enter()
             DispatchQueue.global().async {
                 while !queue.isEmpty() {
                     semaphore.wait()
@@ -22,6 +26,7 @@ struct Teller {
                 group.leave()
             }
         }
+        group.wait()
     }
     
 }
