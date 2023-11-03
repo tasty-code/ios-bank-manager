@@ -35,7 +35,7 @@ final class Bank {
             }
         }
     }
-   
+    
     func prepareWork() {
         hireBanker(Task.deposit.description)
         greetCustomer()
@@ -47,3 +47,4 @@ final class Bank {
         return customerCount
     }
 }
+

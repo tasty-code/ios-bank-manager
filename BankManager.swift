@@ -7,19 +7,19 @@ struct BankManager {
         self.bank = bank
     }
     
-    func showMenu() {
+    private func showMenu() {
         messageOfOpen()
         messageOfClose()
     }
     
-    func checkInput() -> Int {
+    private func checkInput() -> Int {
         guard let input = readLine(), let input = Int(input) else {
             return 0
         }
         return input
     }
     
-    func startMenu(_ input: Int) {
+    private func startMenu(_ input: Int) {
         switch input {
         case 1:
             bank.prepareWork()
