@@ -9,22 +9,27 @@ import Foundation
 
 struct Bank {
     private let bankManager: BankManager
-    
+
     init(clerkCount: Int) {
         self.bankManager = BankManager(clerkCount)
     }
     
     func open() {
         while true {
-            showMenuScript()
+            self.showMenuScript()
             
-            guard let input = readLine() else { return }
-            switch input {
-            case "1":
-                proceedBanking()
-            case "2":
+            guard let input = readLine(),
+                  let userInput = Menu(rawValue: input)
+            else {
+                continue
+            }
+            
+            switch userInput {
+            case .open:
+                self.proceedBanking()
+            case .exit:
                 return
-            default:
+            case .wrongInput:
                 print(Script.wrongInput)
             }
         }
@@ -51,5 +56,24 @@ struct Bank {
     
     private func showBankSettlement(count: Int) {
         print(Script.bankSettlementMessage(count: count, totalWorkTime: self.bankManager.totalWorkTime))
+    }
+}
+
+extension Bank {
+    private enum Menu: String {
+        case open
+        case exit
+        case wrongInput
+        
+        init?(rawValue: String) {
+            switch rawValue {
+            case "1":
+                self = .open
+            case "2":
+                self = .exit
+            default:
+                self = .wrongInput
+            }
+        }
     }
 }
