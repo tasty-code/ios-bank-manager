@@ -13,7 +13,6 @@ final class Node<T> {
 
 final class Queue<T> {
     private var head: Node<T>?
-    var count = 0
     func enqueue(data: T) {
         if head == nil {
             head = Node(data: data)
@@ -27,13 +26,11 @@ final class Queue<T> {
         }
         
         node?.next = Node(data: data)
-        count += 1
     }
     
     func dequeue() -> T? {
         let node = head
         head = head?.next
-        count -= 1
         return node?.data
     }
     
@@ -52,5 +49,5 @@ final class Queue<T> {
             return false
         }
     }
-
+    
 }

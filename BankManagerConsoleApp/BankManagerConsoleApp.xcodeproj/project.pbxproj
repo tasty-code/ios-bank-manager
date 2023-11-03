@@ -13,6 +13,8 @@
 		6BEFD0762AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFD0752AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		D0BDB0832AF22F4000007539 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDB0822AF22F4000007539 /* Teller.swift */; };
+		D0D1B7D62AF488B10017D3A6 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDB0822AF22F4000007539 /* Teller.swift */; };
+		D0D1B7D72AF488B40017D3A6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F7DA02AF23763001136F0 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -182,6 +184,8 @@
 			files = (
 				6BEFD0762AEF7EC3007BBAAC /* BankManagerConsoleAppTest.swift in Sources */,
 				6B5515DF2AEFC58600ADC5BF /* BankManager.swift in Sources */,
+				D0D1B7D62AF488B10017D3A6 /* Teller.swift in Sources */,
+				D0D1B7D72AF488B40017D3A6 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
