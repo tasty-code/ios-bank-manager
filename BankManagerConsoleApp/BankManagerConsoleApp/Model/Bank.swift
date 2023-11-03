@@ -12,8 +12,8 @@ final class Bank {
     private var visitCount: Int = 0
     private var clientQueue: Queue<Client> = Queue()
     
-    init(numOfTellers: Int) {
-        tellers = (1...numOfTellers).map({ Teller(id: $0) })
+    init(numberOfTellers: Int) {
+        tellers = (1...numberOfTellers).map({ Teller(id: $0) })
     }
     
     func visitClient() {
@@ -29,7 +29,10 @@ final class Bank {
                 assignTask(to: teller)
             }
         }
-        print(Prompt.close(numOfClient: visitCount))
+    }
+    
+    func close(time: TimeInterval) {
+        print(Prompt.close(numberOfClient: visitCount, totalTaskTime: time))
     }
     
     private func assignTask(to teller: Teller) {
