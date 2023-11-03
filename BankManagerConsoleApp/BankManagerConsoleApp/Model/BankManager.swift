@@ -21,14 +21,18 @@ final class BankManager {
     }
     
     func startWork() {
+        let group = DispatchGroup()
+        
         while self.clientQueue.isEmpty == false {
             self.semaphore.wait()
             guard let client = self.clientQueue.dequeue() else { return }
-            DispatchQueue.global().async() {
+            DispatchQueue.global().async(group: group) {
                 self.task(for: client)
                 self.semaphore.signal()
             }
         }
+        
+        group.wait()
     }
     
     private func task(for client: Client) {
