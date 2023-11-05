@@ -5,3 +5,5 @@
 // 
 
 import Foundation
+
+BankManager(bank: Bank(bankClerk: 1, processingTime: 0.7)).startBusiness()

@@ -36,7 +36,7 @@ final class QueueUnitTest: XCTestCase {
     
     func test_배열을_enqueue하고_모두_dequeue를_한_값들이_배열과_일치하는지() {
         // given
-        let array = [3, 54, 123,67, 28]
+        let array = [3, 54, 123, 67, 28]
         
         // when
         for number in array {
