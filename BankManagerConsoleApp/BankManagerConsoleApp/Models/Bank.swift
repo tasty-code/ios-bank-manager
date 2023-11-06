@@ -51,13 +51,14 @@ final class Bank {
     }
     
     private func provideService(to target: Customer) {
-        let durationTime: UInt32 = UInt32(target.serviceType.duration) * 1_000_000
+        let serviceType = target.serviceType
+        let durationTime: UInt32 = UInt32(serviceType.duration) * 1_000_000
         
-        print(Prompt.serviceStart(customer: target.ticketNumber, service: ""))
+        print(Prompt.serviceStart(customer: target.ticketNumber, service: serviceType.description))
         usleep(durationTime)
-        print(Prompt.serviceDone(customer: target.ticketNumber, service: ""))
+        print(Prompt.serviceDone(customer: target.ticketNumber, service: serviceType.description))
         
-        totalTime += target.serviceType.duration
+        totalTime += serviceType.duration
         exitCount += 1
     }
 }
