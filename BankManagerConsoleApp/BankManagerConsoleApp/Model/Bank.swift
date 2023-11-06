@@ -26,11 +26,12 @@ final class Bank {
     }
     
     func open() {
-        while !clientQueue.isEmpty {
-            tellers.forEach { teller in
+        tellers.forEach { teller in
+            DispatchQueue.global().async(group: tellerGroup) { [self] in
                 assignTask(to: teller)
             }
         }
+        tellerGroup.wait()
     }
     
     func close(time: TimeInterval) {
@@ -38,8 +39,24 @@ final class Bank {
     }
     
     private func assignTask(to teller: Teller) {
-        guard let client = clientQueue.dequeue() else { return }
-        teller.performTask(with: client)
+        while !clientQueue.isEmpty {
+            semaphore.wait()
+            
+            guard let clientTask = clientQueue.peek?.taskType,
+                  clientTask == teller.taskType
+            else {
+                semaphore.signal()
+                continue
+            }
+            
+            guard let client = clientQueue.dequeue() else {
+                return
+            }
+            
+            semaphore.signal()
+            
+            teller.performTask(with: client)
+        }
     }
     
     private struct Teller {
