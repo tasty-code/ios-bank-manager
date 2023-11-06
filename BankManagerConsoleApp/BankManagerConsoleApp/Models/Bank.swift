@@ -12,7 +12,7 @@ final class Bank {
     private var entranceCount: Int = 0
     private var exitCount: Int = 0
     private let waitingLine = Queue<Customer>()
-    
+
     func open(with numberOfCustomer: Int) {
         entranceCount = numberOfCustomer
         lineUpCustomer()
@@ -29,6 +29,8 @@ final class Bank {
         entranceCount = 0
         exitCount = 0
         totalTime = 0
+        
+        
     }
     
     private func startService() {
@@ -55,12 +57,12 @@ final class Bank {
     
     private func provideService(to target: Customer) {
         let serviceType = target.serviceType
-        let durationTime: UInt32 = UInt32(serviceType.duration) * 1_000_000
+        let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         print(Prompt.serviceStart(customer: target.ticketNumber, service: serviceType.description))
         usleep(durationTime)
         print(Prompt.serviceDone(customer: target.ticketNumber, service: serviceType.description))
-        
+
         totalTime += serviceType.duration
         exitCount += 1
     }
