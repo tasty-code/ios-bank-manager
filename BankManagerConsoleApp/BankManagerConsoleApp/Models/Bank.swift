@@ -12,7 +12,7 @@ final class Bank {
     private var entranceCount: Int = 0
     private var exitCount: Int = 0
     private let waitingLine = Queue<Customer>()
-
+    
     func open(with numberOfCustomer: Int) {
         entranceCount = numberOfCustomer
         lineUpCustomer()
@@ -29,24 +29,27 @@ final class Bank {
         entranceCount = 0
         exitCount = 0
         totalTime = 0
-        
-        
     }
     
     private func startService() {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 3
-         
+        let loanQueue: OperationQueue = OperationQueue(name: "LoanQueue", maxConcurrentOperationCount: 1)
+        let depositQueue: OperationQueue = OperationQueue(name: "DepositQueue", maxConcurrentOperationCount: 2)
+        
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue() else { break }
             
             let taskBlock = BlockOperation {
                 self.provideService(to: currentCustomer)
             }
-            queue.addOperation(taskBlock)
+            
+            if currentCustomer.serviceType == .deposit {
+                depositQueue.addOperation(taskBlock)
+            } else {
+                loanQueue.addOperation(taskBlock)
+            }
         }
-        queue.waitUntilAllOperationsAreFinished()
         
+        OperationQueue.waitUntilAllOperationsAreFinished(depositQueue, loanQueue)
         close()
     }
     
@@ -62,18 +65,8 @@ final class Bank {
         print(Prompt.serviceStart(customer: target.ticketNumber, service: serviceType.description))
         usleep(durationTime)
         print(Prompt.serviceDone(customer: target.ticketNumber, service: serviceType.description))
-
+        
         totalTime += serviceType.duration
         exitCount += 1
     }
 }
-
-
-
-
-
-
-
-
-
-
