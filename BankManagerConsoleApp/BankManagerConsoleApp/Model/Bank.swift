@@ -8,6 +8,7 @@
 import Foundation
 
 final class Bank {
+    private var clientQueue: Queue<Client> = Queue()
     private let tellers: [Teller] = [
         Teller(taskType: .deposit),
         Teller(taskType: .deposit),
@@ -42,7 +43,7 @@ final class Bank {
     }
     
     private struct Teller {
-        var taskType: TaskType
+        let taskType: TaskType
         
         func performTask(with client: Client) {
             print(Prompt.taskStart(with: client))
