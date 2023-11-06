@@ -32,12 +32,12 @@ final class Bank {
     private func startService() {
         let queue = DispatchQueue(label: "worker")
         let group = DispatchGroup()
-        
+         
         while !waitingLine.isEmpty {
-            guard let frontCustomer = waitingLine.dequeue() else { break }
+            guard let currentCustomer = waitingLine.dequeue() else { break }
             
             queue.async(group: group) { [weak self] in
-                self?.provideService(to: frontCustomer)
+                self?.provideService(to: currentCustomer)
             }
         }
         
@@ -51,10 +51,13 @@ final class Bank {
     }
     
     private func provideService(to target: Customer) {
+        let durationTime: UInt32 = UInt32(target.serviceType.duration) * 1_000_000
+        
         print(Prompt.serviceStart(customer: target.ticketNumber, service: ""))
-        usleep(700_000)
+        usleep(durationTime)
         print(Prompt.serviceDone(customer: target.ticketNumber, service: ""))
-        totalTime += 0.7
+        
+        totalTime += target.serviceType.duration
         exitCount += 1
     }
 }
