@@ -10,7 +10,6 @@ import Foundation
 final class Bank {
     private var totalTime: Double = 0
     private var entranceCount: Int = 0
-    private var exitCount: Int = 0
     private let waitingLine = Queue<Customer>()
     
     func open(with numberOfCustomer: Int) {
@@ -27,14 +26,13 @@ final class Bank {
     
     private func clear() {
         entranceCount = 0
-        exitCount = 0
     }
     
     private func startService() {
         let queue = DispatchQueue(label: "worker")
         let group = DispatchGroup()
         
-        while entranceCount > exitCount {
+        while !waitingLine.isEmpty {
             guard let frontCustomer = waitingLine.dequeue() else { break }
             
             queue.async(group: group) { [weak self] in
@@ -57,7 +55,6 @@ final class Bank {
         
         print("\(target.ticketNumber)번 업무 종료")
         totalTime += 0.7
-        exitCount += 1
     }
 }
 
