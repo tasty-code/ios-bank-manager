@@ -16,10 +16,6 @@ final class Bank {
     private var visitCount: Int = 0
     private var clientQueue: Queue<Client> = Queue()
     
-    init(numberOfTellers: Int) {
-        tellers = (1...numberOfTellers).map({ Teller(id: $0) })
-    }
-    
     func visitClient() {
         let totalClient = Int.random(in: 10...30)
         for num in 1...totalClient {
