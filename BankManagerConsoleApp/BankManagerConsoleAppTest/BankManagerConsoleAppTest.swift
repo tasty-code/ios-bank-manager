@@ -22,11 +22,17 @@ final class BankManagerConsoleAppUnitTest: XCTestCase {
     }
     
     // MARK: - isEmpty Test
-    func test_아무것도_추가되지_않았을_경우_결과값_True() {
-        XCTAssertTrue(sut.isEmpty)
+    func test_아무것도_추가되지_않았을_경우_isEmpty의_결과값이_True() {
+        //given
+        
+        //when
+        let isEmpty = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(isEmpty)
     }
     
-    func test_데이터값_추가시_정상추가되면_isEmpty_False() {
+    func test_데이터값_추가시_정상추가되면_isEmpty의_결과값이_False() {
         // given
         let input = 123
         
