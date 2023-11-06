@@ -8,9 +8,10 @@
 import Foundation
 
 struct Customer {
-    var ticketNumber: Int
-    
+    let ticketNumber: Int
+    let serviceType: ServiceType
     init(ticketNumber: Int) {
         self.ticketNumber = ticketNumber
+        self.serviceType = ServiceType.allCases.randomElement() ?? .deposit
     }
 }

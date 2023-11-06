@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ServiceType: CustomStringConvertible {
+enum ServiceType: CustomStringConvertible, CaseIterable {
     case loan
     case deposit
     
