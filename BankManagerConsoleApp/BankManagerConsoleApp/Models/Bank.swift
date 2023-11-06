@@ -8,7 +8,6 @@
 import Foundation
 
 final class Bank {
-    
     private var totalTime: Double = 0
     private var entranceCount: Int = 0
     private var exitCount: Int = 0
