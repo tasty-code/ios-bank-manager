@@ -27,21 +27,24 @@ final class Bank {
     
     private func clear() {
         entranceCount = 0
+        exitCount = 0
+        totalTime = 0
     }
     
     private func startService() {
-        let queue = DispatchQueue(label: "worker")
-        let group = DispatchGroup()
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 3
          
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue() else { break }
             
-            queue.async(group: group) { [weak self] in
-                self?.provideService(to: currentCustomer)
+            let taskBlock = BlockOperation {
+                self.provideService(to: currentCustomer)
             }
+            queue.addOperation(taskBlock)
         }
+        queue.waitUntilAllOperationsAreFinished()
         
-        group.wait()
         close()
     }
     
