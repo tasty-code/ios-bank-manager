@@ -22,7 +22,7 @@ struct BankManager {
     }
     
     private func run() {
-        let bank = Bank(numberOfTellers: 1)
+        let bank = Bank()
         bank.visitClient()
         let time = measureTime {
             bank.open()
