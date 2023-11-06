@@ -8,17 +8,16 @@
 import Foundation
 
 final class Bank {
-    private var tellers: [Teller] = [
+    private let tellers: [Teller] = [
         Teller(taskType: .deposit),
         Teller(taskType: .deposit),
         Teller(taskType: .loan)
     ]
-    private var visitCount: Int = 0
+    private let numberOfClient: Int = Int.random(in: 10...30)
     private var clientQueue: Queue<Client> = Queue()
     
     func visitClient() {
-        let totalClient = Int.random(in: 10...30)
-        for num in 1...totalClient {
+        for num in 1...numberOfClient {
             clientQueue.enqueue(data: Client(id: num))
         }
     }
@@ -32,13 +31,12 @@ final class Bank {
     }
     
     func close(time: TimeInterval) {
-        print(Prompt.close(numberOfClient: visitCount, totalTaskTime: time))
+        print(Prompt.close(numberOfClient: numberOfClient, totalTaskTime: time))
     }
     
     private func assignTask(to teller: Teller) {
         guard let client = clientQueue.dequeue() else { return }
         teller.performTask(with: client)
-        visitCount += 1
     }
     
     private struct Teller {
