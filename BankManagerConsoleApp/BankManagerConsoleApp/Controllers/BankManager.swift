@@ -7,7 +7,7 @@ final class BankManager {
     }
     
     func run() {
-        print("1: 실행, 2: 종료")
+        print(Prompt.run)
         if let userInput = readLine() {
             switch userInput {
             case "1":

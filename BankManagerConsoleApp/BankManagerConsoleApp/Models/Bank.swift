@@ -10,6 +10,7 @@ import Foundation
 final class Bank {
     private var totalTime: Double = 0
     private var entranceCount: Int = 0
+    private var exitCount: Int = 0
     private let waitingLine = Queue<Customer>()
     
     func open(with numberOfCustomer: Int) {
@@ -45,15 +46,16 @@ final class Bank {
     }
     
     private func close() {
-        print("업무가 마감되었습니다. 오늘 처리한 고객은 총 \(entranceCount)명이며, 총 업무시간은 \(totalTime.toString(toDecimalPlace: 2))초 입니다")
+        print(Prompt.end(totalCustomer: exitCount, totalTime: totalTime))
         clear()
     }
     
     private func provideService(to target: Customer) {
-        print("\(target.ticketNumber)번 업무 시작")
+        print(Prompt.start(customer: target.ticketNumber, service: ""))
         usleep(700_000)
-        print("\(target.ticketNumber)번 업무 종료")
+        print(Prompt.finish(customer: target.ticketNumber, service: ""))
         totalTime += 0.7
+        exitCount += 1
     }
 }
 
