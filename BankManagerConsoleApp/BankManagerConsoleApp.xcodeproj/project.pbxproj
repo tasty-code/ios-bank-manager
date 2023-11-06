@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D76FDFB2AF873BD00722425 /* BankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D76FDFA2AF873BD00722425 /* BankTask.swift */; };
+		0D76FDFD2AF874CC00722425 /* DepositTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D76FDFC2AF874CC00722425 /* DepositTask.swift */; };
+		0D76FDFF2AF8752E00722425 /* LoanTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D76FDFE2AF8752E00722425 /* LoanTask.swift */; };
 		0D8977422AEF678F005B8993 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8977412AEF678F005B8993 /* Queue.swift */; };
 		0D89774A2AEF67B9005B8993 /* QueueUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8977492AEF67B9005B8993 /* QueueUnitTest.swift */; };
 		0D89774E2AEF67C3005B8993 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8977412AEF678F005B8993 /* Queue.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D76FDFA2AF873BD00722425 /* BankTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTask.swift; sourceTree = "<group>"; };
+		0D76FDFC2AF874CC00722425 /* DepositTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTask.swift; sourceTree = "<group>"; };
+		0D76FDFE2AF8752E00722425 /* LoanTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanTask.swift; sourceTree = "<group>"; };
 		0D8977412AEF678F005B8993 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0D8977472AEF67B9005B8993 /* QueueUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8977492AEF67B9005B8993 /* QueueUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueUnitTest.swift; sourceTree = "<group>"; };
@@ -90,13 +96,16 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				0D8977562AF22630005B8993 /* Bank.swift */,
+				0D8977542AF22552005B8993 /* Bankable.swift */,
+				0D8977522AF1DEE8005B8993 /* BankDialogue.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				0D76FDFA2AF873BD00722425 /* BankTask.swift */,
+				CBDDBBEB2AF1D73C00DB2B58 /* Customer.swift */,
+				0D76FDFC2AF874CC00722425 /* DepositTask.swift */,
+				0D76FDFE2AF8752E00722425 /* LoanTask.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				0D8977412AEF678F005B8993 /* Queue.swift */,
-				CBDDBBEB2AF1D73C00DB2B58 /* Customer.swift */,
-				0D8977522AF1DEE8005B8993 /* BankDialogue.swift */,
-				0D8977542AF22552005B8993 /* Bankable.swift */,
-				0D8977562AF22630005B8993 /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -198,12 +207,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D76FDFD2AF874CC00722425 /* DepositTask.swift in Sources */,
+				0D76FDFB2AF873BD00722425 /* BankTask.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				0D8977422AEF678F005B8993 /* Queue.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				CBDDBBEC2AF1D73C00DB2B58 /* Customer.swift in Sources */,
 				0D8977532AF1DEE8005B8993 /* BankDialogue.swift in Sources */,
 				0D8977552AF22552005B8993 /* Bankable.swift in Sources */,
+				0D76FDFF2AF8752E00722425 /* LoanTask.swift in Sources */,
 				0D8977572AF22630005B8993 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
