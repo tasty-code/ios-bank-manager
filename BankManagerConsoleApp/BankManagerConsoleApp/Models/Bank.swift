@@ -51,8 +51,7 @@ final class Bank {
     
     private func provideService(to target: Customer) {
         print("\(target.ticketNumber)번 업무 시작")
-        sleep(UInt32(0.7))
-        
+        usleep(700_000)
         print("\(target.ticketNumber)번 업무 종료")
         totalTime += 0.7
     }
