@@ -14,7 +14,9 @@ final class Bank {
         Teller(taskType: .loan)
     ]
     private let numberOfClient: Int = Int.random(in: 10...30)
-    private var clientQueue: Queue<Client> = Queue()
+    private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private let tellerGroup: DispatchGroup = DispatchGroup()
+    
     
     func visitClient() {
         for num in 1...numberOfClient {
