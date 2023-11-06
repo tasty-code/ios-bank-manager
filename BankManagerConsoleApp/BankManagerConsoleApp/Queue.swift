@@ -13,6 +13,13 @@ final class Node<T> {
 
 final class Queue<T> {
     private var head: Node<T>?
+    private var type: TypeOfWork
+    
+    init(head: Node<T>? = nil, type: TypeOfWork) {
+        self.head = head
+        self.type = type
+    }
+    
     func enqueue(data: T) {
         if head == nil {
             head = Node(data: data)
@@ -48,6 +55,10 @@ final class Queue<T> {
         } else {
             return false
         }
+    }
+    
+    func getType() -> TypeOfWork {
+        return type
     }
     
 }
