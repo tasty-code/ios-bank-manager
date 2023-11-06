@@ -1,8 +1,8 @@
 import Foundation
 
-var isBankOpen = true
+var isReady = true
 
-while isBankOpen {
+while isReady {
     print("1 : 은행 개점 \n2 : 종료")
     print("입력 : ", terminator: "")
     
@@ -11,10 +11,10 @@ while isBankOpen {
     switch userInput {
     case "1":
         let bankManager = BankManager(depositTellerCount: 2, loanTellerCount: 1)
-        bankManager.startTask()
+        bankManager.openBank()
         bankManager.finishTask()
     case "2":
-        isBankOpen = false
+        isReady = false
     default:
         print("잘못된 입력")
     }

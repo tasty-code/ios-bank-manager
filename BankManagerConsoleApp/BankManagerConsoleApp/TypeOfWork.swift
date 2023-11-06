@@ -1,6 +1,6 @@
 import Foundation
 
-enum TypeOfWork: Int, Equatable, CaseIterable {
+enum TypeOfWork: Int {
     case Deposit, Loan
     
     var time: UInt32 {
