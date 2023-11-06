@@ -13,6 +13,11 @@ final class Node<T> {
 
 final class Queue<T> {
     private var head: Node<T>?
+    
+    init(head: Node<T>? = nil) {
+        self.head = head
+    }
+    
     func enqueue(data: T) {
         if head == nil {
             head = Node(data: data)

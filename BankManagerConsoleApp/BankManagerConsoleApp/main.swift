@@ -10,10 +10,9 @@ while isBankOpen {
     
     switch userInput {
     case "1":
-        let bankManager = BankManager(tellerCount: 1)
+        let bankManager = BankManager(depositTellerCount: 2, loanTellerCount: 1)
         bankManager.startTask()
         bankManager.finishTask()
-        
     case "2":
         isBankOpen = false
     default:
