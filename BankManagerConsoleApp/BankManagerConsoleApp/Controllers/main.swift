@@ -8,4 +8,4 @@ import Foundation
 
 private let bankApp = BankManager()
 
-bankApp.run()
+bankApp.launch()

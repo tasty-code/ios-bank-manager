@@ -46,14 +46,14 @@ final class Bank {
     }
     
     private func close() {
-        print(Prompt.end(totalCustomer: exitCount, totalTime: totalTime))
+        print(Prompt.appFinish(totalCustomer: exitCount, totalTime: totalTime))
         clear()
     }
     
     private func provideService(to target: Customer) {
-        print(Prompt.start(customer: target.ticketNumber, service: ""))
+        print(Prompt.serviceStart(customer: target.ticketNumber, service: ""))
         usleep(700_000)
-        print(Prompt.finish(customer: target.ticketNumber, service: ""))
+        print(Prompt.serviceDone(customer: target.ticketNumber, service: ""))
         totalTime += 0.7
         exitCount += 1
     }

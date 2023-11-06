@@ -6,19 +6,19 @@ final class BankManager {
         return Int.random(in: 10...30)
     }
     
-    func run() {
-        print(Prompt.run)
+    func launch() {
+        print(Prompt.appLaunch, terminator: " ")
         if let userInput = readLine() {
-            switch userInput {
-            case "1":
+            switch Menu(rawValue: userInput) {
+            case .onGoing:
                 bank.open(with: numberOfCustomer)
-                run()
+                launch()
                 
-            case "2":
+            case .finished:
                 return
                 
             default:
-                return
+                return 
             }
         }
     }
