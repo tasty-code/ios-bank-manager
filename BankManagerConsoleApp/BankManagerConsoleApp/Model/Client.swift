@@ -8,6 +8,6 @@
 import Foundation
 
 struct Client {
-    static let taskTime: Double = 0.7
     var id: Int
+    var taskType: TaskType = TaskType.allCases.randomElement() ?? .deposit
 }

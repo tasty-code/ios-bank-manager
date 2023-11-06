@@ -46,7 +46,7 @@ final class Bank {
         
         func performTask(with client: Client) {
             print(Prompt.taskStart(with: client))
-            Thread.sleep(forTimeInterval: Client.taskTime)
+            Thread.sleep(forTimeInterval: client.taskType.taskTime)
             print(Prompt.taskComplete(with: client))
         }
     }
