@@ -33,7 +33,7 @@ final class BankManager {
             userChoice = number
             
             if isStart {
-                let (taskProcessingTime, handledCustomer) = bank.beginTask(customerCount: Int.random(in: 10...30))
+                let (taskProcessingTime, handledCustomer) = bank.beginTask()
                 print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
             } else {
                 break

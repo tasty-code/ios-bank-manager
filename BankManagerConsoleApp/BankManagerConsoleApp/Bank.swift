@@ -8,48 +8,35 @@
 import Foundation
 
 class Bank: Bankable {
-    private var customerQueue: Queue<Customer>
-    private(set) var bankClerk: Int
-    private(set) var processingTime: Double
+    let group: DispatchGroup = DispatchGroup()
+    private(set) var customerQueue: Queue<Customer>
+    private(set) var handledCustomer = 0
     
-    init(customerQueue: Queue<Customer> = Queue<Customer>(), bankClerk: Int, processingTime: Double) {
+    init(customerQueue: Queue<Customer>) {
         self.customerQueue = customerQueue
-        self.bankClerk = bankClerk
-        self.processingTime = processingTime
     }
     
-    func beginTask(customerCount: Int) -> (taskProcessingTime: Double, handledCustomer: Int) {
-        configureQueue(customerCount: customerCount)
+    func beginTask() -> (taskProcessingTime: Double, handledCustomer: Int) {
+        addRandomCustomers(Int.random(in: 10...30), taskTypes: LoanTask.self, DepositTask.self)
         
-        var taskProcessingTime: Double = 0
-        var handledCustomer = 0
-        
+        let start = CFAbsoluteTimeGetCurrent()
         while !customerQueue.isEmpty {
-            guard let customer = customerQueue.dequeue() else {
-                break
+            if let customer = customerQueue.dequeue() {
+                customer.runTask(group: group)
+                handledCustomer += 1
             }
-            
-            print(BankDialogue.start(customer))
-            taskProcessingTime += processingTime
-            Thread.sleep(forTimeInterval: processingTime)
-            print(BankDialogue.finish(customer))
-            handledCustomer += 1
         }
         
-        clearQueue()
+        group.wait()
         
-        return (taskProcessingTime, handledCustomer)
+        let end = CFAbsoluteTimeGetCurrent() - start
+        
+        return (Double(end), handledCustomer)
     }
     
-    private func configureQueue(customerCount: Int) {
-        var queue = Queue<Customer>()
-        for i in 1...customerCount {
-            queue.enqueue(Customer(id: i))
+    private func addRandomCustomers(_ count: Int, taskTypes: BankTask.Type...) {
+        for i in 1...count {
+            customerQueue.enqueue(Customer(id: i, task: taskTypes.randomElement()!.init()))
         }
-        customerQueue = queue
-    }
-    
-    private func clearQueue() {
-        customerQueue.clear()
     }
 }

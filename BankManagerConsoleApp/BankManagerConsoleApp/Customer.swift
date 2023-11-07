@@ -14,5 +14,9 @@ struct Customer: CustomStringConvertible {
     
     let id: Int
     let task: BankTask
+    
+    func runTask(group: DispatchGroup) {
+        task.runTask(self, group: group)
+    }
 }
 

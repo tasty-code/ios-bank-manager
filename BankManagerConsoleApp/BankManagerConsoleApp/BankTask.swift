@@ -9,20 +9,26 @@ import Foundation
 
 protocol BankTask {
     static var semaphore: DispatchSemaphore { get }
+    static var dispatchQueue: DispatchQueue { get }
     
     var name: String { get }
     var processingTime: Double { get }
     
-    func runTask(_ customer: Customer)
+    init()
+    
+    func runTask(_ customer: Customer, group: DispatchGroup)
 }
 
 extension BankTask {
-    func runTask(_ customer: Customer) {
+    func runTask(_ customer: Customer, group: DispatchGroup) {
         let semaphore = type(of: self).semaphore
-        semaphore.signal()
-        print(BankDialogue.start(customer, task: self))
-        Thread.sleep(forTimeInterval: processingTime)
-        print(BankDialogue.finish(customer, task: self))
-        semaphore.wait()
+        let queue = type(of: self).dispatchQueue
+        queue.async(group: group) {
+            semaphore.wait()
+            print(BankDialogue.start(customer, task: self))
+            Thread.sleep(forTimeInterval: processingTime)
+            print(BankDialogue.finish(customer, task: self))
+            semaphore.signal()
+        }
     }
 }

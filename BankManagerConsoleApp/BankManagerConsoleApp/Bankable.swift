@@ -8,8 +8,8 @@
 import Foundation
 
 protocol Bankable: AnyObject {
-    var bankClerk: Int { get }
-    var processingTime: Double { get }
+    var customerQueue: Queue<Customer> { get }
+    var group: DispatchGroup { get }
     
-    func beginTask(customerCount: Int) -> (taskProcessingTime: Double, handledCustomer: Int)
+    func beginTask() -> (taskProcessingTime: Double, handledCustomer: Int)
 }
