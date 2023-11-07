@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BankProcess {
+final class BankProcess {
     private let bank: Bank
     
     init(clerkCount: Int) {

@@ -10,7 +10,7 @@ import Foundation
 struct Bank {
     private let bankManager: BankManagable
 
-    var totalWorkTime: String {
+    private var totalWorkTime: String {
         String(format: "%.2f", self.bankManager.getTotalWorkTime())
     }
     
