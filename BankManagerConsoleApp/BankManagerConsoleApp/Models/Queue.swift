@@ -1,40 +1,41 @@
 final class Queue<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
+    private var accumulatedCount: Int
     
-    init(head: Node<T>? = nil, tail: Node<T>? = nil) {
+    init(head: Node<T>? = nil, tail: Node<T>? = nil, accumulatedCount: Int = 0) {
         self.head = head
         self.tail = tail
+        self.accumulatedCount = accumulatedCount
     }
     
-    func enqueue(_ Node: Node<T>) {
-        if head == nil {
-            head = Node
-            tail = Node
-        } else {
-            tail?.next = Node
-            tail = Node
-        }
-    }
-    
-    func dequeue() -> T? {
-        let Node: Node<T>? = head
-        if head == nil {
-            return nil
-        }
+    func enqueue(_ data: T) {
+        let node = Node<T>(data: data)
         
-        head = head?.next
+        if head == nil {
+            head = node
+            tail = node
+        } else {
+            tail?.next = node
+            tail = node
+        }
+        accumulatedCount += 1
+    }
+    
+    func dequeue() {
+        if head != nil {
+            head = head?.next
+        }
         
         if head == nil {
             tail = nil
         }
-        
-        return Node?.data
     }
     
     func clear() {
         head = nil
         tail = nil
+        accumulatedCount = 0
     }
     
     func peek() -> T? {
@@ -47,5 +48,9 @@ final class Queue<T> {
         } else {
             return false
         }
+    }
+    
+    func getAccumulatedCount() -> Int {
+        return accumulatedCount
     }
 }
