@@ -8,17 +8,14 @@ final class BankManager {
     
     func launch() {
         print(Prompt.appLaunch, terminator: " ")
-        if let userInput = readLine() {
-            switch Menu(rawValue: userInput) {
+        if let userInput = readLine(), let menu = Menu(rawValue: userInput) {
+            switch menu {
             case .onGoing:
                 bank.open(with: numberOfCustomer)
                 launch()
                 
             case .finished:
                 return
-                
-            default:
-                return 
             }
         }
     }
