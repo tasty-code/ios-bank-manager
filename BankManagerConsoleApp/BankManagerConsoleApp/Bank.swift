@@ -1,50 +1,79 @@
+import Foundation
+
 final class Bank {
     private var queueManager: QueueManager
-    private var bankers: [Banker]
+    private var banker: Banker
     private var customerCount: Int
+    private var elapsedTime: Double
     
-    init(queueManager: QueueManager = QueueManager(), bankers: [Banker] = [], customerCount: Int = 0) {
+    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, timeElapsed: Double = 0.0) {
         self.queueManager = queueManager
-        self.bankers = bankers
+        self.banker = banker
         self.customerCount = customerCount
-    }
-    
-    func hireBanker(_ task: String) {
-        let banker: Banker = Banker(id: bankers.count, task: task)
-        bankers.append(banker)
+        self.elapsedTime = timeElapsed
     }
     
     func greetCustomer() {
         customerCount = Int.random(in: 10...30)
         let queue = queueManager.getQueue()
         
-        for _ in 1...customerCount {
-            let newCustomer = Customer(id: queue.getAccumulatedCount())
+        for index in 1...customerCount {
+            let newCustomer = Customer(id: index, task: Task.random())
+            
             queue.enqueue(newCustomer)
         }
     }
     
-    func startWork() {
-        let queue = queueManager.getQueue()
+    func openBank() {
+        let startTime = Date()
+        startWork()
+        let endTime = Date()
         
-        for _ in 1...customerCount {
-            for banker in bankers {
-                if banker.task == Task.deposit.description {
-                    banker.work(queue)
-                }
-            }
-        }
+        elapsedTime = endTime.timeIntervalSince(startTime)
     }
     
     func prepareWork() {
-        hireBanker(Task.deposit.description)
         greetCustomer()
-        startWork()
+        openBank()
     }
     
-    func prepareCloseWork() -> Int {
+    func prepareCloseWork() -> (Int, Double) {
         queueManager.clearQueue()
-        return customerCount
+        return (customerCount, elapsedTime)
     }
+    
+    private func startWork() {
+        let queue = queueManager.getQueue()
+        let group = DispatchGroup()
+        
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        
+        while !queue.isEmpty() {
+            let customer = queue.dequeue()
+            
+            guard let customer = customer else {
+                return
+            }
+            
+            switch customer.task {
+            case .deposit:
+                insert(customer, toWaitingQueueBy: depositSemaphore, as: Banker.depositTime, group)
+            case .loan:
+                insert(customer, toWaitingQueueBy: loanSemaphore, as: Banker.loanTime, group)
+            }
+        }
+        group.wait()
+    }
+    
+    private func insert(_ customer: Customer?, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double, _ group: DispatchGroup) {
+        
+        DispatchQueue.global().async(group: group) { [self] in
+            dispatchSemaphore.wait()
+            banker.work(for: customer, as: time)
+            dispatchSemaphore.signal()
+        }
+    }
+    
 }
 
