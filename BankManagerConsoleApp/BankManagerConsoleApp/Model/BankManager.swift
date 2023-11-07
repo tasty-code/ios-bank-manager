@@ -19,7 +19,7 @@ final class BankManager {
         self.semaphore = DispatchSemaphore(value: clerkCount)
     }
     
-    func recept(client: Client) {
+    func recept(for client: Client) {
         self.clientQueue.enqueue(client)
     }
     

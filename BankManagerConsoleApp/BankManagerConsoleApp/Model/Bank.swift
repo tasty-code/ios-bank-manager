@@ -50,7 +50,8 @@ struct Bank {
     
     private func beginReception(count: Int) {
         for i in 1...count {
-            self.bankManager.recept(client: Client(id: i, spendTime: 0.7))
+            let client = Client(id: i, spendTime: 0.7)
+            self.bankManager.recept(for: client)
         }
     }
     
