@@ -8,13 +8,13 @@
 import Foundation
 
 struct Bank {
-    private let bankManager: BankManager
+    private let bankManager: BankManagable
 
     var totalWorkTime: String {
-        String(format: "%.2f", self.bankManager._totalWorkTime)
+        String(format: "%.2f", self.bankManager.getTotalWorkTime())
     }
     
-    init(bankManager: BankManager) {
+    init(bankManager: BankManagable) {
         self.bankManager = bankManager
     }
     

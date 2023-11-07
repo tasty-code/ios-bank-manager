@@ -10,8 +10,9 @@ import Foundation
 class BankProcess {
     private let bank: Bank
     
-    init(bank: Bank) {
-        self.bank = bank
+    init() {
+        let bankManager: BankManagable = BankManager(1)
+        self.bank = Bank(bankManager: bankManager)
     }
     
     func run() {
