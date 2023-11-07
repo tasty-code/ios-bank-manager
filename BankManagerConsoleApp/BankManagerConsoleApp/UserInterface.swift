@@ -2,10 +2,10 @@ import Foundation
 
 struct UserInterface {
     
-   private var isReady = true
+   
 
    mutating func runProgram() {
-        while isReady {
+        while true {
             print("1 : 은행 개점 \n2 : 종료")
             print("입력 : ", terminator: "")
             
@@ -17,7 +17,7 @@ struct UserInterface {
                 bankManager.openBank()
                 bankManager.finishTask()
             case "2":
-                isReady = false
+                return
             default:
                 print("잘못된 입력")
             }
