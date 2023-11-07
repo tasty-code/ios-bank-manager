@@ -6,7 +6,7 @@
 
 import Foundation
 
-let bankProcess = BankProcess()
+let bankProcess = BankProcess(clerkCount: 1)
 
 bankProcess.run()
 
