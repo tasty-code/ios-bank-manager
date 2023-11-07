@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 final class BankManager {
     private var clientQueue = Queue<Client>()
     private var _totalWorkTime = 0.0

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Queue<T> {
     private var head: Node?
     private var tail: Node?

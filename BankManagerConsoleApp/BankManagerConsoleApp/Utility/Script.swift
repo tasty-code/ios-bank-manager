@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum Script: CustomStringConvertible {
     case menu
     case inputField
