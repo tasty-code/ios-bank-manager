@@ -22,12 +22,13 @@ struct BankManager {
     }
     
     private func run() {
-        let bank = Bank()
+        let bank = Bank(depositTeller: 2, loanTeller: 1)
+        
         bank.visitClient()
         let time = measureTime {
             bank.open()
         }
-        bank.close(time: time)
+        bank.close(at: time)
         menu()
     }
     
