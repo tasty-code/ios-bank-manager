@@ -8,6 +8,6 @@
 import Foundation
 
 struct Client {
-    var id: Int
-    var taskType: TaskType = TaskType.allCases.randomElement() ?? .deposit
+    let id: Int
+    let taskType: TaskType = TaskType.allCases.randomElement() ?? .deposit
 }
