@@ -66,7 +66,7 @@ final class Bank {
         group.wait()
     }
     
-    private func insert(_ customer: Customer?, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double, _ group: DispatchGroup) {
+    private func insert(_ customer: Customer, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double, _ group: DispatchGroup) {
         
         DispatchQueue.global().async(group: group) { [self] in
             dispatchSemaphore.wait()
@@ -76,4 +76,3 @@ final class Bank {
     }
     
 }
-
