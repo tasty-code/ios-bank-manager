@@ -44,8 +44,6 @@ final class Bank {
     
     private func startWork() {
         let queue = queueManager.getQueue()
-        let group = DispatchGroup()
-        
         let depositSemaphore = DispatchSemaphore(value: 2)
         let loanSemaphore = DispatchSemaphore(value: 1)
         
@@ -58,20 +56,22 @@ final class Bank {
             
             switch customer.task {
             case .deposit:
-                insert(customer, toWaitingQueueBy: depositSemaphore, as: Banker.depositTime, group)
+                insert(customer, toWaitingQueueBy: depositSemaphore, as: Banker.depositTime)
             case .loan:
-                insert(customer, toWaitingQueueBy: loanSemaphore, as: Banker.loanTime, group)
+                insert(customer, toWaitingQueueBy: loanSemaphore, as: Banker.loanTime)
             }
         }
-        group.wait()
     }
     
-    private func insert(_ customer: Customer, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double, _ group: DispatchGroup) {
+    private func insert(_ customer: Customer, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double) {
+        let group = DispatchGroup()
+        group.enter()
         
-        DispatchQueue.global().async(group: group) { [self] in
+        DispatchQueue.global().async { [self] in
             dispatchSemaphore.wait()
             banker.work(for: customer, as: time)
             dispatchSemaphore.signal()
+            group.leave()
         }
     }
     
