@@ -20,7 +20,7 @@ enum Script: CustomStringConvertible {
         case .inputField:
             return "입력 : "
         case .wrongInput:
-            return "잘 못된 입력입니다."
+            return "잘못된 입력입니다."
         case .bankSettlementMessage(let clientCount, let totalWorkTime):
             return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalWorkTime) 입니다."
         }
