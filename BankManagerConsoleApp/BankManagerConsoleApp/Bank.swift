@@ -17,12 +17,13 @@ class Bank: Bankable {
     }
     
     func beginTask() -> (taskProcessingTime: Double, handledCustomer: Int) {
+        handledCustomer = 0
         addRandomCustomers(Int.random(in: 10...30), taskTypes: LoanTask.self, DepositTask.self)
         
         let start = CFAbsoluteTimeGetCurrent()
         while !customerQueue.isEmpty {
             if let customer = customerQueue.dequeue() {
-                customer.runTask(group: group)
+                assignTask(customer, group: group)
                 handledCustomer += 1
             }
         }
