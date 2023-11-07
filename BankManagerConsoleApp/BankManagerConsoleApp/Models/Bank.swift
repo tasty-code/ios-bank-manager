@@ -9,29 +9,21 @@ import Foundation
 
 final class Bank {
     private var totalTime: Double = 0
-    private var entranceCount: Int = 0
     private var exitCount: Int = 0
     private let waitingLine = Queue<Customer>()
     
-    func open(with numberOfCustomer: Int) {
-        entranceCount = numberOfCustomer
-        lineUpCustomer()
+    func runService() {
         startService()
+        shutDownService()
     }
     
-    private func lineUpCustomer() {
-        for i in 1...entranceCount {
-            waitingLine.enqueue(Customer(ticketNumber: i))
-        }
+    func lineUp(_ customer: Customer) {
+        waitingLine.enqueue(customer)
     }
-    
-    private func clear() {
-        entranceCount = 0
-        exitCount = 0
-        totalTime = 0
-    }
-    
-    private func startService() {
+}
+
+private extension Bank {
+    func startService() {
         let loanQueue: OperationQueue = OperationQueue(name: "LoanQueue", maxConcurrentOperationCount: 1)
         let depositQueue: OperationQueue = OperationQueue(name: "DepositQueue", maxConcurrentOperationCount: 2)
         
@@ -50,15 +42,9 @@ final class Bank {
         }
         
         OperationQueue.waitUntilAllOperationsAreFinished(depositQueue, loanQueue)
-        close()
     }
     
-    private func close() {
-        print(Prompt.appFinish(totalCustomer: exitCount, totalTime: totalTime))
-        clear()
-    }
-    
-    private func provideService(to target: Customer) {
+    func provideService(to target: Customer) {
         let serviceType = target.serviceType
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
@@ -68,5 +54,15 @@ final class Bank {
         
         totalTime += serviceType.duration
         exitCount += 1
+    }
+    
+    func shutDownService() {
+        print(Prompt.appFinish(totalCustomer: exitCount, totalTime: totalTime))
+        prepareService()
+    }
+    
+    func prepareService() {
+        exitCount = 0
+        totalTime = 0
     }
 }
