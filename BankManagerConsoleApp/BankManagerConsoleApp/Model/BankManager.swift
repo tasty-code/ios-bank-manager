@@ -34,14 +34,19 @@ final class BankManager: BankManagable {
         group.wait()
     }
     
+    func getTotalWorkTime() -> Double {
+        return self.totalWorkTime
+    }
+    
     private func task(for client: Client) {
         print(WorkState.start(client: client))
-        self.totalWorkTime += client.task()
+        self.working(for: 0.7)
         print(WorkState.end(client: client))
     }
     
-    func getTotalWorkTime() -> Double {
-        return self.totalWorkTime
+    private func working(for time: Double) {
+        Thread.sleep(forTimeInterval: time)
+        self.totalWorkTime += time
     }
 }
 

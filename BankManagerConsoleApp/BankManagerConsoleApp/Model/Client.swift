@@ -9,20 +9,13 @@ import Foundation
 
 struct Client: CustomStringConvertible {
     private let id: Int
-    private let spendTime: Double
     
-    init(id: Int, spendTime: Double) {
+    init(id: Int) {
         self.id = id
-        self.spendTime = spendTime
     }
     
     var description: String {
         "\(self.id)번 고객"
-    }
-    
-    func task() -> Double {
-        Thread.sleep(forTimeInterval: self.spendTime)
-        return self.spendTime
     }
 }
 
