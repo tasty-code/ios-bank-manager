@@ -5,3 +5,10 @@
 // 
 
 import Foundation
+
+let bankProcess = BankProcess(bank: Bank(bankManager: BankManager(1)))
+
+bankProcess.run()
+
+
+

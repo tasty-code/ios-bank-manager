@@ -8,12 +8,10 @@ import Foundation
 
 final class BankManager {
     private var clientQueue = Queue<Client>()
-    private var _totalWorkTime = 0.0
+    private(set) var _totalWorkTime = 0.0
     private let semaphore: DispatchSemaphore
     
-    var totalWorkTime: String {
-        String(format: "%.2f", self._totalWorkTime)
-    }
+    
     
     init(_ clerkCount: Int) {
         self.semaphore = DispatchSemaphore(value: clerkCount)
