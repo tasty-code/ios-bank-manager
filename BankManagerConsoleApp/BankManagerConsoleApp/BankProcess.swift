@@ -17,6 +17,7 @@ class BankProcess {
     func run() {
         while true {
             self.showMenuScript()
+            let clientCount = Int.random(in: 10...30)
             
             guard let input = readLine(),
                   let userInput = Menu(rawValue: input)
@@ -26,7 +27,7 @@ class BankProcess {
             
             switch userInput {
             case .open:
-                self.bank.proceedBanking()
+                self.bank.proceedBanking(clientCount: clientCount)
             case .exit:
                 return
             case .wrongInput:

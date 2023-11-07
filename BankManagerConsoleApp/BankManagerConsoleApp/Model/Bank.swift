@@ -14,9 +14,7 @@ struct Bank {
         self.bankManager = bankManager
     }
     
-    func proceedBanking() {
-        let clientCount = Int.random(in: 10...30)
-        
+    func proceedBanking(clientCount: Int) {
         self.beginReception(count: clientCount)
         self.bankManager.startWork()
     }
