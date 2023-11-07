@@ -5,7 +5,3 @@
 // 
 
 import Foundation
-
-let bank = Bank(clerkCount: 1)
-
-bank.open()

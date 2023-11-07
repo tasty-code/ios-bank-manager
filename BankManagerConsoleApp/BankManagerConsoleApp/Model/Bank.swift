@@ -19,7 +19,6 @@ struct Bank {
         
         self.beginReception(count: clientCount)
         self.bankManager.startWork()
-        self.showBankSettlement(count: clientCount)
     }
     
     private func beginReception(count: Int) {
@@ -27,9 +26,5 @@ struct Bank {
             let client = Client(id: i, spendTime: 0.7)
             self.bankManager.recept(for: client)
         }
-    }
-    
-    private func showBankSettlement(count: Int) {
-        print(Script.bankSettlementMessage(count: count, totalWorkTime: self.bankManager.totalWorkTime))
     }
 }

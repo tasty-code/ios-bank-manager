@@ -30,14 +30,14 @@ class BankProcess {
             case .exit:
                 return
             case .wrongInput:
-                print(Script.wrongInput)
+                print(ProcessMenual.wrongInput)
             }
         }
     }
     
     private func showMenuScript() {
-        print(Script.menu)
-        print(Script.inputField, terminator: "")
+        print(ProcessMenual.menu)
+        print(ProcessMenual.inputField, terminator: "")
     }
 }
 
@@ -55,6 +55,25 @@ extension BankProcess {
                 self = .exit
             default:
                 self = .wrongInput
+            }
+        }
+    }
+}
+
+extension BankProcess {
+    private enum ProcessMenual: CustomStringConvertible {
+        case menu
+        case inputField
+        case wrongInput
+        
+        var description: String {
+            switch self {
+            case .menu:
+                return "1 : 은행개점\n2 : 종료"
+            case .inputField:
+                return "입력 : "
+            case .wrongInput:
+                return "잘못된 입력입니다."
             }
         }
     }

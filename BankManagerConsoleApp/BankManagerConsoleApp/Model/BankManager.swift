@@ -39,8 +39,24 @@ final class BankManager {
     }
     
     private func task(for client: Client) {
-        print(Script.WorkState.start(client: client))
+        print(WorkState.start(client: client))
         self._totalWorkTime += client.task()
-        print(Script.WorkState.end(client: client))
+        print(WorkState.end(client: client))
+    }
+}
+
+extension BankManager {
+    private enum WorkState: CustomStringConvertible  {
+        case start(client: Client)
+        case end(client: Client)
+        
+        var description: String {
+            switch self {
+            case .start(let client):
+                return "\(client) 업무 시작"
+            case .end(let client):
+                return "\(client) 업무 완료"
+            }
+        }
     }
 }
