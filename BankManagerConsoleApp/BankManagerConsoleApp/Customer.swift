@@ -13,5 +13,6 @@ struct Customer: CustomStringConvertible {
     }
     
     let id: Int
+    let task: BankTask
 }
 
