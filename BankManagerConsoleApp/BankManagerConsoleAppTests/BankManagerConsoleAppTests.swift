@@ -21,7 +21,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
     func test_Queue에_enqueue호출_시_queue에_추가되는지() {
         queue.enqueue(3)
         
-        let peek = queue.peek()
+        let peek = queue.peek
         let result = 3
         
         XCTAssertEqual(result, peek)
@@ -76,7 +76,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         
         let _ = queue.dequeue()
         
-        let result = queue.peek()
+        let result = queue.peek
         
         XCTAssertEqual(result, 4)
     }
@@ -90,7 +90,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
             let _ = queue.dequeue()
         }
         
-        let result = queue.peek()
+        let result = queue.peek
         
         XCTAssertNil(result)
     }
@@ -98,7 +98,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
     //MARK: - peek
     func test_Queue가_비어있을_때_peek호출_시_nil을_반환하는지() {
         
-        let result = queue.peek()
+        let result = queue.peek
         
         if queue.isEmpty {
             XCTAssertNil(result)
@@ -110,7 +110,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         queue.enqueue(9)
         queue.enqueue(23)
         
-        let result = queue.peek()
+        let result = queue.peek
         
         XCTAssertEqual(result, 4)
     }

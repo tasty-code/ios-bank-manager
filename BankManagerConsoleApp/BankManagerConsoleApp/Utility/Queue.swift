@@ -7,13 +7,16 @@
 
 import Foundation
 
-
 struct Queue<T> {
     private var head: Node?
     private var tail: Node?
     
     var isEmpty: Bool {
         self.head == nil
+    }
+    
+    var peek: T? {
+        self.head?.data
     }
     
     mutating func enqueue(_ data: T) {
@@ -43,10 +46,7 @@ struct Queue<T> {
         self.head = nil
         self.tail = nil
     }
-    
-    func peek() -> T? {
-        return self.head?.data
-    }
+ 
 }
 
 extension Queue {
