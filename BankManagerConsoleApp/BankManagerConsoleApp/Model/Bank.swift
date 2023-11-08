@@ -27,15 +27,15 @@ final class Bank {
     
     func open() {
         while !clientQueue.isEmpty {
-            guard let client = clientQueue.dequeue() else {
+            guard let client = clientQueue.peek else {
                 return
             }
             
             switch client.taskType {
             case .deposit:
-                depositService(with: client)
+                assignTask(semaphore: depositSemaphore)
             case .loan:
-                loanService(with: client)
+                assignTask(semaphore: loanSemaphore)
             }
         }
         tellerGroup.wait()
@@ -44,24 +44,21 @@ final class Bank {
     func close(numberOfClient: Int, at time: Double) {
         print(Prompt.close(numberOfClient: numberOfClient, totalTaskTime: time))
     }
-    
-    private func depositService(with client: Client) {
+        
+    private func assignTask(semaphore: DispatchSemaphore) {
+        semaphore.wait()
+        guard let client = clientQueue.dequeue() else {
+            semaphore.signal()
+            return
+        }
+        
         dispatchQueue.async(group: tellerGroup) { [weak self] in
-            self?.depositSemaphore.wait()
-            self?.taskService(with: client)
-            self?.depositSemaphore.signal()
+            self?.performTaskService(with: client)
+            semaphore.signal()
         }
     }
     
-    private func loanService(with client: Client) {
-        dispatchQueue.async(group: tellerGroup) { [weak self] in
-            self?.loanSemaphore.wait()
-            self?.taskService(with: client)
-            self?.loanSemaphore.signal()
-        }
-    }
-    
-    private func taskService(with client: Client) {
+    private func performTaskService(with client: Client) {
         print(Prompt.taskStart(with: client))
         Thread.sleep(forTimeInterval: client.taskType.taskTime)
         print(Prompt.taskComplete(with: client))
