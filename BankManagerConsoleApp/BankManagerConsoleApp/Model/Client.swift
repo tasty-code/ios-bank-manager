@@ -9,7 +9,7 @@ import Foundation
 
 struct Client: CustomStringConvertible {
     private let id: Int
-    private let taskType: TaskType
+    let taskType: TaskType
     
     init(id: Int, taskType: TaskType) {
         self.id = id

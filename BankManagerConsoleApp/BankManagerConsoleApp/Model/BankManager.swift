@@ -58,9 +58,9 @@ extension BankManager {
         var description: String {
             switch self {
             case .start(let client):
-                return "\(client) 업무 시작"
+                return "\(client) \(client.taskType)업무 시작"
             case .end(let client):
-                return "\(client) 업무 완료"
+                return "\(client) \(client.taskType)업무 완료"
             }
         }
     }
