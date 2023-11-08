@@ -25,11 +25,12 @@ final class BankManager: BankManagable {
         let group = DispatchGroup()
         
         while self.clientQueue.isEmpty == false {
-            self.loanSemaphore.wait()
-            guard let client = self.clientQueue.dequeue() else { return }
-            DispatchQueue.global().async(group: group) {
-                self.task(for: client)
-                self.loanSemaphore.signal()
+            guard let client = self.clientQueue.peek else { return }
+            switch client.taskType {
+            case .loan:
+                self.callClient(semaphore: loanSemaphore, group: group)
+            case .deposit:
+                self.callClient(semaphore: depositSemaphore, group: group)
             }
         }
         
@@ -38,6 +39,15 @@ final class BankManager: BankManagable {
     
     func getTotalWorkTime() -> Double {
         return self.totalWorkTime
+    }
+    
+    private func callClient(semaphore: DispatchSemaphore, group: DispatchGroup) {
+        semaphore.wait()
+        guard let client = clientQueue.dequeue() else { return }
+        DispatchQueue.global().async(group: group) {
+            self.task(for: client)
+            semaphore.signal()
+        }
     }
     
     private func task(for client: Client) {
