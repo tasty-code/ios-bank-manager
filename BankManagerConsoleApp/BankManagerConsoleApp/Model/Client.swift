@@ -18,4 +18,3 @@ struct Client: CustomStringConvertible {
         "\(self.id)번 고객"
     }
 }
-
