@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BankProcess.swift
 //  BankManagerConsoleApp
 //
 //  Created by 김예준 on 11/7/23.
