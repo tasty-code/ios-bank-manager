@@ -22,13 +22,11 @@ final class BankManager {
             }
         }
     }
-    
-    
 }
 
 private extension BankManager {
     func enqueueCustomers(upTo numberOfCustomers: Int) {
-        for i in numberOfCurrentCustomers + 1...numberOfCurrentCustomers + initialCustomers {
+        for i in numberOfCurrentCustomers + 1...numberOfCurrentCustomers + numberOfCustomers {
             bank.lineUp(Customer(ticketNumber: i))
         }
         
