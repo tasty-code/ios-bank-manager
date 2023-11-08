@@ -9,10 +9,12 @@ import Foundation
 final class BankManager: BankManagable {
     private var clientQueue = Queue<Client>()
     private var totalWorkTime = 0.0
-    private let semaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
+    private let depositSemaphore: DispatchSemaphore
     
-    init(_ clerkCount: Int) {
-        self.semaphore = DispatchSemaphore(value: clerkCount)
+    init(loanClerkCount: Int, depositClerkCount: Int) {
+        self.loanSemaphore = DispatchSemaphore(value: loanClerkCount)
+        self.depositSemaphore = DispatchSemaphore(value: depositClerkCount)
     }
     
     func recept(for client: Client) {
@@ -23,11 +25,11 @@ final class BankManager: BankManagable {
         let group = DispatchGroup()
         
         while self.clientQueue.isEmpty == false {
-            self.semaphore.wait()
+            self.loanSemaphore.wait()
             guard let client = self.clientQueue.dequeue() else { return }
             DispatchQueue.global().async(group: group) {
                 self.task(for: client)
-                self.semaphore.signal()
+                self.loanSemaphore.signal()
             }
         }
         
@@ -40,7 +42,7 @@ final class BankManager: BankManagable {
     
     private func task(for client: Client) {
         print(WorkState.start(client: client))
-        self.working(for: 0.7)
+        self.working(for: client.taskType.requiredTime)
         print(WorkState.end(client: client))
     }
     
