@@ -37,7 +37,9 @@ class Bank: Bankable {
     
     private func addRandomCustomers(_ count: Int, taskTypes: BankTask.Type...) {
         for i in 1...count {
-            customerQueue.enqueue(Customer(id: i, task: taskTypes.randomElement()!.init()))
+            if let randomTask = taskTypes.randomElement() {
+                customerQueue.enqueue(Customer(id: i, task: randomTask.init()))
+            }
         }
     }
 }
