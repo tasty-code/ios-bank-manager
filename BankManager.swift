@@ -10,15 +10,15 @@ final class BankManager {
     private let bank: Bank
     
     init() {
-        let tellers = [Teller(workType: .deposit), Teller(workType: .deposit), Teller(workType: .loan)]
+        let tellers = [Teller(tellerCount: 2), Teller(tellerCount: 1)]
         self.bank = Bank(tellers: tellers)
     }
     
     func run() {
         do {
             InterfaceMessage.printMenuScript()
-            let input = try getUserInput()
-            if input == "1" {
+            let interfaceMenu = try selectInterfaceMenu()
+            if interfaceMenu == .run {
                 bank.work { self.run() }
             } else {
                 return
@@ -32,8 +32,12 @@ final class BankManager {
 
 // MARK: Private Methods
 extension BankManager {
-    private func getUserInput() throws -> String {
-        guard let input = readLine(), input == "1" || input == "2" else { throw InterfaceErrorMessage.wrongMenuSelected }
-        return input
+    private func selectInterfaceMenu() throws -> InterfaceMenu {
+        guard let input = readLine(),
+              let integerInput = Int(input),
+              integerInput == 1 || integerInput == 2,
+              let interfaceMenu = try? InterfaceMenu.convertIntToInterfaceMenu(integerInput)
+        else { throw InterfaceErrorMessage.wrongMenuSelected }
+        return interfaceMenu
     }
 }
