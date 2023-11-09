@@ -62,9 +62,9 @@ final class Bank {
         let task = customer.task
         let semaphore = task.semaphore
         
-        DispatchQueue.global().async(group: group) { [self] in
+        DispatchQueue.global().async(group: group) { [weak self] in
             semaphore.wait()
-            banker.work(for: customer)
+            self?.banker.work(for: customer)
             semaphore.signal()
         }
     }
