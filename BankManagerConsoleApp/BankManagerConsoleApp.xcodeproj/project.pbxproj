@@ -12,6 +12,7 @@
 		04D5A5792AF0B7EF0043FF9F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5A5782AF0B7EF0043FF9F /* Customer.swift */; };
 		04D5A57C2AF0BDB90043FF9F /* InterfaceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5A57B2AF0BDB90043FF9F /* InterfaceMessage.swift */; };
 		374985212AEF91230074EF44 /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E079202AEF85D100C3F8AF /* BankManagerConsoleAppTests.swift */; };
+		378475142AFCBD2D00DABD9A /* InterfaceMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378475132AFCBD2D00DABD9A /* InterfaceMenu.swift */; };
 		378684FC2AF33771000D16BA /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378684F72AF3337E000D16BA /* WorkType.swift */; };
 		378685052AF34685000D16BA /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04923AFA2AEF433300D9637C /* Queue.swift */; };
 		378685062AF34685000D16BA /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04923AFC2AEF433F00D9637C /* LinkedList.swift */; };
@@ -43,6 +44,7 @@
 		04923AFC2AEF433F00D9637C /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		04D5A5782AF0B7EF0043FF9F /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		04D5A57B2AF0BDB90043FF9F /* InterfaceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceMessage.swift; sourceTree = "<group>"; };
+		378475132AFCBD2D00DABD9A /* InterfaceMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceMenu.swift; sourceTree = "<group>"; };
 		378684F72AF3337E000D16BA /* WorkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
 		37AF05652AF9FC5400844682 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		37AF05672AF9FC9400844682 /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				378684F72AF3337E000D16BA /* WorkType.swift */,
 				37AF05652AF9FC5400844682 /* Bank.swift */,
 				37AF05672AF9FC9400844682 /* Teller.swift */,
+				378475132AFCBD2D00DABD9A /* InterfaceMenu.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				37AF05662AF9FC5400844682 /* Bank.swift in Sources */,
 				37AF05682AF9FC9400844682 /* Teller.swift in Sources */,
 				04D5A57C2AF0BDB90043FF9F /* InterfaceMessage.swift in Sources */,
+				378475142AFCBD2D00DABD9A /* InterfaceMenu.swift in Sources */,
 				04923AFB2AEF433300D9637C /* Queue.swift in Sources */,
 				04D5A5792AF0B7EF0043FF9F /* Customer.swift in Sources */,
 				04923AFD2AEF433F00D9637C /* LinkedList.swift in Sources */,
