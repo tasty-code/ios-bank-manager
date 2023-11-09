@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BankServiceExecutor {
+struct BankServiceExecutor {
     private let semaphore: DispatchSemaphore
     
     init(type: ServiceType) {
