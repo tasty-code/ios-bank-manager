@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ServiceType: CustomStringConvertible, CaseIterable {
+enum ServiceType: CaseIterable {
     case loan
     case deposit
     
@@ -26,6 +26,15 @@ enum ServiceType: CustomStringConvertible, CaseIterable {
             return "대출"
         case .deposit:
             return "예금"
+        }
+    }
+    
+    var maxCount: Int {
+        switch self {
+        case .loan:
+            return 1
+        case .deposit:
+            return 2
         }
     }
 }
