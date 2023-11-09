@@ -19,6 +19,7 @@ final class Queue<T> {
         }
     }
     
+    @discardableResult
     func dequeue() -> T?{
         let toDequeue = head?.data
         if head != nil {
