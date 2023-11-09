@@ -13,6 +13,11 @@ final class Bank {
         self.elapsedTime = timeElapsed
     }
     
+    func prepareWork() {
+        greetCustomer()
+        openBank()
+    }
+    
     func greetCustomer() {
         customerCount = Int.random(in: 10...30)
         let queue = queueManager.getQueue()
@@ -31,12 +36,7 @@ final class Bank {
         
         elapsedTime = endTime.timeIntervalSince(startTime)
     }
-    
-    func prepareWork() {
-        greetCustomer()
-        openBank()
-    }
-    
+
     func prepareCloseWork() -> (Int, Double) {
         queueManager.clearQueue()
         return (customerCount, elapsedTime)
