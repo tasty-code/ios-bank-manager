@@ -8,46 +8,59 @@
 import Foundation
 
 final class Bank {
-    private var tellers: [Teller] = []
-    private var visitCount: Int = 0
     private var clientQueue: Queue<Client> = Queue()
+    private let depositSemaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
+    private let tellerGroup: DispatchGroup = DispatchGroup()
+    private let dispatchQueue: DispatchQueue = DispatchQueue.global()
     
-    init(numberOfTellers: Int) {
-        tellers = (1...numberOfTellers).map({ Teller(id: $0) })
+    init(depositTeller: Int, loanTeller: Int) {
+        depositSemaphore = DispatchSemaphore(value: depositTeller)
+        loanSemaphore = DispatchSemaphore(value: loanTeller)
     }
     
-    func visitClient() {
-        let totalClient = Int.random(in: 10...30)
-        for num in 1...totalClient {
+    func visit(numberOfClient: Int) {
+        for num in 1...numberOfClient {
             clientQueue.enqueue(data: Client(id: num))
         }
     }
     
     func open() {
         while !clientQueue.isEmpty {
-            tellers.forEach { teller in
-                assignTask(to: teller)
+            guard let client = clientQueue.peek else {
+                return
+            }
+            
+            switch client.taskType {
+            case .deposit:
+                assignTask(semaphore: depositSemaphore)
+            case .loan:
+                assignTask(semaphore: loanSemaphore)
             }
         }
+        tellerGroup.wait()
     }
     
-    func close(time: TimeInterval) {
-        print(Prompt.close(numberOfClient: visitCount, totalTaskTime: time))
+    func close(numberOfClient: Int, at time: Double) {
+        print(Prompt.close(numberOfClient: numberOfClient, totalTaskTime: time))
     }
-    
-    private func assignTask(to teller: Teller) {
-        guard let client = clientQueue.dequeue() else { return }
-        teller.performTask(with: client)
-        visitCount += 1
-    }
-    
-    private struct Teller {
-        var id: Int
         
-        func performTask(with client: Client) {
-            print(Prompt.taskStart(with: client))
-            Thread.sleep(forTimeInterval: Client.taskTime)
-            print(Prompt.taskComplete(with: client))
+    private func assignTask(semaphore: DispatchSemaphore) {
+        semaphore.wait()
+        guard let client = clientQueue.dequeue() else {
+            semaphore.signal()
+            return
         }
+        
+        dispatchQueue.async(group: tellerGroup) { [weak self] in
+            self?.performTaskService(with: client)
+            semaphore.signal()
+        }
+    }
+    
+    private func performTaskService(with client: Client) {
+        print(Prompt.taskStart(with: client))
+        Thread.sleep(forTimeInterval: client.taskType.taskTime)
+        print(Prompt.taskComplete(with: client))
     }
 }
