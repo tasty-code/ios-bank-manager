@@ -9,8 +9,10 @@ import Foundation
 
 struct Customer {
     let id: Int
+    let workType: WorkType
     
-    init(id: Int) {
+    init(id: Int, workType: WorkType) {
         self.id = id
+        self.workType = workType
     }
 }

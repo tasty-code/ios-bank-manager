@@ -60,7 +60,7 @@ extension LinkedList: QueueProtocol {
     }
     
     func peek() -> Value? {
-        return self.tail?.value
+        return self.head?.value
     }
 }
 

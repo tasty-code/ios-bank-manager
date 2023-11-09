@@ -6,5 +6,5 @@
 
 import Foundation
 
-let queue = Queue<Customer>()
-BankManager(queue: queue).run()
+private let bankManager = BankManager()
+bankManager.run()

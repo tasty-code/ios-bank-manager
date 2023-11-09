@@ -7,17 +7,22 @@
 import Foundation
 
 final class BankManager {
-    private let queue: Queue<Customer>
+    private let bank: Bank
     
-    init(queue: Queue<Customer>) {
-        self.queue = queue
+    init() {
+        let tellers = [Teller(tellerCount: 2), Teller(tellerCount: 1)]
+        self.bank = Bank(tellers: tellers)
     }
     
     func run() {
         do {
-            printMenuMessage()
-            let input = try inputMenu()
-            switchMenu(input)
+            InterfaceMessage.printMenuScript()
+            let interfaceMenu = try selectInterfaceMenu()
+            if interfaceMenu == .run {
+                bank.work { self.run() }
+            } else {
+                return
+            }
         } catch let error {
             print(error)
             run()
@@ -27,66 +32,12 @@ final class BankManager {
 
 // MARK: Private Methods
 extension BankManager {
-    private func printMenuMessage() {
-        print(InterfaceMessage.menuMessage)
-        print(InterfaceMessage.inputMenu, terminator: "")
-    }
-    
-    private func printBankEndMessage(_ totalCustomerCount: Int, totalSeconds: Double) {
-        print(InterfaceMessage.bankDidClose(totalCustomerCount: totalCustomerCount, totalSeconds: totalSeconds))
-    }
-    
-    private func printStartWorkMessage(_ customerId: Int, workType: WorkType) {
-        print(InterfaceMessage.startWork(customerId: customerId, workType: workType))
-    }
-    
-    private func printCompleteWorkMessage(_ customerId: Int) {
-        print(InterfaceMessage.completeWork(customerId: customerId))
-    }
-    
-    private func inputMenu() throws -> String {
-        guard let input = readLine(), input == "1" || input == "2" else { throw InterfaceErrorMessage.wrongMenuSelected }
-        return input
-    }
-    
-    private func switchMenu(_ input: String) {
-        switch input {
-        case "1":
-            let totalCustomerCount = waitForCustomer()
-            let totalSeconds = work()
-            printBankEndMessage(totalCustomerCount, totalSeconds: totalSeconds)
-            run()
-        default: return
-        }
-    }
-    
-    private func waitForCustomer() -> Int {
-        let customerCount: Int = generateRandomNumber10To30()
-        
-        for count in 1..<customerCount {
-            let customer = Customer(id: count)
-            queue.enqueue(customer)
-        }
-        return customerCount
-    }
-    
-    private func work() -> Double {
-        var totalSeconds: Double = 0
-        while queue.isEmpty == false {
-            
-            guard let customer = self.queue.dequeue() else { return totalSeconds }
-            
-            DispatchQueue.global().sync {
-                self.printStartWorkMessage(customer.id, workType: .work)
-                Thread.sleep(forTimeInterval: 0.7)
-                self.printCompleteWorkMessage(customer.id)
-                totalSeconds += 0.7
-            }
-        }
-        return totalSeconds
-    }
-    
-    private func generateRandomNumber10To30() -> Int {
-        return Int.random(in: 10...30)
+    private func selectInterfaceMenu() throws -> InterfaceMenu {
+        guard let input = readLine(),
+              let integerInput = Int(input),
+              integerInput == 1 || integerInput == 2,
+              let interfaceMenu = try? InterfaceMenu.convertIntToInterfaceMenu(integerInput)
+        else { throw InterfaceErrorMessage.wrongMenuSelected }
+        return interfaceMenu
     }
 }

@@ -7,13 +7,20 @@
 
 import Foundation
 
-enum WorkType: CustomStringConvertible {
-    case work
+enum WorkType: CustomStringConvertible, CaseIterable {
+    case deposit, loan
     
     var description: String {
         switch self {
-        case .work:
-            "업무"
+        case .deposit: "예금"
+        case .loan: "대출"
+        }
+    }
+    
+    var timeCost: TimeInterval {
+        switch self {
+        case .deposit: 0.7
+        case .loan: 1.1
         }
     }
 }
