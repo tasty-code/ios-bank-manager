@@ -1,15 +1,13 @@
 import Foundation
 
 struct UserInterface {
-    
-   
 
-   mutating func runProgram() {
+    func runProgram() {
         while true {
             print("1 : 은행 개점 \n2 : 종료")
             print("입력 : ", terminator: "")
             
-            guard let userInput = readLine() else { break }
+            guard let userInput = readLine() else { return }
             
             switch userInput {
             case "1":
