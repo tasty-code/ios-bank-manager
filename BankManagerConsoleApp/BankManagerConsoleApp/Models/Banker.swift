@@ -1,12 +1,19 @@
 import Foundation
 
 struct Banker {
-    static let depositTime: Double = 0.7
-    static let loanTime: Double = 1.1
-    
-    func work(for customer: Customer, as time: Double) {
-        print(Task.start(customer.id, customer.task))
-        Thread.sleep(forTimeInterval: time)
-        print(Task.complete(customer.id, customer.task))
+    func work(for customer: Customer) {
+        let task = customer.task
+        let name = task.name
+        let processingTime = task.processingTime
+        
+        print(start(customer.id, name))
+        Thread.sleep(forTimeInterval: processingTime)
+        print(complete(customer.id, name))
     }
+}
+
+extension Banker {
+    func start(_ orderNumber: Int, _ task: String) -> String { "\(orderNumber)번 고객 \(task)업무 시작" }
+    
+    func complete(_ orderNumber: Int, _ task: String) -> String { "\(orderNumber)번 고객 \(task)업무 완료" }
 }

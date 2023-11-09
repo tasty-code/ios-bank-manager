@@ -18,7 +18,7 @@ final class Bank {
         let queue = queueManager.getQueue()
         
         for index in 1...customerCount {
-            let newCustomer = Customer(id: index, task: Task.random())
+            let newCustomer = Customer(id: index, task: selectRandomTask())
             
             queue.enqueue(newCustomer)
         }
@@ -44,9 +44,8 @@ final class Bank {
     
     private func startWork() {
         let queue = queueManager.getQueue()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
-        
+        let group = DispatchGroup()
+
         while !queue.isEmpty() {
             let customer = queue.dequeue()
             
@@ -54,25 +53,25 @@ final class Bank {
                 return
             }
             
-            switch customer.task {
-            case .deposit:
-                insert(customer, toWaitingQueueBy: depositSemaphore, as: Banker.depositTime)
-            case .loan:
-                insert(customer, toWaitingQueueBy: loanSemaphore, as: Banker.loanTime)
-            }
+           insert(customer, group)
         }
+        group.wait()
     }
     
-    private func insert(_ customer: Customer, toWaitingQueueBy dispatchSemaphore: DispatchSemaphore, as time: Double) {
-        let group = DispatchGroup()
-        group.enter()
+    private func insert(_ customer: Customer, _ group: DispatchGroup) {
+        let task = customer.task
+        let semaphore = task.semaphore
         
-        DispatchQueue.global().async { [self] in
-            dispatchSemaphore.wait()
-            banker.work(for: customer, as: time)
-            dispatchSemaphore.signal()
-            group.leave()
+        DispatchQueue.global().async(group: group) { [self] in
+            semaphore.wait()
+            banker.work(for: customer)
+            semaphore.signal()
         }
     }
     
+    private func selectRandomTask() -> Taskable.Type {
+        let allCases: [Taskable.Type] = [DepositTask.self, LoanTask.self]
+        let randomIndex = Int.random(in: 0..<allCases.count)
+        return allCases[randomIndex]
+    }
 }
