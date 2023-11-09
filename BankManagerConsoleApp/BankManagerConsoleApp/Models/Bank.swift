@@ -10,7 +10,7 @@ import Foundation
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
-    private var totalTime: Double = 0
+    private var totalWorkTime: Double = 0
     private var exitCount: Int = 0
     private let semaphoreForExitCount = DispatchSemaphore(value: 1)
     
@@ -38,7 +38,7 @@ private extension Bank {
     func startService() {
         let group = DispatchGroup()
         
-        let start = DispatchTime.now()
+        let startTime = DispatchTime.now()
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue() else { break }
             
@@ -52,15 +52,15 @@ private extension Bank {
 
         group.wait()
         
-        let end = DispatchTime.now()
-        checkExecutedTime(start: start, end: end)
+        let endTime = DispatchTime.now()
+        calculateTotalWorkTime(from: startTime, to: endTime)
     }
     
-    func checkExecutedTime(start: DispatchTime, end: DispatchTime) {
-        let distance = end.uptimeNanoseconds - start.uptimeNanoseconds
+    func calculateTotalWorkTime(from startTime: DispatchTime,to endTime: DispatchTime) {
+        let distance = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
 
         let timeInterval = Double(distance) / 1_000_000_000
-        totalTime = timeInterval
+        totalWorkTime = timeInterval
     }
     
     func provideService(to target: Customer) {
@@ -77,12 +77,12 @@ private extension Bank {
     }
     
     func shutDownService() {
-        print(Prompt.appFinish(totalCustomer: exitCount, totalTime: totalTime))
+        print(Prompt.appFinish(totalCustomer: exitCount, totalWorkTime: totalWorkTime))
         prepareService()
     }
     
     func prepareService() {
         exitCount = 0
-        totalTime = 0
+        totalWorkTime = 0
     }
 }
