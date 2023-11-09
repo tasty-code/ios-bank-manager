@@ -11,8 +11,8 @@ struct Customer {
     let id: Int
     let workType: WorkType
     
-    init(id: Int) {
+    init(id: Int, workType: WorkType) {
         self.id = id
-        self.workType = WorkType.allCases.randomElement() ?? .deposit
+        self.workType = workType
     }
 }
