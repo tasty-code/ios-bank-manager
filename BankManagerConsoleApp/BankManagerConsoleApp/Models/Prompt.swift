@@ -9,7 +9,7 @@ import Foundation
 
 enum Prompt: CustomStringConvertible {
     case appLaunch
-    case appFinish(totalCustomer: Int, totalTime: Double)
+    case appFinish(totalCustomer: Int, totalWorkTime: Double)
     case serviceStart(customer: Int, service: String)
     case serviceDone(customer: Int, service: String)
     

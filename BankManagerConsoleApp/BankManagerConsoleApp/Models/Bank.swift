@@ -8,9 +8,21 @@
 import Foundation
 
 final class Bank {
-    private var totalTime: Double = 0
-    private var exitCount: Int = 0
+    private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
+    private var totalWorkTime: Double = 0
+    private var exitCount: Int = 0
+    private let semaphoreForExitCount = DispatchSemaphore(value: 1)
+    
+    init() {
+        var list = [ServiceType: BankServiceExecutor]()
+        
+        for i in ServiceType.allCases {
+            list[i] = BankServiceExecutor(type: i)
+        }
+        
+        self.serviceList = list
+    }
     
     func runService() {
         startService()
@@ -24,24 +36,31 @@ final class Bank {
 
 private extension Bank {
     func startService() {
-        let loanQueue: OperationQueue = OperationQueue(name: "LoanQueue", maxConcurrentOperationCount: 1)
-        let depositQueue: OperationQueue = OperationQueue(name: "DepositQueue", maxConcurrentOperationCount: 2)
+        let group = DispatchGroup()
         
+        let startTime = DispatchTime.now()
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue() else { break }
             
-            let taskBlock = BlockOperation {
-                self.provideService(to: currentCustomer)
-            }
-            
-            if currentCustomer.serviceType == .deposit {
-                depositQueue.addOperation(taskBlock)
-            } else {
-                loanQueue.addOperation(taskBlock)
+            DispatchQueue.global().async(group: group) { [weak self] in
+                guard let self = self, let worker = self.serviceList[currentCustomer.serviceType] else { return }
+                worker.work {
+                    self.provideService(to: currentCustomer)
+                }
             }
         }
+
+        group.wait()
         
-        OperationQueue.waitUntilAllOperationsAreFinished(depositQueue, loanQueue)
+        let endTime = DispatchTime.now()
+        calculateTotalWorkTime(from: startTime, to: endTime)
+    }
+    
+    func calculateTotalWorkTime(from startTime: DispatchTime,to endTime: DispatchTime) {
+        let distance = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
+
+        let timeInterval = Double(distance) / 1_000_000_000
+        totalWorkTime = timeInterval
     }
     
     func provideService(to target: Customer) {
@@ -52,17 +71,18 @@ private extension Bank {
         usleep(durationTime)
         print(Prompt.serviceDone(customer: target.ticketNumber, service: serviceType.description))
         
-        totalTime += serviceType.duration
+        semaphoreForExitCount.wait()
         exitCount += 1
+        semaphoreForExitCount.signal()
     }
     
     func shutDownService() {
-        print(Prompt.appFinish(totalCustomer: exitCount, totalTime: totalTime))
+        print(Prompt.appFinish(totalCustomer: exitCount, totalWorkTime: totalWorkTime))
         prepareService()
     }
     
     func prepareService() {
         exitCount = 0
-        totalTime = 0
+        totalWorkTime = 0
     }
 }
