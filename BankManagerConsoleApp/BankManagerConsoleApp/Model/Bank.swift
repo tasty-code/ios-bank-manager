@@ -26,7 +26,8 @@ struct Bank {
     
     private func beginReception(count: Int) {
         for i in 1...count {
-            let client = Client(id: i)
+            guard let taskType = TaskType.allCases.randomElement() else { return }
+            let client = Client(id: i, taskType: taskType)
             self.bankManager.recept(for: client)
         }
     }

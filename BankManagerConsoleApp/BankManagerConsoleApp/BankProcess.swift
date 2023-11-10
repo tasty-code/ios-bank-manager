@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BankProcess.swift
 //  BankManagerConsoleApp
 //
 //  Created by 김예준 on 11/7/23.
@@ -10,8 +10,8 @@ import Foundation
 final class BankProcess {
     private let bank: Bank
     
-    init(clerkCount: Int) {
-        let bankManager: BankManagable = BankManager(clerkCount)
+    init(loanClerkCount: Int, depositClerkCount: Int) {
+        let bankManager: BankManagable = BankManager(loanClerkCount: loanClerkCount, depositClerkCount: depositClerkCount)
         self.bank = Bank(bankManager: bankManager)
     }
     

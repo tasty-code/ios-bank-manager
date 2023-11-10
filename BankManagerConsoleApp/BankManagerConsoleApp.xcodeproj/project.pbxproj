@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E0A05562AF0C4B8008E4B1E /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0A05552AF0C4B8008E4B1E /* BankManagerConsoleAppTests.swift */; };
 		0E0A055C2AF0C71E008E4B1E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F581EFE2AF0BA4B00C00065 /* Queue.swift */; };
+		0E7AADB22AFB6BCD002C02F2 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AADB12AFB6BCD002C02F2 /* TaskType.swift */; };
 		66493A582AF384AE00413019 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66493A572AF384AE00413019 /* Client.swift */; };
 		66493A592AF384B700413019 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66493A572AF384AE00413019 /* Client.swift */; };
 		66493A5C2AF3921900413019 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66493A5B2AF3921900413019 /* Bank.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		0E0A05532AF0C4B8008E4B1E /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E0A05552AF0C4B8008E4B1E /* BankManagerConsoleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTests.swift; sourceTree = "<group>"; };
+		0E7AADB12AFB6BCD002C02F2 /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
 		66493A572AF384AE00413019 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		66493A5B2AF3921900413019 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		666F27FE2AF9F02A00786A1B /* BankProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankProcess.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				66493A572AF384AE00413019 /* Client.swift */,
 				66493A5B2AF3921900413019 /* Bank.swift */,
+				0E7AADB12AFB6BCD002C02F2 /* TaskType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				7F8059C72AFA03AA00948DCB /* BankManagable.swift in Sources */,
 				66493A5C2AF3921900413019 /* Bank.swift in Sources */,
 				66493A582AF384AE00413019 /* Client.swift in Sources */,
+				0E7AADB22AFB6BCD002C02F2 /* TaskType.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
