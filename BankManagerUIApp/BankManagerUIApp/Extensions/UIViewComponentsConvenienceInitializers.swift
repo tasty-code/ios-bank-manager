@@ -21,7 +21,7 @@ extension UILabel {
 }
 
 extension UIButton {
-    convenience init(type: ButtonType = .system, title: String, titleColor: UIColor = .black) {
+    convenience init(type: ButtonType = .system, title: String, titleColor: UIColor = .systemBlue) {
         self.init(type: type)
         
         self.setTitle(title, for: .normal)

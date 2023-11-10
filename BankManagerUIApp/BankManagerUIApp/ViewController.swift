@@ -84,6 +84,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setUpLayouts()
         setUpConstraints()
     }
 }
@@ -91,11 +92,24 @@ final class ViewController: UIViewController {
 // MARK: UI Configure Methods
 extension ViewController {
     private func setUpLayouts() {
+        view.addSubview(contentVerticalStackView)
+        buttonsHorizontalStackView.addArrangedSubviews([addCustomersButton, resetButton])
+        bankingStateLabelsHorizontalStackView.addArrangedSubviews([waitingStateLabel, workingStateLabel])
+        contentVerticalStackView.addArrangedSubviews([buttonsHorizontalStackView, timerLabel, bankingStateLabelsHorizontalStackView])
         
     }
     
     private func setUpConstraints() {
-        
+        NSLayoutConstraint.activate([
+//            contentVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            contentVerticalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            contentVerticalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            contentVerticalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+
+            contentVerticalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            contentVerticalStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor)
+            
+        ])
     }
 }
 
