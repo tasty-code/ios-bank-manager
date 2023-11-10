@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04837B062AFDCCAD001FC5A2 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837B052AFDCCAD001FC5A2 /* UIStackView.swift */; };
 		37F6F63C2AFDCA4400584085 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6342AFDCA4400584085 /* Queue.swift */; };
 		37F6F63D2AFDCA4400584085 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6352AFDCA4400584085 /* LinkedList.swift */; };
 		37F6F63F2AFDCA4400584085 /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6382AFDCA4400584085 /* WorkType.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04837B052AFDCCAD001FC5A2 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		37F6F6342AFDCA4400584085 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		37F6F6352AFDCA4400584085 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		37F6F6382AFDCA4400584085 /* WorkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04837B042AFDCC82001FC5A2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04837B052AFDCCAD001FC5A2 /* UIStackView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		37F6F6332AFDCA4400584085 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +141,12 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
-				37F6F6332AFDCA4400584085 /* DataStructure */,
-				37F6F6362AFDCA4400584085 /* Models */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
+				37F6F6332AFDCA4400584085 /* DataStructure */,
+				37F6F6362AFDCA4400584085 /* Models */,
+				04837B042AFDCC82001FC5A2 /* Extensions */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
@@ -290,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04837B062AFDCCAD001FC5A2 /* UIStackView.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				37F6F6412AFDCA4400584085 /* Teller.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
