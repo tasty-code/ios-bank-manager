@@ -36,21 +36,19 @@ final class Bank {
 
 private extension Bank {
     func startService() {
-        let group = DispatchGroup()
-        
         let startTime = DispatchTime.now()
+        
         while !waitingLine.isEmpty {
-            guard let currentCustomer = waitingLine.dequeue() else { break }
+            guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
-            DispatchQueue.global().async(group: group) { [weak self] in
-                guard let self = self, let worker = self.serviceList[currentCustomer.serviceType] else { return }
-                worker.work {
-                    self.provideService(to: currentCustomer)
-                }
+            let taskBlock = BlockOperation {
+                self.provideService(to: currentCustomer)
             }
+
+            queue.work(taskBlock)
         }
 
-        group.wait()
+        serviceList.values.forEach { $0.wait() }
         
         let endTime = DispatchTime.now()
         calculateTotalWorkTime(from: startTime, to: endTime)

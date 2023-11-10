@@ -8,15 +8,17 @@
 import Foundation
 
 struct BankServiceExecutor {
-    private let semaphore: DispatchSemaphore
+    private let queue: OperationQueue
     
     init(type: ServiceType) {
-        self.semaphore = DispatchSemaphore(value: type.maxCount)
+        self.queue = OperationQueue(name: type.description, maxConcurrentOperationCount: type.maxCount)
     }
     
-    func work(_ task: () -> Void) {
-        semaphore.wait()
-        task()
-        semaphore.signal()
+    func work(_ task: BlockOperation) {
+        queue.addOperation(task)
+    }
+    
+    func wait() {
+        queue.waitUntilAllOperationsAreFinished()
     }
 }

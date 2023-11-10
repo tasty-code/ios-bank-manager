@@ -22,6 +22,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		E13778FE2AFC6D0C0061D1A5 /* BankServiceExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13778FD2AFC6D0C0061D1A5 /* BankServiceExecutor.swift */; };
+		E13779002AFDBBAC0061D1A5 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13778FF2AFDBBAC0061D1A5 /* OperationQueue.swift */; };
 		E1A8F3AB2AF8C85800678EDC /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A8F3AA2AF8C85800678EDC /* ServiceType.swift */; };
 		E1CAD4742AF8B6ED0015C95B /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CAD4732AF8B6ED0015C95B /* Prompt.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		E13778FD2AFC6D0C0061D1A5 /* BankServiceExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankServiceExecutor.swift; sourceTree = "<group>"; };
+		E13778FF2AFDBBAC0061D1A5 /* OperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		E1A8F3AA2AF8C85800678EDC /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		E1CAD4732AF8B6ED0015C95B /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				C38750242AF390ED00713B61 /* Double.swift */,
+				E13778FF2AFDBBAC0061D1A5 /* OperationQueue.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				E1A8F3AB2AF8C85800678EDC /* ServiceType.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				E13779002AFDBBAC0061D1A5 /* OperationQueue.swift in Sources */,
 				C38750252AF390ED00713B61 /* Double.swift in Sources */,
 				C387501B2AF22A0400713B61 /* Queue.swift in Sources */,
 				E13778FE2AFC6D0C0061D1A5 /* BankServiceExecutor.swift in Sources */,
