@@ -19,7 +19,10 @@ struct Tellers {
         
         while !queue.isEmpty() {
             semaphore.wait()
-            guard let data = queue.dequeue() else { return }
+            guard let data = queue.dequeue() else {
+                semaphore.signal()
+                return
+            }
 
             if workingTellerCount < tellerCount {
                 group.enter()
