@@ -10,9 +10,28 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = .blue
     }
-
-
 }
 
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    
+    // update
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+        
+    }
+    // makeui
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> UIViewController {
+        ViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View{
+        ViewControllerRepresentable().previewDisplayName("iPhone 15")
+    }
+}
+#endif

@@ -53,7 +53,7 @@ final class Bank {
                 return
             }
             
-           insert(customer, group)
+            insert(customer, group)
         }
         group.wait()
     }
@@ -62,9 +62,9 @@ final class Bank {
         let task = customer.task
         let semaphore = task.semaphore
         
-        DispatchQueue.global().async(group: group) { [weak self] in
+        DispatchQueue.global().async(group: group) { [self] in
             semaphore.wait()
-            self?.banker.work(for: customer)
+            banker.work(for: customer)
             semaphore.signal()
         }
     }
