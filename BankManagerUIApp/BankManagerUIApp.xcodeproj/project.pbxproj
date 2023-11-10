@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04837B062AFDCCAD001FC5A2 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837B052AFDCCAD001FC5A2 /* UIStackView.swift */; };
+		04837B0D2AFE0C97001FC5A2 /* UIViewComponentsConvenienceInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837B0C2AFE0C97001FC5A2 /* UIViewComponentsConvenienceInitializers.swift */; };
 		37F6F63C2AFDCA4400584085 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6342AFDCA4400584085 /* Queue.swift */; };
 		37F6F63D2AFDCA4400584085 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6352AFDCA4400584085 /* LinkedList.swift */; };
 		37F6F63F2AFDCA4400584085 /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6F6382AFDCA4400584085 /* WorkType.swift */; };
@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04837B052AFDCCAD001FC5A2 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		04837B0C2AFE0C97001FC5A2 /* UIViewComponentsConvenienceInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewComponentsConvenienceInitializers.swift; sourceTree = "<group>"; };
 		37F6F6342AFDCA4400584085 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		37F6F6352AFDCA4400584085 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		37F6F6382AFDCA4400584085 /* WorkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		04837B042AFDCC82001FC5A2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				04837B052AFDCCAD001FC5A2 /* UIStackView.swift */,
+				04837B0C2AFE0C97001FC5A2 /* UIViewComponentsConvenienceInitializers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -301,12 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04837B062AFDCCAD001FC5A2 /* UIStackView.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				37F6F6412AFDCA4400584085 /* Teller.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				37F6F6402AFDCA4400584085 /* Customer.swift in Sources */,
 				37F6F63D2AFDCA4400584085 /* LinkedList.swift in Sources */,
+				04837B0D2AFE0C97001FC5A2 /* UIViewComponentsConvenienceInitializers.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				37F6F6422AFDCA4400584085 /* Bank.swift in Sources */,
 				37F6F63C2AFDCA4400584085 /* Queue.swift in Sources */,

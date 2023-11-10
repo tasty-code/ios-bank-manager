@@ -34,7 +34,6 @@ final class ViewController: UIViewController {
         }
         
         static let defaultSpacing: CGFloat = 14
-        static let defaultHeaderStackViewHeight: CGFloat = 150
     }
     
     // MARK: Properties
@@ -42,123 +41,60 @@ final class ViewController: UIViewController {
     private lazy var bank: Bank = Bank(tellers: tellers)
     
     // MARK: View Components
-    private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Constants.defaultSpacing
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var contentVerticalStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, spacing: Constants.defaultSpacing)
         return stackView
     }()
     
-    private lazy var buttonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = Constants.defaultSpacing
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var headerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = Constants.defaultSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var verticalScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    private lazy var customersLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Constants.defaultSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var waitingCustomersLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Constants.defaultSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var workingCustomersLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Constants.defaultSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var buttonsHorizontalStackView: UIStackView = {
+        let stackView = UIStackView(axis: .horizontal)
         return stackView
     }()
     
     private lazy var addCustomersButton: UIButton = {
-        let button = UIButton()
-        button.role = .normal
-        button.setTitle(Constants.addCustomersButton.title, for: .normal)
-        button.addTarget(self, action: #selector(addCustomers), for: .touchUpInside)
+        let button = UIButton(title: Constants.addCustomersButton.title)
         return button
     }()
     
     private lazy var resetButton: UIButton = {
-        let button = UIButton()
-        button.role = .destructive
-        button.setTitle(Constants.resetButton.title, for: .normal)
-        button.addTarget(self, action: #selector(resetCustomers), for: .touchUpInside)
+        let button = UIButton(title: Constants.resetButton.title, titleColor: .systemRed)
         return button
     }()
     
     private lazy var timerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "04:33:253"
-        label.font = .preferredFont(forTextStyle: .title2)
-        label.textColor = .white
+        let label = UILabel(text: "업무시간 - 04:33:253", font: .preferredFont(forTextStyle: .title1))
         return label
     }()
     
-    private lazy var waitingHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = Constants.waitingLabel.title
-        label.backgroundColor = .green
-        label.textColor = .white
+    private lazy var bankingStateLabelsHorizontalStackView: UIStackView = {
+        let stackView = UIStackView(axis: .horizontal, spacing: .zero)
+        return stackView
+    }()
+    
+    private lazy var waitingStateLabel: UILabel = {
+        let label = UILabel(text: Constants.waitingLabel.title, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemGreen)
         return label
     }()
     
-    private lazy var workingHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = Constants.workingLabel.title
-        label.backgroundColor = UIColor(red: 102, green: 91, blue: 219, alpha: 1)
-        label.textColor = .white
+    private lazy var workingStateLabel: UILabel = {
+        let label = UILabel(text: Constants.workingLabel.title, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemIndigo)
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setUpConstraints()
     }
 }
 
 // MARK: UI Configure Methods
 extension ViewController {
-    private func setUpConstraints() {
-        contentStackView.addArrangedSubviews([buttonsStackView, timerLabel, headerStackView, customersLabelStackView])
-        buttonsStackView.addArrangedSubviews([addCustomersButton, resetButton])
-        headerStackView.addArrangedSubviews([waitingHeaderLabel, workingHeaderLabel])
-        customersLabelStackView.addArrangedSubviews([waitingCustomersLabelStackView, workingCustomersLabelStackView])
+    private func setUpLayouts() {
         
+    }
+    
+    private func setUpConstraints() {
         
     }
 }
