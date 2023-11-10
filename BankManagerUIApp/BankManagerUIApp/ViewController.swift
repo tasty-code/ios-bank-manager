@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    
+    private let bankManager = BankManager(depositTellerCount: 2, loanTellerCount: 1)
     
     private lazy var mainStackView: UIStackView = {
         let view = UIStackView()
@@ -27,6 +29,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
         return button
     }()
     
@@ -34,6 +37,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         return button
     }()
     
@@ -135,7 +139,11 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         configure()
         setupAutoLayout()
+        
+       
+        
     }
+
     
     func configure() {
         view.addSubview(mainStackView)
@@ -203,6 +211,40 @@ class ViewController: UIViewController {
         runningListStackView.trailingAnchor.constraint(equalTo: runningListStackView.trailingAnchor).isActive = true
         runningListStackView.widthAnchor.constraint(equalTo: runningListScrollView.widthAnchor).isActive = true
     }
+    
+    @objc func addCustomer() {
+//        
+//        bankManager.createCustomerQueue(customerCount: 10)
+//        for _ in 1...10 {
+//            
+//            let customerLabel = UILabel()
+//            readyListStackView.addArrangedSubview(customerLabel)
+//        }
+//        
+//       guard let de = bankManager.depositCustomerQueue.peek()
+//        
+//        if bankManager.depositCustomerQueue.peek() > bankManager.loanCustomerQueue.peek() {
+//            
+//        }
+//        
+        
+    }
+    
+    @objc func resetTimer() {
+        
+    }
+    
+    
+    
+    func setupLabel() {
+        
+       
+        
+        
+    }
+    
+    
+    
 }
 
 
