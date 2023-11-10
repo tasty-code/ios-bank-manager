@@ -2,26 +2,38 @@ import Foundation
 
 final class BankManager {
     private let bank = Bank()
-    private var numberOfCustomer: Int {
+    private var numberOfCurrentCustomers: Int = 0
+    private var initialCustomers: Int {
         return Int.random(in: 10...30)
     }
     
     func launch() {
         print(Prompt.appLaunch, terminator: " ")
-        if let userInput = readLine() {
-            switch Menu(rawValue: userInput) {
+        if let userInput = readLine(), let menu = Menu(rawValue: userInput) {
+            switch menu {
             case .onGoing:
-                bank.open(with: numberOfCustomer)
+                enqueueCustomers(upTo: initialCustomers)
+                bank.runService()
+                resetCustomerCount()
                 launch()
                 
             case .finished:
                 return
-                
-            default:
-                return 
             }
         }
     }
 }
 
-
+private extension BankManager {
+    func enqueueCustomers(upTo numberOfCustomers: Int) {
+        for i in numberOfCurrentCustomers + 1...numberOfCurrentCustomers + numberOfCustomers {
+            bank.lineUp(Customer(ticketNumber: i))
+        }
+        
+        numberOfCurrentCustomers += numberOfCustomers
+    }
+    
+    func resetCustomerCount() {
+        numberOfCurrentCustomers = 0
+    }
+}
