@@ -34,6 +34,7 @@ final class ViewController: UIViewController {
         }
         
         static let defaultSpacing: CGFloat = 14
+        static let labelsSpacing: CGFloat = 8
     }
     
     // MARK: Properties
@@ -41,7 +42,7 @@ final class ViewController: UIViewController {
     private lazy var bank: Bank = Bank(tellers: tellers)
     
     // MARK: View Components
-    private lazy var contentVerticalStackView: UIStackView = {
+    private lazy var headerVerticalStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, spacing: Constants.defaultSpacing)
         return stackView
     }()
@@ -53,11 +54,13 @@ final class ViewController: UIViewController {
     
     private lazy var addCustomersButton: UIButton = {
         let button = UIButton(title: Constants.addCustomersButton.title)
+        button.addTarget(self, action: #selector(addCustomers), for: .touchUpInside)
         return button
     }()
     
     private lazy var resetButton: UIButton = {
         let button = UIButton(title: Constants.resetButton.title, titleColor: .systemRed)
+        button.addTarget(self, action: #selector(resetCustomers), for: .touchUpInside)
         return button
     }()
     
@@ -81,6 +84,34 @@ final class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var customerLabelsHorizontalStackView: UIStackView = {
+        let stackView = UIStackView(axis: .horizontal, spacing: .zero)
+        return stackView
+    }()
+    
+    private lazy var waitingCustomerLabelsScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var waitingCustomerLabelsStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, spacing: Constants.labelsSpacing)
+        stackView.backgroundColor = .blue
+        return stackView
+    }()
+    
+    private lazy var workingCustomerLabelsScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var workingCustomerLabelsStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, spacing: Constants.labelsSpacing)
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -92,22 +123,32 @@ final class ViewController: UIViewController {
 // MARK: UI Configure Methods
 extension ViewController {
     private func setUpLayouts() {
-        view.addSubview(contentVerticalStackView)
+        view.addSubview(headerVerticalStackView)
+        view.addSubview(customerLabelsHorizontalStackView)
+        
         buttonsHorizontalStackView.addArrangedSubviews([addCustomersButton, resetButton])
         bankingStateLabelsHorizontalStackView.addArrangedSubviews([waitingStateLabel, workingStateLabel])
-        contentVerticalStackView.addArrangedSubviews([buttonsHorizontalStackView, timerLabel, bankingStateLabelsHorizontalStackView])
         
+        waitingCustomerLabelsScrollView.addSubview(waitingCustomerLabelsStackView)
+        workingCustomerLabelsScrollView.addSubview(workingCustomerLabelsStackView)
+        customerLabelsHorizontalStackView.addArrangedSubviews([waitingCustomerLabelsScrollView, workingCustomerLabelsScrollView])
+        
+        headerVerticalStackView.addArrangedSubviews([buttonsHorizontalStackView, timerLabel, bankingStateLabelsHorizontalStackView])
     }
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-//            contentVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            contentVerticalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            contentVerticalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            contentVerticalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-
-            contentVerticalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            contentVerticalStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor)
+            headerVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerVerticalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            headerVerticalStackView.bottomAnchor.constraint(equalTo: customerLabelsHorizontalStackView.topAnchor),
+            customerLabelsHorizontalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            
+        ])
+        
+        NSLayoutConstraint.activate([
             
         ])
     }
@@ -116,7 +157,8 @@ extension ViewController {
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
-        
+        let label1 = UILabel(text: "고객", font: .preferredFont(forTextStyle: .body))
+        waitingCustomerLabelsStackView.addArrangedSubview(label1)
     }
     
     @objc private func resetCustomers() {
@@ -145,12 +187,12 @@ struct Preview<View: UIView>: UIViewRepresentable {
     }
 }
 
-struct Previewer: PreviewProvider {
-    static var previews: some View {
-        Preview {
-            let viewController = ViewController()
-            return viewController.view
-        }
-    }
-}
+//struct Previewer: PreviewProvider {
+//    static var previews: some View {
+//        Preview {
+//            let viewController = ViewController()
+//            return viewController.view
+//        }
+//    }
+//}
 #endif
