@@ -30,7 +30,6 @@ final class Bank {
         }
         
         dispatchGroup.wait()
-        InterfaceMessage.printBankDidClose(servicedCustomersCount: servicedCustomersCount, totalServicedTimes: totalServicedTimes)
         completion()
     }
 }
