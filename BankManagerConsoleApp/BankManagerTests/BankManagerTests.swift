@@ -15,40 +15,52 @@ final class BankManagerTests: XCTestCase {
         sut = nil
     }
     
-    func test_큐에_아무것도_없을_때_dequeue() {
+    func insertCustomer(until customerCount: Int) -> Queue<Customer> {
         let queue = sut.getQueue()
+        
+        if customerCount <= 0 {
+            return queue
+        }
+        
+        for index in 1...customerCount {
+            let newCustomer = Customer(orderNumber: index, task: DepositTask.self)
+            
+            queue.enqueue(newCustomer)
+        }
+        
+        return queue
+    }
+    
+    func test_큐에_아무것도_없을_때_dequeue() {
+        let queue = insertCustomer(until: 0)
         queue.dequeue()
         let result = queue.peek()
         XCTAssertNil(result)
     }
     
     func test_큐에_아무것도_없을_때_peek() {
-        let queue = sut.getQueue()
+        let queue = insertCustomer(until: 0)
         let result = queue.peek()
         XCTAssertNil(result)
     }
     
     func test_큐에_아무것도_없을_때_isEmpty() {
-        let queue = sut.getQueue()
+        let queue = insertCustomer(until: 0)
         let result = queue.isEmpty()
         XCTAssertTrue(result)
     }
     
     func test_큐에_대기하는_사람이_0명일_때_enqueue() {
-        let queue = sut.getQueue()
-        let customer = Customer(orderNumber: 999, task: DepositTask.self)
-        queue.enqueue(customer)
+        let queue = insertCustomer(until: 1)
         let result = queue.peek()
         
         guard let orderNumber = result?.orderNumber else { return }
         
-        XCTAssertEqual(orderNumber, 999)
+        XCTAssertEqual(orderNumber, 1)
     }
     
     func test_큐에_대기하는_사람이_1명일_때_clear() {
-        let queue = sut.getQueue()
-        let customer = Customer(orderNumber: 999, task: DepositTask.self)
-        queue.enqueue(customer)
+        let queue = insertCustomer(until: 1)
         queue.clear()
         let result = queue.isEmpty()
         
@@ -56,9 +68,7 @@ final class BankManagerTests: XCTestCase {
     }
     
     func test_큐에_대기하는_사람이_1명일_때_dequeue() {
-        let queue = sut.getQueue()
-        let customer = Customer(orderNumber: 999, task: DepositTask.self)
-        queue.enqueue(customer)
+        let queue = insertCustomer(until: 1)
         queue.dequeue()
         let result = queue.peek()
         
@@ -66,19 +76,14 @@ final class BankManagerTests: XCTestCase {
     }
     
     func test_큐에_대기하는_사람이_8명일_때_6명_dequeue_결과() {
-        let queue = sut.getQueue()
-        
-        let queueData : [Int] = [111, 222, 333, 444, 555, 666, 777, 888]
-        queueData.forEach {
-            queue.enqueue(Customer(orderNumber: $0, task: DepositTask.self))
-        }
-        
+        let queue = insertCustomer(until: 6)
+
         for _ in 1...6 {
             queue.dequeue()
         }
         
         let result = queue.peek()
         guard let orderNumber = result?.orderNumber else { return }
-        XCTAssertEqual(orderNumber, 777)
+        XCTAssertEqual(orderNumber, 7)
     }
 }
