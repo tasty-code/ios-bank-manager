@@ -36,18 +36,18 @@ final class BankManagerTests: XCTestCase {
     
     func test_큐에_대기하는_사람이_0명일_때_enqueue() {
         let queue = sut.getQueue()
-        let customer = Customer(id: 999, task: DepositTask.self)
+        let customer = Customer(orderNumber: 999, task: DepositTask.self)
         queue.enqueue(customer)
         let result = queue.peek()
         
-        guard let id = result?.id else { return }
+        guard let orderNumber = result?.orderNumber else { return }
         
-        XCTAssertEqual(id, 999)
+        XCTAssertEqual(orderNumber, 999)
     }
     
     func test_큐에_대기하는_사람이_1명일_때_clear() {
         let queue = sut.getQueue()
-        let customer = Customer(id: 999, task: DepositTask.self)
+        let customer = Customer(orderNumber: 999, task: DepositTask.self)
         queue.enqueue(customer)
         queue.clear()
         let result = queue.isEmpty()
@@ -57,7 +57,7 @@ final class BankManagerTests: XCTestCase {
     
     func test_큐에_대기하는_사람이_1명일_때_dequeue() {
         let queue = sut.getQueue()
-        let customer = Customer(id: 999, task: DepositTask.self)
+        let customer = Customer(orderNumber: 999, task: DepositTask.self)
         queue.enqueue(customer)
         queue.dequeue()
         let result = queue.peek()
@@ -70,7 +70,7 @@ final class BankManagerTests: XCTestCase {
         
         let queueData : [Int] = [111, 222, 333, 444, 555, 666, 777, 888]
         queueData.forEach {
-            queue.enqueue(Customer(id: $0, task: DepositTask.self))
+            queue.enqueue(Customer(orderNumber: $0, task: DepositTask.self))
         }
         
         for _ in 1...6 {
@@ -78,7 +78,7 @@ final class BankManagerTests: XCTestCase {
         }
         
         let result = queue.peek()
-        guard let id = result?.id else { return }
-        XCTAssertEqual(id, 777)
+        guard let orderNumber = result?.orderNumber else { return }
+        XCTAssertEqual(orderNumber, 777)
     }
 }

@@ -55,7 +55,7 @@ extension BankManager {
     }
     
     func close(_ result: Result) {
-        let timeElapsed = String(format: "%.2f", result.elapsedTime)
+        let elapsedTime = String(format: "%.2f", result.elapsedTime)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(result.customerCount)명이며, 총 업무시간은 \(result.elapsedTime) 초 입니다.")
     }
