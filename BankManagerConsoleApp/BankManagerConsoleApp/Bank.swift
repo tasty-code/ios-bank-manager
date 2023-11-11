@@ -6,11 +6,11 @@ final class Bank {
     private var customerCount: Int
     private var elapsedTime: Double
     
-    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, timeElapsed: Double = 0.0) {
+    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0) {
         self.queueManager = queueManager
         self.banker = banker
         self.customerCount = customerCount
-        self.elapsedTime = timeElapsed
+        self.elapsedTime = elapsedTime
     }
     
     func prepareWork() {
@@ -18,9 +18,10 @@ final class Bank {
         openBank()
     }
     
-    func prepareCloseWork() -> (Int, Double) {
+    func prepareCloseWork() -> Result {
         queueManager.clearQueue()
-        return (customerCount, elapsedTime)
+        let result = Result(customerCount: customerCount, elapsedTime: elapsedTime)
+        return result
     }
     
     private func greetCustomer() {
