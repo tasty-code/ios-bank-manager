@@ -6,9 +6,9 @@ struct Banker {
         let name = task.name
         let processingTime = task.processingTime
         
-        print(start(customer.id, name))
+        print(start(customer.orderNumber, name))
         Thread.sleep(forTimeInterval: processingTime)
-        print(complete(customer.id, name))
+        print(complete(customer.orderNumber, name))
     }
 }
 

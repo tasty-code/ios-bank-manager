@@ -29,7 +29,7 @@ final class Bank {
         let queue = queueManager.getQueue()
         
         for index in 1...customerCount {
-            let newCustomer = Customer(id: index, task: selectRandomTask())
+            let newCustomer = Customer(orderNumber: index, task: selectRandomTask())
             
             queue.enqueue(newCustomer)
         }

@@ -1,4 +1,4 @@
-struct Customer: Identifiable {
-    let id: Int
+struct Customer {
+    let orderNumber: Int
     private(set) var task: Taskable.Type
 }
