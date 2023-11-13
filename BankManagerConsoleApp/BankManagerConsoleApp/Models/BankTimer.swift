@@ -9,7 +9,7 @@ import Foundation
 
 protocol TimerProtocol {
     func fire(_ handler: @escaping (String) -> Void)
-    func reset()
+    func reset(_ handler: @escaping (String) -> Void)
 }
 
 final class BankTimer {
@@ -50,16 +50,16 @@ extension BankTimer: TimerProtocol {
             let elapsedTime: TimeInterval = Date().timeIntervalSince(startTime)
             guard let self = self else { return }
             self.elapsedTime = elapsedTime
-            self.representTimeLabel { timeText in
-                handler(timeText)
-            }
+            self.representTimeLabel(handler)
         })
     }
     
-    func reset() {
+    func reset(_ handler: @escaping (String) -> Void) {
         timer?.invalidate()
         timer = nil
         timerStatus = .off
         elapsedTime = 0
+        
+        representTimeLabel(handler)
     }
 }
