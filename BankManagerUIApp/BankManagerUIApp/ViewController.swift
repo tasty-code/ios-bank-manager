@@ -7,9 +7,32 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var timer: Timer?
+    var startTime: Date?
+    
+    @objc func updateTimer() {
+        guard let startTime = startTime else { return }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        let formattedString = formatTimeInterval(elapsedTime)
+        workTimeLabel.text = "업무시간 - \(formattedString)"
+    }
+    
+    func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let hours = Int(interval / 3600)
+        let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
+        let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
+        let milliseconds = Int((interval * 1000).truncatingRemainder(dividingBy: 1000))
+        
+        return String(format: "%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
+        
+        startTime = Date()
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
         for i in 1...30 {
             let label: UILabel = {
@@ -32,6 +55,7 @@ class ViewController: UIViewController {
             
             waitingListStackView.addArrangedSubview(label)
             workingListStackView.addArrangedSubview(label2)
+            
         }
     }
     
@@ -66,11 +90,11 @@ class ViewController: UIViewController {
     
     private let workTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 04:33:253"
+        label.text = "업무시간 - 00:00:00"
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.font = label.font.withSize(23)
-        
+        label.font = UIFont(name: "HelveticaNeue", size: 23)
+        //        label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .medium)
         return label
     }()
     
