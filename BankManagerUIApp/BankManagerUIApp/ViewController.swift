@@ -92,6 +92,7 @@ final class ViewController: UIViewController {
     private lazy var waitingCustomerLabelsScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
@@ -104,6 +105,7 @@ final class ViewController: UIViewController {
     private lazy var workingCustomerLabelsScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
@@ -141,15 +143,28 @@ extension ViewController {
             headerVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerVerticalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             headerVerticalStackView.bottomAnchor.constraint(equalTo: customerLabelsHorizontalStackView.topAnchor),
+            
+            customerLabelsHorizontalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             customerLabelsHorizontalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            
+            waitingCustomerLabelsScrollView.widthAnchor.constraint(equalTo: customerLabelsHorizontalStackView.widthAnchor, multiplier: 0.5),
+            workingCustomerLabelsScrollView.widthAnchor.constraint(equalTo: customerLabelsHorizontalStackView.widthAnchor, multiplier: 0.5)
         ])
         
         NSLayoutConstraint.activate([
+            waitingCustomerLabelsStackView.topAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.topAnchor),
+            waitingCustomerLabelsStackView.bottomAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.bottomAnchor),
+            waitingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.leadingAnchor),
+            waitingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.trailingAnchor),
+            waitingCustomerLabelsStackView.widthAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.frameLayoutGuide.widthAnchor),
             
+            workingCustomerLabelsStackView.topAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.topAnchor),
+            workingCustomerLabelsStackView.bottomAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.bottomAnchor),
+            workingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.leadingAnchor),
+            workingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.trailingAnchor),
+            workingCustomerLabelsStackView.widthAnchor.constraint(equalTo: workingCustomerLabelsScrollView.frameLayoutGuide.widthAnchor),
         ])
     }
 }
@@ -173,8 +188,8 @@ import SwiftUI
 struct Preview<View: UIView>: UIViewRepresentable {
     let view: View
     
-    init(_ interfaceBuilder: @escaping () -> View) {
-        view = interfaceBuilder()
+    init(_ viewBuilder: @escaping () -> View) {
+        view = viewBuilder()
     }
     
     func makeUIView(context: Context) -> some UIView {
