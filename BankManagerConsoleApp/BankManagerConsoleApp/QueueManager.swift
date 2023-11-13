@@ -8,7 +8,7 @@ struct QueueManager {
     func getQueue() -> Queue<Customer> {
         return queue
     }
-    
+
     func clearQueue() {
         queue.clear()
     }

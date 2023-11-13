@@ -1,20 +1,19 @@
 import Foundation
 
-struct Banker: Identifiable {
-    var id: Int
-    private(set) var task: String
-    static let delay: Double = 0.7
-    
-    func work(_ queue: Queue<Customer>) {
-        guard let customerCount = queue.peek()?.id else {
-            return
-        }
-    
-        print(Task.start(customerCount))
+struct Banker {
+    func work(for customer: Customer) {
+        let task = customer.task
+        let name = task.name
+        let processingTime = task.processingTime
         
-        Thread.sleep(forTimeInterval: Banker.delay)
-        queue.dequeue()
-        
-        print(Task.complete(customerCount))
+        print(start(customer.orderNumber, name))
+        Thread.sleep(forTimeInterval: processingTime)
+        print(complete(customer.orderNumber, name))
     }
+}
+
+extension Banker {
+    func start(_ orderNumber: Int, _ task: String) -> String { "\(orderNumber)번 고객 \(task)업무 시작" }
+    
+    func complete(_ orderNumber: Int, _ task: String) -> String { "\(orderNumber)번 고객 \(task)업무 완료" }
 }

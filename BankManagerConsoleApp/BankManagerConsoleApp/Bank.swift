@@ -1,50 +1,79 @@
+import Foundation
+
 final class Bank {
     private var queueManager: QueueManager
-    private var bankers: [Banker]
+    private var banker: Banker
     private var customerCount: Int
+    private var elapsedTime: Double
     
-    init(queueManager: QueueManager = QueueManager(), bankers: [Banker] = [], customerCount: Int = 0) {
+    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0) {
         self.queueManager = queueManager
-        self.bankers = bankers
+        self.banker = banker
         self.customerCount = customerCount
+        self.elapsedTime = elapsedTime
     }
     
-    func hireBanker(_ task: String) {
-        let banker: Banker = Banker(id: bankers.count, task: task)
-        bankers.append(banker)
+    func prepareWork() {
+        greetCustomer()
+        openBank()
     }
     
-    func greetCustomer() {
+    func prepareCloseWork() -> Result {
+        queueManager.clearQueue()
+        let result = Result(customerCount: customerCount, elapsedTime: elapsedTime)
+        return result
+    }
+    
+    private func greetCustomer() {
         customerCount = Int.random(in: 10...30)
         let queue = queueManager.getQueue()
         
-        for _ in 1...customerCount {
-            let newCustomer = Customer(id: queue.getAccumulatedCount())
+        for index in 1...customerCount {
+            let newCustomer = Customer(orderNumber: index, task: selectRandomTask())
+            
             queue.enqueue(newCustomer)
         }
     }
     
-    func startWork() {
-        let queue = queueManager.getQueue()
+    private func openBank() {
+        let startTime = Date()
+        startWork()
+        let endTime = Date()
         
-        for _ in 1...customerCount {
-            for banker in bankers {
-                if banker.task == Task.deposit.description {
-                    banker.work(queue)
-                }
+        elapsedTime = endTime.timeIntervalSince(startTime)
+    }
+
+    
+    private func startWork() {
+        let queue = queueManager.getQueue()
+        let group = DispatchGroup()
+
+        while !queue.isEmpty() {
+            let customer = queue.dequeue()
+            
+            guard let customer = customer else {
+                return
             }
+            
+           insert(customer, group)
+        }
+        group.wait()
+    }
+    
+    private func insert(_ customer: Customer, _ group: DispatchGroup) {
+        let task = customer.task
+        let semaphore = task.semaphore
+        
+        DispatchQueue.global().async(group: group) { [weak self] in
+            semaphore.wait()
+            self?.banker.work(for: customer)
+            semaphore.signal()
         }
     }
     
-    func prepareWork() {
-        hireBanker(Task.deposit.description)
-        greetCustomer()
-        startWork()
-    }
-    
-    func prepareCloseWork() -> Int {
-        queueManager.clearQueue()
-        return customerCount
+    private func selectRandomTask() -> Taskable.Type {
+        let allCases: [Taskable.Type] = [DepositTask.self, LoanTask.self]
+        let randomIndex = Int.random(in: 0..<allCases.count)
+        return allCases[randomIndex]
     }
 }
-

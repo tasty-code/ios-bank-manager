@@ -23,8 +23,8 @@ struct BankManager {
         switch input {
         case 1:
             bank.prepareWork()
-            let customerCount = bank.prepareCloseWork()
-            close(customerCount)
+            let result = bank.prepareCloseWork()
+            close(result)
         case 2:
             exit(0)
         default:
@@ -54,9 +54,9 @@ extension BankManager {
         print("다시 입력해 주십시오.")
     }
     
-    func close(_ customerCount: Int) {
-        let cost = round(Double(customerCount) * Banker.delay * 100) / 100
+    func close(_ result: Result) {
+        let elapsedTime = String(format: "%.2f", result.elapsedTime)
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(cost) 초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(result.customerCount)명이며, 총 업무시간은 \(elapsedTime) 초 입니다.")
     }
 }
