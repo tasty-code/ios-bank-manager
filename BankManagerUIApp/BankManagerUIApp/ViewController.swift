@@ -5,13 +5,19 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
+    var startTime: Date?
+    var cancellable: Cancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupContentView()
         setConstraint()
+        
+        increaseCustomerButton.addTarget(nil, action: #selector(tapAddButton(_:)), for: .touchDown)
+        resetCustomerButton.addTarget(nil, action: #selector(tapResetButton(_:)), for: .touchDown)
     }
     
     private let contentStackView: UIStackView = {
@@ -55,10 +61,10 @@ class ViewController: UIViewController {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 10:37:123"
+        label.text = "업무시간 - 00:00:000"
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 25)
         label.textAlignment = .center
+        label.font = UIFont(name: "HelveticaNeue", size: 25)
         
         return label
     }()
@@ -235,4 +241,51 @@ extension ViewController {
         }
     }
     
+    @objc func tapAddButton(_ sender: UIButton) {
+        if startTime == nil {
+            startTime = Date()
+            let subscription = Timer.publish(every: 0.01, on: .main, in: .default)
+                .autoconnect()
+                .sink { updatedTime in
+                    if let startTime = self.startTime {
+                        let processingTime = Double(updatedTime.timeIntervalSince(startTime))
+                        let miliseconds = Int(processingTime.truncatingRemainder(dividingBy: 1) * 1000)
+                        let seconds = Int(processingTime)
+                        let minutes = seconds / 60
+                        
+                        self.timeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds % 60, miliseconds)
+                    }
+                }
+            cancellable = subscription
+        }
+    }
+    
+    @objc func tapResetButton(_ sender: UIButton) {
+        timeLabel.text = "업무시간 - 00:00:000"
+        cancellable?.cancel()
+        cancellable = nil
+        startTime = nil
+    }
 }
+
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    
+    // update
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+        
+    }
+    // makeui
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> UIViewController {
+        ViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View{
+        ViewControllerRepresentable().previewDisplayName(nil)
+    }
+}
+#endif
