@@ -6,6 +6,10 @@
 
 import UIKit
 
+protocol BankDelegate {
+    
+}
+
 final class ViewController: UIViewController {
     // MARK: Namespace
     private enum Constants {
@@ -14,7 +18,6 @@ final class ViewController: UIViewController {
         case timerLabel(accumulatedTimes: TimeInterval)
         case waitingLabel
         case workingLabel
-        case customerLabel(customer: Customer)
         
         var title: String {
             switch self {
@@ -28,8 +31,6 @@ final class ViewController: UIViewController {
                 "대기중"
             case .workingLabel:
                 "업무중"
-            case .customerLabel(let customer):
-                "\(customer.id) - \(customer.workType)"
             }
         }
         
@@ -98,7 +99,6 @@ final class ViewController: UIViewController {
     
     private lazy var waitingCustomerLabelsStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, spacing: Constants.labelsSpacing)
-        stackView.backgroundColor = .blue
         return stackView
     }()
     
@@ -142,7 +142,7 @@ extension ViewController {
         NSLayoutConstraint.activate([
             headerVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerVerticalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            headerVerticalStackView.bottomAnchor.constraint(equalTo: customerLabelsHorizontalStackView.topAnchor),
+            headerVerticalStackView.bottomAnchor.constraint(equalTo: customerLabelsHorizontalStackView.topAnchor, constant: -Constants.labelsSpacing),
             
             customerLabelsHorizontalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             customerLabelsHorizontalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -172,13 +172,13 @@ extension ViewController {
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
-        let label1 = UILabel(text: "고객", font: .preferredFont(forTextStyle: .body))
-        waitingCustomerLabelsStackView.addArrangedSubview(label1)
+        let customerLabel1 = CustomerLabel(Customer(id: 1, workType: .loan))
+        let customerLabel2 = CustomerLabel(Customer(id: 1, workType: .deposit))
+        
+        waitingCustomerLabelsStackView.addArrangedSubviews([customerLabel1, customerLabel2])
     }
     
     @objc private func resetCustomers() {
-        let label1 = UILabel(text: "일하는중", font: .preferredFont(forTextStyle: .body))
-        workingCustomerLabelsStackView.addArrangedSubview(label1)
         
     }
 }
@@ -203,13 +203,13 @@ struct Preview<View: UIView>: UIViewRepresentable {
         view.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
 }
-
-struct Previewer: PreviewProvider {
-    static var previews: some View {
-        Preview {
-            let viewController = ViewController()
-            return viewController.view
-        }
-    }
-}
+//
+//struct Previewer: PreviewProvider {
+//    static var previews: some View {
+//        Preview {
+//            let viewController = ViewController()
+//            return viewController.view
+//        }
+//    }
+//}
 #endif
