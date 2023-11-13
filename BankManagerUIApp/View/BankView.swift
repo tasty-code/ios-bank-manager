@@ -8,13 +8,13 @@
 import UIKit
 
 final class BankView: UIView {
-    private lazy var addClientButton: UIButton = {
+    lazy var addClientButton: UIButton = {
         let button = UIButton(title: "고객 10명 추가", titleColor: .systemBlue)
         
         return button
     }()
     
-    private lazy var resetButton: UIButton = {
+    lazy var resetButton: UIButton = {
         let button = UIButton(title: "초기화", titleColor: .systemRed)
         
         return button
