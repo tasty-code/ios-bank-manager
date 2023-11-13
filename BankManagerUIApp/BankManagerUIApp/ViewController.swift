@@ -6,16 +6,12 @@
 
 import UIKit
 
-protocol BankDelegate {
-    
-}
-
 final class ViewController: UIViewController {
     // MARK: Namespace
     private enum Constants {
         case addCustomersButton
         case resetButton
-        case timerLabel(accumulatedTimes: TimeInterval)
+        case timerLabel(accumulatedTimes: String)
         case waitingLabel
         case workingLabel
         
@@ -40,7 +36,8 @@ final class ViewController: UIViewController {
     
     // MARK: Properties
     private let tellers: [TellerProtocol] = [Teller(tellerCount: 2), Teller(tellerCount: 1)]
-    private lazy var bank: Bank = Bank(tellers: tellers)
+    private lazy var bank: Bank = Bank(tellers: tellers, self)
+    private let timer: TimerProtocol = BankTimer(timeInterval: 0.001)
     
     // MARK: View Components
     private lazy var headerVerticalStackView: UIStackView = {
@@ -66,7 +63,7 @@ final class ViewController: UIViewController {
     }()
     
     private lazy var timerLabel: UILabel = {
-        let label = UILabel(text: "업무시간 - 04:33:253", font: .preferredFont(forTextStyle: .title1))
+        let label = UILabel(text: Constants.timerLabel(accumulatedTimes: "00:00:000").title, font: .monospacedDigitSystemFont(ofSize: 24, weight: .medium))
         return label
     }()
     
@@ -172,13 +169,19 @@ extension ViewController {
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
-        let customerLabel1 = CustomerLabel(Customer(id: 1, workType: .loan))
-        let customerLabel2 = CustomerLabel(Customer(id: 1, workType: .deposit))
-        
-        waitingCustomerLabelsStackView.addArrangedSubviews([customerLabel1, customerLabel2])
+        timer.fire { [self] timeText in
+            self.timerLabel.text = Constants.timerLabel(accumulatedTimes: timeText).title
+        }
     }
     
     @objc private func resetCustomers() {
+        timer.reset()
+    }
+}
+
+// MARK: Bank Delegation Methods
+extension ViewController: BankDelegate {
+    func someFunction(bank: Bank, timer: TimeInterval) {
         
     }
 }

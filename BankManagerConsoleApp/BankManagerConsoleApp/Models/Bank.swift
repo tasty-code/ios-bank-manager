@@ -7,15 +7,21 @@
 
 import Foundation
 
+protocol BankDelegate: AnyObject {
+    func someFunction(bank: Bank, timer: TimeInterval)
+}
+
 final class Bank {
     private let customerQueue = Queue<Customer>()
     private let dispatchGroup = DispatchGroup()
     private let tellers: [TellerProtocol]
     private var servicedCustomersCount = 0
     private var totalServicedTimes: TimeInterval = 0.0
+    private weak var bankManager: BankDelegate?
     
-    init(tellers: [TellerProtocol]) {
+    init(tellers: [TellerProtocol], _ bankManager: BankDelegate) {
         self.tellers = tellers
+        self.bankManager = bankManager
     }
     
     func work(completion: @escaping () -> Void) {
