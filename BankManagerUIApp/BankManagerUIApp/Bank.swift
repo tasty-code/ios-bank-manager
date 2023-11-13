@@ -28,12 +28,11 @@ class Bank: Bankable {
         
         while !customerQueue.isEmpty {
             if let customer = customerQueue.dequeue() {
-                let label = CustomerLabel(customer: customer)
-                
                 DispatchQueue.main.async {
+                    let label = CustomerLabel(customer: customer)
                     self.waitingHandler(label)
+                    self.assignTask(label, group: self.group)
                 }
-                assignTask(label, group: group)
             }
         }
         

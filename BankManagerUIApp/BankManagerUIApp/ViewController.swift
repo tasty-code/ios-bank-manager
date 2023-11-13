@@ -21,6 +21,7 @@ class ViewController: UIViewController {
             self.taskingListWrap.addArrangedSubview(label)
         }, processingHandler: { label in
             self.taskingListWrap.removeArrangedSubview(label)
+            label.removeFromSuperview()
         }))
         
         setupContentView()
@@ -248,7 +249,6 @@ extension ViewController {
     }
     
     func generateCustomer() {
-        print("mother HI")
         bankManager?.openBank()
     }
 }
