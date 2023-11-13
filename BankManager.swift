@@ -24,17 +24,17 @@ final class BankManager {
     
     func startBusiness() {
         while true {
-            print(BankDialogue.menu)
-            print(BankDialogue.input, terminator: "")
-            guard let input = readLine(), let number = Int(input) else {
-                return
-            }
+//            print(BankDialogue.menu)
+//            print(BankDialogue.input, terminator: "")
+//            guard let input = readLine(), let number = Int(input) else {
+//                return
+//            }
             
-            userChoice = number
+//            userChoice = number
             
             if isStart {
                 let (taskProcessingTime, handledCustomer) = bank.beginTask()
-                print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
+//                print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
             } else {
                 break
             }

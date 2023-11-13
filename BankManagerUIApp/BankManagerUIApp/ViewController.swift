@@ -8,6 +8,7 @@ import UIKit
 import Combine
 
 class ViewController: UIViewController {
+    var bankManager: BankManager?
     var startTime: Date?
     var cancellable: Cancellable?
     
@@ -140,25 +141,25 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private let listLabel: UILabel = {
-        let label = UILabel()
-        label.text = "5 - 예금"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    private let listLabel2: UILabel = {
-        let label = UILabel()
-        label.text = "4 - 예금"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textAlignment = .center
-        
-        return label
-    }()
+//    private let listLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "5 - 예금"
+//        label.textColor = .black
+//        label.font = UIFont.systemFont(ofSize: 18)
+//        label.textAlignment = .center
+//        
+//        return label
+//    }()
+//    
+//    private let listLabel2: UILabel = {
+//        let label = UILabel()
+//        label.text = "4 - 예금"
+//        label.textColor = .black
+//        label.font = UIFont.systemFont(ofSize: 18)
+//        label.textAlignment = .center
+//        
+//        return label
+//    }()
 }
 
 extension ViewController {
@@ -205,43 +206,13 @@ extension ViewController {
             stateListWrap.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor),
             stateListWrap.widthAnchor.constraint(equalTo: contentScrollView.frameLayoutGuide.widthAnchor, multiplier: 1.0),
         ])
-        
-        addNewLabel()
     }
     
-    private func addNewLabel() {
-        for i in 1...50 {
-            let listLabel8: UILabel = {
-                let label = UILabel()
-                label.text = "\(i) 번"
-                label.textColor = .black
-                label.font = UIFont.systemFont(ofSize: 24)
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 40).isActive = true
-                
-                return label
-            }()
-            
-            waitingListWrap.addArrangedSubview(listLabel8)
-        }
-        
-        for i in 1...50 {
-            let listLabel20: UILabel = {
-                let label = UILabel()
-                label.text = "\(i) 번"
-                label.textColor = .black
-                label.font = UIFont.systemFont(ofSize: 24)
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 40).isActive = true
-                
-                return label
-            }()
-            
-            taskingListWrap.addArrangedSubview(listLabel20)
-        }
-    }
-    
+}
+
+extension ViewController {
     @objc func tapAddButton(_ sender: UIButton) {
+        generateCustomer()
         if startTime == nil {
             startTime = Date()
             let subscription = Timer.publish(every: 0.01, on: .main, in: .default)
@@ -266,7 +237,15 @@ extension ViewController {
         cancellable = nil
         startTime = nil
     }
+    
+    func generateCustomer() {
+        for i in 1...10 {
+            waitingListWrap.addArrangedSubview(CustomerLabel(customer: Customer(id: i, task: LoanTask())))
+        }
+    }
 }
+
+
 
 #if DEBUG
 import SwiftUI
