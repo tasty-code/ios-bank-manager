@@ -14,6 +14,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bankManager = BankManager(bank: Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
+            self.waitingListWrap.addArrangedSubview(label)
+        }, changingHandler: { label in
+            self.waitingListWrap.removeArrangedSubview(label)
+            self.taskingListWrap.addArrangedSubview(label)
+        }, processingHandler: { label in
+            self.taskingListWrap.removeArrangedSubview(label)
+        }))
+        
         setupContentView()
         setConstraint()
         
@@ -141,25 +150,25 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-//    private let listLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "5 - 예금"
-//        label.textColor = .black
-//        label.font = UIFont.systemFont(ofSize: 18)
-//        label.textAlignment = .center
-//        
-//        return label
-//    }()
-//    
-//    private let listLabel2: UILabel = {
-//        let label = UILabel()
-//        label.text = "4 - 예금"
-//        label.textColor = .black
-//        label.font = UIFont.systemFont(ofSize: 18)
-//        label.textAlignment = .center
-//        
-//        return label
-//    }()
+    //    private let listLabel: UILabel = {
+    //        let label = UILabel()
+    //        label.text = "5 - 예금"
+    //        label.textColor = .black
+    //        label.font = UIFont.systemFont(ofSize: 18)
+    //        label.textAlignment = .center
+    //
+    //        return label
+    //    }()
+    //
+    //    private let listLabel2: UILabel = {
+    //        let label = UILabel()
+    //        label.text = "4 - 예금"
+    //        label.textColor = .black
+    //        label.font = UIFont.systemFont(ofSize: 18)
+    //        label.textAlignment = .center
+    //
+    //        return label
+    //    }()
 }
 
 extension ViewController {
@@ -239,9 +248,8 @@ extension ViewController {
     }
     
     func generateCustomer() {
-        for i in 1...10 {
-            waitingListWrap.addArrangedSubview(CustomerLabel(customer: Customer(id: i, task: LoanTask())))
-        }
+        print("mother HI")
+        bankManager?.openBank()
     }
 }
 

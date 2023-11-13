@@ -10,33 +10,57 @@ import Foundation
 class Bank: Bankable {
     let group: DispatchGroup = DispatchGroup()
     private(set) var customerQueue: Queue<Customer>
-    private(set) var handledCustomer = 0
+    private(set) var handledCustomer = 1
+    private let waitingHandler: (CustomerLabel) -> Void,
+                changingHandler: (CustomerLabel) -> Void,
+               processingHandler: (CustomerLabel) -> Void
     
-    init(customerQueue: Queue<Customer>) {
+    init(customerQueue: Queue<Customer>, handledCustomer: Int = 1, waitingHandler: @escaping (CustomerLabel) -> Void, changingHandler: @escaping (CustomerLabel) -> Void, processingHandler: @escaping (CustomerLabel) -> Void) {
         self.customerQueue = customerQueue
+        self.handledCustomer = handledCustomer
+        self.waitingHandler = waitingHandler
+        self.changingHandler = changingHandler
+        self.processingHandler = processingHandler
     }
     
-    func beginTask() -> (taskProcessingTime: Double, handledCustomer: Int) {
-        handledCustomer = 0
-        addRandomCustomers(Int.random(in: 10...30), taskTypes: LoanTask.self, DepositTask.self)
+    func beginTask() {
+        addRandomCustomers(handledCustomer, taskTypes: LoanTask.self, DepositTask.self)
         
-        let start = CFAbsoluteTimeGetCurrent()
         while !customerQueue.isEmpty {
             if let customer = customerQueue.dequeue() {
-                assignTask(customer, group: group)
-                handledCustomer += 1
+                let label = CustomerLabel(customer: customer)
+                
+                DispatchQueue.main.async {
+                    self.waitingHandler(label)
+                }
+                assignTask(label, group: group)
             }
         }
         
+        handledCustomer += 10
         group.wait()
+    }
+    
+    func assignTask(_ customer: CustomerLabel , group: DispatchGroup) {
+        let task = customer.customer.task
+        let semaphore = type(of: task).semaphore
+        let queue = type(of: task).dispatchQueue
         
-        let end = CFAbsoluteTimeGetCurrent() - start
-        
-        return (Double(end), handledCustomer)
+        queue.async(group: group) {
+            semaphore.wait()
+            DispatchQueue.main.async {
+                self.changingHandler(customer)
+            }
+            Thread.sleep(forTimeInterval: task.processingTime)
+            DispatchQueue.main.async {
+                self.processingHandler(customer)
+            }
+            semaphore.signal()
+        }
     }
     
     private func addRandomCustomers(_ count: Int, taskTypes: BankTask.Type...) {
-        for i in 1...count {
+        for i in count..<count + 10 {
             if let randomTask = taskTypes.randomElement() {
                 customerQueue.enqueue(Customer(id: i, task: randomTask.init()))
             }
