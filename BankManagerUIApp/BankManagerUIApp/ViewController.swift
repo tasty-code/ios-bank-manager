@@ -145,25 +145,25 @@ extension ViewController {
             headerVerticalStackView.bottomAnchor.constraint(equalTo: customerLabelsHorizontalStackView.topAnchor),
             
             customerLabelsHorizontalStackView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            customerLabelsHorizontalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            customerLabelsHorizontalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate([
             waitingCustomerLabelsScrollView.widthAnchor.constraint(equalTo: customerLabelsHorizontalStackView.widthAnchor, multiplier: 0.5),
-            workingCustomerLabelsScrollView.widthAnchor.constraint(equalTo: customerLabelsHorizontalStackView.widthAnchor, multiplier: 0.5)
+            workingCustomerLabelsScrollView.widthAnchor.constraint(equalTo: customerLabelsHorizontalStackView.widthAnchor, multiplier: 0.5),
         ])
         
         NSLayoutConstraint.activate([
             waitingCustomerLabelsStackView.topAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.topAnchor),
             waitingCustomerLabelsStackView.bottomAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.bottomAnchor),
-            waitingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.leadingAnchor),
-            waitingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.contentLayoutGuide.trailingAnchor),
+            waitingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.frameLayoutGuide.leadingAnchor),
+            waitingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.frameLayoutGuide.trailingAnchor),
             waitingCustomerLabelsStackView.widthAnchor.constraint(equalTo: waitingCustomerLabelsScrollView.frameLayoutGuide.widthAnchor),
             
             workingCustomerLabelsStackView.topAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.topAnchor),
             workingCustomerLabelsStackView.bottomAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.bottomAnchor),
-            workingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.leadingAnchor),
-            workingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.contentLayoutGuide.trailingAnchor),
+            workingCustomerLabelsStackView.leadingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.frameLayoutGuide.leadingAnchor),
+            workingCustomerLabelsStackView.trailingAnchor.constraint(equalTo: workingCustomerLabelsScrollView.frameLayoutGuide.trailingAnchor),
             workingCustomerLabelsStackView.widthAnchor.constraint(equalTo: workingCustomerLabelsScrollView.frameLayoutGuide.widthAnchor),
         ])
     }
@@ -177,6 +177,8 @@ extension ViewController {
     }
     
     @objc private func resetCustomers() {
+        let label1 = UILabel(text: "일하는중", font: .preferredFont(forTextStyle: .body))
+        workingCustomerLabelsStackView.addArrangedSubview(label1)
         
     }
 }
@@ -202,12 +204,12 @@ struct Preview<View: UIView>: UIViewRepresentable {
     }
 }
 
-//struct Previewer: PreviewProvider {
-//    static var previews: some View {
-//        Preview {
-//            let viewController = ViewController()
-//            return viewController.view
-//        }
-//    }
-//}
+struct Previewer: PreviewProvider {
+    static var previews: some View {
+        Preview {
+            let viewController = ViewController()
+            return viewController.view
+        }
+    }
+}
 #endif
