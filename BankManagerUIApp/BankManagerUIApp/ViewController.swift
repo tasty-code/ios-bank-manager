@@ -3,7 +3,6 @@
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -11,6 +10,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
+        for i in 1...30 {
+            let label: UILabel = {
+                let label = UILabel()
+                label.text = "Label \(i)"
+                label.backgroundColor = UIColor.lightGray
+                label.textAlignment = .center
+                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                return label
+            }()
+            
+            let label2: UILabel = {
+                let label = UILabel()
+                label.text = "Label \(i)"
+                label.backgroundColor = UIColor.lightGray
+                label.textAlignment = .center
+                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                return label
+            }()
+            
+            waitingListStackView.addArrangedSubview(label)
+            workingListStackView.addArrangedSubview(label2)
+        }
     }
     
     private let addCustomerButton: UIButton = {
@@ -63,30 +85,40 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let waitingListTabelView: UITableView = {
-        let tableView = UITableView()
-        //        tableView.separatorStyle = .none
+    private lazy var waitingListView: UIView = {
+        let view = UIView()
+        view.addSubview(waitingListScrollView)
         
-        return tableView
+        return view
+    }()
+    
+    private let waitingListStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    private lazy var waitingListScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.addSubview(waitingListStackView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
     }()
     
     private lazy var waitingStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [waitingListLabel,waitingListTabelView])
+        let stackView = UIStackView(arrangedSubviews: [waitingListLabel,waitingListView])
         stackView.spacing = 0
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        
         stackView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         
         return stackView
     }()
-    private let waitingListTableViewCell: UITableViewCell = {
-        let tableViewCell = UITableViewCell(style: .default, reuseIdentifier: "waitng")
-        
-        return tableViewCell
-    }()
-    
     
     private let workingListLabel: UILabel = {
         let label = UILabel()
@@ -98,28 +130,37 @@ class ViewController: UIViewController {
         
         return label
     }()
-    
-    private let workingListTableView: UITableView = {
-        let tableView = UITableView()
-        //        tableView.separatorStyle = .none
-    
-        return tableView
-    }()
-    
-    private let workingListTableViewCell: UITableViewCell = {
-        let tableViewCell = UITableViewCell(style: .default, reuseIdentifier: "custom")
+    private lazy var workingListView: UIView = {
+        let view = UIView()
+        view.addSubview(workingListScrollView)
         
-        return tableViewCell
+        return view
     }()
     
+    private let workingListStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
     
+    private lazy var workingListScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.addSubview(workingListStackView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
     
     private lazy var workingStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [workingListLabel,workingListTableView])
+        let stackView = UIStackView(arrangedSubviews: [workingListLabel,workingListView])
         stackView.spacing = 0
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
+        stackView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         
         return stackView
     }()
@@ -144,56 +185,40 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    func configureTableView() {
-        workingListTableView.register(type(of: workingListTableViewCell), forCellReuseIdentifier: "custom")
-        waitingListTabelView.register(type(of: workingListTableViewCell), forCellReuseIdentifier: "waiting")
-        
-        waitingListTabelView.delegate = self
-        waitingListTabelView.dataSource = self
-        workingListTableView.delegate = self
-        workingListTableView.dataSource = self
-    }
-    
-    func configureUI() {
-        configureTableView()
-        
+    private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(rootStackView)
         
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            //전체 뷰
             rootStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             rootStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             rootStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            rootStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+            rootStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            
+            //왼쪽 스크롤뷰
+            waitingListStackView.leadingAnchor.constraint(equalTo: waitingListScrollView.leadingAnchor, constant: 0),
+            waitingListStackView.widthAnchor.constraint(equalTo: waitingListScrollView.widthAnchor, constant: 0),
+            waitingListStackView.topAnchor.constraint(equalTo: waitingListScrollView.topAnchor, constant: 0),
+            waitingListStackView.bottomAnchor.constraint(equalTo: waitingListScrollView.bottomAnchor, constant: 0),
+            
+            waitingListScrollView.topAnchor.constraint(equalTo: waitingListView.topAnchor, constant: 0),
+            waitingListScrollView.bottomAnchor.constraint(equalTo: waitingListView.bottomAnchor, constant: 0),
+            waitingListScrollView.trailingAnchor.constraint(equalTo: waitingListView.trailingAnchor, constant: 0),
+            waitingListScrollView.leadingAnchor.constraint(equalTo: waitingListView.leadingAnchor, constant: 0),
+            
+            //오른쪽 스크롤뷰
+            workingListStackView.leadingAnchor.constraint(equalTo: workingListScrollView.leadingAnchor, constant: 0),
+            workingListStackView.widthAnchor.constraint(equalTo: workingListScrollView.widthAnchor, constant: 0),
+            workingListStackView.topAnchor.constraint(equalTo: workingListScrollView.topAnchor, constant: 0),
+            workingListStackView.bottomAnchor.constraint(equalTo: workingListScrollView.bottomAnchor, constant: 0),
+            
+            workingListScrollView.topAnchor.constraint(equalTo: workingListView.topAnchor, constant: 0),
+            workingListScrollView.bottomAnchor.constraint(equalTo: workingListView.bottomAnchor, constant: 0),
+            workingListScrollView.trailingAnchor.constraint(equalTo: workingListView.trailingAnchor, constant: 0),
+            workingListScrollView.leadingAnchor.constraint(equalTo: workingListView.leadingAnchor, constant: 0),
         ])
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    
-}
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch tableView {
-        case self.waitingListTabelView: return 20
-        case self.workingListTableView: return 100
-        default: return 100
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView == self.waitingListTabelView {
-            let waitingcell = tableView.dequeueReusableCell(withIdentifier: "waiting", for: indexPath)
-            
-            return waitingcell
-        } else {
-            let workingcell = tableView.dequeueReusableCell(withIdentifier: "custom", for: indexPath)
-            
-            return workingcell
-        }
     }
 }
