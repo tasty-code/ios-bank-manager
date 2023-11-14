@@ -25,7 +25,7 @@ struct BankManager {
         let bank = Bank(depositTeller: 2, loanTeller: 1)
         
         let number = Int.random(in: 10...30)
-        bank.visit(numberOfClient: number)
+//        bank.visit(numberOfClient: number)
         
         let time = measureTime {
             bank.open()
