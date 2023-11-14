@@ -5,7 +5,7 @@
 //
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private let bankView = BankView()
     private var timer: Timer?
     private var startTime: Date?
@@ -57,8 +57,8 @@ class ViewController: UIViewController {
                 return label
             }()
             
-            bankView.waitingListStackView.addArrangedSubview(label)
-            bankView.workingListStackView.addArrangedSubview(label2)
+            bankView.waitingListView.itemListStackView.addArrangedSubview(label)
+            bankView.workingListView.itemListStackView.addArrangedSubview(label2)
         }
     }
 }

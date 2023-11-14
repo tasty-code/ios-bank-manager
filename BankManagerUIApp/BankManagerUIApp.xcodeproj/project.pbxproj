@@ -26,6 +26,9 @@
 		E1D68BF22B02019200E9008D /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BE92B02019200E9008D /* OperationQueue.swift */; };
 		E1D68BF32B02019200E9008D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BEA2B02019200E9008D /* Double.swift */; };
 		E1D68BF72B02FF9F00E9008D /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BF62B02FF9F00E9008D /* UIButton.swift */; };
+		E1D68BFB2B03029E00E9008D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BFA2B03029E00E9008D /* UILabel.swift */; };
+		E1D68BFD2B0305DF00E9008D /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BFC2B0305DF00E9008D /* UIStackView.swift */; };
+		E1D68C012B030CDC00E9008D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C002B030CDC00E9008D /* ListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		E1D68BE92B02019200E9008D /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		E1D68BEA2B02019200E9008D /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E1D68BF62B02FF9F00E9008D /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		E1D68BFA2B03029E00E9008D /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		E1D68BFC2B0305DF00E9008D /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		E1D68C002B030CDC00E9008D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D528BD2B022D51004768DA /* BankView.swift */,
+				E1D68C002B030CDC00E9008D /* ListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +197,8 @@
 				E1D68BE92B02019200E9008D /* OperationQueue.swift */,
 				E1D68BEA2B02019200E9008D /* Double.swift */,
 				E1D68BF62B02FF9F00E9008D /* UIButton.swift */,
+				E1D68BFA2B03029E00E9008D /* UILabel.swift */,
+				E1D68BFC2B0305DF00E9008D /* UIStackView.swift */,
 			);
 			name = Extensions;
 			path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Extensions;
@@ -325,11 +334,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1D68BEB2B02019200E9008D /* ServiceType.swift in Sources */,
+				E1D68C012B030CDC00E9008D /* ListView.swift in Sources */,
 				E1D68BF22B02019200E9008D /* OperationQueue.swift in Sources */,
+				E1D68BFD2B0305DF00E9008D /* UIStackView.swift in Sources */,
 				E1D68BEE2B02019200E9008D /* Bank.swift in Sources */,
 				E1D68BED2B02019200E9008D /* Prompt.swift in Sources */,
 				E1D68BF32B02019200E9008D /* Double.swift in Sources */,
 				E1D68BF72B02FF9F00E9008D /* UIButton.swift in Sources */,
+				E1D68BFB2B03029E00E9008D /* UILabel.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				E1D68BF02B02019200E9008D /* Menu.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
