@@ -6,18 +6,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let bankView = BankView()
-    var timer: Timer?
-    var startTime: Date?
+    private let bankView = BankView()
+    private var timer: Timer?
+    private var startTime: Date?
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         guard let startTime = startTime else { return }
         let elapsedTime = Date().timeIntervalSince(startTime)
         let formattedString = formatTimeInterval(elapsedTime)
-        BankView.workTimeLabel.text = "업무시간 - \(formattedString)"
+        bankView.workTimeLabel.text = "업무시간 - \(formattedString)"
     }
     
-    func formatTimeInterval(_ interval: TimeInterval) -> String {
+    private func formatTimeInterval(_ interval: TimeInterval) -> String {
         let hours = Int(interval / 3600)
         let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
         let seconds = Int(interval.truncatingRemainder(dividingBy: 60))

@@ -37,7 +37,7 @@ class BankView: UIView {
         return stackView
     }()
     
-    static let workTimeLabel: UILabel = {
+    let workTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간 - 00:00:00"
         label.textAlignment = .center
@@ -149,7 +149,7 @@ class BankView: UIView {
     }()
     
     private lazy var rootStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [buttonStackView,BankView.workTimeLabel,dashBoardStackView])
+        let stackView = UIStackView(arrangedSubviews: [buttonStackView,workTimeLabel,dashBoardStackView])
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.distribution = .fill
