@@ -25,6 +25,7 @@
 		E1D68BF12B02019200E9008D /* BankServiceExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BE72B02019200E9008D /* BankServiceExecutor.swift */; };
 		E1D68BF22B02019200E9008D /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BE92B02019200E9008D /* OperationQueue.swift */; };
 		E1D68BF32B02019200E9008D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BEA2B02019200E9008D /* Double.swift */; };
+		E1D68BF72B02FF9F00E9008D /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BF62B02FF9F00E9008D /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E1D68BE72B02019200E9008D /* BankServiceExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankServiceExecutor.swift; sourceTree = "<group>"; };
 		E1D68BE92B02019200E9008D /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		E1D68BEA2B02019200E9008D /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		E1D68BF62B02FF9F00E9008D /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			children = (
 				E1D68BE92B02019200E9008D /* OperationQueue.swift */,
 				E1D68BEA2B02019200E9008D /* Double.swift */,
+				E1D68BF62B02FF9F00E9008D /* UIButton.swift */,
 			);
 			name = Extensions;
 			path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Extensions;
@@ -326,6 +329,7 @@
 				E1D68BEE2B02019200E9008D /* Bank.swift in Sources */,
 				E1D68BED2B02019200E9008D /* Prompt.swift in Sources */,
 				E1D68BF32B02019200E9008D /* Double.swift in Sources */,
+				E1D68BF72B02FF9F00E9008D /* UIButton.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				E1D68BF02B02019200E9008D /* Menu.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,

@@ -32,12 +32,12 @@ final class Bank {
     func lineUp(_ customer: Customer) {
         waitingLine.enqueue(customer)
     }
-}
-
-private extension Bank {
-    func startService() {
-        let startTime = DispatchTime.now()
-        
+    
+    func clearLine() {
+        waitingLine.clear()
+    }
+    
+    func processService() {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
@@ -47,7 +47,14 @@ private extension Bank {
 
             queue.work(taskBlock)
         }
+    }
+}
 
+private extension Bank {
+    func startService() {
+        let startTime = DispatchTime.now()
+
+        processService()
         serviceList.values.forEach { $0.wait() }
         
         let endTime = DispatchTime.now()

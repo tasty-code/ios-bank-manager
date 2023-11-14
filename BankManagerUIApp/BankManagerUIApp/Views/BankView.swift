@@ -8,23 +8,9 @@
 import UIKit
 
 class BankView: UIView {
-    private let addCustomerButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("고객 10명 추가", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.textAlignment = .center
-        
-        return button
-    }()
-    
-    private let resetButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("초기화", for: .normal)
-        button.setTitleColor(.systemRed, for: .normal)
-        button.titleLabel?.textAlignment = .center
-        
-        return button
-    }()
+//    button.titleLabel?.textAlignment = .center
+    private let addCustomerButton: UIButton = UIButton(title: "고객 10명 추가", titleColor: .systemBlue)
+    private let resetButton: UIButton = UIButton(title: "초기화", titleColor: .systemRed)
     
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [addCustomerButton,resetButton])
@@ -43,7 +29,7 @@ class BankView: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont(name: "HelveticaNeue", size: 23)
-        //        label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .medium)
+        
         return label
     }()
     
