@@ -26,8 +26,8 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var taskTimeLabel: UILabel = {
-        let label = UILabel(text: "업무시간 - 04:34:333", font: .preferredFont(forTextStyle: .title1), textAlignment: .center)
+    lazy var taskTimeLabel: UILabel = {
+        let label = UILabel(text: "업무시간 - 00:00:000", font: UIFont(name: "HelveticaNeue", size: 25.0)!, textAlignment: .center)
         
         return label
     }()
@@ -59,8 +59,8 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var waitingStackView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 5)
+    lazy var waitingStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 10)
         
         return stackView
     }()
@@ -72,8 +72,8 @@ final class BankView: UIView {
         return scrollView
     }()
     
-    private lazy var taskingStackView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 5)
+    lazy var taskingStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 10)
         return stackView
     }()
     
