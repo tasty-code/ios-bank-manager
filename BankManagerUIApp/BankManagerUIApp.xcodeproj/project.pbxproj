@@ -24,6 +24,8 @@
 		CB231DB02B01A9790046C988 /* BankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB231DA92B01A9790046C988 /* BankTask.swift */; };
 		CB231DB12B01A9790046C988 /* BankDialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB231DAA2B01A9790046C988 /* BankDialogue.swift */; };
 		CB231DB32B01ABB70046C988 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB231DB22B01ABB70046C988 /* CustomerLabel.swift */; };
+		CB39AF102B03043400832ABC /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39AF0F2B03043400832ABC /* UIStackView.swift */; };
+		CB39AF122B0307BD00832ABC /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39AF112B0307BD00832ABC /* UIButton.swift */; };
 		CB61861B2AFDC44B00543F93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB61861A2AFDC44B00543F93 /* UILabel.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		CB231DA92B01A9790046C988 /* BankTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankTask.swift; sourceTree = "<group>"; };
 		CB231DAA2B01A9790046C988 /* BankDialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankDialogue.swift; sourceTree = "<group>"; };
 		CB231DB22B01ABB70046C988 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
+		CB39AF0F2B03043400832ABC /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		CB39AF112B0307BD00832ABC /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		CB61861A2AFDC44B00543F93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +140,8 @@
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				CB61861A2AFDC44B00543F93 /* UILabel.swift */,
 				CB231DB22B01ABB70046C988 /* CustomerLabel.swift */,
+				CB39AF0F2B03043400832ABC /* UIStackView.swift */,
+				CB39AF112B0307BD00832ABC /* UIButton.swift */,
 			);
 			path = BankManagerUIApp;
 			sourceTree = "<group>";
@@ -290,10 +296,12 @@
 				CB231DB02B01A9790046C988 /* BankTask.swift in Sources */,
 				CB61861B2AFDC44B00543F93 /* UILabel.swift in Sources */,
 				0D8977402AEF4136005B8993 /* Queue.swift in Sources */,
+				CB39AF122B0307BD00832ABC /* UIButton.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				CB231DAC2B01A9790046C988 /* Customer.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				CB231DB32B01ABB70046C988 /* CustomerLabel.swift in Sources */,
+				CB39AF102B03043400832ABC /* UIStackView.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				CB231DAF2B01A9790046C988 /* LoanTask.swift in Sources */,
 				CB231DAD2B01A9790046C988 /* Bank.swift in Sources */,

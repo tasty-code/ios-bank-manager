@@ -26,48 +26,35 @@ class ViewController: UIViewController {
         
         setupContentView()
         setConstraint()
-        
-        increaseCustomerButton.addTarget(nil, action: #selector(tapAddButton(_:)), for: .touchDown)
-        resetCustomerButton.addTarget(nil, action: #selector(tapResetButton(_:)), for: .touchDown)
     }
     
-    private let contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        stackView.distribution = .fillProportionally
-        stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
+    private let contentStackView = UIStackView(.vertical, 15, .fill)
+    
+    private let topButtonWrap = UIStackView(.horizontal, 0, .fillEqually)
+    
+    private let stateIndiCatorWrap = UIStackView(.horizontal, 0, .fillEqually)
+    
+    private let waitingLabel = UILabel("대기중", 35, .white, .center, .systemGreen)
+    
+    private let taskingLabel = UILabel("업무중", 35, .white, .center, .systemIndigo)
+    
+    private let waitingListWrap = UIStackView(.vertical, 0, .fillEqually)
+    
+    private let taskingListWrap = UIStackView(.vertical, 0, .fillEqually)
+    
+    private let contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .white
+        return scrollView
+    }()
+    
+    private let stateListWrap: UIStackView = {
+        let stackView = UIStackView(.horizontal, 0, .fillEqually)
+        stackView.alignment = .top
         
         return stackView
-    }()
-    
-    private let topButtonWrap: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    private let increaseCustomerButton: UIButton = {
-        let addButton = UIButton()
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.setTitle("고객 10명 추가", for: .normal)
-        addButton.setTitleColor(.blue, for: .normal)
-        
-        return addButton
-    }()
-    
-    private let resetCustomerButton: UIButton = {
-        let addButton = UIButton()
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.setTitle("초기화", for: .normal)
-        addButton.setTitleColor(.red, for: .normal)
-        
-        return addButton
     }()
     
     private let timeLabel: UILabel = {
@@ -80,75 +67,18 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let stateIndiCatorWrap: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
+    private let increaseCustomerButton: UIButton = {
+        let addButton = UIButton("고객 10명 추가", .systemBlue)
+        addButton.addTarget(nil, action: #selector(tapAddButton(_:)), for: .touchDown)
         
-        return stackView
+        return addButton
     }()
     
-    private let waitingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "대기중"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 35)
-        label.textAlignment = .center
-        label.backgroundColor = .systemGreen
+    private let resetCustomerButton: UIButton = {
+        let addButton = UIButton("초기화", .systemRed)
+        addButton.addTarget(nil, action: #selector(tapResetButton(_:)), for: .touchDown)
         
-        return label
-    }()
-    
-    private let taskingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "업무중"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 35)
-        label.textAlignment = .center
-        label.backgroundColor = .systemIndigo
-        
-        return label
-    }()
-    
-    private let contentScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .white
-        return scrollView
-    }()
-    
-    private let stateListWrap: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .top
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    private let waitingListWrap: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    private let taskingListWrap: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
-        
-        return stackView
+        return addButton
     }()
 }
 
