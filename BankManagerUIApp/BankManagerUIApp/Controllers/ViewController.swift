@@ -54,8 +54,19 @@ extension ViewController: UIUpdatable {
         for view in subViews {
             if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
                 bankView.waitingListView.itemListStackView.removeArrangedSubview(view)
-                view.removeFromSuperview() 
+                view.removeFromSuperview()
             }
+        }
+    }
+    
+    func removeAll() {
+        bankView.waitingListView.itemListStackView.arrangedSubviews.forEach {
+            bankView.waitingListView.itemListStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+        bankView.workingListView.itemListStackView.arrangedSubviews.forEach {
+            bankView.workingListView.itemListStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
         }
     }
 }

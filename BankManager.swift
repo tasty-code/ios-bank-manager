@@ -9,6 +9,12 @@ protocol BankManagerDelegate: AnyObject {
     func updateWorkTimeLabel(_ formattedString: String)
 }
 
+protocol UIUpdatable: AnyObject {
+    func addLabel(_ target: Customer)
+    func removeLabel(_ target: Customer)
+    func removeAll()
+}
+
 class BankManager {
     private let bank = Bank()
     private var timer: Timer?
@@ -48,9 +54,14 @@ class BankManager {
         timer?.invalidate()
         timer = nil
         count = 0
+        
         isTimerRunning = false
+        numberOfCurrentCustomer = 0
+        
         let formattedString = formatTimeInterval(count)
         delegate?.updateWorkTimeLabel("업무시간 - \(formattedString)")
+        uiUpdaterDelegate?.removeAll()
+        bank.clearLine()
     }
 
     func formatTimeInterval(_ interval: Double) -> String {

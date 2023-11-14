@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol UIUpdatable: AnyObject {
-    func addLabel(_ target: Customer)
-    func removeLabel(_ target: Customer)
-}
+
 
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
