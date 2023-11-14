@@ -1,0 +1,64 @@
+//
+//  BankManagerUIApp - ViewController.swift
+//  Created by yagom.
+//  Copyright © yagom academy. All rights reserved.
+//
+import UIKit
+
+class ViewController: UIViewController {
+    let bankView = BankView()
+    var timer: Timer?
+    var startTime: Date?
+    
+    @objc func updateTimer() {
+        guard let startTime = startTime else { return }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        let formattedString = formatTimeInterval(elapsedTime)
+        BankView.workTimeLabel.text = "업무시간 - \(formattedString)"
+    }
+    
+    func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let hours = Int(interval / 3600)
+        let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
+        let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
+        let milliseconds = Int((interval * 1000).truncatingRemainder(dividingBy: 1000))
+        
+        return String(format: "%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
+    }
+    
+    override func loadView() {
+        view = bankView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bankView.configureUI()
+        
+        startTime = Date()
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .tracking)
+        
+        for i in 1...30 {
+            let label: UILabel = {
+                let label = UILabel()
+                label.text = "Label \(i)"
+                label.backgroundColor = UIColor.lightGray
+                label.textAlignment = .center
+                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                return label
+            }()
+            
+            let label2: UILabel = {
+                let label = UILabel()
+                label.text = "Label \(i)"
+                label.backgroundColor = UIColor.lightGray
+                label.textAlignment = .center
+                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                return label
+            }()
+            
+            bankView.waitingListStackView.addArrangedSubview(label)
+            bankView.workingListStackView.addArrangedSubview(label2)
+        }
+    }
+}

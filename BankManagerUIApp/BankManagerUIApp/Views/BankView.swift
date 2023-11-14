@@ -1,64 +1,13 @@
 //
-//  BankManagerUIApp - ViewController.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  BankView.swift
+//  BankManagerUIApp
 //
+//  Created by 김경록 on 11/13/23.
+//
+
 import UIKit
 
-class ViewController: UIViewController {
-    
-    var timer: Timer?
-    var startTime: Date?
-    
-    @objc func updateTimer() {
-        guard let startTime = startTime else { return }
-        let elapsedTime = Date().timeIntervalSince(startTime)
-        let formattedString = formatTimeInterval(elapsedTime)
-        workTimeLabel.text = "업무시간 - \(formattedString)"
-    }
-    
-    func formatTimeInterval(_ interval: TimeInterval) -> String {
-        let hours = Int(interval / 3600)
-        let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
-        let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
-        let milliseconds = Int((interval * 1000).truncatingRemainder(dividingBy: 1000))
-        
-        return String(format: "%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureUI()
-        
-        
-        startTime = Date()
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        
-        for i in 1...30 {
-            let label: UILabel = {
-                let label = UILabel()
-                label.text = "Label \(i)"
-                label.backgroundColor = UIColor.lightGray
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                return label
-            }()
-            
-            let label2: UILabel = {
-                let label = UILabel()
-                label.text = "Label \(i)"
-                label.backgroundColor = UIColor.lightGray
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                return label
-            }()
-            
-            waitingListStackView.addArrangedSubview(label)
-            workingListStackView.addArrangedSubview(label2)
-            
-        }
-    }
-    
+class BankView: UIView {
     private let addCustomerButton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
@@ -88,7 +37,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private let workTimeLabel: UILabel = {
+    static let workTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간 - 00:00:00"
         label.textAlignment = .center
@@ -116,7 +65,7 @@ class ViewController: UIViewController {
         return view
     }()
     
-    private let waitingListStackView: UIStackView = {
+    let waitingListStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -161,7 +110,7 @@ class ViewController: UIViewController {
         return view
     }()
     
-    private let workingListStackView: UIStackView = {
+    let workingListStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -200,7 +149,7 @@ class ViewController: UIViewController {
     }()
     
     private lazy var rootStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [buttonStackView,workTimeLabel,dashBoardStackView])
+        let stackView = UIStackView(arrangedSubviews: [buttonStackView,BankView.workTimeLabel,dashBoardStackView])
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -209,18 +158,18 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private func configureUI() {
-        view.backgroundColor = .white
-        view.addSubview(rootStackView)
+    func configureUI() {
+        self.backgroundColor = .white
+        self.addSubview(rootStackView)
         
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             //전체 뷰
-            rootStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            rootStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            rootStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            rootStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            rootStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
+            rootStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            rootStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            rootStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             
             //왼쪽 스크롤뷰
             waitingListStackView.leadingAnchor.constraint(equalTo: waitingListScrollView.leadingAnchor, constant: 0),
@@ -246,3 +195,5 @@ class ViewController: UIViewController {
         ])
     }
 }
+
+
