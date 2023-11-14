@@ -169,12 +169,6 @@ extension ViewController {
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
-        for id in 1...40 {
-            let customer = Customer(id: id, workType: WorkType.allCases.randomElement()!)
-            let label = CustomerLabel(customer)
-            waitingCustomerLabelsStackView.addArrangedSubview(label)
-        }
-        
         timer.fire { [self] timeText in
             self.timerLabel.text = Constants.timerLabel(accumulatedTimes: timeText).title
         }
@@ -184,12 +178,15 @@ extension ViewController {
         timer.reset { [self] timeText in
             self.timerLabel.text = Constants.timerLabel(accumulatedTimes: "00:00:000").title
         }
+        
+        waitingCustomerLabelsStackView.removeArrangedSubviews(waitingCustomerLabelsStackView.arrangedSubviews)
+        workingCustomerLabelsStackView.removeArrangedSubviews(workingCustomerLabelsStackView.arrangedSubviews)
     }
 }
 
 // MARK: Bank Delegation Methods
 extension ViewController: BankDelegate {
-    func someFunction(bank: Bank, timer: TimeInterval) {
+    func work(bank: Bank, completion: @escaping () -> Void) {
         
     }
 }

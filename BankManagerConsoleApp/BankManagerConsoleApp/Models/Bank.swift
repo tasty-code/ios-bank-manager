@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BankDelegate: AnyObject {
-    func someFunction(bank: Bank, timer: TimeInterval)
+    func work(bank: Bank, completion: @escaping () -> Void)
 }
 
 final class Bank {
@@ -24,8 +24,8 @@ final class Bank {
         self.bankManager = bankManager
     }
     
-    func work(completion: @escaping () -> Void) {
-        gatherCustomers()
+    func work(count: Int, completion: @escaping () -> Void) {
+        gatherCustomers(count)
         
         tellers.forEach { teller in
             while customerQueue.isEmpty == false {
@@ -36,14 +36,14 @@ final class Bank {
         }
         
         dispatchGroup.wait()
-        completion()
+        completion() // 모든 고객 다 처리하면 타이머 끄기
     }
 }
 
 // MARK: Private Methods
 extension Bank {
-    private func gatherCustomers() {
-        let totalCustomersCount = Int.random(in: 10...30)
+    private func gatherCustomers(_ count: Int) {
+        let totalCustomersCount = count
         for count in 1...totalCustomersCount {
             guard let randomWorkType = WorkType.allCases.randomElement() else { return }
             let customer = Customer(id: count, workType: randomWorkType)

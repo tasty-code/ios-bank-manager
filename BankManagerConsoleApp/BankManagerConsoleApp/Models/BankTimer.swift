@@ -26,6 +26,9 @@ final class BankTimer {
     }()
     private var timerStatus: TimerStatus = .off
     private var elapsedTime: TimeInterval = 0
+    var isRunning: Bool {
+        timerStatus == .on ? true : false
+    }
     
     init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
