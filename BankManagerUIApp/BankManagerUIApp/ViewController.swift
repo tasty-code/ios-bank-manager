@@ -3,7 +3,7 @@ import UIKit
 class ViewController: UIViewController {
     var waitingQueueStackView: UIStackView!
     var workingQueueStackView: UIStackView!
-    var timer: Timer?
+    var timer: Timer? = nil
     var elapsedTime: TimeInterval = 0.000
     
     
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
+        startTimer()
         
         let tenCustomerAddButton = UIButton(title: "고객 10명 추가", titleColor: .systemBlue)
         let initializationButton = UIButton(title: "초기화", titleColor: .systemRed)
@@ -36,14 +36,14 @@ class ViewController: UIViewController {
         
         workingQueueStackView =  UIStackView(axis: .vertical, distribution: .fill, alignment: .fill, arrangedSubviews: addWaitCustomer(3))
         let workingQueue = UIScrollView(subView: workingQueueStackView, isScrollEnabled: false)
-
+        
         let waitingWorkingQueueStackView = UIStackView(axis: .horizontal, distribution: .fillEqually, spacing: 0, arrangedSubviews: [waitingQueue, workingQueue])
-
+        
         let upperStackView = UIStackView(axis: .vertical, distribution: .fillEqually, alignment: .fill, arrangedSubviews: [customerInitializationStackView, workTimeLabel, waitingWorkingLabelStackView])
         let stackView = UIStackView(axis: .vertical, distribution: .fill, alignment: .fill, spacing: 0, arrangedSubviews: [upperStackView, waitingWorkingQueueStackView])
-
+        
         view.addSubview(stackView)
-    
+        
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -71,13 +71,20 @@ class ViewController: UIViewController {
     
     @objc func addCustomer() {
         for index in 1...10 {
-            let label = UILabel(text: "\(index)번 고객", fontSize: 10, textColor: .black)
+            let label = UILabel(text: "\(index)번 고객", fontSize: 20, textColor: .black)
             waitingQueueStackView.addArrangedSubview(label)
         }
+        startTimer()
+    }
+    
+    func startTimer() {
         if let timer = timer {
             
         } else {
-            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
+            DispatchQueue.global(qos: .userInteractive).async { [self] in
+                timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
+                RunLoop.current.run()
+            }
         }
     }
     
@@ -89,16 +96,17 @@ class ViewController: UIViewController {
         timer?.invalidate()
         timer = nil
         workTimeLabel.text = "업무시간 - 00:00:000"
-        }
+    }
     
     @objc func updateTimer() {
-        
         let minutes = Int(elapsedTime) / 60
         let seconds = Int(elapsedTime) % 60
         let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
         
-        workTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
-        workTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
+        DispatchQueue.main.async { [self] in
+            workTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
+            workTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
+        }
         elapsedTime += 0.001
     }
     
@@ -108,75 +116,14 @@ class ViewController: UIViewController {
             let customer = UILabel()
             customer.text = "\(index)번 고객"
             customer.textAlignment = .center
-            customer.font = .systemFont(ofSize: 10)
+            customer.font = .systemFont(ofSize: 20)
             views.append(customer)
         }
         return views
     }
 }
 
-extension UIButton {
-    convenience init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor = .white) {
-        self.init()
-        
-        self.setTitle(title, for: .normal)
-        self.setTitleColor(titleColor, for: .normal)
-        self.backgroundColor = backgroundColor
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.contentHorizontalAlignment = .center
-    }
-}
 
-extension UILabel {
-    convenience init(text: String, fontSize: CGFloat = 10, textColor: UIColor, backgroundColor: UIColor = .white) {
-        self.init()
-        
-        self.text = text
-        self.font = .systemFont(ofSize: fontSize)
-        self.textColor = textColor
-        self.backgroundColor = backgroundColor
-        self.textAlignment = .center
-        self.numberOfLines = 0
-        self.adjustsFontSizeToFitWidth = true
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
-
-extension UIStackView {
-    func addArrangedSubviews(_ addArrangedSubviews: [UIView]) {
-        arrangedSubviews.forEach { $0.removeFromSuperview() }
-        addArrangedSubviews.forEach { addArrangedSubview($0) }
-    }
-    
-    convenience init(axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, alignment: UIStackView.Alignment = .fill, spacing: CGFloat = 8, arrangedSubviews: [UIView] = []) {
-        self.init()
-        
-        self.axis = axis
-        self.distribution = distribution
-        self.alignment = alignment
-        self.spacing = spacing
-        
-        arrangedSubviews.forEach {
-            self.addArrangedSubview($0)
-        }
-        
-        self.isLayoutMarginsRelativeArrangement = false
-        self.isUserInteractionEnabled = true
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
-
-extension UIScrollView {
-    convenience init(subView: UIView, isScrollEnabled: Bool = true) {
-        self.init()
-    
-        self.addSubview(subView)
-    
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.showsVerticalScrollIndicator = false
-        self.isScrollEnabled = isScrollEnabled
-    }
-}
 
 #if DEBUG
 import SwiftUI
