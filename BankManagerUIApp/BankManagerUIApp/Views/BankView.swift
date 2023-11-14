@@ -11,7 +11,7 @@ final class BankView: UIView {
     let addCustomerButton: UIButton = UIButton(title: "고객 10명 추가", titleColor: .systemBlue)
     let resetButton: UIButton = UIButton(title: "초기화", titleColor: .systemRed)
     
-    let workTimeLabel: UILabel = UILabel(text: "업무시간 - 00:00:00", fontSize: 23)
+    let workTimeLabel: UILabel = UILabel(text: "업무시간 - 00:00.000", fontSize: 23)
     
     private let waitingListTitle: UILabel = UILabel(text: "대기중", fontSize: 30, textColor: .white, backgroundColor: .systemGreen)
     private let workingListTitle: UILabel = UILabel(text: "업무중", fontSize: 30, textColor: .white, backgroundColor: .systemIndigo)
@@ -52,7 +52,7 @@ final class BankView: UIView {
         workTimeLabel.font = UIFont(name: "HelveticaNeue", size: 23)
     }
 
-    func configureUI() {
+    func configureView() {
         configureAttribute()
         configureLayout()
     }

@@ -6,4 +6,6 @@
 
 import Foundation
 
-struct BankManager {}
+struct BankManager {
+    
+}
