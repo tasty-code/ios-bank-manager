@@ -27,6 +27,7 @@
 		E1D68C0D2B03391F00E9008D /* BankServiceExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C092B03391F00E9008D /* BankServiceExecutor.swift */; };
 		E1D68C0E2B03391F00E9008D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C0A2B03391F00E9008D /* Queue.swift */; };
 		E1D68C102B03392A00E9008D /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C0F2B03392A00E9008D /* Bank.swift */; };
+		E1D68C122B0340B600E9008D /* WaitingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C112B0340B600E9008D /* WaitingLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		E1D68C092B03391F00E9008D /* BankServiceExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankServiceExecutor.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Models/BankServiceExecutor.swift; sourceTree = "<group>"; };
 		E1D68C0A2B03391F00E9008D /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Models/Queue.swift; sourceTree = "<group>"; };
 		E1D68C0F2B03392A00E9008D /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		E1D68C112B0340B600E9008D /* WaitingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				E1D68C0A2B03391F00E9008D /* Queue.swift */,
 				E1D68C072B03391F00E9008D /* ServiceType.swift */,
 				E1D68C0F2B03392A00E9008D /* Bank.swift */,
+				E1D68C112B0340B600E9008D /* WaitingLine.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			files = (
 				E1D68C0D2B03391F00E9008D /* BankServiceExecutor.swift in Sources */,
 				E1D68C102B03392A00E9008D /* Bank.swift in Sources */,
+				E1D68C122B0340B600E9008D /* WaitingLine.swift in Sources */,
 				E1D68C012B030CDC00E9008D /* ListView.swift in Sources */,
 				E1D68BF22B02019200E9008D /* OperationQueue.swift in Sources */,
 				E1D68BFD2B0305DF00E9008D /* UIStackView.swift in Sources */,

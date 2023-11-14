@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol UIUpdatable: AnyObject {
+    func addLabel(_ target: Customer)
+    func removeLabel(_ target: Customer)
+}
+
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
@@ -24,11 +29,6 @@ final class Bank {
         self.serviceList = list
     }
     
-    func runService() {
-        startService()
-        shutDownService()
-    }
-    
     func lineUp(_ customer: Customer) {
         waitingLine.enqueue(customer)
     }
@@ -37,37 +37,24 @@ final class Bank {
         waitingLine.clear()
     }
     
-    func processService() {
+    func startService(_ closure: @escaping () -> Void) {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
             let taskBlock = BlockOperation {
+                closure()
                 self.provideService(to: currentCustomer)
             }
 
             queue.work(taskBlock)
         }
+        
+        serviceList.values.forEach { $0.wait() }
     }
 }
 
 private extension Bank {
-    func startService() {
-        let startTime = DispatchTime.now()
 
-        processService()
-        serviceList.values.forEach { $0.wait() }
-        
-        let endTime = DispatchTime.now()
-        calculateTotalWorkTime(from: startTime, to: endTime)
-    }
-    
-    func calculateTotalWorkTime(from startTime: DispatchTime,to endTime: DispatchTime) {
-        let distance = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
-
-        let timeInterval = Double(distance) / 1_000_000_000
-        totalWorkTime = timeInterval
-    }
-    
     func provideService(to target: Customer) {
         let serviceType = target.serviceType
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)

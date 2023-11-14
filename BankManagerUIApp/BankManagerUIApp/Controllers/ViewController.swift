@@ -19,33 +19,12 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bankManager.delegate = self
+        bankManager.uiUpdaterDelegate = self
         bankView.configureView()
         
         bankView.addCustomerButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         bankView.resetButton.addTarget(self, action: #selector(resetButtontapped), for: .touchUpInside)
-        
-        for i in 1...30 {
-            let label: UILabel = {
-                let label = UILabel()
-                label.text = "Label \(i)"
-                label.backgroundColor = UIColor.lightGray
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                return label
-            }()
-            
-            let label2: UILabel = {
-                let label = UILabel()
-                label.text = "Label \(i)"
-                label.backgroundColor = UIColor.lightGray
-                label.textAlignment = .center
-                label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                return label
-            }()
-            
-            bankView.waitingListView.itemListStackView.addArrangedSubview(label)
-            bankView.workingListView.itemListStackView.addArrangedSubview(label2)
-        }
+
     }
 }
 
@@ -60,5 +39,23 @@ extension ViewController: BankManagerDelegate {
     
     @objc func resetButtontapped() {
         bankManager.resetTimer()
+    }
+}
+
+extension ViewController: UIUpdatable {
+    func addLabel(_ target: Customer) {
+        let label = UILabel(text: "\(target.ticketNumber) - \(target.serviceType.description)", fontSize: 18)
+        bankView.waitingListView.itemListStackView.addArrangedSubview(label)
+    }
+    
+    func removeLabel(_ target: Customer) {
+        let subViews = bankView.waitingListView.itemListStackView.arrangedSubviews
+        
+        for view in subViews {
+            if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
+                bankView.waitingListView.itemListStackView.removeArrangedSubview(view)
+                view.removeFromSuperview() 
+            }
+        }
     }
 }

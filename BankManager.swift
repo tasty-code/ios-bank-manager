@@ -10,10 +10,14 @@ protocol BankManagerDelegate: AnyObject {
 }
 
 class BankManager {
+    private let bank = Bank()
     private var timer: Timer?
     private var count: Double = 0
     private var isTimerRunning: Bool = false
+    private var numberOfCurrentCustomer: Int = 0
+    
     weak var delegate: BankManagerDelegate?
+    weak var uiUpdaterDelegate: UIUpdatable?
 
     @objc func updateTimer() {
         count += 0.001
@@ -22,10 +26,12 @@ class BankManager {
     }
 
     func startTimer() {
-        if isTimerRunning {
-            return
-        }
-
+        lineUpCustomer()
+//        bank.startService { [
+//            
+//        }
+        guard !isTimerRunning else { return }
+        
         isTimerRunning = true
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         if let timer = timer {
@@ -52,5 +58,17 @@ class BankManager {
         let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
         let milliseconds = Int((interval * 1000).truncatingRemainder(dividingBy: 1000))
         return String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
+    }
+    
+    func lineUpCustomer() {
+        let offset = numberOfCurrentCustomer + 1
+        for i in offset..<offset + 10 {
+            let customer = Customer(ticketNumber: i)
+            bank.lineUp(customer)
+            
+            uiUpdaterDelegate?.addLabel(customer)
+        }
+        
+        numberOfCurrentCustomer += 10
     }
 }
