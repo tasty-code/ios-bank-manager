@@ -52,6 +52,10 @@ extension BankTimer: TimerProtocol {
             self.elapsedTime = elapsedTime
             self.representTimeLabel(handler)
         })
+        
+        if let timer = timer {
+            RunLoop.main.add(timer, forMode: .tracking)
+        }
     }
     
     func reset(_ handler: @escaping (String) -> Void) {
