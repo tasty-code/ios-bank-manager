@@ -92,10 +92,12 @@ class ViewController: UIViewController {
         waitingQueueStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         workingQueueStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        elapsedTime = 0.000
         timer?.invalidate()
         timer = nil
-        workTimeLabel.text = "업무시간 - 00:00:000"
+        DispatchQueue.main.async { [self] in
+            elapsedTime = 0.000
+            workTimeLabel.text = "업무시간 - 00:00:000"
+        }
     }
     
     @objc func updateTimer() {
