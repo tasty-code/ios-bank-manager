@@ -5,12 +5,9 @@
 //
 
 import UIKit
-import Combine
 
 class ViewController: UIViewController {
     var bankManager: BankManager?
-    var startTime: Date?
-    var cancellable: Cancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +31,8 @@ class ViewController: UIViewController {
     
     private let stateIndiCatorWrap = UIStackView(.horizontal, 0, .fillEqually)
     
+    private let timeLabel = TimerLabel(prefix: "업무시간", fontSize: 24)
+    
     private let waitingLabel = UILabel("대기중", 35, .white, .center, .systemGreen)
     
     private let taskingLabel = UILabel("업무중", 35, .white, .center, .systemIndigo)
@@ -55,16 +54,6 @@ class ViewController: UIViewController {
         stackView.alignment = .top
         
         return stackView
-    }()
-    
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "업무시간 - 00:00:000"
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont(name: "HelveticaNeue", size: 25)
-        
-        return label
     }()
     
     private let increaseCustomerButton: UIButton = {
@@ -102,7 +91,6 @@ extension ViewController {
         
         stateListWrap.addArrangedSubview(waitingListWrap)
         stateListWrap.addArrangedSubview(taskingListWrap)
-        
     }
     
     private func setConstraint(){
@@ -133,27 +121,11 @@ extension ViewController {
 extension ViewController {
     @objc func tapAddButton(_ sender: UIButton) {
         generateCustomer()
-        if startTime == nil {
-            startTime = Date()
-        }
-        
-        if cancellable == nil {
-            let subscription = Timer.publish(every: 0.01, on: .current, in: .common)
-                .autoconnect()
-                .sink { updatedTime in
-                    if let startTime = self.startTime {
-                        self.timeLabel.text = updatedTime.timeIntervalSince(startTime).formatTimer()
-                    }
-                }
-            cancellable = subscription
-        }
+        timeLabel.startTimer()
     }
     
     @objc func tapResetButton(_ sender: UIButton) {
-        timeLabel.text = "업무시간 - 00:00:000"
-        cancellable?.cancel()
-        cancellable = nil
-        startTime = nil
+        timeLabel.resetTimer()
     }
     
     func generateCustomer() {
@@ -161,14 +133,7 @@ extension ViewController {
             self.bankManager?.openBank()
         }
     }
-    
-    @objc func tapTest(_ sender: UIButton) {
-        cancellable?.cancel()
-        cancellable = nil
-    }
 }
-
-
 
 #if DEBUG
 import SwiftUI
