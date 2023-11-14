@@ -26,6 +26,7 @@
 		CB231DB32B01ABB70046C988 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB231DB22B01ABB70046C988 /* CustomerLabel.swift */; };
 		CB39AF102B03043400832ABC /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39AF0F2B03043400832ABC /* UIStackView.swift */; };
 		CB39AF122B0307BD00832ABC /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39AF112B0307BD00832ABC /* UIButton.swift */; };
+		CB39AF142B0309F500832ABC /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39AF132B0309F500832ABC /* TimeInterval.swift */; };
 		CB61861B2AFDC44B00543F93 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB61861A2AFDC44B00543F93 /* UILabel.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		CB231DB22B01ABB70046C988 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		CB39AF0F2B03043400832ABC /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		CB39AF112B0307BD00832ABC /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		CB39AF132B0309F500832ABC /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		CB61861A2AFDC44B00543F93 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,10 +140,8 @@
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
-				CB61861A2AFDC44B00543F93 /* UILabel.swift */,
 				CB231DB22B01ABB70046C988 /* CustomerLabel.swift */,
-				CB39AF0F2B03043400832ABC /* UIStackView.swift */,
-				CB39AF112B0307BD00832ABC /* UIButton.swift */,
+				CB39AF152B030B2300832ABC /* Extensions */,
 			);
 			path = BankManagerUIApp;
 			sourceTree = "<group>";
@@ -162,6 +162,17 @@
 				C7694E5E259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIAppUITests;
+			sourceTree = "<group>";
+		};
+		CB39AF152B030B2300832ABC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CB39AF132B0309F500832ABC /* TimeInterval.swift */,
+				CB61861A2AFDC44B00543F93 /* UILabel.swift */,
+				CB39AF0F2B03043400832ABC /* UIStackView.swift */,
+				CB39AF112B0307BD00832ABC /* UIButton.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 				CB231DB02B01A9790046C988 /* BankTask.swift in Sources */,
 				CB61861B2AFDC44B00543F93 /* UILabel.swift in Sources */,
 				0D8977402AEF4136005B8993 /* Queue.swift in Sources */,
+				CB39AF142B0309F500832ABC /* TimeInterval.swift in Sources */,
 				CB39AF122B0307BD00832ABC /* UIButton.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				CB231DAC2B01A9790046C988 /* Customer.swift in Sources */,

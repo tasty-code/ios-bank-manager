@@ -142,12 +142,7 @@ extension ViewController {
                 .autoconnect()
                 .sink { updatedTime in
                     if let startTime = self.startTime {
-                        let processingTime = Double(updatedTime.timeIntervalSince(startTime))
-                        let miliseconds = Int(processingTime.truncatingRemainder(dividingBy: 1) * 1000)
-                        let seconds = Int(processingTime)
-                        let minutes = seconds / 60
-                        
-                        self.timeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds % 60, miliseconds)
+                        self.timeLabel.text = updatedTime.timeIntervalSince(startTime).formatTimer()
                     }
                 }
             cancellable = subscription
