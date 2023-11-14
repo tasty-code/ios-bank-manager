@@ -19,10 +19,8 @@ final class Bank {
         loanSemaphore = DispatchSemaphore(value: loanTeller)
     }
     
-    func visit(numberOfClient: Int) {
-        for num in 1...numberOfClient {
-            clientQueue.enqueue(data: Client(id: num))
-        }
+    func visit(client: Client) {
+        clientQueue.enqueue(data: client)
     }
     
     func open() {
@@ -39,6 +37,10 @@ final class Bank {
             }
         }
         tellerGroup.wait()
+    }
+    
+    func clear() {
+        clientQueue.clear()
     }
     
     func close(numberOfClient: Int, at time: Double) {
