@@ -150,26 +150,6 @@ class ViewController: UIViewController {
         
         return stackView
     }()
-    
-    //    private let listLabel: UILabel = {
-    //        let label = UILabel()
-    //        label.text = "5 - 예금"
-    //        label.textColor = .black
-    //        label.font = UIFont.systemFont(ofSize: 18)
-    //        label.textAlignment = .center
-    //
-    //        return label
-    //    }()
-    //
-    //    private let listLabel2: UILabel = {
-    //        let label = UILabel()
-    //        label.text = "4 - 예금"
-    //        label.textColor = .black
-    //        label.font = UIFont.systemFont(ofSize: 18)
-    //        label.textAlignment = .center
-    //
-    //        return label
-    //    }()
 }
 
 extension ViewController {
@@ -225,7 +205,10 @@ extension ViewController {
         generateCustomer()
         if startTime == nil {
             startTime = Date()
-            let subscription = Timer.publish(every: 0.01, on: .main, in: .default)
+        }
+        
+        if cancellable == nil {
+            let subscription = Timer.publish(every: 0.01, on: .current, in: .common)
                 .autoconnect()
                 .sink { updatedTime in
                     if let startTime = self.startTime {
@@ -249,7 +232,14 @@ extension ViewController {
     }
     
     func generateCustomer() {
-        bankManager?.openBank()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.bankManager?.openBank()
+        }
+    }
+    
+    @objc func tapTest(_ sender: UIButton) {
+        cancellable?.cancel()
+        cancellable = nil
     }
 }
 
