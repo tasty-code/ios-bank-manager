@@ -41,7 +41,7 @@ final class BankView: UIView {
     
     private lazy var taskLabel: UILabel = {
         let label = UILabel(text: "업무중", font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, textAlignment: .center)
-        label.backgroundColor = .systemPurple
+        label.backgroundColor = .systemIndigo
         
         return label
     }()

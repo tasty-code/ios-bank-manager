@@ -69,10 +69,8 @@ final class Bank {
     private func taskService(with client: Client) {
         guard isCancelled == false else { return }
         
-//        print(Prompt.taskStart(with: client))
         delegate?.move(who: client)
         Thread.sleep(forTimeInterval: client.taskType.taskTime)
-//        print(Prompt.taskComplete(with: client))
         delegate?.remove(who: client)
     }
 }
