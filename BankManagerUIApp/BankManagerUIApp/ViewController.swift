@@ -7,16 +7,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var bankManager: BankManager?
+    private var bankManager: BankManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bankManager = BankManager(bank: Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
             self.waitingListWrap.addArrangedSubview(label)
         }, changingHandler: { label in
-//            if !label.customer.workable {
-//                return
-//            }
             self.waitingListWrap.removeArrangedSubview(label)
             self.taskingListWrap.addArrangedSubview(label)
         }, processingHandler: { label in
@@ -122,17 +119,17 @@ extension ViewController {
 }
 
 extension ViewController {
-    @objc func tapAddButton(_ sender: UIButton) {
+    @objc private func tapAddButton(_ sender: UIButton) {
         timeLabel.startTimer()
         generateCustomers()
     }
     
-    @objc func tapResetButton(_ sender: UIButton) {
+    @objc private func tapResetButton(_ sender: UIButton) {
         timeLabel.resetTimer()
         resetCustomers()
     }
     
-    func generateCustomers() {
+    private func generateCustomers() {
         DispatchQueue.global(qos: .userInitiated).async {
             self.bankManager?.openBank(completionHander: {
                 self.timeLabel.pauseTimer()
@@ -140,7 +137,7 @@ extension ViewController {
         }
     }
     
-    func resetCustomers() {
+    private func resetCustomers() {
         bankManager?.resetBank()
         for label in waitingListWrap.arrangedSubviews {
             if let label = label as? CustomerLabel {
