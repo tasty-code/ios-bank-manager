@@ -12,9 +12,6 @@ import Foundation
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
-    private var totalWorkTime: Double = 0
-    private var exitCount: Int = 0
-    private let semaphoreForExitCount = DispatchSemaphore(value: 1)
     private var isSame: Int = 0
     
     init() {
@@ -65,22 +62,11 @@ final class Bank {
     func cancelService() {
         serviceList.values.forEach { $0.cancel() }
     }
-}
-
-private extension Bank {
+    
     func provideService(to target: Customer) {
         let serviceType = target.serviceType
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         usleep(durationTime)
-    }
-    
-    func shutDownService() {
-        prepareService()
-    }
-    
-    func prepareService() {
-        exitCount = 0
-        totalWorkTime = 0
     }
 }
