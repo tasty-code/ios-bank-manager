@@ -7,12 +7,20 @@
 
 import Foundation
 
-
+protocol UIUpdatable: AnyObject {
+    func addLabel(_ target: Customer)
+    func removeFinishedLabel(_ target: Customer)
+    func moveLabelToWorkStation(_ target: Customer)
+    func checkQueueEnded()
+}
 
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
-    private var isSame: Int = 0
+    private var numberOfCompleteQueue: Int = 0
+    private var numberOfCurrentCustomer: Int = 0
+    
+    weak var uiUpdaterDelegate: UIUpdatable?
     
     init() {
         var list = [ServiceType: BankServiceExecutor]()
@@ -24,43 +32,21 @@ final class Bank {
         self.serviceList = list
     }
     
-    func lineUp(_ customer: Customer) {
-        waitingLine.enqueue(customer)
+    func lineUp() {
+        let offset = numberOfCurrentCustomer + 1
+        for i in offset..<offset + 10 {
+            let customer = Customer(ticketNumber: i)
+            waitingLine.enqueue(customer)
+            uiUpdaterDelegate?.addLabel(customer)
+        }
+        
+        numberOfCurrentCustomer += 10
     }
     
     func clearLine() {
         waitingLine.clear()
-    }
-    
-    func startService(_ forUI: @escaping (_ target: Customer) -> Void, _ forTimer: @escaping () -> Void) {
-        while !waitingLine.isEmpty {
-            guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
-            
-            let taskBlock = BlockOperation {
-                forUI(currentCustomer)
-                self.provideService(to: currentCustomer)
-            }
-
-            queue.work(taskBlock)
-        }
-        
-        finishService(forTimer)
-    }
-    
-    func finishService(_ closure: @escaping () -> Void) {
-        serviceList.values.forEach {
-            $0.notify {
-                self.isSame += 1
-                
-                if self.isSame % 2 == 0 {
-                    closure()
-                }
-            }
-        }
-    }
-    
-    func cancelService() {
-        serviceList.values.forEach { $0.cancel() }
+        numberOfCurrentCustomer = 0
+        numberOfCompleteQueue = 0
     }
     
     func provideService(to target: Customer) {
@@ -68,5 +54,38 @@ final class Bank {
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         usleep(durationTime)
+    }
+
+    func startService(_ completion: @escaping () -> Void) {
+        while !waitingLine.isEmpty {
+            guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
+            
+            let taskBlock = BlockOperation {
+                DispatchQueue.main.sync {
+                    self.uiUpdaterDelegate?.moveLabelToWorkStation(currentCustomer)
+                }
+                
+                self.provideService(to: currentCustomer)
+                DispatchQueue.main.sync {
+                    self.uiUpdaterDelegate?.removeFinishedLabel(currentCustomer)
+                }
+            }
+
+            queue.work(taskBlock)
+        }
+        
+        guard let closure = uiUpdaterDelegate?.checkQueueEnded else { return }
+        finishService(closure)
+    }
+    
+    func finishService(_ closure: @escaping () -> Void) {
+        serviceList.values.forEach {
+            $0.notify(closure)
+        }
+    }
+    
+    func cancelService() {
+        serviceList.values.forEach { $0.cancel() }
+        clearLine()
     }
 }
