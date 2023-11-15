@@ -6,7 +6,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    private let bankView = BankView()
+    private let mainView = BankView()
     private var bank: Bank = Bank()
     
     private var timer: Timer?
@@ -14,25 +14,23 @@ final class ViewController: UIViewController {
     private var isTimerRunning: Bool = false
     
     override func loadView() {
-        view = bankView
+        view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bank.uiUpdaterDelegate = self
-        bankView.configureView()
+        bank.UIUpdater = self
+        mainView.configureView()
         
-        bankView.addCustomerButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
-        bankView.resetButton.addTarget(self, action: #selector(resetButtontapped), for: .touchUpInside)
+        mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
+        mainView.resetButton.addTarget(self, action: #selector(resetButtontapped), for: .touchUpInside)
     }
     
-    @objc func startButtonTapped() {
-        if let currentTimer = self.timer {
-            currentTimer.invalidate()
-        }
-        bank.lineUp()
+    @objc func addCustomerButtonTapped() {
+        self.timer?.invalidate()
         
+        bank.lineUp()
         bank.startService()
         
         isTimerRunning = false
@@ -52,12 +50,11 @@ final class ViewController: UIViewController {
     }
 }
 
-
 extension ViewController {
     @objc func updateTimer() {
         count += 0.001
         let formattedString = formatTimeInterval(count)
-        bankView.workTimeLabel.text = "업무시간 - \(formattedString)"
+        mainView.workTimeLabel.text = "업무시간 - \(formattedString)"
     }
     
     func stopTimer() {
@@ -72,7 +69,7 @@ extension ViewController {
         count = 0
         
         let formattedString = formatTimeInterval(count)
-        bankView.workTimeLabel.text = "업무시간 - \(formattedString)"
+        mainView.workTimeLabel.text = "업무시간 - \(formattedString)"
     }
     
     func formatTimeInterval(_ interval: Double) -> String {
@@ -83,13 +80,13 @@ extension ViewController {
     }
     
     func resetUI() {
-        bankView.waitingListView.itemListStackView.arrangedSubviews.forEach {
-            bankView.waitingListView.itemListStackView.removeArrangedSubview($0)
+        mainView.waitingListView.itemListStackView.arrangedSubviews.forEach {
+            mainView.waitingListView.itemListStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
         
-        bankView.workingListView.itemListStackView.arrangedSubviews.forEach {
-            bankView.workingListView.itemListStackView.removeArrangedSubview($0)
+        mainView.workingListView.itemListStackView.arrangedSubviews.forEach {
+            mainView.workingListView.itemListStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
             
         }
@@ -97,40 +94,41 @@ extension ViewController {
 }
 
 extension ViewController: UIUpdatable {
-    func removeFinishedLabel(_ target: Customer) {
+    func addLabelToWaitingStation(_ target: Customer) {
+        let label = UILabel(text: "\(target.ticketNumber) - \(target.serviceType.description)", fontSize: 18, textColor: target.serviceType == .deposit ? .black : .systemPurple)
+        mainView.waitingListView.itemListStackView.addArrangedSubview(label)
+    }
+    
+    func moveLabelToWorkStation(_ target: Customer) {
+        let subViews = mainView.waitingListView.itemListStackView.arrangedSubviews
+        
+        for view in subViews {
+            if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
+                mainView.waitingListView.itemListStackView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+                
+                mainView.workingListView.itemListStackView.addArrangedSubview(view)
+            }
+        }
+    }
+    
+    func removeLabelWhenFinished(_ target: Customer) {
         let labelText = "\(target.ticketNumber) - \(target.serviceType.description)"
-        let subView = bankView.workingListView.itemListStackView.arrangedSubviews.filter {
+        let subView = mainView.workingListView.itemListStackView.arrangedSubviews.filter {
             guard let label = $0 as? UILabel else { return false }
             return label.text == labelText
         }.first
         
         guard let subView = subView else { return }
-        bankView.workingListView.itemListStackView.removeArrangedSubview(subView)
+        
+        mainView.workingListView.itemListStackView.removeArrangedSubview(subView)
         subView.removeFromSuperview()
     }
     
-    func checkQueueEnded() {
-        DispatchQueue.main.sync {
-            if bankView.waitingListView.itemListStackView.arrangedSubviews.count == 0 {
-                stopTimer()
-            }
-        }
-    }
-    
-    func addLabel(_ target: Customer) {
-        let label = UILabel(text: "\(target.ticketNumber) - \(target.serviceType.description)", fontSize: 18, textColor: target.serviceType == .deposit ? .black : .systemPurple)
-        bankView.waitingListView.itemListStackView.addArrangedSubview(label)
-    }
-    
-    func moveLabelToWorkStation(_ target: Customer) {
-        let subViews = bankView.waitingListView.itemListStackView.arrangedSubviews
-        
-        for view in subViews {
-            if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
-                bankView.waitingListView.itemListStackView.removeArrangedSubview(view)
-                view.removeFromSuperview()
-                
-                bankView.workingListView.itemListStackView.addArrangedSubview(view)
+    func stopTimerWhenAllWorkDone() {
+        DispatchQueue.main.async { [weak self] in
+            if self?.mainView.waitingListView.itemListStackView.arrangedSubviews.count == 0 {
+                self?.stopTimer()
             }
         }
     }
