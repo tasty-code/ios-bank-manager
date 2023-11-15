@@ -54,16 +54,17 @@ class ViewController: UIViewController {
     }
     
     @objc private func resetButtonTapped() {
-        // 1. 큐에 있는 사람 모두 삭제
-        bank.clear()
-        // 2. 양쪽 스택뷰의 모든 레이블을 지우고
+        bank.stop()
+        
         bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         bankView.taskingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        // 3. 타이머 삭제
+        
         timer?.invalidate()
         timer = nil
         processingTime = 0.000
         bankView.taskTimeLabel.text = "업무시간 - 00:00:000"
+        
+        count = 1
     }
     
     @objc private func runningTimer() {

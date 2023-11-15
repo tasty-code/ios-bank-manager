@@ -22,6 +22,7 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		DE1E84CB2B035FF70029CBFF /* ClientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E84CA2B035FF70029CBFF /* ClientLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		DE1E84CA2B035FF70029CBFF /* ClientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClientLabel.swift; path = Model/ClientLabel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		531924962B01BA2D00123FCB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DE1E84CA2B035FF70029CBFF /* ClientLabel.swift */,
 				531924972B01BA6F00123FCB /* BankView.swift */,
 			);
 			path = View;
@@ -309,6 +312,7 @@
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
+				DE1E84CB2B035FF70029CBFF /* ClientLabel.swift in Sources */,
 				531924952B01B95400123FCB /* UIComponentsExtension.swift in Sources */,
 				531924982B01BA6F00123FCB /* BankView.swift in Sources */,
 				531924912B01B4EF00123FCB /* TaskType.swift in Sources */,
