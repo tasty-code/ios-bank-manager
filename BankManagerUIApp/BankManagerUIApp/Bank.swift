@@ -11,16 +11,12 @@ class Bank: Bankable {
     let group: DispatchGroup = DispatchGroup()
     private(set) var customerQueue: Queue<Customer>
     private(set) var handledCustomer = 1
-    private let waitingHandler: (CustomerLabel) -> Void,
-                changingHandler: (CustomerLabel) -> Void,
-               processingHandler: (CustomerLabel) -> Void
     
-    init(customerQueue: Queue<Customer>, handledCustomer: Int = 1, waitingHandler: @escaping (CustomerLabel) -> Void, changingHandler: @escaping (CustomerLabel) -> Void, processingHandler: @escaping (CustomerLabel) -> Void) {
+    weak var delegate: BankUIDelegate?
+    
+    init(customerQueue: Queue<Customer>, handledCustomer: Int = 1) {
         self.customerQueue = customerQueue
         self.handledCustomer = handledCustomer
-        self.waitingHandler = waitingHandler
-        self.changingHandler = changingHandler
-        self.processingHandler = processingHandler
     }
     
     func beginTask(completionHandler: @escaping () -> Void) {
@@ -31,7 +27,7 @@ class Bank: Bankable {
                 if let customer = customerQueue.dequeue() {
                     DispatchQueue.main.async(group: group) {
                         let label = CustomerLabel(customer: customer)
-                        self.waitingHandler(label)
+                        self.delegate?.handleWaitingCustomer(customerLabel: label)
                         self.assignTask(label)
                     }
                 }
@@ -56,11 +52,11 @@ class Bank: Bankable {
                 return
             }
             DispatchQueue.main.async {
-                self.changingHandler(customer)
+                self.delegate?.handleProcessingCustomer(customerLabel: customer)
             }
             Thread.sleep(forTimeInterval: task.processingTime)
             DispatchQueue.main.async {
-                self.processingHandler(customer)
+                self.delegate?.handleProcessedCustomer(customerLabel: customer)
             }
             semaphore.signal()
         }

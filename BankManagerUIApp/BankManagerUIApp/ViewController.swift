@@ -7,23 +7,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var bank: Bankable?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        bank = Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
-            self.waitingListWrap.addArrangedSubview(label)
-        }, changingHandler: { label in
-            self.waitingListWrap.removeArrangedSubview(label)
-            self.taskingListWrap.addArrangedSubview(label)
-        }, processingHandler: { label in
-            self.taskingListWrap.removeArrangedSubview(label)
-            label.removeFromSuperview()
-        })
+        bank = Bank(customerQueue: Queue<Customer>())
+        bank?.delegate = self
         
         setupContentView()
         setConstraint()
     }
+    
+    private var bank: Bankable?
     
     private let contentStackView = UIStackView(.vertical, 15, .fill)
     
@@ -143,5 +136,20 @@ extension ViewController {
                 label.removeFromSuperview()
             }
         }
+    }
+}
+
+extension ViewController: BankUIDelegate {
+    func handleWaitingCustomer(customerLabel: CustomerLabel) {
+        waitingListWrap.addArrangedSubview(customerLabel)
+    }
+    
+    func handleProcessingCustomer(customerLabel: CustomerLabel) {
+        customerLabel.removeFromSuperview()
+        taskingListWrap.addArrangedSubview(customerLabel)
+    }
+    
+    func handleProcessedCustomer(customerLabel: CustomerLabel) {
+        customerLabel.removeFromSuperview()
     }
 }
