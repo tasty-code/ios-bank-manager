@@ -28,7 +28,7 @@ struct BankManager {
 //        bank.visit(numberOfClient: number)
         
         let time = measureTime {
-            bank.open()
+//            bank.open()
         }
         bank.close(numberOfClient: number, at: time)
         
