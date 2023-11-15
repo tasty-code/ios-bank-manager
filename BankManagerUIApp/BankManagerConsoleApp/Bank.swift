@@ -24,8 +24,8 @@ final class Bank {
         return result
     }
     
-    private func greetCustomer() {
-        customerCount = Int.random(in: 10...30)
+    func greetCustomer() {
+        customerCount = 10
         let queue = queueManager.getQueue()
         
         for index in 1...customerCount {
@@ -33,9 +33,10 @@ final class Bank {
             
             queue.enqueue(newCustomer)
         }
+        customerCount += 10
     }
     
-    private func openBank() {
+    func openBank() {
         let startTime = Date()
         startWork()
         let endTime = Date()
