@@ -45,7 +45,6 @@ extension BankTimer: TimerProtocol {
         guard timerStatus == .off else { return }
         
         timerStatus = .on
-        
         let startTime = Date()
         
         timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { [weak self] _ in
@@ -64,7 +63,6 @@ extension BankTimer: TimerProtocol {
         timer?.invalidate()
         timer = nil
         timerStatus = .off
-        elapsedTime = 0
         savedTimeStamp = 0
         
         representTimeLabel(handler)
