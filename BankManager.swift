@@ -11,7 +11,7 @@ protocol BankManagerDelegate: AnyObject {
 
 protocol UIUpdatable: AnyObject {
     func addLabel(_ target: Customer)
-    func removeLabel(_ target: Customer)
+    func moveLabelToWorkStation(_ target: Customer)
     func removeAll()
 }
 
@@ -24,18 +24,20 @@ class BankManager {
     
     weak var delegate: BankManagerDelegate?
     weak var uiUpdaterDelegate: UIUpdatable?
-
+    
     @objc func updateTimer() {
         count += 0.001
         let formattedString = formatTimeInterval(count)
         delegate?.updateWorkTimeLabel("업무시간 - \(formattedString)")
     }
-
+    
     func startTimer() {
         lineUpCustomer()
-//        bank.startService { [
-//            
-//        }
+        bank.startService { target in
+            DispatchQueue.main.sync {
+                self.uiUpdaterDelegate?.moveLabelToWorkStation(target)
+            }
+        }
         guard !isTimerRunning else { return }
         
         isTimerRunning = true
@@ -43,14 +45,19 @@ class BankManager {
         if let timer = timer {
             RunLoop.main.add(timer, forMode: .tracking)
         }
+        
+        bank.finishService {
+            self.timer?.invalidate()
+        }
     }
-
+    
     func stopTimer() {
         timer?.invalidate()
         isTimerRunning = false
     }
-
+    
     func resetTimer() {
+        bank.cancelService()
         timer?.invalidate()
         timer = nil
         count = 0
@@ -63,7 +70,7 @@ class BankManager {
         uiUpdaterDelegate?.removeAll()
         bank.clearLine()
     }
-
+    
     func formatTimeInterval(_ interval: Double) -> String {
         let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
         let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
@@ -79,6 +86,7 @@ class BankManager {
             
             uiUpdaterDelegate?.addLabel(customer)
         }
+        
         
         numberOfCurrentCustomer += 10
     }

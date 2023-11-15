@@ -34,33 +34,37 @@ final class Bank {
         waitingLine.clear()
     }
     
-    func startService(_ closure: @escaping () -> Void) {
+    func startService(_ closure: @escaping (_ target: Customer) -> Void) {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
             let taskBlock = BlockOperation {
-                closure()
+                closure(currentCustomer)
                 self.provideService(to: currentCustomer)
             }
 
             queue.work(taskBlock)
         }
         
-        serviceList.values.forEach { $0.wait() }
+        
+    }
+    
+    func finishService(_ closure: @escaping () -> Void) {
+        serviceList.values.forEach { $0.notify(closure)}
+    }
+    
+    func cancelService() {
+        serviceList.values.forEach { $0.cancel() }
     }
 }
 
 private extension Bank {
-
     func provideService(to target: Customer) {
         let serviceType = target.serviceType
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         usleep(durationTime)
-        
-        semaphoreForExitCount.wait()
-        exitCount += 1
-        semaphoreForExitCount.signal()
+        print("\(target.ticketNumber) DONE")
     }
     
     func shutDownService() {

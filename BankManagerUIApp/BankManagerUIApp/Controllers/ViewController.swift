@@ -24,7 +24,6 @@ final class ViewController: UIViewController {
         
         bankView.addCustomerButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         bankView.resetButton.addTarget(self, action: #selector(resetButtontapped), for: .touchUpInside)
-
     }
 }
 
@@ -48,13 +47,15 @@ extension ViewController: UIUpdatable {
         bankView.waitingListView.itemListStackView.addArrangedSubview(label)
     }
     
-    func removeLabel(_ target: Customer) {
+    func moveLabelToWorkStation(_ target: Customer) {
         let subViews = bankView.waitingListView.itemListStackView.arrangedSubviews
         
         for view in subViews {
             if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
                 bankView.waitingListView.itemListStackView.removeArrangedSubview(view)
                 view.removeFromSuperview()
+                
+                bankView.workingListView.itemListStackView.addArrangedSubview(view)
             }
         }
     }
