@@ -7,11 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var bankManager: BankManager?
+    private var bank: Bankable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bankManager = BankManager(bank: Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
+        bank = Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
             self.waitingListWrap.addArrangedSubview(label)
         }, changingHandler: { label in
             self.waitingListWrap.removeArrangedSubview(label)
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         }, processingHandler: { label in
             self.taskingListWrap.removeArrangedSubview(label)
             label.removeFromSuperview()
-        }))
+        })
         
         setupContentView()
         setConstraint()
@@ -130,15 +130,13 @@ extension ViewController {
     }
     
     private func generateCustomers() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.bankManager?.openBank(completionHander: {
-                self.timeLabel.pauseTimer()
-            })
+        self.bank?.beginTask {
+            self.timeLabel.pauseTimer()
         }
     }
     
     private func resetCustomers() {
-        bankManager?.resetBank()
+        bank?.resetCustomer()
         for label in waitingListWrap.arrangedSubviews {
             if let label = label as? CustomerLabel {
                 label.customer.workable = false

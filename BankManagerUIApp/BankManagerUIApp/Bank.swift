@@ -24,21 +24,23 @@ class Bank: Bankable {
     }
     
     func beginTask(completionHandler: @escaping () -> Void) {
-        addRandomCustomers(handledCustomer, taskTypes: LoanTask.self, DepositTask.self)
-        
-        while !customerQueue.isEmpty {
-            if let customer = customerQueue.dequeue() {
-                DispatchQueue.main.async(group: group) {
-                    let label = CustomerLabel(customer: customer)
-                    self.waitingHandler(label)
-                    self.assignTask(label)
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            addRandomCustomers(handledCustomer, taskTypes: LoanTask.self, DepositTask.self)
+            
+            while !customerQueue.isEmpty {
+                if let customer = customerQueue.dequeue() {
+                    DispatchQueue.main.async(group: group) {
+                        let label = CustomerLabel(customer: customer)
+                        self.waitingHandler(label)
+                        self.assignTask(label)
+                    }
                 }
             }
-        }
-        
-        handledCustomer += 10
-        group.notify(queue: .main) {
-            completionHandler()
+            
+            handledCustomer += 10
+            group.notify(queue: .main) {
+                completionHandler()
+            }
         }
     }
     
