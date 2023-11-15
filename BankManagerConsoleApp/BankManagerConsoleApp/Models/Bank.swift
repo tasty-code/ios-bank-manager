@@ -8,7 +8,10 @@
 import Foundation
 
 protocol BankDelegate: AnyObject {
-    func work(bank: Bank, completion: @escaping () -> Void)
+    func gatherCustomers(bank: Bank, from startCount: Int, to endCount: Int)
+    func updateWaitingCustomersList(bank: Bank, customer: Customer)
+    func updateWorkingCustomersList(bank: Bank, customer: Customer)
+    func updateViewWhenCustomerDidMatched(bank: Bank, customer: Customer)
 }
 
 final class Bank {
@@ -24,38 +27,50 @@ final class Bank {
         self.bankManager = bankManager
     }
     
-    func work(count: Int, completion: @escaping () -> Void) {
-        gatherCustomers(count)
-        
+    func work(completion: @escaping (Bool) -> Void) {
         tellers.forEach { teller in
             while customerQueue.isEmpty == false {
                 guard let customer = customerQueue.dequeue() else { return }
                 
                 matchUpService(with: customer, on: teller)
+                
+                DispatchQueue.main.async { [self] in
+                    bankManager?.updateViewWhenCustomerDidMatched(bank: self, customer: customer)
+                    print("넘어감")
+                }
             }
         }
         
-        dispatchGroup.wait()
-        completion() // 모든 고객 다 처리하면 타이머 끄기
+        dispatchGroup.notify(queue: .main) { [self] in
+            completion(customerQueue.isEmpty)
+        }
     }
 }
 
 // MARK: Private Methods
 extension Bank {
-    private func gatherCustomers(_ count: Int) {
-        let totalCustomersCount = count
-        for count in 1...totalCustomersCount {
-            guard let randomWorkType = WorkType.allCases.randomElement() else { return }
+    func gatherCustomers(from: Int, to: Int) {
+        for count in from...to {
+            guard let randomWorkType = WorkType.allCases.randomElement() else { continue }
             let customer = Customer(id: count, workType: randomWorkType)
             customerQueue.enqueue(customer)
+            
+            DispatchQueue.main.async { [self] in
+                bankManager?.updateWaitingCustomersList(bank: self, customer: customer)
+                print("대기자 목록에 추가 \(customer.id)")
+            }
         }
     }
     
     private func matchUpService(with customer: Customer, on teller: TellerProtocol) {
-        DispatchQueue.global().async(group: dispatchGroup) {
+        DispatchQueue.global().async(group: dispatchGroup, qos: .background) {
             teller.service(to: customer) { [self] in
                 servicedCustomersCount += 1
                 totalServicedTimes += customer.workType.timeCost
+                
+                DispatchQueue.main.async { [self] in
+                    bankManager?.updateWorkingCustomersList(bank: self, customer: customer)
+                }
             }
         }
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CustomerLabel: UILabel {
-    private let customer: Customer
+    let customer: Customer
     
     init(_ customer: Customer) {
         self.customer = customer

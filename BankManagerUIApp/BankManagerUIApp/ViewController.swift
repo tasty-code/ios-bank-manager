@@ -32,12 +32,16 @@ final class ViewController: UIViewController {
         
         static let defaultSpacing: CGFloat = 14
         static let labelsSpacing: CGFloat = 8
+        static let customerGatheringQuantityLimit: Int = 10
+        static let firstCustomerNumber: Int = 1
+        static let initialAccumulatedTimes: String = "00:00:000"
     }
     
     // MARK: Properties
     private let tellers: [TellerProtocol] = [Teller(tellerCount: 2), Teller(tellerCount: 1)]
     private lazy var bank: Bank = Bank(tellers: tellers, self)
     private let timer: TimerProtocol = BankTimer(timeInterval: 0.001)
+    private var currentCustomerNumber: Int = 1
     
     // MARK: View Components
     private lazy var headerVerticalStackView: UIStackView = {
@@ -63,7 +67,7 @@ final class ViewController: UIViewController {
     }()
     
     private lazy var timerLabel: UILabel = {
-        let label = UILabel(text: Constants.timerLabel(accumulatedTimes: "00:00:000").title, font: .monospacedDigitSystemFont(ofSize: 24, weight: .medium))
+        let label = UILabel(text: Constants.timerLabel(accumulatedTimes: Constants.initialAccumulatedTimes).title, font: .monospacedDigitSystemFont(ofSize: 24, weight: .medium))
         return label
     }()
     
@@ -172,52 +176,65 @@ extension ViewController {
         timer.fire { [self] timeText in
             self.timerLabel.text = Constants.timerLabel(accumulatedTimes: timeText).title
         }
+        
+        gatherCustomers(
+            bank: bank,
+            from: currentCustomerNumber,
+            to: currentCustomerNumber + Constants.customerGatheringQuantityLimit - Constants.firstCustomerNumber
+        )
+        
+        bank.work { isQueueEmpty in
+            guard isQueueEmpty else { return }
+            // 뱅크에서 작업 모두 끝나서 일시정지 해야하는 로직이 여기 들어와야 됨
+        }
     }
     
     @objc private func resetCustomers() {
         timer.reset { [self] timeText in
-            self.timerLabel.text = Constants.timerLabel(accumulatedTimes: "00:00:000").title
+            self.timerLabel.text = Constants.timerLabel(accumulatedTimes: Constants.initialAccumulatedTimes).title
         }
         
         waitingCustomerLabelsStackView.removeArrangedSubviews(waitingCustomerLabelsStackView.arrangedSubviews)
         workingCustomerLabelsStackView.removeArrangedSubviews(workingCustomerLabelsStackView.arrangedSubviews)
+        
+        currentCustomerNumber = Constants.firstCustomerNumber
+    }
+    
+    private func removeCustomerLabel(customer: Customer, where customerStackView: UIStackView) {
+        let arrangedSubviews = customerStackView.arrangedSubviews
+        let customerLabels = arrangedSubviews.map { $0 as? CustomerLabel }
+        
+        guard let customerLabel = customerLabels.first (where: {$0?.customer.id == customer.id}) else { return }
+        
+        if let customerLabel = customerLabel {
+            customerStackView.removeArrangedSubview(customerLabel)
+            customerLabel.removeFromSuperview()
+        }
     }
 }
 
 // MARK: Bank Delegation Methods
 extension ViewController: BankDelegate {
-    func work(bank: Bank, completion: @escaping () -> Void) {
+    func gatherCustomers(bank: Bank, from startCount: Int, to endCount: Int) {
+        bank.gatherCustomers(from: startCount, to: endCount)
         
+        currentCustomerNumber = endCount + 1
+    }
+    
+    func updateWaitingCustomersList(bank: Bank, customer: Customer) {
+        let customerLabel = CustomerLabel(customer)
+        waitingCustomerLabelsStackView.addArrangedSubview(customerLabel)
+        // 라벨이 추가가 안되고 있음
+    }
+    
+    func updateWorkingCustomersList(bank: Bank, customer: Customer) {
+        removeCustomerLabel(customer: customer, where: workingCustomerLabelsStackView)
+    }
+    
+    func updateViewWhenCustomerDidMatched(bank: Bank, customer: Customer) {
+        removeCustomerLabel(customer: customer, where: waitingCustomerLabelsStackView)
+        
+        let customerLabel = CustomerLabel(customer)
+        workingCustomerLabelsStackView.addArrangedSubview(customerLabel)
     }
 }
-
-// MARK: PreviewProvider
-#if canImport(SwiftUI)
-import SwiftUI
-
-struct Preview<View: UIView>: UIViewRepresentable {
-    let view: View
-    
-    init(_ viewBuilder: @escaping () -> View) {
-        view = viewBuilder()
-    }
-    
-    func makeUIView(context: Context) -> some UIView {
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
-    }
-}
-//
-//struct Previewer: PreviewProvider {
-//    static var previews: some View {
-//        Preview {
-//            let viewController = ViewController()
-//            return viewController.view
-//        }
-//    }
-//}
-#endif
