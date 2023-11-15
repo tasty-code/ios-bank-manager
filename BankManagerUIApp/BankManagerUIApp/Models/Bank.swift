@@ -56,7 +56,7 @@ final class Bank {
         usleep(durationTime)
     }
 
-    func startService(_ completion: @escaping () -> Void) {
+    func startService() {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
@@ -72,6 +72,7 @@ final class Bank {
             }
 
             queue.work(taskBlock)
+            
         }
         
         guard let closure = uiUpdaterDelegate?.checkQueueEnded else { return }

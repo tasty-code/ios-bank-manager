@@ -33,11 +33,7 @@ final class ViewController: UIViewController {
         }
         bank.lineUp()
         
-        bank.startService {
-            print("complete")
-            self.timer?.invalidate()
-            self.isTimerRunning = false
-        }
+        bank.startService()
         
         isTimerRunning = false
         
