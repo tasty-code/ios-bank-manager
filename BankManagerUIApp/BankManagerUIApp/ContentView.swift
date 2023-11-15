@@ -1,6 +1,6 @@
 import UIKit
 
-final class CustomView: UIView {
+final class ContentView: UIView {
     lazy var addCustomerButton: UIButton = {
         let button = UIButton(title: "고객 10명 추가", titleColor: .systemBlue, backgroundColor: .clear)
         return button
@@ -17,7 +17,8 @@ final class CustomView: UIView {
     }()
     
     lazy var workingTimeLabel: UILabel = {
-        let label = UILabel(text: "업무시간 - 00:00:000", fontSize: 30, textColor: .black, backgroundColor: .clear)
+        let label = UILabel(text: "업무시간 - 00:00:000", textColor: .black, backgroundColor: .clear)
+        label.font = UIFont(name: "Helvetica", size: 25)
         return label
     }()
     
@@ -37,7 +38,7 @@ final class CustomView: UIView {
     }()
     
     lazy var upperStackView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, distribution: .fillEqually, alignment: .fill, spacing: 10, arrangedSubviews: [buttonStackView, workingTimeLabel, labelStackView])
+        let stackView = UIStackView(axis: .vertical, distribution: .fillEqually, alignment: .fill, spacing: 20, arrangedSubviews: [buttonStackView, workingTimeLabel, labelStackView])
         return stackView
     }()
     
@@ -66,18 +67,72 @@ final class CustomView: UIView {
         return stackView
     }()
     
-    lazy var contentStackView: UIStackView = {
+    lazy var contentView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, arrangedSubviews: [upperStackView, lowerStackView])
         return stackView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUI()
+        setConstraint()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    private func setUI() {
+        self.addSubview(contentView)
+    }
     
+    private func setConstraint() {
+        setContentStackViewConstraint()
+        setWaitingScrollViewConstraint()
+        setWorkingScrollViewConstraint()
+    }
+    
+    private func setContentStackViewConstraint() {
+        let safeArea = self.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+        ])
+    }
+    
+    private func setWaitingScrollViewConstraint() {
+        NSLayoutConstraint.activate([
+            waitingScrollView.widthAnchor.constraint(equalTo: waitingStackView.widthAnchor)
+        ])
+    }
+    
+    private func setWorkingScrollViewConstraint() {
+        NSLayoutConstraint.activate([
+            workingScrollView.widthAnchor.constraint(equalTo: workingStackView.widthAnchor)
+        ])
+    }
 }
+
+
+
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+
+    }
+
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> UIViewController {
+        ViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View{
+        ViewControllerRepresentable().previewDisplayName("iPhone 15")
+    }
+}
+#endif

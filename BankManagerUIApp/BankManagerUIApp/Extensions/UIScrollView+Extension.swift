@@ -7,7 +7,7 @@ extension UIScrollView {
         self.addSubview(subView)
     
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.showsVerticalScrollIndicator = false
+//        self.showsVerticalScrollIndicator = false
         self.isScrollEnabled = isScrollEnabled
     }
 }
