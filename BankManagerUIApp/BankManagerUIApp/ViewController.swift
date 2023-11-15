@@ -7,11 +7,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
     private let bankView: BankView = BankView()
     private let bank: Bank = Bank(depositTeller: 2, loanTeller: 1)
+    private let dispatchGroup: DispatchGroup = DispatchGroup()
+
     private var timer: Timer?
     private var processingTime = 0.000
-    private var count: Int = 1 // 고객 방문 수
+    private var count: Int = 1
+    private var isTimerRunning: Bool = false
+
     override func loadView() {
         view = bankView
     }
