@@ -29,14 +29,15 @@ final class Bank {
     
     func work(completion: @escaping (Bool) -> Void) {
         tellers.forEach { teller in
-            while customerQueue.isEmpty == false {
-                guard let customer = customerQueue.dequeue() else { return }
-                
-                matchUpService(with: customer, on: teller)
-                
-                DispatchQueue.main.async { [self] in
-                    bankManager?.updateViewWhenCustomerDidMatched(bank: self, customer: customer)
-                    print("넘어감")
+            DispatchQueue.global().async(group: dispatchGroup) { [self] in
+                while customerQueue.isEmpty == false {
+                    guard let customer = customerQueue.dequeue() else { return }
+                    
+                    DispatchQueue.main.sync {
+                        self.bankManager?.updateViewWhenCustomerDidMatched(bank: self, customer: customer)
+                    }
+                    
+                    matchUpService(with: customer, on: teller)
                 }
             }
         }
@@ -55,22 +56,17 @@ extension Bank {
             let customer = Customer(id: count, workType: randomWorkType)
             customerQueue.enqueue(customer)
             
-            DispatchQueue.main.async { [self] in
-                bankManager?.updateWaitingCustomersList(bank: self, customer: customer)
-                print("대기자 목록에 추가 \(customer.id)")
-            }
+            self.bankManager?.updateWaitingCustomersList(bank: self, customer: customer)
         }
     }
     
     private func matchUpService(with customer: Customer, on teller: TellerProtocol) {
-        DispatchQueue.global().async(group: dispatchGroup, qos: .background) {
-            teller.service(to: customer) { [self] in
-                servicedCustomersCount += 1
-                totalServicedTimes += customer.workType.timeCost
-                
-                DispatchQueue.main.async { [self] in
-                    bankManager?.updateWorkingCustomersList(bank: self, customer: customer)
-                }
+        teller.service(to: customer) { [self] in
+            servicedCustomersCount += 1
+            totalServicedTimes += customer.workType.timeCost
+            
+            DispatchQueue.main.sync {
+                self.bankManager?.updateWorkingCustomersList(bank: self, customer: customer)
             }
         }
     }

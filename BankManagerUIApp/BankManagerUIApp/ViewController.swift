@@ -183,9 +183,9 @@ extension ViewController {
             to: currentCustomerNumber + Constants.customerGatheringQuantityLimit - Constants.firstCustomerNumber
         )
         
-        bank.work { isQueueEmpty in
+        bank.work { [self] isQueueEmpty in
             guard isQueueEmpty else { return }
-            // 뱅크에서 작업 모두 끝나서 일시정지 해야하는 로직이 여기 들어와야 됨
+            timer.pause()
         }
     }
     
@@ -200,7 +200,12 @@ extension ViewController {
         currentCustomerNumber = Constants.firstCustomerNumber
     }
     
-    private func removeCustomerLabel(customer: Customer, where customerStackView: UIStackView) {
+    private func createCustomerLabel(customer: Customer, in customerStackView: UIStackView) {
+        let customerLabel = CustomerLabel(customer)
+        customerStackView.addArrangedSubview(customerLabel)
+    }
+    
+    private func removeCustomerLabel(customer: Customer, in customerStackView: UIStackView) {
         let arrangedSubviews = customerStackView.arrangedSubviews
         let customerLabels = arrangedSubviews.map { $0 as? CustomerLabel }
         
@@ -222,19 +227,15 @@ extension ViewController: BankDelegate {
     }
     
     func updateWaitingCustomersList(bank: Bank, customer: Customer) {
-        let customerLabel = CustomerLabel(customer)
-        waitingCustomerLabelsStackView.addArrangedSubview(customerLabel)
-        // 라벨이 추가가 안되고 있음
+        createCustomerLabel(customer: customer, in: waitingCustomerLabelsStackView)
     }
     
     func updateWorkingCustomersList(bank: Bank, customer: Customer) {
-        removeCustomerLabel(customer: customer, where: workingCustomerLabelsStackView)
+        removeCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
     }
     
     func updateViewWhenCustomerDidMatched(bank: Bank, customer: Customer) {
-        removeCustomerLabel(customer: customer, where: waitingCustomerLabelsStackView)
-        
-        let customerLabel = CustomerLabel(customer)
-        workingCustomerLabelsStackView.addArrangedSubview(customerLabel)
+        removeCustomerLabel(customer: customer, in: waitingCustomerLabelsStackView)
+        createCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
     }
 }

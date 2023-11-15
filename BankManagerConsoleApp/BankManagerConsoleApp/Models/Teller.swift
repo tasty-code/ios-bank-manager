@@ -22,7 +22,6 @@ struct Teller: TellerProtocol {
         semaphore.wait()
         Thread.sleep(forTimeInterval: customer.workType.timeCost)
         semaphore.signal()
-        print("\(customer.id) - \(customer.workType) 처리")
         completion()
     }
 }
