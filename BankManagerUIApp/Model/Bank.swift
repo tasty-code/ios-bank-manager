@@ -26,20 +26,19 @@ final class Bank {
         clientQueue.enqueue(data: client)
     }
     
-    func open() {
+    func open(with dispatchGroup: DispatchGroup) {
+        isCancelled = false
+        
         while !clientQueue.isEmpty {
-            guard let client = clientQueue.dequeue() else {
-                return
-            }
-            
+            guard let client = clientQueue.dequeue() else { return }
+
             switch client.taskType {
             case .deposit:
-                depositService(with: client)
+                depositService(with: client, dispatchGroup: dispatchGroup)
             case .loan:
-                loanService(with: client)
+                loanService(with: client, dispatchGroup: dispatchGroup)
             }
         }
-        tellerGroup.wait()
     }
     
     func stop() {
@@ -51,16 +50,16 @@ final class Bank {
         print(Prompt.close(numberOfClient: numberOfClient, totalTaskTime: time))
     }
     
-    private func depositService(with client: Client) {
-        dispatchQueue.async(group: tellerGroup) { [weak self] in
+    private func depositService(with client: Client, dispatchGroup: DispatchGroup) {
+        dispatchQueue.async(group: dispatchGroup) { [weak self] in
             self?.depositSemaphore.wait()
             self?.taskService(with: client)
             self?.depositSemaphore.signal()
         }
     }
     
-    private func loanService(with client: Client) {
-        dispatchQueue.async(group: tellerGroup) { [weak self] in
+    private func loanService(with client: Client, dispatchGroup: DispatchGroup) {
+        dispatchQueue.async(group: dispatchGroup) { [weak self] in
             self?.loanSemaphore.wait()
             self?.taskService(with: client)
             self?.loanSemaphore.signal()
@@ -68,8 +67,12 @@ final class Bank {
     }
     
     private func taskService(with client: Client) {
-        print(Prompt.taskStart(with: client))
+        guard isCancelled == false else { return }
+        
+//        print(Prompt.taskStart(with: client))
+        delegate?.move(who: client)
         Thread.sleep(forTimeInterval: client.taskType.taskTime)
-        print(Prompt.taskComplete(with: client))
+//        print(Prompt.taskComplete(with: client))
+        delegate?.remove(who: client)
     }
 }
