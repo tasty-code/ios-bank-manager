@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         bankView.taskTimeLabel.text = "업무시간 - 00:00:000"
     }
     
-    @objc private func timerMethod() {
+    @objc private func runningTimer() {
         let minutes = Int(processingTime) / 60
         let seconds = Int(processingTime) % 60
         let milliSeconds = Int((processingTime.truncatingRemainder(dividingBy: 1)) * 1000)
