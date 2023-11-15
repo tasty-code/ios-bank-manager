@@ -42,8 +42,9 @@ final class Bank {
         tellerGroup.wait()
     }
     
-    func clear() {
+    func stop() {
         clientQueue.clear()
+        isCancelled = true
     }
     
     func close(numberOfClient: Int, at time: Double) {
