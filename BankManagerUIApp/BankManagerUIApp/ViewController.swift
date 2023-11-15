@@ -2,12 +2,85 @@ import UIKit
 
 class ViewController: UIViewController {
     private let contentView = ContentView()
+    private var timer: Timer? = nil
+    private var elapsedTime: TimeInterval = 0.000
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = contentView
+        startTimer()
+        contentView.addCustomerButton.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
+        
+        contentView.resetButton.addTarget(self, action: #selector(resetCustomer), for: .touchUpInside)
     }
 
+    private func startTimer() {
+        if let timer = timer {
+
+        } else {
+            DispatchQueue.global(qos: .background).async { [self] in
+                timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                RunLoop.current.run()
+            }
+        }
+    }
+    
+    @objc func updateTimer() {
+       let minutes = Int(elapsedTime) / 60
+       let seconds = Int(elapsedTime) % 60
+       let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
+
+       DispatchQueue.main.async { [self] in
+           contentView.updateTime(minutes, seconds, milliseconds)
+       }
+       elapsedTime += 0.001
+   }
+    
+    @objc func addCustomer() {
+        for index in 1...10 {
+            let label = UILabel(text: "\(index) - ", fontSize: 20, textColor: .black)
+            contentView.waitingStackView.addArrangedSubview(label)
+        }
+        startTimer()
+    }
+    
+    @objc func resetCustomer() {
+        timer?.invalidate()
+        timer = nil
+        elapsedTime = 0.000
+        
+        contentView.resetCustomer()
+        DispatchQueue.main.async { [self] in
+            contentView.resetWorkingTimeLabel()
+        }
+    }
 }
+
+
+
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+
+    }
+
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> UIViewController {
+        ViewController()
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    static var previews: some View{
+        ViewControllerRepresentable().previewDisplayName("iPhone 15")
+    }
+}
+#endif
+
+
 //class ViewController: UIViewController {
 //    private let customView = CustomView()
 //    private var timer: Timer? = nil
@@ -83,70 +156,4 @@ class ViewController: UIViewController {
 ////            }
 //        }
 //    }
-//    
-//    func startTimer() {
-//        if let timer = timer {
-//            
-//        } else {
-//            DispatchQueue.global(qos: .userInteractive).async { [self] in
-//                timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
-//                RunLoop.current.run()
-//            }
-//        }
-//    }
-//    
-//    @objc func addCustomer() {
-//        for index in 1...10 {
-//            let label = UILabel(text: "\(index) - ", fontSize: 20, textColor: .black)
-//            customView.waitingQueueStackView.addArrangedSubview(label)
-//        }
-//        startTimer()
-//    }
-//    
-//    @objc func initializeCustomer() {
-//        customView.waitingQueueStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-//        customView.workingQueueStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-//        
-//        timer?.invalidate()
-//        timer = nil
-//        DispatchQueue.main.async { [self] in
-//            elapsedTime = 0.000
-//            customView.workTimeLabel.text = "업무시간 - 00:00:000"
-//        }
-//    }
-//    
-//    @objc func updateTimer() {
-//        let minutes = Int(elapsedTime) / 60
-//        let seconds = Int(elapsedTime) % 60
-//        let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
-//        
-//        DispatchQueue.main.async { [self] in
-//            customView.workTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
-//            customView.workTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
-//        }
-//        elapsedTime += 0.001
-//    }
 //}
-//
-//
-//
-//#if DEBUG
-//import SwiftUI
-//struct ViewControllerRepresentable: UIViewControllerRepresentable {
-//
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-//
-//    }
-//
-//    @available(iOS 13.0, *)
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        ViewController()
-//    }
-//}
-//
-//struct ViewController_Previews: PreviewProvider {
-//    static var previews: some View{
-//        ViewControllerRepresentable().previewDisplayName("iPhone 15")
-//    }
-//}
-//#endif

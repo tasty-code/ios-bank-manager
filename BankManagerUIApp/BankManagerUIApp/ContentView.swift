@@ -18,7 +18,7 @@ final class ContentView: UIView {
     
     lazy var workingTimeLabel: UILabel = {
         let label = UILabel(text: "업무시간 - 00:00:000", textColor: .black, backgroundColor: .clear)
-        label.font = UIFont(name: "Helvetica", size: 25)
+        label.font = UIFont(name: "HelveticaNeue", size: 20)
         return label
     }()
     
@@ -68,7 +68,7 @@ final class ContentView: UIView {
     }()
     
     lazy var contentView: UIStackView = {
-        let stackView = UIStackView(axis: .vertical, arrangedSubviews: [upperStackView, lowerStackView])
+        let stackView = UIStackView(axis: .vertical, distribution: .fill, arrangedSubviews: [upperStackView, lowerStackView])
         return stackView
     }()
     
@@ -88,51 +88,51 @@ final class ContentView: UIView {
     
     private func setConstraint() {
         setContentStackViewConstraint()
-        setWaitingScrollViewConstraint()
-        setWorkingScrollViewConstraint()
+        setWaitingStackViewConstraint()
     }
     
     private func setContentStackViewConstraint() {
         let safeArea = self.safeAreaLayoutGuide
+        self.backgroundColor = .white
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
+    }
+    
+    private func setWaitingStackViewConstraint() {
+        NSLayoutConstraint.activate([
+            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.leadingAnchor),
+            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.trailingAnchor),
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.topAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.bottomAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.widthAnchor)
         ])
     }
     
     private func setWaitingScrollViewConstraint() {
         NSLayoutConstraint.activate([
+            waitingScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            waitingScrollView.trailingAnchor.constraint(equalTo: waitingLabel.trailingAnchor),
+            waitingScrollView.topAnchor.constraint(equalTo: waitingLabel.bottomAnchor),
+            waitingScrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             waitingScrollView.widthAnchor.constraint(equalTo: waitingStackView.widthAnchor)
         ])
     }
     
-    private func setWorkingScrollViewConstraint() {
-        NSLayoutConstraint.activate([
-            workingScrollView.widthAnchor.constraint(equalTo: workingStackView.widthAnchor)
-        ])
+    func updateTime(_ minutes: Int, _ seconds: Int, _ milliseconds: Int) {
+        workingTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
+        workingTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
+    }
+    
+    func resetCustomer() {
+        waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func resetWorkingTimeLabel() {
+        workingTimeLabel.text = "업무시간 - 00:00:000"
     }
 }
-
-
-
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
-    }
-
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        ViewController()
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View{
-        ViewControllerRepresentable().previewDisplayName("iPhone 15")
-    }
-}
-#endif
