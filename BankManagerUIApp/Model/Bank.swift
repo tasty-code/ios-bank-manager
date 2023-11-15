@@ -8,11 +8,14 @@
 import Foundation
 
 final class Bank {
-    private var clientQueue: Queue<Client> = Queue()
+
     private let depositSemaphore: DispatchSemaphore
     private let loanSemaphore: DispatchSemaphore
-    private let tellerGroup: DispatchGroup = DispatchGroup()
-    private let dispatchQueue: DispatchQueue = DispatchQueue.global()
+    private let dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .utility)
+
+    private var clientQueue: Queue<Client> = Queue()
+    private var isCancelled: Bool = false
+    weak var delegate: ManagingForClientLabel?
     
     init(depositTeller: Int, loanTeller: Int) {
         depositSemaphore = DispatchSemaphore(value: depositTeller)
