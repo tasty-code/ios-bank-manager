@@ -9,7 +9,6 @@ import Foundation
 
 final class BankServiceExecutor {
     private let queue: OperationQueue
-    var isFinishedAll: Bool = false
     
     init(type: ServiceType) {
         self.queue = OperationQueue(name: type.description, maxConcurrentOperationCount: type.maxCount)

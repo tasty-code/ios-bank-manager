@@ -33,21 +33,20 @@ class BankManager {
     
     func startTimer() {
         lineUpCustomer()
-        bank.startService { target in
+        bank.startService({ (customer: Customer) in
             DispatchQueue.main.sync {
-                self.uiUpdaterDelegate?.moveLabelToWorkStation(target)
+                self.uiUpdaterDelegate?.moveLabelToWorkStation(customer)
             }
-        }
+        }, {
+            self.timer?.invalidate()
+            self.isTimerRunning = false
+        })
         guard !isTimerRunning else { return }
         
         isTimerRunning = true
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         if let timer = timer {
             RunLoop.main.add(timer, forMode: .tracking)
-        }
-        
-        bank.finishService {
-            self.timer?.invalidate()
         }
     }
     

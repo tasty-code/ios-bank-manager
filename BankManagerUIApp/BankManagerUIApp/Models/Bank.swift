@@ -15,6 +15,7 @@ final class Bank {
     private var totalWorkTime: Double = 0
     private var exitCount: Int = 0
     private let semaphoreForExitCount = DispatchSemaphore(value: 1)
+    private var isSame: Int = 0
     
     init() {
         var list = [ServiceType: BankServiceExecutor]()
@@ -34,23 +35,31 @@ final class Bank {
         waitingLine.clear()
     }
     
-    func startService(_ closure: @escaping (_ target: Customer) -> Void) {
+    func startService(_ forUI: @escaping (_ target: Customer) -> Void, _ forTimer: @escaping () -> Void) {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
             
             let taskBlock = BlockOperation {
-                closure(currentCustomer)
+                forUI(currentCustomer)
                 self.provideService(to: currentCustomer)
             }
 
             queue.work(taskBlock)
         }
         
-        
+        finishService(forTimer)
     }
     
     func finishService(_ closure: @escaping () -> Void) {
-        serviceList.values.forEach { $0.notify(closure)}
+        serviceList.values.forEach {
+            $0.notify {
+                self.isSame += 1
+                
+                if self.isSame % 2 == 0 {
+                    closure()
+                }
+            }
+        }
     }
     
     func cancelService() {
@@ -64,7 +73,6 @@ private extension Bank {
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         usleep(durationTime)
-        print("\(target.ticketNumber) DONE")
     }
     
     func shutDownService() {
