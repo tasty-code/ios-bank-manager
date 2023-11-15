@@ -14,6 +14,9 @@ class ViewController: UIViewController {
         bankManager = BankManager(bank: Bank(customerQueue: Queue<Customer>(), waitingHandler: { label in
             self.waitingListWrap.addArrangedSubview(label)
         }, changingHandler: { label in
+//            if !label.customer.workable {
+//                return
+//            }
             self.waitingListWrap.removeArrangedSubview(label)
             self.taskingListWrap.addArrangedSubview(label)
         }, processingHandler: { label in
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
     
     private let stateIndiCatorWrap = UIStackView(.horizontal, 0, .fillEqually)
     
-    private let timeLabel = TimerLabel(prefix: "업무시간", fontSize: 24)
+    private lazy var timeLabel = TimerLabel(prefix: "업무시간", fontSize: 24)
     
     private let waitingLabel = UILabel("대기중", 35, .white, .center, .systemGreen)
     
@@ -120,17 +123,30 @@ extension ViewController {
 
 extension ViewController {
     @objc func tapAddButton(_ sender: UIButton) {
-        generateCustomer()
         timeLabel.startTimer()
+        generateCustomers()
     }
     
     @objc func tapResetButton(_ sender: UIButton) {
         timeLabel.resetTimer()
+        resetCustomers()
     }
     
-    func generateCustomer() {
+    func generateCustomers() {
         DispatchQueue.global(qos: .userInitiated).async {
-            self.bankManager?.openBank()
+            self.bankManager?.openBank(completionHander: {
+                self.timeLabel.pauseTimer()
+            })
+        }
+    }
+    
+    func resetCustomers() {
+        bankManager?.resetBank()
+        for label in waitingListWrap.arrangedSubviews {
+            if let label = label as? CustomerLabel {
+                label.customer.workable = false
+                label.removeFromSuperview()
+            }
         }
     }
 }

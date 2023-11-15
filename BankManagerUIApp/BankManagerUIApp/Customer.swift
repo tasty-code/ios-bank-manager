@@ -12,6 +12,7 @@ struct Customer: CustomStringConvertible {
         "\(id)번 고객"
     }
     
+    var workable: Bool = true
     let id: Int
     let task: BankTask
 }

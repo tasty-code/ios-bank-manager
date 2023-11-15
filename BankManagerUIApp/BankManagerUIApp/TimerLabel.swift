@@ -20,8 +20,13 @@ final class TimerLabel: UILabel {
         
         textAlignment = .center
         text = "\(prefix)-00:00:000"
+        textColor = .black
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont.monospacedSystemFont(ofSize: fontSize, weight: .medium)
+    }
+    
+    deinit {
+        resetTimer()
     }
     
     required init?(coder: NSCoder) {

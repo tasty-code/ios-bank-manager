@@ -14,26 +14,11 @@ final class BankManager {
         self.bank = bank
     }
     
-    func openBank() {
-        bank.beginTask()
+    func openBank(completionHander: @escaping () -> Void) {
+        bank.beginTask(completionHandler: completionHander)
     }
     
-//    func startBusiness() {
-//        while true {
-////            print(BankDialogue.menu)
-////            print(BankDialogue.input, terminator: "")
-////            guard let input = readLine(), let number = Int(input) else {
-////                return
-////            }
-//            
-////            userChoice = number
-//            
-//            if isStart {
-//                let (taskProcessingTime, handledCustomer) = bank.beginTask()
-////                print(BankDialogue.close(handledCustomer, workTime: taskProcessingTime))
-//            } else {
-//                break
-//            }
-//        }
-//    }
+    func resetBank() {
+        bank.resetCustomer()
+    }
 }

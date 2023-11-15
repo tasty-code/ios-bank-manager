@@ -11,7 +11,6 @@ import Foundation
 final class CustomerLabel: UILabel {
     var customer: Customer
     
-    
     init(customer: Customer) {
         let color: UIColor = customer.task.name == "예금" ? .black : .systemPurple
         self.customer = customer

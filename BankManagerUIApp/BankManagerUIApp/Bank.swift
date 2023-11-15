@@ -23,30 +23,36 @@ class Bank: Bankable {
         self.processingHandler = processingHandler
     }
     
-    func beginTask() {
+    func beginTask(completionHandler: @escaping () -> Void) {
         addRandomCustomers(handledCustomer, taskTypes: LoanTask.self, DepositTask.self)
         
         while !customerQueue.isEmpty {
             if let customer = customerQueue.dequeue() {
-                DispatchQueue.main.async {
+                DispatchQueue.main.async(group: group) {
                     let label = CustomerLabel(customer: customer)
                     self.waitingHandler(label)
-                    self.assignTask(label, group: self.group)
+                    self.assignTask(label)
                 }
             }
         }
         
         handledCustomer += 10
-        group.wait()
+        group.notify(queue: .main) {
+            completionHandler()
+        }
     }
     
-    func assignTask(_ customer: CustomerLabel , group: DispatchGroup) {
+    func assignTask(_ customer: CustomerLabel) {
         let task = customer.customer.task
         let semaphore = type(of: task).semaphore
         let queue = type(of: task).dispatchQueue
         
         queue.async(group: group) {
             semaphore.wait()
+            if !customer.customer.workable {
+                semaphore.signal()
+                return
+            }
             DispatchQueue.main.async {
                 self.changingHandler(customer)
             }
@@ -56,6 +62,10 @@ class Bank: Bankable {
             }
             semaphore.signal()
         }
+    }
+    
+    func resetCustomer() {
+        handledCustomer = 1
     }
     
     private func addRandomCustomers(_ count: Int, taskTypes: BankTask.Type...) {
