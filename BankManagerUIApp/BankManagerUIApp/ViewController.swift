@@ -69,13 +69,30 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController {
-    private func identify(_ client: Client) -> UILabel {
-        switch client.taskType {
-        case .loan:
-            return UILabel(text: "\(client.id) - \(client.taskType)", font: .systemFont(ofSize: 23) ,textColor: .systemPurple)
-        case .deposit:
-            return UILabel(text: "\(client.id) - \(client.taskType)", font: .systemFont(ofSize: 23))
+protocol ManagingForClientLabel: AnyObject {
+    func move(who client: Client)
+    func remove(who client: Client)
+}
+
+extension ViewController: ManagingForClientLabel {
+    func move(who client: Client) {
+        DispatchQueue.main.async { [unowned self] in
+            bankView.waitingStackView.arrangedSubviews.forEach { view in
+                guard let clientLabel = view as? ClientLabel else { return }
+                guard clientLabel.client.id == client.id else { return }
+                clientLabel.removeFromSuperview()
+            }
+            bankView.taskingStackView.addArrangedSubview(ClientLabel(client: client))
+        }
+    }
+    
+    func remove(who client: Client) {
+        DispatchQueue.main.async { [unowned self] in
+            bankView.taskingStackView.arrangedSubviews.forEach { view in
+                guard let clientLabel = view as? ClientLabel else { return }
+                guard clientLabel.client.id == client.id else { return }
+                clientLabel.removeFromSuperview()
+            }
         }
     }
 }
