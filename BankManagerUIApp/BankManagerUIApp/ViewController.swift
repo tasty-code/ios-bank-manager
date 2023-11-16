@@ -235,10 +235,7 @@ extension ViewController: BankDelegate {
     func updateWorkingCustomersList(bank: Bank, customer: Customer) {
         removeCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
     }
-}
-
-// MARK: TellerWorkingStateNotifiable Implementation
-extension ViewController: TellerWorkingStateNotifiable {
+    
     func notifyCustomerDidMatch(teller: Teller, customer: Customer) {
         removeCustomerLabel(customer: customer, in: waitingCustomerLabelsStackView)
         createCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
