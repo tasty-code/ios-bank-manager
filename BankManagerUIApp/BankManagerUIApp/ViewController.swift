@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     private let bankView: BankView = BankView()
     private let bank: Bank = Bank(depositTeller: 2, loanTeller: 1)
