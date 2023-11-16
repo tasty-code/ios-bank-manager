@@ -18,21 +18,21 @@ class ViewController: UIViewController {
     
     private var bank: Bankable?
     
-    private let contentStackView = UIStackView(.vertical, 15, .fill)
+    private let contentStackView = UIStackView(axis: .vertical, spacing: 15, distribution: .fill)
     
-    private let topButtonWrap = UIStackView(.horizontal, 0, .fillEqually)
+    private let topButtonWrap = UIStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually)
     
-    private let stateIndiCatorWrap = UIStackView(.horizontal, 0, .fillEqually)
+    private let stateIndiCatorWrap = UIStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually)
     
     private lazy var timeLabel = TimerLabel(prefix: "업무시간", fontSize: 24)
     
-    private let waitingLabel = UILabel("대기중", 35, .white, .center, .systemGreen)
+    private let waitingLabel = UILabel(text: "대기중", fontSize: 35, textColor: .white, textAlignment: .center, backgroundColor: .systemGreen)
     
-    private let taskingLabel = UILabel("업무중", 35, .white, .center, .systemIndigo)
+    private let taskingLabel = UILabel(text: "업무중", fontSize: 35, textColor: .white, textAlignment: .center, backgroundColor: .systemIndigo)
     
-    private let waitingListWrap = UIStackView(.vertical, 0, .fillEqually)
+    private let waitingListWrap = UIStackView(axis: .vertical, spacing: 0, distribution: .fillEqually)
     
-    private let taskingListWrap = UIStackView(.vertical, 0, .fillEqually)
+    private let taskingListWrap = UIStackView(axis: .vertical, spacing: 0, distribution: .fillEqually)
     
     private let contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -43,21 +43,21 @@ class ViewController: UIViewController {
     }()
     
     private let stateListWrap: UIStackView = {
-        let stackView = UIStackView(.horizontal, 0, .fillEqually)
+        let stackView = UIStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually)
         stackView.alignment = .top
         
         return stackView
     }()
     
     private let increaseCustomerButton: UIButton = {
-        let addButton = UIButton("고객 10명 추가", .systemBlue)
+        let addButton = UIButton(title: "고객 10명 추가", color: .systemBlue)
         addButton.addTarget(nil, action: #selector(tapAddButton(_:)), for: .touchDown)
         
         return addButton
     }()
     
     private let resetCustomerButton: UIButton = {
-        let addButton = UIButton("초기화", .systemRed)
+        let addButton = UIButton(title: "초기화", color: .systemRed)
         addButton.addTarget(nil, action: #selector(tapResetButton(_:)), for: .touchDown)
         
         return addButton
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
 extension ViewController {
     
     private func setupContentView() {
-        self.view.addSubview(contentStackView)
+        view.addSubview(contentStackView)
         
         contentStackView.addArrangedSubview(topButtonWrap)
         topButtonWrap.addArrangedSubview(increaseCustomerButton)
@@ -86,7 +86,7 @@ extension ViewController {
         stateListWrap.addArrangedSubview(taskingListWrap)
     }
     
-    private func setConstraint(){
+    private func setConstraint() {
         self.view.backgroundColor = .white
         NSLayoutConstraint.activate([
             
@@ -123,7 +123,7 @@ extension ViewController {
     }
     
     private func generateCustomers() {
-        self.bank?.beginTask {
+        bank?.beginTask {
             self.timeLabel.pauseTimer()
         }
     }

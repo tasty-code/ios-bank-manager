@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-    convenience init(_ text: String, _ fontSize: CGFloat,_ textColor: UIColor,_ textAlignment: NSTextAlignment ,_ backgroundColor: UIColor) {
+    convenience init(text: String, fontSize: CGFloat, textColor: UIColor, textAlignment: NSTextAlignment , backgroundColor: UIColor) {
         self.init(frame: .zero)
         
         self.text = text

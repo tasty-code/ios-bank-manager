@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
     
-    convenience init(_ title: String, _ color: UIColor) {
+    convenience init(title: String, color: UIColor) {
         self.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false

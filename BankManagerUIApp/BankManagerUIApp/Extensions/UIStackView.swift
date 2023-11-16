@@ -9,7 +9,7 @@ import UIKit
 
 extension UIStackView {
     
-    convenience init(_ axis: NSLayoutConstraint.Axis, _ spacing: CGFloat?, _ distribution: Distribution) {
+    convenience init(axis: NSLayoutConstraint.Axis, spacing: CGFloat?, distribution: Distribution) {
         self.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false

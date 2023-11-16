@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Foundation
 
 final class CustomerLabel: UILabel {
     var customer: Customer
