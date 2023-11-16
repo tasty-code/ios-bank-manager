@@ -1,16 +1,13 @@
-import Foundation
+
+import UIKit
 
 
-protocol Delegate: AnyObject {
-    func setupDepositLabel(number: Int)
-    
-    func setupLoanLabel(number: Int)
+protocol BankUIDelegate: AnyObject {
+    func addTaskLabel(type: TypeOfWork, number: Int, textColor: UIColor)
     
     func changeToLabelState(tellerType: TypeOfWork,data: Int)
     
-    func countReset()
-    
-    func timerStop()
-    
     func removeLabel(data: Int)
 }
+
+

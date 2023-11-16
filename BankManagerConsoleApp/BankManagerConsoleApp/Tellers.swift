@@ -4,8 +4,8 @@ import Foundation
 struct Tellers {
     private let tellerCount: Int
     let tellerType: TypeOfWork
-    let semaphore: DispatchSemaphore
-    weak var del: Delegate?
+    private let semaphore: DispatchSemaphore
+    weak var delegate: BankUIDelegate?
     
     init(tellerCount: Int, tellerType: TypeOfWork) {
         self.tellerCount = tellerCount
@@ -25,16 +25,15 @@ struct Tellers {
             group.enter()
             semaphore.wait()
             DispatchQueue.global().async {
-                del?.changeToLabelState(tellerType: tellerType, data: data)
+                delegate?.changeToLabelState(tellerType: tellerType, data: data)
                 
                 usleep(time)
                 
-                del?.removeLabel(data: data)
+                delegate?.removeLabel(data: data)
                 semaphore.signal()
                 group.leave()
             }
         }
         group.wait()
-        del?.countReset()
     }
 }

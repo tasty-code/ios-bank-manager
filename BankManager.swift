@@ -1,90 +1,52 @@
 import Foundation
 
 final class BankManager {
-    private let customerCount: Int
+    private var customerCount: Int = 0
+    private let depositCustomerQueue = Queue<Int>()
+    private let loanCustomerQueue = Queue<Int>()
     var depositTellers: Tellers
     var loanTellers: Tellers
-    let depositCustomerQueue = Queue<Int>()
-    let loanCustomerQueue = Queue<Int>()
-    var total = 0
-    var startTime: Date?
-    weak var del: Delegate?
+    weak var delegate: BankUIDelegate?
     
     
     init(depositTellerCount: Int, loanTellerCount: Int) {
-        self.customerCount = Int.random(in: 10...30)
         self.depositTellers = Tellers(tellerCount: depositTellerCount, tellerType: .Deposit)
         self.loanTellers = Tellers(tellerCount: loanTellerCount, tellerType: .Loan)
     }
     
-    
-    func openBank() {
-        startTime = Date()
-        createCustomerQueue(customerCount: customerCount)
-        startTask()
-    }
-    
-    func finishTask() {
-        let endTime = Date()
-        guard let startTime = startTime else { return }
-        let time = endTime.timeIntervalSince(startTime)
-        let totalSecond = String(format: "%.2f", time)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalSecond)초 입니다.")
-    }
-    
-    func createCustomerQueue(customerCount: Int) {
-        for n in 1...customerCount {
+    func createCustomerQueue() {
+        for n in 1...10 {
             guard let work = TypeOfWork(rawValue: Int.random(in: 0...1)) else {
                 return
             }
             
-            
             switch work {
+                
             case .Deposit:
-                depositCustomerQueue.enqueue(data: n + total)
-                del?.setupDepositLabel(number: n + total)
+                depositCustomerQueue.enqueue(data: n + customerCount)
+                delegate?.addTaskLabel(type: .Deposit, number: n + customerCount, textColor: .black)
             case .Loan:
-                loanCustomerQueue.enqueue(data: n + total)
-                del?.setupLoanLabel(number: n + total)
+                loanCustomerQueue.enqueue(data: n + customerCount)
+                delegate?.addTaskLabel(type: .Loan, number: n + customerCount, textColor: .orange)
             }
         }
-        
-        
+        customerCount += 10
     }
     
     func startTask() {
-        
-        
-        let depositWork = (depositTellers, depositCustomerQueue)
-        let loanWork = (loanTellers, loanCustomerQueue)
-        
-        let group = DispatchGroup()
-        [depositWork, loanWork].forEach { (tellers, queue) in
-            group.enter()
-            DispatchQueue.global().async {
-                tellers.doTask(queue: queue)
-                group.leave()
-            }
-        }
-        
-        group.wait()
-        
-    }
-    
-    func uiStartTask() {
-        
-        
         let depositWork = (depositTellers, depositCustomerQueue)
         let loanWork = (loanTellers, loanCustomerQueue)
         
         [depositWork, loanWork].forEach { (tellers, queue) in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .utility ).async {
                 tellers.doTask(queue: queue)
             }
         }
-        
-        
-        
     }
     
+    func reset() {
+        customerCount = 0
+        depositCustomerQueue.clear()
+        loanCustomerQueue.clear()
+    }
 }
