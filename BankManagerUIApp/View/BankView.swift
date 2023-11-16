@@ -8,13 +8,13 @@
 import UIKit
 
 final class BankView: UIView {
-    lazy var addClientButton: UIButton = {
+    let addClientButton: UIButton = {
         let button = UIButton(title: "고객 10명 추가", titleColor: .systemBlue)
         
         return button
     }()
     
-    lazy var resetButton: UIButton = {
+    let resetButton: UIButton = {
         let button = UIButton(title: "초기화", titleColor: .systemRed)
         
         return button
@@ -26,20 +26,20 @@ final class BankView: UIView {
         return stackView
     }()
     
-    lazy var taskTimeLabel: UILabel = {
+    let taskTimeLabel: UILabel = {
         let label = UILabel(text: "업무시간 - 00:00:000", font: UIFont(name: "HelveticaNeue", size: 25.0)!, textAlignment: .center)
         
         return label
     }()
     
-    private lazy var waitLabel: UILabel = {
+    private let waitLabel: UILabel = {
         let label = UILabel(text: "대기중", font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, textAlignment: .center)
         label.backgroundColor = .systemGreen
         
         return label
     }()
     
-    private lazy var taskLabel: UILabel = {
+    private let taskLabel: UILabel = {
         let label = UILabel(text: "업무중", font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, textAlignment: .center)
         label.backgroundColor = .systemIndigo
         
@@ -59,7 +59,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    lazy var waitingStackView: UIStackView = {
+    let waitingStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 10)
         
         return stackView
@@ -72,7 +72,7 @@ final class BankView: UIView {
         return scrollView
     }()
     
-    lazy var taskingStackView: UIStackView = {
+    let taskingStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 10)
         return stackView
     }()
