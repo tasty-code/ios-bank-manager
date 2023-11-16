@@ -113,7 +113,7 @@ final class ContentView: UIView {
         ])
     }
     
-    private func setWorkingStackViewConstraint() {
+    func setWorkingStackViewConstraint() {
         NSLayoutConstraint.activate([
             workingStackView.leadingAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.leadingAnchor),
             workingStackView.trailingAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.trailingAnchor),
@@ -167,5 +167,4 @@ final class ContentView: UIView {
             }
         }
     }
-    
 }

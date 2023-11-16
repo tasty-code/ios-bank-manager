@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     @objc private func resetCustomer() {
         timer?.invalidate()
         elapsedTime = 0.000
-        
+
         contentView.resetCustomer()
         DispatchQueue.main.async { [self] in
             contentView.resetWorkingTimeLabel()
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     @objc private func startBank() {
         let queue = bank.greetCustomer()
         var customer = queue.head
-        
+
         while customer != nil {
             guard let currentCustomer = customer?.data else {
                 return
@@ -93,23 +93,23 @@ extension ViewController: BankerDelegate {
 }
 
 
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-        
-    }
-    
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        ViewController()
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View{
-        ViewControllerRepresentable().previewDisplayName("iPhone 15")
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//struct ViewControllerRepresentable: UIViewControllerRepresentable {
+//    
+//    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+//        
+//    }
+//    
+//    @available(iOS 13.0, *)
+//    func makeUIViewController(context: Context) -> UIViewController {
+//        ViewController()
+//    }
+//}
+//
+//struct ViewController_Previews: PreviewProvider {
+//    static var previews: some View{
+//        ViewControllerRepresentable().previewDisplayName("iPhone 15")
+//    }
+//}
+//#endif

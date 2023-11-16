@@ -6,6 +6,7 @@ final class Bank {
     private var banker: Banker
     private var customerCount: Int
     private var elapsedTime: Double
+    private var isReset: Bool = false
     
     init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0, delegate: BankerDelegate) {
         self.queueManager = queueManager
@@ -16,7 +17,9 @@ final class Bank {
     }
         
     func prepareCloseWork() {
+        customerCount = 0
         queueManager.clearQueue()
+        isReset = true
     }
     
     func greetCustomer() -> Queue<Customer> {
@@ -40,7 +43,8 @@ final class Bank {
     }
 
     func startWork() {
-        DispatchQueue.global().async { [self] in
+        isReset = false
+        DispatchQueue.global(qos: .userInteractive).async { [self] in
             let queue = queueManager.getQueue()
             let group = DispatchGroup()
             
@@ -62,8 +66,12 @@ final class Bank {
         let semaphore = task.semaphore
         
         DispatchQueue.global(qos: .background).async(group: group) { [weak self] in
+            guard let self = self else { 
+                return
+            }
+            
             semaphore.wait()
-            self?.banker.work(for: customer, self?.delegate)
+            self.banker.work(for: customer, self.delegate, self.isReset)
             semaphore.signal()
         }
     }
