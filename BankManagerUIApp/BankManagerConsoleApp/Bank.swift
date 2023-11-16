@@ -1,6 +1,7 @@
 import Foundation
 
 final class Bank {
+    var delegate: BankerDelegate?
     private var queueManager: QueueManager
     private var banker: Banker
     private var customerCount: Int
@@ -40,28 +41,30 @@ final class Bank {
     }
 
     func startWork() {
-        let queue = queueManager.getQueue()
-        let group = DispatchGroup()
-
-        while !queue.isEmpty() {
-            let customer = queue.dequeue()
+        DispatchQueue.global().async { [self] in
+            let queue = queueManager.getQueue()
+            let group = DispatchGroup()
             
-            guard let customer = customer else {
-                return
+            while !queue.isEmpty() {
+                let customer = queue.dequeue()
+                
+                guard let customer = customer else {
+                    return
+                }
+                
+                insert(customer, group)
             }
-            
-           insert(customer, group)
+            group.wait()
         }
-        group.wait()
     }
     
     private func insert(_ customer: Customer, _ group: DispatchGroup) {
         let task = customer.task
         let semaphore = task.semaphore
         
-        DispatchQueue.global().async(group: group) { [weak self] in
+        DispatchQueue.global(qos: .background).async(group: group) { [weak self] in
             semaphore.wait()
-            self?.banker.work(for: customer)
+            self?.banker.work(for: customer, self?.delegate)
             semaphore.signal()
         }
     }

@@ -5,21 +5,25 @@ class ViewController: UIViewController {
     private var timer: Timer? = nil
     private var elapsedTime: TimeInterval = 0.000
     private let bank = Bank()
-
+    
     override func viewDidLoad() {
+        bank.delegate = self
         super.viewDidLoad()
+        
         view = contentView
         startTimer()
-        startWork()
+        startBank()
         
-        contentView.addCustomerButton.addTarget(self, action: #selector(startWork), for: .touchUpInside)
+        bank.startWork()
+        
+        contentView.addCustomerButton.addTarget(self, action: #selector(startBank), for: .touchUpInside)
         
         contentView.resetButton.addTarget(self, action: #selector(resetCustomer), for: .touchUpInside)
     }
     
     private func startTimer() {
         if let timer = timer {
-
+            
         } else {
             DispatchQueue.global(qos: .background).async { [self] in
                 timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -29,15 +33,15 @@ class ViewController: UIViewController {
     }
     
     @objc private func updateTimer() {
-       let minutes = Int(elapsedTime) / 60
-       let seconds = Int(elapsedTime) % 60
-       let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
-
-       DispatchQueue.main.async { [self] in
-           contentView.updateTime(minutes, seconds, milliseconds)
-       }
-       elapsedTime += 0.001
-   }
+        let minutes = Int(elapsedTime) / 60
+        let seconds = Int(elapsedTime) % 60
+        let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
+        
+        DispatchQueue.main.async { [self] in
+            contentView.updateTime(minutes, seconds, milliseconds)
+        }
+        elapsedTime += 0.001
+    }
     
     @objc private func resetCustomer() {
         timer?.invalidate()
@@ -50,19 +54,21 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc private func startWork() {
+    @objc private func startBank() {
         let queue = bank.greetCustomer()
+        var customer = queue.head
         
-        while !queue.isEmpty() {
-            guard let customer = queue.dequeue() else {
+        while customer != nil {
+            guard let currentCustomer = customer?.data else {
                 return
             }
             
-            let orderNumber = customer.orderNumber
-            let task = customer.task
+            let orderNumber = currentCustomer.orderNumber
+            let task = currentCustomer.task
             let taskName = task.name
             
             contentView.addCustomer(orderNumber, and: taskName)
+            customer = customer?.next
         }
         if timer == nil {
             startTimer()
@@ -70,31 +76,34 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ViewControllerDelegate {
-    func touchUpCustomerButton() {
-        <#code#>
+extension ViewController: BankerDelegate {
+    func addWorkingStackView(_ orderNumber: Int) {
+        DispatchQueue.main.async { [self] in
+            contentView.deleteWaitingStackView(orderNumber)
+        }
     }
     
-    func touchUpResetButton() {
-        <#code#>
+    func deleteWorkingStackView(_ orderNumber: Int) {
+        //                label.removeFromSuperview() 하면 됨 ㅇㅇ
     }
+    
+    
 }
 
 
 #if DEBUG
 import SwiftUI
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
-
+    
     func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
+        
     }
-
+    
     @available(iOS 13.0, *)
     func makeUIViewController(context: Context) -> UIViewController {
         ViewController()
     }
 }
-
 
 struct ViewController_Previews: PreviewProvider {
     static var previews: some View{
@@ -109,43 +118,43 @@ struct ViewController_Previews: PreviewProvider {
 //    private var timer: Timer? = nil
 //    private var elapsedTime: TimeInterval = 0.000
 //    private let bank = Bank()
-//    
+//
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //        view = customView
-//        
+//
 //        var queue: Queue<Customer> = Queue()
 //        DispatchQueue.global().async { [self] in
 //            queue = bank.greetCustomer()
-//            
+//
 //            DispatchQueue.main.async { [self] in
 //                work()
 //            }
 //        }
-//        
+//
 //        startTimer()
 //        La
 //    }
-//    
+//
 //    func greetCustomer(_ queue: Queue<Customer>) -> [UIView] {
 //        var views = [UIView]()
-//        
+//
 //        var customer = queue.head
-//        
+//
 //        while customer != nil {
 //            guard let currentCustomer = customer else {
 //                return views
 //            }
 //            let data = currentCustomer.data
 //            let task = data.task
-//            
+//
 //            let customerLabel = UILabel()
 //            customerLabel.textColor = task.name == "대출" ? .systemPurple : .black
 //            customerLabel.text = "\(data.orderNumber) - \(task.name)"
 //            customerLabel.textAlignment = .center
 //            customerLabel.font = .systemFont(ofSize: 20)
 //            views.append(customerLabel)
-//            
+//
 //            guard let nextCustomer = currentCustomer.next else {
 //                break
 //            }
@@ -153,10 +162,10 @@ struct ViewController_Previews: PreviewProvider {
 //        }
 //        return views
 //    }
-//    
+//
 //    func work()  {
 //        var customer = bank.startWork()
-//        
+//
 ////        DispatchQueue.global(qos: .userInteractive).async { [self] in
 ////            print("1")
 //            while customer != nil {
@@ -166,8 +175,8 @@ struct ViewController_Previews: PreviewProvider {
 //                    return
 //                }
 //                let task = customer.task
-//            
-//                
+//
+//
 //                DispatchQueue.main.async { [self] in
 //                    let customerLabel = UILabel()
 //                    customerLabel.textColor = task.name == "대출" ? .systemPurple : .black

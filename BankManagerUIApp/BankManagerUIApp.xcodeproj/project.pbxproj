@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A64853452B05B67B00D266F7 /* BankerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64853442B05B67B00D266F7 /* BankerDelegate.swift */; };
 		A69CAFC42B02FD0E00A02279 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69CAFC32B02FD0E00A02279 /* UIButton+Extension.swift */; };
 		A69CAFC62B02FD2200A02279 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69CAFC52B02FD2200A02279 /* UILabel+Extension.swift */; };
 		A69CAFC82B02FDC500A02279 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69CAFC72B02FDC500A02279 /* UIStackView+Extension.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A64853442B05B67B00D266F7 /* BankerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankerDelegate.swift; sourceTree = "<group>"; };
 		A69CAFC32B02FD0E00A02279 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		A69CAFC52B02FD2200A02279 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		A69CAFC72B02FDC500A02279 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				E36D39902B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift */,
+				A64853442B05B67B00D266F7 /* BankerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
 				A6D685E52B034640005C70A6 /* Taskable.swift in Sources */,
 				A6D685DC2B034640005C70A6 /* LoanTask.swift in Sources */,
+				A64853452B05B67B00D266F7 /* BankerDelegate.swift in Sources */,
 				E36D39912B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift in Sources */,
 				A6D685E32B034640005C70A6 /* Bank.swift in Sources */,
 				A69CAFCA2B02FDDF00A02279 /* UIScrollView+Extension.swift in Sources */,

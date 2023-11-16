@@ -112,16 +112,6 @@ final class ContentView: UIView {
         ])
     }
     
-    private func setWaitingScrollViewConstraint() {
-        NSLayoutConstraint.activate([
-            waitingScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            waitingScrollView.trailingAnchor.constraint(equalTo: waitingLabel.trailingAnchor),
-            waitingScrollView.topAnchor.constraint(equalTo: waitingLabel.bottomAnchor),
-            waitingScrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            waitingScrollView.widthAnchor.constraint(equalTo: waitingStackView.widthAnchor)
-        ])
-    }
-    
     func updateTime(_ minutes: Int, _ seconds: Int, _ milliseconds: Int) {
         workingTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
         workingTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
@@ -144,6 +134,23 @@ final class ContentView: UIView {
         }
         
         waitingStackView.addArrangedSubview(label)
-        
     }
+    
+    func deleteWaitingStackView(_ orderNumber: Int) {
+        waitingStackView.arrangedSubviews.forEach { subview in
+            guard let label = subview as? UILabel, let text = label.text else {
+                return
+            }
+        
+            guard let trimmedText = text.split(separator: " ").first else {
+                return
+            }
+            
+            if trimmedText == "\(orderNumber)" {
+                label.removeFromSuperview()
+                return
+            }
+        }
+    }
+    
 }
