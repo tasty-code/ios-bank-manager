@@ -2,11 +2,14 @@ import Foundation
 
 final class BankManager {
     private let customerCount: Int
-    private let depositTellers: Tellers
-    private let loanTellers: Tellers
+    var depositTellers: Tellers
+    var loanTellers: Tellers
     let depositCustomerQueue = Queue<Int>()
     let loanCustomerQueue = Queue<Int>()
-    private var startTime: Date?
+    var total = 0
+    var startTime: Date?
+    weak var del: Delegate?
+//    var state = "stop"
     
     init(depositTellerCount: Int, loanTellerCount: Int) {
         self.customerCount = Int.random(in: 10...30)
@@ -30,21 +33,28 @@ final class BankManager {
     }
     
     func createCustomerQueue(customerCount: Int) {
-        for n in 1...customerCount {
-            guard let work = TypeOfWork(rawValue: Int.random(in: 0...1)) else {
-                return
+            for n in 1...customerCount {
+                guard let work = TypeOfWork(rawValue: Int.random(in: 0...1)) else {
+                    return
+                }
+                
+//                        DispatchQueue.main.async { [self] in
+                switch work {
+                case .Deposit:
+                    depositCustomerQueue.enqueue(data: n + total)
+                    del?.setupDepositLabel(number: n + total)
+                case .Loan:
+                    loanCustomerQueue.enqueue(data: n + total)
+                    del?.setupLoanLabel(number: n + total)
+                }
             }
-            
-            switch work {
-            case .Deposit:
-                depositCustomerQueue.enqueue(data: n)
-            case .Loan:
-                loanCustomerQueue.enqueue(data: n)
-            }
-        }
+//        }
+        
     }
     
-    private func startTask() {
+     func startTask() {
+         
+
         let depositWork = (depositTellers, depositCustomerQueue)
         let loanWork = (loanTellers, loanCustomerQueue)
         
@@ -56,8 +66,25 @@ final class BankManager {
                 group.leave()
             }
         }
-        
+         
         group.wait()
+
+    }
+
+     func uiStartTask() {
+         
+
+        let depositWork = (depositTellers, depositCustomerQueue)
+        let loanWork = (loanTellers, loanCustomerQueue)
+        
+        [depositWork, loanWork].forEach { (tellers, queue) in
+            DispatchQueue.global().async {
+                tellers.doTask(queue: queue)
+            }
+        }
+         
+         
+
     }
     
 }

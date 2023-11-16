@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController, Delegate {
+    private var timer: Timer = Timer()
+    private var time: Double = 0
+    private var count = 0
     
     private let bankManager = BankManager(depositTellerCount: 2, loanTellerCount: 1)
     
@@ -37,15 +40,15 @@ final class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reset), for: .touchUpInside)
         return button
     }()
     
     private lazy var timerTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무 시간 - 04:44:44"
+        label.text = "00 : 00 : 00"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 24)
+        label.font = UIFont.monospacedSystemFont(ofSize: 24, weight: .regular)
         return label
     }()
     
@@ -96,11 +99,13 @@ final class ViewController: UIViewController {
     
     private lazy var readyListScrollView: UIScrollView = {
         let view = UIScrollView()
+        view.bounces = false
         return view
     }()
     
     private lazy var runningListScrollView: UIScrollView = {
         let view = UIScrollView()
+        view.bounces = false
         return view
     }()
     
@@ -114,36 +119,23 @@ final class ViewController: UIViewController {
     private lazy var runningListStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
+        view.spacing = 16
         return view
-    }()
-    
-    private lazy var temp1: UILabel = {
-        let label = UILabel()
-        label.text = "1 - 예금"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 24)
-        return label
-    }()
-    
-    private lazy var temp2: UILabel = {
-        let label = UILabel()
-        label.text = "2 - 대출"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 24)
-        label.textColor = .orange
-        return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bankManager.del = self
+        bankManager.depositTellers.del = self
+        bankManager.loanTellers.del = self
         view.backgroundColor = .white
         configure()
         setupAutoLayout()
+        bankManager.startTime = Date()
         
-       
         
     }
-
+    
     
     func configure() {
         view.addSubview(mainStackView)
@@ -166,10 +158,6 @@ final class ViewController: UIViewController {
         
         readyListScrollView.addSubview(readyListStackView)
         runningListScrollView.addSubview(runningListStackView)
-        
-        readyListStackView.addArrangedSubview(temp1)
-        readyListStackView.addArrangedSubview(temp2)
-        
     }
     
     func setupAutoLayout() {
@@ -205,75 +193,138 @@ final class ViewController: UIViewController {
         
         runningListStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        runningListStackView.topAnchor.constraint(equalTo: runningListStackView.topAnchor).isActive = true
-        runningListStackView.bottomAnchor.constraint(equalTo: runningListStackView.bottomAnchor).isActive = true
-        runningListStackView.leadingAnchor.constraint(equalTo: runningListStackView.leadingAnchor).isActive = true
-        runningListStackView.trailingAnchor.constraint(equalTo: runningListStackView.trailingAnchor).isActive = true
+        runningListStackView.topAnchor.constraint(equalTo: runningListScrollView.topAnchor).isActive = true
+        runningListStackView.bottomAnchor.constraint(equalTo: runningListScrollView.bottomAnchor).isActive = true
+        runningListStackView.leadingAnchor.constraint(equalTo: runningListScrollView.leadingAnchor).isActive = true
+        runningListStackView.trailingAnchor.constraint(equalTo: runningListScrollView.trailingAnchor).isActive = true
         runningListStackView.widthAnchor.constraint(equalTo: runningListScrollView.widthAnchor).isActive = true
+        
     }
     
     @objc func addCustomer() {
-//        
-//        bankManager.createCustomerQueue(customerCount: 10)
-//        for _ in 1...10 {
-//            
-//            let customerLabel = UILabel()
-//            readyListStackView.addArrangedSubview(customerLabel)
-//        }
-//        
-//       guard let de = bankManager.depositCustomerQueue.peek()
-//        
-//        if bankManager.depositCustomerQueue.peek() > bankManager.loanCustomerQueue.peek() {
-//            
-//        }
-//        
+        
+        bankManager.createCustomerQueue(customerCount: 10)
+        bankManager.total += 10
+        if count == 0 {
+            startTimer()
+            bankManager.uiStartTask()
+            count = 1
+        }
         
     }
     
-    @objc func resetTimer() {
+    func startTimer() {
         
-    }
-    
-    
-    
-    func setupLabel() {
-        
-       
-        
-        
-    }
-    
-    
-    
-}
-
-
-#if canImport(SwiftUI)
-import SwiftUI
-
-struct Preview<View: UIView>: UIViewRepresentable {
-    let view: View
-    
-    init(_ interfaceBuilder: @escaping () -> View) {
-        view = interfaceBuilder()
-    }
-    
-    func makeUIView(context: Context) -> some UIView {
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
-    }
-}
-
-struct Previewer: PreviewProvider {
-    static var previews: some View {
-        Preview {
-            let viewController = ViewController()
-            return viewController.view
+        if !timer.isValid {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(setTimerLabel), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .common)
         }
     }
+    
+    @objc func setTimerLabel() {
+        let minute = String(format: "%02d", Int(time) / 60)
+        let second = String(format: "%02d", Int(time) % 60)
+        let millisecond = String(format: "%03d" , Int(time * 1000) % 1000)
+        
+        time += 0.001
+    
+        timerTitleLabel.text = "\(minute) : \(second) : \(millisecond)"
+    }
+    
+    
+    
+    @objc func reset() {
+        
+        let _ = readyListStackView.arrangedSubviews.map { $0.removeFromSuperview()}
+        let _ = runningListStackView.arrangedSubviews.map { $0.removeFromSuperview()}
+        bankManager.depositCustomerQueue.clear()
+        bankManager.loanCustomerQueue.clear()
+        bankManager.total = 0
+        count = 0
+        timerStop()
+        time = 0
+        timerTitleLabel.text = "00 : 00 : 00"
+//        addCustomerButton.isEnabled = false
+//        addCustomerButton.setTitleColor(.gray, for: .normal)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) { [self] in
+//            addCustomerButton.isEnabled = true
+//            addCustomerButton.setTitleColor(.blue, for: .normal)
+//        }
+    }
+    
+    func timerStop() {
+        
+        timer.invalidate()
+    }
+    
+    func changeToLabelState(tellerType: TypeOfWork,data: Int){
+        
+        let time = tellerType.time
+        
+        
+        DispatchQueue.main.sync  { [self] in
+            for i in readyListStackView.arrangedSubviews {
+                if i.tag == data {
+                    readyListStackView.removeArrangedSubview(i)
+                    runningListStackView.addArrangedSubview(i)
+                    break
+                }
+            }
+            
+        }
+//        usleep(time)
+        
+        
+    }
+    
+    func removeLabel(data: Int) {
+        DispatchQueue.main.sync  { [self] in
+            
+            for i in runningListStackView.arrangedSubviews {
+                if i.tag == data {
+                    i.removeFromSuperview()
+                    break
+                }
+            }
+            if runningListStackView.arrangedSubviews.isEmpty && readyListStackView.arrangedSubviews.isEmpty {
+                timerStop()
+            }
+        }
+    }
+    
+    
+    
+    
+    func setupDepositLabel(number: Int){
+        DispatchQueue.main.async { [self] in
+            let label = UILabel()
+            label.text = String(number) + " - 예금"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 24)
+            label.tag = number
+            readyListStackView.addArrangedSubview(label)
+        }
+    }
+    
+    func setupLoanLabel(number: Int){
+        DispatchQueue.main.async { [self] in
+            let label = UILabel()
+            
+            label.text = String(number) + " - 대출"
+            label.textAlignment = .center
+            label.textColor = .orange
+            label.font = .systemFont(ofSize: 24)
+            label.tag = number
+            readyListStackView.addArrangedSubview(label)
+        }
+    }
+    
+    func countReset() {
+        count = 0
+    }
+    
+    
+    
+    
 }
-#endif
+
