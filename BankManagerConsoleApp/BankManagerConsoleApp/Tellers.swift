@@ -1,40 +1,37 @@
 import Foundation
 
+
 struct Tellers {
     private let tellerCount: Int
-    private let tellerType: TypeOfWork
+    let tellerType: TypeOfWork
+    private let semaphore: DispatchSemaphore
+    weak var delegate: BankUIDelegate?
     
     init(tellerCount: Int, tellerType: TypeOfWork) {
         self.tellerCount = tellerCount
         self.tellerType = tellerType
+        self.semaphore = DispatchSemaphore(value: tellerCount)
     }
-
+    
     func doTask(queue: Queue<Int>) {
-        let name = tellerType.name
         let time = tellerType.time
         
-        let semaphore = DispatchSemaphore(value: tellerCount)
         let group = DispatchGroup()
-        var workingTellerCount = 0
         
         while !queue.isEmpty() {
+            
+            guard let data = queue.dequeue() else { return }
+            
+            group.enter()
             semaphore.wait()
-            guard let data = queue.dequeue() else {
+            DispatchQueue.global().async {
+                delegate?.changeToLabelState(tellerType: tellerType, data: data)
+                
+                usleep(time)
+                
+                delegate?.removeLabel(data: data)
                 semaphore.signal()
-                return
-            }
-
-            if workingTellerCount < tellerCount {
-                group.enter()
-                DispatchQueue.global().async {
-                    workingTellerCount += 1
-                    print("\(name) 은행원 \(data)번 고객 \(name)업무 시작")
-                    usleep(time)
-                    print("\(name) 은행원 \(data)번 고객 \(name)업무 완료")
-                    workingTellerCount -= 1
-                    semaphore.signal()
-                    group.leave()
-                }
+                group.leave()
             }
         }
         group.wait()
