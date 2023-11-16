@@ -7,11 +7,10 @@
 
 import Foundation
 
-protocol BankDelegate: AnyObject {
+protocol BankDelegate: TellerWorkingStateNotifiable, AnyObject {
     func gatherCustomers(bank: Bank, from startCount: Int, to endCount: Int)
     func updateWaitingCustomersList(bank: Bank, customer: Customer)
     func updateWorkingCustomersList(bank: Bank, customer: Customer)
-    func updateViewWhenCustomerDidMatched(bank: Bank, customer: Customer)
 }
 
 final class Bank {
@@ -22,8 +21,8 @@ final class Bank {
     private var totalServicedTimes: TimeInterval = 0.0
     private weak var bankManager: BankDelegate?
     
-    init(tellers: [TellerProtocol], _ bankManager: BankDelegate) {
-        self.tellers = tellers
+    init(_ bankManager: BankDelegate) {
+        self.tellers = [Teller(tellerCount: 2, bankManager: bankManager), Teller(tellerCount: 1, bankManager: bankManager)]
         self.bankManager = bankManager
     }
     
@@ -32,10 +31,6 @@ final class Bank {
             DispatchQueue.global().async(group: dispatchGroup) { [self] in
                 while customerQueue.isEmpty == false {
                     guard let customer = customerQueue.dequeue() else { return }
-                    
-                    DispatchQueue.main.sync {
-                        self.bankManager?.updateViewWhenCustomerDidMatched(bank: self, customer: customer)
-                    }
                     
                     matchUpService(with: customer, on: teller)
                 }
@@ -46,20 +41,20 @@ final class Bank {
             completion(customerQueue.isEmpty)
         }
     }
-}
-
-// MARK: Private Methods
-extension Bank {
+    
     func gatherCustomers(from: Int, to: Int) {
         for count in from...to {
-            guard let randomWorkType = WorkType.allCases.randomElement() else { continue }
+            guard let randomWorkType = WorkType.allCases.randomElement() else { return }
             let customer = Customer(id: count, workType: randomWorkType)
             customerQueue.enqueue(customer)
             
             self.bankManager?.updateWaitingCustomersList(bank: self, customer: customer)
         }
     }
-    
+}
+
+// MARK: Private Methods
+extension Bank {
     private func matchUpService(with customer: Customer, on teller: TellerProtocol) {
         teller.service(to: customer) { [self] in
             servicedCustomersCount += 1

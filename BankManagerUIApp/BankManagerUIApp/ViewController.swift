@@ -7,39 +7,8 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    // MARK: Namespace
-    private enum Constants {
-        case addCustomersButton
-        case resetButton
-        case timerLabel(accumulatedTimes: String)
-        case waitingLabel
-        case workingLabel
-        
-        var title: String {
-            switch self {
-            case .addCustomersButton:
-                "고객 10명 추가"
-            case .resetButton:
-                "초기화"
-            case .timerLabel(let accumulatedTimes):
-                "업무시간 - \(accumulatedTimes)"
-            case .waitingLabel:
-                "대기중"
-            case .workingLabel:
-                "업무중"
-            }
-        }
-        
-        static let defaultSpacing: CGFloat = 14
-        static let labelsSpacing: CGFloat = 8
-        static let customerGatheringQuantityLimit: Int = 10
-        static let firstCustomerNumber: Int = 1
-        static let initialAccumulatedTimes: String = "00:00:000"
-    }
-    
     // MARK: Properties
-    private let tellers: [TellerProtocol] = [Teller(tellerCount: 2), Teller(tellerCount: 1)]
-    private lazy var bank: Bank = Bank(tellers: tellers, self)
+    private lazy var bank: Bank = Bank(self)
     private let timer: TimerProtocol = BankTimer(timeInterval: 0.001)
     private var currentCustomerNumber: Int = 1
     
@@ -170,6 +139,39 @@ extension ViewController {
     }
 }
 
+// MARK: Nested Types
+extension ViewController {
+    // MARK: Namespace
+    private enum Constants {
+        case addCustomersButton
+        case resetButton
+        case timerLabel(accumulatedTimes: String)
+        case waitingLabel
+        case workingLabel
+        
+        var title: String {
+            switch self {
+            case .addCustomersButton:
+                "고객 10명 추가"
+            case .resetButton:
+                "초기화"
+            case .timerLabel(let accumulatedTimes):
+                "업무시간 - \(accumulatedTimes)"
+            case .waitingLabel:
+                "대기중"
+            case .workingLabel:
+                "업무중"
+            }
+        }
+        
+        static let defaultSpacing: CGFloat = 14
+        static let labelsSpacing: CGFloat = 8
+        static let customerGatheringQuantityLimit: Int = 10
+        static let firstCustomerNumber: Int = 1
+        static let initialAccumulatedTimes: String = "00:00:000"
+    }
+}
+
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
@@ -233,8 +235,11 @@ extension ViewController: BankDelegate {
     func updateWorkingCustomersList(bank: Bank, customer: Customer) {
         removeCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
     }
-    
-    func updateViewWhenCustomerDidMatched(bank: Bank, customer: Customer) {
+}
+
+// MARK: TellerWorkingStateNotifiable Implementation
+extension ViewController: TellerWorkingStateNotifiable {
+    func notifyCustomerDidMatch(teller: Teller, customer: Customer) {
         removeCustomerLabel(customer: customer, in: waitingCustomerLabelsStackView)
         createCustomerLabel(customer: customer, in: workingCustomerLabelsStackView)
     }
