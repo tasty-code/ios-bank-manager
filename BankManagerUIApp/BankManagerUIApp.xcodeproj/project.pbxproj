@@ -108,6 +108,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		049F84D92B05A25000742B54 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				04274D0D2B0206800001C015 /* BankTimer.swift */,
+				37F6F63B2AFDCA4400584085 /* Bank.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		37F6F6332AFDCA4400584085 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,8 +133,6 @@
 				37F6F6382AFDCA4400584085 /* WorkType.swift */,
 				37F6F6392AFDCA4400584085 /* Customer.swift */,
 				37F6F63A2AFDCA4400584085 /* Teller.swift */,
-				37F6F63B2AFDCA4400584085 /* Bank.swift */,
-				04274D0D2B0206800001C015 /* BankTimer.swift */,
 			);
 			name = Models;
 			path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Models;
@@ -160,6 +167,7 @@
 				04274CCE2B01C1A80001C015 /* Views */,
 				37F6F6332AFDCA4400584085 /* DataStructure */,
 				37F6F6362AFDCA4400584085 /* Models */,
+				049F84D92B05A25000742B54 /* Utilities */,
 				04837B042AFDCC82001FC5A2 /* Extensions */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
