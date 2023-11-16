@@ -135,4 +135,15 @@ final class ContentView: UIView {
     func resetWorkingTimeLabel() {
         workingTimeLabel.text = "업무시간 - 00:00:000"
     }
+    
+    func addCustomer(_ orderNumber: Int, and taskName: String) {
+        let label = UILabel(text: "\(orderNumber) - \(taskName)", fontSize: 20, tag: orderNumber)
+
+        if taskName == LoanTask.name {
+            label.textColor = .systemPurple
+        }
+        
+        waitingStackView.addArrangedSubview(label)
+        
+    }
 }

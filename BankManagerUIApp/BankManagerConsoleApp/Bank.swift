@@ -12,40 +12,34 @@ final class Bank {
         self.customerCount = customerCount
         self.elapsedTime = elapsedTime
     }
-    
-    func prepareWork() {
-        greetCustomer()
-        openBank()
-    }
-    
+        
     func prepareCloseWork() -> Result {
         queueManager.clearQueue()
         let result = Result(customerCount: customerCount, elapsedTime: elapsedTime)
         return result
     }
     
-    func greetCustomer() {
-        customerCount = 10
+    func greetCustomer() -> Queue<Customer> {
+        let range = customerCount + 1
+        
+        if customerCount != 0 {
+            customerCount += 10
+        } else {
+            customerCount = Int.random(in: 10...30)
+        }
+        
         let queue = queueManager.getQueue()
         
-        for index in 1...customerCount {
+        for index in range...customerCount {
             let newCustomer = Customer(orderNumber: index, task: selectRandomTask())
-            
+             
             queue.enqueue(newCustomer)
         }
-        customerCount += 10
-    }
     
-    func openBank() {
-        let startTime = Date()
-        startWork()
-        let endTime = Date()
-        
-        elapsedTime = endTime.timeIntervalSince(startTime)
+        return queue
     }
 
-    
-    private func startWork() {
+    func startWork() {
         let queue = queueManager.getQueue()
         let group = DispatchGroup()
 

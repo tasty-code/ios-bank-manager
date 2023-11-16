@@ -30,6 +30,7 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		E36D39912B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D39902B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		E36D39902B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				E36D39922B059EF0001555CA /* Protocols */,
 				A69CAFCB2B02FDEA00A02279 /* Extensions */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
@@ -211,6 +214,14 @@
 				C7694E5E259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIAppUITests;
+			sourceTree = "<group>";
+		};
+		E36D39922B059EF0001555CA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E36D39902B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +370,7 @@
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
 				A6D685E52B034640005C70A6 /* Taskable.swift in Sources */,
 				A6D685DC2B034640005C70A6 /* LoanTask.swift in Sources */,
+				E36D39912B04FA2B001555CA /* ViewControllerDelegateviewControllerDelegateontentViewDelegate.swift in Sources */,
 				A6D685E32B034640005C70A6 /* Bank.swift in Sources */,
 				A69CAFCA2B02FDDF00A02279 /* UIScrollView+Extension.swift in Sources */,
 			);

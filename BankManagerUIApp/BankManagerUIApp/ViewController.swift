@@ -4,17 +4,19 @@ class ViewController: UIViewController {
     private let contentView = ContentView()
     private var timer: Timer? = nil
     private var elapsedTime: TimeInterval = 0.000
+    private let bank = Bank()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = contentView
         startTimer()
-        contentView.addCustomerButton.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
+        startWork()
+        
+        contentView.addCustomerButton.addTarget(self, action: #selector(startWork), for: .touchUpInside)
         
         contentView.resetButton.addTarget(self, action: #selector(resetCustomer), for: .touchUpInside)
     }
-
+    
     private func startTimer() {
         if let timer = timer {
 
@@ -26,7 +28,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
        let minutes = Int(elapsedTime) / 60
        let seconds = Int(elapsedTime) % 60
        let milliseconds = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
@@ -37,15 +39,7 @@ class ViewController: UIViewController {
        elapsedTime += 0.001
    }
     
-    @objc func addCustomer() {
-        for index in 1...10 {
-            let label = UILabel(text: "\(index) - ", fontSize: 20, textColor: .black)
-            contentView.waitingStackView.addArrangedSubview(label)
-        }
-        startTimer()
-    }
-    
-    @objc func resetCustomer() {
+    @objc private func resetCustomer() {
         timer?.invalidate()
         timer = nil
         elapsedTime = 0.000
@@ -55,8 +49,36 @@ class ViewController: UIViewController {
             contentView.resetWorkingTimeLabel()
         }
     }
+    
+    @objc private func startWork() {
+        let queue = bank.greetCustomer()
+        
+        while !queue.isEmpty() {
+            guard let customer = queue.dequeue() else {
+                return
+            }
+            
+            let orderNumber = customer.orderNumber
+            let task = customer.task
+            let taskName = task.name
+            
+            contentView.addCustomer(orderNumber, and: taskName)
+        }
+        if timer == nil {
+            startTimer()
+        }
+    }
 }
 
+extension ViewController: ViewControllerDelegate {
+    func touchUpCustomerButton() {
+        <#code#>
+    }
+    
+    func touchUpResetButton() {
+        <#code#>
+    }
+}
 
 
 #if DEBUG
@@ -72,6 +94,7 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
         ViewController()
     }
 }
+
 
 struct ViewController_Previews: PreviewProvider {
     static var previews: some View{

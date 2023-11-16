@@ -20,7 +20,7 @@ struct BankManager {
     }
     
     private func startMenu() {
-        bank.prepareWork()
+    
         let result = bank.prepareCloseWork()
         close(result)
     }
