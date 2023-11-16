@@ -227,7 +227,7 @@ final class ViewController: UIViewController, Delegate {
         let millisecond = String(format: "%03d" , Int(time * 1000) % 1000)
         
         time += 0.001
-    
+        
         timerTitleLabel.text = "\(minute) : \(second) : \(millisecond)"
     }
     
@@ -244,12 +244,7 @@ final class ViewController: UIViewController, Delegate {
         timerStop()
         time = 0
         timerTitleLabel.text = "00 : 00 : 00"
-//        addCustomerButton.isEnabled = false
-//        addCustomerButton.setTitleColor(.gray, for: .normal)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) { [self] in
-//            addCustomerButton.isEnabled = true
-//            addCustomerButton.setTitleColor(.blue, for: .normal)
-//        }
+        
     }
     
     func timerStop() {
@@ -258,9 +253,6 @@ final class ViewController: UIViewController, Delegate {
     }
     
     func changeToLabelState(tellerType: TypeOfWork,data: Int){
-        
-        let time = tellerType.time
-        
         
         DispatchQueue.main.sync  { [self] in
             for i in readyListStackView.arrangedSubviews {
@@ -272,7 +264,7 @@ final class ViewController: UIViewController, Delegate {
             }
             
         }
-//        usleep(time)
+        
         
         
     }
@@ -327,4 +319,3 @@ final class ViewController: UIViewController, Delegate {
     
     
 }
-

@@ -11,5 +11,6 @@ protocol Delegate: AnyObject {
     func countReset()
     
     func timerStop()
+    
     func removeLabel(data: Int)
 }

@@ -9,7 +9,7 @@ final class BankManager {
     var total = 0
     var startTime: Date?
     weak var del: Delegate?
-//    var state = "stop"
+    
     
     init(depositTellerCount: Int, loanTellerCount: Int) {
         self.customerCount = Int.random(in: 10...30)
@@ -17,7 +17,7 @@ final class BankManager {
         self.loanTellers = Tellers(tellerCount: loanTellerCount, tellerType: .Loan)
     }
     
-   
+    
     func openBank() {
         startTime = Date()
         createCustomerQueue(customerCount: customerCount)
@@ -33,28 +33,28 @@ final class BankManager {
     }
     
     func createCustomerQueue(customerCount: Int) {
-            for n in 1...customerCount {
-                guard let work = TypeOfWork(rawValue: Int.random(in: 0...1)) else {
-                    return
-                }
-                
-//                        DispatchQueue.main.async { [self] in
-                switch work {
-                case .Deposit:
-                    depositCustomerQueue.enqueue(data: n + total)
-                    del?.setupDepositLabel(number: n + total)
-                case .Loan:
-                    loanCustomerQueue.enqueue(data: n + total)
-                    del?.setupLoanLabel(number: n + total)
-                }
+        for n in 1...customerCount {
+            guard let work = TypeOfWork(rawValue: Int.random(in: 0...1)) else {
+                return
             }
-//        }
+            
+            
+            switch work {
+            case .Deposit:
+                depositCustomerQueue.enqueue(data: n + total)
+                del?.setupDepositLabel(number: n + total)
+            case .Loan:
+                loanCustomerQueue.enqueue(data: n + total)
+                del?.setupLoanLabel(number: n + total)
+            }
+        }
+        
         
     }
     
-     func startTask() {
-         
-
+    func startTask() {
+        
+        
         let depositWork = (depositTellers, depositCustomerQueue)
         let loanWork = (loanTellers, loanCustomerQueue)
         
@@ -66,14 +66,14 @@ final class BankManager {
                 group.leave()
             }
         }
-         
+        
         group.wait()
-
+        
     }
-
-     func uiStartTask() {
-         
-
+    
+    func uiStartTask() {
+        
+        
         let depositWork = (depositTellers, depositCustomerQueue)
         let loanWork = (loanTellers, loanCustomerQueue)
         
@@ -82,9 +82,9 @@ final class BankManager {
                 tellers.doTask(queue: queue)
             }
         }
-         
-         
-
+        
+        
+        
     }
     
 }
