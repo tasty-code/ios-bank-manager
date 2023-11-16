@@ -1,23 +1,22 @@
 import Foundation
 
 final class Bank {
-    var delegate: BankerDelegate?
+    private weak var delegate: BankerDelegate?
     private var queueManager: QueueManager
     private var banker: Banker
     private var customerCount: Int
     private var elapsedTime: Double
     
-    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0) {
+    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0, delegate: BankerDelegate) {
         self.queueManager = queueManager
         self.banker = banker
         self.customerCount = customerCount
         self.elapsedTime = elapsedTime
+        self.delegate = delegate
     }
         
-    func prepareCloseWork() -> Result {
+    func prepareCloseWork() {
         queueManager.clearQueue()
-        let result = Result(customerCount: customerCount, elapsedTime: elapsedTime)
-        return result
     }
     
     func greetCustomer() -> Queue<Customer> {

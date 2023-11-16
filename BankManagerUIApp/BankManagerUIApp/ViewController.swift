@@ -1,20 +1,17 @@
 import UIKit
-
+// 1. 디스패치로 인한 뒤늦게 일 끝낸 루팡들 제거, 2. 순번 초기화
 class ViewController: UIViewController {
     private let contentView = ContentView()
     private var timer: Timer? = nil
     private var elapsedTime: TimeInterval = 0.000
-    private let bank = Bank()
+    private lazy var bank = Bank(delegate: self)
     
     override func viewDidLoad() {
-        bank.delegate = self
         super.viewDidLoad()
         
         view = contentView
         startTimer()
         startBank()
-        
-        bank.startWork()
         
         contentView.addCustomerButton.addTarget(self, action: #selector(startBank), for: .touchUpInside)
         
@@ -22,14 +19,11 @@ class ViewController: UIViewController {
     }
     
     private func startTimer() {
-        if let timer = timer {
-            
-        } else {
-            DispatchQueue.global(qos: .background).async { [self] in
-                timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-                RunLoop.current.run()
-            }
+        DispatchQueue.global(qos: .userInteractive).async { [self] in
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+            RunLoop.current.run()
         }
+        
     }
     
     @objc private func updateTimer() {
@@ -45,13 +39,14 @@ class ViewController: UIViewController {
     
     @objc private func resetCustomer() {
         timer?.invalidate()
-        timer = nil
         elapsedTime = 0.000
         
         contentView.resetCustomer()
         DispatchQueue.main.async { [self] in
             contentView.resetWorkingTimeLabel()
         }
+        
+        bank.prepareCloseWork()
     }
     
     @objc private func startBank() {
@@ -63,31 +58,38 @@ class ViewController: UIViewController {
                 return
             }
             
-            let orderNumber = currentCustomer.orderNumber
-            let task = currentCustomer.task
-            let taskName = task.name
-            
-            contentView.addCustomer(orderNumber, and: taskName)
+            contentView.add(currentCustomer, to: contentView.waitingStackView)
             customer = customer?.next
         }
-        if timer == nil {
+        
+        guard let timer = timer else {
+            return
+        }
+        
+        if !timer.isValid {
             startTimer()
         }
+        bank.startWork()
     }
 }
 
 extension ViewController: BankerDelegate {
-    func addWorkingStackView(_ orderNumber: Int) {
+    func addWorkingStackView(_ banker: Banker, _ customer: Customer) {
         DispatchQueue.main.async { [self] in
-            contentView.deleteWaitingStackView(orderNumber)
+            contentView.deleteStackView(customer, to: contentView.waitingStackView)
+            contentView.add(customer, to: contentView.workingStackView)
         }
     }
     
-    func deleteWorkingStackView(_ orderNumber: Int) {
-        //                label.removeFromSuperview() 하면 됨 ㅇㅇ
+    func deleteWorkingStackView(_ banker: Banker, _ customer: Customer) {
+        DispatchQueue.main.async { [self] in
+            contentView.deleteStackView(customer, to: contentView.workingStackView)
+            
+            if contentView.waitingStackView.arrangedSubviews.isEmpty && contentView.workingStackView.arrangedSubviews.isEmpty {
+                timer?.invalidate()
+            }
+        }
     }
-    
-    
 }
 
 
@@ -111,81 +113,3 @@ struct ViewController_Previews: PreviewProvider {
     }
 }
 #endif
-
-
-//class ViewController: UIViewController {
-//    private let customView = CustomView()
-//    private var timer: Timer? = nil
-//    private var elapsedTime: TimeInterval = 0.000
-//    private let bank = Bank()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view = customView
-//
-//        var queue: Queue<Customer> = Queue()
-//        DispatchQueue.global().async { [self] in
-//            queue = bank.greetCustomer()
-//
-//            DispatchQueue.main.async { [self] in
-//                work()
-//            }
-//        }
-//
-//        startTimer()
-//        La
-//    }
-//
-//    func greetCustomer(_ queue: Queue<Customer>) -> [UIView] {
-//        var views = [UIView]()
-//
-//        var customer = queue.head
-//
-//        while customer != nil {
-//            guard let currentCustomer = customer else {
-//                return views
-//            }
-//            let data = currentCustomer.data
-//            let task = data.task
-//
-//            let customerLabel = UILabel()
-//            customerLabel.textColor = task.name == "대출" ? .systemPurple : .black
-//            customerLabel.text = "\(data.orderNumber) - \(task.name)"
-//            customerLabel.textAlignment = .center
-//            customerLabel.font = .systemFont(ofSize: 20)
-//            views.append(customerLabel)
-//
-//            guard let nextCustomer = currentCustomer.next else {
-//                break
-//            }
-//            customer = nextCustomer
-//        }
-//        return views
-//    }
-//
-//    func work()  {
-//        var customer = bank.startWork()
-//
-////        DispatchQueue.global(qos: .userInteractive).async { [self] in
-////            print("1")
-//            while customer != nil {
-////                print("2")
-//                customer = bank.startWork()
-//                guard let customer = customer else {
-//                    return
-//                }
-//                let task = customer.task
-//
-//
-//                DispatchQueue.main.async { [self] in
-//                    let customerLabel = UILabel()
-//                    customerLabel.textColor = task.name == "대출" ? .systemPurple : .black
-//                    customerLabel.text = "\(customer.orderNumber) - \(task.name)"
-//                    customerLabel.textAlignment = .center
-//                    customerLabel.font = .systemFont(ofSize: 20)
-//                    customView.waitingQueueStackView.addArrangedSubview(customerLabel)
-//                }
-////            }
-//        }
-//    }
-//}

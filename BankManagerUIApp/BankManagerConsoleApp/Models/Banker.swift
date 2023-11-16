@@ -2,12 +2,11 @@ import Foundation
 
 struct Banker {
     func work(for customer: Customer, _ delegate: BankerDelegate?) {
-        let orderNumber = customer.orderNumber
         let task = customer.task
         let processingTime = task.processingTime
         
-        delegate?.addWorkingStackView(orderNumber)
+        delegate?.addWorkingStackView(self, customer)
         Thread.sleep(forTimeInterval: processingTime)
-        delegate?.deleteWorkingStackView(orderNumber)
+        delegate?.deleteWorkingStackView(self, customer)
     }
 }

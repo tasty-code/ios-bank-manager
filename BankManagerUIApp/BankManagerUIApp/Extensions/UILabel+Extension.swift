@@ -1,7 +1,7 @@
 import UIKit
 
 extension UILabel {
-    convenience init(text: String, fontSize: CGFloat = 10, textColor: UIColor = .black, backgroundColor: UIColor = .white, tag: Int = 0) {
+    convenience init(text: String, fontSize: CGFloat = 10, textColor: UIColor = .black, backgroundColor: UIColor = .white) {
         self.init()
         
         self.text = text
@@ -12,6 +12,5 @@ extension UILabel {
         self.numberOfLines = 0
         self.adjustsFontSizeToFitWidth = true
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.tag = tag
     }
 }

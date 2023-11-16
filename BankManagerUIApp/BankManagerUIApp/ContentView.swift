@@ -89,6 +89,7 @@ final class ContentView: UIView {
     private func setConstraint() {
         setContentStackViewConstraint()
         setWaitingStackViewConstraint()
+        setWorkingStackViewConstraint()
     }
     
     private func setContentStackViewConstraint() {
@@ -112,6 +113,16 @@ final class ContentView: UIView {
         ])
     }
     
+    private func setWorkingStackViewConstraint() {
+        NSLayoutConstraint.activate([
+            workingStackView.leadingAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.leadingAnchor),
+            workingStackView.trailingAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.trailingAnchor),
+            workingStackView.topAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.topAnchor),
+            workingStackView.bottomAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.bottomAnchor),
+            workingStackView.widthAnchor.constraint(equalTo: workingScrollView.frameLayoutGuide.widthAnchor)
+        ])
+    }
+    
     func updateTime(_ minutes: Int, _ seconds: Int, _ milliseconds: Int) {
         workingTimeLabel.font = UIFont(name: "HelveticaNeue", size: 20)
         workingTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
@@ -126,22 +137,26 @@ final class ContentView: UIView {
         workingTimeLabel.text = "업무시간 - 00:00:000"
     }
     
-    func addCustomer(_ orderNumber: Int, and taskName: String) {
-        let label = UILabel(text: "\(orderNumber) - \(taskName)", fontSize: 20, tag: orderNumber)
+    func add(_ customer: Customer, to stackView: UIStackView) {
+        let orderNumber = customer.orderNumber
+        let task = customer.task
+        let taskName = task.name
+    
+        let label = UILabel(text: "\(orderNumber) - \(taskName)", fontSize: 20)
 
         if taskName == LoanTask.name {
             label.textColor = .systemPurple
         }
-        
-        waitingStackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(label)
     }
     
-    func deleteWaitingStackView(_ orderNumber: Int) {
-        waitingStackView.arrangedSubviews.forEach { subview in
+    func deleteStackView(_ customer: Customer, to stackView: UIStackView) {
+        let orderNumber = customer.orderNumber
+        stackView.arrangedSubviews.forEach { subview in
             guard let label = subview as? UILabel, let text = label.text else {
                 return
             }
-        
+            
             guard let trimmedText = text.split(separator: " ").first else {
                 return
             }
