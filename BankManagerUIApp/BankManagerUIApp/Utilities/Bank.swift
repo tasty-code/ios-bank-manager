@@ -28,7 +28,7 @@ final class Bank {
     
     func work(completion: @escaping (Bool) -> Void) {
         tellers.forEach { teller in
-            DispatchQueue.global().async(group: dispatchGroup) { [self] in
+            DispatchQueue.global().async(group: dispatchGroup, qos: .userInitiated) { [self] in
                 while customerQueue.isEmpty == false {
                     guard let customer = customerQueue.dequeue() else { return }
                     
@@ -50,6 +50,10 @@ final class Bank {
             
             self.bankManager?.updateWaitingCustomersList(bank: self, customer: customer)
         }
+    }
+    
+    func removeCustomers() {
+        customerQueue.clear()
     }
 }
 

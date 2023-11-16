@@ -72,7 +72,6 @@ extension BankTimer: TimerProtocol {
         timer?.invalidate()
         timer = nil
         timerStatus = .off
-        
         savedTimeStamp = elapsedTime
     }
 }

@@ -197,9 +197,9 @@ extension ViewController {
         }
         
         waitingCustomerLabelsStackView.removeArrangedSubviews(waitingCustomerLabelsStackView.arrangedSubviews)
-        workingCustomerLabelsStackView.removeArrangedSubviews(workingCustomerLabelsStackView.arrangedSubviews)
         
         currentCustomerNumber = Constants.firstCustomerNumber
+        bank.removeCustomers()
     }
     
     private func createCustomerLabel(customer: Customer, in customerStackView: UIStackView) {
