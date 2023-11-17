@@ -7,11 +7,8 @@ import UIKit
 
 final class ViewController: UIViewController {
     private let mainView = BankView()
-    private var bank: Bank = Bank()
-    
-    private var timer: Timer?
-    private var count: Double = 0
-    private var isTimerRunning: Bool = false
+    private let bank = Bank()
+    private let timer = WorkTimer()
     
     override func loadView() {
         view = mainView
@@ -20,115 +17,66 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bank.UIUpdater = self
+        bank.delegate = self
+        timer.delegate = self
+        
         mainView.configureView()
         
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
         mainView.resetButton.addTarget(self, action: #selector(resetButtontapped), for: .touchUpInside)
     }
     
-    @objc func addCustomerButtonTapped() {
-        self.timer?.invalidate()
-        
-        bank.lineUp()
-        bank.startService()
-        
-        isTimerRunning = false
-        
-        guard !isTimerRunning else { return }
-        
-        isTimerRunning = true
-        self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        if let timer = self.timer {
-            RunLoop.main.add(timer, forMode: .common)
-        }
+    @objc private func addCustomerButtonTapped() {
+        bank.lineUpCustomers(amount: 10)
+        timer.start()
+        bank.runService()
     }
     
-    @objc func resetButtontapped() {
-        resetTimer()
-        resetUI()
-    }
-}
-
-extension ViewController {
-    @objc func updateTimer() {
-        count += 0.001
-        let formattedString = formatTimeInterval(count)
-        mainView.workTimeLabel.text = "업무시간 - \(formattedString)"
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        isTimerRunning = false
-    }
-    
-    func resetTimer() {
-        bank.cancelService()
-        stopTimer()
-        timer = nil
-        count = 0
-        
-        let formattedString = formatTimeInterval(count)
-        mainView.workTimeLabel.text = "업무시간 - \(formattedString)"
-    }
-    
-    func formatTimeInterval(_ interval: Double) -> String {
-        let minutes = Int((interval.truncatingRemainder(dividingBy: 3600)) / 60)
-        let seconds = Int(interval.truncatingRemainder(dividingBy: 60))
-        let milliseconds = Int((interval * 1000).truncatingRemainder(dividingBy: 1000))
-        return String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
-    }
-    
-    func resetUI() {
-        mainView.waitingListView.itemListStackView.arrangedSubviews.forEach {
-            mainView.waitingListView.itemListStackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
-        }
-        
-        mainView.workingListView.itemListStackView.arrangedSubviews.forEach {
-            mainView.workingListView.itemListStackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
-            
-        }
+    @objc private func resetButtontapped() {
+        timer.reset()
+        bank.clearLine()
     }
 }
 
 extension ViewController: UIUpdatable {
-    func addLabelToWaitingStation(_ target: Customer) {
-        let label = UILabel(text: "\(target.ticketNumber) - \(target.serviceType.description)", fontSize: 18, textColor: target.serviceType == .deposit ? .black : .systemPurple)
-        mainView.waitingListView.itemListStackView.addArrangedSubview(label)
-    }
-    
-    func moveLabelToWorkStation(_ target: Customer) {
-        let subViews = mainView.waitingListView.itemListStackView.arrangedSubviews
-        
-        for view in subViews {
-            if let label = view as? UILabel, label.text == "\(target.ticketNumber) - \(target.serviceType.description)" {
-                mainView.waitingListView.itemListStackView.removeArrangedSubview(view)
-                view.removeFromSuperview()
-                
-                mainView.workingListView.itemListStackView.addArrangedSubview(view)
-            }
+    func updateTimerLabel(_ workTime: Double) {
+        updateUI {
+            self.mainView.updateWorkTime(workTime)
         }
     }
     
-    func removeLabelWhenFinished(_ target: Customer) {
-        let labelText = "\(target.ticketNumber) - \(target.serviceType.description)"
-        let subView = mainView.workingListView.itemListStackView.arrangedSubviews.filter {
-            guard let label = $0 as? UILabel else { return false }
-            return label.text == labelText
-        }.first
-        
-        guard let subView = subView else { return }
-        
-        mainView.workingListView.itemListStackView.removeArrangedSubview(subView)
-        subView.removeFromSuperview()
+    func addCustomerLabel(_ customer: Customer) {
+        updateUI {
+            let text = UIText.customerLabel(ticketNumber: customer.ticketNumber, serviceType: customer.serviceType).displayText
+            let label = UILabel(text: text, fontSize: 23, textColor: customer.serviceType == .deposit ? .black : .systemPurple)
+            self.mainView.addLabelToWaitingStation(label)
+        }
     }
     
-    func stopTimerWhenAllWorkDone() {
-        DispatchQueue.main.async { [weak self] in
-            if self?.mainView.waitingListView.itemListStackView.arrangedSubviews.count == 0 {
-                self?.stopTimer()
+    func moveCustomerLabel(_ target: Customer) {
+        let targetText = UIText.customerLabel(ticketNumber: target.ticketNumber, serviceType: target.serviceType).displayText
+        updateUI {
+            self.mainView.moveLabelToWorkStation(targetText)
+        }
+    }
+    
+    func removeCustomerLabel(_ target: Customer) {
+        let targetText = UIText.customerLabel(ticketNumber: target.ticketNumber, serviceType: target.serviceType).displayText
+        updateUI {
+            self.mainView.removeLabelFromWorkStation(targetText)
+        }
+    }
+    
+    func resetAllCustomerLabel() {
+        updateUI {
+            self.mainView.resetAllStation()
+        }
+    }
+    
+    func stopTimer() {
+        updateUI {
+            if self.mainView.checkAllStationsEmpty() {
+                self.timer.stop()
             }
         }
     }

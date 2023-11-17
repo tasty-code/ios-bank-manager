@@ -7,36 +7,29 @@
 
 import Foundation
 
-protocol UIUpdatable: AnyObject {
-    func addLabelToWaitingStation(_ target: Customer)
-    func removeLabelWhenFinished(_ target: Customer)
-    func moveLabelToWorkStation(_ target: Customer)
-    func stopTimerWhenAllWorkDone()
-}
-
 final class Bank {
     private let serviceList: [ServiceType: BankServiceExecutor]
     private let waitingLine = Queue<Customer>()
-    private var numberOfCurrentCustomer: Int = 0
+    private var numberOfCurrentCustomer = 0
     
-    weak var UIUpdater: UIUpdatable?
+    weak var delegate: UIUpdatable?
     
     init() {
         var list = [ServiceType: BankServiceExecutor]()
         
-        for i in ServiceType.allCases {
-            list[i] = BankServiceExecutor(type: i)
+        for serviceType in ServiceType.allCases {
+            list[serviceType] = BankServiceExecutor(type: serviceType)
         }
         
         self.serviceList = list
     }
     
-    func lineUp() {
+    func lineUpCustomers(amount: Int) {
         let offset = numberOfCurrentCustomer + 1
-        for i in offset..<offset + 10 {
+        for i in offset..<offset + amount {
             let customer = Customer(ticketNumber: i)
             waitingLine.enqueue(customer)
-            UIUpdater?.addLabelToWaitingStation(customer)
+            delegate?.addCustomerLabel(customer)
         }
         
         numberOfCurrentCustomer += 10
@@ -45,29 +38,24 @@ final class Bank {
     func clearLine() {
         waitingLine.clear()
         numberOfCurrentCustomer = 0
+        delegate?.resetAllCustomerLabel()
     }
-
-    func startService() {
-        while !waitingLine.isEmpty {
-            guard let currentCustomer = waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
-            
-            let taskBlock = BlockOperation {
-                DispatchQueue.main.async {
-                    self.UIUpdater?.moveLabelToWorkStation(currentCustomer)
+    
+    func runService() {
+        DispatchQueue.global().async { 
+            while !self.waitingLine.isEmpty {
+                guard let currentCustomer = self.waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
+                
+                let taskBlock = BlockOperation {
+                    self.delegate?.moveCustomerLabel(currentCustomer)
+                    self.provideService(to: currentCustomer)
+                    self.delegate?.removeCustomerLabel(currentCustomer)
                 }
                 
-                self.provideService(to: currentCustomer)
-                DispatchQueue.main.async {
-                    self.UIUpdater?.removeLabelWhenFinished(currentCustomer)
-                }
+                queue.work(taskBlock)
             }
-
-            queue.work(taskBlock)
-            
+            self.didFinishAllWork()
         }
-        
-        guard let closure = UIUpdater?.stopTimerWhenAllWorkDone else { return }
-        finishService(closure)
     }
     
     func provideService(to target: Customer) {
@@ -77,14 +65,16 @@ final class Bank {
         usleep(durationTime)
     }
     
-    func cancelService() {
+    func cancelAllWork() {
         serviceList.values.forEach { $0.cancel() }
         clearLine()
     }
     
-    func finishService(_ closure: @escaping () -> Void) {
+    func didFinishAllWork() {
         serviceList.values.forEach {
-            $0.notify(closure)
+            $0.notify {
+                self.delegate?.stopTimer()
+            }
         }
     }
 }
