@@ -7,8 +7,38 @@
 import UIKit
 
 final class ViewController: UIViewController {
+    // MARK: Namespace
+    private enum Constants {
+        case addCustomersButton
+        case resetButton
+        case timerLabel(accumulatedTimes: String)
+        case waitingLabel
+        case workingLabel
+        
+        var title: String {
+            switch self {
+            case .addCustomersButton:
+                "고객 10명 추가"
+            case .resetButton:
+                "초기화"
+            case .timerLabel(let accumulatedTimes):
+                "업무시간 - \(accumulatedTimes)"
+            case .waitingLabel:
+                "대기중"
+            case .workingLabel:
+                "업무중"
+            }
+        }
+        
+        static let defaultSpacing: CGFloat = 14
+        static let labelsSpacing: CGFloat = 8
+        static let customerGatheringQuantityLimit: Int = 10
+        static let firstCustomerNumber: Int = 1
+        static let initialAccumulatedTimes: String = "00:00:000"
+    }
+    
     // MARK: Properties
-    private lazy var bank: Bank = Bank(self)
+    private lazy var bank: Bank = Bank(bankDelegate: self)
     private let timer: TimerProtocol = BankTimer(timeInterval: 0.001)
     private var currentCustomerNumber: Int = 1
     
@@ -139,44 +169,11 @@ extension ViewController {
     }
 }
 
-// MARK: Nested Types
-extension ViewController {
-    // MARK: Namespace
-    private enum Constants {
-        case addCustomersButton
-        case resetButton
-        case timerLabel(accumulatedTimes: String)
-        case waitingLabel
-        case workingLabel
-        
-        var title: String {
-            switch self {
-            case .addCustomersButton:
-                "고객 10명 추가"
-            case .resetButton:
-                "초기화"
-            case .timerLabel(let accumulatedTimes):
-                "업무시간 - \(accumulatedTimes)"
-            case .waitingLabel:
-                "대기중"
-            case .workingLabel:
-                "업무중"
-            }
-        }
-        
-        static let defaultSpacing: CGFloat = 14
-        static let labelsSpacing: CGFloat = 8
-        static let customerGatheringQuantityLimit: Int = 10
-        static let firstCustomerNumber: Int = 1
-        static let initialAccumulatedTimes: String = "00:00:000"
-    }
-}
-
 // MARK: Private Methods
 extension ViewController {
     @objc private func addCustomers() {
         timer.fire { [self] timeText in
-            self.timerLabel.text = Constants.timerLabel(accumulatedTimes: timeText).title
+            timerLabel.text = Constants.timerLabel(accumulatedTimes: timeText).title
         }
         
         gatherCustomers(

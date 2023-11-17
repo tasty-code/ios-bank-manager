@@ -20,7 +20,7 @@ final class BankTimer {
     
     private var timer: Timer?
     private let timeInterval: TimeInterval
-    private var dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "mm:ss:SSS"
         return formatter
