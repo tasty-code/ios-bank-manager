@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankServiceExecutor {
+final class BankServiceExecutor {
     private let queue: OperationQueue
     
     init(type: ServiceType) {
@@ -15,10 +15,16 @@ struct BankServiceExecutor {
     }
     
     func work(_ task: BlockOperation) {
-        queue.addOperation(task)
+        if !task.isCancelled {
+            queue.addOperation(task)
+        }
     }
     
-    func wait() {
-        queue.waitUntilAllOperationsAreFinished()
+    func cancel() {
+        queue.cancelAllOperations()
+    }
+    
+    func notify(_ closure: @escaping () -> Void) {
+        queue.addBarrierBlock(closure)
     }
 }
