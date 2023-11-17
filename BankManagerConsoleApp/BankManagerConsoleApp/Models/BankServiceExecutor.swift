@@ -20,10 +20,6 @@ final class BankServiceExecutor {
         }
     }
     
-    func wait() {
-        queue.waitUntilAllOperationsAreFinished()
-    }
-    
     func cancel() {
         queue.cancelAllOperations()
     }

@@ -43,7 +43,7 @@ final class Bank {
     }
     
     func runService() {
-        DispatchQueue.global().async { 
+        DispatchQueue.global().async {
             while !self.waitingLine.isEmpty {
                 guard let currentCustomer = self.waitingLine.dequeue(), let queue = self.serviceList[currentCustomer.serviceType] else { return }
                 
@@ -60,18 +60,18 @@ final class Bank {
         }
     }
     
-    func provideService(to target: Customer) {
+    private func provideService(to target: Customer) {
         let serviceType = target.serviceType
         let durationTime: UInt32 = UInt32(serviceType.duration * 1_000_000)
         
         usleep(durationTime)
     }
     
-    func cancelAllWork() {
+    private func cancelAllWork() {
         serviceList.values.forEach { $0.cancel() }
     }
     
-    func didFinishAllWork() {
+    private func didFinishAllWork() {
         serviceList.values.forEach {
             $0.notify {
                 self.delegate?.stopTimer()
