@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UIUpdatable: AnyObject {
+protocol UIUpdateDelegate: AnyObject {
     func updateUI(_ handler: @escaping () -> Void)
     func addCustomerLabel(_ customer: Customer)
     func moveCustomerLabel(_ customer: Customer)
@@ -18,7 +18,7 @@ protocol UIUpdatable: AnyObject {
     func stopTimer()
 }
 
-extension UIUpdatable {
+extension UIUpdateDelegate {
     func updateUI(_ handler: @escaping () -> Void) {
         DispatchQueue.main.async {
             handler()

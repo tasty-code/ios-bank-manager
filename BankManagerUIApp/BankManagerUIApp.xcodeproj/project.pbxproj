@@ -16,7 +16,7 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		E18D0E862B071F5600F35C68 /* UIText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D0E852B071F5600F35C68 /* UIText.swift */; };
-		E18D0E892B071F7100F35C68 /* UIUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D0E872B071F7100F35C68 /* UIUpdatable.swift */; };
+		E18D0E892B071F7100F35C68 /* UIUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D0E872B071F7100F35C68 /* UIUpdateDelegate.swift */; };
 		E18D0E8A2B071F7100F35C68 /* WorkTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D0E882B071F7100F35C68 /* WorkTimer.swift */; };
 		E1D68BF22B02019200E9008D /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BE92B02019200E9008D /* OperationQueue.swift */; };
 		E1D68BF32B02019200E9008D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68BEA2B02019200E9008D /* Double.swift */; };
@@ -64,7 +64,7 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E18D0E852B071F5600F35C68 /* UIText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIText.swift; sourceTree = "<group>"; };
-		E18D0E872B071F7100F35C68 /* UIUpdatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUpdatable.swift; sourceTree = "<group>"; };
+		E18D0E872B071F7100F35C68 /* UIUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUpdateDelegate.swift; sourceTree = "<group>"; };
 		E18D0E882B071F7100F35C68 /* WorkTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkTimer.swift; sourceTree = "<group>"; };
 		E1D68BE92B02019200E9008D /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		E1D68BEA2B02019200E9008D /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		E1D68C062B0338FA00E9008D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E18D0E872B071F7100F35C68 /* UIUpdatable.swift */,
+				E18D0E872B071F7100F35C68 /* UIUpdateDelegate.swift */,
 				E18D0E882B071F7100F35C68 /* WorkTimer.swift */,
 				E1D68C092B03391F00E9008D /* BankServiceExecutor.swift */,
 				E1D68C082B03391F00E9008D /* Customer.swift */,
@@ -352,7 +352,7 @@
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				E18D0E862B071F5600F35C68 /* UIText.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
-				E18D0E892B071F7100F35C68 /* UIUpdatable.swift in Sources */,
+				E18D0E892B071F7100F35C68 /* UIUpdateDelegate.swift in Sources */,
 				E1D68C0E2B03391F00E9008D /* Queue.swift in Sources */,
 				E18D0E8A2B071F7100F35C68 /* WorkTimer.swift in Sources */,
 				E1D68C0C2B03391F00E9008D /* Customer.swift in Sources */,
