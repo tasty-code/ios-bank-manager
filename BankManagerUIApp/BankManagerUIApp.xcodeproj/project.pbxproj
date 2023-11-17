@@ -122,8 +122,8 @@
 			children = (
 				A6D685CD2B03463F005C70A6 /* Tasks */,
 				A6D685D02B03463F005C70A6 /* QueueManager.swift */,
-				A6D685D12B03463F005C70A6 /* Models */,
 				A6D685D72B03463F005C70A6 /* Bank.swift */,
+				A6D685D12B03463F005C70A6 /* Models */,
 				A6D685D92B03463F005C70A6 /* Protocols */,
 			);
 			path = BankManagerConsoleApp;
