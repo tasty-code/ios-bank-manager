@@ -36,6 +36,7 @@ final class Bank {
     }
     
     func clearLine() {
+        cancelAllWork()
         waitingLine.clear()
         numberOfCurrentCustomer = 0
         delegate?.resetAllCustomerLabel()
@@ -54,6 +55,7 @@ final class Bank {
                 
                 queue.work(taskBlock)
             }
+            
             self.didFinishAllWork()
         }
     }
@@ -67,7 +69,6 @@ final class Bank {
     
     func cancelAllWork() {
         serviceList.values.forEach { $0.cancel() }
-        clearLine()
     }
     
     func didFinishAllWork() {
