@@ -1,59 +1,50 @@
 import Foundation
 
 final class Bank {
-    private weak var delegate: BankerDelegate?
+    private weak var bankerDelegate: BankerDelegate?
+    private weak var bankDelegate: BankDelegate?
     private var queueManager: QueueManager
     private var banker: Banker
-    private var customerCount: Int
+    private var totalCustomerCount: Int
     private var elapsedTime: Double
     private var isReset: Bool = false
     
-    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0, delegate: BankerDelegate) {
+    init(queueManager: QueueManager = QueueManager(), banker: Banker = Banker(), customerCount: Int = 0, elapsedTime: Double = 0.0, bankerDelegate: BankerDelegate, bankDelegate: BankDelegate) {
         self.queueManager = queueManager
         self.banker = banker
-        self.customerCount = customerCount
+        self.totalCustomerCount = customerCount
         self.elapsedTime = elapsedTime
-        self.delegate = delegate
-    }
-        
-    func prepareCloseWork() {
-        customerCount = 0
-        queueManager.clearQueue()
-        isReset = true
+        self.bankerDelegate = bankerDelegate
+        self.bankDelegate = bankDelegate
     }
     
-    func greetCustomer() -> Queue<Customer> {
-        let range = customerCount + 1
+    func greetCustomer() {
+        let nowCustomerCount = totalCustomerCount + 1
         
-        if customerCount != 0 {
-            customerCount += 10
-        } else {
-            customerCount = Int.random(in: 10...30)
-        }
+        totalCustomerCount = (totalCustomerCount != 0) ? (totalCustomerCount + 10) : Int.random(in: 10...30)
         
         let queue = queueManager.getQueue()
         
-        for index in range...customerCount {
+        for index in nowCustomerCount...totalCustomerCount {
             let newCustomer = Customer(orderNumber: index, task: selectRandomTask())
              
             queue.enqueue(newCustomer)
         }
-    
-        return queue
     }
 
     func startWork() {
         isReset = false
-        DispatchQueue.global(qos: .userInteractive).async { [self] in
+        
+        DispatchQueue.global().async { [self] in
             let queue = queueManager.getQueue()
             let group = DispatchGroup()
             
             while !queue.isEmpty() {
                 let customer = queue.dequeue()
-                
                 guard let customer = customer else {
                     return
                 }
+                bankDelegate?.addWaitingStackView(self, customer)
                 
                 insert(customer, group)
             }
@@ -61,17 +52,23 @@ final class Bank {
         }
     }
     
+    func prepareCloseWork() {
+        totalCustomerCount = 0
+        queueManager.clearQueue()
+        isReset = true
+    }
+    
     private func insert(_ customer: Customer, _ group: DispatchGroup) {
         let task = customer.task
         let semaphore = task.semaphore
         
         DispatchQueue.global(qos: .background).async(group: group) { [weak self] in
-            guard let self = self else { 
+            guard let self = self else {
                 return
             }
             
             semaphore.wait()
-            self.banker.work(for: customer, self.delegate, self.isReset)
+            self.banker.work(self.bankerDelegate, for: customer, self.isReset)
             semaphore.signal()
         }
     }

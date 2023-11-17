@@ -1,7 +1,7 @@
 import Foundation
 
 struct Banker {
-    func work(for customer: Customer, _ delegate: BankerDelegate?, _ isReset: Bool) {
+    func work(_ delegate: BankerDelegate?, for customer: Customer, _ isReset: Bool) {
         let task = customer.task
         let processingTime = task.processingTime
         
