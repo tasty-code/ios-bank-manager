@@ -11,7 +11,7 @@ final class WorkTimer {
     private var timer: Timer?
     private var count: Double = 0
     
-    weak var delegate: UIUpdatable?
+    weak var delegate: UIUpdateDelegate?
     
     func start() {
         timer?.invalidate()

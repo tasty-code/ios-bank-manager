@@ -1,5 +1,5 @@
 //
-//  UIUpdatable.swift
+//  UIUpdateDelegate.swift
 //  BankManagerUIApp
 //
 //  Created by Janine on 11/17/23.

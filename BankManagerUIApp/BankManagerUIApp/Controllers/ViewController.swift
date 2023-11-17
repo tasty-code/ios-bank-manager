@@ -38,7 +38,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UIUpdatable {
+extension ViewController: UIUpdateDelegate {
     func updateTimerLabel(_ workTime: Double) {
         updateUI {
             self.mainView.updateWorkTime(workTime)

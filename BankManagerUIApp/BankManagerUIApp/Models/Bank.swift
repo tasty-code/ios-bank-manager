@@ -12,7 +12,7 @@ final class Bank {
     private let waitingLine = Queue<Customer>()
     private var numberOfCurrentCustomer = 0
     
-    weak var delegate: UIUpdatable?
+    weak var delegate: UIUpdateDelegate?
     
     init() {
         var list = [ServiceType: BankServiceExecutor]()
