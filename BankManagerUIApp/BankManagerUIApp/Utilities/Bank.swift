@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BankDelegate: TellerWorkingStateNotifiable, AnyObject {
+protocol BankDelegate: TellerWorkingStateNotifiable {
     func gatherCustomers(bank: Bank, from startCount: Int, to endCount: Int)
     func updateWaitingCustomersList(bank: Bank, customer: Customer)
     func updateWorkingCustomersList(bank: Bank, customer: Customer)
@@ -21,14 +21,14 @@ final class Bank {
     private var totalServicedTimes: TimeInterval = 0.0
     private weak var bankManager: BankDelegate?
     
-    init(_ bankManager: BankDelegate) {
+    init(bankDelegate bankManager: BankDelegate) {
         self.tellers = [Teller(tellerCount: 2, bankManager: bankManager), Teller(tellerCount: 1, bankManager: bankManager)]
         self.bankManager = bankManager
     }
     
     func work(completion: @escaping (Bool) -> Void) {
         tellers.forEach { teller in
-            DispatchQueue.global().async(group: dispatchGroup, qos: .userInitiated) { [self] in
+            DispatchQueue.global().async(group: dispatchGroup, qos: .background) { [self] in
                 while customerQueue.isEmpty == false {
                     guard let customer = customerQueue.dequeue() else { return }
                     
@@ -64,7 +64,7 @@ extension Bank {
             servicedCustomersCount += 1
             totalServicedTimes += customer.workType.timeCost
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.bankManager?.updateWorkingCustomersList(bank: self, customer: customer)
             }
         }

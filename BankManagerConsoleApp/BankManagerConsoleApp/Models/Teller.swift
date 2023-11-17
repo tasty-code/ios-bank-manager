@@ -27,7 +27,7 @@ struct Teller: TellerProtocol {
     func service(to customer: Customer, completion: @escaping () -> Void) {
         semaphore.wait()
         
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.bankManager?.notifyCustomerDidMatch(teller: self, customer: customer)
         }
         
