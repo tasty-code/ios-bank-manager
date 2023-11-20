@@ -92,22 +92,26 @@ protocol ManagingForClientLabel: AnyObject {
 extension ViewController: ManagingForClientLabel {
     func move(who client: Client) {
         DispatchQueue.main.async { [unowned self] in
-            bankView.waitingStackView.arrangedSubviews.forEach { view in
-                guard let clientLabel = view as? ClientLabel else { return }
-                guard clientLabel.client.id == client.id else { return }
-                clientLabel.removeFromSuperview()
+            let clientLabel = bankView.waitingStackView.arrangedSubviews.first { view in
+                guard let clientLabel = view as? ClientLabel else {
+                    return false
+                }
+                return clientLabel.client.id == client.id
             }
+            clientLabel?.removeFromSuperview()
             bankView.taskingStackView.addArrangedSubview(ClientLabel(client: client))
         }
     }
     
     func remove(who client: Client) {
         DispatchQueue.main.async { [unowned self] in
-            bankView.taskingStackView.arrangedSubviews.forEach { view in
-                guard let clientLabel = view as? ClientLabel else { return }
-                guard clientLabel.client.id == client.id else { return }
-                clientLabel.removeFromSuperview()
+            let clientLabel = bankView.taskingStackView.arrangedSubviews.first { view in
+                guard let clientLabel = view as? ClientLabel else {
+                    return false
+                }
+                return clientLabel.client.id == client.id
             }
+            clientLabel?.removeFromSuperview()
         }
     }
 }
