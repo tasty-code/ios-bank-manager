@@ -32,7 +32,8 @@ final class ViewController: UIViewController {
         bankView.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func addClientButtonTapped() {
+    @objc 
+    private func addClientButtonTapped() {
         for number in count...count + 9 {
             let client = Client(id: number)
             bank.visit(client: client)
@@ -54,7 +55,8 @@ final class ViewController: UIViewController {
         }
     }
     
-    @objc private func resetButtonTapped() {
+    @objc 
+    private func resetButtonTapped() {
         bank.stop()
         
         bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -68,7 +70,8 @@ final class ViewController: UIViewController {
         count = 1
     }
     
-    @objc private func runningTimer() {
+    @objc 
+    private func runningTimer() {
         let minutes = Int(processingTime) / 60
         let seconds = Int(processingTime) % 60
         let milliSeconds = Int((processingTime.truncatingRemainder(dividingBy: 1)) * 1000)
