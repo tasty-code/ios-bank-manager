@@ -42,7 +42,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    let waitingStackView: UIStackView = {
+    private let waitingStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, distribution: .fillEqually)
         return stackView
     }()
@@ -52,7 +52,7 @@ final class BankView: UIView {
         return scrollView
     }()
     
-    let workingStackView: UIStackView = {
+    private let workingStackView: UIStackView = {
         let stackView = UIStackView(axis: .vertical, distribution: .fillEqually)
         return stackView
     }()
@@ -123,21 +123,47 @@ final class BankView: UIView {
         ])
     }
     
-    func updateTime(_ minutes: Int, _ seconds: Int, _ milliseconds: Int) {
+    func updateTimer(_ minutes: Int, _ seconds: Int, _ milliseconds: Int) {
         workingTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliseconds)
     }
     
-    func add(_ customer: Customer, to stackView: UIStackView) {
+    func addWaitingStackView(_ customer: Customer) {
         let label = UILabel(text: "\(customer.orderNumber) - \(customer.task.name)", fontSize: 20)
 
         if customer.task.name == LoanTask.name {
             label.textColor = .systemPurple
         }
-        stackView.addArrangedSubview(label)
+        waitingStackView.addArrangedSubview(label)
     }
     
-    func delete(_ customer: Customer, from stackView: UIStackView) {
-        stackView.arrangedSubviews.forEach { subview in
+    func addWorkingStackView(_ customer: Customer) {
+        let label = UILabel(text: "\(customer.orderNumber) - \(customer.task.name)", fontSize: 20)
+
+        if customer.task.name == LoanTask.name {
+            label.textColor = .systemPurple
+        }
+        workingStackView.addArrangedSubview(label)
+    }
+    
+    func deleteWaitingStackView(_ customer: Customer) {
+        waitingStackView.arrangedSubviews.forEach { subview in
+            guard let label = subview as? UILabel, let text = label.text else {
+                return
+            }
+            
+            guard let trimmedText = text.split(separator: " ").first else {
+                return
+            }
+            
+            if trimmedText == "\(customer.orderNumber)" {
+                label.removeFromSuperview()
+                return
+            }
+        }
+    }
+    
+    func deleteWorkingStackView(_ customer: Customer) {
+        workingStackView.arrangedSubviews.forEach { subview in
             guard let label = subview as? UILabel, let text = label.text else {
                 return
             }
@@ -160,5 +186,11 @@ final class BankView: UIView {
     func resetCustomer() {
         waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func checkInvalidate(completion: () -> Void) {
+        if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubviews.isEmpty {
+            completion()
+        }
     }
 }

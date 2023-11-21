@@ -39,7 +39,7 @@ final class BankViewController: UIViewController {
                 return
             }
             
-            bankView.updateTime(minutes, seconds, milliseconds)
+            bankView.updateTimer(minutes, seconds, milliseconds)
         }
         elapsedTime += 0.001
     }
@@ -76,7 +76,7 @@ extension BankViewController: BankDelegate {
                 return
             }
             
-            bankView.add(customer, to: bankView.waitingStackView)
+            bankView.addWaitingStackView(customer)
         }
     }
 }
@@ -88,8 +88,8 @@ extension BankViewController: BankerDelegate {
                 return
             }
             
-            bankView.delete(customer, from: bankView.waitingStackView)
-            bankView.add(customer, to: bankView.workingStackView)
+            bankView.deleteWaitingStackView(customer)
+            bankView.addWorkingStackView(customer)
         }
     }
     
@@ -99,10 +99,10 @@ extension BankViewController: BankerDelegate {
                 return
             }
             
-            bankView.delete(customer, from: bankView.workingStackView)
+            bankView.deleteWorkingStackView(customer)
             
-            if bankView.waitingStackView.arrangedSubviews.isEmpty && bankView.workingStackView.arrangedSubviews.isEmpty {
-                timer.invalidate()
+            bankView.checkInvalidate {
+                self.timer.invalidate()
             }
         }
     }
