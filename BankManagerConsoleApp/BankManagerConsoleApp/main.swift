@@ -1,1 +1,0 @@
-BankManager().run()
