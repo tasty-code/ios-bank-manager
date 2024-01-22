@@ -14,9 +14,12 @@ final class Node<T> {
 }
 
 final class LinkedList<T> {
-
+    
     private var head: Node<T>?
     
+    var isEmpty: Bool  {
+        return head == nil ? true : false
+    }
 }
 
 // MARK: - Methods
@@ -112,10 +115,5 @@ extension LinkedList {
     
     func removeAll() {
         head = nil
-    }
-    
-    /// Validate
-    func isEmpty() -> Bool {
-        return head == nil
     }
 }
