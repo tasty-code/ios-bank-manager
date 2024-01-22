@@ -1,3 +1,9 @@
+//
+//  LinkedList.swift
+//  BankManagerConsoleApp
+//
+//  Created by EUNJU on 2024/01/22.
+//
 
 import Foundation
 
