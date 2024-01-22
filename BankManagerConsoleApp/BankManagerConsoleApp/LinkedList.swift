@@ -1,21 +1,21 @@
 
 import Foundation
 
-final class Node {
-    var data: Int
+final class Node<T> {
+    var data: T
     var next: Node?
     
-    init(_ data: Int, _ next: Node? = nil) {
+    init(_ data: T, _ next: Node? = nil) {
         self.data = data
         self.next = next
     }
     
-    deinit { print("Node has benn deinit.") }
+    deinit { print("Node has been deinitialized.") }
 }
 
-final class LinkedList {
-    
-    private var head: Node?
+final class LinkedList<T> {
+
+    private var head: Node<T>?
     
 }
 
@@ -23,13 +23,13 @@ final class LinkedList {
 extension LinkedList {
     
     /// Add
-    func addFront(_ data: Int) {
+    func addFront(_ data: T) {
         let newNode = Node(data)
         newNode.next = head
         head = newNode
     }
     
-    func addBack(_ data: Int) {
+    func addBack(_ data: T) {
         let newNode = Node(data)
         
         if head == nil {
@@ -37,14 +37,15 @@ extension LinkedList {
             return
         }
         
-        var node = head ?? nil
+        var node = head
         
         while(node?.next != nil) {
-            node = node?.next ?? nil
+            node = node?.next
         }
+        node?.next = newNode
     }
     
-    func insert(position: Int, data: Int) {
+    func insert(position: Int, data: T) {
         if position == 0 {
             addFront(data)
             return
@@ -54,29 +55,26 @@ extension LinkedList {
         var currentNode = head
         
         for _ in 0..<position-1 {
-            currentNode = currentNode?.next ?? nil
+            currentNode = currentNode?.next
         }
         newNode.next = currentNode?.next
         currentNode?.next = newNode
     }
     
     /// Get
-    func getLast() -> Int? {
+    func getLast() -> T? {
         if head == nil {
             return nil
         }
-        var node = head ?? nil
+        var node = head
         
         while(node?.next != nil) {
-            node = node?.next ?? nil
+            node = node?.next
         }
         return node?.data
     }
     
-    func getFirst() -> Int? {
-        if head == nil {
-            return nil
-        }
+    func getFirst() -> T? {
         return head?.data
     }
 
@@ -87,8 +85,8 @@ extension LinkedList {
     
     func removeLast() {
         var nextNode = head
-        var previousNode: Node?
-        
+        var previousNode: Node<T>?
+
         while(nextNode?.next != nil) {
             previousNode = nextNode
             nextNode = nextNode?.next
@@ -103,7 +101,7 @@ extension LinkedList {
         }
         
         var nextNode = head
-        var previousNode: Node?
+        var previousNode: Node<T>?
         
         for _ in 0..<position {
             previousNode = nextNode

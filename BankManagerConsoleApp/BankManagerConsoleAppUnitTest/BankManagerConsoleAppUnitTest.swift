@@ -12,4 +12,5 @@ final class LinkedListUnitTest: XCTestCase {
 
     func testExample() throws {
     }
+
 }
