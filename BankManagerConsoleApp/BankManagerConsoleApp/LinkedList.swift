@@ -19,7 +19,7 @@ final class Node<T> {
     deinit { print("Node has been deinitialized.") }
 }
 
-final class LinkedList<T> {
+struct LinkedList<T> {
     
     var head: Node<T>?
     
@@ -32,7 +32,7 @@ final class LinkedList<T> {
 extension LinkedList {
     
     /// Add    
-    func addBack(_ data: T) {
+    mutating func addBack(_ data: T) {
         let newNode = Node(data)
         
         if head == nil {
@@ -49,18 +49,18 @@ extension LinkedList {
     }
     
     /// Get
-    func getFirst() -> T? {
+    mutating func getFirst() -> T? {
         return head?.data
     }
 
     /// Remove
-    func removeFirst() -> T? {
+    mutating func removeFirst() -> T? {
         let currentHead = head
         head = head?.next
         return currentHead?.data
     }
             
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
     }
 }
