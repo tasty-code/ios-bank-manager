@@ -16,6 +16,7 @@
 		F447FC3A2B5E8053002A2692 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447FC392B5E8053002A2692 /* Node.swift */; };
 		F4EDF9F72B5F749400C3E54C /* BankManagerConsoleAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDF9F62B5F749400C3E54C /* BankManagerConsoleAppTest.swift */; };
 		F4EDFA002B5F758400C3E54C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447FC392B5E8053002A2692 /* Node.swift */; };
+		F4EDFA022B5FADF200C3E54C /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDFA012B5FADF200C3E54C /* LinkedListTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,7 @@
 		F447FC392B5E8053002A2692 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F4EDF9F42B5F749400C3E54C /* BankManagerConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EDF9F62B5F749400C3E54C /* BankManagerConsoleAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTest.swift; sourceTree = "<group>"; };
+		F4EDFA012B5FADF200C3E54C /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				F4EDF9F62B5F749400C3E54C /* BankManagerConsoleAppTest.swift */,
+				F4EDFA012B5FADF200C3E54C /* LinkedListTest.swift */,
 			);
 			path = BankManagerConsoleAppTest;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				F4EDF9F72B5F749400C3E54C /* BankManagerConsoleAppTest.swift in Sources */,
 				F4EDFA002B5F758400C3E54C /* Node.swift in Sources */,
 				2733E4FE2B5FA11B00785607 /* Queue.swift in Sources */,
+				F4EDFA022B5FADF200C3E54C /* LinkedListTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +383,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = K9NKZR257N;
+				DEVELOPMENT_TEAM = Y67S3384LP;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -401,7 +405,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = K9NKZR257N;
+				DEVELOPMENT_TEAM = Y67S3384LP;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
