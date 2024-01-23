@@ -22,6 +22,7 @@ class QueueUnitTests<T>: BaseTestCase {
     }
 }
 
+// MARK: - Queue Integer타입 유닛테스트
 final class IntegerQueueUnitTests: QueueUnitTests<Int> {
     
     // MARK: isEmpty
@@ -164,6 +165,7 @@ final class IntegerQueueUnitTests: QueueUnitTests<Int> {
     }
 }
 
+// MARK: - Queue String타입 유닛테스트
 final class StringQueueUnitTests: QueueUnitTests<String> {
     
     // MARK: isEmpty
