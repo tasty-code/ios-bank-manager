@@ -22,7 +22,6 @@ class LinkedListUnitTests<T>: BaseTestCase {
     }
 }
 
-
 final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
     
     func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
@@ -31,7 +30,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
         
         when {
-            sut.addBack(1)
+            sut.append(1)
         }
         
         then {
@@ -45,8 +44,8 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
         
         when {
-            sut.addBack(1)
-            sut.addBack(2)
+            sut.append(1)
+            sut.append(2)
         }
         
         then {
@@ -138,7 +137,7 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         when {
-            sut.addBack("가")
+            sut.append("가")
         }
         
         then {
@@ -152,8 +151,8 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         when {
-            sut.addBack("가")
-            sut.addBack("나")
+            sut.append("가")
+            sut.append("나")
         }
         
         then {

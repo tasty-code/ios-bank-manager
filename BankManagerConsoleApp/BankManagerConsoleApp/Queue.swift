@@ -19,7 +19,7 @@ struct Queue<T> {
 extension Queue {
     
     mutating func enqueue(_ element: T) {
-        queue.addBack(element)
+        queue.append(element)
     }
     
     mutating func dequeue() -> T? {

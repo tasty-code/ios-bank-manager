@@ -32,7 +32,7 @@ struct LinkedList<T> {
 extension LinkedList {
     
     /// Add    
-    mutating func addBack(_ data: T) {
+    mutating func append(_ data: T) {
         let newNode = Node(data)
         
         if head == nil {
