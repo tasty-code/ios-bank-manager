@@ -5,7 +5,7 @@
 //  Created by Effie on 1/22/24.
 //
 
-class Node<Value> {
+final class Node<Value> {
     let value: Value
     var next: Node?
     
