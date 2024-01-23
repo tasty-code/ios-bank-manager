@@ -19,54 +19,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
         self.sut = nil
     }
     
-    func test_노드가_없을때_dequeue하면_남은_노드의_개수는_0이다() throws {
-        // given
-        
-        // when
-        self.sut.dequeue()
-        
-        // then
-        XCTAssertEqual(self.sut.linkedList.count, 0)
-    }
-    
-    func test_node가_하나일때_dequeue를_하면_some을_리턴한다() throws {
-        // given
-        self.sut = Queue(linkedList: .init(head: .init(value: "Effie")))
-        
-        // when
-        let result = self.sut.dequeue()
-        
-        // then
-        XCTAssertNotNil(result)
-    }
-    
-    func test_node가_하나일때_dequeue를_하면_isEmpty가_true다() throws {
-        // given
-        self.sut = Queue(linkedList: .init(head: .init(value: "Effie")))
-        
-        // when
-        self.sut.dequeue()
-        let result = self.sut.isEmpty
-        
-        // then
-        XCTAssertTrue(result)
-    }
-    
-    func test_node가_없을때_enqueue하면_isEmpty가_false이다() throws {
-        // given
-        self.sut = Queue()
-        
-        // when
-        self.sut.enqueue("Effie")
-        let result = self.sut.isEmpty
-        
-        // then
-        XCTAssertFalse(result)
-    }
-    
-    //    func test_node가_있을때_clear하면
-    
-    func test_node가_없을때_peek하면_nil을_리턴한다() throws {
+    // 1. Peek
+    func test_큐가_비어있을때_peek을_하면_nil을_리턴한다() {
         // given
         self.sut = Queue()
         
@@ -75,5 +29,110 @@ final class BankManagerConsoleAppTest: XCTestCase {
         
         // then
         XCTAssertNil(result)
+    }
+    
+    func test_큐에_요소가_두개_일때_peek을_하면_리턴하는_것이_front의_첫번째_요소이다() {
+        // given
+        let (firstValue, secondeValue) = ("1", "2")
+        let second = Node(value: secondeValue)
+        let first = Node(value: firstValue, next: second)
+        self.sut = Queue(linkedList: .init(head: first))
+        
+        // when
+        let result = self.sut.peek()
+        
+        // then
+        XCTAssertEqual(result, firstValue)
+    }
+    
+    func test_큐가_비어있으면_isEmpty가_true이다() {
+        // given
+        self.sut = Queue()
+        
+        // when
+        let result = self.sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_큐가_비어있지_않으면_isEmpty가_false이다() {
+        let first = Node(value: "1")
+        self.sut = Queue(linkedList: .init(head: first))
+        
+        // when
+        let result = self.sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+    
+    func test_비어있지_않으면_clear했을때_peek이_nil을_리턴한다() {
+        // given
+        let first = Node(value: "1")
+        self.sut = Queue(linkedList: .init(head: first))
+        
+        // when
+        self.sut.clear()
+        
+        // then
+        let result = self.sut.peek()
+        XCTAssertNil(result)
+    }
+    
+    func test_큐가_비어있을때_dequeue하면_nil을_리턴한다() {
+        // given
+        self.sut = Queue()
+        
+        // when
+        let result = self.sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    //TODO: 이게 유효한 테스트인가..?
+    func test_큐에_요소가_하나있을때_dequeue한_값은_nil_이_아니다() {
+        // given
+        let first = Node(value: "1")
+        self.sut = Queue(linkedList: .init(head: first))
+        
+        // when
+        let result = self.sut.dequeue()
+        
+        // then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_큐에_요소가_두개있을때_dequeue한_값은_front의_첫번째_요소이다() {
+        // given
+        let (firstValue, secondeValue) = ("1", "2")
+        let second = Node(value: secondeValue)
+        let first = Node(value: firstValue, next: second)
+        self.sut = Queue(linkedList: .init(head: first))
+        
+        // when
+        let result = self.sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, firstValue)
+        XCTAssertNotEqual(result, secondeValue)
+    }
+    
+    func test_큐에_요소가_하나있을때_요소를_추가하면_요소가_rear에_추가된다() {
+        // given
+        let firstNode = Node(value: "old")
+        self.sut = Queue(linkedList: .init(head: firstNode))
+        
+        // when
+        let newValue = "new"
+        self.sut.enqueue(newValue)
+        
+        // then
+        var lastValue: String?
+        while self.sut.peek() != nil {
+            lastValue = self.sut.dequeue()
+        }
+        XCTAssertEqual(lastValue, newValue)
     }
 }

@@ -16,7 +16,11 @@ class Node<Value> {
 }
 
 struct LinkedList<Value> {
-    var head: Node<Value>?
+    private var head: Node<Value>?
+    
+    init(head: Node<Value>? = nil) {
+        self.head = head
+    }
     
     func getFirst() -> Value? {
         return head?.value
@@ -72,7 +76,7 @@ struct LinkedList<Value> {
 }
 
 struct Queue<Value> {
-    var linkedList: LinkedList<Value>
+    private var linkedList: LinkedList<Value>
     
     var isEmpty: Bool {
         return self.linkedList.isEmpty
