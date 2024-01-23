@@ -19,8 +19,7 @@ struct LinkedList<Value> {
     var head: Node<Value>?
     
     func getFirst() -> Value? {
-        guard let head else { return nil }
-        return head.value
+        return head?.value
     }
     
     func travel() -> [Value] {
@@ -51,8 +50,11 @@ struct LinkedList<Value> {
         return head == nil
     }
     
-    func add(value: Value) {
-        guard let head else { return }
+    mutating func add(value: Value) {
+        guard let head else {
+            self.head = Node(value: value)
+            return
+        }
         var current: Node = head
         while let next = current.next {
             current = next
@@ -63,8 +65,9 @@ struct LinkedList<Value> {
     @discardableResult
     mutating func removeFirst() -> Value? {
         guard let head else { return nil }
+        let result = head.value
         self.head = head.next
-        return head.value
+        return result
     }
 }
 
@@ -75,7 +78,11 @@ struct Queue<Value> {
         return self.linkedList.isEmpty
     }
     
-    func enqueue(_ value: Value) {
+    init(linkedList: LinkedList<Value> = LinkedList()) {
+        self.linkedList = linkedList
+    }
+    
+    mutating func enqueue(_ value: Value) {
         self.linkedList.add(value: value)
     }
     
