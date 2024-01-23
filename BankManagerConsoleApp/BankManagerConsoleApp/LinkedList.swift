@@ -2,14 +2,22 @@
 import Foundation
 
 class LinkedList<T: Equatable> {
-    private var head: Node<T>?
+    private var _head: Node<T>?
+    var head: Node<T>? {
+        get {
+            return _head
+        } set(node) {
+            _head = node
+        }
+    }
+    
     private var _count: Int
     var count: Int {
         return _count
     }
     
     init(head: Node<T>? = nil) {
-        self.head = head
+        self._head = head
         self._count = head == nil ? 0 : 1
     }
 }
@@ -53,6 +61,11 @@ extension LinkedList {
     }
     
     public func add(_ node: Node<T>) {
+        if _head == nil {
+            _head = node
+            return
+        }
+        
         let lastNode = getNode(index: _count - 1)
         lastNode?.next = node
         _count += 1
