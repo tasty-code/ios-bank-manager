@@ -31,6 +31,8 @@ class LinkedList<T> {
         let deleteNode = head
         head = deleteNode?.next
         head?.prev = nil
+        
+        tail = isEmpty() ? head : tail
         return deleteNode?.value
     }
     
@@ -38,6 +40,6 @@ class LinkedList<T> {
         return head?.value
     }
     func isEmpty() -> Bool {
-        return head?.value == nil && tail?.value == nil
+        return head == nil
     }
 }
