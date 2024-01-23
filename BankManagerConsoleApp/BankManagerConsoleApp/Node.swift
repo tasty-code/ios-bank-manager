@@ -26,30 +26,6 @@ struct LinkedList<Value> {
         return head?.value
     }
     
-    func travel() -> [Value] {
-        guard let head else { return [] }
-        var result: [Value] = []
-        var current: Node = head
-        while true {
-            result.append(current.value)
-            guard let next = current.next else { break }
-            current = next
-        }
-        return result
-    }
-    
-    var count: Int {
-        var result: Int = 0
-        guard let head else { return result }
-        var current: Node = head
-        while true {
-            result += 1
-            guard let next = current.next else { break }
-            current = next
-        }
-        return result
-    }
-    
     var isEmpty: Bool {
         return head == nil
     }
@@ -68,9 +44,8 @@ struct LinkedList<Value> {
     
     @discardableResult
     mutating func removeFirst() -> Value? {
-        guard let head else { return nil }
-        let result = head.value
-        self.head = head.next
+        let result = head?.value
+        self.head = head?.next
         return result
     }
 }
