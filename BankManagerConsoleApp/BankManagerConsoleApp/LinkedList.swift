@@ -1,37 +1,29 @@
-//
-//  LinkedList.swift
-//  BankManagerConsoleApp
-//
-//  Created by Kim EenSung on 1/23/24.
-//
 
 import Foundation
 
 class Node<T: Equatable> {
-    private let value: T
-    private var next: Node?
+    private let _value: T
+    var value: T {
+        return _value 
+    }
+    private var _next: Node?
+    var next: Node? {
+        return _next
+    }
     
     init(value: T, next: Node? = nil) {
-        self.value = value
-        self.next = next
+        self._value = value
+        self._next = next
     }
 }
 
 extension Node {
-    public func getValue() -> T {
-        return value
-    }
-    
-    public func getNext() -> Node? {
-        return next
-    }
-    
     public func changeNext(to node: Node?) {
-        next = node
+        _next = node
     }
     
     static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return lhs.getValue() == rhs.getValue()
+        return lhs.value == rhs.value
     }
 }
 
@@ -61,7 +53,7 @@ extension LinkedList {
         var nextNode: Node<T>? = head
 
         for _ in 1...index {
-            guard let next = nextNode?.getNext() else {
+            guard let next = nextNode?.next else {
                 return nil
             }
             nextNode = next
@@ -70,17 +62,17 @@ extension LinkedList {
     }
     
     public func getReferenceNode(_ node: Node<T>) -> Node<T>? {
-        if let reference = head?.getNext(), reference == node {
+        if let reference = head?.next, reference == node {
             return head
         }
         
-        var nextNode = head?.getNext()
+        var nextNode = head?.next
             
         for _ in 1..._count {
-            if let reference = nextNode?.getNext(), reference == node {
+            if let reference = nextNode?.next, reference == node {
                 return nextNode
             }
-            nextNode = nextNode?.getNext()
+            nextNode = nextNode?.next
         }
         
         return nil
@@ -93,7 +85,7 @@ extension LinkedList {
     }
     
     public func addNode(_ node: Node<T>, after: Node<T>) {
-        if let temporaryNode = after.getNext() {
+        if let temporaryNode = after.next {
             node.changeNext(to: temporaryNode)
         }
         
@@ -104,7 +96,7 @@ extension LinkedList {
     public func removeNode(_ node: Node<T>) {
         let previousNode = getReferenceNode(node)
         
-        if let nextNode = node.getNext() {
+        if let nextNode = node.next {
             previousNode?.changeNext(to: nextNode)
         } else {
             previousNode?.changeNext(to: nil)
