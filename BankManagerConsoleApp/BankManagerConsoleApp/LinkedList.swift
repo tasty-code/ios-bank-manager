@@ -15,8 +15,6 @@ final class Node<T> {
         self.data = data
         self.next = next
     }
-    
-    deinit { print("Node has been deinitialized.") }
 }
 
 struct LinkedList<T> {
@@ -29,6 +27,10 @@ struct LinkedList<T> {
     
     var isEmpty: Bool  {
         return head == nil ? true : false
+    }
+    
+    init(head: Node<T>? = nil) {
+        self.head = head
     }
 }
 
