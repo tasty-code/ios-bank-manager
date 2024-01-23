@@ -10,8 +10,8 @@ import XCTest
 
 class LinkedListUnitTests<T>: BaseTestCase {
     
-    var sut: LinkedList<T>!
-    var result: T!
+    fileprivate var sut: LinkedList<T>!
+    fileprivate var result: T!
     
     override func setUpWithError() throws {
         sut = LinkedList()
