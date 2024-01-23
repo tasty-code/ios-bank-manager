@@ -21,7 +21,7 @@ final class Node<T> {
 
 final class LinkedList<T> {
     
-    private var head: Node<T>?
+    var head: Node<T>?
     
     var isEmpty: Bool  {
         return head == nil ? true : false
@@ -54,8 +54,10 @@ extension LinkedList {
     }
 
     /// Remove
-    func removeFirst() {
+    func removeFirst() -> T? {
+        let currentHead = head
         head = head?.next
+        return currentHead?.data
     }
             
     func removeAll() {
