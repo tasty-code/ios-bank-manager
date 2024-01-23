@@ -1,5 +1,5 @@
 //
-//  BankManagerConsoleAppTest.swift
+//  QueueTest.swift
 //  BankManagerConsoleAppTest
 //
 //  Created by Effie on 1/23/24.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class BankManagerConsoleAppTest: XCTestCase {
+final class QueueTest: XCTestCase {
     private var sut: Queue<String>!
     
     override func setUpWithError() throws {
@@ -139,7 +139,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     }
 }
 
-extension BankManagerConsoleAppTest {
+extension QueueTest {
     private func setEmptySUT() {
         self.sut = Queue()
     }
