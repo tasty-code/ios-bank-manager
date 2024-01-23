@@ -17,7 +17,6 @@ class LinkedList<T> {
         return head == nil
     }
     
-    //tail노드 찾고 없으면 추가 -> 마지막에 추가함
     func append(value: T) {
         let newNode = ListNode(value: value)
         if let tailNode = tail {

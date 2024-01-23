@@ -1,7 +1,9 @@
 import Foundation
 
-class LinkedListQueue: Queue {
-    var isEmpty: Bool
+class LinkedListQueue<T>: Queue {
+    var queue: LinkedList<T> = LinkedList()
+    
+    var isEmpty: Bool = true
     
     func enqueue() {
         <#code#>
