@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2733E4FA2B5F9FDB00785607 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E4F92B5F9FDB00785607 /* LinkedList.swift */; };
 		2733E4FC2B5FA00300785607 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E4FB2B5FA00300785607 /* Queue.swift */; };
+		2733E4FD2B5FA11800785607 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E4F92B5F9FDB00785607 /* LinkedList.swift */; };
+		2733E4FE2B5FA11B00785607 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E4FB2B5FA00300785607 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		F447FC3A2B5E8053002A2692 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447FC392B5E8053002A2692 /* Node.swift */; };
@@ -221,8 +223,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2733E4FD2B5FA11800785607 /* LinkedList.swift in Sources */,
 				F4EDF9F72B5F749400C3E54C /* BankManagerConsoleAppTest.swift in Sources */,
 				F4EDFA002B5F758400C3E54C /* Node.swift in Sources */,
+				2733E4FE2B5FA11B00785607 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +379,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -397,7 +401,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
