@@ -60,7 +60,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
         
         when {
-            result = sut.getFirst()
+            result = sut.first
         }
         
         then {
@@ -75,7 +75,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
         
         when {
-            result = sut.getFirst()
+            result = sut.first
         }
         
         then {
@@ -166,7 +166,7 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         when {
-            result = sut.getFirst()
+            result = sut.first
         }
         
         then {
@@ -181,7 +181,7 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         when {
-            result = sut.getFirst()
+            result = sut.first
         }
         
         then {

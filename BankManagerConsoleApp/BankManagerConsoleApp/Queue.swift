@@ -31,6 +31,6 @@ extension Queue {
     }
 
     mutating func peek() -> T? {
-        return queue.getFirst()
+        return queue.first
     }
 }

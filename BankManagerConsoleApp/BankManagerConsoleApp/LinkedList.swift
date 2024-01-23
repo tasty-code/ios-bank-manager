@@ -23,6 +23,10 @@ struct LinkedList<T> {
     
     var head: Node<T>?
     
+    var first: T? {
+        return head?.data
+    }
+    
     var isEmpty: Bool  {
         return head == nil ? true : false
     }
@@ -46,11 +50,6 @@ extension LinkedList {
             node = node?.next
         }
         node?.next = newNode
-    }
-    
-    /// Get
-    mutating func getFirst() -> T? {
-        return head?.data
     }
 
     /// Remove
