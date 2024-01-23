@@ -9,7 +9,6 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class LinkedListTest: XCTestCase {
-    
     private var sut: LinkedList<String>!
     
     override func setUpWithError() throws {
@@ -19,6 +18,8 @@ final class LinkedListTest: XCTestCase {
     override func tearDownWithError() throws {
         self.sut = nil
     }
+    
+    // MARK: - isEmpty
     
     func test_linkedList가_비어있을때_isEmpty가_true이다() {
         // given
@@ -41,6 +42,8 @@ final class LinkedListTest: XCTestCase {
         // then
         XCTAssertFalse(result)
     }
+    
+    // MARK: - getFirst
     
     func test_비어있을때_getFirst는_nil을_리턴한다() {
         // given
@@ -66,7 +69,8 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    #warning("이게 맞나")
+    // MARK: - removeFirst
+    
     func test_비어있을때_removeFirst하면_head가_nil이다() {
         // given
         setEmptySUT()
@@ -107,6 +111,8 @@ final class LinkedListTest: XCTestCase {
         let expectedHeadValue = secondValue
         XCTAssertEqual(headValue, expectedHeadValue)
     }
+    
+    // MARK: - add
     
     func test_비어있을때_add를하면_head가_nil이_아니다() {
         // given

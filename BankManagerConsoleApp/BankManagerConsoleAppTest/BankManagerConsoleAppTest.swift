@@ -9,7 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerConsoleAppTest: XCTestCase {
-    var sut: Queue<String>!
+    private var sut: Queue<String>!
     
     override func setUpWithError() throws {
         self.sut = Queue()
@@ -19,7 +19,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
         self.sut = nil
     }
     
-    // 1. Peek
+    // MARK: - Peek
+    
     func test_큐가_비어있을때_peek을_하면_nil을_리턴한다() {
         // given
         setEmptySUT()
@@ -43,6 +44,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertEqual(result, firstValue)
     }
     
+    // MARK: - isEmpty
+    
     func test_큐가_비어있으면_isEmpty가_true이다() {
         // given
         setEmptySUT()
@@ -64,6 +67,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    // MARK: - Clear
+    
     func test_비어있지_않으면_clear했을때_LinkedList의_head가_nil이다() {
         // given
         setSUTWithOneElement("1")
@@ -75,6 +80,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
         let result = self.sut.linkedList.head
         XCTAssertNil(result)
     }
+    
+    // MARK: - Dequeue
     
     func test_큐가_비어있을때_dequeue하면_nil을_리턴한다() {
         // given
@@ -111,7 +118,9 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertNotEqual(result, secondValue)
     }
     
-    func test_큐에_요소가_하나있을때_요소를_추가하면_요소가_rear에_추가된다() {
+    // MARK: - Enqueue
+    
+    func test_큐에_요소가_하나있을때_요소를_enqueue하면_요소가_rear에_추가된다() {
         // given
         setSUTWithOneElement("old")
         
