@@ -128,12 +128,12 @@ final class BankManagerConsoleAppTest: XCTestCase {
         self.sut.enqueue(newValue)
         
         // then
-        var lastNode: Node<String>? = self.sut.linkedList.head
-        var result: Node<String>?
-        while lastNode != nil {
-            result = lastNode
-            lastNode = lastNode?.next
+        var lastNode = self.sut.linkedList.head
+        while let nextNode = lastNode?.next {
+            lastNode = nextNode
         }
-        XCTAssertEqual(result?.value, newValue)
+        let result = lastNode?.value
+        let expected = newValue
+        XCTAssertEqual(result, expected)
     }
 }
