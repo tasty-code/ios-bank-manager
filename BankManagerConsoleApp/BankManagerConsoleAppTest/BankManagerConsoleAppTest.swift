@@ -22,7 +22,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     // 1. Peek
     func test_큐가_비어있을때_peek을_하면_nil을_리턴한다() {
         // given
-        self.sut = Queue()
+        setEmptySUT()
         
         // when
         let result = self.sut.peek()
@@ -33,10 +33,8 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_큐에_요소가_두개_일때_peek을_하면_리턴하는_것이_front의_첫번째_요소이다() {
         // given
-        let (firstValue, secondeValue) = ("1", "2")
-        let second = Node(value: secondeValue)
-        let first = Node(value: firstValue, next: second)
-        self.sut = Queue(linkedList: .init(head: first))
+        let (firstValue, secondValue) = ("1", "2")
+        setSUTWithTwoElements(firstValue, secondValue)
         
         // when
         let result = self.sut.peek()
@@ -47,7 +45,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_큐가_비어있으면_isEmpty가_true이다() {
         // given
-        self.sut = Queue()
+        setEmptySUT()
         
         // when
         let result = self.sut.isEmpty
@@ -57,8 +55,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     }
     
     func test_큐가_비어있지_않으면_isEmpty가_false이다() {
-        let first = Node(value: "1")
-        self.sut = Queue(linkedList: .init(head: first))
+        setSUTWithOneElement("1")
         
         // when
         let result = self.sut.isEmpty
@@ -69,8 +66,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_비어있지_않으면_clear했을때_LinkedList의_head가_nil이다() {
         // given
-        let first = Node(value: "1")
-        self.sut = Queue(linkedList: .init(head: first))
+        setSUTWithOneElement("1")
         
         // when
         self.sut.clear()
@@ -82,7 +78,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_큐가_비어있을때_dequeue하면_nil을_리턴한다() {
         // given
-        self.sut = Queue()
+        setEmptySUT()
         
         // when
         let result = self.sut.dequeue()
@@ -93,8 +89,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_큐에_요소가_하나있을때_dequeue한_값은_nil_이_아니다() {
         // given
-        let first = Node(value: "1")
-        self.sut = Queue(linkedList: .init(head: first))
+        setSUTWithOneElement("1")
         
         // when
         let result = self.sut.dequeue()
@@ -105,35 +100,49 @@ final class BankManagerConsoleAppTest: XCTestCase {
     
     func test_큐에_요소가_두개있을때_dequeue한_값은_front의_첫번째_요소이다() {
         // given
-        let (firstValue, secondeValue) = ("1", "2")
-        let second = Node(value: secondeValue)
-        let first = Node(value: firstValue, next: second)
-        self.sut = Queue(linkedList: .init(head: first))
+        let (firstValue, secondValue) = ("1", "2")
+        setSUTWithTwoElements(firstValue, secondValue)
         
         // when
         let result = self.sut.dequeue()
         
         // then
         XCTAssertEqual(result, firstValue)
-        XCTAssertNotEqual(result, secondeValue)
+        XCTAssertNotEqual(result, secondValue)
     }
     
     func test_큐에_요소가_하나있을때_요소를_추가하면_요소가_rear에_추가된다() {
         // given
-        let firstNode = Node(value: "old")
-        self.sut = Queue(linkedList: .init(head: firstNode))
+        setSUTWithOneElement("old")
         
         // when
         let newValue = "new"
         self.sut.enqueue(newValue)
         
         // then
-        var lastNode: Node<String>? = self.sut.linkedList.head
-        var result: Node<String>?
-        while lastNode != nil {
-            result = lastNode
-            lastNode = lastNode?.next
+        var lastNode = self.sut.linkedList.head
+        while let nextNode = lastNode?.next {
+            lastNode = nextNode
         }
-        XCTAssertEqual(result?.value, newValue)
+        let result = lastNode?.value
+        let expected = newValue
+        XCTAssertEqual(result, expected)
+    }
+}
+
+extension BankManagerConsoleAppTest {
+    private func setEmptySUT() {
+        self.sut = Queue()
+    }
+    
+    private func setSUTWithOneElement(_ oneValue: String) {
+        let first = Node(value: oneValue)
+        self.sut = Queue(linkedList: .init(head: first))
+    }
+    
+    private func setSUTWithTwoElements(_ firstValue: String, _ secondValue: String) {
+        let second = Node(value: secondValue)
+        let first = Node(value: firstValue, next: second)
+        self.sut = Queue(linkedList: .init(head: first))
     }
 }
