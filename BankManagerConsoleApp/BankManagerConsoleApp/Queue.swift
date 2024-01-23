@@ -23,8 +23,7 @@ extension Queue {
     }
     
     mutating func dequeue() -> T? {
-        queue.removeFirst()
-        return queue.getFirst()
+        return queue.removeFirst()
     }
     
     mutating func clear() {
