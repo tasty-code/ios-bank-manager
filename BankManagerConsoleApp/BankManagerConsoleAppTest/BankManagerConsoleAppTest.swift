@@ -67,7 +67,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_비어있지_않으면_clear했을때_peek이_nil을_리턴한다() {
+    func test_비어있지_않으면_clear했을때_LinkedList의_head가_nil이다() {
         // given
         let first = Node(value: "1")
         self.sut = Queue(linkedList: .init(head: first))
@@ -76,7 +76,7 @@ final class BankManagerConsoleAppTest: XCTestCase {
         self.sut.clear()
         
         // then
-        let result = self.sut.peek()
+        let result = self.sut.linkedList.head
         XCTAssertNil(result)
     }
     
@@ -91,7 +91,6 @@ final class BankManagerConsoleAppTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    //TODO: 이게 유효한 테스트인가..?
     func test_큐에_요소가_하나있을때_dequeue한_값은_nil_이_아니다() {
         // given
         let first = Node(value: "1")
@@ -129,10 +128,12 @@ final class BankManagerConsoleAppTest: XCTestCase {
         self.sut.enqueue(newValue)
         
         // then
-        var lastValue: String?
-        while self.sut.peek() != nil {
-            lastValue = self.sut.dequeue()
+        var lastNode: Node<String>? = self.sut.linkedList.head
+        var result: Node<String>?
+        while lastNode != nil {
+            result = lastNode
+            lastNode = lastNode?.next
         }
-        XCTAssertEqual(lastValue, newValue)
+        XCTAssertEqual(result?.value, newValue)
     }
 }
