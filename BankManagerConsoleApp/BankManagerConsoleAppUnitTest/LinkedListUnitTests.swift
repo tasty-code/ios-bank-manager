@@ -25,6 +25,7 @@ class LinkedListUnitTests<T>: BaseTestCase {
 // MARK: - LinkedList Integer타입 유닛테스트
 final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
     
+    // MARK: isEmpty property
     func test_링크드리스트가_비어있으면_isEmpty는_true() {
         given {
             sut = LinkedList<Int>()
@@ -53,6 +54,37 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
     }
         
+    // MARK: first property
+    func test_비어있는_링크드리스트의_첫번째_노드를_가져오면_nil이_나옴() {
+        given {
+            sut = LinkedList<Int>()
+        }
+        
+        when {
+            result = sut.first
+        }
+        
+        then {
+            XCTAssertNil(result)
+        }
+    }
+    
+    func test_비어있지_않는_링크드리스트의_첫번째_헤드의_데이터를_가져오면_1이_나옴() {
+        given {
+            sut = LinkedList<Int>()
+            sut.head = Node(1, nil)
+        }
+        
+        when {
+            result = sut.first
+        }
+        
+        then {
+            XCTAssert(result == 1)
+        }
+    }
+
+    // MARK: append()
     func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
         given {
             sut = LinkedList<Int>()
@@ -82,35 +114,8 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
     }
     
-    func test_비어있는_링크드리스트의_첫번째_노드를_가져오면_nil이_나옴() {
-        given {
-            sut = LinkedList<Int>()
-        }
-        
-        when {
-            result = sut.first
-        }
-        
-        then {
-            XCTAssertNil(result)
-        }
-    }
     
-    func test_비어있지_않는_링크드리스트의_첫번째_헤드의_데이터를_가져오면_1이_나옴() {
-        given {
-            sut = LinkedList<Int>()
-            sut.head = Node(1, nil)
-        }
-        
-        when {
-            result = sut.first
-        }
-        
-        then {
-            XCTAssert(result == 1)
-        }
-    }
-    
+    // MARK: - removeFirst()
     func test_비어있는_링크드리스트_삭제하면_nil값을_리턴함() {
         given {
             sut = LinkedList<Int>()
@@ -140,6 +145,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
     }
     
+    // MARK: - removeAll()
     func test_링크드리스트의_요소를_전체삭제하면_헤드가_nil() {
         given {
             sut = LinkedList<Int>()
@@ -159,6 +165,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
 // MARK: - LinkedList String타입 유닛테스트
 final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
     
+    // MARK: isEmpty property
     func test_링크드리스트가_비어있으면_isEmpty는_true() {
         given {
             sut = LinkedList<String>()
@@ -186,36 +193,8 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
             XCTAssertFalse(sut.isEmpty)
         }
     }
-
-    func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
-        given {
-            sut = LinkedList<String>()
-        }
-        
-        when {
-            sut.append("가")
-        }
-        
-        then {
-            XCTAssertNotNil(sut.head)
-        }
-    }
     
-    func test_노드를_여러개_추가하면_마지막_노드_데이터인_나가_나옴() {
-        given {
-            sut = LinkedList<String>()
-        }
-        
-        when {
-            sut.append("가")
-            sut.append("나")
-        }
-        
-        then {
-            XCTAssert(sut.head?.next?.data == "나")
-        }
-    }
-    
+    // MARK: first property
     func test_비어있는_링크드리스트의_첫번째_노드를_가져오면_nil이_나옴() {
         given {
             sut = LinkedList<String>()
@@ -241,10 +220,46 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         then {
-            XCTAssert(result == "가")
+            XCTAssertEqual(result, "가")
+        }
+    }
+
+    // MARK: append()
+    func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
+        given {
+            sut = LinkedList<String>()
+        }
+        
+        when {
+            sut.append("가")
+        }
+        
+        then {
+            XCTAssertNotNil(sut.head)
         }
     }
     
+    func test_노드를_여러개_추가하면_마지막_노드_데이터인_나가_나옴() {
+        given {
+            sut = LinkedList<String>()
+        }
+        
+        when {
+            sut.append("가")
+            sut.append("나")
+        }
+        
+        then {
+            while (sut.head?.next != nil) {
+                sut.head = sut.head?.next
+            }
+            XCTAssertEqual(sut.head?.data, "나")
+        }
+    }
+    
+
+    
+    // MARK: removeFirst()
     func test_비어있는_링크드리스트_삭제하면_nil값을_리턴함() {
         given {
             sut = LinkedList<String>()
@@ -270,10 +285,11 @@ final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
         }
         
         then {
-            XCTAssert(result == "가")
+            XCTAssertEqual(result, "가")
         }
     }
 
+    // MARK: removeAll()
     func test_링크드리스트의_요소를_전체삭제하면_헤드가_nil() {
         given {
             sut = LinkedList<String>()
