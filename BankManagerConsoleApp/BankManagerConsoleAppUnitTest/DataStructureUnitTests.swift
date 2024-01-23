@@ -8,8 +8,8 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class LinkedListUnitTest: XCTestCase {
-
+final class LinkedListUnitTests: XCTestCase {
+    
     override func setUpWithError() throws {
     }
 
@@ -20,3 +20,4 @@ final class LinkedListUnitTest: XCTestCase {
     }
 
 }
+
