@@ -4,11 +4,17 @@ import Foundation
 class Node<T: Equatable> {
     private let _value: T
     var value: T {
-        return _value 
+        return _value
     }
+    
     private var _next: Node?
     var next: Node? {
-        return _next
+        get {
+            return _next
+        }
+        set(node) {
+           _next = node
+        }
     }
     
     init(value: T, next: Node? = nil) {
@@ -18,10 +24,6 @@ class Node<T: Equatable> {
 }
 
 extension Node {
-    public func changeNext(to node: Node?) {
-        _next = node
-    }
-    
     static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
         return lhs.value == rhs.value
     }
@@ -80,16 +82,16 @@ extension LinkedList {
     
     public func addNode(_ node: Node<T>) {
         let lastNode = getNode(index: _count - 1)
-        lastNode?.changeNext(to: node)
+        lastNode?.next = node
         _count += 1
     }
     
     public func addNode(_ node: Node<T>, after: Node<T>) {
         if let temporaryNode = after.next {
-            node.changeNext(to: temporaryNode)
+            node.next = temporaryNode
         }
         
-        after.changeNext(to: node)
+        after.next = node
         _count += 1
     }
     
@@ -97,9 +99,9 @@ extension LinkedList {
         let previousNode = getReferenceNode(node)
         
         if let nextNode = node.next {
-            previousNode?.changeNext(to: nextNode)
+            previousNode?.next = nextNode
         } else {
-            previousNode?.changeNext(to: nil)
+            previousNode?.next = nil
         }
       
         _count -= 1
