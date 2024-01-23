@@ -6,7 +6,7 @@
 //
 
 struct Queue<Value> {
-    private var linkedList: LinkedList<Value>
+    private(set) var linkedList: LinkedList<Value>
     
     var isEmpty: Bool {
         return self.linkedList.isEmpty

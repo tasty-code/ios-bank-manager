@@ -6,7 +6,7 @@
 //
 
 struct LinkedList<Value> {
-    private var head: Node<Value>?
+    private(set) var head: Node<Value>?
     
     init(head: Node<Value>? = nil) {
         self.head = head
