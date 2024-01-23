@@ -22,8 +22,37 @@ class LinkedListUnitTests<T>: BaseTestCase {
     }
 }
 
+// MARK: - LinkedList Integer타입 유닛테스트
 final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
     
+    func test_링크드리스트가_비어있으면_isEmpty는_true() {
+        given {
+            sut = LinkedList<Int>()
+        }
+        
+        when {
+            sut.head = nil
+        }
+        
+        then {
+            XCTAssertTrue(sut.isEmpty)
+        }
+    }
+    
+    func test_링크드리스트가_비어있지_않으면_isEmpty는_false() {
+        given {
+            sut = LinkedList<Int>()
+        }
+        
+        when {
+            sut.head = Node(1, nil)
+        }
+        
+        then {
+            XCTAssertFalse(sut.isEmpty)
+        }
+    }
+        
     func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
         given {
             sut = LinkedList<Int>()
@@ -50,7 +79,6 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         
         then {
             XCTAssert(sut.head?.data == 1)
-            
         }
     }
     
@@ -113,7 +141,6 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
     }
     
     func test_링크드리스트의_요소를_전체삭제하면_헤드가_nil() {
-        
         given {
             sut = LinkedList<Int>()
             sut.head = Node(1, Node(2, nil))
@@ -129,8 +156,37 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
     }
 }
 
+// MARK: - LinkedList String타입 유닛테스트
 final class StringLinkedListUnitTests: LinkedListUnitTests<String> {
     
+    func test_링크드리스트가_비어있으면_isEmpty는_true() {
+        given {
+            sut = LinkedList<String>()
+        }
+        
+        when {
+            sut.head = nil
+        }
+        
+        then {
+            XCTAssertTrue(sut.isEmpty)
+        }
+    }
+    
+    func test_링크드리스트가_비어있지_않으면_isEmpty는_false() {
+        given {
+            sut = LinkedList<String>()
+        }
+        
+        when {
+            sut.head = Node("가", nil)
+        }
+        
+        then {
+            XCTAssertFalse(sut.isEmpty)
+        }
+    }
+
     func test_비어있는_링크드리스트에_노드를_추가하면_head가_nil이_아님() {
         given {
             sut = LinkedList<String>()
