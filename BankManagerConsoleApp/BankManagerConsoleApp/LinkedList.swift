@@ -27,7 +27,6 @@ struct LinkedList<T> {
 // MARK: - Methods
 extension LinkedList {
     
-    /// Add    
     mutating func append(_ data: T) {
         let newNode = Node(data)
         
@@ -44,7 +43,6 @@ extension LinkedList {
         node?.next = newNode
     }
 
-    /// Remove
     mutating func removeFirst() -> T? {
         let currentHead = head
         head = head?.next
