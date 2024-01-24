@@ -30,7 +30,7 @@ final class LinkedList<Element> {
         count += 1
     }
     
-    func remove() -> Element? {
+    func removeFirst() -> Element? {
         let removeNodeValue = head?.data
         
         head = head?.next

@@ -19,7 +19,7 @@ struct BankTellerQueue<Element> {
     }
     
     mutating func dequeue() -> Element? {
-        linkedList.remove()
+        linkedList.removeFirst()
     }
     
     mutating func clear() {
