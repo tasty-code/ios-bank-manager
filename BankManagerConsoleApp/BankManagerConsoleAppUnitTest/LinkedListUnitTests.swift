@@ -82,7 +82,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
     }
     
-    func test_노드를_추가하면_헤드로_마지막_노드_데이터인_2가_나옴() {
+    func test_노드를_추가하면_테일로_마지막_노드_데이터인_2가_나옴() {
         given {
             sut = LinkedList()
         }
@@ -93,10 +93,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
         
         then {
-            while (sut.head?.next != nil) {
-                sut.head = sut.head?.next
-            }
-            XCTAssertEqual(sut.head?.data, 2)
+            XCTAssertEqual(sut.tail?.data, 2)
         }
     }
     
