@@ -57,7 +57,7 @@ final class IntegerLinkedListUnitTests: LinkedListUnitTests<Int> {
         }
     }
     
-    func test_비어있지_않는_링크드리스트의_첫번째_헤드의_데이터를_가져오면_1이_나옴() {
+    func test_링크드리스트에_1_삽입_후_첫번째_헤드의_데이터를_가져오면_1이_나옴() {
         given {
             sut = LinkedList(head: Node(1))
         }
