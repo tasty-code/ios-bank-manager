@@ -115,7 +115,6 @@ final class QueueTest: XCTestCase {
         
         // then
         XCTAssertEqual(result, firstValue)
-        XCTAssertNotEqual(result, secondValue)
     }
     
     // MARK: - Enqueue

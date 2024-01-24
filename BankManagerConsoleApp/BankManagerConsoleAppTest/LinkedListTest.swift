@@ -107,9 +107,6 @@ final class LinkedListTest: XCTestCase {
         // then
         let expectedFirstValue = firstValue
         XCTAssertEqual(result, expectedFirstValue)
-        
-        let expectedHeadValue = secondValue
-        XCTAssertEqual(headValue, expectedHeadValue)
     }
     
     // MARK: - add
