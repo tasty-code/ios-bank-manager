@@ -9,6 +9,10 @@ import Foundation
 
 struct BankTellerQueue<Element> {
     private var linkedList = LinkedList<Element>()
+    
+    var count: Int {
+        linkedList.count
+    }
         
     mutating func enqueue(item: Element) {
         linkedList.append(item: item)
