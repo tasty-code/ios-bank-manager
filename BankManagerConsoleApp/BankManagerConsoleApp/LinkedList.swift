@@ -15,4 +15,23 @@ class LinkedList<T> {
     var isEmpty: Bool {
         head == nil
     }
+    
+    func push(with data: T) {
+        head = Node(data: data, next: head)
+        count += 1
+        if tail == nil {
+            tail = head
+        }
+    }
+    
+    func append(with data: T) {
+        guard isEmpty == false else {
+            push(with: data)
+            return
+        }
+        
+        tail?.next = Node(data: data)
+        count += 1
+        tail = tail?.next
+    }
 }
