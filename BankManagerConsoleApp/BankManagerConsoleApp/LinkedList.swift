@@ -2,28 +2,32 @@
 import Foundation
 
 class LinkedList<T: Equatable> {
-    private var head: Node<T>? {
-        didSet {
-            if head == nil {
-                _count = 0
-            }
-        }
-    }
+    private var head: Node<T>?
     
-    private var _count: Int
     var count: Int {
-        return _count
+        if head == nil {
+            return 0
+        }
+        
+        var count = 1
+        var lastNode: Node<T>? = head
+        
+        while lastNode?.reference() != nil {
+            lastNode = lastNode?.reference()
+            count += 1
+        }
+        
+        return count
     }
     
     init(head: Node<T>? = nil) {
         self.head = head
-        self._count = head == nil ? 0 : 1
     }
 }
 
 extension LinkedList {
     public func getNode(index: Int) -> Node<T>? {
-        if index < 0 || index > _count {
+        if index < 0 || index > count {
             fatalError("Index out of range")
         }
         
@@ -45,13 +49,11 @@ extension LinkedList {
     public func add(_ newNode: Node<T>) {
         if head == nil {
             head = newNode
-            _count += 1
             return
         }
         
-        let lastNode = getNode(index: _count - 1)
+        let lastNode = getLastNode()
         lastNode?.refer(to: newNode)
-        _count += 1
     }
     
     public func add(_ newNode: Node<T>, after previousNode: Node<T>) {
@@ -60,7 +62,6 @@ extension LinkedList {
         }
         
         previousNode.refer(to: newNode)
-        _count += 1
     }
     
     public func remove(_ node: Node<T>) {
@@ -71,8 +72,6 @@ extension LinkedList {
         } else {
             previousNode?.refer(to: nil)
         }
-      
-        _count -= 1
     }
     
     public func removeAll() {
@@ -88,7 +87,7 @@ extension LinkedList {
         
         var nextNode = head?.reference()
             
-        for _ in 1..._count {
+        while nextNode?.reference() != nil {
             if let reference = nextNode?.reference(), reference == node {
                 return nextNode
             }
@@ -96,5 +95,18 @@ extension LinkedList {
         }
         
         return nil
+    }
+    
+    private func getLastNode() -> Node<T>? {
+        if head == nil {
+            return nil
+        }
+        
+        var lastNode = head
+        while lastNode?.reference() != nil {
+            lastNode = lastNode?.reference()
+        }
+        
+        return lastNode
     }
 }
