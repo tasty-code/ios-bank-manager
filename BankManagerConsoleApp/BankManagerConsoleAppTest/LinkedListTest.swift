@@ -135,11 +135,7 @@ final class LinkedListTest: XCTestCase {
         self.sut.add(value: newValue)
         
         // then
-        var lastNode = self.sut.head
-        while let next = lastNode?.next {
-            lastNode = next
-        }
-        let result = lastNode?.value
+        let result = self.sut.tail?.value
         let expected = newValue
         XCTAssertEqual(result, expected)
     }
