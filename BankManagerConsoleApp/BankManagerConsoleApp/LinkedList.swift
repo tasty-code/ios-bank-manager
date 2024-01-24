@@ -26,6 +26,27 @@ class LinkedList<T: Equatable> {
 }
 
 extension LinkedList {
+    subscript(index: Int) -> Node<T>? {
+        print(count)
+        if index < 0 || index > count - 1 {
+            fatalError("Index out of range")
+        }
+        
+        if index == 0 {
+            return head
+        }
+        
+        var nextNode: Node<T>? = head
+
+        for _ in 1...index {
+            guard let next = nextNode?.next else {
+                return nil
+            }
+            nextNode = next
+        }
+        return nextNode
+    }
+    
     public func getNode(index: Int) -> Node<T>? {
         if index < 0 || index > count {
             fatalError("Index out of range")
@@ -35,7 +56,7 @@ extension LinkedList {
             return head
         }
         
-        var nextNode: Node<T>? = head?.next
+        var nextNode: Node<T>? = head
 
         for _ in 1...index {
             guard let next = nextNode?.next else {
