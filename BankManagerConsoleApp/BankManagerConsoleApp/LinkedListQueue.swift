@@ -2,17 +2,23 @@ import Foundation
 
 class LinkedListQueue<Element>: Queue {
     private var queue: LinkedList<Element> = LinkedList()
-    var isEmpty: Bool = true
+    private var count: Int = 0
+    var isEmpty: Bool {
+        return self.count == 0 ? true : false
+    }
     
     func enqueue(element: Element) {
+        count += 1
         queue.append(data: element)
     }
     
     func dequeue() -> Element? {
+        count -= 1
         return queue.remove(at: 0)
     }
     
     func clear() {
+        count = 0
         queue.head = nil
         queue.tail = nil
     }
