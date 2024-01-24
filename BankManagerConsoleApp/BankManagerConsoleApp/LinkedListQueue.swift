@@ -6,7 +6,7 @@ class LinkedListQueue<Element>: Queue {
     var isEmpty: Bool = true
     
     func enqueue(element: Element) {
-        
+        queue.append(data: element)
     }
     
     func dequeue() -> Element? {
