@@ -16,7 +16,7 @@ struct LinkedList<T> {
     }
     
     var isEmpty: Bool  {
-        return head == nil ? true : false
+        return head == nil
     }
     
     init(head: Node<T>? = nil) {
@@ -30,7 +30,7 @@ extension LinkedList {
     mutating func append(_ data: T) {
         let newNode = Node(data)
         
-        if head == nil {
+        if isEmpty {
             head = newNode
             return
         }
