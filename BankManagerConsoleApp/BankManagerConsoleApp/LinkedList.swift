@@ -48,7 +48,7 @@ class LinkedList<T> {
         }
     }
     
-    func removeFirst() -> T? {
+    private func removeFirst() -> T? {
         if let headNode = head {
             head = headNode.next
             if head == nil {
