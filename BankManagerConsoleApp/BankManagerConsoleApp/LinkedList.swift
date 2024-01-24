@@ -1,8 +1,12 @@
 import Foundation
 
 class LinkedList<T> {
-    var head: Node<T>?
-    var rear: Node<T>?
+    private var head: Node<T>?
+    private var rear: Node<T>?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     func appendNode(value: T) {
         let newNode = Node(value: value)
@@ -15,5 +19,9 @@ class LinkedList<T> {
             }
             previousNode?.next = newNode
         }
+    }
+    
+    func headValue() -> T? {
+        return head?.value
     }
 }

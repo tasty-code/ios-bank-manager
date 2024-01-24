@@ -12,6 +12,7 @@
 		9935A6EE2B610382005AB81C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		9935A6F22B6104B9005AB81C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9935A6F12B6104B9005AB81C /* Node.swift */; };
 		9935A6F32B6104E2005AB81C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9935A6F12B6104B9005AB81C /* Node.swift */; };
+		9935A6F42B6122DA005AB81C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F662632B61085700DB0AFC /* LinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -208,6 +209,7 @@
 			files = (
 				9935A6F32B6104E2005AB81C /* Node.swift in Sources */,
 				9935A6EE2B610382005AB81C /* main.swift in Sources */,
+				9935A6F42B6122DA005AB81C /* LinkedList.swift in Sources */,
 				9935A6EA2B61037E005AB81C /* BankManagerConsoleUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -397,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
