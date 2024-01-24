@@ -13,14 +13,17 @@ struct Queue<T: Equatable> {
     }
     
     func dequeue() {
-        linkedList?.head = linkedList?.head?.next
+        guard let firstNode = linkedList?.getNode(index: 0) else {
+            return
+        }
+        linkedList?.remove(firstNode)
     }
     
     func peek() -> Node<T>? {
-        return linkedList?.head
+        return linkedList?.getNode(index: 0)
     }
     
     func clear() {
-        linkedList?.head = nil
+        linkedList?.removeAll()
     }
 }

@@ -2,18 +2,11 @@
 import Foundation
 
 class LinkedList<T: Equatable> {
-    private var _head: Node<T>? {
+    private var head: Node<T>? {
         didSet {
-            if _head == nil {
+            if head == nil {
                 _count = 0
             }
-        }
-    }
-    var head: Node<T>? {
-        get {
-            return _head
-        } set(node) {
-            _head = node
         }
     }
     
@@ -23,7 +16,7 @@ class LinkedList<T: Equatable> {
     }
     
     init(head: Node<T>? = nil) {
-        self._head = head
+        self.head = head
         self._count = head == nil ? 0 : 1
     }
 }
@@ -38,10 +31,10 @@ extension LinkedList {
             return head
         }
         
-        var nextNode: Node<T>? = head?.next
+        var nextNode: Node<T>? = head?.reference()
 
         for _ in 1...index {
-            guard let next = nextNode?.next else {
+            guard let next = nextNode?.reference() else {
                 return nil
             }
             nextNode = next
@@ -49,53 +42,59 @@ extension LinkedList {
         return nextNode
     }
     
-    public func findPreviousNode(of node: Node<T>) -> Node<T>? {
-        if let reference = head?.next, reference == node {
-            return head
-        }
-        
-        var nextNode = head?.next
-            
-        for _ in 1..._count {
-            if let reference = nextNode?.next, reference == node {
-                return nextNode
-            }
-            nextNode = nextNode?.next
-        }
-        
-        return nil
-    }
-    
-    public func add(_ node: Node<T>) {
-        if _head == nil {
-            _head = node
+    public func add(_ newNode: Node<T>) {
+        if head == nil {
+            head = newNode
             _count += 1
             return
         }
         
         let lastNode = getNode(index: _count - 1)
-        lastNode?.next = node
+        lastNode?.refer(to: newNode)
         _count += 1
     }
     
-    public func add(_ node: Node<T>, after referenceNode: Node<T>) {
-        if let temporaryNode = referenceNode.next {
-            node.next = temporaryNode
+    public func add(_ newNode: Node<T>, after previousNode: Node<T>) {
+        if let temporaryNode = previousNode.reference() {
+            newNode.refer(to: temporaryNode)
         }
         
-        referenceNode.next = node
+        previousNode.refer(to: newNode)
         _count += 1
     }
     
-    public func removeNode(_ node: Node<T>) {
+    public func remove(_ node: Node<T>) {
         let previousNode = findPreviousNode(of: node)
         
-        if let nextNode = node.next {
-            previousNode?.next = nextNode
+        if let nextNode = node.reference() {
+            previousNode?.refer(to: nextNode)
         } else {
-            previousNode?.next = nil
+            previousNode?.refer(to: nil)
         }
       
         _count -= 1
+    }
+    
+    public func removeAll() {
+        head = nil
+    }
+}
+
+extension LinkedList {
+    private func findPreviousNode(of node: Node<T>) -> Node<T>? {
+        if let reference = head?.reference(), reference == node {
+            return head
+        }
+        
+        var nextNode = head?.reference()
+            
+        for _ in 1..._count {
+            if let reference = nextNode?.reference(), reference == node {
+                return nextNode
+            }
+            nextNode = nextNode?.reference()
+        }
+        
+        return nil
     }
 }
