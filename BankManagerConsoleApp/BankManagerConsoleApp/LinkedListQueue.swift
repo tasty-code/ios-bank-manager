@@ -13,7 +13,9 @@ class LinkedListQueue<Element>: Queue {
     }
     
     func dequeue() -> Element? {
-        count -= 1
+        if count > 0 {
+            count -= 1
+        }
         return queue.remove(at: 0)
     }
     
