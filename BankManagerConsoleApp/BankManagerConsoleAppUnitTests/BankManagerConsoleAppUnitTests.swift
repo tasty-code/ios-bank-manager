@@ -47,4 +47,18 @@ final class BankManagerConsoleAppUnitTests: XCTestCase {
         // then
         XCTAssertEqual(expectation, result)
     }
+    
+    func test_큐에_두개의_요소를_인큐했다가_clear_하면_큐가_비어있다() {
+        // given
+        let firstElement: String = "1"
+        let secondElement: String = "2"
+        let expectation: Bool = true
+        // when
+        sut.enqueue(element: firstElement)
+        sut.enqueue(element: secondElement)
+        sut.clear()
+        let result: Bool = sut.isEmpty
+        // then
+        XCTAssertEqual(expectation, result)
+    }
 }
