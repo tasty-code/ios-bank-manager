@@ -8,8 +8,9 @@
 import Foundation
 
 class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     func appendLastNode(data: T) {
         let newNode = Node(value: data)
@@ -18,28 +19,32 @@ class LinkedList<T> {
             tail = head
             return
         }
-        tail?.next = newNode
-        newNode.prev = tail
+        tail?.formNext(newNode)
+        newNode.formPrev(tail)
         tail = newNode
     }
     
+    @discardableResult
     func removeFirstNode() -> T? {
         if head == nil || tail == nil {
             tail = nil
             return nil
         }
         let deleteNode = head
-        head = deleteNode?.next
-        head?.prev = nil
+        head = deleteNode?.fetchNext()
+        head?.formPrev(nil)
         
         tail = isEmpty() ? head : tail
-        return deleteNode?.value
+        return deleteNode?.fetchValue()
     }
     
     func peekNode() -> T? {
-        return head?.value
+        return head?.fetchValue()
     }
+    
     func isEmpty() -> Bool {
         return head == nil
     }
+    
+    
 }

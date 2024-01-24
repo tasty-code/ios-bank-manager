@@ -8,6 +8,7 @@
 import Foundation
 
 class Queue<T> {
+    
     let likeList = LinkedList<T>()
     
     func enqueue(data: T) {
