@@ -26,7 +26,7 @@ class LinkedListQueue<Element>: Queue {
     }
     
     func peek() -> Element? {
-        return queue.tail?.data
+        return queue.head?.data
     }
     
 }
