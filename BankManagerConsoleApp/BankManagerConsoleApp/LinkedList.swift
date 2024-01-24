@@ -20,6 +20,11 @@ final class LinkedList<Value> {
     
     init(head: Node<Value>? = nil) {
         self.head = head
+        var lastNode = self.head
+        while let next = lastNode?.next {
+            lastNode = next
+        }
+        self.tail = lastNode
     }
     
     func add(value: Value) {
@@ -42,5 +47,6 @@ final class LinkedList<Value> {
     
     func clear() {
         self.head = nil
+        self.tail = nil
     }
 }
