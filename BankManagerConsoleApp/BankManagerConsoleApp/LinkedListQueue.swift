@@ -10,7 +10,7 @@ class LinkedListQueue<Element>: Queue {
     }
     
     func dequeue() -> Element? {
-        
+        return queue.remove(at: 0)
     }
     
     func clear() {
