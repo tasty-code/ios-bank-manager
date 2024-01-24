@@ -13,8 +13,8 @@ struct LinkedList<T> {
         return head == nil
     }
     
-    mutating func append(data :T) {
-        let newNode = Node(value: data)
+    mutating func append(value :T) {
+        let newNode = Node(value: value)
         
         if isEmpty() {
             head = newNode
@@ -25,14 +25,37 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func first() -> T? {
+    mutating func first() -> Node<T>? {
         if isEmpty() { return nil }
-        return head?.value
+        return head
     }
     
     mutating func last() -> Node<T>? {
         if isEmpty() { return nil }
         return tail
+    }
+    
+    mutating func insert(value: T, at: Int) {
+        let newNode = Node(value: value)
+        
+        if isEmpty() {
+            head = newNode
+            tail = newNode
+        } 
+        
+        if !isEmpty() {
+            var node = head
+            for _ in 1...at {
+                if node?.next == nil {
+                    tail = node?.next
+                    break
+                }
+                node = node?.next
+            }
+            let nextNode = node?.next
+            node?.next = newNode
+            node?.next?.next = nextNode
+        }
     }
     
     mutating func removeAll() {
