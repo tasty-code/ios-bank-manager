@@ -69,7 +69,7 @@ final class QueueTest: XCTestCase {
     
     // MARK: - Clear
     
-    func test_비어있지_않으면_clear했을때_LinkedList의_head가_nil이다() {
+    func test_비어있지_않으면_clear했을때_front가_nil이다() {
         // given
         setSUTWithOneElement("1")
         

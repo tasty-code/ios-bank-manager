@@ -45,7 +45,7 @@ final class LinkedListTest: XCTestCase {
     
     // MARK: - getFirst
     
-    func test_비어있을때_getFirst는_nil을_리턴한다() {
+    func test_비어있을때_first는_nil을_리턴한다() {
         // given
         setEmptySUT()
         
@@ -56,7 +56,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_요소가_두개있을때_getFirst는_front의_첫번째_요소를_리턴한다() {
+    func test_요소가_두개있을때_first는_front의_첫번째_요소를_리턴한다() {
         // given
         let (firstValue, secondValue) = ("first", "second")
         setSUTWithTwoElements(firstValue, secondValue)
@@ -138,6 +138,22 @@ final class LinkedListTest: XCTestCase {
         let result = self.sut.tail?.value
         let expected = newValue
         XCTAssertEqual(result, expected)
+    }
+    
+    // MARK: - Clear
+    
+    func test_비어있지_않으면_clear했을때_head와_tail이_nil이다() {
+        // given
+        setSUTWithOneElement("1")
+        
+        // when
+        self.sut.clear()
+        
+        // then
+        let head = self.sut.head
+        let tail = self.sut.tail
+        XCTAssertNil(head)
+        XCTAssertNil(tail)
     }
 }
 
