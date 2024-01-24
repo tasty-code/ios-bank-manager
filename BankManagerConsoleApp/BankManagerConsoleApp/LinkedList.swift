@@ -7,16 +7,6 @@
 
 import Foundation
 
-final class Node<T> {
-    var data: T
-    var next: Node?
-    
-    init(_ data: T, _ next: Node? = nil) {
-        self.data = data
-        self.next = next
-    }
-}
-
 struct LinkedList<T> {
     
     var head: Node<T>?
