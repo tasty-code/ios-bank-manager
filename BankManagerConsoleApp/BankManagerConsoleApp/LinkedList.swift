@@ -7,9 +7,9 @@
 
 import Foundation
 
-class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
@@ -23,8 +23,8 @@ class LinkedList<T> {
             head = newNode
         } else {
             tail?.next = newNode
-            tail = newNode
         }
+        tail = newNode
     }
     
     func removeFirst() -> T? {
