@@ -34,9 +34,7 @@ struct Queue<Value> {
     }
     
     mutating func clear() {
-        while self.isEmpty == false {
-            self.dequeue()
-        }
+        self.linkedList.clear()
     }
     
     mutating func peek() -> Value? {

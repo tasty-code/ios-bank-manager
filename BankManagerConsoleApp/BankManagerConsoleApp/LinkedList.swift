@@ -29,9 +29,8 @@ struct LinkedList<Value> {
             self.tail = self.head
             return
         }
-        let previousTail = self.tail
-        previousTail?.next = newNode
-        self.tail = self.tail?.next
+        currentTail.next = newNode
+        self.tail = newNode
     }
     
     @discardableResult
@@ -39,5 +38,9 @@ struct LinkedList<Value> {
         let result = head?.value
         self.head = head?.next
         return result
+    }
+    
+    mutating func clear() {
+        self.head = nil
     }
 }
