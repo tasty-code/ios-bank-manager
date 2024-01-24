@@ -69,7 +69,7 @@ final class QueueTest: XCTestCase {
     
     // MARK: - Clear
     
-    func test_비어있지_않으면_clear했을때_LinkedList의_head가_nil이다() {
+    func test_비어있지_않으면_clear했을때_front가_nil이다() {
         // given
         setSUTWithOneElement("1")
         
@@ -77,7 +77,7 @@ final class QueueTest: XCTestCase {
         self.sut.clear()
         
         // then
-        let result = self.sut.linkedList.head
+        let result = self.sut.front
         XCTAssertNil(result)
     }
     
@@ -115,7 +115,6 @@ final class QueueTest: XCTestCase {
         
         // then
         XCTAssertEqual(result, firstValue)
-        XCTAssertNotEqual(result, secondValue)
     }
     
     // MARK: - Enqueue
@@ -129,11 +128,7 @@ final class QueueTest: XCTestCase {
         self.sut.enqueue(newValue)
         
         // then
-        var lastNode = self.sut.linkedList.head
-        while let nextNode = lastNode?.next {
-            lastNode = nextNode
-        }
-        let result = lastNode?.value
+        let result = self.sut.rear?.value
         let expected = newValue
         XCTAssertEqual(result, expected)
     }

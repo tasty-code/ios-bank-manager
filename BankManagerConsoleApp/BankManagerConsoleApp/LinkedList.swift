@@ -5,14 +5,12 @@
 //  Created by 강창현 on 1/23/24.
 //
 
-struct LinkedList<Value> {
+final class LinkedList<Value> {
     private(set) var head: Node<Value>?
     
-    init(head: Node<Value>? = nil) {
-        self.head = head
-    }
-    
-    func getFirst() -> Value? {
+    private(set) var tail: Node<Value>?
+
+    var first: Value? {
         return head?.value
     }
     
@@ -20,22 +18,29 @@ struct LinkedList<Value> {
         return head == nil
     }
     
-    mutating func add(value: Value) {
-        guard let head else {
-            self.head = Node(value: value)
+    init(head: Node<Value>? = nil) {
+        self.head = head
+    }
+    
+    func add(value: Value) {
+        let newNode = Node(value: value)
+        guard let currentTail = self.tail else {
+            self.head = newNode
+            self.tail = self.head
             return
         }
-        var current: Node = head
-        while let next = current.next {
-            current = next
-        }
-        current.next = Node(value: value)
+        currentTail.next = newNode
+        self.tail = newNode
     }
     
     @discardableResult
-    mutating func removeFirst() -> Value? {
+    func removeFirst() -> Value? {
         let result = head?.value
         self.head = head?.next
         return result
+    }
+    
+    func clear() {
+        self.head = nil
     }
 }
