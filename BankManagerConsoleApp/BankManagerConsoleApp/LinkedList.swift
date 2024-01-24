@@ -12,8 +12,8 @@ class LinkedList<T: Equatable> {
         var count = 1
         var lastNode: Node<T>? = head
         
-        while lastNode?.reference() != nil {
-            lastNode = lastNode?.reference()
+        while lastNode?.next != nil {
+            lastNode = lastNode?.next
             count += 1
         }
         
@@ -35,10 +35,10 @@ extension LinkedList {
             return head
         }
         
-        var nextNode: Node<T>? = head?.reference()
+        var nextNode: Node<T>? = head?.next
 
         for _ in 1...index {
-            guard let next = nextNode?.reference() else {
+            guard let next = nextNode?.next else {
                 return nil
             }
             nextNode = next
@@ -57,7 +57,7 @@ extension LinkedList {
     }
     
     public func add(_ newNode: Node<T>, after previousNode: Node<T>) {
-        if let temporaryNode = previousNode.reference() {
+        if let temporaryNode = previousNode.next {
             newNode.refer(to: temporaryNode)
         }
         
@@ -67,7 +67,7 @@ extension LinkedList {
     public func remove(_ node: Node<T>) {
         let previousNode = findPreviousNode(of: node)
         
-        if let nextNode = node.reference() {
+        if let nextNode = node.next {
             previousNode?.refer(to: nextNode)
         } else {
             previousNode?.refer(to: nil)
@@ -81,17 +81,17 @@ extension LinkedList {
 
 extension LinkedList {
     private func findPreviousNode(of node: Node<T>) -> Node<T>? {
-        if let reference = head?.reference(), reference == node {
+        if let reference = head?.next, reference == node {
             return head
         }
         
-        var nextNode = head?.reference()
+        var nextNode = head?.next
             
-        while nextNode?.reference() != nil {
-            if let reference = nextNode?.reference(), reference == node {
+        while nextNode?.next != nil {
+            if let reference = nextNode?.next, reference == node {
                 return nextNode
             }
-            nextNode = nextNode?.reference()
+            nextNode = nextNode?.next
         }
         
         return nil
@@ -103,8 +103,8 @@ extension LinkedList {
         }
         
         var lastNode = head
-        while lastNode?.reference() != nil {
-            lastNode = lastNode?.reference()
+        while lastNode?.next != nil {
+            lastNode = lastNode?.next
         }
         
         return lastNode

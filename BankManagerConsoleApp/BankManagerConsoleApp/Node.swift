@@ -7,7 +7,7 @@ class Node<T: Equatable> {
         return _value
     }
     
-    private var next: Node?
+    private(set) var next: Node?
     
     init(value: T, next: Node? = nil) {
         self._value = value
@@ -17,11 +17,7 @@ class Node<T: Equatable> {
     static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
         return lhs.value == rhs.value
     }
-    
-    public func reference() -> Node? {
-        return next
-    }
-    
+
     public func refer(to node: Node?) {
         next = node
     }
