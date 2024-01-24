@@ -5,7 +5,7 @@
 //  Created by 강창현 on 1/23/24.
 //
 
-struct LinkedList<Value> {
+final class LinkedList<Value> {
     private(set) var head: Node<Value>?
     
     private(set) var tail: Node<Value>?
@@ -22,7 +22,7 @@ struct LinkedList<Value> {
         self.head = head
     }
     
-    mutating func add(value: Value) {
+    func add(value: Value) {
         let newNode = Node(value: value)
         guard let currentTail = self.tail else {
             self.head = newNode
@@ -34,13 +34,13 @@ struct LinkedList<Value> {
     }
     
     @discardableResult
-    mutating func removeFirst() -> Value? {
+    func removeFirst() -> Value? {
         let result = head?.value
         self.head = head?.next
         return result
     }
     
-    mutating func clear() {
+    func clear() {
         self.head = nil
     }
 }

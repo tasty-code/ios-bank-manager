@@ -5,7 +5,7 @@
 //  Created by 강창현 on 1/23/24.
 //
 
-struct Queue<Value> {
+final class Queue<Value> {
     private var linkedList: LinkedList<Value>
     
     var front: Node<Value>? {
@@ -24,20 +24,20 @@ struct Queue<Value> {
         self.linkedList = linkedList
     }
     
-    mutating func enqueue(_ value: Value) {
+    func enqueue(_ value: Value) {
         self.linkedList.add(value: value)
     }
     
     @discardableResult
-    mutating func dequeue() -> Value? {
+    func dequeue() -> Value? {
         return self.linkedList.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         self.linkedList.clear()
     }
     
-    mutating func peek() -> Value? {
+    func peek() -> Value? {
         return self.linkedList.first
     }
 }
