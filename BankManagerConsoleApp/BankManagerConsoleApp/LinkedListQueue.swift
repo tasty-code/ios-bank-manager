@@ -1,15 +1,14 @@
 import Foundation
 
-class LinkedListQueue<T>: Queue {
-    var queue: LinkedList<T> = LinkedList()
-    
+class LinkedListQueue<Element>: Queue {
+    var queue: LinkedList<Element> = LinkedList()
     var isEmpty: Bool = true
     
-    func enqueue() {
-        <#code#>
+    func enqueue(element: Element) {
+        
     }
     
-    func dequeue() {
+    func dequeue() -> Element {
         <#code#>
     }
     
@@ -17,7 +16,7 @@ class LinkedListQueue<T>: Queue {
         <#code#>
     }
     
-    func peek() {
+    func peek() -> Element {
         <#code#>
     }
     

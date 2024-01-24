@@ -1,10 +1,11 @@
 import Foundation
 
 protocol Queue {
+    associatedtype Element
     var isEmpty: Bool { get }
     
-    func enqueue()
-    func dequeue()
+    func enqueue(element: Element)
+    func dequeue() -> Element
     func clear()
-    func peek()
+    func peek() -> Element
 }
