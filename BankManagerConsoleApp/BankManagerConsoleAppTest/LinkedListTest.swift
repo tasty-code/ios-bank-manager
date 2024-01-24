@@ -50,7 +50,7 @@ final class LinkedListTest: XCTestCase {
         setEmptySUT()
         
         // when
-        let result = self.sut.getFirst()
+        let result = self.sut.first
         
         // then
         XCTAssertNil(result)
@@ -62,7 +62,7 @@ final class LinkedListTest: XCTestCase {
         setSUTWithTwoElements(firstValue, secondValue)
         
         // when
-        let result = self.sut.getFirst()
+        let result = self.sut.first
         
         // then
         let expected = firstValue

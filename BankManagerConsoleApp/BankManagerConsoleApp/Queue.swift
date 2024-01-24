@@ -6,7 +6,15 @@
 //
 
 struct Queue<Value> {
-    private(set) var linkedList: LinkedList<Value>
+    private var linkedList: LinkedList<Value>
+    
+    var front: Node<Value>? {
+        return self.linkedList.head
+    }
+    
+    var rear: Node<Value>? {
+        return self.linkedList.tail
+    }
     
     var isEmpty: Bool {
         return self.linkedList.isEmpty
@@ -32,6 +40,6 @@ struct Queue<Value> {
     }
     
     mutating func peek() -> Value? {
-        return self.linkedList.getFirst()
+        return self.linkedList.first
     }
 }

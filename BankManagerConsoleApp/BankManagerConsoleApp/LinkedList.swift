@@ -8,11 +8,9 @@
 struct LinkedList<Value> {
     private(set) var head: Node<Value>?
     
-    init(head: Node<Value>? = nil) {
-        self.head = head
-    }
-    
-    func getFirst() -> Value? {
+    private(set) var tail: Node<Value>?
+
+    var first: Value? {
         return head?.value
     }
     
@@ -20,16 +18,20 @@ struct LinkedList<Value> {
         return head == nil
     }
     
+    init(head: Node<Value>? = nil) {
+        self.head = head
+    }
+    
     mutating func add(value: Value) {
-        guard let head else {
-            self.head = Node(value: value)
+        let newNode = Node(value: value)
+        guard let currentTail = self.tail else {
+            self.head = newNode
+            self.tail = self.head
             return
         }
-        var current: Node = head
-        while let next = current.next {
-            current = next
-        }
-        current.next = Node(value: value)
+        let previousTail = self.tail
+        previousTail?.next = newNode
+        self.tail = self.tail?.next
     }
     
     @discardableResult
