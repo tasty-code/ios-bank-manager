@@ -2,7 +2,6 @@ import Foundation
 
 class LinkedListQueue<Element>: Queue {
     private var queue: LinkedList<Element> = LinkedList()
-    private var count: Int = 0
     var isEmpty: Bool = true
     
     func enqueue(element: Element) {
@@ -14,12 +13,12 @@ class LinkedListQueue<Element>: Queue {
     }
     
     func clear() {
-        
+        queue.head = nil
+        queue.tail = nil
     }
     
     func peek() -> Element? {
         return queue.tail?.data
     }
-    
     
 }
