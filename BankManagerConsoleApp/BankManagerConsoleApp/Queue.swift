@@ -2,13 +2,17 @@
 //  Queue.swift
 //  BankManagerConsoleApp
 //
-//  Created by 둘리 on 2024/01/24.
+//  Created by 미르, 희동 on 2024/01/24.
 //
 
 import Foundation
 
 struct Queue<T> {
-    var queue: LinkedList = LinkedList<T>()
+    private var queue: LinkedList<T>
+    
+    init(queue: LinkedList<T>) {
+        self.queue = queue
+    }
     
     func enqueue(element: T) {
         queue.append(value: element)
