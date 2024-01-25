@@ -12,6 +12,7 @@
 		7F57D1922B622664001A835F /* LinkedListQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57D1912B622664001A835F /* LinkedListQueueTest.swift */; };
 		7F57D1972B6229BA001A835F /* LinkedListQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57D1872B6219F7001A835F /* LinkedListQueue.swift */; };
 		7F57D1992B622ED2001A835F /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57D1892B621D18001A835F /* QueueProtocol.swift */; };
+		7F99BB472B627DA500FE9E85 /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F99BB462B627DA500FE9E85 /* DoublyLinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		7F57D1892B621D18001A835F /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		7F57D18F2B622664001A835F /* LinkedListQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F57D1912B622664001A835F /* LinkedListQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListQueueTest.swift; sourceTree = "<group>"; };
+		7F99BB462B627DA500FE9E85 /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +61,7 @@
 			children = (
 				7F57D1872B6219F7001A835F /* LinkedListQueue.swift */,
 				7F57D1892B621D18001A835F /* QueueProtocol.swift */,
+				7F99BB462B627DA500FE9E85 /* DoublyLinkedList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				7F57D18A2B621D18001A835F /* QueueProtocol.swift in Sources */,
 				7F57D1882B6219F7001A835F /* LinkedListQueue.swift in Sources */,
+				7F99BB472B627DA500FE9E85 /* DoublyLinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
