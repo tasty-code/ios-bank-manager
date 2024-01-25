@@ -1,8 +1,8 @@
 import Foundation
 
-class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class LinkedList<T> {
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     var isEmpty: Bool {
         return head == nil
     }

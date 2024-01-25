@@ -63,4 +63,19 @@ final class QueueTest: XCTestCase {
         // then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    // MARK: - clear
+    func test_클리어시_모든노드가_메모리에서_해제되는지() {
+        // given
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+        sut.enqueue(value: 4)
+        
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
