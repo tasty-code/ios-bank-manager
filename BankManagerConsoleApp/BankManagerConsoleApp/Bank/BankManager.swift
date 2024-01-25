@@ -1,7 +1,8 @@
 //
-//  BankManager.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  Bank.swift
+//  BankManagerConsoleApp
+//
+//  Created by EUNJU on 2024/01/25.
 //
 
 import Foundation
@@ -20,31 +21,36 @@ extension BankManager {
     
     /// 은행원 업무 (총 업무시간 리턴)
     func handleTask(with count: Int) -> Double {
-        var totalDuration = Double(count) * duration
+        let totalDuration = Double(count) * duration
         makeCustomerQueue(with: count)
         proccessTask(with: count)
         return totalDuration
     }
     
     /// 손님 줄세우기
-    func makeCustomerQueue(with customer: Int) {
-        for number in 1...customer {
-            customerQueue.enqueue(number)
+    private func makeCustomerQueue(with customer: Int) {
+        (1...customer).forEach {
+            customerQueue.enqueue($0)
         }
     }
     
     /// 업무 처리하기
-    func proccessTask(with customer: Int) {
-        for number in 1...customer {
-
-            updateCustomerNumber?(number)
+    private func proccessTask(with customer: Int) {
+        
+        (1...customer).forEach { [weak self] in
+            guard let self = self else { return }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                guard let self = self else { return }
-                if let num = customerQueue.dequeue() {
-                    updateCustomerNumber?(num)
-                }
+            self.updateCustomerNumber?($0)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                self.completeTask()
             }
+        }
+    }
+    
+    private func completeTask() {
+        if let number = self.customerQueue.dequeue() {
+            self.updateCustomerNumber?(number)
         }
     }
 }
