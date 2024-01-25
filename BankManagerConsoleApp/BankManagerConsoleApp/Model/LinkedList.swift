@@ -17,8 +17,6 @@ struct LinkedList<T: Equatable> {
         return head != nil
     }
     
-    
-    
     mutating func count() -> UInt {
         var count: UInt = 1
         var node = head
@@ -56,27 +54,32 @@ struct LinkedList<T: Equatable> {
         return tail
     }
     
-    mutating func insert(value: T, at: Int ) {
+    mutating func insert(value: T, at index: UInt ) {
         let newNode = Node(value: value)
         
         if isEmpty() {
             head = newNode
             tail = newNode
-        } 
-        
-        if isNotEmpty() {
-            var node = head
-            for _ in 1...at {
-                if node?.next == nil {
-                    tail = newNode
-                    break
-                }
-                node = node?.next
-            }
-            let nextNode = node?.next
-            node?.next = newNode
-            node?.next?.next = nextNode
+            return
         }
+        
+        var node = head
+        if index == 0 {
+            head = newNode
+            head?.next = node
+            return
+        }
+        
+        for _ in 0..<index-1 {
+            if node?.next == nil {
+                tail = newNode
+                break
+            }
+            node = node?.next
+        }
+        let nextNode = node?.next
+        node?.next = newNode
+        node?.next?.next = nextNode
     }
     
     mutating func remove(at index: UInt) -> Node<T>? {
