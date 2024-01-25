@@ -12,8 +12,8 @@ class LinkedList<T: Equatable> {
         var count = 1
         var lastNode: Node<T>? = head
         
-        while lastNode?.next != nil {
-            lastNode = lastNode?.next
+        while let next = lastNode?.next {
+            lastNode = next
             count += 1
         }
         
