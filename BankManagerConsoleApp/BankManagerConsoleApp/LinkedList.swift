@@ -3,6 +3,9 @@ import Foundation
 class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     func appendNode(value: T) {
         let newNode = Node(value: value)
@@ -11,6 +14,7 @@ class LinkedList<T> {
             tail = newNode
         } else {
             tail?.next = newNode
+            tail = newNode
         }
     }
     
@@ -26,7 +30,8 @@ class LinkedList<T> {
         return head?.value
     }
     
-    var isEmpty: Bool {
-        return head == nil
+    func clear() {
+        head = nil
+        tail = nil
     }
 }
