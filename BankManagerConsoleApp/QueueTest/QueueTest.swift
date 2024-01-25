@@ -21,15 +21,6 @@ final class QueueTest: XCTestCase {
         sut = nil
     }
     
-    func test_queue에enqueue호출시_1를_추가하면_1이_반환되는지() {
-        //given
-        let result = 1
-        //when
-        sut.enqueue(item: result)
-        //then
-        XCTAssertEqual(sut.peek(), result)
-    }
-    
     func test_queue에enqueue호출후_1을_넣고_peek호출시_1을_반환하는지() {
         //given
         let result = 1
@@ -48,6 +39,7 @@ final class QueueTest: XCTestCase {
         let dequeueResult = sut.dequeue()
         //then
         XCTAssertEqual(dequeueResult, result)
+        XCTAssertEqual(sut.dequeue(), nil)
     }
     
     func test_queue가비어있고_dequeue호출시_nil을반환하는지() {
@@ -89,10 +81,13 @@ final class QueueTest: XCTestCase {
     func test_queue에_isEmpty호출시_true를_반환하는지() {
         //given
         let result = true
+        let anotherResult = false
         //when
         let isEmptyResult = sut.isEmpty()
+        sut.enqueue(item: 1)
         //then
         XCTAssertEqual(isEmptyResult, result)
+        XCTAssertEqual(sut.isEmpty(), anotherResult)
     }
     
     func test_queue에enqueue호출후_1부터15를넣고_10이_될때까지_dequeue시_10을_반환하는지() {
