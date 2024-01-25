@@ -123,8 +123,8 @@ extension LinkedList {
         }
         
         var lastNode = head
-        while lastNode?.next != nil {
-            lastNode = lastNode?.next
+        while let next = lastNode?.next {
+            lastNode = next
         }
         
         return lastNode
