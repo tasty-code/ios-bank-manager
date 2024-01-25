@@ -32,7 +32,7 @@ final class LinkedList<T> {
     func append(value: T) {
         let newNode = Node(value: value)
         
-        if head == nil || tail == nil {
+        if isEmpty() {
             head = newNode
             tail = head
         } else {
@@ -44,51 +44,45 @@ final class LinkedList<T> {
     }
     
     func insert(value: T, at index: Int) {
+        guard index >= 0 else { return }  // index가 음수인 경의 처리
+        
         let newNode = Node(value: value)
 
-        if isEmpty() { //head가 비어있으면 head로 설정
-            head = newNode
-            tail = head
-
-            size += 1
-            return
-        } else if index <= 0 { //head에 추가
+        if index == 0 || isEmpty() {
             newNode.next = head
             head?.previous = newNode
             head = newNode
-
-            size += 1
-            return
+            if tail == nil {
+                tail = head
+            }
+        } else if index >= size {
+            append(value: value)
         } else if index >= size { //tail에 추가
             append(value: value)
             return
-        } else { //중간 삽입
+        } else {
             let half = size / 2
             let isForward = (index <= half)
-
+            
             var node: Node<T>?
             if isForward {
                 node = head
-                for _ in 0..<index - 1 {
-                    guard let next = node?.next else { break }
-                    node = next
+                for _ in 0..<index {
+                    node = node?.next
                 }
             } else {
                 node = tail
-                for _ in 0..<(size - index) {
-                    guard let previous = node?.previous else { break }
-                    node = previous
+                for _ in 0..<(size - index - 1) {
+                    node = node?.previous
                 }
             }
 
-            node?.next?.previous = newNode
             newNode.next = node?.next
-
             newNode.previous = node
+            node?.next?.previous = newNode
             node?.next = newNode
 
             size += 1
-            return
         }
     }
     
@@ -100,85 +94,78 @@ final class LinkedList<T> {
     }
     
     func removeFirst() -> T? {
-        guard let _ = head else { return nil }
+        guard let currentHead = head else { return nil }
         
-        head = head?.next
+        head = currentHead.next
         head?.previous = nil
-        
         size -= 1
+        
         if isEmpty() {
-            head = nil
             tail = nil
         }
-        return head?.value
+        
+        return currentHead.value
     }
     
     func removeLast() -> T? {
-        guard let _ = tail else { return nil }
+        guard let currentTail = tail else { return nil }
         
-        tail = tail?.previous
+        tail = currentTail.previous
         tail?.next = nil
-        
         size -= 1
+        
         if isEmpty() {
             head = nil
-            tail = nil
         }
-        return tail?.value
+        
+        return currentTail.value
     }
     
-//    func remove(at index: Int) -> T? {
-//        if isEmpty() {
-//            return nil
-//        } else if index <= 0 { //head 삭제
-//            return removeFirst()
-//        } else if index >= size { //tail 삭제
-//            return removeLast()
-//        } else {
-//            let half = size / 2
-//            let isForward = (index <= half)
-//
-//            var node: Node<T>?
-//            if isForward {
-//                node = head
-//                for _ in 0..<index {
-//                    guard let next = node?.next else { break }
-//                    node = next
-//                }
-//            } else {
-//                node = tail
-//                for _ in 0..<(size - index - 1) {
-//                    guard let previous = node?.previous else { break }
-//                    node = previous
-//                }
-//            }
-//
-//            node?.previous?.next = node?.next
-//            node?.next?.previous = node?.previous
-//
-//            size -= 1
-//            return node?.value
-//        }
-//
-//        if isEmpty() {
-//            head = nil
-//            tail = nil
-//        }
-//
-//        return
-//    }
+    func remove(at index: Int) -> T? {
+        guard !isEmpty(), index >= 0, index < size else { return nil }
+        
+        if index == 0 {
+            return removeFirst()
+        } else if index == size - 1 {
+            return removeLast()
+        } else {
+            let half = size / 2
+            let isForward = (index < half)
+            
+            var node: Node<T>?
+            if isForward {
+                node = head
+                for _ in 0..<index {
+                    node = node?.next
+                }
+            } else {
+                node = tail
+                for _ in 0..<(size - index - 1) {
+                    node = node?.previous
+                }
+            }
+            
+            node?.previous?.next = node?.next
+            node?.next?.previous = node?.previous
+            
+            size -= 1
+            
+            if isEmpty() {
+                head = nil
+                tail = nil
+            }
+            
+            return node?.value
+        }
+    }
     
     func peek() -> T? {
         return head?.value
     }
     
     func isEmpty() -> Bool {
-        return head == nil || tail == nil
+        return head == nil
     }
-    
-//    func fetchSize() -> Int {
-//        return size
-//    }
 }
 
 
