@@ -85,7 +85,7 @@ extension LinkedList {
     
     public func remove(_ node: Node<T>) {
         guard let previousNode = findPreviousNode(of: node) else {
-            head = nil
+            head = head?.next
             return
         }
         
