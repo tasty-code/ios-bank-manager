@@ -122,6 +122,15 @@
 			path = Bank;
 			sourceTree = "<group>";
 		};
+		7729DCA92B624D3B001DD6D8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7729DCA52B623378001DD6D8 /* Message.swift */,
+				7729DCA72B624C62001DD6D8 /* TaskState.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
+				7729DCA92B624D3B001DD6D8 /* Constants */,
 				7729DCA22B61EE62001DD6D8 /* Bank */,
 				7729DCA12B61EE39001DD6D8 /* DataStructure */,
 			);
