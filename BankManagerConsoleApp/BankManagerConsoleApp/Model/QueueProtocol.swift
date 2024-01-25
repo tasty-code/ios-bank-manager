@@ -7,9 +7,9 @@
 
 protocol QueueProtocol {
     associatedtype Element
+    var peek: Element? {get}
+    var isEmpty: Bool {get}
     func enqueue(_ element: Element)
     func dequeue() -> Element?
     func clear()
-    func peek() -> Element?
-    func isEmpty() -> Bool
 }
