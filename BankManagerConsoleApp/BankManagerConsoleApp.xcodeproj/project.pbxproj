@@ -77,6 +77,25 @@
 			path = BankManagerConsoleAppUnitTest;
 			sourceTree = "<group>";
 		};
+		7729DCA12B61EE39001DD6D8 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				08D27FF32B609F06002DF272 /* Node.swift */,
+				08AF73CC2B5E0EFA00B95E23 /* LinkedList.swift */,
+				7729DC992B5E5D93001DD6D8 /* Queue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		7729DCA22B61EE62001DD6D8 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				7729DCA32B61EE82001DD6D8 /* Bank.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				08D27FF32B609F06002DF272 /* Node.swift */,
-				08AF73CC2B5E0EFA00B95E23 /* LinkedList.swift */,
-				7729DC992B5E5D93001DD6D8 /* Queue.swift */,
+				7729DCA22B61EE62001DD6D8 /* Bank */,
+				7729DCA12B61EE39001DD6D8 /* DataStructure */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
