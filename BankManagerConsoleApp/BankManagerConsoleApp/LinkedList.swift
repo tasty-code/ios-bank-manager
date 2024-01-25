@@ -40,8 +40,13 @@ final class LinkedList<Value> {
     
     @discardableResult
     func removeFirst() -> Value? {
-        let result = head?.value
-        self.head = head?.next
+        let result = self.head?.value
+        guard self.head !== self.tail else {
+            self.head = nil
+            self.tail = nil
+            return result
+        }
+        self.head = self.head?.next
         return result
     }
     
