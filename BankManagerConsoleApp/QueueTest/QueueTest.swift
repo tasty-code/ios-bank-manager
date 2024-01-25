@@ -21,7 +21,7 @@ final class QueueTest: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue호출시_1를_넣으면_1이_반환되는지() {
+    func test_queue에enqueue호출시_1를_추가하면_1이_반환되는지() {
         //given
         let result = 1
         //when
@@ -30,7 +30,17 @@ final class QueueTest: XCTestCase {
         XCTAssertEqual(sut.peek(), result)
     }
     
-    func test_dequeue호출시_1을_반환하는지() {
+    func test_queue에enqueue호출후_1을_넣고_peek호출시_1을_반환하는지() {
+        //given
+        let result = 1
+        sut.enqueue(item: result)
+        //when
+        let peekResult = sut.peek()
+        //then
+        XCTAssertEqual(peekResult, result)
+    }
+    
+    func test_queue에enqueue호출후_1를_추가하면_dequeue호출시_1을_반환하는지() {
         //given
         let result = 1
         sut.enqueue(item: result)
@@ -40,73 +50,77 @@ final class QueueTest: XCTestCase {
         XCTAssertEqual(dequeueResult, result)
     }
     
-    func test_dequeue호출시_빈배열일시_nil을반환하는지() {
+    func test_queue가비어있고_dequeue호출시_nil을반환하는지() {
         //given
+        //when
         guard sut.isEmpty() else {
             XCTFail()
             return
         }
-        //when
-        let result = sut.dequeue()
+        let dequeueResult = sut.dequeue()
         //then
-        XCTAssertEqual(result, nil)
+        XCTAssertEqual(dequeueResult, nil)
     }
     
-    func test_123삽입후_clear호출시_nil을_반환하는지() {
+    func test_queue에enqueue호출후_123을_넣고_clear후_peek을_호출시_nil을_반환하는지() {
         //given
-        for n in 1...3 {
-            sut.enqueue(item: n)
+        for value in 1...3 {
+            sut.enqueue(item: value)
         }
         //when
         sut.clear()
+        let peekResult = sut.peek()
         //then
-        XCTAssertEqual(sut.peek(), nil)
+        XCTAssertEqual(peekResult, nil)
     }
     
-    func test_4추가한List에서_clear호출시_isEmpty가true되는지() {
+    func test_queue에enqueue호출후_4를_넣고_clear호출시_isEmpty가true_count가_0을_반환하는지() {
         //given
         sut.enqueue(item: 4)
         //when
         sut.clear()
+        let isEmptyResult = sut.isEmpty()
+        let countResult = sut.count
         //then
-        XCTAssertTrue(sut.isEmpty())
-        XCTAssertEqual(sut.count, 0)
+        XCTAssertTrue(isEmptyResult)
+        XCTAssertEqual(countResult, 0)
     }
     
-    func test_1삽입후_peek호출시_1을_반환하는지() {
+    func test_queue에_isEmpty호출시_true를_반환하는지() {
         //given
-        let result = 1
+        let result = true
         //when
-        sut.enqueue(item: result)
+        let isEmptyResult = sut.isEmpty()
         //then
-        XCTAssertEqual(sut.peek(), 1)
+        XCTAssertEqual(isEmptyResult, result)
     }
     
-    func test_생성시_isEmpty가_true인지_확인() {
-        XCTAssertEqual(sut.isEmpty(), true)
-    }
-    
-    func test_enqueue_15번실행후_dequeue를_이용해_10번손님찾을수있는지() {
+    func test_queue에enqueue호출후_1부터15를넣고_10이_될때까지_dequeue시_10을_반환하는지() {
         //given
         var findNumber = 0
-        var result: Int?
-        for n in 1...15 {
-            sut.enqueue(item: n)
+        let result = 10
+        var dequeueResult: Int?
+        for value in 1...15 {
+            sut.enqueue(item: value)
         }
         //when
         while !(findNumber == 10) {
             findNumber += 1
-            result = sut.dequeue()
+            dequeueResult = sut.dequeue()
         }
         //then
-        XCTAssertEqual(10, result)
+        XCTAssertEqual(dequeueResult, result)
     }
     
-    func test_queue_1번실행후_2번queue_실행하여_nil값확인() {
-        //when
+    func test_queue애enqueue_1을넣고_2번_dequeue시_nil을_반환하는지() {
+        //given
+        var dequeueResult: Int?
         sut.enqueue(item: 1)
-        var check = sut.dequeue()
+        //when
+        for _ in 1...2 {
+            dequeueResult = sut.dequeue()
+        }
         //then
-        XCTAssertEqual(sut.dequeue(), nil)
+        XCTAssertEqual(dequeueResult, nil)
     }
 }
