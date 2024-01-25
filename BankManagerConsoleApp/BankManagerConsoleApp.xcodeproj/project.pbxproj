@@ -90,8 +90,8 @@
 		7729DCA22B61EE62001DD6D8 /* Bank */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				7729DCA32B61EE82001DD6D8 /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
