@@ -5,3 +5,7 @@
 //
 
 import Foundation
+
+final class BankManager {
+    
+}
