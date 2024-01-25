@@ -1,41 +1,44 @@
-//
-//  LinkedList.swift
-//  BankManagerConsoleApp
-//
-//  Created by MAC2020 on 2024/01/23.
-//
-
 import Foundation
 
-class LinkedList<T> {
+final class LinkedList<T> {
     
     private var head: Node<T>?
     private var tail: Node<T>?
+}
+
+// MARK: - LinkedList Method
+extension LinkedList {
     
     func appendLastNode(data: T) {
         let newNode = Node(value: data)
+        
         if head == nil || tail == nil {
             head = newNode
             tail = head
             return
         }
+        
         tail?.formNext(newNode)
         newNode.formPrev(tail)
         tail = newNode
     }
     
-    @discardableResult
-    func removeFirstNode() -> T? {
+    func clearNode() {
+        self.head = nil
+        self.tail = nil
+    }
+    
+    func removeFirstNode(){
         if head == nil || tail == nil {
             tail = nil
-            return nil
+            return
         }
+        
         let deleteNode = head
         head = deleteNode?.fetchNext()
         head?.formPrev(nil)
         
         tail = isEmpty() ? head : tail
-        return deleteNode?.fetchValue()
     }
     
     func peekNode() -> T? {
@@ -45,6 +48,4 @@ class LinkedList<T> {
     func isEmpty() -> Bool {
         return head == nil
     }
-    
-    
 }

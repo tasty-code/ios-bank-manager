@@ -1,28 +1,23 @@
-//
-//  Queue.swift
-//  BankManagerConsoleApp
-//
-//  Created by Matthew on 1/23/24.
-//
-
 import Foundation
 
-class Queue<T> {
+final class Queue<T> {
     
-    let likeList = LinkedList<T>()
+    private let likeList = LinkedList<T>()
+}
+
+// MARK: - Queue Method
+extension Queue {
     
     func enqueue(data: T) {
         likeList.appendLastNode(data: data)
     }
     
-    func dequeue() -> T? {
-        return likeList.removeFirstNode()
+    func dequeue() {
+        likeList.removeFirstNode()
     }
     
     func clear() {
-        while likeList.removeFirstNode() != nil {
-            likeList.removeFirstNode()
-        }
+        likeList.clearNode()
     }
     
     func peek() -> T? {

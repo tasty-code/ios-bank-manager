@@ -1,13 +1,6 @@
-//
-//  Node.swift
-//  BankManagerConsoleApp
-//
-//  Created by Matthew on 1/23/24.
-//
-
 import Foundation
 
-class Node<T> {
+final class Node<T> {
     
     private var prev: Node<T>?
     private var value: T
@@ -18,6 +11,10 @@ class Node<T> {
         self.value = value
         self.next = next
     }
+}
+
+// MARK: - Node Method
+extension Node {
     
     func fetchPrev() -> Node<T>? {
         return prev
