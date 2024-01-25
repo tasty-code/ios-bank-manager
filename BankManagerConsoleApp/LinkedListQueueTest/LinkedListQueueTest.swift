@@ -6,30 +6,59 @@
 //
 
 import XCTest
+@testable import BankManagerConsoleApp
 
 final class LinkedListQueueTest: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    /// 빈 큐를 생성하고 비어 있는지 확인하는 테스트
+    func testEmptyQueue() {
+        let queue = LinkedListQueue<Int>()
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertNil(queue.peek)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    /// 큐에 요소를 추가하고 큐가 비어있지 않은지 확인하는 테스트
+    func testEnqueue() {
+        let queue = LinkedListQueue<Int>()
+        queue.enqueue(1)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.peek, 1)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    /// 큐에서 요소를 제거하고 큐가 비어 있는지 확인하는 테스트
+    func testDequeue() {
+        let queue = LinkedListQueue<Int>()
+        queue.enqueue(1)
+        let dequeuedElement = queue.dequeue()
+        XCTAssertEqual(dequeuedElement, 1)
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertNil(queue.peek)
     }
+    
+    /// 큐에 여러 요소를 추가하고 모두 제거하는 테스트
+    func testMultipleEnqueueDequeue() {
+        let queue = LinkedListQueue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(queue.dequeue(), 1)
+        XCTAssertEqual(queue.dequeue(), 2)
+        XCTAssertEqual(queue.dequeue(), 3)
+
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertNil(queue.peek)
     }
+    
+    /// 큐를 비우는 테스트
+    func testClear() {
+        let queue = LinkedListQueue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
 
+        queue.clear()
+
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertNil(queue.peek)
+    }
 }

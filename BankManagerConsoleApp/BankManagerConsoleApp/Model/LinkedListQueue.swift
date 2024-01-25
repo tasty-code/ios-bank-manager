@@ -22,7 +22,7 @@ final class LinkedListQueue<T>: QueueProtocol {
     }
     
     /// 큐에 요소를 추가
-    public func enqueue(_ element: Element) {
+    public func enqueue(_ element: T) {
         bankQueue.append(data: element)
     }
     
@@ -47,7 +47,7 @@ final class LinkedListQueue<T>: QueueProtocol {
         }
     }
     
-    // LinkedList 클래스는 Queue를 구현하기 위한 연결 리스트
+    /// LinkedList 클래스는 Queue를 구현하기 위한 연결 리스트
     private final class LinkedList<U> {
         private var head: Node<U>?
         private var tail: Node<U>?
