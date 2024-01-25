@@ -65,4 +65,21 @@ final class BankManagerConsoleAppTests: XCTestCase {
         //then
         XCTAssertEqual("5", lastNode, "예상되는 값은 5")
     }
+    
+    func test_dequeue가_Queue의_노드를_제대로_삭제하는가() {
+            //given
+            let node1: Node = Node(value: "6")
+            let node2: Node = Node(value: "7")
+            let node3: Node = Node(value: "8")
+            sut.enqueue(node: node1)
+            sut.enqueue(node: node2)
+            sut.enqueue(node: node3)
+            
+            //when
+            sut.dequeue()
+            let headNode: String? = sut.linkedList[0]?.value
+
+            //then
+            XCTAssertEqual("7", headNode, "예상되는 값은 7")
+    }
 }
