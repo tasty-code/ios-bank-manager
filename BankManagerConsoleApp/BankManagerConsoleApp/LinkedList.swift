@@ -73,6 +73,26 @@ final class LinkedList<T> {
         return headData
     }
     
+    func remove(index: Int) -> T? {
+        guard let frontNode = search(index: index-1) else {
+            return nil
+        }
+            
+        guard let removeNode = frontNode.next else {
+            return nil
+        }
+            
+        guard let nextNode = removeNode.next else {
+            frontNode.next = nil
+            self.tail = frontNode
+            return removeNode.data
+        }
+            
+        frontNode.next = nextNode
+            
+        return removeNode.data
+    }
+    
     func peek() -> T? {
         head?.data
     }
