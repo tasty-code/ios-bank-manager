@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<T> {
-    private var queue: LinkedList<T>
+    private(set) var queue: LinkedList<T>
     
     init(queue: LinkedList<T>) {
         self.queue = queue

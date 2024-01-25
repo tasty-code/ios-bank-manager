@@ -66,4 +66,16 @@ final class QueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, firstElement)
     }
+    
+    func test_queue에1과2가있을때_insert를통해2번째에3을넣어줬을때_두번째값이3이반환된다() {
+        //given
+        sut?.enqueue(element: 1)
+        sut?.enqueue(element: 2)
+        //when
+        sut?.queue.insertNode(index: 1, from: 3)
+        //then
+        XCTAssertEqual(try sut?.dequeue(), 1)
+        XCTAssertEqual(try sut?.dequeue(), 3)
+    }
 }
+
