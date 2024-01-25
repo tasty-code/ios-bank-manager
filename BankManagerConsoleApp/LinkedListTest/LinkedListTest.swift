@@ -1,7 +1,7 @@
 @testable import BankManagerConsoleApp
 import XCTest
 
-final class BankManagerConsoleUnitTests: XCTestCase {
+final class LinkedListTest: XCTestCase {
 
     var sut: LinkedList<String>!
     
@@ -13,7 +13,7 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         sut = nil
     }
     
-    /// append
+    // MARK: - append
     func test_첫_노드를_추가하면_리스트가_비어있지_않아야_한다() {
         // given
         sut.appendNode(value:  "3")
@@ -21,7 +21,7 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         // then
         XCTAssertEqual(sut.isEmpty, false)
     }
-    /// append
+
     func test_첫_노드를_추가하면_헤드의_값과_같아야_한다() {
         // given
         sut.appendNode(value: "1")
@@ -30,7 +30,7 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         XCTAssertEqual(sut.headValue, "1")
     }
     
-    /// removeFirst
+    // MARK: - removeFirst
     func test_노드가_두개이상일때_removeFirst를하면_두번째노드가_헤드가_된다() {
         // given
         sut.appendNode(value: "1")
@@ -43,7 +43,7 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         XCTAssertEqual(sut.head?.value, "폴")
     }
     
-    /// clear
+    // MARK: - clear
     func test_노드를추가하고_클리어를_했을때_head와_tail이_nil이어야_한다() {
         // given
         sut.appendNode(value: "1")
@@ -58,7 +58,6 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         XCTAssertEqual(sut.tail == nil, true)
     }
     
-    /// clear
     func test_노드를추가하고_클리어를_했을때_노드의_다음값이_없어야_한다() {
         // given
         sut.appendNode(value: "1")

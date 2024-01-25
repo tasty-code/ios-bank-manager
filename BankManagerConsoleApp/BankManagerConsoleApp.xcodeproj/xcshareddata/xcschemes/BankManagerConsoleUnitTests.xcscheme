@@ -19,8 +19,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9935A6E62B61037E005AB81C"
-               BuildableName = "BankManagerConsoleUnitTests.xctest"
-               BlueprintName = "BankManagerConsoleUnitTests"
+               BuildableName = "LinkedListTest.xctest"
+               BlueprintName = "LinkedListTest"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
