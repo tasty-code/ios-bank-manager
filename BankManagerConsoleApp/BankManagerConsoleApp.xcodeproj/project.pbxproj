@@ -70,11 +70,27 @@
 		08AF74152B5E491200B95E23 /* BankManagerConsoleAppUnitTest */ = {
 			isa = PBXGroup;
 			children = (
+				08D2800B2B621ABE002DF272 /* BankUnitTests */,
+				08D2800A2B621AA0002DF272 /* DataStructureUnitTests */,
+			);
+			path = BankManagerConsoleAppUnitTest;
+			sourceTree = "<group>";
+		};
+		08D2800A2B621AA0002DF272 /* DataStructureUnitTests */ = {
+			isa = PBXGroup;
+			children = (
 				7729DC9B2B5F4BA3001DD6D8 /* BaseTestCase.swift */,
 				08AF74162B5E491200B95E23 /* LinkedListUnitTests.swift */,
 				7729DC9D2B5F8533001DD6D8 /* QueueUnitTests.swift */,
 			);
-			path = BankManagerConsoleAppUnitTest;
+			path = DataStructureUnitTests;
+			sourceTree = "<group>";
+		};
+		08D2800B2B621ABE002DF272 /* BankUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BankUnitTests;
 			sourceTree = "<group>";
 		};
 		7729DCA12B61EE39001DD6D8 /* DataStructure */ = {
