@@ -6,6 +6,9 @@ class LinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
+    var headValue: T? {
+        return head?.value
+    }
     
     func appendNode(value: T) {
         let newNode = Node(value: value)
@@ -24,10 +27,6 @@ class LinkedList<T> {
         } else {
             head = head?.next
         }
-    }
-    
-    func headValue() -> T? {
-        return head?.value
     }
     
     func clear() {

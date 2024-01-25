@@ -27,7 +27,7 @@ final class BankManagerConsoleUnitTests: XCTestCase {
         sut.appendNode(value: "1")
         
         // then
-        XCTAssertEqual(sut.headValue(), "1")
+        XCTAssertEqual(sut.headValue, "1")
     }
     
     /// removeFirst
