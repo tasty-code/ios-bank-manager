@@ -71,7 +71,7 @@ final class QueueTests: XCTestCase {
         }
     }
     
-    func test_queue에1과2와3이있을때_remove호출하여_2를반환한다() {
+    func test_queue에1과2와3이있을때_remove호출하여_두번째값인2를빼내면2가반환한다() {
         //given
         sut.enqueue(element: 1)
         sut.enqueue(element: 2)

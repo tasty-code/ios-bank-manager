@@ -21,7 +21,7 @@ final class LinkedList<T> {
            return head
         } else {
             var node = head?.next
-            for _ in 1...index {
+            for _ in 1..<index {
                 node = node?.next
                 if node == nil {
                     break
@@ -74,7 +74,7 @@ final class LinkedList<T> {
     }
     
     func remove(index: Int) -> T? {
-        guard let frontNode = search(index: index-1) else {
+        guard let frontNode = search(index: index - 1) else {
             return nil
         }
             
@@ -84,7 +84,7 @@ final class LinkedList<T> {
             
         guard let nextNode = removeNode.next else {
             frontNode.next = nil
-            self.tail = frontNode
+            tail = frontNode
             return removeNode.data
         }
             

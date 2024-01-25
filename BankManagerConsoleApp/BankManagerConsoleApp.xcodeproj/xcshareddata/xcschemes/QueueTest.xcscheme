@@ -18,7 +18,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E44264812B60F3B5006FE241"
+               BlueprintIdentifier = "E41999652B6272E400507804"
                BuildableName = "QueueTest.xctest"
                BlueprintName = "QueueTest"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
