@@ -27,7 +27,6 @@ class LinkedList<T: Equatable> {
 
 extension LinkedList {
     subscript(index: Int) -> Node<T>? {
-        print(count)
         if index < 0 || index > count - 1 {
             fatalError("Index out of range")
         }
@@ -68,13 +67,12 @@ extension LinkedList {
     }
     
     public func add(_ newNode: Node<T>) {
-        if head == nil {
+        guard let lastNode = getLastNode() else {
             head = newNode
             return
         }
         
-        let lastNode = getLastNode()
-        lastNode?.refer(to: newNode)
+        lastNode.refer(to: newNode)
     }
     
     public func add(_ newNode: Node<T>, after previousNode: Node<T>) {
