@@ -16,7 +16,8 @@ struct LinkedList<T: Equatable> {
     mutating func isNotEmpty() -> Bool {
         return head != nil
     }
-
+    
+    
     
     mutating func count() -> UInt {
         var count: UInt = 1
@@ -132,6 +133,22 @@ struct LinkedList<T: Equatable> {
             node = node?.next
         }
 
+        return result
+    }
+}
+
+extension LinkedList: CustomStringConvertible {
+    public var description: String {
+        var result = ""
+        var node = head
+        while node != nil {
+            guard let unNode = node else {
+                break
+            }
+            result += String(describing: unNode.value) + (unNode.next == nil ? "" : " -> ")
+            node = unNode.next
+        }
+        
         return result
     }
 }
