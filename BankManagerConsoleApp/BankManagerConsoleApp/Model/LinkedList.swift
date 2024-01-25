@@ -118,7 +118,7 @@ struct LinkedList<T: Equatable> {
         tail = nil
     }
     
-    mutating func search(data: T?) -> [(Node<T>?, Int)]? {
+    mutating func search(value: T?) -> [(Node<T>?, Int)]? {
         if isEmpty() { return nil }
         
         var result: [(Node<T>?, Int)] = []
@@ -126,7 +126,7 @@ struct LinkedList<T: Equatable> {
         var count = 0
         while node != nil {
             count += 1
-            if node?.value == data {
+            if node?.value == value {
                 result.append((node, count))
             }
             node = node?.next

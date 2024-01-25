@@ -11,6 +11,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A904222B60AC5D001E00E7 /* LinkedList.swift */; };
+		F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		F3A904222B60AC5D001E00E7 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +67,19 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				229B94BD2B60AA9E003320F6 /* Node.swift */,
-				F3A904222B60AC5D001E00E7 /* LinkedList.swift */,
+				F3F4F95B2B62231D0037A3AF /* Model */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		F3F4F95B2B62231D0037A3AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				229B94BD2B60AA9E003320F6 /* Node.swift */,
+				F3A904222B60AC5D001E00E7 /* LinkedList.swift */,
+				F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +141,7 @@
 			files = (
 				229B94BE2B60AA9E003320F6 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */,
 				F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
