@@ -8,3 +8,5 @@ import Foundation
 
 private let bankManager = BankManager()
 private let bank = Bank(bankManager: bankManager)
+
+bank.open()
