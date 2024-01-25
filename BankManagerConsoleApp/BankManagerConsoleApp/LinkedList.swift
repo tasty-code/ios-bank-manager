@@ -5,13 +5,18 @@
 //  Created by 루피, 진 on 1/24/24.
 //
 
-struct LinkedList<T> {
+struct LinkedList<T: Equatable> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
     mutating func isEmpty() -> Bool {
         return head == nil
     }
+    
+    mutating func isNotEmpty() -> Bool {
+        return head != nil
+    }
+
     
     mutating func count() -> UInt {
         var count: UInt = 1
@@ -31,7 +36,9 @@ struct LinkedList<T> {
         if isEmpty() {
             head = newNode
             tail = newNode
-        } else {
+        }
+        
+        if isNotEmpty() {
             tail?.next = newNode
             tail = newNode
         }
@@ -47,7 +54,7 @@ struct LinkedList<T> {
         return tail
     }
     
-    mutating func insert(value: T, at: Int) {
+    mutating func insert(value: T, at: Int ) {
         let newNode = Node(value: value)
         
         if isEmpty() {
@@ -55,7 +62,7 @@ struct LinkedList<T> {
             tail = newNode
         } 
         
-        if !isEmpty() {
+        if isNotEmpty() {
             var node = head
             for _ in 1...at {
                 if node?.next == nil {
@@ -111,4 +118,20 @@ struct LinkedList<T> {
         tail = nil
     }
     
+    mutating func search(data: T?) -> [(Node<T>?, Int)]? {
+        if isEmpty() { return nil }
+        
+        var result: [(Node<T>?, Int)] = []
+        var node = head
+        var count = 0
+        while node != nil {
+            count += 1
+            if node?.value == data {
+                result.append((node, count))
+            }
+            node = node?.next
+        }
+
+        return result
+    }
 }
