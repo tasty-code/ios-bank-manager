@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E2482B12B60ECAE00887D3D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2482B02B60ECAE00887D3D /* LinkedList.swift */; };
-		4EAEFDC82B621C9B002E87DA /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEFDC72B621C9B002E87DA /* Error.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		E41999692B6272E400507804 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41999682B6272E400507804 /* QueueTest.swift */; };
@@ -16,6 +15,8 @@
 		E419996E2B6272F000507804 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		E419996F2B6272F300507804 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2482B02B60ECAE00887D3D /* LinkedList.swift */; };
 		E41999702B6272F600507804 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442647C2B60EFBF006FE241 /* Queue.swift */; };
+		E41999722B627E7900507804 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEFDC72B621C9B002E87DA /* QueueError.swift */; };
+		E41999732B627EAA00507804 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEFDC72B621C9B002E87DA /* QueueError.swift */; };
 		E442647B2B60EC48006FE241 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442647A2B60EC48006FE241 /* Node.swift */; };
 		E442647D2B60EFBF006FE241 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442647C2B60EFBF006FE241 /* Queue.swift */; };
 /* End PBXBuildFile section */
@@ -34,7 +35,7 @@
 
 /* Begin PBXFileReference section */
 		4E2482B02B60ECAE00887D3D /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		4EAEFDC72B621C9B002E87DA /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		4EAEFDC72B621C9B002E87DA /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -87,7 +88,7 @@
 				E442647A2B60EC48006FE241 /* Node.swift */,
 				4E2482B02B60ECAE00887D3D /* LinkedList.swift */,
 				E442647C2B60EFBF006FE241 /* Queue.swift */,
-				4EAEFDC72B621C9B002E87DA /* Error.swift */,
+				4EAEFDC72B621C9B002E87DA /* QueueError.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -189,11 +190,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41999722B627E7900507804 /* QueueError.swift in Sources */,
 				E442647D2B60EFBF006FE241 /* Queue.swift in Sources */,
 				E442647B2B60EC48006FE241 /* Node.swift in Sources */,
 				4E2482B12B60ECAE00887D3D /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				4EAEFDC82B621C9B002E87DA /* Error.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41999732B627EAA00507804 /* QueueError.swift in Sources */,
 				E41999702B6272F600507804 /* Queue.swift in Sources */,
 				E41999692B6272E400507804 /* QueueTest.swift in Sources */,
 				E419996D2B6272ED00507804 /* Node.swift in Sources */,

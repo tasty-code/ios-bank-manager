@@ -13,7 +13,7 @@ enum QueueError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .dequeueError:
-            "값을 빼내지 못했습니다."
+         return "값을 빼내지 못했습니다."
         }
     }
 }
