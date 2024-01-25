@@ -16,7 +16,7 @@ final class LinkedList<Element> {
         head == nil
     }
     
-    func append(item: Element) {
+    func append(new item: Element) {
         let newNode = Node(data: item)
         
         guard let node = tail else {

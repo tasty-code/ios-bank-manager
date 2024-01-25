@@ -15,7 +15,7 @@ struct BankTellerQueue<Element> {
     }
         
     mutating func enqueue(item: Element) {
-        linkedList.append(item: item)
+        linkedList.append(new: item)
     }
     
     mutating func dequeue() -> Element? {
