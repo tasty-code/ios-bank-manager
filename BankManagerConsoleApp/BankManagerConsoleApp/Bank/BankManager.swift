@@ -8,11 +8,12 @@
 import Foundation
 
 final class BankManager {
-    
-    var updateCustomerNumber: ((Int) -> Void)?
+
+    var updateCustomerNumber: ((TaskState) -> Void)?
     
     private var customerQueue = Queue<Int>()
     private let duration = 0.7
+    private var totalDuration = 0.0
 
 }
 
@@ -20,11 +21,10 @@ final class BankManager {
 extension BankManager {
     
     /// 은행원 업무 (총 업무시간 리턴)
-    func handleTask(with count: Int) -> Double {
-        let totalDuration = Double(count) * duration
+    func handleTask(with count: Int, completion: @escaping (Double) -> Void) {
         makeCustomerQueue(with: count)
         proccessTask(with: count)
-        return totalDuration
+        completion(totalDuration)
     }
     
     /// 손님 줄세우기
@@ -40,17 +40,18 @@ extension BankManager {
         (1...customer).forEach { [weak self] in
             guard let self = self else { return }
             
-            self.updateCustomerNumber?($0)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.updateCustomerNumber?(.start(number: $0))
+            DispatchQueue.global().sync {
+                Thread.sleep(forTimeInterval: duration)
                 self.completeTask()
+                totalDuration += duration
             }
         }
     }
     
     private func completeTask() {
-        if let number = self.customerQueue.dequeue() {
-            self.updateCustomerNumber?(number)
+        if let number = customerQueue.dequeue() {
+            updateCustomerNumber?(.finish(number: number))
         }
     }
 }
