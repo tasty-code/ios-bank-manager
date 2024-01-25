@@ -82,4 +82,17 @@ final class BankManagerConsoleAppTests: XCTestCase {
             //then
             XCTAssertEqual("7", headNode, "예상되는 값은 7")
     }
+    
+    func test_peek가_첫번째_노드를_돌려주는가() {
+        // given
+        let expectation = "100"
+        let result: String
+
+        // when
+        sut.enqueue(node: Node(value: "100"))
+        sut.enqueue(node: Node(value: "101"))
+        result = sut.peek()!.value
+        // then
+        XCTAssertEqual(expectation, result, "예상되는 값은 100")
+    }
 }
