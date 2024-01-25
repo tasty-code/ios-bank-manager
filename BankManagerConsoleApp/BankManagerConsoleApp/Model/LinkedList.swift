@@ -37,6 +37,7 @@ struct LinkedList<T: Equatable> {
         if isEmpty() {
             head = newNode
             tail = newNode
+            return 
         }
         
         if isNotEmpty() {

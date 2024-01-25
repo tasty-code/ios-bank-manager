@@ -13,9 +13,6 @@ final class CustomerQueueUnitTest: XCTestCase {
     var customerQueue = CustomerQueue<Int>()
     
     override func setUp() {
-//        for i in 1...5 {
-//            customerQueue.enqueue(value: i)
-//        }
     }
     
     override func tearDown() {
@@ -40,7 +37,6 @@ final class CustomerQueueUnitTest: XCTestCase {
     }
     
     func test_클리어_메서드_호출시_모든_노드가_사라지고_isEmpty가_트루_반환() {
-        
         //given
         customerQueue.enqueue(value: 1)
         customerQueue.enqueue(value: 2)
