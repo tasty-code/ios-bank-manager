@@ -95,4 +95,20 @@ final class BankManagerConsoleAppTests: XCTestCase {
         // then
         XCTAssertEqual(expectation, result, "예상되는 값은 100")
     }
+    
+    func test_clear가_큐를_삭제하는가() {
+        // given
+        let expectation: Int = 0
+        let result: Int
+        
+        // when
+        sut.enqueue(node: Node(value: "100"))
+        sut.enqueue(node: Node(value: "101"))
+        sut.enqueue(node: Node(value: "102"))
+        sut.clear()
+        result = sut.linkedList.count
+        
+        // then
+        XCTAssertEqual(expectation, result, "예상되는 count는 0")
+    }
 }
