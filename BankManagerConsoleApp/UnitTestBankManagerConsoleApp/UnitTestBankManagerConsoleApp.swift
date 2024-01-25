@@ -1,35 +1,59 @@
-//
-//  UnitTestBankManagerConsoleApp.swift
-//  UnitTestBankManagerConsoleApp
-//
-//  Created by MAC2020 on 2024/01/24.
-//
-
 import XCTest
+@testable import BankManagerConsoleApp
 
 final class UnitTestBankManagerConsoleApp: XCTestCase {
+    
+    var sut: Queue<String>! = nil
+}
 
+extension UnitTestBankManagerConsoleApp {
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = Queue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
+}
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+// MARK: - UnitTestBankManagerConsoleApp TestMethod
+extension UnitTestBankManagerConsoleApp {
+    
+    func test_enqueueTest() {
+        let data = "test-data"
+        sut.enqueue(data: data)
+        XCTAssertEqual(sut.peek(), data, "thisTestFailed")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_dequeueTest() {
+        sut.dequeue()
+        XCTAssertNil(sut.peek(), "thisTestFailed")
     }
-
+    
+    func test_clearTest() {
+        sut.clear()
+        XCTAssertNil(sut.peek(), "thisTestFailed")
+    }
+    
+    func test_peekCheckTest() {
+        let data = "test-data"
+        sut.enqueue(data: data)
+        XCTAssertEqual(sut.peek(),data, "thisTestFailed")
+    }
+    
+    func test_peekNilTest() {
+        XCTAssertNil(sut.peek(), "thisTestFailed")
+    }
+    
+    func test_isEmptyTrueTest() {
+        XCTAssertTrue(sut.isEmpty(), "thisTestFailed")
+    }
+    
+    func test_isEmptyFalseTest() {
+        sut.enqueue(data: "test-data")
+        XCTAssertFalse(sut.isEmpty(), "thisTestFailed")
+    }
 }
