@@ -8,8 +8,13 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
+<<<<<<< Updated upstream:BankManagerConsoleApp/QueueTest/QueueTest.swift
 final class QueueTest: XCTestCase {
     var sut: BankTellerQueue<Int>!
+=======
+final class BankTellerQueueTest: XCTestCase {
+    var bankTellerQueue: BankTellerQueue<Int>!
+>>>>>>> Stashed changes:BankManagerConsoleApp/QueueTest/BankTellerQueueTest.swift
 
     override func setUpWithError() throws {
         try super.setUpWithError()

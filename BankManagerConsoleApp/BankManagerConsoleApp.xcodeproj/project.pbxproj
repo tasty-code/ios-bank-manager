@@ -16,7 +16,7 @@
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		CCA535552B5F89A700F282B4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
 		CCA535572B5F930700F282B4 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
-		CCA5355F2B5F988F00F282B4 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5355E2B5F988F00F282B4 /* QueueTest.swift */; };
+		CCA5355F2B5F988F00F282B4 /* BankTellerQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */; };
 		CCA535632B5F98AB00F282B4 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
 		CCA535642B5F98AE00F282B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E022B5F8E0400FDBDE7 /* LinkedList.swift */; };
 		CCA535652B5F98B100F282B4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
@@ -44,7 +44,7 @@
 		CCA535542B5F89A700F282B4 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		CCA535562B5F930700F282B4 /* BankTellerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueue.swift; sourceTree = "<group>"; };
 		CCA5355C2B5F988F00F282B4 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCA5355E2B5F988F00F282B4 /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
+		CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueueTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,7 @@
 		CCA5355D2B5F988F00F282B4 /* QueueTest */ = {
 			isa = PBXGroup;
 			children = (
-				CCA5355E2B5F988F00F282B4 /* QueueTest.swift */,
+				CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */,
 			);
 			path = QueueTest;
 			sourceTree = "<group>";
@@ -268,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCA535642B5F98AE00F282B4 /* LinkedList.swift in Sources */,
-				CCA5355F2B5F988F00F282B4 /* QueueTest.swift in Sources */,
+				CCA5355F2B5F988F00F282B4 /* BankTellerQueueTest.swift in Sources */,
 				CCA535632B5F98AB00F282B4 /* BankTellerQueue.swift in Sources */,
 				CCA535652B5F98B100F282B4 /* Node.swift in Sources */,
 			);
