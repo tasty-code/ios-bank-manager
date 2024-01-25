@@ -5,6 +5,10 @@
 //  Created by 루피, 진 on 1/24/24.
 //
 
+enum Constants {
+    static let nodeInterpolation: UInt = 1
+}
+
 struct LinkedList<T: Equatable> {
     private var head: Node<T>?
     private var tail: Node<T>?
@@ -70,7 +74,7 @@ struct LinkedList<T: Equatable> {
             return
         }
         
-        for _ in 0..<index-1 {
+        for _ in 0..<index - Constants.nodeInterpolation {
             if node?.next == nil {
                 tail = newNode
                 break
@@ -92,7 +96,7 @@ struct LinkedList<T: Equatable> {
             return node
         }
         
-        for _ in 0..<index-1 {
+        for _ in 0..<index - Constants.nodeInterpolation {
             if node?.next?.next == nil {
                 tail = node?.next
                 break
