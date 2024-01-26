@@ -1,8 +1,8 @@
 
 class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var count: Int = 0
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         head == nil
