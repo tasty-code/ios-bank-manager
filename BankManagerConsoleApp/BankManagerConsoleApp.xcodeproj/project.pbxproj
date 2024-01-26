@@ -7,16 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15A5CB902B5F926D0006A55B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
-		15A5CB922B5F92850006A55B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
-		C15061B02B60A3A600877C57 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15061AF2B60A3A600877C57 /* Queue.swift */; };
+		15A94F1E2B6379FC00169F2A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15061AF2B60A3A600877C57 /* Queue.swift */; };
+		15A94F1F2B6379FE00169F2A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
+		15A94F202B637A0400169F2A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
+		15A94F222B637C7900169F2A /* UnitTestBankManagerConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A8ED742B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift */; };
 		C15C48B12B61FF00002EA255 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15061AF2B60A3A600877C57 /* Queue.swift */; };
 		C15C48B22B61FF04002EA255 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
 		C15C48B32B61FF06002EA255 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
-		C1A8ED752B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A8ED742B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15A94F232B637D5800169F2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7694E6E259C3EC00053667F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7694E75259C3EC00053667F;
+			remoteInfo = BankManagerConsoleApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C7694E74259C3EC00053667F /* CopyFiles */ = {
@@ -111,6 +121,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				15A94F242B637D5800169F2A /* PBXTargetDependency */,
 			);
 			name = UnitTestBankManagerConsoleApp;
 			productName = UnitTestBankManagerConsoleApp;
@@ -186,7 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C15C48B22B61FF04002EA255 /* LinkedList.swift in Sources */,
-				C1A8ED752B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift in Sources */,
+				15A94F222B637C7900169F2A /* UnitTestBankManagerConsoleApp.swift in Sources */,
 				C15C48B12B61FF00002EA255 /* Queue.swift in Sources */,
 				C15C48B32B61FF06002EA255 /* Node.swift in Sources */,
 			);
@@ -196,15 +207,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C15061B02B60A3A600877C57 /* Queue.swift in Sources */,
-				15A5CB902B5F926D0006A55B /* Node.swift in Sources */,
+				15A94F1E2B6379FC00169F2A /* Queue.swift in Sources */,
+				15A94F202B637A0400169F2A /* Node.swift in Sources */,
+				15A94F1F2B6379FE00169F2A /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				15A5CB922B5F92850006A55B /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		15A94F242B637D5800169F2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7694E75259C3EC00053667F /* BankManagerConsoleApp */;
+			targetProxy = 15A94F232B637D5800169F2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C1A8ED762B60F21100ED65C8 /* Debug */ = {
@@ -214,15 +233,16 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T92LV6HV88;
+				DEVELOPMENT_TEAM = 76PL59HQ85;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Matthew.UnitTestBankManagerConsoleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sungsu.UnitTestBankManagerConsoleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -240,15 +260,16 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T92LV6HV88;
+				DEVELOPMENT_TEAM = 76PL59HQ85;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Matthew.UnitTestBankManagerConsoleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sungsu.UnitTestBankManagerConsoleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -295,6 +316,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -356,6 +378,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -377,6 +400,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_TESTING_SEARCH_PATHS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -386,6 +411,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_TESTING_SEARCH_PATHS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
