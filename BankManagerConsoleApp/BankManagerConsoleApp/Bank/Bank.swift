@@ -11,36 +11,41 @@ final class Bank {
     
     private let bankManager: BankManager
     private var customerCount: Int?
+    private let startNumber: Int = 1
+    private let customerCountRange: ClosedRange<Int> = 10...30
     
     init(bankManager: BankManager) {
         self.bankManager = bankManager
     }
     
-    func open() {
+    func openBank() {
         print(Message.default.showMessage())
         print(Message.userInput.showMessage(), terminator: "")
         
-        guard let userInput = readLine(),
-              let userChoice = Int(userInput)
-        else {
-            open()
-            return
+        let userInput = readLine()
+        
+        do {
+            customerCount = try validateUserInput(with: userInput)
+            startTask()
+        } catch {
+            print(Message.inputError.showMessage())
+            openBank()
         }
-        validateUserInput(with: userChoice)
     }
     
-    private func validateUserInput(with userChoice: Int) {
-        if userChoice == 1 {
-            customerCount = Int.random(in: 10...30)
+    private func validateUserInput(with userInput: String?) throws -> Int? {
+        guard let userInput,
+              let userChoice = Int(userInput),
+              userChoice > 0 && userChoice < 3
+        else {
+            throw BankError.inputError
         }
         
-        if let _ = customerCount {
-            startTask()
-        }
+        return userChoice == startNumber ? Int.random(in: customerCountRange) : nil
     }
     
-    private func handle() {
-        bankManager.updateCustomerNumber = { result in
+    private func showProcessState() {
+        bankManager.updateTaskState = { result in
             switch result {
             case .start(let num):
                 print(Message.startTask(number: num).showMessage())
@@ -51,17 +56,13 @@ final class Bank {
     }
     
     private func startTask() {
-        guard let customerCount = customerCount else {
-            return
-        }
-        
-        handle()
-        
-        bankManager.handleTask(with: customerCount) { [weak self] totalDuration in
+        guard let customerCount = customerCount else { return }
+        bankManager.makeCustomerQueue(with: customerCount)
+        showProcessState()
+        bankManager.handleTask { totalDuration in
             let duration: Double = round(totalDuration * 100) / 100
             print(Message.report(count: customerCount, duration: duration).showMessage())
-            self?.customerCount = nil
-            self?.open()
         }
+        openBank()
     }
 }
