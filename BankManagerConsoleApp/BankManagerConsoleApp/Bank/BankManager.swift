@@ -42,9 +42,9 @@ extension BankManager {
             
             self.updateCustomerNumber?(.start(number: $0))
             DispatchQueue.global().sync {
-                Thread.sleep(forTimeInterval: duration)
+                Thread.sleep(forTimeInterval: self.duration)
                 self.completeTask()
-                totalDuration += duration
+                self.totalDuration += self.duration
             }
         }
     }
