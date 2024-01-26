@@ -9,13 +9,13 @@ import Foundation
 
 struct Queue<T> {    
     
-    private var queue: LinkedList<T>?
+    private var queue: LinkedList<T>
     
     var isEmpty: Bool {
-        return queue?.isEmpty ?? true
+        return queue.isEmpty
     }
     
-    init(queue: LinkedList<T>? = nil) {
+    init(queue: LinkedList<T> = LinkedList<T>()) {
         self.queue = queue
     }
 }
@@ -24,21 +24,18 @@ struct Queue<T> {
 extension Queue {
     
     mutating func enqueue(_ element: T) {
-        if queue == nil {
-            queue = LinkedList()
-        }
-        queue?.append(element)
+        queue.append(element)
     }
     
     mutating func dequeue() -> T? {
-        return queue?.removeFirst()
+        return queue.removeFirst()
     }
     
     mutating func clear() {
-        queue?.removeAll()
+        queue.removeAll()
     }
 
     mutating func peek() -> T? {
-        return queue?.first
+        return queue.first
     }
 }
