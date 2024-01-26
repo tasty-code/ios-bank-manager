@@ -16,11 +16,12 @@ struct Queue<T: Equatable> {
         linkedList.add(node)
     }
     
-    func dequeue() {
+    @discardableResult
+    func dequeue() -> Node<T>? {
         guard let firstNode = linkedList[0] else {
-            return
+            return nil
         }
-        linkedList.remove(firstNode)
+        return linkedList.remove(firstNode)
     }
     
     func peek() -> Node<T>? {
