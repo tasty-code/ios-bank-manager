@@ -1,14 +1,19 @@
-class Node<T> {
-    var data: T
+final class Node<T> {
+    private var data: T
     var next: Node?
     
     init(data: T, next: Node? = nil) {
         self.data = data
         self.next = next
     }
+    
+    func value() -> T {
+        let duplicatedData: T = data
+        return duplicatedData
+    }
 }
 
-class LinkedList<T> {
+final class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
@@ -18,8 +23,8 @@ class LinkedList<T> {
     
     func append(data: T) {
         let newNode = Node(data: data)
-        if let tailNode = tail {
-            tailNode.next = newNode
+        if let tail {
+            tail.next = newNode
         } else {
             head = newNode
         }
@@ -49,12 +54,11 @@ class LinkedList<T> {
     }
     
     private func removeFirst() -> T? {
-        if let headNode = head {
-            head = headNode.next
-            if head == nil {
-                tail = nil
-            }
-            return headNode.data
+        if  head != nil {
+            let value: T? = head?.value()
+            head = nil
+            tail = nil
+            return value
         } else {
             return nil
         }
@@ -72,6 +76,6 @@ class LinkedList<T> {
         }
         let removedNode = node?.next
         node?.next = node?.next?.next
-        return removedNode?.data
+        return removedNode?.value()
     }
 }

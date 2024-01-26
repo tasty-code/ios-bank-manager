@@ -1,5 +1,3 @@
-import Foundation
-
 protocol Queue {
     associatedtype Element
     var isEmpty: Bool { get }
