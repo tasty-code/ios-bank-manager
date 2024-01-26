@@ -1,28 +1,28 @@
 
 class Queue<T> {
-    var queue: LinkedList<T> = LinkedList()
+    private let linkedList: LinkedList<T> = LinkedList()
     
     func enqueue(with item: T) {
-        queue.appendNodeAtRear(with: item)
+        linkedList.appendNodeAtRear(with: item)
     }
     
     func dequeue() -> T? {
-        return queue.removeNodeFromFront()
+        return linkedList.removeNodeFromFront()
     }
     
     func clean() {
-        queue.clean()
+        linkedList.clean()
     }
     
     func peek() -> T? {
-        return queue.peek()
+        return linkedList.peek()
     }
     
     func isEmpty() -> Bool {
-        return queue.isEmpty
+        return linkedList.isEmpty
     }
     
     func totalLength() -> Int {
-        return queue.count
+        return linkedList.count
     }
 }
