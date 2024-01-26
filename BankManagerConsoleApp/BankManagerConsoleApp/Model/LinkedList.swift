@@ -9,15 +9,15 @@ struct LinkedList<T: Equatable> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return head == nil
     }
     
-    mutating func isNotEmpty() -> Bool {
+    func isNotEmpty() -> Bool {
         return head != nil
     }
     
-    mutating func count() -> UInt {
+    func count() -> UInt {
         var count: UInt = 1
         var node = head
         
@@ -44,12 +44,12 @@ struct LinkedList<T: Equatable> {
         }
     }
     
-    mutating func first() -> Node<T>? {
+    func first() -> Node<T>? {
         guard isNotEmpty() else { return nil }
         return head
     }
     
-    mutating func last() -> Node<T>? {
+    func last() -> Node<T>? {
         guard isNotEmpty() else { return nil }
         return tail
     }
@@ -125,7 +125,7 @@ struct LinkedList<T: Equatable> {
         tail = nil
     }
     
-    mutating func search(value: T?) -> [(Node<T>?, Int)]? {
+    func search(value: T?) -> [(Node<T>?, Int)]? {
         guard isNotEmpty() else { return nil }
         
         var result: [(Node<T>?, Int)] = []
