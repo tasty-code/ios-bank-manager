@@ -1,7 +1,7 @@
 
 import Foundation
 
-class LinkedList<T: Equatable> {
+final class LinkedList<T: Equatable> {
     private var head: Node<T>?
     
     var count: Int {
