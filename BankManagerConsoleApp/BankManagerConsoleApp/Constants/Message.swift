@@ -10,6 +10,7 @@ import Foundation
 enum Message {
     case `default`
     case userInput
+    case inputError
     case startTask(number: Int)
     case finishTask(number: Int)
     case report(count: Int, duration: Double)
@@ -26,6 +27,8 @@ extension Message {
             """
         case .userInput:
             return "입력 : "
+        case .inputError:
+            return "잘못된 입력입니다. 다시 입력해주세요."
         case .startTask(let number):
             return "\(number)번 고객 업무 시작"
         case .finishTask(let number):
