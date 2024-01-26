@@ -1,11 +1,3 @@
-//
-//  Queue.swift
-//  BankManagerConsoleApp
-//
-//  Created by Harry Ho on 1/24/24.
-//
-
-import Foundation
 
 class Queue<T> {
     var queue: LinkedList<T> = LinkedList()

@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-
 let queue: Queue<String> = Queue()
 
 print("1️⃣ queue.isEmpty: \(queue.isEmpty())")
