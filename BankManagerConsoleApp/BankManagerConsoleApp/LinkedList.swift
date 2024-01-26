@@ -1,10 +1,15 @@
 final class Node<T> {
-    var data: T
+    private var data: T
     var next: Node?
     
     init(data: T, next: Node? = nil) {
         self.data = data
         self.next = next
+    }
+    
+    func value() -> T {
+        let duplicatedData: T = data
+        return duplicatedData
     }
 }
 
@@ -54,7 +59,7 @@ final class LinkedList<T> {
             if head == nil {
                 tail = nil
             }
-            return headNode.data
+            return headNode.value()
         } else {
             return nil
         }
@@ -72,6 +77,6 @@ final class LinkedList<T> {
         }
         let removedNode = node?.next
         node?.next = node?.next?.next
-        return removedNode?.data
+        return removedNode?.value()
     }
 }
