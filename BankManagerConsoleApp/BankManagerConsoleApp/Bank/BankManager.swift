@@ -9,49 +9,37 @@ import Foundation
 
 final class BankManager {
 
-    var updateCustomerNumber: ((TaskState) -> Void)?
+    var updateTaskState: ((TaskState) -> Void)?
     
     private var customerQueue = Queue<Int>()
     private let duration = 0.7
-    private var totalDuration = 0.0
-
 }
 
 // MARK: - Methods
 extension BankManager {
     
-    /// 은행원 업무 (총 업무시간 리턴)
-    func handleTask(with count: Int, completion: @escaping (Double) -> Void) {
-        makeCustomerQueue(with: count)
-        proccessTask(with: count)
-        completion(totalDuration)
-    }
-    
-    /// 손님 줄세우기
-    private func makeCustomerQueue(with customer: Int) {
+    func makeCustomerQueue(with customer: Int) {
         (1...customer).forEach {
             customerQueue.enqueue($0)
         }
     }
     
-    /// 업무 처리하기
-    private func proccessTask(with customer: Int) {
+    func handleTask(completion: @escaping (Double) -> Void) {
+        var totalDuration = 0.0
         
-        (1...customer).forEach { [weak self] in
-            guard let self = self else { return }
+        while !customerQueue.isEmpty {
+            guard let customerNumber = customerQueue.dequeue() else {
+                return
+            }
+            updateTaskState?(.start(number: customerNumber))
             
-            self.updateCustomerNumber?(.start(number: $0))
             DispatchQueue.global().sync {
-                Thread.sleep(forTimeInterval: self.duration)
-                self.completeTask()
-                self.totalDuration += self.duration
+                Thread.sleep(forTimeInterval: duration)
+                updateTaskState?(.finish(number: customerNumber))
+                totalDuration += duration
             }
         }
-    }
-    
-    private func completeTask() {
-        if let number = customerQueue.dequeue() {
-            updateCustomerNumber?(.finish(number: number))
-        }
+        
+        completion(totalDuration)
     }
 }
