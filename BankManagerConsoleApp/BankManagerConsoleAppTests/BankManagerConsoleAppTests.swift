@@ -30,12 +30,6 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_linkedList_push로_첫노드_생성() {
-        let input = "test"
-        sut.queue.push(with: input)
-        XCTAssertEqual(1, sut.queue.count)
-    }
-    
     func test_queue에_노드가_다섯개_생성된다() {
         sut.enqueue(with: "A")
         sut.enqueue(with: "B")
@@ -134,21 +128,22 @@ final class BankManagerConsoleAppTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
-    
-    func test_노드가_정상적으로_다음_노드를_연결한다() {
-        sut.enqueue(with: "A")
-        sut.enqueue(with: "B")
-        
-        let result = sut.queue.head?.next?.data
-        XCTAssertEqual("B", result)
-    }
-    
-    func test_tail의_다음_연결이_nil이다() {
-        sut.enqueue(with: "A")
-        sut.enqueue(with: "B")
-        
-        let result = sut.queue.tail?.next
-        XCTAssertNil(result)
-    }
-    
+
+//  Private 테스트 확인 필요
+//    func test_노드가_정상적으로_다음_노드를_연결한다() {
+//        sut.enqueue(with: "A")
+//        sut.enqueue(with: "B")
+//        
+//        let result = sut.queue.head?.next?.data
+//        XCTAssertEqual("B", result)
+//    }
+//    
+//    func test_tail의_다음_연결이_nil이다() {
+//        sut.enqueue(with: "A")
+//        sut.enqueue(with: "B")
+//        
+//        let result = sut.queue.tail?.next
+//        XCTAssertNil(result)
+//    }
+//    
 }

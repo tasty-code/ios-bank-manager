@@ -8,23 +8,16 @@ class LinkedList<T> {
         head == nil
     }
     
-    func push(with data: T) {
-        head = Node(data: data, next: head)
-        count += 1
-        if tail == nil {
-            tail = head
-        }
-    }
-    
-    func append(with data: T) {
-        guard isEmpty == false else {
-            push(with: data)
+    func appendNodeAtRear(with data: T) {
+        if isEmpty {
+            tail = Node(data: data)
+            head = tail
+            count += 1
             return
         }
-        
         tail?.next = Node(data: data)
-        count += 1
         tail = tail?.next
+        count += 1
     }
     
     func pop() -> T? {

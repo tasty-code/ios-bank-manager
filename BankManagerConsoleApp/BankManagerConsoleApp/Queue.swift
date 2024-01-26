@@ -3,7 +3,7 @@ class Queue<T> {
     var queue: LinkedList<T> = LinkedList()
     
     func enqueue(with item: T) {
-        queue.append(with: item)
+        queue.appendNodeAtRear(with: item)
     }
     
     func dequeue() -> T? {
