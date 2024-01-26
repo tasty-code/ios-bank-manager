@@ -45,12 +45,12 @@ struct LinkedList<T: Equatable> {
     }
     
     mutating func first() -> Node<T>? {
-        if isEmpty() { return nil }
+        guard isNotEmpty() else { return nil }
         return head
     }
     
     mutating func last() -> Node<T>? {
-        if isEmpty() { return nil }
+        guard isNotEmpty() else { return nil }
         return tail
     }
     
@@ -85,7 +85,7 @@ struct LinkedList<T: Equatable> {
     }
     
     mutating func remove(at index: UInt) -> Node<T>? {
-        guard isEmpty() else { return nil }
+        guard isNotEmpty() else { return nil }
         
         var node = head
         if index == 0 {
@@ -107,7 +107,7 @@ struct LinkedList<T: Equatable> {
     }
     
     mutating func removeLast() -> Node<T>? {
-        if isEmpty() { return nil }
+        guard isNotEmpty() else { return nil }
         
         var node = head
         
@@ -126,7 +126,7 @@ struct LinkedList<T: Equatable> {
     }
     
     mutating func search(value: T?) -> [(Node<T>?, Int)]? {
-        if isEmpty() { return nil }
+        guard isNotEmpty() else { return nil }
         
         var result: [(Node<T>?, Int)] = []
         var node = head
