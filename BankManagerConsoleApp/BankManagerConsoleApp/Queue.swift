@@ -7,7 +7,7 @@ class Queue<T> {
     }
     
     func dequeue() -> T? {
-        return queue.pop()
+        return queue.removeNodeFromFront()
     }
     
     func clean() {

@@ -20,16 +20,16 @@ class LinkedList<T> {
         count += 1
     }
     
-    func pop() -> T? {
-        let returnValue = head?.data
-        head = head?.next
+    func removeNodeFromFront() -> T? {
+        let removedNode = head
         if isEmpty {
             tail = nil
             count = 0
             return nil
         }
+        head = head?.next
         count -= 1
-        return returnValue
+        return removedNode?.data
     }
     
     func clean() {
