@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		15A94F1F2B6379FE00169F2A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
 		15A94F202B637A0400169F2A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
 		15A94F222B637C7900169F2A /* UnitTestBankManagerConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A8ED742B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift */; };
+		C134404A2B639AEB00657CC5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13440492B639AEB00657CC5 /* Bank.swift */; };
 		C15C48B12B61FF00002EA255 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15061AF2B60A3A600877C57 /* Queue.swift */; };
 		C15C48B22B61FF04002EA255 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
 		C15C48B32B61FF06002EA255 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		15A5CB8F2B5F926D0006A55B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		15A5CB912B5F92850006A55B /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		C13440492B639AEB00657CC5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C15061AF2B60A3A600877C57 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C1A8ED722B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestBankManagerConsoleApp.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A8ED742B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestBankManagerConsoleApp.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				15A5CB8F2B5F926D0006A55B /* Node.swift */,
 				15A5CB912B5F92850006A55B /* LinkedList.swift */,
 				C15061AF2B60A3A600877C57 /* Queue.swift */,
+				C13440492B639AEB00657CC5 /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -151,8 +154,9 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					C1A8ED712B60F21100ED65C8 = {
 						CreatedOnToolsVersion = 15.2;
@@ -210,6 +214,7 @@
 				15A94F1E2B6379FC00169F2A /* Queue.swift in Sources */,
 				15A94F202B637A0400169F2A /* Node.swift in Sources */,
 				15A94F1F2B6379FE00169F2A /* LinkedList.swift in Sources */,
+				C134404A2B639AEB00657CC5 /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
@@ -233,14 +238,15 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76PL59HQ85;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = T92LV6HV88;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sungsu.UnitTestBankManagerConsoleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,14 +266,15 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76PL59HQ85;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = T92LV6HV88;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sungsu.UnitTestBankManagerConsoleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -313,6 +320,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -375,6 +383,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -400,8 +409,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_TESTING_SEARCH_PATHS = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -411,8 +421,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_TESTING_SEARCH_PATHS = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
