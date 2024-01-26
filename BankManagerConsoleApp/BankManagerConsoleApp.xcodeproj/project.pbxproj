@@ -13,6 +13,7 @@
 		229B94F32B62333F003320F6 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A904222B60AC5D001E00E7 /* LinkedList.swift */; };
 		229B94F42B62333F003320F6 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */; };
 		F31EDD952B63911400CBB73E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDD942B63911400CBB73E /* main.swift */; };
+		F31EDDAB2B63996700CBB73E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDAA2B63996700CBB73E /* Constants.swift */; };
 		F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A904222B60AC5D001E00E7 /* LinkedList.swift */; };
 		F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		229B94EB2B623287003320F6 /* CustomerQueueUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueUnitTest.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31EDD942B63911400CBB73E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F31EDDAA2B63996700CBB73E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F3A904222B60AC5D001E00E7 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,9 +89,18 @@
 			isa = PBXGroup;
 			children = (
 				F31EDD942B63911400CBB73E /* main.swift */,
+				F31EDDA92B63988B00CBB73E /* Library */,
 				F3F4F95B2B62231D0037A3AF /* Model */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		F31EDDA92B63988B00CBB73E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				F31EDDAA2B63996700CBB73E /* Constants.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		F3F4F95B2B62231D0037A3AF /* Model */ = {
@@ -202,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F31EDDAB2B63996700CBB73E /* Constants.swift in Sources */,
 				229B94BE2B60AA9E003320F6 /* Node.swift in Sources */,
 				F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */,
 				F31EDD952B63911400CBB73E /* main.swift in Sources */,

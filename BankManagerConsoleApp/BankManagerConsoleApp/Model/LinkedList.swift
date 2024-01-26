@@ -5,10 +5,6 @@
 //  Created by 루피, 진 on 1/24/24.
 //
 
-enum Constants {
-    static let nodeInterpolation: UInt = 1
-}
-
 struct LinkedList<T: Equatable> {
     private var head: Node<T>?
     private var tail: Node<T>?
