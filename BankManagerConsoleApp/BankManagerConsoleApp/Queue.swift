@@ -2,7 +2,11 @@
 import Foundation
 
 struct Queue<T: Equatable> {
-    var linkedList: LinkedList<T>
+    private let linkedList: LinkedList<T>
+    
+    init(linkedList: LinkedList<T>) {
+        self.linkedList = linkedList
+    }
     
     func isEmpty() -> Bool {
         return linkedList.count == 0
@@ -25,5 +29,13 @@ struct Queue<T: Equatable> {
     
     func clear() {
         linkedList.removeAll()
+    }
+    
+    func count() -> Int {
+        return linkedList.count
+    }
+    
+    func customerNumber(at index: Int) -> T? {
+        return linkedList[index]?.value
     }
 }
