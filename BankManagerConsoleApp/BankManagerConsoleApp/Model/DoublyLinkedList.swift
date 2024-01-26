@@ -57,9 +57,6 @@ final class LinkedList<T> {
             }
         } else if index >= size {
             append(value: value)
-        } else if index >= size { //tail에 추가
-            append(value: value)
-            return
         } else {
             let half = size / 2
             let isForward = (index <= half)
@@ -169,19 +166,9 @@ final class LinkedList<T> {
 }
 
 
-//MARK: - Queue.swift
-protocol Queue {
-    associatedtype Element
-    func enqueue(_ element: Element)
-    func dequeue() -> Element?
-    func clear()
-    func peek() -> Element?
-    func isEmpty() -> Bool
-}
-
-
 //MARK: - LinkedListQueue.swift
-struct DoublyLinkedListQueue<T>: Queue {
+struct DoublyLinkedListQueue<T>: QueueProtocol {
+    
     // MARK: - Properties
     private var queue: LinkedList<T>
     private var size: Int {
