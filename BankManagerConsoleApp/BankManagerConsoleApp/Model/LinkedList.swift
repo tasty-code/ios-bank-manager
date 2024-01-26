@@ -22,7 +22,7 @@ final class LinkedList<Element> {
         guard let node = tail else {
             head = newNode
             tail = newNode
-            count += 1
+            count = 1
             return
         }
         node.next = newNode
@@ -34,8 +34,10 @@ final class LinkedList<Element> {
         let removeNodeValue = head?.data
         
         head = head?.next
-        tail = isEmpty ? head : tail
-        count = isEmpty ? count : count - 1
+        if isEmpty {
+            tail = head
+        }
+        count -= 1
         
         return removeNodeValue
     }
