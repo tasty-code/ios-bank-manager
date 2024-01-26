@@ -44,7 +44,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         
         //when
         sut.enqueue(node: node)
-        let result = sut.linkedList.count
+        let result = sut.count()
         
         //then
         XCTAssertEqual(1, result, "예상되는 값은 1")
@@ -60,7 +60,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         sut.enqueue(node: node1)
         sut.enqueue(node: node2)
         sut.enqueue(node: node3)
-        let lastNode = sut.linkedList[2]?.value
+        let lastNode = sut.customerNumber(at: 2)
         
         //then
         XCTAssertEqual("5", lastNode, "예상되는 값은 5")
@@ -77,7 +77,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
             
             //when
             sut.dequeue()
-            let headNode: String? = sut.linkedList[0]?.value
+            let headNode: String? = sut.customerNumber(at: 0)
 
             //then
             XCTAssertEqual("7", headNode, "예상되는 값은 7")
@@ -106,7 +106,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         sut.enqueue(node: Node(value: "101"))
         sut.enqueue(node: Node(value: "102"))
         sut.clear()
-        result = sut.linkedList.count
+        result = sut.count()
         
         // then
         XCTAssertEqual(expectation, result, "예상되는 count는 0")
