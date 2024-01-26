@@ -54,12 +54,11 @@ final class LinkedList<T> {
     }
     
     private func removeFirst() -> T? {
-        if let headNode = head {
-            head = headNode.next
-            if head == nil {
-                tail = nil
-            }
-            return headNode.value()
+        if  head != nil {
+            let value: T? = head?.value()
+            head = nil
+            tail = nil
+            return value
         } else {
             return nil
         }
