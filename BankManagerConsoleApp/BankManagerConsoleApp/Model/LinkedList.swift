@@ -58,7 +58,7 @@ struct LinkedList<T: Equatable> {
         return tail
     }
     
-    mutating func insert(value: T, at index: UInt ) {
+    mutating func insert(value: T, at index: UInt) {
         let newNode = Node(value: value)
         
         if isEmpty() {
@@ -67,23 +67,25 @@ struct LinkedList<T: Equatable> {
             return
         }
         
+        guard let head = head else { return }
         var node = head
+        
         if index == 0 {
-            head = newNode
-            head?.next = node
+            self.head = newNode
+            self.head?.next = node
             return
         }
         
         for _ in 0..<index - Constants.nodeInterpolation {
-            if node?.next == nil {
-                tail = newNode
-                break
+            if let nextNode = node.next {
+                node = nextNode
             }
-            node = node?.next
+            tail = newNode
         }
-        let nextNode = node?.next
-        node?.next = newNode
-        node?.next?.next = nextNode
+        
+        let nextNode = node.next
+        node.next = newNode
+        node.next?.next = nextNode
     }
     
     mutating func remove(at index: UInt) -> Node<T>? {
