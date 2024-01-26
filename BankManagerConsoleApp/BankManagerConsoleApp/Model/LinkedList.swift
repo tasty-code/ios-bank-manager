@@ -87,7 +87,7 @@ struct LinkedList<T: Equatable> {
     }
     
     mutating func remove(at index: UInt) -> Node<T>? {
-        if isEmpty() { return nil }
+        guard isEmpty() else { return nil }
         
         var node = head
         if index == 0 {
