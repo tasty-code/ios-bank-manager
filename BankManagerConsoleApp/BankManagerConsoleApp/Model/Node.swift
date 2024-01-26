@@ -5,7 +5,7 @@
 //  Created by 루피, 진 on 1/24/24.
 //
 
-class Node<T> {
+final class Node<T> {
     var value: T
     var next: Node?
 
