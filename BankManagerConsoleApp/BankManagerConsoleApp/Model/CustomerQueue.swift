@@ -17,7 +17,7 @@ struct CustomerQueue<T: Equatable> {
         return result?.value
     }
     
-    mutating func peek() -> T? {
+    func peek() -> T? {
         return list.first()?.value
     }
     
@@ -25,7 +25,7 @@ struct CustomerQueue<T: Equatable> {
         list.removeAll()
     }
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return list.isEmpty()
     }
 }
