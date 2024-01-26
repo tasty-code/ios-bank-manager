@@ -1,0 +1,10 @@
+//
+//  BankManagerApp.swift
+//  BankManagerConsoleApp
+//
+//  Created by Effie on 1/26/24.
+//
+
+struct BankManagerApp {
+    
+}
