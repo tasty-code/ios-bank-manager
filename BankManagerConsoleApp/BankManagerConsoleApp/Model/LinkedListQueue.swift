@@ -6,34 +6,34 @@
 //
 
 final class LinkedListQueue<T>: QueueProtocol {
-    private var bankQueue: LinkedList<T>
+    private var elements: LinkedList<T>
     
     /// 큐에 맨 앞을 확인
     public var peek: T? {
-        return bankQueue.peek
+        return elements.peek
     }
     /// 큐가 비어 있는지 확인
     public var isEmpty: Bool {
-        return bankQueue.isEmpty
+        return elements.isEmpty
     }
     
     init() {
-        self.bankQueue = LinkedList<T>()
+        self.elements = LinkedList<T>()
     }
     
     /// 큐에 요소를 추가
     public func enqueue(_ element: T) {
-        bankQueue.append(data: element)
+        elements.append(data: element)
     }
     
     /// 큐에서 첫 번째 요소를 제거하고 반환
     public func dequeue() -> T? {
-        bankQueue.removeFirst()
+        elements.removeFirst()
     }
     
     /// 큐의 모든 요소를 제거
     public func clear() {
-        bankQueue.removeAll()
+        elements.removeAll()
     }
     
     /// LinkedList의 개별 요소 나타냄
