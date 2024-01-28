@@ -1,20 +1,20 @@
 
-class Queue<T> {
-    private let linkedList: LinkedList<T> = LinkedList()
+struct Queue<T> {
+    private var linkedList: LinkedList<T> = LinkedList()
     private(set) var isEmpty: Bool {
         get { return linkedList.isEmpty }
         set { }
     }
     
-    func enqueue(with item: T) {
+    mutating func enqueue(with item: T) {
         linkedList.appendNodeAtRear(with: item)
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return linkedList.removeNodeFromFront()
     }
     
-    func clean() {
+    mutating func clean() {
         linkedList.clean()
     }
     
