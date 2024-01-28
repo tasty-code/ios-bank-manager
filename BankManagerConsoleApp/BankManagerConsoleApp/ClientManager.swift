@@ -5,8 +5,12 @@
 //  Created by Effie on 1/26/24.
 //
 
+import Foundation
+
 final class ClientManager {
     private let clientQueue: Queue<Client>
+    
+    private let semaphore: DispatchSemaphore = .init(value: 1)
     
     init() {
         self.clientQueue = Queue()
@@ -21,6 +25,9 @@ extension ClientManager: ClientEnqueuable {
 
 extension ClientManager: ClientDequeuable {
     func dispatchClient() -> Client? {
-        return self.clientQueue.dequeue()
+        self.semaphore.wait()
+        let result = self.clientQueue.dequeue()
+        self.semaphore.signal()
+        return result
     }
 }
