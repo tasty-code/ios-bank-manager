@@ -20,67 +20,90 @@ final class BankManagerConsoleAppTests: XCTestCase {
     }
     
     func test_queue에_노드가_없다() {
+        // given
+        // when
         let result = sut.isEmpty
+        // then
         XCTAssertTrue(result)
     }
     
     func test_queue에_노드가_있다() {
-        sut.enqueue(with: "test")
+        // given
+        let input = "test"
+        sut.enqueue(with: input)
+        // when
         let result = sut.isEmpty
+        // then
         XCTAssertFalse(result)
     }
     
     func test_queue에_노드가_다섯개_생성된다() {
-        sut.enqueue(with: "A")
-        sut.enqueue(with: "B")
-        sut.enqueue(with: "C")
-        sut.enqueue(with: "D")
-        sut.enqueue(with: "E")
-        
-        XCTAssertEqual(5, sut.totalLength())
+        // given
+        let data = [ "A", "B", "C", "D", "E" ]
+        let expectedLengthOfQueue = 5
+        for input in data {
+            sut.enqueue(with: input)
+        }
+        // when
+        let result = sut.totalLength()
+        // then
+        XCTAssertEqual(expectedLengthOfQueue, result)
     }
     
     func test_queue의_5번_enqueue_4번_dequeue_노드가_1개_남는다() {
-        sut.enqueue(with: "A")
-        sut.enqueue(with: "B")
-        sut.enqueue(with: "C")
-        sut.enqueue(with: "D")
-        sut.enqueue(with: "E")
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        
-        XCTAssertEqual(1, sut.totalLength())
+        // given
+        let data = [ "A", "B", "C", "D", "E" ]
+        let lengthOfQueue = 1
+        let countOfDeque = 4
+        for input in data {
+            sut.enqueue(with: input)
+        }
+        for i in 1...countOfDeque {
+            let _ = sut.dequeue()
+        }
+        // when
+        let result = sut.totalLength()
+        // then
+        XCTAssertEqual(lengthOfQueue, result)
     }
     
     func test_queue의_5번_enqueue_4번_dequeue_남은_노드를_peek_한다() {
-        sut.enqueue(with: "A")
-        sut.enqueue(with: "B")
-        sut.enqueue(with: "C")
-        sut.enqueue(with: "D")
-        sut.enqueue(with: "E")
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        
+        // given
+        let data = [ "A", "B", "C", "D", "E" ]
+        let lengthOfQueue = 2
+        let countOfDeque = 3
+        let peekCharacter = data[countOfDeque]
+        for input in data {
+            sut.enqueue(with: input)
+        }
+        for i in 1...countOfDeque {
+            let _ = sut.dequeue()
+        }
+        // when
         let result = sut.peek()
-        
-        XCTAssertEqual("E", result)
+        // then
+        XCTAssertEqual(peekCharacter, result)
     }
     
     func test_초기에_dequeue를_했을때_카운트가_0이다() {
-        sut.dequeue()
+        // given
+        let expectedCount = 0
+        let _ = sut.dequeue()
+        // when
         let result = sut.totalLength()
-        XCTAssertEqual(0, result)
+        // then
+        XCTAssertEqual(expectedCount, result)
     }
     
-    func test_dequeue_시_반환되는_노드가_0이다() {
+    func test_dequeue_시_반환되는_노드가_Nil이다() {
+        // given
+        // when
         let result = sut.dequeue()
+        // then 그렇다면 이 케이스는 통과하는가?
         XCTAssertNil(result)
     }
     
+    ///⬇️ L 리팩토링 고고
     func test_dequeue한_데이터가_삭제된다() {
         let firstInput = "First"
         let secondInput = "Second"
