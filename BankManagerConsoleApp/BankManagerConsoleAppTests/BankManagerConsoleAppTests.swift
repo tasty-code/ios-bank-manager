@@ -20,13 +20,13 @@ final class BankManagerConsoleAppTests: XCTestCase {
     }
     
     func test_queue에_노드가_없다() {
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         XCTAssertTrue(result)
     }
     
     func test_queue에_노드가_있다() {
         sut.enqueue(with: "test")
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         XCTAssertFalse(result)
     }
     
@@ -124,7 +124,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         let _ = sut.enqueue(with: "C")
         let _ = sut.enqueue(with: "D")
         let _ = sut.clean()
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         
         XCTAssertTrue(result)
     }

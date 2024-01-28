@@ -6,7 +6,7 @@
 
 let queue: Queue<String> = Queue()
 
-print("1️⃣ queue.isEmpty: \(queue.isEmpty())")
+print("1️⃣ queue.isEmpty: \(queue.isEmpty)")
 
 queue.enqueue(with: "A")
 queue.enqueue(with: "B")
@@ -26,10 +26,10 @@ if let peekedItem = queue.peek() {
     dump(queue)
 }
 
-print("7️⃣ queue.isEmpty: \(queue.isEmpty())")
+print("7️⃣ queue.isEmpty: \(queue.isEmpty)")
 
 queue.clean()
-print("8️⃣ queue.isEmpty: \(queue.isEmpty())")
+print("8️⃣ queue.isEmpty: \(queue.isEmpty)")
 
 
 

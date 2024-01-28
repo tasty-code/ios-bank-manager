@@ -3,9 +3,9 @@ class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     private(set) var count: Int = 0
-    
-    var isEmpty: Bool {
-        head == nil
+    private(set) var isEmpty: Bool {
+        get { return head == nil }
+        set { }
     }
     
     func appendNodeAtRear(with data: T) {

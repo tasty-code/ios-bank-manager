@@ -1,6 +1,10 @@
 
 class Queue<T> {
     private let linkedList: LinkedList<T> = LinkedList()
+    private(set) var isEmpty: Bool {
+        get { return linkedList.isEmpty }
+        set { }
+    }
     
     func enqueue(with item: T) {
         linkedList.appendNodeAtRear(with: item)
@@ -16,10 +20,6 @@ class Queue<T> {
     
     func peek() -> T? {
         return linkedList.peek()
-    }
-    
-    func isEmpty() -> Bool {
-        return linkedList.isEmpty
     }
     
     func totalLength() -> Int {
