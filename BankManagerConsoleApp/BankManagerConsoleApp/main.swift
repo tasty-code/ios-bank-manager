@@ -5,4 +5,5 @@
 // 
 
 
-
+let bankManger = BankManager()
+bankManger.sendMessage(work: .start, count: 3)

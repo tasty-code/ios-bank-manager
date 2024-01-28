@@ -17,6 +17,7 @@ struct Bank {
     mutating func endWaitingLine() {
         let myTurn = bankTellerQueue.dequeue()
         let bankClerk = BankClerk(next: myTurn)
+        
     }
     
     func isClosingBank() -> Bool {
