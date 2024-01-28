@@ -21,6 +21,8 @@
 		CCA535632B5F98AB00F282B4 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
 		CCA535642B5F98AE00F282B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E022B5F8E0400FDBDE7 /* LinkedList.swift */; };
 		CCA535652B5F98B100F282B4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
+		CCE195222B65EE6400F0946F /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE195212B65EE6400F0946F /* Bank.swift */; };
+		CCE195242B65EE9200F0946F /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE195232B65EE9200F0946F /* BankClerk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +49,8 @@
 		CCA535562B5F930700F282B4 /* BankTellerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueue.swift; sourceTree = "<group>"; };
 		CCA5355C2B5F988F00F282B4 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueueTest.swift; sourceTree = "<group>"; };
+		CCE195212B65EE6400F0946F /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		CCE195232B65EE9200F0946F /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 			children = (
 				CCA535532B5F898100F282B4 /* Model */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				CCE195212B65EE6400F0946F /* Bank.swift */,
+				CCE195232B65EE9200F0946F /* BankClerk.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				95762E302B64F82C00FDBDE7 /* Customer.swift */,
 			);
@@ -264,6 +270,8 @@
 				95762E312B64F82C00FDBDE7 /* Customer.swift in Sources */,
 				95762E032B5F8E0400FDBDE7 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				CCE195242B65EE9200F0946F /* BankClerk.swift in Sources */,
+				CCE195222B65EE6400F0946F /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
