@@ -1,5 +1,5 @@
 
-struct LinkedList<T> {
+struct LinkedList<T: Equatable> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     private(set) var count: Int = 0
@@ -40,5 +40,29 @@ struct LinkedList<T> {
     
     func peek() -> T? {
         head?.data
+    }
+
+    mutating func isData(with data: T?) -> Int? {
+        var count = 0
+        
+        while head?.next != nil {
+            count += 1
+            print("반복수행 중")
+            if head?.data == data {
+                print("찾았다!")
+                return count
+            }
+            head = head?.next
+        }
+        
+        if isEmpty {
+            return nil
+        } else if head?.next == nil {
+            if head?.data == data {
+                count += 1
+                return count
+            }
+        }
+        return nil
     }
 }

@@ -30,6 +30,3 @@ print("7️⃣ queue.isEmpty: \(queue.isEmpty)")
 
 queue.clean()
 print("8️⃣ queue.isEmpty: \(queue.isEmpty)")
-
-
-

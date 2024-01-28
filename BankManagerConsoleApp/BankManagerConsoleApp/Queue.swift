@@ -1,5 +1,5 @@
 
-struct Queue<T> {
+struct Queue<T: Equatable> {
     private(set) var linkedList: LinkedList<T> = LinkedList()
     private(set) var isEmpty: Bool {
         get { return linkedList.isEmpty }

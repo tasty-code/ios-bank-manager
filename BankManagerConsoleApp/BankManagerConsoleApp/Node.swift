@@ -1,5 +1,5 @@
 
-final class Node<T> {
+final class Node<T: Equatable> {
     private(set) var data: T?
     private(set) var next: Node<T>?
     
