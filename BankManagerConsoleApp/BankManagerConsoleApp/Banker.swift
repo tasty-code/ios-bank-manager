@@ -12,10 +12,7 @@ final class Banker {
     
     private let dispatcher: ClientDequeuable
     
-    private lazy var queue = DispatchQueue(
-        label: String(describing: self),
-        attributes: .concurrent
-    )
+    private lazy var queue = DispatchQueue(label: String(describing: self))
     
     init(name: String, dispatcher: ClientDequeuable) {
         self.name = name
