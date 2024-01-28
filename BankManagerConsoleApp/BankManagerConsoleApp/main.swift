@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let queue: Queue<String> = Queue()
+var queue: Queue<String> = Queue()
 
 print("1️⃣ queue.isEmpty: \(queue.isEmpty)")
 

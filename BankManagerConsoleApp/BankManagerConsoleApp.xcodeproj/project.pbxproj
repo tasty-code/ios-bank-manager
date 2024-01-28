@@ -23,6 +23,16 @@
 		C7E61A832B6123B600D55D4A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E61A822B6123B600D55D4A /* Queue.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9B4C3EB32B66101200420C0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7694E6E259C3EC00053667F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7694E75259C3EC00053667F;
+			remoteInfo = BankManagerConsoleApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		C7694E74259C3EC00053667F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -116,6 +126,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9B4C3EB42B66101200420C0B /* PBXTargetDependency */,
 			);
 			name = BankManagerConsoleAppTests;
 			productName = BankManagerConsoleAppTests;
@@ -216,6 +227,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9B4C3EB42B66101200420C0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7694E75259C3EC00053667F /* BankManagerConsoleApp */;
+			targetProxy = 9B4C3EB32B66101200420C0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9B73730B2B61325300FDB082 /* Debug */ = {
