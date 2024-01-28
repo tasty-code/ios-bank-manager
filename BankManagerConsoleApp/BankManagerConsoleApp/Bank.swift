@@ -12,10 +12,11 @@ struct Bank {
     private let clerk = BankClerk()
     private var handledCustomerCount = 0
     
-    mutating func setWaitingLine(customer: Customer) {
-        for numbers in 1...customer.number {
-            bankTellerQueue.enqueue(item: customer)
+    private mutating func setWaitingLine() -> Int {
+        for number in 1...Int.random(in: 10...30) {
+            bankTellerQueue.enqueue(item: Customer(number: number))
         }
+        return bankTellerQueue.count
     }
     
     private mutating func executeBankWork(){
