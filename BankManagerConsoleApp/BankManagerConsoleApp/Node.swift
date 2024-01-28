@@ -1,7 +1,7 @@
 
 final class Node<T> {
-    private var data: T?
-    private var next: Node<T>?
+    private(set) var data: T?
+    private(set) var next: Node<T>?
     
     init(data: T? = nil, next: Node<T>? = nil) {
         self.data = data
@@ -14,13 +14,5 @@ final class Node<T> {
     
     func updateNext(next: Node<T>?) {
          self.next = next
-    }
-    
-    func readData() -> T? {
-        return self.data
-    }
-    
-    func readNext() -> Node<T>? {
-        return self.next
     }
 }

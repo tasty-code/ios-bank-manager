@@ -1,7 +1,7 @@
 
 struct LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     private(set) var count: Int = 0
     private(set) var isEmpty: Bool {
         get { return head == nil }
@@ -16,7 +16,7 @@ struct LinkedList<T> {
             return
         }
         tail?.updateNext(next: Node(data: data))
-        tail = tail?.readNext()
+        tail = tail?.next
         count += 1
     }
     
@@ -27,9 +27,9 @@ struct LinkedList<T> {
             count = 0
             return nil
         }
-        head = head?.readNext()
+        head = head?.next
         count -= 1
-        return removedNode?.readData()
+        return removedNode?.data
     }
     
     mutating func clean() {
@@ -39,6 +39,6 @@ struct LinkedList<T> {
     }
     
     func peek() -> T? {
-        head?.readData()
+        head?.data
     }
 }

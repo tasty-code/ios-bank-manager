@@ -129,21 +129,20 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-//  Private 테스트 확인 필요
-//    func test_노드가_정상적으로_다음_노드를_연결한다() {
-//        sut.enqueue(with: "A")
-//        sut.enqueue(with: "B")
-//        
-//        let result = sut.queue.head?.next?.data
-//        XCTAssertEqual("B", result)
-//    }
-//    
-//    func test_tail의_다음_연결이_nil이다() {
-//        sut.enqueue(with: "A")
-//        sut.enqueue(with: "B")
-//        
-//        let result = sut.queue.tail?.next
-//        XCTAssertNil(result)
-//    }
-//    
+    func test_노드가_정상적으로_다음_노드를_연결한다() {
+        sut.enqueue(with: "A")
+        sut.enqueue(with: "B")
+        sut.enqueue(with: "C")
+        
+        let result = sut.linkedList.head?.next?.next?.data
+        XCTAssertEqual("C", result)
+    }
+    
+    func test_tail의_다음_연결이_nil이다() {
+        sut.enqueue(with: "A")
+        sut.enqueue(with: "B")
+        
+        let result = sut.linkedList.tail?.next
+        XCTAssertNil(result)
+    }
 }
