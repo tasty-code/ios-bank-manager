@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct BankClerk {    
+struct BankClerk {
     func work(for customer: Customer) {
-        print("\(customer.number)번 고객 업무 시작")
+        print(workMessage.start(customer.number).show)
         DispatchQueue.global().sync {
             Thread.sleep(forTimeInterval: 0.7)
         }
-        print("\(customer.number)번 고객 업무 완료")
+        print(workMessage.done(customer.number).show)
     }
 }

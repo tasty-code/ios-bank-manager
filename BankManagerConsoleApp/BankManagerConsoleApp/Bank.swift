@@ -19,8 +19,10 @@ struct Bank {
         return bankTellerQueue.count
     }
     
-    private mutating func executeBankWork(){
+    mutating func executeBankWork(){
         let startTime = CFAbsoluteTimeGetCurrent()
+        
+        let _ = setWaitingLine()
         
         while !bankTellerQueue.isEmpty() {
             guard let customer = bankTellerQueue.dequeue() else { return }
@@ -36,13 +38,10 @@ struct Bank {
         print(resultMessage)
     }
     
-    func isClosingBank() -> Bool {
-        // 프롬포트에 2번 누르고, 큐에 맴버가 없을때
-        if true {
+    func closeBank() -> Bool {
+        if bankTellerQueue.isEmpty() {
             return true
         }
         return false
     }
-    
-    
 }
