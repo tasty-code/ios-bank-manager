@@ -12,4 +12,10 @@ struct BankManager {
     func standBy(customer: Customer) {
         queue.enqueue(element: customer)
     }
+    
+    func assign() {
+        while let list = try? queue.dequeue() {
+            BankClerk().recieve(customer: list as Customer )
+        }
+    }
 }
