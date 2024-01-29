@@ -18,15 +18,19 @@ struct Bank {
     
     func openBank() {
         setCustomerCount(customer: customNum)
-        let startWorkTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-        bankManager.assign()
-        let endOfWorkTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-        let workTime = String(format: "%.2f", endOfWorkTime - startWorkTime)
+        let workTime = calulateWorkTime { bankManager.assign() }
         closeBank(time: workTime)
     }
     
     func setCustomerCount(customer: Int) {
         (1...customer).forEach { bankManager.standBy(customer: Customer(numOfPerson: $0)) }
+    }
+    
+    func calulateWorkTime(work: () -> Void) -> String {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        work()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        return String(format: "%.2f", endTime - startTime)
     }
     
     func closeBank(time: String) {
