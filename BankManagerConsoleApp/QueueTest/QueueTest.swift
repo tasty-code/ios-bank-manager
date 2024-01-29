@@ -36,7 +36,7 @@ final class QueueTest: XCTestCase {
     // MARK: - dequeue
     func test_리스트가_비어있을때_dequeue를_하면_nil_이어야한다() {
         // given
-        sut.dequeue()
+        let dequeueValue = sut.dequeue()
         
         // then
         XCTAssertTrue(sut.isEmpty)
@@ -48,7 +48,7 @@ final class QueueTest: XCTestCase {
         sut.enqueue(value: 2)
         sut.enqueue(value: 3)
         
-        sut.dequeue()
+        let dequeueValue = sut.dequeue()
         
         XCTAssertEqual(2, sut.peek)
     }
@@ -58,11 +58,34 @@ final class QueueTest: XCTestCase {
         sut.enqueue(value: 1)
         
         // when
-        sut.dequeue()
+        let dequeueValue = sut.dequeue()
         
         // then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_1을_리스트에_추가하고_dequeue를하면_dequeue된_값은_1_된다() {
+        // given
+        sut.enqueue(value: 1)
+        
+        // when
+        let dequeueValue = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(dequeueValue, 1)
+    }
+    
+    func test_리스트가_비어있을때_dequeue를하면_dequeue된_값은_nil이_된다() {
+        // given
+        let list = sut.isEmpty
+        
+        // when
+        let dequeueValue = sut.dequeue()
+        
+        // then
+        XCTAssertNil(dequeueValue)
+    }
+    
     
     // MARK: - clear
     func test_클리어시_모든노드가_메모리에서_해제되는지() {

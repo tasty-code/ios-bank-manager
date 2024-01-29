@@ -14,21 +14,20 @@ final class LinkedList<T> {
         let newNode = Node(value: value)
         if isEmpty {
             head = newNode
-            tail = newNode
         } else {
             tail?.next = newNode
-            tail = newNode
         }
+        tail = newNode
     }
     
-    func removeFirst() {
-        if isEmpty {
-            print("리스트가 비어있습니다")
-        } else {
-            head = head?.next
+    func removeFirst() -> T? {
+        guard let currentHead = head else {
+            tail = nil
+            return nil
         }
-    }
-    
+        head = currentHead.next
+        return currentHead.value
+        }
     func clear() {
         head = nil
         tail = nil

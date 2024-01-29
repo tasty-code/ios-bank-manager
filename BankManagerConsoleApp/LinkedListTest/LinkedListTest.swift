@@ -37,10 +37,31 @@ final class LinkedListTest: XCTestCase {
         sut.appendNode(value: "폴")
         
         // when
-        sut.removeFirst()
+        let removedValue = sut.removeFirst()
         
         // then
         XCTAssertEqual(sut.head?.value, "폴")
+    }
+    func test_1을_리스트에_추가하고_removeFirst를하면_removeFirst된_값은_1_된다() {
+        // given
+        sut.appendNode(value: "1")
+        
+        // when
+        let removedValue = sut.removeFirst()
+        
+        // then
+        XCTAssertEqual(removedValue, "1")
+    }
+    
+    func test_리스트가_비어있을때_removeFirst를하면_removeFirst된_값은_nil이_된다() {
+        // given
+        let list = sut.isEmpty
+        
+        // when
+        let removedValue = sut.removeFirst()
+        
+        // then
+        XCTAssertNil(removedValue)
     }
     
     // MARK: - clear

@@ -13,8 +13,8 @@ final class Queue<T> {
         linkedList.appendNode(value: value)
     }
     
-    func dequeue() {
-        linkedList.removeFirst()
+    func dequeue() -> T? {
+        return linkedList.removeFirst()
     }
     
     func clear() {
