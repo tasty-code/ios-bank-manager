@@ -24,6 +24,8 @@ extension Bank {
             return
         }
         
+        makeCustomerQueue()
+        openBanck()
     }
     
     private func selectMenu() -> Int? {
@@ -33,5 +35,15 @@ extension Bank {
             return nil
         }
         return selectedMenu
+    }
+    
+    private func makeCustomerQueue() {
+        (1...Int.random(in: customerCountRange)).forEach {
+            customerQueue.enqueue(element: Customer(number: $0))
+            customerCount += 1
+        }
+    }
+    
+    private func openBanck() {
     }
 }
