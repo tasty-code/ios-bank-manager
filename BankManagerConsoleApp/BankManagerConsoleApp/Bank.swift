@@ -1,11 +1,17 @@
 final class Bank {
     private var customerCount: Int
     private var customerQueue: LinkedListQueue<Customer>
+    private var bankManagerQueue: LinkedListQueue<BankManager>
     private let customerCountRange: ClosedRange<Int> = 10...30
     
-    init() {
+    init(bankManagerCount: Int) {
         self.customerCount = 0
         self.customerQueue = LinkedListQueue<Customer>()
+        self.bankManagerQueue = LinkedListQueue<BankManager>()
+        (1...bankManagerCount).forEach { _ in
+            let bankManger = BankManager()
+            bankManagerQueue.enqueue(element: bankManger)
+        }
     }
 }
 
