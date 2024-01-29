@@ -9,7 +9,7 @@ import Foundation
 
 struct ConsoleManager: CustomerNumbering {
     private let isBool: Bool = true
-    var numOfPerson: Int = Int.random(in: 10...30)
+    var numOfPerson: Int { Int.random(in: 10...30) }
     
     private enum Message {
         static let menu = """
