@@ -46,15 +46,15 @@ extension BankManagerApp {
     }
     
     private func startBank() {
-        let clientDispatcher = ClientManager()
+        let clientManager = ClientManager()
         let bankers = [
             Banker.init(
                 name: "1",
-                dispatcher: clientDispatcher,
+                clientManager: clientManager,
                 taskOutput: output
             ),
         ]
-        BankManager(bankers: bankers, clientDispatcher: clientDispatcher).start()
+        BankManager(bankers: bankers, clientManager: clientManager).start()
     }
     
     private func handleInputError(_ error: Error) {

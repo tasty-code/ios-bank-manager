@@ -10,7 +10,7 @@ import Foundation
 final class Banker {
     private let name: String
     
-    private let dispatcher: ClientDequeuable
+    private let clientManager: ClientDequeuable
     
     private lazy var queue = DispatchQueue(label: String(describing: self))
     
@@ -18,18 +18,18 @@ final class Banker {
     
     init(
         name: String,
-        dispatcher: ClientDequeuable,
+        clientManager: ClientDequeuable,
         taskOutput: TextOutputHandlable
     ) {
         self.name = name
-        self.dispatcher = dispatcher
+        self.clientManager = clientManager
         self.taskOutput = taskOutput
     }
     
     func start(group: DispatchGroup) {
         queue.async(group: group) { [weak self] in
             guard let self else { return }
-            while let client = dispatcher.dispatchClient() {
+            while let client = clientManager.dispatchClient() {
                 work(for: client, time: 0.7)
             }
         }

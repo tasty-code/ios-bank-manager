@@ -7,15 +7,15 @@
 import Foundation
 
 struct BankManager {
-    private let clientDispatcher: ClientQueueManagable
+    private let clientManager: ClientQueueManagable
     
     private let bankers: [Banker]
     
     init(
         bankers: [Banker],
-        clientDispatcher: ClientQueueManagable
+        clientManager: ClientQueueManagable
     ) {
-        self.clientDispatcher = clientDispatcher
+        self.clientManager = clientManager
         self.bankers = bankers
     }
     
@@ -32,7 +32,7 @@ struct BankManager {
         let numberOfClient = Int.random(in: 10...30)
         for number in 1...numberOfClient {
             let client = Client(number: number)
-            self.clientDispatcher.enqueueClient(client)
+            self.clientManager.enqueueClient(client)
         }
     }
 }
