@@ -19,7 +19,7 @@ struct ConsoleManager {
             
             switch input {
             case "1":
-                print("시작")
+                Bank(customNum: Int.random(in: 10...30)).openBank()
             case "2":
                 return
             default:
