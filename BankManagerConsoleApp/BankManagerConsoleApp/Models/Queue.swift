@@ -9,7 +9,7 @@ final class Queue<T> {
 extension Queue {
     
     func enqueue(data: T) {
-        linkedList.appendLastNode(data: data)
+        linkedList.appendNode(data: data)
     }
     
     func dequeue() {
