@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankClerk {
-    var pace = 0.7
+    var pace: Double = 0.7
     
     func recieve(customer: Customer) {
         print("\(customer.numOfPerson)번 고객 업무 시작")

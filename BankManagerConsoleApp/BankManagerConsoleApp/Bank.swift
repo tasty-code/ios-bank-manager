@@ -2,7 +2,7 @@
 //  Bank.swift
 //  BankManagerConsoleApp
 //
-//  Created by 둘리 on 2024/01/29.
+//  Created by 미르, 희동 on 2024/01/29.
 //
 
 import Foundation

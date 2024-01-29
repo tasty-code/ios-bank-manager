@@ -8,7 +8,8 @@
 import Foundation
 
 struct ConsoleManager {
-    let isBool = true
+    let isBool: Bool = true
+    let randomNumber: Int = Int.random(in: 10...30)
     
     func create() {
         while isBool {
@@ -19,7 +20,7 @@ struct ConsoleManager {
             
             switch input {
             case "1":
-                Bank(customNum: Int.random(in: 10...30)).openBank()
+                Bank(customNum: randomNumber).openBank()
             case "2":
                 return
             default:
