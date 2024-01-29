@@ -51,5 +51,18 @@ extension Bank {
     }
     
     private func openBanck() {
+        while let customer: Customer = customerQueue.dequeue(),
+              let bankManager: BankManager = bankManagerQueue.dequeue() {
+            bankManager.deal(with: customer) { manager in
+                self.bankManagerQueue.enqueue(element: manager)
+            }
+        }
+        Message.close(customerCount: customerCount, time: Double(customerCount) * Customer.taskTime).printMessage()
+        closeBank()
+    }
+    
+    private func closeBank() {
+        customerCount = 0
+        process()
     }
 }
