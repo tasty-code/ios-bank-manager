@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ConsoleManager {
+struct ConsoleManager: CustomerNumbering {
     let isBool: Bool = true
-    let randomNumber: Int = Int.random(in: 10...30)
+    var numOfPerson: Int = Int.random(in: 10...30)
     
     func create() {
         while isBool {
@@ -20,7 +20,7 @@ struct ConsoleManager {
             
             switch input {
             case "1":
-                Bank(customNum: randomNumber).openBank()
+                Bank(customNum: numOfPerson).openBank()
             case "2":
                 return
             default:
