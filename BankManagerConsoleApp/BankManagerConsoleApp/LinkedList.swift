@@ -47,9 +47,7 @@ struct LinkedList<T: Equatable> {
         
         while head?.next != nil {
             count += 1
-            print("반복수행 중")
             if head?.data == data {
-                print("찾았다!")
                 return count
             }
             head = head?.next
