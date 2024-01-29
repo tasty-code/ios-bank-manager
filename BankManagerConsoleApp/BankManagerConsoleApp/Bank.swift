@@ -57,11 +57,11 @@ extension Bank {
                 self.bankManagerQueue.enqueue(element: manager)
             }
         }
-        Message.close(customerCount: customerCount, time: Double(customerCount) * Customer.taskTime).printMessage()
         closeBank()
     }
     
     private func closeBank() {
+        Message.close(customerCount: customerCount, time: Double(customerCount) * Customer.taskTime).printMessage()
         customerCount = 0
         process()
     }
