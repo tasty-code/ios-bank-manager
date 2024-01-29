@@ -3,6 +3,7 @@ disabled_rules:
 - trailing_whitespace
 - trailing_comma
 - class_delegate_protocol
+- sorted_imports
 
 force_unwrapping:
   severity: error

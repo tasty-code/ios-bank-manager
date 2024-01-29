@@ -20,6 +20,10 @@ final class Queue<Value> {
         return self.linkedList.isEmpty
     }
     
+    var count: Int {
+        return self.linkedList.count
+    }
+    
     init(linkedList: LinkedList<Value> = LinkedList()) {
         self.linkedList = linkedList
     }
