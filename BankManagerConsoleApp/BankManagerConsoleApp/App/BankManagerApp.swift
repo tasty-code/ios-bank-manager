@@ -30,13 +30,13 @@ extension BankManagerApp {
         do {
             let input = try self.input.readInput(prompt: "입력:")
             let menu = try BankManagerAppMenu(input: input)
-            handleMenu(menu)
+            handle(menu: menu)
         } catch {
-            handleInputError(error)
+            handle(error: error)
         }
     }
     
-    private func handleMenu(_ menu: BankManagerAppMenu) {
+    private func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
             startBank()
@@ -57,7 +57,7 @@ extension BankManagerApp {
         BankManager(bankers: bankers, clientManager: clientManager).start()
     }
     
-    private func handleInputError(_ error: Error) {
+    private func handle(error: Error) {
         self.output.display(output: error.localizedDescription)
     }
 }
