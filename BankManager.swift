@@ -26,7 +26,7 @@ struct BankManager {
                   let value = Int(input),
                   let menu = Menu(rawValue: value)
             else {
-                return
+                continue
             }
             processMenu(menu)
         }
@@ -44,8 +44,8 @@ struct BankManager {
     }
     
     private func showMenu() {
-        showPromt(message: BankMessage.open)
-        showPromt(message: BankMessage.exit)
+        showPromt(message: .open)
+        showPromt(message: .exit)
     }
     
     private func inputMenu() -> String? {

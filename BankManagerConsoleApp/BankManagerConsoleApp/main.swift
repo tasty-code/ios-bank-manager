@@ -4,6 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bankManger = BankManager(of: Bank(clerk: BankClerk()))
+let currentBank = Bank(clerk: BankClerk())
+var bankManger = BankManager(of: currentBank)
 bankManger.run()
 
