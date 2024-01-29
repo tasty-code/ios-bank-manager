@@ -32,7 +32,7 @@ final class Banker {
     func start(group: DispatchGroup) {
         queue.async(group: group) { [weak self] in
             guard let self else { return }
-            while let client = clientManager.dispatchClient() {
+            while let client = clientManager.dequeueClient() {
                 work(for: client, time: 0.7)
             }
         }

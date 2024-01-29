@@ -10,7 +10,7 @@ protocol ClientEnqueuable {
 }
 
 protocol ClientDequeuable {
-    func dispatchClient() -> Client?
+    func dequeueClient() -> Client?
 }
 
 typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable

@@ -24,7 +24,7 @@ extension ClientManager: ClientEnqueuable {
 }
 
 extension ClientManager: ClientDequeuable {
-    func dispatchClient() -> Client? {
+    func dequeueClient() -> Client? {
         self.semaphore.wait()
         let result = self.clientQueue.dequeue()
         self.semaphore.signal()
