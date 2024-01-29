@@ -28,7 +28,7 @@ final class LinkedList<T: Equatable> {
 extension LinkedList {
     subscript(index: Int) -> Node<T>? {
         if index < 0 || index > count - 1 {
-            fatalError("Index out of range")
+            return nil
         }
         
         if index == 0 {
@@ -48,7 +48,7 @@ extension LinkedList {
     
     public func getNode(index: Int) -> Node<T>? {
         if index < 0 || index > count {
-            fatalError("Index out of range")
+            return nil
         }
         
         if index == 0 {
