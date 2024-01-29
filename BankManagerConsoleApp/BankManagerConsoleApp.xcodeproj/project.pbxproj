@@ -45,7 +45,7 @@
 		95762E302B64F82C00FDBDE7 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		CCA535542B5F89A700F282B4 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		CCA535562B5F930700F282B4 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		CCA5355C2B5F988F00F282B4 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +88,18 @@
 			path = LinkedListTests;
 			sourceTree = "<group>";
 		};
+		95762E322B67C94E00FDBDE7 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				CCE195212B65EE6400F0946F /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				CCE195232B65EE9200F0946F /* BankClerk.swift */,
+				95762E302B64F82C00FDBDE7 /* Customer.swift */,
+				CCE195252B6677A200F0946F /* BankMessage.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -111,25 +123,21 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				CCA535532B5F898100F282B4 /* Model */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				CCE195212B65EE6400F0946F /* Bank.swift */,
-				CCE195232B65EE9200F0946F /* BankClerk.swift */,
-				CCE195252B6677A200F0946F /* BankMessage.swift */,
+				95762E322B67C94E00FDBDE7 /* Bank */,
+				CCA535532B5F898100F282B4 /* DataStructure */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				95762E302B64F82C00FDBDE7 /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
-		CCA535532B5F898100F282B4 /* Model */ = {
+		CCA535532B5F898100F282B4 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
 				CCA535542B5F89A700F282B4 /* Node.swift */,
 				95762E022B5F8E0400FDBDE7 /* LinkedList.swift */,
 				CCA535562B5F930700F282B4 /* Queue.swift */,
 			);
-			path = Model;
+			path = DataStructure;
 			sourceTree = "<group>";
 		};
 		CCA5355D2B5F988F00F282B4 /* QueueTest */ = {
