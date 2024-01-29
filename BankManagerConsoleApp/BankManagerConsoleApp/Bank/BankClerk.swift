@@ -12,7 +12,11 @@ struct BankClerk {
     
     func recieve(customer: Customer) {
         print("\(customer.numOfPerson)번 고객 업무 시작")
-        usleep(useconds_t(pace * 1000000))
+        paceTime(pace)
         print("\(customer.numOfPerson)번 고객 업무 완료")
+    }
+    
+    private func paceTime(_ pace: Double) {
+        usleep(useconds_t(pace * 1000000))
     }
 }
