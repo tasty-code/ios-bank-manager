@@ -53,8 +53,8 @@ extension Bank {
     private func openBanck() {
         while let customer: Customer = customerQueue.dequeue(),
               let bankManager: BankManager = bankManagerQueue.dequeue() {
-            bankManager.deal(with: customer) { manager in
-                self.bankManagerQueue.enqueue(element: manager)
+            bankManager.deal(with: customer) { [weak self] manager in
+                self?.bankManagerQueue.enqueue(element: manager)
             }
         }
         closeBank()
