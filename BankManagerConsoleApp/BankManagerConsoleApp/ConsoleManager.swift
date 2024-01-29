@@ -8,23 +8,30 @@
 import Foundation
 
 struct ConsoleManager: CustomerNumbering {
-    let isBool: Bool = true
+    private let isBool: Bool = true
     var numOfPerson: Int = Int.random(in: 10...30)
     
-    func create() {
+    private enum Message {
+        static let menu = """
+                          1 : 은행개점
+                          2 : 종료
+                          입력 :
+                          """
+        static let reselection = "메뉴를 다시 선택해주세요."
+    }
+    
+    func startBank() {
         while isBool {
-            print("1 : 은행개점")
-            print("2 : 종료")
-            print("입력 :", terminator:" ")
+            print(Message.menu, terminator: " ")
             guard let input = readLine() else { return }
             
             switch input {
             case "1":
-                Bank(customNum: numOfPerson).openBank()
+                Bank(numOfPerson: numOfPerson).openBank()
             case "2":
                 return
             default:
-                print("메뉴를 다시 선택해주세요.")
+                print(Message.reselection)
                 continue
             }
         }
