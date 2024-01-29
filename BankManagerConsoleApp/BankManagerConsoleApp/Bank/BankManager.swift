@@ -7,15 +7,19 @@
 import Foundation
 
 struct BankManager {
-    let queue = Queue<Number>(queue: LinkedList<Number>())
+    private let queue = Queue<Number>(queue: LinkedList<Number>())
+    private let bankClerk = BankClerk()
     
     func standBy(customer: Number) {
         queue.enqueue(element: customer)
     }
     
-    func assign() {
+    func assign() throws {
         while let list = try? queue.dequeue() {
-            BankClerk().recieve(customer: list as? Customer ?? Customer(numOfPerson: 0) )
+            guard let customer = list as? Customer else {
+                throw QueueError.dequeueError
+            }
+            bankClerk.recieve(customer: customer)
         }
     }
 }

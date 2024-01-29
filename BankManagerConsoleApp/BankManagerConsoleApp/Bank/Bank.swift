@@ -18,7 +18,13 @@ struct Bank {
     
     func openBank() {
         setCustomerCount(customer: customNum)
-        let workTime = calulateWorkTime { bankManager.assign() }
+        let workTime = calulateWorkTime {
+            do {
+                try bankManager.assign()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
         closeBank(time: workTime)
     }
     
