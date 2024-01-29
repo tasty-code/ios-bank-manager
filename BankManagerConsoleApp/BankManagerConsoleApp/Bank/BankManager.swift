@@ -7,10 +7,10 @@
 import Foundation
 
 struct BankManager {
-    private let queue = Queue<Number>(queue: LinkedList<Number>())
+    private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
     private let bankClerk = BankClerk()
     
-    func standBy(customer: Number) {
+    func standBy(customer: CustomerNumbering) {
         queue.enqueue(element: customer)
     }
     

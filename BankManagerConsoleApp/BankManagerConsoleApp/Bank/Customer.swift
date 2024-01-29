@@ -7,11 +7,10 @@
 
 import Foundation
 
-protocol Number {
+protocol CustomerNumbering {
     var numOfPerson: Int { get }
 }
 
-struct Customer: Number {
+struct Customer: CustomerNumbering {
     var numOfPerson: Int
-    
 }
