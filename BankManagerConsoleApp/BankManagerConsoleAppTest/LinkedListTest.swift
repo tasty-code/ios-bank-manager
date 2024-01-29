@@ -152,6 +152,66 @@ final class LinkedListTest: XCTestCase {
         XCTAssertNil(head)
         XCTAssertNil(tail)
     }
+    
+    // MARK: - Count
+    
+    func test_비어있으면_count는_0이다() {
+        // given
+        setEmptySUT()
+        
+        // when
+        let result = self.sut.count
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_한개일때_count는_1이다() {
+        // given
+        setSUTWithOneElement("1")
+        
+        // when
+        let result = self.sut.count
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_1개일때_하나를_add하면_2개이다() {
+        // given
+        setSUTWithOneElement("old")
+        
+        // when
+        self.sut.add(value: "new")
+        let result = self.sut.count
+        
+        // then
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_1개일때_remove하면_0개이다() {
+        // given
+        setSUTWithOneElement("value")
+        
+        // when
+        self.sut.removeFirst()
+        let result = self.sut.count
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_0개일때_remove하면_0개이다() {
+        // given
+        setEmptySUT()
+        
+        // when
+        self.sut.removeFirst()
+        let result = self.sut.count
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
 }
 
 extension LinkedListTest {
