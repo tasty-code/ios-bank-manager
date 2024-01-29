@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Customer {
+protocol Number {
+    var numOfPerson: Int { get }
+}
+
+struct Customer: Number {
     var numOfPerson: Int
     
 }
