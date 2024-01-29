@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890723D02B678C2600DA6B04 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890723CF2B678C2600DA6B04 /* Customer.swift */; };
 		89F662642B61085700DB0AFC /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F662632B61085700DB0AFC /* LinkedList.swift */; };
 		89F662692B61F80200DB0AFC /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F662682B61F80200DB0AFC /* Queue.swift */; };
 		89F662722B61FA9600DB0AFC /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F662712B61FA9600DB0AFC /* QueueTest.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		890723CF2B678C2600DA6B04 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		89F662632B61085700DB0AFC /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		89F662682B61F80200DB0AFC /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		89F6626F2B61FA9600DB0AFC /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 				89F662682B61F80200DB0AFC /* Queue.swift */,
 				89F662632B61085700DB0AFC /* LinkedList.swift */,
 				994780E42B6786F5006B914C /* BankMessage.swift */,
+				890723CF2B678C2600DA6B04 /* Customer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F662692B61F80200DB0AFC /* Queue.swift in Sources */,
+				890723D02B678C2600DA6B04 /* Customer.swift in Sources */,
 				9935A6F22B6104B9005AB81C /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				994780E52B6786F5006B914C /* BankMessage.swift in Sources */,

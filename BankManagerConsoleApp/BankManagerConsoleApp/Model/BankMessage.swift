@@ -10,11 +10,7 @@ extension BankMessage {
     func message() {
         switch self {
         case .menu:
-            print("""
-            1 : 은행개점
-            2 : 종료
-            입력 :
-            """, terminator: " ")
+            print("1 : 은행개점\n2 : 종료\n입력 :", terminator: " ")
         case .wrongInput:
             print("1 혹은 2 를 입력하세요.")
         case .taskStart(let customer):

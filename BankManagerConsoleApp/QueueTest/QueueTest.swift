@@ -29,7 +29,7 @@ final class QueueTest: XCTestCase {
         // given
         sut.enqueue(value: 1)
         
-        //then
+        // then
         XCTAssertFalse(sut.isEmpty)
     }
     
