@@ -87,6 +87,7 @@ extension LinkedList {
         guard let previousNode = findPreviousNode(of: node) else {
             let result = head
             head = head?.next
+            result?.refer(to: nil)
             return result
         }
         
