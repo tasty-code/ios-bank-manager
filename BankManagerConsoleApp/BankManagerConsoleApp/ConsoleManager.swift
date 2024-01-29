@@ -7,8 +7,8 @@
 
 struct ConsoleManager { }
 
-extension ConsoleManager: TextInputHandlable {
-    func handleInput(prompt: String?) throws -> String {
+extension ConsoleManager: TextInputReadable {
+    func readInput(prompt: String?) throws -> String {
         if let prompt {
             print(prompt, terminator: " ")
         }
@@ -19,8 +19,8 @@ extension ConsoleManager: TextInputHandlable {
     }
 }
 
-extension ConsoleManager: TextOutputHandlable {
-    func handleOutput(_ output: String) {
+extension ConsoleManager: TextOutputDisplayable {
+    func display(output: String) {
         print(output)
     }
 }

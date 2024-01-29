@@ -20,7 +20,7 @@
 		F46FA2A22B63A22100787C3F /* ClientQueueManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2A12B63A22100787C3F /* ClientQueueManagable.swift */; };
 		F46FA2A42B63A46A00787C3F /* BankManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2A32B63A46A00787C3F /* BankManagerApp.swift */; };
 		F46FA2A82B66309000787C3F /* ConsoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2A72B66309000787C3F /* ConsoleManager.swift */; };
-		F46FA2AA2B6630B200787C3F /* TextInputHandlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2A92B6630B200787C3F /* TextInputHandlable.swift */; };
+		F46FA2AA2B6630B200787C3F /* TextInputReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2A92B6630B200787C3F /* TextInputReadable.swift */; };
 		F46FA2AC2B6630CF00787C3F /* BankManagerAppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2AB2B6630CF00787C3F /* BankManagerAppMenu.swift */; };
 		F46FA2AE2B6630E300787C3F /* IOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FA2AD2B6630E300787C3F /* IOError.swift */; };
 		F4EDF9F72B5F749400C3E54C /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EDF9F62B5F749400C3E54C /* QueueTest.swift */; };
@@ -54,7 +54,7 @@
 		F46FA2A12B63A22100787C3F /* ClientQueueManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientQueueManagable.swift; sourceTree = "<group>"; };
 		F46FA2A32B63A46A00787C3F /* BankManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerApp.swift; sourceTree = "<group>"; };
 		F46FA2A72B66309000787C3F /* ConsoleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleManager.swift; sourceTree = "<group>"; };
-		F46FA2A92B6630B200787C3F /* TextInputHandlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputHandlable.swift; sourceTree = "<group>"; };
+		F46FA2A92B6630B200787C3F /* TextInputReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputReadable.swift; sourceTree = "<group>"; };
 		F46FA2AB2B6630CF00787C3F /* BankManagerAppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerAppMenu.swift; sourceTree = "<group>"; };
 		F46FA2AD2B6630E300787C3F /* IOError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		F4EDF9F42B5F749400C3E54C /* BankManagerConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +105,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				F46FA2A32B63A46A00787C3F /* BankManagerApp.swift */,
 				F46FA2AB2B6630CF00787C3F /* BankManagerAppMenu.swift */,
-				F46FA2A92B6630B200787C3F /* TextInputHandlable.swift */,
+				F46FA2A92B6630B200787C3F /* TextInputReadable.swift */,
 				F46FA2A72B66309000787C3F /* ConsoleManager.swift */,
 				F46FA2AD2B6630E300787C3F /* IOError.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
@@ -262,7 +262,7 @@
 				F447FC3A2B5E8053002A2692 /* Node.swift in Sources */,
 				F46FA29C2B638CAB00787C3F /* Banker.swift in Sources */,
 				F46FA2AE2B6630E300787C3F /* IOError.swift in Sources */,
-				F46FA2AA2B6630B200787C3F /* TextInputHandlable.swift in Sources */,
+				F46FA2AA2B6630B200787C3F /* TextInputReadable.swift in Sources */,
 				F46FA2A42B63A46A00787C3F /* BankManagerApp.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				2733E4FA2B5F9FDB00785607 /* LinkedList.swift in Sources */,

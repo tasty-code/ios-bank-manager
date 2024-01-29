@@ -6,13 +6,13 @@
 //
 
 final class BankManagerApp {
-    private let input: TextInputHandlable
+    private let input: TextInputReadable
     
-    private let output: TextOutputHandlable
+    private let output: TextOutputDisplayable
     
     private var isRunning: Bool = true
     
-    init(inputHandler: TextInputHandlable, outputHandler: TextOutputHandlable) {
+    init(inputHandler: TextInputReadable, outputHandler: TextOutputDisplayable) {
         self.input = inputHandler
         self.output = outputHandler
     }
@@ -26,9 +26,9 @@ final class BankManagerApp {
 
 extension BankManagerApp {
     private func startLoop() {
-        self.output.handleOutput(BankManagerAppMenu.allMenusPrompt)
+        self.output.display(output: BankManagerAppMenu.allMenusPrompt)
         do {
-            let input = try self.input.handleInput(prompt: "입력:")
+            let input = try self.input.readInput(prompt: "입력:")
             let menu = try BankManagerAppMenu(input: input)
             handleMenu(menu)
         } catch {
@@ -58,6 +58,6 @@ extension BankManagerApp {
     }
     
     private func handleInputError(_ error: Error) {
-        self.output.handleOutput(error.localizedDescription)
+        self.output.display(output: error.localizedDescription)
     }
 }
