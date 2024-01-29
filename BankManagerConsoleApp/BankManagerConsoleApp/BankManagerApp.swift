@@ -27,16 +27,13 @@ final class BankManagerApp {
 extension BankManagerApp {
     private func startLoop() {
         self.output.handleOutput(BankManagerAppMenu.allMenusPrompt)
-        let inputResult = self.input.handleInput(prompt: "입력:")
-        guard
-            case .success(let input) = inputResult,
-            let number = Int(input),
-            let menu = BankManagerAppMenu(number: number)
-        else {
-            handleInputError()
-            return
+        do {
+            let input = try self.input.handleInput(prompt: "입력:")
+            let menu = try BankManagerAppMenu(input: input)
+            handleMenu(menu)
+        } catch {
+            handleInputError(error)
         }
-        handleMenu(menu)
     }
     
     private func handleMenu(_ menu: BankManagerAppMenu) {
@@ -51,12 +48,16 @@ extension BankManagerApp {
     private func startBank() {
         let clientDispatcher = ClientManager()
         let bankers = [
-            Banker.init(name: "1", dispatcher: clientDispatcher),
+            Banker.init(
+                name: "1",
+                dispatcher: clientDispatcher,
+                taskOutput: output
+            ),
         ]
         BankManager(bankers: bankers, clientDispatcher: clientDispatcher).start()
     }
     
-    private func handleInputError() {
-        self.output.handleOutput("메뉴 번호를 보고 다시 입력해주세요.")
+    private func handleInputError(_ error: Error) {
+        self.output.handleOutput(error.localizedDescription)
     }
 }

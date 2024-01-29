@@ -14,9 +14,16 @@ final class Banker {
     
     private lazy var queue = DispatchQueue(label: String(describing: self))
     
-    init(name: String, dispatcher: ClientDequeuable) {
+    private let taskOutput: TextOutputHandlable
+    
+    init(
+        name: String,
+        dispatcher: ClientDequeuable,
+        taskOutput: TextOutputHandlable
+    ) {
         self.name = name
         self.dispatcher = dispatcher
+        self.taskOutput = taskOutput
     }
     
     func start(group: DispatchGroup) {
@@ -35,10 +42,10 @@ final class Banker {
     }
     
     private func startTask(for client: Client) {
-        print("\(self.name): \(client.number)번 고객 업무 시작")
+        self.taskOutput.handleOutput("\(self.name): \(client.number)번 고객 업무 시작")
     }
     
     private func endTask(for client: Client) {
-        print("\(self.name): \(client.number)번 고객 업무 완료")
+        self.taskOutput.handleOutput("\(self.name): \(client.number)번 고객 업무 완료")
     }
 }

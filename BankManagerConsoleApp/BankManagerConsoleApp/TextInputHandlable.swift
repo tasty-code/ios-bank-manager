@@ -6,7 +6,7 @@
 //
 
 protocol TextInputHandlable {
-    func handleInput(prompt: String?) -> Result<String, IOError>
+    func handleInput(prompt: String?) throws -> String
 }
 
 protocol TextOutputHandlable {

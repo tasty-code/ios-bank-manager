@@ -8,18 +8,14 @@
 struct ConsoleManager { }
 
 extension ConsoleManager: TextInputHandlable {
-    func handleInput(prompt: String?) -> Result<String, IOError> {
+    func handleInput(prompt: String?) throws -> String {
         if let prompt {
             print(prompt, terminator: " ")
         }
-        guard let pureInput = readLine() else {
-            return .failure(.invalidInput)
+        guard let input = readLine() else {
+            throw IOError.unexpectedError
         }
-        let input = pureInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard input.isEmpty == false else {
-            return .failure(.invalidInput)
-        }
-        return .success(input)
+        return input
     }
 }
 
