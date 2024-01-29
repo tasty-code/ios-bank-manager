@@ -22,10 +22,12 @@ struct BankManager {
     func start() {
         makeClientList()
         let group = DispatchGroup()
-        for banker in bankers {
-            banker.start(group: group)
+        let totalWorkTime = measure {
+            for banker in bankers {
+                banker.start(group: group)
+            }
+            group.wait()
         }
-        group.wait()
     }
     
     private func makeClientList() {
@@ -34,5 +36,11 @@ struct BankManager {
             let client = Client(number: number)
             self.clientManager.enqueueClient(client)
         }
+    }
+    
+    private func measure(_ progress: () -> Void) -> TimeInterval {
+        let start = Date()
+        progress()
+        return Date().timeIntervalSince(start)
     }
 }
