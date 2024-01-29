@@ -9,8 +9,12 @@ import Foundation
 
 struct Bank {
     private var bankWatingQueue = Queue<Customer>()
-    private let clerk = BankClerk()
+    private let clerk: WorkAble
     private var handledCustomerCount = 0
+    
+    init(clerk: WorkAble) {
+        self.clerk = clerk
+    }
     
     private mutating func setWaitingLine() {
         handledCustomerCount = 0

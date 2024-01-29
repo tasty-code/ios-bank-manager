@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct BankClerk {
+protocol WorkAble {
+    func work(for customer: Customer)
+}
+
+struct BankClerk: WorkAble {
     func work(for customer: Customer) {
         print(BankMessage.start(customer.number).show)
         Thread.sleep(forTimeInterval: 0.7)

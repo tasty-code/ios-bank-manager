@@ -12,8 +12,12 @@ struct BankManager {
         case close = 2
     }
     
-    var bank: Bank = Bank()
     private var isRunning: Bool = true
+    private var bank: Bank
+    
+    init(of bank: Bank) {
+        self.bank = bank
+    }
 
     mutating func run() {
         while isRunning {
