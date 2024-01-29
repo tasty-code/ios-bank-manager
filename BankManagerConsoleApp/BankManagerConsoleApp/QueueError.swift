@@ -2,7 +2,7 @@
 //  Error.swift
 //  BankManagerConsoleApp
 //
-//  Created by Lee minyeol on 1/25/24.
+//  Created by 미르, 희동 on 1/25/24.
 //
 
 import Foundation
