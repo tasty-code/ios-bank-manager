@@ -18,7 +18,7 @@ class Node<T: Equatable> {
         return lhs.value == rhs.value
     }
 
-    public func refer(to node: Node?) {
+    func refer(to node: Node?) {
         next = node
     }
 }

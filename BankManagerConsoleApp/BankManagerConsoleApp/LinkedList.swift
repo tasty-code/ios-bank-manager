@@ -46,7 +46,7 @@ extension LinkedList {
         return nextNode
     }
     
-    public func getNode(index: Int) -> Node<T>? {
+    func getNode(index: Int) -> Node<T>? {
         if index < 0 || index > count {
             return nil
         }
@@ -66,7 +66,7 @@ extension LinkedList {
         return nextNode
     }
     
-    public func add(_ newNode: Node<T>) {
+    func add(_ newNode: Node<T>) {
         guard let lastNode = getLastNode() else {
             head = newNode
             return
@@ -75,7 +75,7 @@ extension LinkedList {
         lastNode.refer(to: newNode)
     }
     
-    public func add(_ newNode: Node<T>, after previousNode: Node<T>) {
+    func add(_ newNode: Node<T>, after previousNode: Node<T>) {
         if let temporaryNode = previousNode.next {
             newNode.refer(to: temporaryNode)
         }
@@ -83,7 +83,7 @@ extension LinkedList {
         previousNode.refer(to: newNode)
     }
     
-    public func remove(_ node: Node<T>) -> Node<T>? {
+    func remove(_ node: Node<T>) -> Node<T>? {
         guard let previousNode = findPreviousNode(of: node) else {
             head = head?.next
             return head
@@ -98,7 +98,7 @@ extension LinkedList {
         return node
     }
     
-    public func removeAll() {
+    func removeAll() {
         head = nil
     }
 }
