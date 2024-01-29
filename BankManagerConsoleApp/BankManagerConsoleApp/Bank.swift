@@ -13,6 +13,7 @@ struct Bank {
     private var handledCustomerCount = 0
     
     private mutating func setWaitingLine() {
+        handledCustomerCount = 0
         for number in 1...Int.random(in: 10...30) {
             bankWatingQueue.enqueue(item: Customer(number: number))
         }
@@ -44,12 +45,5 @@ struct Bank {
             handledCustomerCount += 1
             clerk.work(for: customer)
         }
-    }
-    
-    func closeBank() -> Bool {
-        if bankWatingQueue.isEmpty() {
-            return true
-        }
-        return false
     }
 }

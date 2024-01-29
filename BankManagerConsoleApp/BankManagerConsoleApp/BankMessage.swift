@@ -1,5 +1,5 @@
 //
-//  message.swift
+//  BankMessage.swift
 //  BankManagerConsoleApp
 //
 //  Created by Roh on 1/28/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum workMessage {
+enum BankMessage {
     case open
     case exit
     case start(Int)

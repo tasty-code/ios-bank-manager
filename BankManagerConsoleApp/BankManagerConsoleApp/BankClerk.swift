@@ -9,8 +9,8 @@ import Foundation
 
 struct BankClerk {
     func work(for customer: Customer) {
-        print(workMessage.start(customer.number).show)
+        print(BankMessage.start(customer.number).show)
         Thread.sleep(forTimeInterval: 0.7)
-        print(workMessage.done(customer.number).show)
+        print(BankMessage.done(customer.number).show)
     }
 }
