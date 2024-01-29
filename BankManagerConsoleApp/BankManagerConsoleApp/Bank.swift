@@ -12,22 +12,22 @@ struct Bank {
     private let clerk = BankClerk()
     private var handledCustomerCount = 0
     
-    private mutating func setWaitingLine() -> Int {
+    private mutating func setWaitingLine() {
         for number in 1...Int.random(in: 10...30) {
             bankWatingQueue.enqueue(item: Customer(number: number))
         }
-        return bankWatingQueue.count
     }
     
-    mutating func executeBankWork(){
+    mutating func open() {
+        setWaitingLine()
+        executeBankWork()
+    }
+    
+    private mutating func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
-        let _ = setWaitingLine()
-        
-        while !bankWatingQueue.isEmpty() {
-            guard let customer = bankWatingQueue.dequeue() else { return }
-            handledCustomerCount += 1
-            clerk.work(for: customer)
+        DispatchQueue.global().sync {
+            serveCustomer()
         }
         
         let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -36,6 +36,14 @@ struct Bank {
         let resultMessage = String(format: resultDescription, handledCustomerCount, flooredDifference)
         
         print(resultMessage)
+    }
+    
+    private mutating func serveCustomer() {
+        while !bankWatingQueue.isEmpty() {
+            guard let customer = bankWatingQueue.dequeue() else { return }
+            handledCustomerCount += 1
+            clerk.work(for: customer)
+        }
     }
     
     func closeBank() -> Bool {

@@ -31,10 +31,10 @@ struct BankManager {
     private mutating func processMenu(_ inputProcess: Menu) {
         switch inputProcess {
         case .open:
-            bank.executeBankWork()
+            bank.open()
             break
         case .close:
-            isRunning = bank.closeBank()
+            isRunning = false
             break
         }
     }

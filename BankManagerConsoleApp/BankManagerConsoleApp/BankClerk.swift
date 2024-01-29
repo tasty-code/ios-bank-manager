@@ -10,9 +10,7 @@ import Foundation
 struct BankClerk {
     func work(for customer: Customer) {
         print(workMessage.start(customer.number).show)
-        DispatchQueue.global().sync {
-            Thread.sleep(forTimeInterval: 0.7)
-        }
+        Thread.sleep(forTimeInterval: 0.7)
         print(workMessage.done(customer.number).show)
     }
 }
