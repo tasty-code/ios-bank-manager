@@ -13,8 +13,4 @@ protocol ClientDequeuable {
     func dispatchClient() -> Client?
 }
 
-protocol ClientCountProvidable {
-    var numberOfClient: Int { get }
-}
-
-typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable & ClientCountProvidable
+typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable

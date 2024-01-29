@@ -31,9 +31,3 @@ extension ClientManager: ClientDequeuable {
         return result
     }
 }
-
-extension ClientManager: ClientCountProvidable {
-    var numberOfClient: Int {
-        return self.clientQueue.count
-    }
-}
