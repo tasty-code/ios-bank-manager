@@ -26,7 +26,7 @@ extension BankManager {
             customerEnqueue()
             customerDequeue()
             printEndMessage()
-            break
+            formIsRunning()
         case CustomString.numberTwoText.description:
             view.printMessage(input: CustomString.bankClose.description)
             formIsRunning()
