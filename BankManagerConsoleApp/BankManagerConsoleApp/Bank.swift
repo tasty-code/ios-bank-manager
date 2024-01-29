@@ -8,15 +8,15 @@
 import Foundation
 
 struct Bank {
-    private var bankTellerQueue = BankTellerQueue<Customer>()
+    private var bankWatingQueue = Queue<Customer>()
     private let clerk = BankClerk()
     private var handledCustomerCount = 0
     
     private mutating func setWaitingLine() -> Int {
         for number in 1...Int.random(in: 10...30) {
-            bankTellerQueue.enqueue(item: Customer(number: number))
+            bankWatingQueue.enqueue(item: Customer(number: number))
         }
-        return bankTellerQueue.count
+        return bankWatingQueue.count
     }
     
     mutating func executeBankWork(){
@@ -24,8 +24,8 @@ struct Bank {
         
         let _ = setWaitingLine()
         
-        while !bankTellerQueue.isEmpty() {
-            guard let customer = bankTellerQueue.dequeue() else { return }
+        while !bankWatingQueue.isEmpty() {
+            guard let customer = bankWatingQueue.dequeue() else { return }
             handledCustomerCount += 1
             clerk.work(for: customer)
         }
@@ -39,7 +39,7 @@ struct Bank {
     }
     
     func closeBank() -> Bool {
-        if bankTellerQueue.isEmpty() {
+        if bankWatingQueue.isEmpty() {
             return true
         }
         return false

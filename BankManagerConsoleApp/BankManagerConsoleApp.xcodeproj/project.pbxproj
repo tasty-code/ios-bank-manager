@@ -9,16 +9,16 @@
 /* Begin PBXBuildFile section */
 		95762E032B5F8E0400FDBDE7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E022B5F8E0400FDBDE7 /* LinkedList.swift */; };
 		95762E292B60C13C00FDBDE7 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E282B60C13C00FDBDE7 /* LinkedListTests.swift */; };
-		95762E2D2B60C14800FDBDE7 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
+		95762E2D2B60C14800FDBDE7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* Queue.swift */; };
 		95762E2E2B60C14B00FDBDE7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E022B5F8E0400FDBDE7 /* LinkedList.swift */; };
 		95762E2F2B60C14D00FDBDE7 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
 		95762E312B64F82C00FDBDE7 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E302B64F82C00FDBDE7 /* Customer.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		CCA535552B5F89A700F282B4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
-		CCA535572B5F930700F282B4 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
+		CCA535572B5F930700F282B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* Queue.swift */; };
 		CCA5355F2B5F988F00F282B4 /* BankTellerQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */; };
-		CCA535632B5F98AB00F282B4 /* BankTellerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* BankTellerQueue.swift */; };
+		CCA535632B5F98AB00F282B4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535562B5F930700F282B4 /* Queue.swift */; };
 		CCA535642B5F98AE00F282B4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95762E022B5F8E0400FDBDE7 /* LinkedList.swift */; };
 		CCA535652B5F98B100F282B4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA535542B5F89A700F282B4 /* Node.swift */; };
 		CCE195222B65EE6400F0946F /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE195212B65EE6400F0946F /* Bank.swift */; };
@@ -47,7 +47,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		CCA535542B5F89A700F282B4 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		CCA535562B5F930700F282B4 /* BankTellerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueue.swift; sourceTree = "<group>"; };
+		CCA535562B5F930700F282B4 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		CCA5355C2B5F988F00F282B4 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA5355E2B5F988F00F282B4 /* BankTellerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerQueueTest.swift; sourceTree = "<group>"; };
 		CCE195212B65EE6400F0946F /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 			children = (
 				CCA535542B5F89A700F282B4 /* Node.swift */,
 				95762E022B5F8E0400FDBDE7 /* LinkedList.swift */,
-				CCA535562B5F930700F282B4 /* BankTellerQueue.swift */,
+				CCA535562B5F930700F282B4 /* Queue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,7 +258,7 @@
 			files = (
 				95762E2E2B60C14B00FDBDE7 /* LinkedList.swift in Sources */,
 				95762E292B60C13C00FDBDE7 /* LinkedListTests.swift in Sources */,
-				95762E2D2B60C14800FDBDE7 /* BankTellerQueue.swift in Sources */,
+				95762E2D2B60C14800FDBDE7 /* Queue.swift in Sources */,
 				95762E2F2B60C14D00FDBDE7 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCA535572B5F930700F282B4 /* BankTellerQueue.swift in Sources */,
+				CCA535572B5F930700F282B4 /* Queue.swift in Sources */,
 				CCA535552B5F89A700F282B4 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				95762E312B64F82C00FDBDE7 /* Customer.swift in Sources */,
@@ -285,7 +285,7 @@
 			files = (
 				CCA535642B5F98AE00F282B4 /* LinkedList.swift in Sources */,
 				CCA5355F2B5F988F00F282B4 /* BankTellerQueueTest.swift in Sources */,
-				CCA535632B5F98AB00F282B4 /* BankTellerQueue.swift in Sources */,
+				CCA535632B5F98AB00F282B4 /* Queue.swift in Sources */,
 				CCA535652B5F98B100F282B4 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

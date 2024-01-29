@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankTellerQueue<Element> {
+struct Queue<Element> {
     private var linkedList = LinkedList<Element>()
     
     var count: Int {
