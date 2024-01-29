@@ -15,7 +15,7 @@ struct BankManager {
     
     func assign() {
         while let list = try? queue.dequeue() {
-            BankClerk().recieve(customer: list as! Customer )
+            BankClerk().recieve(customer: list as? Customer ?? Customer(numOfPerson: 0) )
         }
     }
 }
