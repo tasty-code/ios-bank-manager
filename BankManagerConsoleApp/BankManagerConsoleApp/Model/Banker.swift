@@ -16,6 +16,8 @@ final class Banker {
     
     private let taskOutput: TextOutputDisplayable
     
+    private(set) var dailyClientStatistics: Int
+    
     init(
         name: String,
         clientManager: ClientDequeuable,
@@ -24,6 +26,7 @@ final class Banker {
         self.name = name
         self.clientManager = clientManager
         self.taskOutput = taskOutput
+        self.dailyClientStatistics = 0
     }
     
     func start(group: DispatchGroup) {
@@ -37,6 +40,7 @@ final class Banker {
     
     private func work(for client: Client, time: Double) {
         self.startTask(for: client)
+        self.dailyClientStatistics += 1
         Thread.sleep(forTimeInterval: time)
         self.endTask(for: client)
     }

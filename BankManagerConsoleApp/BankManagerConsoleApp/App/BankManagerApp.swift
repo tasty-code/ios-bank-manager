@@ -54,7 +54,12 @@ extension BankManagerApp {
                 taskOutput: output
             ),
         ]
-        BankManager(bankers: bankers, clientManager: clientManager).start()
+        
+        BankManager(
+            bankers: bankers,
+            clientManager: clientManager,
+            output: self.output
+        ).start()
     }
     
     private func handle(error: Error) {
