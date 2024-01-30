@@ -2,7 +2,7 @@
 import Foundation
 
 struct Employee {
-    var assignedTask: String = "업무"
+    private(set) var assignedTask: String = "업무"
     
     func handleCustomerTasks(with customersQueue: Queue<Customer>) {
         var customers = customersQueue

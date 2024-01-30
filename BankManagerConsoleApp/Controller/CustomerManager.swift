@@ -1,7 +1,7 @@
 
 struct CustomerManager {
-    var customers: [Customer] = []
-    var ticketMachine = Queue<Customer>()
+    private(set) var customers: [Customer] = []
+    private(set) var ticketMachine = Queue<Customer>()
     
     mutating func createCustomer() {
         let number = Int.random(in: 10...30)
