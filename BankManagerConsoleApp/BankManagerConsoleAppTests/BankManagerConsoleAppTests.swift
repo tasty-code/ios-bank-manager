@@ -64,12 +64,11 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(lengthOfQueue, result)
     }
     
-    func test_queue의_5번_enqueue_4번_dequeue_남은_노드를_peek_한다() {
+    func test_queue의_5번_enqueue_3번_dequeue_남은_노드를_peek_한다() {
         // given
         let data = [ "A", "B", "C", "D", "E" ]
-        let lengthOfQueue = 2
         let countOfDeque = 3
-        let peekCharacter = data[countOfDeque]
+        let expectedResult = data[countOfDeque]
         for input in data {
             sut.enqueue(with: input)
         }
@@ -79,7 +78,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         // when
         let result = sut.peek()
         // then
-        XCTAssertEqual(peekCharacter, result)
+        XCTAssertEqual(expectedResult, result)
     }
     
     func test_초기에_dequeue를_했을때_카운트가_0이다() {
@@ -96,7 +95,7 @@ final class BankManagerConsoleAppTests: XCTestCase {
         // given
         // when
         let result = sut.dequeue()
-        // then 그렇다면 이 케이스는 통과하는가?
+        // then
         XCTAssertNil(result)
     }
     
@@ -153,13 +152,14 @@ final class BankManagerConsoleAppTests: XCTestCase {
     func test_노드가_정상적으로_다음_노드를_연결한다() {
         // given
         let input = [ "A", "B", "C" ]
+        let expectedResult = "C"
         for data in input {
             sut.enqueue(with: data)
         }
         // when
         let result = sut.linkedList.head?.next?.next?.data
         // then
-        XCTAssertEqual("C", result)
+        XCTAssertEqual(expectedResult, result)
     }
     
     func test_tail의_다음_연결이_nil이다() {
