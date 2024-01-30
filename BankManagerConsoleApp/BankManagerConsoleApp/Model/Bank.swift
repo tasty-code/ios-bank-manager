@@ -9,12 +9,12 @@ import Foundation
 
 final class Bank {
     private var customerQueue: LinkedListQueue<Customer>
-    private let consoleMessages: ConsoleMessages
+    private let consoleMessages: ConsoleMessage
     private var totalCustomers: Int = 0
     
     init() {
         self.customerQueue = LinkedListQueue<Customer>()
-        self.consoleMessages = ConsoleMessages()
+        self.consoleMessages = ConsoleMessage()
     }
     
     /// 고객 업무 시작
