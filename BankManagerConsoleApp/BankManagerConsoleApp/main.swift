@@ -7,4 +7,4 @@
 import Foundation
 
 var bankManager: BankManager = BankManager()
-bankManager.start()
+bankManager.main()

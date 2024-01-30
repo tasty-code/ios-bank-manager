@@ -13,7 +13,7 @@ struct BankManager {
     private let banker: Banker = Banker()
     private let queue: Queue<Customer> = Queue(linkedList: LinkedList())
     
-    mutating func start() {
+    mutating func main() {
         print("""
             1 : 은행 개점
             2 : 종료
@@ -27,8 +27,7 @@ struct BankManager {
         switch selectedMenu {
         case "1":
             startBankingProcess()
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
-            start()
+            main()
         case "2":
             exit(0)
         default:
@@ -46,6 +45,8 @@ struct BankManager {
             let customer = node.value
             totalTime += banker.provideService(to: customer)
         }
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
     }
     
     mutating private func setupInitialInformation() {
