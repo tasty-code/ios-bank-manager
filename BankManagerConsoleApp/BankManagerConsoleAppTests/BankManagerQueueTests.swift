@@ -2,18 +2,15 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class BankManagerConsoleAppTests: XCTestCase {
+final class BankManagerQueueTests: XCTestCase {
     var sut: Queue<String>!
-    var sutLinkedTest: LinkedList<String>!
     
     override func setUpWithError() throws {
         sut = Queue<String>()
-        sutLinkedTest = LinkedList()
     }
     
     override func tearDownWithError() throws {
         sut = nil
-        sutLinkedTest = nil
     }
     
     func test_queue에_노드가_없다() {
@@ -173,40 +170,5 @@ final class BankManagerConsoleAppTests: XCTestCase {
         let result = sut.linkedList.tail?.next
         // then
         XCTAssertNil(result)
-    }
-    
-    // MARK: 선택사항 - LinkedList 특정 데이터 검색구현
-    func test_데이터가_하나도_없는데_데이터를_검색하는_경우() {
-        // given
-        sutLinkedTest.appendNodeAtRear(with: "A")
-        let _ = sutLinkedTest.removeNodeFromFront()
-        //when
-        let result = sutLinkedTest.isData(with: nil)
-        //then
-        XCTAssertNil(result)
-    }
-    
-    func test_데이터가_하나일때_데이터를_검색하는_경우() {
-        // given
-        let input = "A"
-        let expectedResult = 1
-        sutLinkedTest.appendNodeAtRear(with: input)
-        // when
-        let result = sutLinkedTest.isData(with: input)
-        // then
-        XCTAssertEqual(expectedResult, result)
-    }
-    
-    func test_데이터의_값이_A_B_C가_존재하는_경우_C를_검색() {
-        // given
-        let input = [ "A", "B", "C" ]
-        let expectedResult = 3
-        for data in input {
-            sutLinkedTest.appendNodeAtRear(with: data)
-        }
-        // when
-        let result = sutLinkedTest.isData(with: "C")
-        // then
-        XCTAssertEqual(expectedResult, result)
     }
 }
