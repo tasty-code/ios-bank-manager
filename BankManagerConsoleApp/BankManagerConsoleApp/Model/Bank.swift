@@ -40,9 +40,15 @@ struct Bank {
             }
         }
         
+        let totalTime = caculateProcessingTime(startTime)
+        print(BankMessage.result(count, totalTime).description)
+    }
+    
+    func caculateProcessingTime(_ startTime: CFAbsoluteTime) -> String {
         let time = CFAbsoluteTimeGetCurrent() - startTime
         let flooredTime = floor(time * 10) / 10
         let totalTime = String(format: "%.2f", flooredTime)
-        print(BankMessage.result(count, totalTime).description)
+        
+        return totalTime
     }
 }
