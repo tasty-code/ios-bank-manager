@@ -14,24 +14,28 @@ struct BankManager {
     private let queue: Queue<Customer> = Queue(linkedList: LinkedList())
     
     mutating func main() {
-        print("""
+        var isExit: Bool = false
+        
+        while !isExit {
+            print("""
             1 : 은행 개점
             2 : 종료
             입력 :
             """, terminator: " ")
-        
-        guard let selectedMenu = readLine() else {
-            return
-        }
-        
-        switch selectedMenu {
-        case "1":
-            startBankingProcess()
-            main()
-        case "2":
-            exit(0)
-        default:
-            break
+            
+            guard let selectedMenu = readLine() else {
+                return
+            }
+            
+            switch selectedMenu {
+            case "1":
+                startBankingProcess()
+            case "2":
+                isExit = true
+            default:
+                print("잘못된 입력입니다. 다시 입력해 주세요.")
+                continue
+            }
         }
     }
     
