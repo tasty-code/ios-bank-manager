@@ -17,8 +17,8 @@ final class BankManager {
 // MARK: - Methods
 extension BankManager {
     
-    func makeCustomerQueue(with customer: Int) {
-        (1...customer).forEach {
+    func makeCustomerQueue(with customerCount: Int) {
+        (1...customerCount).forEach {
             customerQueue.enqueue($0)
         }
     }
