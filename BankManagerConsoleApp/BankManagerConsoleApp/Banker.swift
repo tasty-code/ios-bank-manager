@@ -2,7 +2,6 @@ import Foundation
 
 final class Banker {
     var customerQueue = Queue<Customer>()
-    var count = Int()
     private(set) var totalProcessingTime: TimeInterval = 0
     
     func sum() {
@@ -23,16 +22,15 @@ final class Banker {
                 BankMessage.taskStart(with: dequeue).message()
                 processTransaction(for: dequeue, with: dequeue.taskTime)
                 BankMessage.taskComplete(with: dequeue).message()
-                count += 1
             }
         }
-        taskclose(count, totalProcessingTime)
+        taskclose(customerQueue.count, totalProcessingTime)
     }
     
-    func taskclose(_ customersCount: Int,_ totalProcessingTime: Double) {
+    func taskclose(_ customersCount: Int, _ totalProcessingTime: Double) {
+        customerQueue.clear()
         let time = String(format: "%.2f", totalProcessingTime)
         BankMessage.close(customersCount: customersCount, totalProcessingTime: time).message()
-        count = 0
         self.totalProcessingTime = 0
     }
     
