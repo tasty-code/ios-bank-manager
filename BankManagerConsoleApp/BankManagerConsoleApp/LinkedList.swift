@@ -40,12 +40,12 @@ struct LinkedList<T: Equatable> {
     }
 
     mutating func isData(with data: T?) -> Int? {
-        var count = 0
+        var foundLocation = 0
         
         while head?.next != nil {
-            count += 1
+            foundLocation += 1
             if head?.data == data {
-                return count
+                return foundLocation
             }
             head = head?.next
         }
@@ -54,8 +54,8 @@ struct LinkedList<T: Equatable> {
             return nil
         } else if head?.next == nil {
             if head?.data == data {
-                count += 1
-                return count
+                foundLocation += 1
+                return foundLocation
             }
         }
         return nil
