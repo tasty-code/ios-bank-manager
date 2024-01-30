@@ -8,7 +8,6 @@
 import Foundation
 
 final class BankManager {
-
     var updateTaskState: ((TaskState) -> Void)?
     
     private var customerQueue = Queue<Int>()
@@ -27,17 +26,11 @@ extension BankManager {
     func handleTask(completion: @escaping (Double) -> Void) {
         var totalDuration = 0.0
         
-        while !customerQueue.isEmpty {
-            guard let customerNumber = customerQueue.dequeue() else {
-                return
-            }
+        while let customerNumber = customerQueue.dequeue() {
             updateTaskState?(.start(number: customerNumber))
-            
-            DispatchQueue.global().sync {
-                Thread.sleep(forTimeInterval: duration)
-                updateTaskState?(.finish(number: customerNumber))
-                totalDuration += duration
-            }
+            Thread.sleep(forTimeInterval: duration)
+            updateTaskState?(.finish(number: customerNumber))
+            totalDuration += duration
         }
         
         completion(totalDuration)
