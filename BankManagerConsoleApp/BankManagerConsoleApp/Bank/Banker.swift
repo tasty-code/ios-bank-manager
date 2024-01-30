@@ -31,7 +31,7 @@ final class Banker {
 
 // MARK: - 처리 시간 및 처리 완료 메서드
 private extension Banker {
-    func taskclose(_ customersCount: Int, _ totalProcessingTime: Double) {
+    func taskclose(_ customersCount: Int, _ totalProcessingTime: TimeInterval) {
         let time = String(format: "%.2f", totalProcessingTime)
         BankMessage.close(customersCount: customersCount, totalProcessingTime: time).message()
         resetProcessingTime()

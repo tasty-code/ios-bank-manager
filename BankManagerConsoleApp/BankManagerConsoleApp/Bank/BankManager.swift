@@ -14,10 +14,9 @@ final class BankManager {
                 banker.taskStart()
             case "2":
                 return
-            default :
+            default:
                 BankMessage.wrongInput.message()
             }
         }
     }
 }
-
