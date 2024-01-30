@@ -30,11 +30,14 @@ struct BankManager {
             print("은행개점")
             createCustomer()
             print("\(customers.count) 명의 고객이 생성되었다.")
+            registerCustomer(with: customers)
+            print("\(ticketMachine.totalLength())명의 고객이 대기열이 등록되었다")
         case "2":
             print("은행종료")
             isOpen = false
         default:
-            break
+            print("오입력입니다.")
+            isOpen = false
         }
     }
     
@@ -50,7 +53,14 @@ struct BankManager {
         }
     }
     
+    mutating func registerCustomer(with customers: [Customer]) {
+        for customer in customers {
+            ticketMachine.enqueue(with: customer)
+        }
+    }
+    
     mutating func resetCustomer() {
         customers = []
+        ticketMachine.clean()
     }
 }
