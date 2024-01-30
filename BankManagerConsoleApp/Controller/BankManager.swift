@@ -25,19 +25,20 @@ struct BankManager {
         while isOpen {
             resetCustomer()
             printMenuOfBank()
-            guard let input = selectBankingOperation() else { return }
-            executeBankingOperation(of: input)
+            do {
+                let input = try selectBankingOperation()
+                executeBankingOperation(of: input)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
     mutating func executeBankingOperation(of input: String) {
         switch input {
-        case "1": 
-            print("은행개점")
+        case "1":
             createCustomer()
-            print("\(customers.count) 명의 고객이 생성되었다.")
             registerCustomer(with: customers)
-            print("\(ticketMachine.totalLength())명의 고객이 대기열이 등록되었다")
             employees.append(Employee())
             employees[0].handleCustomerTasks(with: ticketMachine)
             printCloseMenu()
@@ -45,13 +46,17 @@ struct BankManager {
             print("은행종료")
             isOpen = false
         default:
-            print("오입력입니다.")
-            isOpen = false
+            break
         }
     }
     
-    func selectBankingOperation() -> String? {
-        guard let input = readLine() else { return nil }
+    func selectBankingOperation() throws -> String {
+        guard let input = readLine() else {
+            throw InputError.wrongInput
+        }
+        guard input == "1" || input == "2" else {
+            throw InputError.wrongInput
+        }
         return input
     }
     

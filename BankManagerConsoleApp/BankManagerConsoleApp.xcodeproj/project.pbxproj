@@ -18,6 +18,7 @@
 		C76B75322B620127005B972D /* BankManagerConsoleTests.xctest in Sources */ = {isa = PBXBuildFile; fileRef = 9B7373072B61325300FDB082 /* BankManagerConsoleTests.xctest */; };
 		C76B75332B62012C005B972D /* BankManagerConsoleApp in Sources */ = {isa = PBXBuildFile; fileRef = C7694E76259C3EC00053667F /* BankManagerConsoleApp */; };
 		C76B75342B62012F005B972D /* BankManagerConsoleTests.xctest in Sources */ = {isa = PBXBuildFile; fileRef = 9B7373072B61325300FDB082 /* BankManagerConsoleTests.xctest */; };
+		C78BD4D22B6909CE00682AE3 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78BD4D12B6909CE00682AE3 /* InputError.swift */; };
 		C7A1FAEA2B68D85600050986 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1FAE92B68D85600050986 /* Customer.swift */; };
 		C7A1FAEC2B68DEC300050986 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1FAEB2B68DEC300050986 /* Employee.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -54,6 +55,7 @@
 		C75378482B68C32C0087F275 /* BankManagerLinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerLinkedListTests.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C78BD4D12B6909CE00682AE3 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		C7A1FAE92B68D85600050986 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		C7A1FAEB2B68DEC300050986 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				9B2642672B68DAF8008FA05F /* Controller */,
 				9B2642662B68DAF0008FA05F /* Queue */,
 				9B2642652B68DAEA008FA05F /* Model */,
+				C78BD4D02B6909AB00682AE3 /* Enum */,
 				9B7373082B61325300FDB082 /* BankManagerConsoleAppTests */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
@@ -143,6 +146,14 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		C78BD4D02B6909AB00682AE3 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				C78BD4D12B6909CE00682AE3 /* InputError.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +264,7 @@
 				C76B75342B62012F005B972D /* BankManagerConsoleTests.xctest in Sources */,
 				C7A1FAEC2B68DEC300050986 /* Employee.swift in Sources */,
 				C76B75332B62012C005B972D /* BankManagerConsoleApp in Sources */,
+				C78BD4D22B6909CE00682AE3 /* InputError.swift in Sources */,
 				C7E61A832B6123B600D55D4A /* Queue.swift in Sources */,
 				C7A1FAEA2B68D85600050986 /* Customer.swift in Sources */,
 				C7E61A7F2B61239700D55D4A /* Node.swift in Sources */,
