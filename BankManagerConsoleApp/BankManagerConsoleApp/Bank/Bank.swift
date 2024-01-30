@@ -18,7 +18,7 @@ final class Bank {
         self.bankManager = bankManager
     }
     
-    func openBank() {
+    func open() {
         print(Message.default.showMessage())
         print(Message.userInput.showMessage(), terminator: "")
         
@@ -29,7 +29,7 @@ final class Bank {
             startTask()
         } catch {
             print(Message.inputError.showMessage())
-            openBank()
+            open()
         }
     }
     
@@ -63,6 +63,6 @@ final class Bank {
             let duration: Double = round(totalDuration * 100) / 100
             print(Message.report(count: customerCount, duration: duration).showMessage())
         }
-        openBank()
+        open()
     }
 }
