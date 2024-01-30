@@ -17,21 +17,21 @@ final class Banker {
     }
     
     private func taskProcess() {
-        while !customerQueue.isEmpty {
-            if let dequeue = customerQueue.dequeue() {
-                BankMessage.taskStart(with: dequeue).message()
-                processTransaction(for: dequeue, with: dequeue.taskTime)
-                BankMessage.taskComplete(with: dequeue).message()
-            }
+        if let dequeue = customerQueue.dequeue() {
+            BankMessage.taskStart(with: dequeue).message()
+            processTransaction(for: dequeue, with: dequeue.taskTime)
+            BankMessage.taskComplete(with: dequeue).message()
+            taskProcess()
+        } else {
+            taskClose(customerQueue.count, totalProcessingTime)
+            customerQueue.clear()
         }
-        taskclose(customerQueue.count, totalProcessingTime)
-        customerQueue.clear()
     }
 }
 
 // MARK: - 처리 시간 및 처리 완료 메서드
 private extension Banker {
-    func taskclose(_ customersCount: Int, _ totalProcessingTime: TimeInterval) {
+    func taskClose(_ customersCount: Int, _ totalProcessingTime: TimeInterval) {
         BankMessage.close(customersCount: customersCount, totalProcessingTime: totalProcessingTime).message()
         resetProcessingTime()
     }
@@ -44,5 +44,4 @@ private extension Banker {
     func resetProcessingTime() {
         totalProcessingTime = 0
     }
-    
 }
