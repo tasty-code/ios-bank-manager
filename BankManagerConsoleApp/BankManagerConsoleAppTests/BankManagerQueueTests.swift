@@ -2,7 +2,7 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class BankManagerQueueTests: XCTestCase {
+final class BankManagerQueueTests: XCTestCase { // test_~일때_~하면_~할것이다
     var sut: Queue<String>!
     
     override func setUpWithError() throws {
@@ -13,7 +13,9 @@ final class BankManagerQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_queue에_노드가_없다() {
+    
+    
+    func test_초기상태일때_대기열을확인하면_대기열이없을것이다() {
         // given
         // when
         let result = sut.isEmpty
@@ -21,74 +23,74 @@ final class BankManagerQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_queue에_노드가_있다() {
+    func test_입력이1개있을때_enqueue를수행하면_대기열이있을것이다() {
         // given
         let input = "test"
-        sut.enqueue(with: input)
         // when
+        sut.enqueue(with: input)
         let result = sut.isEmpty
         // then
         XCTAssertFalse(result)
     }
     
-    func test_queue에_노드가_다섯개_생성된다() {
+    func test_입력이5개있을때_queue의길이를확인하면_길이가5일것이다() {
         // given
         let data = [ "A", "B", "C", "D", "E" ]
         let expectedLengthOfQueue = 5
+        // when
         for input in data {
             sut.enqueue(with: input)
         }
-        // when
         let result = sut.totalLength()
         // then
         XCTAssertEqual(expectedLengthOfQueue, result)
     }
     
-    func test_queue의_5번_enqueue_4번_dequeue_노드가_1개_남는다() {
+    func test_입력이5개일때_enqueue를5번dequeue를4번하면_queue의길이가1일것이다() {
         // given
         let data = [ "A", "B", "C", "D", "E" ]
         let lengthOfQueue = 1
         let countOfDeque = 4
+        // when
         for input in data {
             sut.enqueue(with: input)
         }
         for _ in 1...countOfDeque {
             let _ = sut.dequeue()
         }
-        // when
         let result = sut.totalLength()
         // then
         XCTAssertEqual(lengthOfQueue, result)
     }
     
-    func test_queue의_5번_enqueue_3번_dequeue_남은_노드를_peek_한다() {
+    func test_입력이5개일때_enqueue를5번dequeue3번하면_4번째데이터를정상적으로peek한다() {
         // given
         let data = [ "A", "B", "C", "D", "E" ]
         let countOfDeque = 3
         let expectedResult = data[countOfDeque]
+        // when
         for input in data {
             sut.enqueue(with: input)
         }
         for _ in 1...countOfDeque {
             let _ = sut.dequeue()
         }
-        // when
         let result = sut.peek()
         // then
         XCTAssertEqual(expectedResult, result)
     }
     
-    func test_초기에_dequeue를_했을때_카운트가_0이다() {
+    func test_초기상태일때_dequeue를1번수행하면_길이가0을유지한다() {
         // given
         let expectedCount = 0
-        let _ = sut.dequeue()
         // when
+        let _ = sut.dequeue()
         let result = sut.totalLength()
         // then
         XCTAssertEqual(expectedCount, result)
     }
     
-    func test_dequeue_시_반환되는_노드가_Nil이다() {
+    func test_초기상태일때_dequeue를한번수행하면_가져오는것이없을것이다() {
         // given
         // when
         let result = sut.dequeue()
