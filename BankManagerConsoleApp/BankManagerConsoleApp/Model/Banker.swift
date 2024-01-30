@@ -12,8 +12,6 @@ final class Banker {
     
     private let clientManager: ClientDequeuable
     
-    private var queue = DispatchQueue.global()
-    
     private let taskOutput: TextOutputDisplayable
     
     private(set) var dailyClientStatistics: Int
@@ -30,7 +28,7 @@ final class Banker {
     }
     
     func start(group: DispatchGroup) {
-        queue.async(group: group) { [weak self] in
+        DispatchQueue.global().async(group: group) { [weak self] in
             guard let self else { return }
             while let client = clientManager.dequeueClient() {
                 work(for: client, time: 0.7)
