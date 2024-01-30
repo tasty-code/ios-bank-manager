@@ -7,19 +7,19 @@
 import Foundation
 
 struct BankManager {
-    private let clientManager: ClientQueueManagable
-    
     private let bankers: [Banker]
+    
+    private let clientManager: [BankTaskType: any ClientEnqueuable]
     
     private let output: TextOutputDisplayable
     
     init(
         bankers: [Banker],
-        clientManager: ClientQueueManagable,
+        clientManager: [BankTaskType: any ClientEnqueuable],
         output: TextOutputDisplayable
     ) {
-        self.clientManager = clientManager
         self.bankers = bankers
+        self.clientManager = clientManager
         self.output = output
     }
     
@@ -42,8 +42,7 @@ private extension BankManager {
         
         for number in 1...numberOfClient {
             guard let bankTaskType = BankTaskType.random else { return }
-            let client = Client(number: number, taskType: bankTaskType)
-            self.clientManager.enqueueClient(client)
+            self.clientManager[bankTaskType]?.enqueueClient(number: number)
         }
     }
     
@@ -54,9 +53,7 @@ private extension BankManager {
     }
     
     func summarizeDailyStatistics(totalWorkTime: Double) {
-        let numberOfClient = self.bankers.reduce(into: 0) { result, banker in
-            result += banker.dailyClientStatistics
-        }
+        let numberOfClient = self.bankers.map(\.dailyClientStatistics).reduce(0, +)
         let roundedWorkTimeString = String(format: "%.2f", totalWorkTime)
         let output = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(roundedWorkTimeString)초입니다."
         self.output.display(output: output)

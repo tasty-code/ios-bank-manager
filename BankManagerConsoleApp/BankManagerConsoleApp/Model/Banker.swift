@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Banker<TaskType: Task> {
+final class Banker {
     private let name: String
     
     private let clientManager: any ClientDequeuable
@@ -18,7 +18,7 @@ final class Banker<TaskType: Task> {
     
     init(
         name: String,
-        clientManager: some ClientDequeuable,
+        clientManager: any ClientDequeuable,
         taskOutput: TextOutputDisplayable
     ) {
         self.name = name
@@ -38,18 +38,18 @@ final class Banker<TaskType: Task> {
 }
 
 private extension Banker {
-    func work(for client: Client<TaskType>, time: Double) {
+    func work(for client: Client, time: Double) {
         self.startTask(for: client)
         self.dailyClientStatistics += 1
         Thread.sleep(forTimeInterval: time)
         self.endTask(for: client)
     }
     
-    func startTask(for client: Client<TaskType>) {
+    func startTask(for client: Client) {
         self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 시작")
     }
     
-    func endTask(for client: Client<TaskType>) {
+    func endTask(for client: Client) {
         self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 완료")
     }
 }

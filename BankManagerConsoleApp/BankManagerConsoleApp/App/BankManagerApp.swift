@@ -46,18 +46,32 @@ private extension BankManagerApp {
     }
     
     func startBank() {
-        let clientManager = ClientManager()
+        let loanClientManager = ClientManager<Loan>()
+        let depositClientManager = ClientManager<Deposit>()
         let bankers = [
             Banker.init(
-                name: "1",
-                clientManager: clientManager,
+                name: "에피",
+                clientManager: loanClientManager,
+                taskOutput: output
+            ),
+            Banker.init(
+                name: "카일",
+                clientManager: depositClientManager,
+                taskOutput: output
+            ),
+            Banker.init(
+                name: "두두",
+                clientManager: depositClientManager,
                 taskOutput: output
             ),
         ]
         
         BankManager(
             bankers: bankers,
-            clientManager: clientManager,
+            clientManager: [
+                .loan: loanClientManager,
+                .deposit: depositClientManager
+            ],
             output: self.output
         ).start()
     }
