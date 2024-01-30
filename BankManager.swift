@@ -37,18 +37,23 @@ struct BankManager {
     }
     
     mutating func startBankingProcess() {
-        totalCustomers = .random(in: 10...30)
+        setupInitialInformation()
         
-        for i in 1...totalCustomers {
-            queue.enqueue(node: Node(value: Customer(requiredTime: 0.7, waitingNumber: i)))
-        }
-        
-        while queue.count() > 0 {
+        while !queue.isEmpty() {
             guard let node = queue.dequeue() else {
                 return
             }
             let customer = node.value
             totalTime += banker.provideService(to: customer)
+        }
+    }
+    
+    mutating private func setupInitialInformation() {
+        totalCustomers = .random(in: 10...30)
+        totalTime = 0
+        
+        for i in 1...totalCustomers {
+            queue.enqueue(node: Node(value: Customer(requiredTime: 0.7, waitingNumber: i)))
         }
     }
 }
