@@ -1,22 +1,22 @@
 import Foundation
 
 final class Banker {
-    var customerQueue = Queue<Customer>()
+    private var customerQueue = Queue<Customer>()
     private(set) var totalProcessingTime: TimeInterval = 0
     
-    func sum() {
-        taskStart()
-        taskComplete()
+    func taskStart() {
+        generateCustomerQueue()
+        taskProcess()
     }
     
-    func taskStart() {
-        let waitingNumber = Int.random(in: 5...6)
+    private func generateCustomerQueue() {
+        let waitingNumber = Int.random(in: 10...30)
         for num in 1...waitingNumber {
             customerQueue.enqueue(value: Customer(waitingNumber: num))
         }
     }
     
-    func taskComplete() {
+    private func taskProcess() {
         while !customerQueue.isEmpty {
             if let dequeue = customerQueue.dequeue() {
                 BankMessage.taskStart(with: dequeue).message()
@@ -25,18 +25,25 @@ final class Banker {
             }
         }
         taskclose(customerQueue.count, totalProcessingTime)
-    }
-    
-    func taskclose(_ customersCount: Int, _ totalProcessingTime: Double) {
         customerQueue.clear()
+    }
+}
+
+// MARK: - 처리 시간 및 처리 완료 메서드
+private extension Banker {
+    func taskclose(_ customersCount: Int, _ totalProcessingTime: Double) {
         let time = String(format: "%.2f", totalProcessingTime)
         BankMessage.close(customersCount: customersCount, totalProcessingTime: time).message()
-        self.totalProcessingTime = 0
+        resetProcessingTime()
     }
     
     func processTransaction(for customer: Customer, with processingTime: TimeInterval) {
         Thread.sleep(forTimeInterval: processingTime)
         totalProcessingTime += processingTime
+    }
+    
+    func resetProcessingTime() {
+        totalProcessingTime = 0
     }
     
 }

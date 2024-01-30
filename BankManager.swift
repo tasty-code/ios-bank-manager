@@ -1,5 +1,9 @@
 final class BankManager {
-    var banker: Banker = Banker()
+    var banker: Banker
+    
+    init(banker: Banker) {
+        self.banker = banker
+    }
     
     func openBank() {
         while true {
@@ -7,7 +11,7 @@ final class BankManager {
             guard let choice = readLine() else { return }
             switch choice {
             case "1":
-                banker.sum()
+                banker.taskStart()
             case "2":
                 return
             default :
