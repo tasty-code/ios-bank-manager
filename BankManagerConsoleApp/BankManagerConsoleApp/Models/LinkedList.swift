@@ -9,7 +9,7 @@ final class LinkedList<T> {
 // MARK: - LinkedList Method
 extension LinkedList {
     
-    func appendLastNode(data: T) {
+    func appendNode(data: T) {
         let newNode = Node(value: data)
         
         if head == nil || tail == nil {

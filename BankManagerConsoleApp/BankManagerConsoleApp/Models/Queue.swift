@@ -2,29 +2,29 @@ import Foundation
 
 final class Queue<T> {
     
-    private let likeList = LinkedList<T>()
+    private let linkedList = LinkedList<T>()
 }
 
 // MARK: - Queue Method
 extension Queue {
     
     func enqueue(data: T) {
-        likeList.appendLastNode(data: data)
+        linkedList.appendNode(data: data)
     }
     
     func dequeue() {
-        likeList.removeFirstNode()
+        linkedList.removeFirstNode()
     }
     
     func clear() {
-        likeList.clearNode()
+        linkedList.clearNode()
     }
     
     func peek() -> T? {
-        return likeList.peekNode()
+        return linkedList.peekNode()
     }
     
     func isEmpty() -> Bool {
-        return likeList.isEmpty()
+        return linkedList.isEmpty()
     }
 }
