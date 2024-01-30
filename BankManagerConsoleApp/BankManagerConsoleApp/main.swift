@@ -4,6 +4,10 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let bankController = BankController()
+/// DI
+let linkedListQueue = LinkedListQueue<Customer>()
+let consoleMessage = ConsoleMessage()
+let bank = Bank(customerQueue: linkedListQueue, consoleMessage: consoleMessage)
+let bankController = BankController(bank: bank)
 
 bankController.runBankApp()

@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class Bank {
-    private var customerQueue: LinkedListQueue<Customer>
+final class Bank<Q: QueueProtocol> where Q.Element == Customer {
+    private var customerQueue: Q
     private let consoleMessage: ConsoleMessage
     private var totalCustomers: Int = 0
     
-    init() {
-        self.customerQueue = LinkedListQueue<Customer>()
-        self.consoleMessage = ConsoleMessage()
+    init(customerQueue: Q, consoleMessage: ConsoleMessage) {
+        self.customerQueue = customerQueue
+        self.consoleMessage = consoleMessage
     }
     
     /// 고객 업무 시작

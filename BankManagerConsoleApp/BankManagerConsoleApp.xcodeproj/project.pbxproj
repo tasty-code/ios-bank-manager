@@ -80,12 +80,20 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		7F57D1862B6219D9001A835F /* Model */ = {
+		7F4FA4C32B6910EE0004A9AE /* LinkedListQueue */ = {
 			isa = PBXGroup;
 			children = (
 				7F57D1872B6219F7001A835F /* LinkedListQueue.swift */,
 				7F57D1892B621D18001A835F /* QueueProtocol.swift */,
 				7F99BB462B627DA500FE9E85 /* DoublyLinkedList.swift */,
+			);
+			path = LinkedListQueue;
+			sourceTree = "<group>";
+		};
+		7F57D1862B6219D9001A835F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FA4C32B6910EE0004A9AE /* LinkedListQueue */,
 				1DDC4DD52B68CDEC00B9B165 /* Customer.swift */,
 				1DDC4DD72B68D83400B9B165 /* Bank.swift */,
 			);

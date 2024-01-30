@@ -6,10 +6,10 @@
 //
 
 final class BankController {
-    private let bank: Bank
+    private let bank: Bank<LinkedListQueue<Customer>>
     
-    init() {
-        self.bank = Bank()
+    init(bank: Bank<LinkedListQueue<Customer>>) {
+        self.bank = bank
     }
     
     /// 사용자 입력
