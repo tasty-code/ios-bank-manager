@@ -127,13 +127,14 @@ final class BankManagerConsoleAppTests: XCTestCase {
     func test_첫노드를_peek한다() {
         // given
         let input = [ "First", "Second" ]
+        let expectedResult = "First"
         for data in input {
             sut.enqueue(with: data)
         }
         // when
-        let result = sut.peek() == "First"
+        let result = sut.peek()
         // then
-        XCTAssertTrue(result)
+        XCTAssertEqual(expectedResult, result)
     }
     
     func test_큐를_clear한다() {
