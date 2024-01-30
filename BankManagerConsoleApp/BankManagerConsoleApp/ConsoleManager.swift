@@ -18,6 +18,8 @@ struct ConsoleManager: CustomerNumbering {
                           입력 :
                           """
         static let reselection = "메뉴를 다시 선택해주세요."
+        static let first = "1"
+        static let second = "2"
     }
     
     func startBank() {
@@ -26,9 +28,9 @@ struct ConsoleManager: CustomerNumbering {
             guard let input = readLine() else { return }
             
             switch input {
-            case "1":
-                Bank(numOfPerson: numOfPerson).openBank()
-            case "2":
+            case Message.first:
+                Bank(customNum: numOfPerson, bankManager: BankManager(), bankClerk: BankClerk()).openBank()
+            case Message.second:
                 return
             default:
                 print(Message.reselection)

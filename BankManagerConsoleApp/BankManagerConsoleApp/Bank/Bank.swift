@@ -7,13 +7,19 @@
 
 import Foundation
 
-struct Bank: CustomerNumbering {
-    private let bankManager = BankManager()
-    private let bankClerk = BankClerk()
-    var numOfPerson: Int
+struct Bank {
+    private var bankManager = BankManager()
+    private var bankClerk = BankClerk()
+    private let customNum: Int
+    
+    init(customNum: Int, bankManager: BankManager, bankClerk: BankClerk) {
+            self.customNum = customNum
+            self.bankManager = bankManager
+            self.bankClerk = bankClerk
+        }
     
     func openBank() {
-        setCustomerCount(customer: numOfPerson)
+        setCustomerCount(customer: customNum)
         let workTime = calulateWorkTime {
             do {
                 try bankManager.assign()
@@ -36,6 +42,6 @@ struct Bank: CustomerNumbering {
     }
     
     private func closeBank(time: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numOfPerson)명이며, 총 업무시간은 \(time)초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customNum)명이며, 총 업무시간은 \(time)초 입니다.")
     }
 }
