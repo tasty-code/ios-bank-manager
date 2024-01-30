@@ -29,7 +29,7 @@ struct BankManager {
         }
     }
     
-    func fetchUserInput() -> String {
+    private func fetchUserInput() -> String {
         guard let inputText = readLine() else { return Constants.userInputError }
         return inputText
     }
