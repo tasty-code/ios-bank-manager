@@ -9,12 +9,12 @@ import Foundation
 
 final class Bank {
     private var customerQueue: LinkedListQueue<Customer>
-    private let consoleMessages: ConsoleMessage
+    private let consoleMessage: ConsoleMessage
     private var totalCustomers: Int = 0
     
     init() {
         self.customerQueue = LinkedListQueue<Customer>()
-        self.consoleMessages = ConsoleMessage()
+        self.consoleMessage = ConsoleMessage()
     }
     
     /// 고객 업무 시작
@@ -30,9 +30,9 @@ final class Bank {
     /// 고객 업무 완료
     func processCustomer() {
         while let customer = customerQueue.dequeue() {
-            consoleMessages.customerStart(customerNumber: customer.waitingNumber)
+            consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber)
             Thread.sleep(forTimeInterval: 0.7)
-            consoleMessages.customerEnd(customerNumber: customer.waitingNumber)
+            consoleMessage.teskEndMessage(customerNumber: customer.waitingNumber)
         }
         closed()
     }
@@ -40,6 +40,6 @@ final class Bank {
     /// 업무가 마감됨
     func closed() {
         let totalTime = Double(totalCustomers) * 0.7
-        consoleMessages.bankClosure(totalCustomers: totalCustomers, time: totalTime)
+        consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime)
     }
 }
