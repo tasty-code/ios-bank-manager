@@ -2,7 +2,7 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class BankManagerQueueTests: XCTestCase { // test_~일때_~하면_~할것이다
+final class BankManagerQueueTests: XCTestCase { 
     var sut: Queue<String>!
     
     override func setUpWithError() throws {
