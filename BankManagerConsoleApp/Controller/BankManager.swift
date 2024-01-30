@@ -8,6 +8,7 @@ struct BankManager {
     var isOpen: Bool = true
     var ticketMachine = Queue<Customer>()
     var customers: [Customer] = []
+    var employees: [Employee] = []
     
     func printMenuOfBank() {
         print("1 : 은행개점")
@@ -32,6 +33,8 @@ struct BankManager {
             print("\(customers.count) 명의 고객이 생성되었다.")
             registerCustomer(with: customers)
             print("\(ticketMachine.totalLength())명의 고객이 대기열이 등록되었다")
+            employees.append(Employee())
+            employees[0].handleCustomerTasks(with: ticketMachine)
         case "2":
             print("은행종료")
             isOpen = false
