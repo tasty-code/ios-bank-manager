@@ -13,8 +13,6 @@ final class BankManagerQueueTests: XCTestCase { // test_~일때_~하면_~할것�
         sut = nil
     }
     
-    
-    
     func test_초기상태일때_대기열을확인하면_대기열이없을것이다() {
         // given
         // when
@@ -90,7 +88,7 @@ final class BankManagerQueueTests: XCTestCase { // test_~일때_~하면_~할것�
         XCTAssertEqual(expectedCount, result)
     }
     
-    func test_초기상태일때_dequeue를한번수행하면_가져오는것이없을것이다() {
+    func test_초기상태일때_dequeue를1번수행하면_가져오는것이없을것이다() {
         // given
         // when
         let result = sut.dequeue()
@@ -98,77 +96,79 @@ final class BankManagerQueueTests: XCTestCase { // test_~일때_~하면_~할것�
         XCTAssertNil(result)
     }
     
-    func test_dequeue한_데이터가_삭제된다() {
+    func test_입력이2개일때_enqueue를2번dequeue를1번수행하면_peek되는값이second일것이다() {
         // given
         let input = [ "First", "Second" ]
+        let expectedResult = "Second"
+        // when
         for data in input {
             sut.enqueue(with: data)
         }
         let _ = sut.dequeue()
-        // when
-        let result = sut.peek() == "Second"
-        // then
-        XCTAssertTrue(result)
-    }
-    
-    func test_dequeue시_삭제되는_첫데이터_확인() {
-        // given
-        let input = [ "First", "Second" ]
-        for data in input {
-            sut.enqueue(with: data)
-        }
-        //when
-        let result = sut.dequeue() == "First"
-        // then
-        XCTAssertTrue(result)
-    }
-    
-    func test_첫노드를_peek한다() {
-        // given
-        let input = [ "First", "Second" ]
-        let expectedResult = "First"
-        for data in input {
-            sut.enqueue(with: data)
-        }
-        // when
         let result = sut.peek()
         // then
         XCTAssertEqual(expectedResult, result)
     }
     
-    func test_큐를_clear한다() {
+    func test_입력이2개일때_enqueue를2번수행하면_dequeue한값이First일것이다() {
+        // given
+        let input = [ "First", "Second" ]
+        let expectedResult = "First"
+        //when
+        for data in input {
+            sut.enqueue(with: data)
+        }
+        let result = sut.dequeue()
+        // then
+        XCTAssertEqual(expectedResult, result)
+    }
+    
+    func test_입력이2개일때_enqueue를2번하고peek를하면_반환되는값이First일것이다() {
+        // given
+        let input = [ "First", "Second" ]
+        let expectedResult = "First"
+        // when
+        for data in input {
+            sut.enqueue(with: data)
+        }
+        let result = sut.peek()
+        // then
+        XCTAssertEqual(expectedResult, result)
+    }
+    
+    func test_입력이4개일때_enqueue를4번하고clean을하면_대기열이없을것이다() {
         // given
         let input = [ "A", "B", "C", "D" ]
+        // when
         for data in input {
             sut.enqueue(with: data)
         }
         let _ = sut.clean()
-        // when
         let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }
     
-    func test_노드가_정상적으로_다음_노드를_연결한다() {
+    func test_입력이3개일때_enque를3번하면_head의다음다음노드가정상연결되고데이터를불러온다() {
         // given
         let input = [ "A", "B", "C" ]
         let expectedResult = "C"
+        // when
         for data in input {
             sut.enqueue(with: data)
         }
-        // when
         let result = sut.linkedList.head?.next?.next?.data
         // then
         XCTAssertEqual(expectedResult, result)
     }
     
-    func test_tail의_다음_연결이_nil이다() {
+    func test_입력이3개일때_enqueue를3번하면_tail의다음연결이nil이다() {
         // given
         let input = [ "A", "B", "C" ]
+        // when
         for data in input {
             sut.enqueue(with: data)
         }
-        // when
         let result = sut.linkedList.tail?.next
         // then
         XCTAssertNil(result)
