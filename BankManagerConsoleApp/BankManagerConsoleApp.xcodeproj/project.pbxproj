@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B26426B2B690DEE008FA05F /* CustomerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26426A2B690DEE008FA05F /* CustomerManager.swift */; };
 		9B73730A2B61325300FDB082 /* BankManagerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7373092B61325300FDB082 /* BankManagerQueueTests.swift */; };
 		9B73730F2B6133C100FDB082 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		9B7373102B6133C500FDB082 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E61A7E2B61239700D55D4A /* Node.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B26426A2B690DEE008FA05F /* CustomerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerManager.swift; sourceTree = "<group>"; };
 		9B7373072B61325300FDB082 /* BankManagerConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7373092B61325300FDB082 /* BankManagerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerQueueTests.swift; sourceTree = "<group>"; };
 		C75378482B68C32C0087F275 /* BankManagerLinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerLinkedListTests.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				9B26426A2B690DEE008FA05F /* CustomerManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				C78BD4D22B6909CE00682AE3 /* InputError.swift in Sources */,
 				C7E61A832B6123B600D55D4A /* Queue.swift in Sources */,
 				C7A1FAEA2B68D85600050986 /* Customer.swift in Sources */,
+				9B26426B2B690DEE008FA05F /* CustomerManager.swift in Sources */,
 				C7E61A7F2B61239700D55D4A /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7E61A812B6123A600D55D4A /* LinkedList.swift in Sources */,

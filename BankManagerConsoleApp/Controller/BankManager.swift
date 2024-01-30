@@ -6,10 +6,9 @@
 
 struct BankManager {
     var isOpen: Bool = true
-    var ticketMachine = Queue<Customer>()
-    var customers: [Customer] = []
     var employees: [Employee] = []
-    var totalTaskTime: Double { Double(customers.count * 700) / 1000 }
+    var customerManager = CustomerManager()
+    var totalTaskTime: Double { Double(customerManager.customers.count * 700) / 1000 }
     
     func printMenuOfBank() {
         print("1 : 은행개점")
@@ -18,12 +17,12 @@ struct BankManager {
     }
     
     func printCloseMenu() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers.count)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerManager.customers.count)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
     }
     
     mutating func operateBank() {
         while isOpen {
-            resetCustomer()
+            customerManager.resetCustomer()
             printMenuOfBank()
             do {
                 let input = try selectBankingOperation()
@@ -37,10 +36,10 @@ struct BankManager {
     mutating func executeBankingOperation(of input: String) {
         switch input {
         case "1":
-            createCustomer()
-            registerCustomer(with: customers)
+            customerManager.createCustomer()
+            customerManager.registerCustomer(with: customerManager.customers)
             employees.append(Employee())
-            employees[0].handleCustomerTasks(with: ticketMachine)
+            employees[0].handleCustomerTasks(with: customerManager.ticketMachine)
             printCloseMenu()
         case "2":
             print("은행종료")
@@ -58,23 +57,5 @@ struct BankManager {
             throw InputError.wrongInput
         }
         return input
-    }
-    
-    mutating func createCustomer() {
-        let number = Int.random(in: 1...5)
-        for ticketNumber in 1...number {
-            customers.append(Customer(ticketNumber: ticketNumber))
-        }
-    }
-    
-    mutating func registerCustomer(with customers: [Customer]) {
-        for customer in customers {
-            ticketMachine.enqueue(with: customer)
-        }
-    }
-    
-    mutating func resetCustomer() {
-        customers = []
-        ticketMachine.clean()
     }
 }
