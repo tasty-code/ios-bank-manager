@@ -2,6 +2,6 @@
 import Foundation
 
 struct Customer: Equatable {
-    let requiredTime: Double
-    let waitingNumber: Int
+    private(set) var requiredTime: Double
+    private(set) var waitingNumber: Int
 }
