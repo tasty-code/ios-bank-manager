@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDC4DD62B68CDEC00B9B165 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDC4DD52B68CDEC00B9B165 /* Customer.swift */; };
+		1DDC4DD82B68D83400B9B165 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDC4DD72B68D83400B9B165 /* Bank.swift */; };
 		7F3D04032B68D1570059BD02 /* ConsoleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D04022B68D1570059BD02 /* ConsoleMessage.swift */; };
 		7F57D1882B6219F7001A835F /* LinkedListQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57D1872B6219F7001A835F /* LinkedListQueue.swift */; };
 		7F57D18A2B621D18001A835F /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57D1892B621D18001A835F /* QueueProtocol.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1DDC4DD52B68CDEC00B9B165 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		1DDC4DD72B68D83400B9B165 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		7F3D04022B68D1570059BD02 /* ConsoleMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleMessage.swift; sourceTree = "<group>"; };
 		7F57D1872B6219F7001A835F /* LinkedListQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListQueue.swift; sourceTree = "<group>"; };
 		7F57D1892B621D18001A835F /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				7F57D1892B621D18001A835F /* QueueProtocol.swift */,
 				7F99BB462B627DA500FE9E85 /* DoublyLinkedList.swift */,
 				1DDC4DD52B68CDEC00B9B165 /* Customer.swift */,
+				1DDC4DD72B68D83400B9B165 /* Bank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				7F57D1882B6219F7001A835F /* LinkedListQueue.swift in Sources */,
 				7F99BB472B627DA500FE9E85 /* DoublyLinkedList.swift in Sources */,
 				7F3D04032B68D1570059BD02 /* ConsoleMessage.swift in Sources */,
+				1DDC4DD82B68D83400B9B165 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
