@@ -10,12 +10,14 @@ struct BankManager {
     func printMenuOfBank() {
         print("1 : 은행개점")
         print("2 : 종료")
+        print("입력 : ", terminator: "")
     }
     
     mutating func operateBank() {
         while isOpen {
             printMenuOfBank()
-            isOpen = false
+            guard let input = selectBankingOperation() else { return }
+            executeBankingOperation(of: input)
         }
     }
     
@@ -29,5 +31,10 @@ struct BankManager {
         default:
             break
         }
+    }
+    
+    func selectBankingOperation() -> String? {
+        guard let input = readLine() else { return nil }
+        return input
     }
 }
