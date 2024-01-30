@@ -3,10 +3,7 @@ struct LinkedList<T: Equatable> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     private(set) var count: Int = 0
-    private(set) var isEmpty: Bool {
-        get { return head == nil }
-        set { }
-    }
+    var isEmpty: Bool { head == nil }
     
     mutating func appendNodeAtRear(with data: T) {
         if isEmpty {

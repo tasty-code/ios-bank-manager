@@ -1,10 +1,7 @@
 
 struct Queue<T: Equatable> {
     private(set) var linkedList: LinkedList<T> = LinkedList()
-    private(set) var isEmpty: Bool {
-        get { return linkedList.isEmpty }
-        set { }
-    }
+    var isEmpty: Bool { linkedList.isEmpty }
     
     mutating func enqueue(with item: T) {
         linkedList.appendNodeAtRear(with: item)
