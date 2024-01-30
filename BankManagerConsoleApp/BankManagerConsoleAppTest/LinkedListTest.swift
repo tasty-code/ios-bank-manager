@@ -214,17 +214,17 @@ final class LinkedListTest: XCTestCase {
     }
 }
 
-extension LinkedListTest {
-    private func setEmptySUT() {
+private extension LinkedListTest {
+    func setEmptySUT() {
         self.sut = LinkedList<String>()
     }
     
-    private func setSUTWithOneElement(_ oneValue: String) {
+    func setSUTWithOneElement(_ oneValue: String) {
         let node = Node(value: oneValue)
         self.sut = LinkedList(head: node)
     }
     
-    private func setSUTWithTwoElements(_ firstValue: String, _ secondValue: String) {
+    func setSUTWithTwoElements(_ firstValue: String, _ secondValue: String) {
         let secondNode = Node(value: secondValue)
         let firstNode = Node(value: firstValue, next: secondNode)
         self.sut = LinkedList(head: firstNode)

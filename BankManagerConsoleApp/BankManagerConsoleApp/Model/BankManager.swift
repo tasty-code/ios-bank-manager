@@ -34,22 +34,26 @@ struct BankManager {
         }
         summarizeDailyStatistics(totalWorkTime: totalWorkTime)
     }
-    
-    private func makeClientList() {
+}
+
+private extension BankManager {
+    func makeClientList() {
         let numberOfClient = Int.random(in: 10...30)
+        
         for number in 1...numberOfClient {
-            let client = Client(number: number)
+            guard let bankTaskType = BankTaskType.random else { return }
+            let client = Client(number: number, taskType: bankTaskType)
             self.clientManager.enqueueClient(client)
         }
     }
     
-    private func measure(_ progress: () -> Void) -> TimeInterval {
+    func measure(_ progress: () -> Void) -> TimeInterval {
         let start = Date()
         progress()
         return Date().timeIntervalSince(start)
     }
     
-    private func summarizeDailyStatistics(totalWorkTime: Double) {
+    func summarizeDailyStatistics(totalWorkTime: Double) {
         let numberOfClient = self.bankers.reduce(into: 0) { result, banker in
             result += banker.dailyClientStatistics
         }
