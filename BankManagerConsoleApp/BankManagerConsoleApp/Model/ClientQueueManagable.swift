@@ -6,11 +6,13 @@
 //
 
 protocol ClientEnqueuable {
-    func enqueueClient(_ client: Client)
+    associatedtype TaskType: Task
+    func enqueueClient(_ client: Client<TaskType>)
 }
 
 protocol ClientDequeuable {
-    func dequeueClient() -> Client?
+    associatedtype TaskType: Task
+    func dequeueClient() -> Client<TaskType>?
 }
 
 typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable

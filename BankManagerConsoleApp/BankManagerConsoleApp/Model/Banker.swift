@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class Banker {
+final class Banker<TaskType: Task> {
     private let name: String
     
-    private let clientManager: ClientDequeuable
+    private let clientManager: any ClientDequeuable
     
     private let taskOutput: TextOutputDisplayable
     
@@ -18,7 +18,7 @@ final class Banker {
     
     init(
         name: String,
-        clientManager: ClientDequeuable,
+        clientManager: some ClientDequeuable,
         taskOutput: TextOutputDisplayable
     ) {
         self.name = name
@@ -31,25 +31,25 @@ final class Banker {
         DispatchQueue.global().async(group: group) { [weak self] in
             guard let self else { return }
             while let client = clientManager.dequeueClient() {
-                work(for: client, time: 0.7)
+                self.work(for: client, time: 0.7)
             }
         }
     }
 }
 
 private extension Banker {
-    func work(for client: Client, time: Double) {
+    func work(for client: Client<TaskType>, time: Double) {
         self.startTask(for: client)
         self.dailyClientStatistics += 1
         Thread.sleep(forTimeInterval: time)
         self.endTask(for: client)
     }
     
-    func startTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 시작")
+    func startTask(for client: Client<TaskType>) {
+        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 시작")
     }
     
-    func endTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 완료")
+    func endTask(for client: Client<TaskType>) {
+        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 완료")
     }
 }

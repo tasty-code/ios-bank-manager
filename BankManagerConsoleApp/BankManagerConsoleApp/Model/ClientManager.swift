@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class ClientManager {
-    private let clientQueue: Queue<Client>
+final class ClientManager<TaskType: Task> {
+    private let clientQueue: Queue<Client<TaskType>>
     
     private let semaphore: DispatchSemaphore = .init(value: 1)
     
@@ -18,13 +18,13 @@ final class ClientManager {
 }
 
 extension ClientManager: ClientEnqueuable {
-    func enqueueClient(_ client: Client) {
+    func enqueueClient(_ client: Client<TaskType>) {
         self.clientQueue.enqueue(client)
     }
 }
 
 extension ClientManager: ClientDequeuable {
-    func dequeueClient() -> Client? {
+    func dequeueClient() -> Client<TaskType>? {
         self.semaphore.wait()
         let result = self.clientQueue.dequeue()
         self.semaphore.signal()
