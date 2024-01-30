@@ -16,6 +16,7 @@
 		F31EDDAB2B63996700CBB73E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDAA2B63996700CBB73E /* Constants.swift */; };
 		F31EDDBB2B68C6A200CBB73E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDBA2B68C6A200CBB73E /* Customer.swift */; };
 		F31EDDBD2B68C72600CBB73E /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDBC2B68C72600CBB73E /* Bank.swift */; };
+		F31EDDBF2B68C7F200CBB73E /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */; };
 		F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A904222B60AC5D001E00E7 /* LinkedList.swift */; };
 		F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		F31EDDAA2B63996700CBB73E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F31EDDBA2B68C6A200CBB73E /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		F31EDDBC2B68C72600CBB73E /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		F3A904222B60AC5D001E00E7 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 			children = (
 				F31EDD942B63911400CBB73E /* main.swift */,
 				F31EDDBC2B68C72600CBB73E /* Bank.swift */,
+				F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */,
 				F31EDDBA2B68C6A200CBB73E /* Customer.swift */,
 				F31EDDA92B63988B00CBB73E /* Library */,
 				F3F4F95B2B62231D0037A3AF /* Model */,
@@ -226,6 +229,7 @@
 				F31EDD952B63911400CBB73E /* main.swift in Sources */,
 				F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */,
 				F31EDDBD2B68C72600CBB73E /* Bank.swift in Sources */,
+				F31EDDBF2B68C7F200CBB73E /* BankClerk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

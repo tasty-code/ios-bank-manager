@@ -9,4 +9,9 @@ import Foundation
 
 struct Bank {
     var bankWatingQueue = CustomerQueue<Customer>()
+    var clerk: BankClerk
+    
+    init(clerk: BankClerk = BankClerk()) {
+        self.clerk = clerk
+    }
 }
