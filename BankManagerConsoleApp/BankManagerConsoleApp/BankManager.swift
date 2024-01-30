@@ -13,9 +13,7 @@ struct BankManager {
     
     mutating func run() {
         while isRunning {
-            print("1: 은행 개점")
-            print("2: 종료")
-            print("입력: ", terminator: "")
+            print(BankMessage.bankMenu.description, terminator: "")
             guard let inputText = readLine() else { return }
             
             switch inputText {
@@ -24,6 +22,7 @@ struct BankManager {
             case "2":
                 isRunning = false
             default:
+                print(BankMessage.request.description)
                 continue
             }
         }

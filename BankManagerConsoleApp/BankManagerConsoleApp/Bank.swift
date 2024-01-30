@@ -35,9 +35,9 @@ struct Bank {
         DispatchQueue.global().sync {
             while !bankWatingQueue.isEmpty() {
                 guard let customer = bankWatingQueue.dequeue() else { return }
-                print("\(customer.number)번 고객 업무 시작")
+                print(BankMessage.start(customer.number).description)
                 Thread.sleep(forTimeInterval: 0.7)
-                print("\(customer.number)번 고객 업무 완료")
+                print(BankMessage.done(customer.number).description)
                 count += 1
             }
         }
@@ -45,6 +45,6 @@ struct Bank {
         let time = CFAbsoluteTimeGetCurrent() - startTime
         let flooredTime = floor(time * 10) / 10
         let totalTime = String(format: "%.2f", flooredTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무시간은 \(totalTime)초 입니다.")
+        print(BankMessage.result(count, totalTime).description)
     }
 }
