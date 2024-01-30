@@ -24,8 +24,8 @@ final class BankManagerApp {
     }
 }
 
-extension BankManagerApp {
-    private func startLoop() {
+private extension BankManagerApp {
+    func startLoop() {
         self.output.display(output: BankManagerAppMenu.allMenusPrompt)
         do {
             let input = try self.input.readInput(prompt: "입력:")
@@ -36,7 +36,7 @@ extension BankManagerApp {
         }
     }
     
-    private func handle(menu: BankManagerAppMenu) {
+    func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
             startBank()
@@ -45,7 +45,7 @@ extension BankManagerApp {
         }
     }
     
-    private func startBank() {
+    func startBank() {
         let clientManager = ClientManager()
         let bankers = [
             Banker.init(
@@ -62,7 +62,7 @@ extension BankManagerApp {
         ).start()
     }
     
-    private func handle(error: Error) {
+    func handle(error: Error) {
         self.output.display(output: error.localizedDescription)
     }
 }

@@ -134,17 +134,17 @@ final class QueueTest: XCTestCase {
     }
 }
 
-extension QueueTest {
-    private func setEmptySUT() {
+private extension QueueTest {
+    func setEmptySUT() {
         self.sut = Queue()
     }
     
-    private func setSUTWithOneElement(_ oneValue: String) {
+    func setSUTWithOneElement(_ oneValue: String) {
         let first = Node(value: oneValue)
         self.sut = Queue(linkedList: .init(head: first))
     }
     
-    private func setSUTWithTwoElements(_ firstValue: String, _ secondValue: String) {
+    func setSUTWithTwoElements(_ firstValue: String, _ secondValue: String) {
         let second = Node(value: secondValue)
         let first = Node(value: firstValue, next: second)
         self.sut = Queue(linkedList: .init(head: first))

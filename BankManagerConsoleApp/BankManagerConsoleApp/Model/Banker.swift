@@ -12,7 +12,7 @@ final class Banker {
     
     private let clientManager: ClientDequeuable
     
-    private lazy var queue = DispatchQueue(label: String(describing: self))
+    private var queue = DispatchQueue.global()
     
     private let taskOutput: TextOutputDisplayable
     
@@ -37,19 +37,21 @@ final class Banker {
             }
         }
     }
-    
-    private func work(for client: Client, time: Double) {
+}
+
+private extension Banker {
+    func work(for client: Client, time: Double) {
         self.startTask(for: client)
         self.dailyClientStatistics += 1
         Thread.sleep(forTimeInterval: time)
         self.endTask(for: client)
     }
     
-    private func startTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 업무 시작")
+    func startTask(for client: Client) {
+        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 시작")
     }
     
-    private func endTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 업무 완료")
+    func endTask(for client: Client) {
+        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 완료")
     }
 }
