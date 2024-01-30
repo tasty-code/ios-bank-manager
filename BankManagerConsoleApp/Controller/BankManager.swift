@@ -10,17 +10,7 @@ struct BankManager {
     private var customerManager = CustomerManager()
     private var totalTaskTime: Double { Double(customerManager.customers.count * 700) / 1000 }
     
-    private func printMenuOfBank() {
-        print("1 : 은행개점")
-        print("2 : 종료")
-        print("입력 : ", terminator: "")
-    }
-    
-    private func printCloseMenu() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerManager.customers.count)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
-    }
-    
-    mutating func operateBank() {
+    mutating func operate() {
         while isOpen {
             customerManager.resetCustomer()
             printMenuOfBank()
@@ -38,8 +28,8 @@ struct BankManager {
         case "1":
             customerManager.createCustomer()
             customerManager.registerCustomer(with: customerManager.customers)
-            employees.append(Employee())
-            employees[0].handleCustomerTasks(with: customerManager.ticketMachine)
+            createEmployee()
+            handleCustomerTasks()
             printCloseMenu()
         case "2":
             print("은행종료")
@@ -57,5 +47,23 @@ struct BankManager {
             throw InputError.wrongInput
         }
         return input
+    }
+    
+    private func printMenuOfBank() {
+        print("1 : 은행개점")
+        print("2 : 종료")
+        print("입력 : ", terminator: "")
+    }
+    
+    private func printCloseMenu() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerManager.customers.count)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
+    }
+    
+    private mutating func createEmployee() {
+        employees.append(Employee())
+    }
+    
+    private mutating func handleCustomerTasks() {
+        employees[0].handleCustomerTasks(with: customerManager.ticketMachine)
     }
 }

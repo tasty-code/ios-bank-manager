@@ -5,6 +5,4 @@
 // 
 
 var bank: BankManager = BankManager()
-bank.operateBank()
-
-
+bank.operate()
