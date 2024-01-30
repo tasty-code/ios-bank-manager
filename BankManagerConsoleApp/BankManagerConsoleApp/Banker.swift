@@ -2,10 +2,10 @@
 import Foundation
 
 struct Banker {
-    func doYourJob(customerInfo: Customer) -> Double {
-        serviceDidStart(customerNumber: customerInfo.waitingNumber)
-        serviceDidComplete(customerNumber: customerInfo.waitingNumber)
-        return customerInfo.requiredTime
+    func provideService(to customer: Customer) -> Double {
+        serviceDidStart(customerNumber: customer.waitingNumber)
+        serviceDidComplete(customerNumber: customer.waitingNumber)
+        return customer.requiredTime
     }
     
     private func serviceDidStart(customerNumber: Int) {

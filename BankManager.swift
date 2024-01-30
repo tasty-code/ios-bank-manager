@@ -38,16 +38,17 @@ struct BankManager {
     
     mutating func startBankingProcess() {
         totalCustomers = .random(in: 10...30)
+        
         for i in 1...totalCustomers {
             queue.enqueue(node: Node(value: Customer(requiredTime: 0.7, waitingNumber: i)))
         }
         
         while queue.count() > 0 {
-            guard let nextNode = queue.dequeue() else {
+            guard let node = queue.dequeue() else {
                 return
             }
-            let nextCustomer = nextNode.value
-            totalTime += banker.doYourJob(customerInfo: nextCustomer)
+            let customer = node.value
+            totalTime += banker.provideService(to: customer)
         }
     }
 }
