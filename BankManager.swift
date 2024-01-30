@@ -1,13 +1,12 @@
 final class BankManager {
-    var customerQueue = Queue<Customer>()
-    var count = Int()
+    var banker: Banker = Banker()
     
     func openBank() {
         BankMessage.menu.message()
         guard let choice = readLine() else { return }
         switch choice {
         case "1":
-            print("시작")
+            banker.sum()
         case "2":
             return
         default :
