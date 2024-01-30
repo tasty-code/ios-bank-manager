@@ -6,7 +6,6 @@
 //
 
 enum BankMessage: CustomStringConvertible {
-    
     case bankMenu
     case start(Int)
     case done(Int)

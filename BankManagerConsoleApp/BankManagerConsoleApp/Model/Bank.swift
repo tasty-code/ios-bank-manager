@@ -35,9 +35,7 @@ struct Bank {
         DispatchQueue.global().sync {
             while !bankWatingQueue.isEmpty() {
                 guard let customer = bankWatingQueue.dequeue() else { return }
-                print(BankMessage.start(customer.number).description)
-                Thread.sleep(forTimeInterval: 0.7)
-                print(BankMessage.done(customer.number).description)
+                clerk.work(for: customer)
                 count += 1
             }
         }

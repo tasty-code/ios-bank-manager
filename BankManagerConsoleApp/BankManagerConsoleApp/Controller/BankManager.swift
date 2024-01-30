@@ -14,17 +14,23 @@ struct BankManager {
     mutating func run() {
         while isRunning {
             print(BankMessage.bankMenu.description, terminator: "")
-            guard let inputText = readLine() else { return }
             
-            switch inputText {
+            switch fetchUserInput() {
             case "1":
                 bank.open()
+                break
             case "2":
                 isRunning = false
+                break
             default:
                 print(BankMessage.request.description)
                 continue
             }
         }
+    }
+    
+    func fetchUserInput() -> String {
+        guard let inputText = readLine() else { return Constants.userInputError }
+        return inputText
     }
 }

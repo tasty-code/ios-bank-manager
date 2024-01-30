@@ -77,6 +77,24 @@
 			path = CustomerQueueUnitTest;
 			sourceTree = "<group>";
 		};
+		22AB1BF42B68D51900241B0F /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				229B94BD2B60AA9E003320F6 /* Node.swift */,
+				F3A904222B60AC5D001E00E7 /* LinkedList.swift */,
+				F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		22AB1BF52B68D5CB00241B0F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22AB1BF02B68CA1600241B0F /* BankManager.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -99,31 +117,29 @@
 			isa = PBXGroup;
 			children = (
 				F31EDD942B63911400CBB73E /* main.swift */,
-				F31EDDBC2B68C72600CBB73E /* Bank.swift */,
-				F31EDDC02B68D1A900CBB73E /* BankMessage.swift */,
-				F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */,
-				F31EDDBA2B68C6A200CBB73E /* Customer.swift */,
-				22AB1BF02B68CA1600241B0F /* BankManager.swift */,
-				F31EDDA92B63988B00CBB73E /* Library */,
+				22AB1BF52B68D5CB00241B0F /* Controller */,
+				F31EDDA92B63988B00CBB73E /* Enums */,
 				F3F4F95B2B62231D0037A3AF /* Model */,
+				22AB1BF42B68D51900241B0F /* DataStructure */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
-		F31EDDA92B63988B00CBB73E /* Library */ = {
+		F31EDDA92B63988B00CBB73E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				F31EDDC02B68D1A900CBB73E /* BankMessage.swift */,
 				F31EDDAA2B63996700CBB73E /* Constants.swift */,
 			);
-			path = Library;
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		F3F4F95B2B62231D0037A3AF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				229B94BD2B60AA9E003320F6 /* Node.swift */,
-				F3A904222B60AC5D001E00E7 /* LinkedList.swift */,
-				F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */,
+				F31EDDBC2B68C72600CBB73E /* Bank.swift */,
+				F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */,
+				F31EDDBA2B68C6A200CBB73E /* Customer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
