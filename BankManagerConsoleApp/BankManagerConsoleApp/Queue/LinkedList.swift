@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LinkedList<T> {
+final class LinkedList<T> {
     var front: Node<T>?
     var rear: Node<T>?
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     let banker = Banker()
     var customerQueue = Queue<Customer>()
 
@@ -27,7 +27,7 @@ class Bank {
         banker.totalDuration = 0.0
     }
 
-    func processCustomers() {
+    private func processCustomers() {
         while !customerQueue.isEmpty() {
             if let customer = customerQueue.dequeue() {
                 banker.processCustomer(customer)

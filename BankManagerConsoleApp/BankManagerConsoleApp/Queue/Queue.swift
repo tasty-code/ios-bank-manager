@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Queue<T> {
-    var linkedList: LinkedList<T>
+final class Queue<T> {
+    private var linkedList: LinkedList<T>
     
     init(linkedList: LinkedList<T> = LinkedList()) {
         self.linkedList = linkedList
