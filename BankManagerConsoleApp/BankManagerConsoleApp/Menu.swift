@@ -1,15 +1,16 @@
 enum Menu {
     case open
     case exit
-}
-
-extension Menu {
-    var value: Int {
-        switch self {
-        case .open:
-            return 1
-        case .exit:
-            return 2
+    case wrongInput
+    
+    init(input: Int) {
+        switch input {
+        case 1:
+            self = .open
+        case 2:
+            self = .exit
+        default:
+            self = .wrongInput
         }
     }
 }

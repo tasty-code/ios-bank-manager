@@ -24,13 +24,19 @@ extension Bank {
         Message.menu.printMessage()
         Message.input.printMessage()
         
-        guard let selectedMenu = selectMenu() else {
+        guard let selectedMenu = validate()else {
             Message.wrongInput.printMessage()
             process()
             return
         }
         
-        if selectedMenu == Menu.exit.value {
+        if selectedMenu == .wrongInput {
+            Message.wrongInput.printMessage()
+            process()
+            return
+        }
+        
+        if selectedMenu == .exit {
             return
         }
         
@@ -38,13 +44,12 @@ extension Bank {
         openBanck()
     }
     
-    private func selectMenu() -> Int? {
+    private func validate() -> Menu? {
         guard let input = readLine(),
-              let selectedMenu = Int(input),
-              (Menu.open.value...Menu.exit.value) ~= selectedMenu else {
+              let userInput = Int(input) else {
             return nil
         }
-        return selectedMenu
+        return Menu(input: userInput)
     }
     
     private func makeCustomerQueue() {
