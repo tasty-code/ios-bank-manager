@@ -8,20 +8,27 @@
 struct Banker {
     private let bankerEnqueuable: BankerEnqueuable
     
-    init(bankerEnqueuable: BankerEnqueuable) {
+    private let resultOut: TextOutputDisplayable
+    
+    init(
+        bankerEnqueuable: BankerEnqueuable,
+        resultOut: TextOutputDisplayable
+    ) {
         self.bankerEnqueuable = bankerEnqueuable
+        self.resultOut = resultOut
     }
 }
 
+import Foundation
+
 extension Banker: ClientTaskHandlable {
     func handle(client: Client) {
-        // 시작
-        // n초간 실행
-        // client.task.process()
-        // 종료
-        
-        // 셀프로 인큐
-        self.bankerEnqueuable.enqueueBanker(self)
+        DispatchQueue.global().async {
+            resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 시작")
+            client.task.process()
+            resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 종료")
+            self.bankerEnqueuable.enqueueBanker(self)
+        }
     }
 }
 

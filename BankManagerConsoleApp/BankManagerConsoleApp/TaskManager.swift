@@ -35,14 +35,15 @@ extension TaskManager: BankerEnqueuable {
     }
 }
 
-extension TaskManager: StatGeneratable {
-    func generateStat() -> TaskStat {
-        return TaskStat(clientCount: 0)
-    }
-}
-
 extension TaskManager: ClientEnqueuable {
     func enqueueClient(_ client: Client) {
         self.clientQueue.enqueue(client)
+    }
+}
+
+extension TaskManager: StatGeneratable {
+    func generateStat() -> TaskStat {
+        // TODO: 결과 집계 구현 (리턴..)
+        return TaskStat(clientCount: 0)
     }
 }
