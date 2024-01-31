@@ -39,7 +39,7 @@ struct BankManager {
         }
     }
     
-    mutating func startBankingProcess() {
+    mutating private func startBankingProcess() {
         setupInitialInformation()
         
         while !queue.isEmpty() {
