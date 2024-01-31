@@ -12,5 +12,5 @@ protocol CustomerNumbering {
 }
 
 struct Customer: CustomerNumbering {
-    var numOfPerson: Int
+    private(set) var numOfPerson: Int
 }
