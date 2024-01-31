@@ -22,114 +22,206 @@ extension UnitTestBankManagerConsoleApp {
 // MARK: - UnitTestBankManagerConsoleApp TestMethod
 extension UnitTestBankManagerConsoleApp {
     
-    func test_enqueue() {
-        let data = "test-data"
-        sut.enqueue(data: data)
-        XCTAssertEqual(sut.peek(), data)
-    }
-    
-    func test_enqueue_데이터가_여러개있을때_동작확인() {
-        sut.enqueue(data: "test0")
-        sut.enqueue(data: "test1")
-        sut.enqueue(data: "test2")
-        sut.enqueue(data: "test3")
-        let result = sut.peek()
-        XCTAssertEqual(result, "test0")
-    }
-    
-    func test_enqueue_dequeue_반복_동작확인() {
-        sut.enqueue(data: "test0")
-        sut.dequeue()
-        sut.enqueue(data: "test1")
-        sut.dequeue()
-        sut.enqueue(data: "test2")
-        sut.dequeue()
-        sut.enqueue(data: "test3")
-        let result = sut.peek()
-        XCTAssertEqual(result, "test3")
-    }
-    
-    func test_enqueue_dequeue_반복_동작확인_dequeue마지막실행() {
-        sut.enqueue(data: "test0")
-        sut.dequeue()
-        sut.enqueue(data: "test1")
-        sut.dequeue()
-        sut.enqueue(data: "test2")
-        sut.dequeue()
-        let result = sut.peek()
-        XCTAssertNil(result)
-    }
-    
-    func test_dequeue() {
-        sut.dequeue()
+    func test_queue가_빈_상태에서_enqueue를_동작확인() {
+        // Given
         XCTAssertNil(sut.peek())
-    }
-    
-    func test_dequeue_데이터가_있을때_동작확인() {
-        sut.enqueue(data: "test")
-        let result = sut.peek()
-        XCTAssertEqual(result, "test")
-    }
-    
-    func test_claer가_제대로_동작하는지() {
-        sut.enqueue(data: "test")
-        sut.clear()
-        let result = sut.peek()
-        XCTAssertNil(result)
-    }
-    
-    func test_claer가_데이터가_여러개있어도_제대로_동작하는지() {
-        sut.enqueue(data: "test0")
-        sut.enqueue(data: "test1")
-        sut.enqueue(data: "test2")
-        sut.enqueue(data: "test3")
-        sut.clear()
-        let result = sut.peek()
-    
-        XCTAssertNil(result)
-    }
-    
-    func test_dequeue_데이터가_여러개_있을때_dequeue_여러번동작확인() {
-        sut.enqueue(data: "test0")
-        sut.enqueue(data: "test1")
-        sut.enqueue(data: "test2")
-        sut.enqueue(data: "test3")
-        sut.dequeue()
-        sut.dequeue()
-        let result = sut.peek()
-        XCTAssertEqual(result, "test2")
-    }
-    
-    func test_dequeue_데이터가_여러개_있을때_동작확인() {
-        sut.enqueue(data: "test0")
-        sut.enqueue(data: "test1")
-        sut.enqueue(data: "test2")
-        sut.enqueue(data: "test3")
-        let result = sut.peek()
-        XCTAssertEqual(result, "test0")
-    }
-    
-    func test_clear() {
-        sut.clear()
-        XCTAssertNil(sut.peek())
-    }
-    
-    func test_peekCheck() {
-        let data = "test-data"
-        sut.enqueue(data: data)
-        XCTAssertEqual(sut.peek(),data)
-    }
-    
-    func test_peekNil() {
-        XCTAssertNil(sut.peek())
-    }
-    
-    func test_isEmptyTrue() {
-        XCTAssertTrue(sut.isEmpty())
-    }
-    
-    func test_isEmptyFalse() {
+        
+        // When
         sut.enqueue(data: "test-data")
-        XCTAssertFalse(sut.isEmpty())
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test-data")
+    }
+    
+    func test_queue가_빈_상태에서_enqueue를_여러번_수행해도_첫_요소는_변경되지_않는다() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.enqueue(data: "test1")
+        sut.enqueue(data: "test2")
+        sut.enqueue(data: "test3")
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test0")
+    }
+    
+    func test_queue가_빈_상태에서_enqueue_dequeue_여러번_수행했을때_결과확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.dequeue()
+        sut.enqueue(data: "test1")
+        sut.dequeue()
+        sut.enqueue(data: "test2")
+        sut.dequeue()
+        sut.enqueue(data: "test3")
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test3")
+    }
+    
+    func test_queue가_빈_상태에서_enqueue_dequeue_여러번_수행했을때_마지막에_dequeue실행() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.dequeue()
+        sut.enqueue(data: "test1")
+        sut.dequeue()
+        sut.enqueue(data: "test2")
+        sut.dequeue()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_queue가_빈_상태에서_dequeue_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.dequeue()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_queue가_빈_상태에서_dequeue_데이터가_있을때_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test")
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test")
+    }
+    
+    func test_queue가_빈_상태에서_claer_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test")
+        sut.clear()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_queue가_빈_상태에서_여러개의_데이터를_enqueue하고_claer_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.enqueue(data: "test1")
+        sut.enqueue(data: "test2")
+        sut.enqueue(data: "test3")
+        sut.clear()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_queue가_빈_상태에서_여러개의_데이터를_enqueue하고_dequeue의_연속_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.enqueue(data: "test1")
+        sut.enqueue(data: "test2")
+        sut.enqueue(data: "test3")
+        sut.dequeue()
+        sut.dequeue()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test2")
+    }
+    
+    func test_queue가_빈_상태에서_여러개의_데이터를_enqueue_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test0")
+        sut.enqueue(data: "test1")
+        sut.enqueue(data: "test2")
+        sut.enqueue(data: "test3")
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test0")
+    }
+    
+    func test_queue가_빈_상태에서_clear_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.clear()
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_queue가_빈_상태에서_peekCheck_동작확인() {
+        // Given
+        XCTAssertNil(sut.peek())
+        
+        // When
+        sut.enqueue(data: "test-data")
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertEqual(expected, "test-data")
+    }
+    
+    func test_peek_결과값_확인() {
+        // Given
+        
+        // When
+        let expected = sut.peek()
+        
+        // Then
+        XCTAssertNil(expected)
+    }
+    
+    func test_isEmptyTrue_결과값_확인() {
+        // Given
+        
+        // When
+        let expected = sut.isEmpty()
+        
+        // Then
+        XCTAssertTrue(expected)
+    }
+    
+    func test_isEmptyFalse_결과값_확인() {
+        // Given
+        
+        // When
+        sut.enqueue(data: "test-data")
+        let expected = sut.isEmpty()
+        
+        // Then
+        
+        XCTAssertFalse(expected)
     }
 }

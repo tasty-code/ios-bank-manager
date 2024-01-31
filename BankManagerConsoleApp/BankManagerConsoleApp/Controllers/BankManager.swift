@@ -2,9 +2,13 @@ import Foundation
 
 struct BankManager {
     
-    private var bank: Bank = Bank(bankEmployeeCount: 1)
+    private var bank: Bank
     private var view: ConsoleTextView = ConsoleTextView()
     private var isRunning: Bool = true
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
 }
 
 // MARK: - BankManager Method
@@ -17,38 +21,39 @@ extension BankManager {
     
     private func printMenu() {
         print()
-        view.printMessage(input: CustomString.printMenuText.description, inputTerminator: CustomString.isEmptyText.description)
+        view.printMessage(input: CustomString.printMenuText, inputTerminator: CustomString.isEmptyText)
     }
     
     private mutating func switchMenu(_ input: String) {
         switch input {
-        case CustomString.numberOneText.description:
-            customerEnqueue()
-            customerDequeue()
+        case InputNumber.one.rawValue:
+//            enqueueCustomer()
+            dequeueCustomer()
             printEndMessage()
             formIsRunning()
-        case CustomString.numberTwoText.description:
-            view.printMessage(input: CustomString.bankClose.description)
+        case InputNumber.two.rawValue:
+//            view.printMessage(input: CustomString.bankClose.description)
             formIsRunning()
         default:
-            view.printMessage(input: CustomString.wrongInputMessage.description)
+//            view.printMessage(input: CustomString.wrongInputMessage.description)
             startBusiness()
         }
     }
     
-    private func customerEnqueue() {
-        for number in 0...bank.fetchCustomerCount() {
-            bank.enqueueCustomer(inputData: number)
+    private func enqueueCustomer(_ input: Int) {
+        for number in 0...input {
+//            bank.enqueueCustomer(inputCustomerNumber: )
         }
     }
     
-    private mutating func customerDequeue() {
-        for number in 0...bank.fetchCustomerCount() {
-            view.printMessage(input: CustomString.startCustomerBusiness(number).description)
-            bank.formTime(add: 0.7)
-            bank.dequeueCustomer()
-            view.printMessage(input: CustomString.endCustomerBusiness(number).description)
-        }
+    private mutating func dequeueCustomer() {
+//        for number in 0...bank.fetchCustomerCount() {
+//            view.printMessage(input: CustomString.startCustomerBusiness(number).description)
+//            bank.formTime(add: 0.7)
+//            sleepMilliseconds(0.7)
+//            bank.dequeueCustomer()
+//            view.printMessage(input: CustomString.endCustomerBusiness(number).description)
+//        }
     }
     
     private func userInput() -> String {
@@ -58,12 +63,10 @@ extension BankManager {
         return userInput
     }
     
-    private func formatTimeToTwoDecimalPlaces(_ time: Double) -> Double {
-        return Double(String(format: CustomString.format.description, time)) ?? 0.0
-    }
+
     
     private func printEndMessage() {
-        view.printMessage(input: CustomString.resultBusiness(bank.fetchCustomerCount(), formatTimeToTwoDecimalPlaces(bank.fetchTime())).description)
+//        view.printMessage(input: CustomString.resultBusiness(bank.fetchCustomerCount(), bank.fetchTime()).description)
     }
     
     func fetchIsRunning() -> Bool {
@@ -72,5 +75,10 @@ extension BankManager {
     
     mutating func formIsRunning() {
         isRunning.toggle()
+    }
+    
+    func sleepMilliseconds(_ milliseconds: Double) {
+        let result = UInt32(milliseconds * 10)
+        usleep(useconds_t(result * 100000))
     }
 }

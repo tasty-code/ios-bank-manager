@@ -2,7 +2,7 @@ import Foundation
 
 struct ConsoleTextView {
     
-    func printMessage(input: String, inputTerminator: String? = nil) {
-        print(input, terminator: inputTerminator ?? "\n")
+    func printMessage(input: CustomString, inputTerminator: CustomString? = nil) {
+        print(input.description, terminator: inputTerminator?.description ?? "\n")
     }
 }
