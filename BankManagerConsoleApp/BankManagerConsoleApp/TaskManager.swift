@@ -25,12 +25,30 @@ final class TaskManager {
 
 extension TaskManager: TaskManagable {
     func startTaskManaging() {
-        // while 조건 어쩌구
+        // 시작 전에 은행원 수 캡쳐
+        let bankerCount = bankerQueue.count
+        
+        while true {
+            if let client = self.clientQueue.dequeue() {
+                if let banker = self.bankerQueue.dequeue() {
+                    banker.handle(client: client)
+                } else {
+                    continue
+                }
+            } else {
+                if self.bankerQueue.count == bankerCount {
+                    break
+                } else {
+                    continue
+                }
+            }
+        }
     }
 }
 
 extension TaskManager: BankerEnqueuable {
     func enqueueBanker(_ taskHandlable: ClientTaskHandlable) {
+        // race 관리 or not
         self.bankerQueue.enqueue(taskHandlable)
     }
 }
