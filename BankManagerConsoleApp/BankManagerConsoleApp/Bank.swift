@@ -1,11 +1,11 @@
 final class Bank {
-    private var customerCount: Int
+    private var maxCustomerNumber: Int
     private var customerQueue: LinkedListQueue<Customer>
     private var bankManagerQueue: LinkedListQueue<BankManager>
     private let customerCountRange: ClosedRange<Int> = 10...30
     
     init(bankManagerCount: Int) {
-        self.customerCount = 0
+        self.maxCustomerNumber = 0
         self.customerQueue = LinkedListQueue<Customer>()
         self.bankManagerQueue = LinkedListQueue<BankManager>()
         (1...bankManagerCount).forEach { _ in
@@ -46,7 +46,7 @@ extension Bank {
     private func makeCustomerQueue() {
         (1...Int.random(in: customerCountRange)).forEach {
             customerQueue.enqueue(element: Customer(number: $0))
-            customerCount += 1
+            maxCustomerNumber += 1
         }
     }
     
@@ -61,8 +61,8 @@ extension Bank {
     }
     
     private func closeBank() {
-        Message.close(customerCount: customerCount, time: Double(customerCount) * Customer.taskTime).printMessage()
-        customerCount = 0
+        Message.close(customerCount: maxCustomerNumber, time: Double(maxCustomerNumber) * Customer.taskTime).printMessage()
+        maxCustomerNumber = 0
         process()
     }
 }
