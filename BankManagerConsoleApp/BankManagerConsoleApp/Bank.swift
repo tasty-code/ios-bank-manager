@@ -16,7 +16,7 @@ extension Bank {
     func makeBankManagerQueue(_ bankManagerCount: Int) {
         (1...bankManagerCount).forEach { _ in
             let bankManger = BankManager()
-            bankManagerQueue.enqueue(element: bankManger)
+            bankManagerQueue.enqueue(bankManger)
         }
     }
     
@@ -54,7 +54,7 @@ extension Bank {
     
     private func makeCustomerQueue() {
         (1...Int.random(in: customerCountRange)).forEach {
-            customerQueue.enqueue(element: Customer(number: $0))
+            customerQueue.enqueue( Customer(number: $0))
             maxCustomerNumber += 1
         }
     }
@@ -63,7 +63,7 @@ extension Bank {
         while let customer: Customer = customerQueue.dequeue(),
               let bankManager: BankManager = bankManagerQueue.dequeue() {
             bankManager.deal(with: customer) { [weak self] manager in
-                self?.bankManagerQueue.enqueue(element: manager)
+                self?.bankManagerQueue.enqueue(manager)
             }
         }
         closeBank()
