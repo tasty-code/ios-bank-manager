@@ -46,32 +46,35 @@ private extension BankManagerApp {
     }
     
     func startBank() {
-        let loanClientManager = ClientManager<Loan>()
-        let depositClientManager = ClientManager<Deposit>()
-        let bankers = [
-            Banker.init(
-                name: "에피",
-                clientManager: loanClientManager,
-                taskOutput: output
-            ),
-            Banker.init(
-                name: "카일",
-                clientManager: depositClientManager,
-                taskOutput: output
-            ),
-            Banker.init(
-                name: "두두",
-                clientManager: depositClientManager,
-                taskOutput: output
-            ),
+        let dict: [BankTaskType: any ClientQueueManagable] = [
+            .loan: ClientManager<Loan>(),
+            .deposit: ClientManager<Deposit>(),
         ]
+        
+        func makeBankers(orders: [BankTaskType: Int]) -> [Banker] {
+            return orders.reduce(into: []) { (
+                result: inout [Banker],
+                order: (key: BankTaskType, value: Int)
+            ) in
+                for number in 1...order.value {
+                    guard let clientManager = dict[order.key] else { break }
+                    let banker = Banker.init(
+                        name: "에피",
+                        clientManager: clientManager,
+                        taskOutput: output
+                    )
+                    result.append(banker)
+                }
+            }
+        }
+        
+        let rec: [BankTaskType: Int] = [.loan: 2, .deposit: 3]
+        
+        let bankers = makeBankers(orders: rec)
         
         BankManager(
             bankers: bankers,
-            clientManager: [
-                .loan: loanClientManager,
-                .deposit: depositClientManager
-            ],
+            clientManager: dict,
             output: self.output
         ).start()
     }
