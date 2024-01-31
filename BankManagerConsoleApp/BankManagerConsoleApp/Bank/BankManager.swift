@@ -36,10 +36,8 @@ struct BankManager {
         switch inputProcess {
         case .open:
             bank.open()
-            break
         case .close:
             isRunning = false
-            break
         }
     }
     

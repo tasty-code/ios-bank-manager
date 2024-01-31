@@ -44,8 +44,8 @@ struct Bank {
     private mutating func serveCustomer() {
         while !bankWatingQueue.isEmpty() {
             guard let customer = bankWatingQueue.dequeue() else { return }
-            handledCustomerCount += 1
             clerk.work(for: customer)
+            handledCustomerCount += 1
         }
     }
 }
