@@ -42,16 +42,10 @@ struct BankManager {
     }
     
     private func showMenu() {
-        showPromt(message: .open)
-        showPromt(message: .exit)
+        bank.showMenu()
     }
     
     private func inputMenu() -> String? {
         return Swift.readLine()
     }
-    
-    private func showPromt(message: BankMessage) {
-        print(message.show)
-    }
 }
-

@@ -15,10 +15,15 @@ struct Bank {
     init(clerk: BankWork) {
         self.clerk = clerk
     }
-
+    
     mutating func open() {
         setWaitingLine()
         executeBankWork()
+    }
+    
+    func showMenu() {
+        print(BankMessage.open.show)
+        print(BankMessage.exit.show)
     }
     
     private mutating func setWaitingLine() {

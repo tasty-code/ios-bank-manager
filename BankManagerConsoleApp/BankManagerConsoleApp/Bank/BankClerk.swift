@@ -13,8 +13,16 @@ protocol BankWork {
 
 struct BankClerk: BankWork {
     func work(for customer: Customer) {
-        print(BankMessage.start(customer.number).show)
-        Thread.sleep(forTimeInterval: 0.7)
-        print(BankMessage.done(customer.number).show)
+        printMessage(BankMessage.start(customer.number).show)
+        wait(for: 0.7)
+        printMessage(BankMessage.done(customer.number).show)
+    }
+
+    private func wait(for timeInterval: TimeInterval) {
+        Thread.sleep(forTimeInterval: timeInterval)
+    }
+
+    private func printMessage(_ message: String) {
+        print(message)
     }
 }
