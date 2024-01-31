@@ -7,6 +7,10 @@
 
 struct Banker {
     private let bankerEnqueuable: BankerEnqueuable
+    
+    init(bankerEnqueuable: BankerEnqueuable) {
+        self.bankerEnqueuable = bankerEnqueuable
+    }
 }
 
 extension Banker: ClientTaskHandlable {

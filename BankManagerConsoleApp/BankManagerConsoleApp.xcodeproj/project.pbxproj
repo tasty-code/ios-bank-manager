@@ -21,6 +21,7 @@
 		F4EC3C432B6A6D06006C9D11 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C422B6A6D06006C9D11 /* Banker.swift */; };
 		F4EC3C452B6A6D15006C9D11 /* ClientTaskHandlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C442B6A6D15006C9D11 /* ClientTaskHandlable.swift */; };
 		F4EC3C472B6A6D6F006C9D11 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C462B6A6D6F006C9D11 /* Client.swift */; };
+		F4EC3C492B6A70E7006C9D11 /* ClientEnqueuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		F4EC3C422B6A6D06006C9D11 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F4EC3C442B6A6D15006C9D11 /* ClientTaskHandlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTaskHandlable.swift; sourceTree = "<group>"; };
 		F4EC3C462B6A6D6F006C9D11 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEnqueuable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				F4EC3C3E2B6A6CC3006C9D11 /* BankRunnable.swift */,
 				F4EC3C402B6A6CE6006C9D11 /* TaskManagable.swift */,
 				F4EC3C442B6A6D15006C9D11 /* ClientTaskHandlable.swift */,
+				F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				F4EC3C3D2B6A6C54006C9D11 /* StatGeneratable.swift in Sources */,
 				F4EC3C312B6A57B0006C9D11 /* Taskable.swift in Sources */,
+				F4EC3C492B6A70E7006C9D11 /* ClientEnqueuable.swift in Sources */,
 				F4EC3C452B6A6D15006C9D11 /* ClientTaskHandlable.swift in Sources */,
 				F4EC3C3B2B6A6C18006C9D11 /* BankerEnqueuable.swift in Sources */,
 				F4EC3C472B6A6D6F006C9D11 /* Client.swift in Sources */,

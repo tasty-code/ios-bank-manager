@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TaskManager<Task: Taskable> {
+final class TaskManager {
     private let clientQueue: Queue<Client>
     
     private let bankerQueue: Queue<ClientTaskHandlable>
@@ -15,8 +15,8 @@ final class TaskManager<Task: Taskable> {
     private let semaphore: DispatchSemaphore = .init(value: 1)
     
     init(
-        clientQueue: Queue<Client>,
-        bankerQueue: Queue<ClientTaskHandlable>
+        clientQueue: Queue<Client> = .init(),
+        bankerQueue: Queue<ClientTaskHandlable> = .init()
     ) {
         self.clientQueue = clientQueue
         self.bankerQueue = bankerQueue
@@ -38,5 +38,11 @@ extension TaskManager: BankerEnqueuable {
 extension TaskManager: StatGeneratable {
     func generateStat() -> TaskStat {
         return TaskStat(clientCount: 0)
+    }
+}
+
+extension TaskManager: ClientEnqueuable {
+    func enqueueClient(_ client: Client) {
+        self.clientQueue.enqueue(client)
     }
 }
