@@ -4,6 +4,7 @@ import Foundation
 struct Banker {
     func provideService(to customer: Customer) -> Double {
         serviceDidStart(customerNumber: customer.waitingNumber)
+        Thread.sleep(forTimeInterval: customer.requiredTime)
         serviceDidComplete(customerNumber: customer.waitingNumber)
         return customer.requiredTime
     }
