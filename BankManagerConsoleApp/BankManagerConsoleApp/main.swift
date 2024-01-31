@@ -29,5 +29,4 @@ func operateBank() {
     }
 }
 
-
 operateBank()

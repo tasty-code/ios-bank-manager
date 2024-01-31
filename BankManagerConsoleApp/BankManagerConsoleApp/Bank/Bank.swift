@@ -13,7 +13,7 @@ class Bank {
 
     func open() {
         print("은행 문이 열렸습니다.")
-        let numberOfCustomers = Int.random(in: 1...10)
+        let numberOfCustomers = Int.random(in: 10...30)
 
         print("고객 수: \(numberOfCustomers)")
         for customerNumber in 1...numberOfCustomers {
@@ -35,3 +35,4 @@ class Bank {
         }
     }
 }
+
