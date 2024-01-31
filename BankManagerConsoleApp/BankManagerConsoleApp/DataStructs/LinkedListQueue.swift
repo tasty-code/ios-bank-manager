@@ -7,7 +7,7 @@ final class LinkedListQueue<Element>: Queue {
         return self.count == 0
     }
     
-    func enqueue(element: Element) {
+    func enqueue(_ element: Element) {
         count += 1
         queue.append(data: element)
     }
