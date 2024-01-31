@@ -8,14 +8,18 @@ final class Bank {
         self.maxCustomerNumber = 0
         self.customerQueue = LinkedListQueue<Customer>()
         self.bankManagerQueue = LinkedListQueue<BankManager>()
+        makeBankManagerQueue(bankManagerCount)
+    }
+}
+
+extension Bank {
+    func makeBankManagerQueue(_ bankManagerCount: Int) {
         (1...bankManagerCount).forEach { _ in
             let bankManger = BankManager()
             bankManagerQueue.enqueue(element: bankManger)
         }
     }
-}
-
-extension Bank {
+    
     func process() {
         Message.menu.printMessage()
         Message.input.printMessage()
