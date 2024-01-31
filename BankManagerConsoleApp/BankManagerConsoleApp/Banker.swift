@@ -22,8 +22,8 @@ struct Banker {
 import Foundation
 
 extension Banker: ClientTaskHandlable {
-    func handle(client: Client) {
-        DispatchQueue.global().async {
+    func handle(client: Client, group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
             resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 시작")
             client.task.process()
             resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 종료")

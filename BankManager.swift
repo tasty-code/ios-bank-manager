@@ -8,10 +8,15 @@ import Foundation
 
 struct BankManager {
     private let textOut: TextOutputDisplayable
+    
+    init(textOut: TextOutputDisplayable) {
+        self.textOut = textOut
+    }
 }
 
 extension BankManager: BankRunnable {
     func runBank(with orders: [Order]) {
+        let group = DispatchGroup()
         for order in orders {
             // 각각 task별 taskManager 만들기
             let taskManager = TaskManager()
@@ -33,8 +38,9 @@ extension BankManager: BankRunnable {
             bankers.forEach { banker in taskManager.enqueueBanker(banker) }
             clients.forEach { client in taskManager.enqueueClient(client) }
             
-            taskManager.startTaskManaging()
+            taskManager.startTaskManaging(group: group)
         }
+        group.wait()
     }
 }
 

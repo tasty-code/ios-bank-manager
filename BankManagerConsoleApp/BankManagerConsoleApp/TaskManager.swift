@@ -24,22 +24,24 @@ final class TaskManager {
 }
 
 extension TaskManager: TaskManagable {
-    func startTaskManaging() {
-        // 시작 전에 은행원 수 캡쳐
-        let bankerCount = bankerQueue.count
-        
-        while true {
-            if let client = self.clientQueue.dequeue() {
-                if let banker = self.bankerQueue.dequeue() {
-                    banker.handle(client: client)
+    func startTaskManaging(group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            // 시작 전에 은행원 수 캡쳐
+            let bankerCount = self.bankerQueue.count
+            
+            while true {
+                if let client = self.clientQueue.dequeue() {
+                    if let banker = self.bankerQueue.dequeue() {
+                        banker.handle(client: client, group: group)
+                    } else {
+                        continue
+                    }
                 } else {
-                    continue
-                }
-            } else {
-                if self.bankerQueue.count == bankerCount {
-                    break
-                } else {
-                    continue
+                    if self.bankerQueue.count == bankerCount {
+                        break
+                    } else {
+                        continue
+                    }
                 }
             }
         }
