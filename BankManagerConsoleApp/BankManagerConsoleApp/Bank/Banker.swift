@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Banker {
+final class Banker {
     let duration = 0.7
     var totalDuration = 0.0
     func processCustomer(_ customer: Customer) {
