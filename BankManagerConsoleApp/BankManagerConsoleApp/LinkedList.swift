@@ -74,6 +74,10 @@ final class LinkedList<T> {
     }
     
     func remove(index: Int) -> T? {
+        if index == 0 {
+            return removeFirst()
+        }
+        
         guard let frontNode = search(index: index - 1) else {
             return nil
         }
