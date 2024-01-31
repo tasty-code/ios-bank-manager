@@ -56,8 +56,10 @@ final class LinkedList<T> {
     private func removeFirst() -> T? {
         if  head != nil {
             let value: T? = head?.value()
-            head = nil
-            tail = nil
+            head = head?.next
+            if head == nil {
+                tail = nil
+            }
             return value
         } else {
             return nil
@@ -79,3 +81,4 @@ final class LinkedList<T> {
         return removedNode?.value()
     }
 }
+
