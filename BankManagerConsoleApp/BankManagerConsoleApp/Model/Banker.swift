@@ -5,6 +5,8 @@
 //  Created by Effie on 1/31/24.
 //
 
+import Foundation
+
 struct Banker {
     private let bankerEnqueuable: BankerEnqueuable
     
@@ -18,8 +20,6 @@ struct Banker {
         self.resultOut = resultOut
     }
 }
-
-import Foundation
 
 extension Banker: ClientTaskHandlable {
     func handle(client: Client, group: DispatchGroup) {

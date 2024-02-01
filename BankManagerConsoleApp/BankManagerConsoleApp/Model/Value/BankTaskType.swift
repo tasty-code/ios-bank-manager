@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  BankTaskType.swift
 //  BankManagerConsoleApp
 //
 //  Created by Effie on 1/31/24.
