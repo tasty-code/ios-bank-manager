@@ -21,29 +21,25 @@ struct Bank {
         executeBankWork()
     }
     
-    func showMenu() {
-        print(BankMessage.open.show)
-        print(BankMessage.exit.show)
-    }
-    
     private mutating func setWaitingLine() {
         handledCustomerCount = 0
         for number in 1...Int.random(in: 10...30) {
             bankWatingQueue.enqueue(item: Customer(number: number))
         }
     }
-        
+    
     private mutating func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        
+
         DispatchQueue.global().sync {
             serveCustomer()
         }
-        
+
         let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
         let flooredDifference = floor(intervalTime * 10) / 10
         let totalTime = String(format: "%.2f", flooredDifference)
-        print(BankMessage.result(handledCustomerCount, totalTime).show)
+
+        ConsoleView.showResult(customerCount: handledCustomerCount, intervalTime: totalTime)
     }
     
     private mutating func serveCustomer() {

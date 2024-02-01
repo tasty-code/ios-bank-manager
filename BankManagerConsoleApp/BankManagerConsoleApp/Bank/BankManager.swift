@@ -42,7 +42,7 @@ struct BankManager {
     }
     
     private func showMenu() {
-        bank.showMenu()
+        ConsoleView.showMenu()
     }
     
     private func inputMenu() -> String? {
