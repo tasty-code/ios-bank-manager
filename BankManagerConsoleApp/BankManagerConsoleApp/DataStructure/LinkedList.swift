@@ -30,7 +30,7 @@ final class LinkedList<Element> {
         count += 1
     }
     
-    func prepend(item: Element) {
+    func prepend(new item: Element) {
         let newNode = Node(data: item)
         
         guard let currentHead = head else {
@@ -63,20 +63,20 @@ final class LinkedList<Element> {
         count = 0
     }
     
-    func insert(value: Element, index: Int) {
+    func insert(value: Element, at index: Int) {
         let newNode = Node(data: value)
         
         if index >= count || isEmpty {
             append(new: value)
             return
         } else if index == 0 {
-            prepend(item: value)
+            prepend(new : value)
             return
         }
         
-        let serchNode = serch(index: index)
-        newNode.next = serchNode?.next
-        serchNode?.next = newNode
+        let searchNode = search(at: index)
+        newNode.next = searchNode?.next
+        searchNode?.next = newNode
         count += 1
     }
     
@@ -87,7 +87,7 @@ final class LinkedList<Element> {
             return removeFirst()
         } 
        
-        let prevNode = serch(index: index)
+        let prevNode = search(at: index)
         let removeNode = prevNode?.next
         prevNode?.next = removeNode?.next
         count -= 1
@@ -95,7 +95,7 @@ final class LinkedList<Element> {
         return removeNode?.data
     }
     
-    private func serch(index: Int) -> Node<Element>? {
+    private func search(at index: Int) -> Node<Element>? {
         var indexNode = head
         
         for _ in 1..<index - 1  {
