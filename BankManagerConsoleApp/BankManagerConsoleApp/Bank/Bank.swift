@@ -2,7 +2,8 @@ import Foundation
 
 final class Bank: PrintableMessage {
     private var customerQueue = Queue<Customer>()
-    let banker: Banker
+    private let banker: Banker
+    
     init( banker: Banker) {
         self.banker = banker
     }

@@ -1,5 +1,5 @@
 final class BankManager {
-    var bank: Bank
+    private let bank: Bank
     
     init(bank: Bank) {
         self.bank = bank
