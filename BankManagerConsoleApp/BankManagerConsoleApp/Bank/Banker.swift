@@ -1,6 +1,6 @@
 import Foundation
 
-final class Banker {
+final class Banker: PrintableMessage {
     private var customerQueue = Queue<Customer>()
     private(set) var totalProcessingTime: TimeInterval = 0
     
@@ -18,9 +18,9 @@ final class Banker {
     
     private func taskProcess() {
         if let dequeue = customerQueue.dequeue() {
-            BankMessage.taskStart(with: dequeue).message()
+            printStartTaskMessage(customer: dequeue)
             processTransaction(for: dequeue, with: dequeue.taskTime)
-            BankMessage.taskComplete(with: dequeue).message()
+            printCompleteTaskMessage(customer: dequeue)
             taskProcess()
         } else {
             taskClose(customerQueue.count, totalProcessingTime)
@@ -32,7 +32,7 @@ final class Banker {
 // MARK: - 처리 시간 및 처리 완료 메서드
 private extension Banker {
     func taskClose(_ customersCount: Int, _ totalProcessingTime: TimeInterval) {
-        BankMessage.close(customersCount: customersCount, totalProcessingTime: totalProcessingTime).message()
+        printClosingMessage(customersCount: customersCount, totalProcessingTime: totalProcessingTime)
         resetProcessingTime()
     }
     

@@ -7,7 +7,7 @@ final class BankManager {
     
     func openBank() {
         while true {
-            BankMessage.menu.message()
+            print("1 : 은행개점\n2 : 종료\n입력 :", terminator: " ")
             guard let choice = readLine() else { return }
             switch choice {
             case "1":
@@ -15,7 +15,7 @@ final class BankManager {
             case "2":
                 return
             default:
-                BankMessage.wrongInput.message()
+                print("1 혹은 2를 입력하세요.")
             }
         }
     }
