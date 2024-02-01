@@ -17,16 +17,16 @@ final class Banker: PrintableMessage {
     }
     
     private func taskProcess() {
-        if let dequeue = customerQueue.dequeue() {
+        while let dequeue = customerQueue.dequeue() {
             printStartTaskMessage(customer: dequeue)
             processTransaction(for: dequeue, with: dequeue.taskTime)
             printCompleteTaskMessage(customer: dequeue)
-            taskProcess()
-        } else {
-            taskClose(customerQueue.count, totalProcessingTime)
-            customerQueue.clear()
         }
+        taskClose(customerQueue.count, totalProcessingTime)
+        customerQueue.clear()
     }
+    
+    
 }
 
 // MARK: - 처리 시간 및 처리 완료 메서드
