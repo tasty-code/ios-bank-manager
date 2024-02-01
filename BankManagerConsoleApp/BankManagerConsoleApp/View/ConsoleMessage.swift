@@ -8,6 +8,22 @@
 /// 뷰에 해당하는 콘솔 메시지를 관리
 struct ConsoleMessage {
     
+    /// 은행 메뉴 메세지
+    func bankMenu() {
+        print("1 : 은행 개점 \n2 : 종료")
+        print("입력: ", terminator: "")
+    }
+    
+    /// 사용자 입력 오류 메시지
+    func inputErrorMessage() {
+        print("잘못된 입력입니다.")
+    }
+    
+    /// 프로그램 종료 메시지
+    func appExitMessage() {
+        print("프로그램을 종료합니다.")
+    }
+    
     /// 고객 업무 시작 메시지
     func taskStartMessage(customerNumber: Int) {
         print("\(customerNumber)번 고객 업무 시작")
