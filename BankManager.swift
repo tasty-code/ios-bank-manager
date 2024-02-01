@@ -22,21 +22,18 @@ extension BankManager: BankRunnable {
             let taskManager = TaskManager()
             
             // 수에 따라 client 만들기
-            let clients = (1...order.clientCount).map { number in
-                Client(number: number, task: order.taskType.init())
+            (1...order.clientCount).forEach { number in
+                let client = Client(number: number, task: order.taskType.init())
+                taskManager.enqueueClient(client)
             }
             
             // 수에 따라 banker 만들기
-            let bankers = (1...order.bankerCount).map { _ in
-                Banker(
-                    bankerEnqueuable: taskManager,
-                    resultOut: self.textOut
-                )
-            }
-            
             // enqueue client, banker
-            bankers.forEach { banker in taskManager.enqueueBanker(banker) }
-            clients.forEach { client in taskManager.enqueueClient(client) }
+            
+            (1...order.bankerCount).forEach { _ in
+                let banker = Banker(bankerEnqueuable: taskManager, resultOut: self.textOut)
+                taskManager.enqueueBanker(banker)
+            }
             
             taskManager.startTaskManaging(group: group)
         }
