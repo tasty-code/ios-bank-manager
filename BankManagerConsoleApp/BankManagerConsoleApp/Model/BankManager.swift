@@ -52,7 +52,6 @@ private extension BankManager {
         while let number = self.dispenser.provideTicket(of: order.taskType) {
             let client = Client(number: number, task: order.taskType)
             taskManager.enqueueClient(client)
-            
         }
     }
     
