@@ -6,7 +6,6 @@
 //
 
 struct Order {
-    let taskType: Taskable.Type
+    let taskType: BankTaskType
     let bankerCount: Int
-    let clientNumbers: [Int]
 }
