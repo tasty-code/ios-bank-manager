@@ -16,7 +16,7 @@ final class LinkedListTest: XCTestCase {
     // MARK: - append
     func test_첫_노드를_추가하면_리스트가_비어있지_않아야_한다() {
         // given
-        sut.appendNode(value:  "3")
+        sut.appendNode(value: "3")
         
         // then
         XCTAssertEqual(sut.isEmpty, false)

@@ -2,6 +2,7 @@ import Foundation
 
 final class Queue<T> {
     private var linkedList = LinkedList<T>()
+    
     var peek: T? {
         return linkedList.head?.value
     }

@@ -8,5 +8,4 @@ final class Node<T> {
         self.value = value
         self.next = next
     }
-    deinit { print("노드 해제됨") }
 }
