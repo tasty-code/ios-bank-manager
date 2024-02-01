@@ -5,6 +5,18 @@ final class BankManager {
         self.banker = banker
     }
     
+    private func getUserInput() -> String? {
+        do {
+            guard let userInput = readLine() else {
+                throw BankManagerError.invalidInput
+            }
+            return userInput
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     func openBank() {
         while true {
             print("1 : 은행개점\n2 : 종료\n입력 :", terminator: " ")
@@ -15,12 +27,8 @@ final class BankManager {
             case "2":
                 return
             default:
-                print("1 혹은 2를 입력하세요.")
+                print(BankManagerError.invalidInput.message)
             }
         }
-    }
-    
-    private func getUserInput() -> String? {
-        return readLine()
     }
 }
