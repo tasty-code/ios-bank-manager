@@ -21,24 +21,13 @@ struct BankManager {
 }
 
 extension BankManager: BankRunnable {
-    func runBank(with orders: [Order]) {
+    func runBank(with orders: [Order], numberOfClient: Int) {
         let group = DispatchGroup()
-        var numberOfClient: Int = 0
         let totalWorkTime = measure {
             for order in orders {
                 let taskManager = TaskManager()
-                
-                while let number = self.dispenser.provideTicket(of: order.taskType) {
-                    let client = Client(number: number, task: order.taskType)
-                    taskManager.enqueueClient(client)
-                    numberOfClient += 1
-                }
-                
-                (1...order.bankerCount).forEach { _ in
-                    let banker = Banker(bankerEnqueuable: taskManager, resultOut: self.textOut)
-                    taskManager.enqueueBanker(banker)
-                }
-                
+                makeClients(order: order, taskManager: taskManager)
+                makeBankers(order: order, taskManager: taskManager)
                 taskManager.startTaskManaging(group: group)
             }
             group.wait()
@@ -52,6 +41,21 @@ extension BankManager: BankRunnable {
 }
 
 private extension BankManager {
+    func makeBankers(order: Order, taskManager: TaskManager) {
+        (1...order.bankerCount).forEach { _ in
+            let banker = Banker(bankerEnqueuable: taskManager, resultOut: self.textOut)
+            taskManager.enqueueBanker(banker)
+        }
+    }
+    
+    func makeClients(order: Order, taskManager: TaskManager) {
+        while let number = self.dispenser.provideTicket(of: order.taskType) {
+            let client = Client(number: number, task: order.taskType)
+            taskManager.enqueueClient(client)
+            
+        }
+    }
+    
     func measure(_ progress: () -> Void) -> TimeInterval {
         let start = Date()
         progress()

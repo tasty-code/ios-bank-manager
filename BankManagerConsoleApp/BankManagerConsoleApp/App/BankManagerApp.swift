@@ -40,17 +40,17 @@ private extension BankManagerApp {
         guard let clientCount = (10...30).randomElement() else { fatalError() }
         let dispenser = TicketDispenser(totalClientCount: clientCount)
         
-        let bankManager = BankManager(
-            textOut: self.output,
-            dispenser: dispenser
-        )
-        
         let orders = [
             Order(taskType: .loan, bankerCount: 1),
             Order(taskType: .deposit, bankerCount: 2),
         ]
         
-        bankManager.runBank(with: orders)
+        let bankManager = BankManager(
+            textOut: self.output,
+            dispenser: dispenser
+        )
+        
+        bankManager.runBank(with: orders, numberOfClient: clientCount)
     }
     
     func handle(menu: BankManagerAppMenu) {
