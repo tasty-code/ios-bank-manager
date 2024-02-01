@@ -8,5 +8,5 @@
 struct Order {
     let taskType: Taskable.Type
     let bankerCount: Int
-    let clientCount: Int
+    let clientNumbers: [Int]
 }
