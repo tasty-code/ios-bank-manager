@@ -25,7 +25,7 @@ final class TicketDispenser {
         var remain = totalIndexCount
         for (index, taskType) in taskTypes.enumerated() {
             guard index != taskTypes.count - 1 else {
-                result.updateValue(shuffled, forKey: taskType)
+                result.updateValue(shuffled.sorted(by: >), forKey: taskType)
                 break
             }
             guard let chunkSize = (0...remain).randomElement() else { fatalError() }

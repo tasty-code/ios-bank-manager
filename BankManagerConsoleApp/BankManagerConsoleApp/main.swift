@@ -3,5 +3,5 @@
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
-
-BankManagerApp().start()
+let console = ConsoleManager()
+BankManagerApp(inputHandler: console, outputHandler: console).start()

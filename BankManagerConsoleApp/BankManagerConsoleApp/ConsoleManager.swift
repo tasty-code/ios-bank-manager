@@ -12,3 +12,15 @@ extension ConsoleManager: TextOutputDisplayable {
         print(output)
     }
 }
+
+extension ConsoleManager: TextInputReadable {
+    func readInput(prompt: String?) throws -> String {
+        if let prompt {
+            print(prompt, terminator: " ")
+        }
+        guard let input = readLine() else {
+            throw IOError.unexpectedError
+        }
+        return input
+    }
+}
