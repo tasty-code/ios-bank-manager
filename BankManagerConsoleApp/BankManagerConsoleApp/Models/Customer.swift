@@ -1,8 +1,9 @@
 struct Customer {
-    static let taskTime: Double = 0.7
     let number: Int
+    let task: Task
     
-    init(number: Int) {
+    init(number: Int, task: Task) {
         self.number = number
+        self.task = task
     }
 }

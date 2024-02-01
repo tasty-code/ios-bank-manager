@@ -68,7 +68,7 @@ extension Bank {
         (1...Int.random(in: customerCountRange)).forEach {
             let task: Task = Int.random(in: 1...2) == 1 ? .deposit : .loan
             let customerQueue = task == .deposit ? depositCustomerQueue : loanCustomerQueue
-            customerQueue.enqueue(Customer(number: $0))
+            customerQueue.enqueue(Customer(number: $0, task: task))
             maxCustomerNumber += 1
         }
         isDepositManagerWorking = depositCustomerQueue.isEmpty ? false : true
