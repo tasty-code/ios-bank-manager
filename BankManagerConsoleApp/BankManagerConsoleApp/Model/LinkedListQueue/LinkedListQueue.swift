@@ -9,11 +9,11 @@ final class LinkedListQueue<T>: QueueProtocol {
     private var elements: LinkedList<T>
     
     /// 큐에 맨 앞을 확인
-    public var peek: T? {
+    var peek: T? {
         return elements.peek
     }
     /// 큐가 비어 있는지 확인
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return elements.isEmpty
     }
     
@@ -22,22 +22,22 @@ final class LinkedListQueue<T>: QueueProtocol {
     }
     
     /// 큐에 요소를 추가
-    public func enqueue(_ element: T) {
+    func enqueue(_ element: T) {
         elements.append(data: element)
     }
     
     /// 큐에서 첫 번째 요소를 제거하고 반환
-    public func dequeue() -> T? {
+    func dequeue() -> T? {
         elements.removeFirst()
     }
     
     /// 큐의 모든 요소를 제거
-    public func clear() {
+    func clear() {
         elements.removeAll()
     }
     
     /// LinkedList의 개별 요소 나타냄
-    final class Node<U> {
+    private final class Node<U> {
         var data: U
         var next: Node<U>?
         
