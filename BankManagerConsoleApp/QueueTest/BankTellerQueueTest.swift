@@ -9,11 +9,11 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankTellerQueueTest: XCTestCase {
-    var bankTellerQueue: BankTellerQueue<Int>!
+    var bankTellerQueue: Queue<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        bankTellerQueue = BankTellerQueue<Int>()
+        bankTellerQueue = Queue<Int>()
     }
 
     override func tearDownWithError() throws {

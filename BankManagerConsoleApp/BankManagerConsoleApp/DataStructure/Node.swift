@@ -13,10 +13,5 @@ final class Node<Element> {
     
     init(data: Element) {
         self.data = data
-        print("Node with \(data) has been created.")
-    }
-    
-    deinit {
-        print("Node with \(data) has been expired.")
     }
 }

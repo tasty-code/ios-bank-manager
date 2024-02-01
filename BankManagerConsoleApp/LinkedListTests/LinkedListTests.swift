@@ -90,7 +90,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(new: 4)
         
         //when
-        sut.insert(value: 7, index: 1)
+        sut.insert(value: 7, at: 1)
         let _ = sut.removeFirst()
         let head = sut.head?.data
         //then
@@ -105,7 +105,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(new: 4)
         
         //when
-        let result = sut.removeAt(index: 3)
+        let result = sut.remove(at: 3)
         
         //then
         XCTAssertEqual(result, 4)
@@ -118,7 +118,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(new: 6)
         
         //when
-        sut.prepend(item: 7)
+        sut.prepend(new: 7)
         let head = sut.head?.data
         //then
         XCTAssertEqual(head, 7)

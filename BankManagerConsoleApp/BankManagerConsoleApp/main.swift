@@ -4,6 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-
+let currentBank = Bank(clerk: BankClerk())
+var bankManger = BankManager(of: currentBank)
+bankManger.run()
 
