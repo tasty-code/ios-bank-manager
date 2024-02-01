@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    private var bankManager = BankManager()
+    private let bankManager: BankManager
     private let customNum: Int
     
     init(customNum: Int, bankManager: BankManager) {

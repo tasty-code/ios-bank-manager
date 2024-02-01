@@ -30,7 +30,7 @@ struct ConsoleManager: CustomerNumbering {
             
             switch input {
             case Message.first:
-                Bank(customNum: numOfPerson, bankManager: BankManager()).openBank()
+                Bank(customNum: numOfPerson, bankManager: BankManager(bankClerk: [.deposit: BankClerk(work: .deposit), .loan: BankClerk(work: .loan)])).openBank()
             case Message.second:
                 return
             default:
