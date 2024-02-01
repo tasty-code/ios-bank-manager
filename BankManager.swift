@@ -44,17 +44,21 @@ struct BankManager {
     mutating private func startBankingProcess(completionHandler: (_ customer: Int, _ time: Double) -> Void) {
         setupInitialInformation()
         
+        let startTime = Date()
+        
         while !queue.isEmpty() {
             guard let node = queue.dequeue() else {
                 return
             }
             let customer = node.value
             DispatchQueue.global().sync {
-                totalTime += banker.provideService(to: customer)
+                banker.provideService(to: customer)
             }
         }
         
-        completionHandler(totalCustomers, totalTime)
+        let endTime = Date()
+        let duration = endTime.timeIntervalSince(startTime)
+        completionHandler(totalCustomers, duration)
     }
     
     mutating private func setupInitialInformation() {
