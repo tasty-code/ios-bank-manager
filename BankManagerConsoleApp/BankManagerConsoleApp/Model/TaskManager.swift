@@ -32,7 +32,7 @@ extension TaskManager: TaskManagable {
             while true {
                 if self.clientQueue.isEmpty == false {
                     if self.bankerQueue.isEmpty == false {
-                        guard let banker = self.bankerQueue.dequeue(),
+                        guard let banker = self.dequeueBanker(),
                               let client = self.clientQueue.dequeue() else { continue }
                         banker.handle(client: client, group: group)
                     } else {
@@ -52,13 +52,23 @@ extension TaskManager: TaskManagable {
 
 extension TaskManager: BankerEnqueuable {
     func enqueueBanker(_ taskHandlable: ClientTaskHandlable) {
-        // race 관리 or not
+        self.semaphore.wait()
         self.bankerQueue.enqueue(taskHandlable)
+        self.semaphore.signal()
     }
 }
 
 extension TaskManager: ClientEnqueuable {
     func enqueueClient(_ client: Client) {
         self.clientQueue.enqueue(client)
+    }
+}
+
+extension TaskManager {
+    private func dequeueBanker() -> ClientTaskHandlable? {
+        self.semaphore.wait()
+        let result = self.bankerQueue.dequeue()
+        self.semaphore.signal()
+        return result
     }
 }
