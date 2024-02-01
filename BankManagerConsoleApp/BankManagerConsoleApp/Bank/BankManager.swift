@@ -24,8 +24,7 @@ struct BankManager {
         let loanQueue = DispatchQueue(label: "loanQueue")
         let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
         
-        while let list = try? queue.dequeue() {
-        guard let banking = list.banking else { return }
+        while let list = try? queue.dequeue(), let banking = list.banking {
             guard let customer = list as? Customer else {
                 throw QueueError.dequeueError
             }
