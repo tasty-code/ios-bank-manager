@@ -3,10 +3,7 @@ struct LinkedList<T: Equatable> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     private(set) var count: Int = 0
-    private(set) var isEmpty: Bool {
-        get { return head == nil }
-        set { }
-    }
+    var isEmpty: Bool { head == nil }
     
     mutating func appendNodeAtRear(with data: T) {
         if isEmpty {
@@ -42,13 +39,13 @@ struct LinkedList<T: Equatable> {
         head?.data
     }
 
-    mutating func isData(with data: T?) -> Int? {
-        var count = 0
+    mutating func searchNodeLocation(with data: T?) -> Int? {
+        var foundLocation = 0
         
         while head?.next != nil {
-            count += 1
+            foundLocation += 1
             if head?.data == data {
-                return count
+                return foundLocation
             }
             head = head?.next
         }
@@ -57,8 +54,8 @@ struct LinkedList<T: Equatable> {
             return nil
         } else if head?.next == nil {
             if head?.data == data {
-                count += 1
-                return count
+                foundLocation += 1
+                return foundLocation
             }
         }
         return nil

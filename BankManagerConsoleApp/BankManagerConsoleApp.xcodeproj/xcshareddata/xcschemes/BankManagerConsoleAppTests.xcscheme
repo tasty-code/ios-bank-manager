@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9B7373062B61325300FDB082"
-               BuildableName = "BankManagerConsoleAppTests.xctest"
-               BlueprintName = "BankManagerConsoleAppTests"
+               BuildableName = "BankManagerConsoleTests.xctest"
+               BlueprintName = "BankManagerConsoleTests"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -58,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B7373062B61325300FDB082"
-            BuildableName = "BankManagerConsoleAppTests.xctest"
-            BlueprintName = "BankManagerConsoleAppTests"
+            BuildableName = "BankManagerConsoleTests.xctest"
+            BlueprintName = "BankManagerConsoleTests"
             ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
