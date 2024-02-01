@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9B26426B2B690DEE008FA05F /* CustomerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26426A2B690DEE008FA05F /* CustomerManager.swift */; };
 		9B73730A2B61325300FDB082 /* BankManagerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7373092B61325300FDB082 /* BankManagerQueueTests.swift */; };
-		9B73730F2B6133C100FDB082 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		9B7373102B6133C500FDB082 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E61A7E2B61239700D55D4A /* Node.swift */; };
 		9B7373112B6133C800FDB082 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E61A802B6123A600D55D4A /* LinkedList.swift */; };
 		9B7373122B6133CB00FDB082 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E61A822B6123B600D55D4A /* Queue.swift */; };
@@ -254,7 +253,6 @@
 				C76B75312B620123005B972D /* BankManagerConsoleApp in Sources */,
 				9B7373122B6133CB00FDB082 /* Queue.swift in Sources */,
 				9B7373102B6133C500FDB082 /* Node.swift in Sources */,
-				9B73730F2B6133C100FDB082 /* main.swift in Sources */,
 				9B7373112B6133C800FDB082 /* LinkedList.swift in Sources */,
 				9B73730A2B61325300FDB082 /* BankManagerQueueTests.swift in Sources */,
 			);

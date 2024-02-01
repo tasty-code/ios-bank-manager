@@ -13,13 +13,13 @@ final class BankMangerLinkedListTests: XCTestCase {
         sutLinkedTest = nil
     }
 
-    func test_입력이1개일때_노드를1개추가하고삭제를1번하면_노드가없을것이다() {
+    func test_입력이1개일때_노드를1개추가하고삭제를1번하면_입력한노드가없을것이다() {
         // given
         let input = "A"
         // when
         sutLinkedTest.appendNodeAtRear(with: input)
         let _ = sutLinkedTest.removeNodeFromFront()
-        let result = sutLinkedTest.isData(with: nil)
+        let result = sutLinkedTest.searchNodeLocation(with: input)
         // then
         XCTAssertNil(result)
     }
@@ -30,7 +30,7 @@ final class BankMangerLinkedListTests: XCTestCase {
         let expectedResult = 1
         // when
         sutLinkedTest.appendNodeAtRear(with: input)
-        let result = sutLinkedTest.isData(with: input)
+        let result = sutLinkedTest.searchNodeLocation(with: input)
         // then
         XCTAssertEqual(expectedResult, result)
     }
@@ -43,7 +43,7 @@ final class BankMangerLinkedListTests: XCTestCase {
         for data in input {
             sutLinkedTest.appendNodeAtRear(with: data)
         }
-        let result = sutLinkedTest.isData(with: "C")
+        let result = sutLinkedTest.searchNodeLocation(with: input[2])
         // then
         XCTAssertEqual(expectedResult, result)
     }

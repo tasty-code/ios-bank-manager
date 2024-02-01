@@ -39,7 +39,7 @@ struct LinkedList<T: Equatable> {
         head?.data
     }
 
-    mutating func isData(with data: T?) -> Int? {
+    mutating func searchNodeLocation(with data: T?) -> Int? {
         var foundLocation = 0
         
         while head?.next != nil {
