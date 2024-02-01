@@ -25,25 +25,23 @@ final class TaskManager {
 
 extension TaskManager: TaskManagable {
     func startTaskManaging(group: DispatchGroup) {
-        // 시작 전에 은행원 수 캡쳐
         let bankerCount = self.bankerQueue.count
         
         DispatchQueue.global().async(group: group) {
-            while true {
-                if self.clientQueue.isEmpty == false {
-                    if self.bankerQueue.isEmpty == false {
-                        guard let banker = self.dequeueBanker(),
-                              let client = self.clientQueue.dequeue() else { continue }
-                        banker.handle(client: client, group: group)
-                    } else {
-                        continue
-                    }
-                } else {
-                    if self.bankerQueue.count == bankerCount {
-                        break
-                    } else {
-                        continue
-                    }
+            while self.clientQueue.isEmpty == false {
+                guard
+                    let banker = self.dequeueBanker(),
+                    let client = self.clientQueue.dequeue()
+                else {
+                    continue
+                }
+                
+                banker.handle(client: client, group: group)
+                
+                guard
+                    self.bankerQueue.count != bankerCount
+                else {
+                    break
                 }
             }
         }
