@@ -1,3 +1,5 @@
+import Foundation
+
 final class Bank {
     private let customerCountRange: ClosedRange<Int> = 10...30
     private var maxCustomerNumber: Int
@@ -52,6 +54,7 @@ extension Bank {
             return
         }
         
+        makeBankManagerQueue(depositManagerCount: 2, loanManagerCount: 1)
         makeCustomerQueue()
         openBanck()
     }
@@ -76,17 +79,48 @@ extension Bank {
     }
     
     private func openBanck() {
-        while let customer: Customer = customerQueue.dequeue(),
-              let bankManager: BankManager = bankManagerQueue.dequeue() {
-            bankManager.deal(with: customer) { [weak self] manager in
-                self?.bankManagerQueue.enqueue(manager)
-            }
+        let openTime: Date = Date()
+        while isbankWorking {
+            handleQueues(task: .deposit)
+            handleQueues(task: .loan)
         }
-        closeBank()
+        closeBank(openTime)
     }
     
-    private func closeBank() {
-        Message.close(customerCount: maxCustomerNumber, time: Double(maxCustomerNumber) * Customer.taskTime).printMessage()
+    private func handleQueues(task: Task) {
+        let managerQueue: LinkedListQueue<BankManager> = task == .deposit ? depositManagerQueue : loanManagerQueue
+        let customerQueue: LinkedListQueue<Customer> = task == .deposit ? depositCustomerQueue : loanCustomerQueue
+        if let manager: BankManager = managerQueue.dequeue(),
+           let customer: Customer = customerQueue.dequeue() {
+            assign(to: manager, with: customer)
+        }
+    }
+    
+    private func assign(to bankManager: BankManager, with customer: Customer) {
+        let isLastCustomer: Bool = customer.task == .deposit ? depositCustomerQueue.isEmpty : loanCustomerQueue.isEmpty
+        DispatchQueue.global().async {
+            bankManager.deal(with: customer,
+                             isLastCustomer: isLastCustomer,
+                             completionHandler: { [weak self] (manager, task, isLastCustomer) in
+                let managerQueue = task == .deposit ? self?.depositManagerQueue : self?.loanManagerQueue
+                managerQueue?.enqueue(manager)
+                if isLastCustomer {
+                    self?.finishManaging(task)
+                }
+            })
+        }
+    }
+    
+    private func finishManaging(_ task: Task) {
+        if task == .deposit {
+            isDepositManagerWorking = false
+            return
+        }
+        isLoanManagerWorking = false
+    }
+    
+    private func closeBank(_ openTime: Date) {
+        Message.close(customerCount: maxCustomerNumber, time: Date().timeIntervalSince(openTime)).printMessage()
         maxCustomerNumber = 0
         process()
     }
