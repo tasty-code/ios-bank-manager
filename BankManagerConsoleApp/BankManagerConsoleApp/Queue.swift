@@ -5,8 +5,6 @@
 //  Created by Effie on 1/31/24.
 //
 
-import Foundation
-
 final class Node<Value> {
     let value: Value
     var next: Node?

@@ -33,7 +33,7 @@ extension TaskManager: TaskManagable {
                 if self.clientQueue.isEmpty == false {
                     if self.bankerQueue.isEmpty == false {
                         guard let banker = self.bankerQueue.dequeue(),
-                              let client = self.clientQueue.dequeue() else { continue /*음*/ }
+                              let client = self.clientQueue.dequeue() else { continue }
                         banker.handle(client: client, group: group)
                     } else {
                         continue

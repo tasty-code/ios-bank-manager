@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2776CBD12B6B844F00EF7155 /* TextInputReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776CBD02B6B844F00EF7155 /* TextInputReadable.swift */; };
+		2776CBD32B6B852F00EF7155 /* BankManagerAppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776CBD22B6B852F00EF7155 /* BankManagerAppMenu.swift */; };
+		2776CBD52B6B854C00EF7155 /* IOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2776CBD42B6B854C00EF7155 /* IOError.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		F4EC3C312B6A57B0006C9D11 /* Taskable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C302B6A57B0006C9D11 /* Taskable.swift */; };
@@ -42,6 +45,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2776CBD02B6B844F00EF7155 /* TextInputReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputReadable.swift; sourceTree = "<group>"; };
+		2776CBD22B6B852F00EF7155 /* BankManagerAppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerAppMenu.swift; sourceTree = "<group>"; };
+		2776CBD42B6B854C00EF7155 /* IOError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOError.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -104,15 +110,17 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				F4EC3C382B6A6C05006C9D11 /* TaskManager.swift */,
 				F4EC3C422B6A6D06006C9D11 /* Banker.swift */,
+				2776CBD22B6B852F00EF7155 /* BankManagerAppMenu.swift */,
+				2776CBD42B6B854C00EF7155 /* IOError.swift */,
 				F4EC3C462B6A6D6F006C9D11 /* Client.swift */,
-				F4EC3C4E2B6A72C6006C9D11 /* protocol */,
+				F4EC3C4E2B6A72C6006C9D11 /* Protocol */,
 				F4EC3C4C2B6A71F8006C9D11 /* ConsoleManager.swift */,
 				F4EC3C512B6B7F9A006C9D11 /* TicketDispenser.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
-		F4EC3C4E2B6A72C6006C9D11 /* protocol */ = {
+		F4EC3C4E2B6A72C6006C9D11 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				F4EC3C3A2B6A6C18006C9D11 /* BankerEnqueuable.swift */,
@@ -121,10 +129,11 @@
 				F4EC3C402B6A6CE6006C9D11 /* TaskManagable.swift */,
 				F4EC3C442B6A6D15006C9D11 /* ClientTaskHandlable.swift */,
 				F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */,
+				2776CBD02B6B844F00EF7155 /* TextInputReadable.swift */,
 				F4EC3C4A2B6A71E0006C9D11 /* TextOutputDisplayable.swift */,
 				F4EC3C532B6B7FAE006C9D11 /* TicketProvidable.swift */,
 			);
-			path = protocol;
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,8 +205,11 @@
 				F4EC3C492B6A70E7006C9D11 /* ClientEnqueuable.swift in Sources */,
 				F4EC3C452B6A6D15006C9D11 /* ClientTaskHandlable.swift in Sources */,
 				F4EC3C3B2B6A6C18006C9D11 /* BankerEnqueuable.swift in Sources */,
+				2776CBD32B6B852F00EF7155 /* BankManagerAppMenu.swift in Sources */,
 				F4EC3C472B6A6D6F006C9D11 /* Client.swift in Sources */,
 				F4EC3C352B6A6BD1006C9D11 /* Order.swift in Sources */,
+				2776CBD52B6B854C00EF7155 /* IOError.swift in Sources */,
+				2776CBD12B6B844F00EF7155 /* TextInputReadable.swift in Sources */,
 				F4EC3C412B6A6CE6006C9D11 /* TaskManagable.swift in Sources */,
 				F4EC3C522B6B7F9A006C9D11 /* TicketDispenser.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
