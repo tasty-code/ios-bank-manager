@@ -6,5 +6,5 @@
 //
 
 protocol BankRunnable {
-    func runBank(with orders: [Order])
+    func runBank(with orders: [Order], numberOfClient: Int)
 }
