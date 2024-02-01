@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08A2B2702B6B7970009EDDEA /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2B26F2B6B7970009EDDEA /* Customer.swift */; };
+		08A2B2722B6B7C44009EDDEA /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2B2712B6B7C44009EDDEA /* Factory.swift */; };
 		08AF73CD2B5E0EFA00B95E23 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF73CC2B5E0EFA00B95E23 /* LinkedList.swift */; };
 		08AF74172B5E491200B95E23 /* LinkedListUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF74162B5E491200B95E23 /* LinkedListUnitTests.swift */; };
 		08AF74312B5F53EA00B95E23 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		08A2B26F2B6B7970009EDDEA /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		08A2B2712B6B7C44009EDDEA /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		08AF73CC2B5E0EFA00B95E23 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		08AF74142B5E491100B95E23 /* BankManagerConsoleAppUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08AF74162B5E491200B95E23 /* LinkedListUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListUnitTests.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				7729DCA72B624C62001DD6D8 /* TaskState.swift */,
 				773075D72B6374B500249038 /* BankError.swift */,
 				08A2B26F2B6B7970009EDDEA /* Customer.swift */,
+				08A2B2712B6B7C44009EDDEA /* Factory.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			files = (
 				08AF73CD2B5E0EFA00B95E23 /* LinkedList.swift in Sources */,
 				08A2B2702B6B7970009EDDEA /* Customer.swift in Sources */,
+				08A2B2722B6B7C44009EDDEA /* Factory.swift in Sources */,
 				08D27FF42B609F06002DF272 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				7729DCA42B61EE82001DD6D8 /* Bank.swift in Sources */,
