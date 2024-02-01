@@ -66,7 +66,8 @@ struct BankManager {
         totalTime = 0
         
         for i in 1...totalCustomers {
-            queue.enqueue(node: Node(value: Customer(requiredTime: 0.7, waitingNumber: i)))
+            let randomService: BankingService = BankingService.allCases.randomElement() ?? .deposit
+            queue.enqueue(node: Node(value: Customer(requiredTime: 0.7, waitingNumber: i, requiredService: randomService)))
         }
     }
 }
