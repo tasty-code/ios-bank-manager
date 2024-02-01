@@ -60,8 +60,7 @@ extension Bank {
     }
     
     private func validate() -> Menu? {
-        guard let input = readLine(),
-              let userInput = Int(input) else {
+        guard let userInput = readLine() else {
             return nil
         }
         return Menu(input: userInput)
