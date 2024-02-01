@@ -20,7 +20,7 @@ struct Bank {
         setCustomerCount(customer: customNum)
         let workTime = calulateWorkTime {
             do {
-                try bankManager.assign()
+                try bankManager.assignBank()
             } catch {
                 print(error.localizedDescription)
             }
