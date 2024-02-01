@@ -5,30 +5,31 @@
 //  Created by Effie on 1/31/24.
 //
 
-protocol Taskable {
-    var name: String { get }
-    init()
-    func process()
-}
-
-import Foundation
-
-struct Loan: Taskable {
-    let name: String = "대출업무"
+enum BankTaskType {
+    case deposit
+    case loan
     
-    private let duration: Double = 1.1
+    var name: String {
+        switch self {
+        case .deposit:
+            return "예금업무"
+        case .loan:
+            return "대출업무"
+        }
+    }
     
-    func process() {
-        Thread.sleep(forTimeInterval: self.duration)
+    var duration: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
     }
 }
 
-struct Deposit: Taskable {
-    let name: String = "예금업무"
-    
-    private let duration: Double = 0.7
-    
-    func process() {
-        Thread.sleep(forTimeInterval: self.duration)
+extension BankTaskType: CaseIterable {
+    static var allCasesSet: Set<Self> {
+        return Set(allCases)
     }
 }

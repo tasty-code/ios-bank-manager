@@ -24,6 +24,9 @@
 		F4EC3C492B6A70E7006C9D11 /* ClientEnqueuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */; };
 		F4EC3C4B2B6A71E0006C9D11 /* TextOutputDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C4A2B6A71E0006C9D11 /* TextOutputDisplayable.swift */; };
 		F4EC3C4D2B6A71F8006C9D11 /* ConsoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C4C2B6A71F8006C9D11 /* ConsoleManager.swift */; };
+		F4EC3C502B6B6701006C9D11 /* BankManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C4F2B6B6701006C9D11 /* BankManagerApp.swift */; };
+		F4EC3C522B6B7F9A006C9D11 /* TicketDispenser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C512B6B7F9A006C9D11 /* TicketDispenser.swift */; };
+		F4EC3C542B6B7FAE006C9D11 /* TicketProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC3C532B6B7FAE006C9D11 /* TicketProvidable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +60,9 @@
 		F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEnqueuable.swift; sourceTree = "<group>"; };
 		F4EC3C4A2B6A71E0006C9D11 /* TextOutputDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOutputDisplayable.swift; sourceTree = "<group>"; };
 		F4EC3C4C2B6A71F8006C9D11 /* ConsoleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleManager.swift; sourceTree = "<group>"; };
+		F4EC3C4F2B6B6701006C9D11 /* BankManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerApp.swift; sourceTree = "<group>"; };
+		F4EC3C512B6B7F9A006C9D11 /* TicketDispenser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDispenser.swift; sourceTree = "<group>"; };
+		F4EC3C532B6B7FAE006C9D11 /* TicketProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketProvidable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,12 +100,14 @@
 				F4EC3C302B6A57B0006C9D11 /* Taskable.swift */,
 				F4EC3C342B6A6BD1006C9D11 /* Order.swift */,
 				F4EC3C362B6A6BE6006C9D11 /* TaskStat.swift */,
+				F4EC3C4F2B6B6701006C9D11 /* BankManagerApp.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				F4EC3C382B6A6C05006C9D11 /* TaskManager.swift */,
 				F4EC3C422B6A6D06006C9D11 /* Banker.swift */,
 				F4EC3C462B6A6D6F006C9D11 /* Client.swift */,
 				F4EC3C4E2B6A72C6006C9D11 /* protocol */,
 				F4EC3C4C2B6A71F8006C9D11 /* ConsoleManager.swift */,
+				F4EC3C512B6B7F9A006C9D11 /* TicketDispenser.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -114,6 +122,7 @@
 				F4EC3C442B6A6D15006C9D11 /* ClientTaskHandlable.swift */,
 				F4EC3C482B6A70E7006C9D11 /* ClientEnqueuable.swift */,
 				F4EC3C4A2B6A71E0006C9D11 /* TextOutputDisplayable.swift */,
+				F4EC3C532B6B7FAE006C9D11 /* TicketProvidable.swift */,
 			);
 			path = protocol;
 			sourceTree = "<group>";
@@ -176,9 +185,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EC3C3F2B6A6CC3006C9D11 /* BankRunnable.swift in Sources */,
+				F4EC3C502B6B6701006C9D11 /* BankManagerApp.swift in Sources */,
 				F4EC3C372B6A6BE6006C9D11 /* TaskStat.swift in Sources */,
 				F4EC3C432B6A6D06006C9D11 /* Banker.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				F4EC3C542B6B7FAE006C9D11 /* TicketProvidable.swift in Sources */,
 				F4EC3C3D2B6A6C54006C9D11 /* StatGeneratable.swift in Sources */,
 				F4EC3C312B6A57B0006C9D11 /* Taskable.swift in Sources */,
 				F4EC3C4B2B6A71E0006C9D11 /* TextOutputDisplayable.swift in Sources */,
@@ -188,6 +199,7 @@
 				F4EC3C472B6A6D6F006C9D11 /* Client.swift in Sources */,
 				F4EC3C352B6A6BD1006C9D11 /* Order.swift in Sources */,
 				F4EC3C412B6A6CE6006C9D11 /* TaskManagable.swift in Sources */,
+				F4EC3C522B6B7F9A006C9D11 /* TicketDispenser.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				F4EC3C392B6A6C05006C9D11 /* TaskManager.swift in Sources */,
 				F4EC3C4D2B6A71F8006C9D11 /* ConsoleManager.swift in Sources */,
