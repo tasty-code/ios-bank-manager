@@ -18,28 +18,41 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
     }
     
     /// 고객 업무 시작
-    func open() {
+    func open(completion: @escaping () -> Void) {
         let numberOfCustomers = Int.random(in: 10...30)
         for number in 1...numberOfCustomers {
             customerQueue.enqueue(Customer(waitingNumber: number))
         }
         totalCustomers = numberOfCustomers
-        processCustomer()
+        processCustomers {
+            self.closed(completion: completion)
+        }
     }
     
-    /// 고객 업무 완료
-    func processCustomer() {
+    /// 고객 업무 처리
+    private func processCustomers(completion: @escaping () -> Void) {
+        let dispatchGroup = DispatchGroup()
+        
         while let customer = customerQueue.dequeue() {
+            dispatchGroup.enter()
             consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber)
-            Thread.sleep(forTimeInterval: 0.7)
-            consoleMessage.teskEndMessage(customerNumber: customer.waitingNumber)
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.7) {
+                self.consoleMessage.teskEndMessage(customerNumber: customer.waitingNumber)
+                dispatchGroup.leave()
+            }
+            dispatchGroup.wait()
         }
-        closed()
+
+        dispatchGroup.notify(queue: .global()) {
+            completion()
+        }
     }
     
     /// 업무가 마감됨
-    func closed() {
+    private func closed(completion: @escaping () -> Void) {
         let totalTime = Double(totalCustomers) * 0.7
         consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime)
+        completion()
     }
 }
