@@ -1,22 +1,34 @@
 final class Bank {
-    private var maxCustomerNumber: Int
-    private var customerQueue: LinkedListQueue<Customer>
-    private var bankManagerQueue: LinkedListQueue<BankManager>
     private let customerCountRange: ClosedRange<Int> = 10...30
+    private var maxCustomerNumber: Int
+    private var depositCustomerQueue: LinkedListQueue<Customer>
+    private var loanCustomerQueue: LinkedListQueue<Customer>
+    private var depositManagerQueue: LinkedListQueue<BankManager>
+    private var loanManagerQueue: LinkedListQueue<BankManager>
+    private var isDepositManagerWorking: Bool
+    private var isLoanManagerWorking: Bool
+    private var isbankWorking: Bool {
+        return isDepositManagerWorking || isLoanManagerWorking
+    }
     
-    init(bankManagerCount: Int) {
+    init() {
         self.maxCustomerNumber = 0
-        self.customerQueue = LinkedListQueue<Customer>()
-        self.bankManagerQueue = LinkedListQueue<BankManager>()
-        makeBankManagerQueue(bankManagerCount)
+        self.depositCustomerQueue = LinkedListQueue<Customer>()
+        self.loanCustomerQueue = LinkedListQueue<Customer>()
+        self.depositManagerQueue = LinkedListQueue<BankManager>()
+        self.loanManagerQueue = LinkedListQueue<BankManager>()
+        self.isDepositManagerWorking = true
+        self.isLoanManagerWorking = true
     }
 }
 
 extension Bank {
-    func makeBankManagerQueue(_ bankManagerCount: Int) {
-        (1...bankManagerCount).forEach { _ in
-            let bankManger = BankManager()
-            bankManagerQueue.enqueue(bankManger)
+    private func makeBankManagerQueue(depositManagerCount: Int, loanManagerCount: Int) {
+        (1...depositManagerCount).forEach { _ in
+            depositManagerQueue.enqueue(BankManager())
+        }
+        (1...loanManagerCount).forEach { _ in
+            loanManagerQueue.enqueue(BankManager())
         }
     }
     
@@ -54,9 +66,13 @@ extension Bank {
     
     private func makeCustomerQueue() {
         (1...Int.random(in: customerCountRange)).forEach {
-            customerQueue.enqueue( Customer(number: $0))
+            let task: Task = Int.random(in: 1...2) == 1 ? .deposit : .loan
+            let customerQueue = task == .deposit ? depositCustomerQueue : loanCustomerQueue
+            customerQueue.enqueue(Customer(number: $0))
             maxCustomerNumber += 1
         }
+        isDepositManagerWorking = depositCustomerQueue.isEmpty ? false : true
+        isLoanManagerWorking = loanCustomerQueue.isEmpty ? false : true
     }
     
     private func openBanck() {
