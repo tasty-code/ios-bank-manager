@@ -174,6 +174,12 @@ struct DoublyLinkedListQueue<T>: QueueProtocol {
     private var size: Int {
         queue.size
     }
+    var peek: T? {
+        return queue.peek()
+    }
+    var isEmpty: Bool {
+        return queue.isEmpty()
+    }
     
     init() {
         self.queue = LinkedList<T>()
@@ -188,18 +194,18 @@ extension DoublyLinkedListQueue {
     }
     
     func dequeue() -> T? {
-        return isEmpty() ? nil : queue.removeFirst()
+        return isEmpty ? nil : queue.removeFirst()
     }
     
     func clear() {
         queue.removeAll()
     }
     
-    func peek() -> T? {
-        return queue.peek()
-    }
-    
-    func isEmpty() -> Bool {
-        return queue.isEmpty()
-    }
+//    func peek() -> T? {
+//        return queue.peek()
+//    }
+//    
+//    func isEmpty() -> Bool {
+//        return queue.isEmpty()
+//    }
 }
