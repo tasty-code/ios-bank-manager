@@ -10,4 +10,3 @@ enum BankManagerError: LocalizedError {
         }
     }
 }
-

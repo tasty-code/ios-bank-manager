@@ -1,8 +1,8 @@
 final class BankManager {
-    var banker: Banker
+    var bank: Bank
     
-    init(banker: Banker) {
-        self.banker = banker
+    init(bank: Bank) {
+        self.bank = bank
     }
     
     private func getUserInput() -> String? {
@@ -23,7 +23,7 @@ final class BankManager {
             let choice = getUserInput()
             switch choice {
             case "1":
-                banker.taskStart()
+                bank.openBank()
             case "2":
                 return
             default:
