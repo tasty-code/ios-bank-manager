@@ -38,7 +38,7 @@ extension Bank {
         Message.menu.printMessage()
         Message.input.printMessage()
         
-        guard let selectedMenu = validate()else {
+        guard let selectedMenu = validate() else {
             Message.wrongInput.printMessage()
             process()
             return
@@ -56,7 +56,7 @@ extension Bank {
         
         makeBankManagerQueue(depositManagerCount: 2, loanManagerCount: 1)
         makeCustomerQueue()
-        openBanck()
+        openBank()
     }
     
     private func validate() -> Menu? {
@@ -77,7 +77,7 @@ extension Bank {
         isLoanManagerWorking = loanCustomerQueue.isEmpty ? false : true
     }
     
-    private func openBanck() {
+    private func openBank() {
         let openTime: Date = Date()
         while isbankWorking {
             handleQueues(task: .deposit)
