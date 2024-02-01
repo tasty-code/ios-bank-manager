@@ -9,8 +9,10 @@ import Foundation
 
 protocol CustomerNumbering {
     var numOfPerson: Int { get }
+    var banking: Banking? { get }
 }
 
 struct Customer: CustomerNumbering {
+    let banking: Banking?
     private(set) var numOfPerson: Int
 }
