@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct BankManager {
+struct BankManager: BankManagerDelegate {
     private enum Menu: Int {
         case open = 1
         case close = 2
@@ -17,6 +17,7 @@ struct BankManager {
     
     init(of bank: Bank) {
         self.bank = bank
+        self.bank.delegate = self
     }
 
     mutating func run() {
@@ -44,5 +45,17 @@ struct BankManager {
     
     private func inputMenu() -> String? {
         return Swift.readLine()
+    }
+    
+    func showResult(customerCount: Int, intervalTime: String) {
+        ConsoleView.showResult(customerCount: customerCount, intervalTime: intervalTime)
+    }
+
+    func showCustomerWorkStart(customerNumber: Int) {
+        ConsoleView.showCustomerWorkStart(customerNumber: customerNumber)
+    }
+
+    func showCustomerWorkDone(customerNumber: Int) {
+        ConsoleView.showCustomerWorkDone(customerNumber: customerNumber)
     }
 }

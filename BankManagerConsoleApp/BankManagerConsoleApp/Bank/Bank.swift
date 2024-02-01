@@ -7,19 +7,26 @@
 
 import Foundation
 
+protocol BankManagerDelegate {
+    func showResult(customerCount: Int, intervalTime: String)
+    func showCustomerWorkStart(customerNumber: Int)
+    func showCustomerWorkDone(customerNumber: Int)
+}
+
 struct Bank {
     private var bankWatingQueue = Queue<Customer>()
     private let clerk: BankWork
     private var handledCustomerCount = 0
+    var delegate: BankManagerDelegate?
     
     init(clerk: BankWork) {
         self.clerk = clerk
     }
     
     mutating func open() {
-        setWaitingLine()
-        executeBankWork()
-    }
+         setWaitingLine()
+         executeBankWork()
+     }
     
     private mutating func setWaitingLine() {
         handledCustomerCount = 0
@@ -30,23 +37,24 @@ struct Bank {
     
     private mutating func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        
+
         DispatchQueue.global().sync {
             serveCustomer()
         }
-        
+
         let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
         let flooredDifference = floor(intervalTime * 10) / 10
         let totalTime = String(format: "%.2f", flooredDifference)
-        ConsoleView.showResult(customerCount: handledCustomerCount, intervalTime: totalTime)
+
+        delegate?.showResult(customerCount: handledCustomerCount, intervalTime: totalTime)
     }
     
     private mutating func serveCustomer() {
         while !bankWatingQueue.isEmpty() {
             guard let customer = bankWatingQueue.dequeue() else { return }
-            ConsoleView.showCustomerWorkStart(customerNumber: customer.number)
+            delegate?.showCustomerWorkStart(customerNumber: customer.number)
             clerk.work(for: customer)
-            ConsoleView.showCustomerWorkDone(customerNumber: customer.number)
+            delegate?.showCustomerWorkDone(customerNumber: customer.number)
             handledCustomerCount += 1
         }
     }
