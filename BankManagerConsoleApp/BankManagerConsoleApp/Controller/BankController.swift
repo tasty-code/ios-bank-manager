@@ -14,19 +14,25 @@ final class BankController {
     
     /// 사용자 입력
     func runBankApp() {
-        var isRunning = true
-        while isRunning {
-            print("1 : 은행 개점 \n2 : 종료")
-            print("입력: ",terminator: "")
-            let choice = readLine()
-            switch choice {
-            case "1":
-                bank.open()
-            case "2":
-                isRunning = false
-            default:
-                print("잘못된 입력입니다.")
+        var userChoice: String?
+        consoleMessage.bankMenu()
+        
+        repeat {
+            if let choice = readLine() {
+                userChoice = choice
+                
+                switch userChoice {
+                case "1":
+                    bank.open {
+                        consoleMessage.bankMenu()
+                    }
+                case "2":
+                    consoleMessage.appExitMessage()
+                default:
+                    consoleMessage.inputErrorMessage()
+                    consoleMessage.bankMenu()
+                }
             }
-        }
+        } while userChoice != "2"
     }
 }
