@@ -1,7 +1,7 @@
 
 import Foundation
 
-class Node<T: Equatable> {
+final class Node<T: Equatable> {
     private let _value: T
     var value: T {
         return _value
