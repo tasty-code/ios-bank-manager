@@ -80,7 +80,7 @@ final class LinkedList<Element> {
         count += 1
     }
     
-    func removeAt(index: Int) -> Element? {
+    func remove(at index: Int) -> Element? {
         guard !isEmpty, index >= 0 else { return nil }
         
         if index == 0 {
@@ -98,7 +98,7 @@ final class LinkedList<Element> {
     private func serch(index: Int) -> Node<Element>? {
         var indexNode = head
         
-        for _ in 0..<index - 1  {
+        for _ in 1..<index - 1  {
             indexNode = indexNode?.next
         }
         return indexNode

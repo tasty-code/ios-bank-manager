@@ -28,16 +28,13 @@ struct BankManager {
             else {
                 continue
             }
-            processMenu(menu)
-        }
-    }
-    
-    private mutating func processMenu(_ inputProcess: Menu) {
-        switch inputProcess {
-        case .open:
-            bank.open()
-        case .close:
-            isRunning = false
+            
+            switch menu {
+            case .open:
+                bank.open()
+            case .close:
+                isRunning = false
+            }
         }
     }
     
