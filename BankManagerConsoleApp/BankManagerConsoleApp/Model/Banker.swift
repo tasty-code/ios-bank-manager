@@ -8,8 +8,6 @@
 import Foundation
 
 final class Banker {
-    private let name: String
-    
     private let clientManager: any ClientDequeuable
     
     private let taskOutput: TextOutputDisplayable
@@ -17,11 +15,9 @@ final class Banker {
     private(set) var dailyClientStatistics: Int
     
     init(
-        name: String,
         clientManager: any ClientDequeuable,
         taskOutput: TextOutputDisplayable
     ) {
-        self.name = name
         self.clientManager = clientManager
         self.taskOutput = taskOutput
         self.dailyClientStatistics = 0
@@ -46,10 +42,10 @@ private extension Banker {
     }
     
     func startTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 시작")
+        self.taskOutput.display(output: "\(client.number)번 고객 \(client.task.name) 시작")
     }
     
     func endTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.task.name) 완료")
+        self.taskOutput.display(output: "\(client.number)번 고객 \(client.task.name) 완료")
     }
 }

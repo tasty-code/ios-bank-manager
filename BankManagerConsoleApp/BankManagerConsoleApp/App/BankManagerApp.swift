@@ -36,6 +36,42 @@ private extension BankManagerApp {
         }
     }
     
+    func startBank() {
+        let tasks: [BankTaskType: any ClientQueueManagable] = [
+            .loan: ClientManager<Loan>(),
+            .deposit: ClientManager<Deposit>(),
+        ]
+
+        let orders: [BankTaskType: Int] = [.loan: 2, .deposit: 3]
+        let bankers = makeBankers(
+            tasks: tasks,
+            orders: orders,
+            output: self.output
+        )
+        
+        BankManager(
+            bankers: bankers,
+            clientManager: tasks,
+            output: self.output
+        ).start()
+    }
+
+    func makeBankers(
+        tasks: [BankTaskType: any ClientQueueManagable],
+        orders: [BankTaskType: Int],
+        output: TextOutputDisplayable
+    ) -> [Banker] {
+        return orders.flatMap { (taskType, count) in
+            (1...count).compactMap { _ in
+                guard let clientManager = tasks[taskType] else { return nil }
+                return Banker(
+                    clientManager: clientManager,
+                    taskOutput: output
+                )
+            }
+        }
+    }
+    
     func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
@@ -43,40 +79,6 @@ private extension BankManagerApp {
         case .end:
             self.isRunning = false
         }
-    }
-    
-    func startBank() {
-        let dict: [BankTaskType: any ClientQueueManagable] = [
-            .loan: ClientManager<Loan>(),
-            .deposit: ClientManager<Deposit>(),
-        ]
-        
-        func makeBankers(orders: [BankTaskType: Int]) -> [Banker] {
-            return orders.reduce(into: []) { (
-                result: inout [Banker],
-                order: (key: BankTaskType, value: Int)
-            ) in
-                for number in 1...order.value {
-                    guard let clientManager = dict[order.key] else { break }
-                    let banker = Banker.init(
-                        name: "에피",
-                        clientManager: clientManager,
-                        taskOutput: output
-                    )
-                    result.append(banker)
-                }
-            }
-        }
-        
-        let rec: [BankTaskType: Int] = [.loan: 2, .deposit: 3]
-        
-        let bankers = makeBankers(orders: rec)
-        
-        BankManager(
-            bankers: bankers,
-            clientManager: dict,
-            output: self.output
-        ).start()
     }
     
     func handle(error: Error) {
