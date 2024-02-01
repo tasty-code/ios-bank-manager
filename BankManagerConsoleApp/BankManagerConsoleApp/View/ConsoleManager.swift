@@ -2,10 +2,16 @@
 //  ConsoleManager.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/28/24.
+//  Created by Effie on 1/31/24.
 //
 
 struct ConsoleManager { }
+
+extension ConsoleManager: TextOutputDisplayable {
+    func display(output: String) {
+        print(output)
+    }
+}
 
 extension ConsoleManager: TextInputReadable {
     func readInput(prompt: String?) throws -> String {
@@ -16,11 +22,5 @@ extension ConsoleManager: TextInputReadable {
             throw IOError.unexpectedError
         }
         return input
-    }
-}
-
-extension ConsoleManager: TextOutputDisplayable {
-    func display(output: String) {
-        print(output)
     }
 }

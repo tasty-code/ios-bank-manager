@@ -2,7 +2,7 @@
 //  BankManagerApp.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/26/24.
+//  Created by Effie on 2/1/24.
 //
 
 final class BankManagerApp {
@@ -36,6 +36,23 @@ private extension BankManagerApp {
         }
     }
     
+    func startBank() {
+        guard let clientCount = (10...30).randomElement() else { fatalError() }
+        let dispenser = TicketDispenser(totalClientCount: clientCount)
+        
+        let bankManager = BankManager(
+            textOut: self.output,
+            dispenser: dispenser
+        )
+        
+        let orders = [
+            Order(taskType: .loan, bankerCount: 1),
+            Order(taskType: .deposit, bankerCount: 2),
+        ]
+        
+        bankManager.runBank(with: orders)
+    }
+    
     func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
@@ -43,23 +60,6 @@ private extension BankManagerApp {
         case .end:
             self.isRunning = false
         }
-    }
-    
-    func startBank() {
-        let clientManager = ClientManager()
-        let bankers = [
-            Banker.init(
-                name: "1",
-                clientManager: clientManager,
-                taskOutput: output
-            ),
-        ]
-        
-        BankManager(
-            bankers: bankers,
-            clientManager: clientManager,
-            output: self.output
-        ).start()
     }
     
     func handle(error: Error) {

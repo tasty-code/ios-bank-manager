@@ -2,7 +2,7 @@
 //  IOError.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/28/24.
+//  Created by 강창현 on 2/1/24.
 //
 
 import Foundation

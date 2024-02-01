@@ -2,56 +2,37 @@
 //  Banker.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/26/24.
+//  Created by Effie on 1/31/24.
 //
 
 import Foundation
 
-final class Banker {
-    private let name: String
+struct Banker {
+    private let bankerEnqueuable: BankerEnqueuable
     
-    private let clientManager: ClientDequeuable
-    
-    private var queue = DispatchQueue.global()
-    
-    private let taskOutput: TextOutputDisplayable
-    
-    private(set) var dailyClientStatistics: Int
+    private let resultOut: TextOutputDisplayable
     
     init(
-        name: String,
-        clientManager: ClientDequeuable,
-        taskOutput: TextOutputDisplayable
+        bankerEnqueuable: BankerEnqueuable,
+        resultOut: TextOutputDisplayable
     ) {
-        self.name = name
-        self.clientManager = clientManager
-        self.taskOutput = taskOutput
-        self.dailyClientStatistics = 0
-    }
-    
-    func start(group: DispatchGroup) {
-        queue.async(group: group) { [weak self] in
-            guard let self else { return }
-            while let client = clientManager.dequeueClient() {
-                work(for: client, time: 0.7)
-            }
-        }
+        self.bankerEnqueuable = bankerEnqueuable
+        self.resultOut = resultOut
     }
 }
 
-private extension Banker {
-    func work(for client: Client, time: Double) {
-        self.startTask(for: client)
-        self.dailyClientStatistics += 1
-        Thread.sleep(forTimeInterval: time)
-        self.endTask(for: client)
+extension Banker: ClientTaskHandlable {
+    func handle(client: Client, group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 시작")
+            processTask(for: client.task.duration)
+            resultOut.display(output: "\(client.number)번 고객 \(client.task.name) 종료")
+            self.bankerEnqueuable.enqueueBanker(self)
+        }
     }
     
-    func startTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 시작")
-    }
-    
-    func endTask(for client: Client) {
-        self.taskOutput.display(output: "\(self.name): \(client.number)번 고객 \(client.taskType) 완료")
+    private func processTask(for duration: TimeInterval) {
+        Thread.sleep(forTimeInterval: duration)
     }
 }
+
