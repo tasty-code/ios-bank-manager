@@ -8,6 +8,7 @@
 import Foundation
 
 struct ConsoleManager: CustomerNumbering {
+    var banking: Banking?
     private let isBool: Bool = true
     var numOfPerson: Int { Int.random(in: 10...30) }
     
@@ -29,7 +30,7 @@ struct ConsoleManager: CustomerNumbering {
             
             switch input {
             case Message.first:
-                Bank(customNum: numOfPerson, bankManager: BankManager(), bankClerk: BankClerk()).openBank()
+                Bank(customNum: numOfPerson, bankManager: BankManager()).openBank()
             case Message.second:
                 return
             default:

@@ -9,13 +9,11 @@ import Foundation
 
 struct Bank {
     private var bankManager = BankManager()
-    private var bankClerk = BankClerk()
     private let customNum: Int
     
-    init(customNum: Int, bankManager: BankManager, bankClerk: BankClerk) {
+    init(customNum: Int, bankManager: BankManager) {
             self.customNum = customNum
             self.bankManager = bankManager
-            self.bankClerk = bankClerk
         }
     
     func openBank() {
@@ -31,7 +29,7 @@ struct Bank {
     }
     
     private func setCustomerCount(customer: Int) {
-        (1...customer).forEach { bankManager.standBy(customer: Customer(numOfPerson: $0)) }
+        (1...customer).forEach { bankManager.standBy(customer: Customer(banking: Banking.allCases.randomElement(), numOfPerson: $0)) }
     }
     
     private func calulateWorkTime(work: () -> Void) -> String {
