@@ -3,6 +3,7 @@ import Foundation
 final class Banker: PrintableMessage {
     private var customerQueue = Queue<Customer>()
     private(set) var totalProcessingTime: TimeInterval = 0
+    private(set) var customersCount = 0
     
     func taskStart() {
         generateCustomerQueue()
@@ -21,8 +22,9 @@ final class Banker: PrintableMessage {
             printStartTaskMessage(customer: dequeue)
             processTransaction(for: dequeue, with: dequeue.taskTime)
             printCompleteTaskMessage(customer: dequeue)
+            customersCount += 1
         }
-        taskClose(customerQueue.count, totalProcessingTime)
+        taskClose(customersCount, totalProcessingTime)
         customerQueue.clear()
     }
     
@@ -33,7 +35,7 @@ final class Banker: PrintableMessage {
 private extension Banker {
     func taskClose(_ customersCount: Int, _ totalProcessingTime: TimeInterval) {
         printClosingMessage(customersCount: customersCount, totalProcessingTime: totalProcessingTime)
-        resetProcessingTime()
+        resetProcessingTimeAndCount()
     }
     
     func processTransaction(for customer: Customer, with processingTime: TimeInterval) {
@@ -41,7 +43,8 @@ private extension Banker {
         totalProcessingTime += processingTime
     }
     
-    func resetProcessingTime() {
+    func resetProcessingTimeAndCount() {
         totalProcessingTime = 0
+        customersCount = 0
     }
 }
