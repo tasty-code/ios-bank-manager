@@ -17,16 +17,16 @@ final class BankManager {
 // MARK: - Methods
 extension BankManager {
     
-    func makeCustomerQueue(with customerCount: Int) {
-        (1...customerCount).forEach {
-            customerQueue.enqueue($0)
+    func makeCustomerQueue(with customerCount: Int) async {
+        for index in 1...customerCount {
+            await customerQueue.enqueue(index)
         }
     }
     
-    func handleTask(completion: @escaping (Double) -> Void) {
+    func handleTask(completion: @escaping (Double) -> Void) async {
         var totalDuration = 0.0
         
-        while let customerNumber = customerQueue.dequeue() {
+        while let customerNumber = await customerQueue.dequeue() {
             updateTaskState?(.start(number: customerNumber))
             Thread.sleep(forTimeInterval: duration)
             updateTaskState?(.finish(number: customerNumber))

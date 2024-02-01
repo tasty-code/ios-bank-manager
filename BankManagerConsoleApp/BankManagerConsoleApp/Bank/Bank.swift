@@ -19,7 +19,7 @@ final class Bank {
         self.bankManager = bankManager
     }
     
-    func open() {
+    func open() async {
         print(Message.default.showMessage())
         print(Message.userInput.showMessage(), terminator: "")
         
@@ -27,10 +27,10 @@ final class Bank {
         
         do {
             customerCount = try validateUserInput(with: userInput)
-            startTask()
+            await startTask()
         } catch {
             print(Message.inputError.showMessage())
-            open()
+            await open()
         }
     }
     
@@ -56,14 +56,14 @@ final class Bank {
         }
     }
     
-    private func startTask() {
+    private func startTask() async {
         guard let customerCount = customerCount else { return }
-        bankManager.makeCustomerQueue(with: customerCount)
+        await bankManager.makeCustomerQueue(with: customerCount)
         showProcessState()
-        bankManager.handleTask { totalDuration in
+        await bankManager.handleTask { totalDuration in
             let duration: Double = round(totalDuration * 100) / 100
             print(Message.report(count: customerCount, duration: duration).showMessage())
         }
-        open()
+        await open()
     }
 }
