@@ -9,7 +9,7 @@ import Foundation
 
 struct MemberFactory {
     
-    func makeCustomers(count: Int) -> [Customer] {
+    static func makeCustomers(count: Int) -> [Customer] {
         var customers = [Customer]()
         for number in 1...count {
             let service: BankService = Bool.random() ? .deposit : .loan
