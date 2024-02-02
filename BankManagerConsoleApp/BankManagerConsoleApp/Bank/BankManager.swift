@@ -8,31 +8,62 @@
 import Foundation
 
 final class BankManager {
-    var updateTaskState: ((TaskState) -> Void)?
+    var startTask: ((Int) -> Void)?
+    var finishTask: ((Int) -> Void)?
     
-    private var customerQueue = Queue<Int>()
-    private let duration = 0.7
+    private var customerQueue = Queue<Customer>()
 }
 
 // MARK: - Methods
 extension BankManager {
-    
-    func makeCustomerQueue(with customerCount: Int) async {
-        for index in 1...customerCount {
-            await customerQueue.enqueue(index)
-        }
+
+    func addCustomerQueue(with customer: Customer) async {
+        await customerQueue.enqueue(customer)
     }
-    
-    func handleTask(completion: @escaping (Double) -> Void) async {
+
+    func performTotalTask(of customer: Customer) async -> Double {
         var totalDuration = 0.0
         
-        while let customerNumber = await customerQueue.dequeue() {
-            updateTaskState?(.start(number: customerNumber))
-            Thread.sleep(forTimeInterval: duration)
-            updateTaskState?(.finish(number: customerNumber))
-            totalDuration += duration
+        switch customer.service {
+        case .loan:
+            totalDuration += await performLoanTask()
+        case .deposit:
+            
+            async let depositDuration1 = performDeposit()
+            async let depositDuration2 = performDeposit()
+            
+            totalDuration += await depositDuration1
+            totalDuration += await depositDuration2
         }
-        
-        completion(totalDuration)
+        return totalDuration
     }
+
+    private func performLoanTask() async -> Double {
+        if let customer = await customerQueue.dequeue() {
+            let startTime = Date()
+            startTask?(customer.number)
+            Thread.sleep(forTimeInterval: 0.7)
+            finishTask?(customer.number)
+            let endTime = Date()
+            let duration = endTime.timeIntervalSince(startTime)
+            return duration
+        }
+        return 0.0
+    }
+
+    private func performDeposit() async -> Double {
+        if let customer = await customerQueue.dequeue() {
+            let startTime = Date()
+            startTask?(customer.number)
+            Thread.sleep(forTimeInterval: 1.1)
+            finishTask?(customer.number)
+            let endTime = Date()
+            let duration = endTime.timeIntervalSince(startTime)
+            return duration
+        }
+        return 0.0
+    }
+
 }
+
+
