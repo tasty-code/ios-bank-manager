@@ -11,6 +11,7 @@
 		15A94F1F2B6379FE00169F2A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB912B5F92850006A55B /* LinkedList.swift */; };
 		15A94F202B637A0400169F2A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5CB8F2B5F926D0006A55B /* Node.swift */; };
 		15A94F222B637C7900169F2A /* UnitTestBankManagerConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A8ED742B60F21100ED65C8 /* UnitTestBankManagerConsoleApp.swift */; };
+		15C5EB352B6C8C1A0018D448 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C5EB342B6C8C1A0018D448 /* Task.swift */; };
 		C134404A2B639AEB00657CC5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13440492B639AEB00657CC5 /* Bank.swift */; };
 		C1461D272B69DB820023799B /* InputNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1461D262B69DB820023799B /* InputNumber.swift */; };
 		C1461D292B69DD050023799B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1461D282B69DD050023799B /* Customer.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		15A5CB8F2B5F926D0006A55B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		15A5CB912B5F92850006A55B /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		15C5EB342B6C8C1A0018D448 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C13440492B639AEB00657CC5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C1461D262B69DB820023799B /* InputNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNumber.swift; sourceTree = "<group>"; };
 		C1461D282B69DD050023799B /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				C1F1D7032B66739300232EB4 /* CustomString.swift */,
 				C1461D262B69DB820023799B /* InputNumber.swift */,
+				15C5EB342B6C8C1A0018D448 /* Task.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				C134404A2B639AEB00657CC5 /* Bank.swift in Sources */,
 				C1461D2B2B69DECF0023799B /* CustomerManager.swift in Sources */,
 				C1F1D7042B66739300232EB4 /* CustomString.swift in Sources */,
+				15C5EB352B6C8C1A0018D448 /* Task.swift in Sources */,
 				C1461D2D2B69E1420023799B /* Double+Extension.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C1461D272B69DB820023799B /* InputNumber.swift in Sources */,
@@ -295,7 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T92LV6HV88;
+				DEVELOPMENT_TEAM = 76PL59HQ85;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -323,7 +327,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T92LV6HV88;
+				DEVELOPMENT_TEAM = 76PL59HQ85;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
