@@ -10,7 +10,7 @@ import Foundation
 final class Bank {
     
     private let bankManager: BankManager
-    private var customerCount: Int?
+    private var customers: [Customer]? = nil
     private let startNumber: Int = 1
     private let userChoiceRange: ClosedRange<Int> = 1...2
     private let customerCountRange: ClosedRange<Int> = 10...30
@@ -22,11 +22,10 @@ final class Bank {
     func open() async {
         print(Message.default.showMessage())
         print(Message.userInput.showMessage(), terminator: "")
-        
         let userInput = readLine()
         
         do {
-            customerCount = try validateUserInput(with: userInput)
+            customers = try validateUserInput(with: userInput)
             await startTask()
         } catch {
             print(Message.inputError.showMessage())
@@ -34,36 +33,50 @@ final class Bank {
         }
     }
     
-    private func validateUserInput(with userInput: String?) throws -> Int? {
+    private func validateUserInput(with userInput: String?) throws -> [Customer]? {
         guard let userInput,
               let userChoice = Int(userInput),
               userChoiceRange.contains(userChoice)
         else {
             throw BankError.inputError
         }
-        
-        return userChoice == startNumber ? Int.random(in: customerCountRange) : nil
+
+        guard userChoice == startNumber else { exit(1) }
+        return MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
+    }
+            
+    private func startTask() async {
+        await alignCustomer()
+        await handleTask()
+        await open()
+    }
+    
+    private func alignCustomer() async {
+        guard let customers = customers else { return }
+        for customer in customers {
+            await bankManager.addCustomerQueue(with: customer)
+        }
+    }
+    
+    private func handleTask() async  {
+        showProcessState()
+        guard let customers = customers else { return }
+        var total = 0.0
+        for customer in customers {
+            let totalDuration = await bankManager.performTotalTask(of: customer)
+            let duration: Double = round(totalDuration * 100) / 100
+            total += duration
+        }
+        print(Message.report(count: customers.count, duration: total).showMessage())
     }
     
     private func showProcessState() {
-        bankManager.updateTaskState = { result in
-            switch result {
-            case .start(let num):
-                print(Message.startTask(number: num).showMessage())
-            case .finish(let num):
-                print(Message.finishTask(number: num).showMessage())
-            }
+        bankManager.startTask = { num in
+            print(Message.startTask(number: num).showMessage())
         }
-    }
-    
-    private func startTask() async {
-        guard let customerCount = customerCount else { return }
-        await bankManager.makeCustomerQueue(with: customerCount)
-        showProcessState()
-        await bankManager.handleTask { totalDuration in
-            let duration: Double = round(totalDuration * 100) / 100
-            print(Message.report(count: customerCount, duration: duration).showMessage())
+        
+        bankManager.finishTask = { num in
+            print(Message.finishTask(number: num).showMessage())
         }
-        await open()
     }
 }
