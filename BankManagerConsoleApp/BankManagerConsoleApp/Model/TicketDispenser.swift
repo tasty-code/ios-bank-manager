@@ -8,8 +8,8 @@
 final class TicketDispenser {
     private var ticketNumbers: [BankTask: [Int]]
     
-    init(totalClientCount: Int) {
-        self.ticketNumbers = Self.componentIndices(
+    init(totalClientCount: Int) throws {
+        self.ticketNumbers = try Self.componentIndices(
             totalIndexCount: totalClientCount,
             taskTypes: BankTask.allCasesSet
         )
@@ -18,7 +18,7 @@ final class TicketDispenser {
     private static func componentIndices(
         totalIndexCount: Int,
         taskTypes: Set<BankTask>
-    ) -> [BankTask: [Int]] {
+    ) throws -> [BankTask: [Int]] {
         var result: [BankTask: [Int]] = [:]
         guard totalIndexCount >= 1 else { return [:] }
         var shuffled = (1...totalIndexCount).shuffled()
@@ -28,7 +28,7 @@ final class TicketDispenser {
                 result.updateValue(shuffled.sorted(by: >), forKey: taskType)
                 break
             }
-            guard let chunkSize = (0...remain).randomElement() else { fatalError() }
+            guard let chunkSize = (0...remain).randomElement() else { throw BankManagerAppError.outOfIndex }
             let chunk: [Int] = chunkSize == 0 ? [] : (1...chunkSize).reduce(into: []) { partialResult, _ in
                 let index = shuffled.removeLast()
                 partialResult.append(index)

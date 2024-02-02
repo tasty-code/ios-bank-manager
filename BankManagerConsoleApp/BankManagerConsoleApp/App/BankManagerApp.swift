@@ -36,9 +36,9 @@ private extension BankManagerApp {
         }
     }
     
-    func startBank() {
-        guard let clientCount = (10...30).randomElement() else { fatalError() }
-        let dispenser = TicketDispenser(totalClientCount: clientCount)
+    func startBank() throws {
+        guard let clientCount = (10...30).randomElement() else { throw BankManagerAppError.outOfIndex }
+        let dispenser = try TicketDispenser(totalClientCount: clientCount)
         
         let orders = [
             Order(taskType: .loan, bankerCount: 1),
@@ -56,7 +56,12 @@ private extension BankManagerApp {
     func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
-            startBank()
+            do {
+                try startBank()
+            } catch {
+                handle(error: error)
+//                return
+            }
         case .end:
             self.isRunning = false
         }
