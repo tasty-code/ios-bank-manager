@@ -1,6 +1,7 @@
 import Foundation
 
 struct Customer {
+
     let numberTicket: Int
     let bankServices: Task?
     
@@ -8,6 +9,4 @@ struct Customer {
         self.numberTicket = numberTicket
         self.bankServices = bankServices
     }
-    
-    
 }

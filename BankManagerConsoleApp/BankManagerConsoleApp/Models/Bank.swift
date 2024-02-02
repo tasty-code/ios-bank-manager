@@ -4,8 +4,8 @@ struct Bank {
     
     private let bankEmployeeCount: Int
     private var businessHour: Double = 0.0
+    
     private let customerCount: Int = Int.random(in: 10...30)
-
     private let customerWaitingLoanList: Queue = Queue<Customer>()
     private let customerWaitingDepositList: Queue = Queue<Customer>()
     
@@ -17,16 +17,18 @@ struct Bank {
 // MARK: - Bank Method
 extension Bank {
     
-    func enqueueLoanCustomer(Customer: Customer) {
-        customerWaitingLoanList.enqueue(data: Customer)
+    func enqueueLoanCustomer(customerInfo: Customer) {
+        customerWaitingLoanList.enqueue(data: customerInfo)
     }
-    func enqueueDepositCustomer(Customer: Customer) {
-        customerWaitingDepositList.enqueue(data: Customer)
+    
+    func enqueueDepositCustomer(customerInfo: Customer) {
+        customerWaitingDepositList.enqueue(data: customerInfo)
     }
     
     func dequeueLoanCustomer() {
         customerWaitingLoanList.dequeue()
     }
+    
     func dequeueDepositCustomer() {
         customerWaitingDepositList.dequeue()
     }

@@ -1,6 +1,19 @@
 import Foundation
 
-enum InputNumber: String {
-    case one = "1"
-    case two = "2"
+enum InputNumber {
+    case one
+    case two
+}
+
+extension InputNumber: CustomStringConvertible {
+    
+    var description: String {
+        switch self {
+            
+        case .one:
+            return "1"
+        case .two:
+            return "2"
+        }
+    }
 }

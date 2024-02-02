@@ -1,8 +1,15 @@
 import Foundation
 
 struct ConsoleTextView {
-    
-    func printMessage(input: CustomString, inputTerminator: CustomString? = nil) {
+
+}
+
+extension ConsoleTextView {
+    func printInputMessage(input: CustomStringInput, inputTerminator: CustomStringInput? = nil) {
         print(input.description, terminator: inputTerminator?.description ?? "\n")
+    }
+    
+    func printMenuMessage(menu: CustomStringPrintMenu, menuTerminator: CustomStringPrintMenu? = nil) {
+        print(menu.description, terminator: menuTerminator?.description ?? "\n")
     }
 }

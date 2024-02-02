@@ -1,13 +1,13 @@
-//
-//  Task.swift
-//  BankManagerConsoleApp
-//
-//  Created by MAC2020 on 2/2/24.
-//
-
 import Foundation
 
-enum Task: CustomStringConvertible, CaseIterable {
+enum Task {
+    
+    case loan
+    case deposit
+}
+
+extension Task: CustomStringConvertible, CaseIterable {
+    
     var description: String {
         switch self {
         case .loan:
@@ -16,7 +16,4 @@ enum Task: CustomStringConvertible, CaseIterable {
             return "예금"
         }
     }
-    
-    case loan
-    case deposit
 }

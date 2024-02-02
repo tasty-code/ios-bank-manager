@@ -5,10 +5,9 @@ struct BankManager {
     private var bank: Bank
     private var view: ConsoleTextView = ConsoleTextView()
     private var isRunning: Bool = true
-    
-    let depositSemaphore = DispatchSemaphore(value: 2)
-    let loanSemaphore = DispatchSemaphore(value: 1)
-    let group = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let group = DispatchGroup()
     
     init(bank: Bank) {
         self.bank = bank
@@ -24,43 +23,39 @@ extension BankManager {
     }
     
     private func printMenu() {
-        view.printMessage(input: CustomString.printMenuText, inputTerminator: CustomString.isEmptyText)
+        view.printMenuMessage(menu: CustomStringPrintMenu.printMenuText, menuTerminator: CustomStringPrintMenu.isEmptyText)
     }
     
     private mutating func switchMenu(_ input: String) {
         switch input {
-        case InputNumber.one.rawValue:
-//            enqueueCustomer()
+        case InputNumber.one.description:
             enqueueCustomer()
             
             while !bank.fetchDepositCustomerIsEmpty() && !bank.fetchLoanCustomerIsEmpty() {
-                depositBankerOne()
-                depositBankerTwo()
-                loanBankerOne()
+                depositFirstBanker()
+                depositSecondBanker()
+                loanBanker()
             }
 
             group.wait()
-            printEndMessage()
+            view.printMenuMessage(menu: CustomStringPrintMenu.resultBusiness(bank.fetchCustomerCount(), bank.fetchTime()))
             formIsRunning()
-        case InputNumber.two.rawValue:
-//            view.printMessage(input: CustomString.bankClose.description)
+        case InputNumber.two.description:
+            view.printInputMessage(input: CustomStringInput.bankClose)
             formIsRunning()
         default:
-//            view.printMessage(input: CustomString.wrongInputMessage.description)
+            view.printInputMessage(input: CustomStringInput.wrongInputMessage)
             startBusiness()
         }
     }
     
     private func enqueueCustomer() {
-        for number in 1..<bank.fetchCustomerCount() {
-            let result = Customer(numberTicket: number, bankServices: Task.allCases.randomElement())
-            if result.bankServices == .deposit {
-                bank.enqueueDepositCustomer(Customer: result)
-            } else {
-                bank.enqueueLoanCustomer(Customer: result)
-            }
+        for number in 1...bank.fetchCustomerCount() {
+            let custoemr = Customer(numberTicket: number, bankServices: Task.allCases.randomElement())
+            custoemr.bankServices == .deposit ? bank.enqueueDepositCustomer(customerInfo: custoemr) : bank.enqueueLoanCustomer(customerInfo: custoemr)
         }
     }
+    
     private mutating func dequeueLoanCustomer() {
         bank.dequeueLoanCustomer()
     }
@@ -69,54 +64,78 @@ extension BankManager {
         bank.dequeueDepositCustomer()
     }
     
-    mutating func depositBankerOne() {
-        guard let customer = bank.customerDepositPeek() else { return }
-        view.printMessage(input: CustomString.startCustomerBusiness(customer.numberTicket, customer.bankServices))
+    private mutating func depositFirstBanker() {
+        guard let customer = bank.customerDepositPeek() else {
+            return
+        }
+        
+        guard let service = customer.bankServices else {
+            return
+        }
+        
         depositSemaphore.wait()
-        self.dequeueDepositCustomer()
+        performDepositBusiness(for: customer, with: service)
+    }
+    
+    private mutating func depositSecondBanker() {
+        guard let customer = bank.customerDepositPeek() else {
+            return
+        }
+        
+        guard let service = customer.bankServices else {
+            return
+        }
+        
+        depositSemaphore.wait()
+        performDepositBusiness(for: customer, with: service)
+    }
+    
+    private mutating func performDepositBusiness(for customer: Customer, with service: Task) {
+        view.printMenuMessage(menu: CustomStringPrintMenu.startCustomerBusiness(customer.numberTicket, service))
+        dequeueDepositCustomer()
+        bank.addProcessTime(0.7)
+        
         DispatchQueue.global().async(group: group) { [self] in
-            view.printMessage(input: CustomString.endCustomerBusiness(customer.numberTicket, customer.bankServices))
-            Thread.sleep(forTimeInterval: 0.7)
+            view.printMenuMessage(menu: CustomStringPrintMenu.endCustomerBusiness(customer.numberTicket, service))
+            workProcessTime(0.7)
             depositSemaphore.signal()
         }
     }
     
-    mutating func depositBankerTwo() {
-        guard let customer = bank.customerDepositPeek() else { return }
-        view.printMessage(input: CustomString.startCustomerBusiness(customer.numberTicket, customer.bankServices))
-        depositSemaphore.wait()
-        self.dequeueDepositCustomer()
-        DispatchQueue.global().async(group: group) { [self] in
-            view.printMessage(input: CustomString.endCustomerBusiness(customer.numberTicket, customer.bankServices))
-            Thread.sleep(forTimeInterval: 0.7)
-            depositSemaphore.signal()
+    private mutating func loanBanker() {
+        guard let customer = bank.customerLoanPeek() else {
+            return
         }
-    }
-    
-    mutating func loanBankerOne() {
-        guard let customer = bank.customerLoanPeek() else { return }
-        view.printMessage(input: CustomString.startCustomerBusiness(customer.numberTicket, customer.bankServices))
+        
+        guard let service = customer.bankServices else {
+            return
+        }
+        
         loanSemaphore.wait()
-        self.dequeueLoanCustomer()
+        performLoanBusiness(for: customer, with: service)
+    }
+    
+    private mutating func performLoanBusiness(for customer: Customer, with service: Task) {
+        view.printMenuMessage(menu: CustomStringPrintMenu.startCustomerBusiness(customer.numberTicket, service))
+        dequeueLoanCustomer()
+        bank.addProcessTime(1.1)
+        
         DispatchQueue.global().async(group: group) { [self] in
-            view.printMessage(input: CustomString.endCustomerBusiness(customer.numberTicket, customer.bankServices))
-            Thread.sleep(forTimeInterval: 1.1)
+            view.printMenuMessage(menu: CustomStringPrintMenu.endCustomerBusiness(customer.numberTicket, service))
+            workProcessTime(1.1)
             loanSemaphore.signal()
         }
     }
-
     
     private func userInput() -> String {
         guard let userInput = readLine() else {
-            return CustomString.isEmptyText.description
+            return CustomStringPrintMenu.isEmptyText.description
         }
         return userInput
     }
     
-
-    
-    private func printEndMessage() {
-        view.printMessage(input: CustomString.resultBusiness(bank.fetchCustomerCount(), bank.fetchTime()))
+    private func workProcessTime(_ time: TimeInterval) {
+        Thread.sleep(forTimeInterval: time)
     }
     
     func fetchIsRunning() -> Bool {
@@ -125,10 +144,5 @@ extension BankManager {
     
     mutating func formIsRunning() {
         isRunning.toggle()
-    }
-    
-    func sleepMilliseconds(_ milliseconds: Double) {
-        let result = UInt32(milliseconds * 10)
-        usleep(useconds_t(result * 100000))
     }
 }
