@@ -8,6 +8,6 @@
 import Foundation
 
 enum TaskState {
-    case start(number: Int)
-    case finish(number: Int)
+    case start(customer: Int)
+    case finish(customer: Int)
 }
