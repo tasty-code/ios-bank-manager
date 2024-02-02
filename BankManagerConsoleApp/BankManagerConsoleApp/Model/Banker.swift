@@ -35,4 +35,3 @@ extension Banker: ClientTaskHandlable {
         Thread.sleep(forTimeInterval: duration)
     }
 }
-

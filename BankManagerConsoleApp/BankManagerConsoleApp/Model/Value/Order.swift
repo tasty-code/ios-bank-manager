@@ -6,6 +6,6 @@
 //
 
 struct Order {
-    let taskType: BankTaskType
+    let taskType: BankTask
     let bankerCount: Int
 }

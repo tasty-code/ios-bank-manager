@@ -6,20 +6,20 @@
 //
 
 final class TicketDispenser {
-    private var indicesByTask: [BankTaskType: [Int]]
+    private var ticketNumbers: [BankTask: [Int]]
     
     init(totalClientCount: Int) {
-        self.indicesByTask = Self.componentIndices(
+        self.ticketNumbers = Self.componentIndices(
             totalIndexCount: totalClientCount,
-            taskTypes: BankTaskType.allCasesSet
+            taskTypes: BankTask.allCasesSet
         )
     }
     
     private static func componentIndices(
         totalIndexCount: Int,
-        taskTypes: Set<BankTaskType>
-    ) -> [BankTaskType: [Int]] {
-        var result: [BankTaskType: [Int]] = [:]
+        taskTypes: Set<BankTask>
+    ) -> [BankTask: [Int]] {
+        var result: [BankTask: [Int]] = [:]
         guard totalIndexCount >= 1 else { return [:] }
         var shuffled = (1...totalIndexCount).shuffled()
         var remain = totalIndexCount
@@ -41,14 +41,14 @@ final class TicketDispenser {
 }
 
 extension TicketDispenser: TicketProvidable {
-    func provideTicket(of taskType: BankTaskType) -> Int? {
+    func provideTicket(of taskType: BankTask) -> Int? {
         guard
-            let indiceArrayIsEmpty = self.indicesByTask[taskType]?.isEmpty,
+            let indiceArrayIsEmpty = self.ticketNumbers[taskType]?.isEmpty,
             indiceArrayIsEmpty == false
         else {
             return nil
         }
-        return self.indicesByTask[taskType]?.removeLast()
+        return self.ticketNumbers[taskType]?.removeLast()
     }
 }
 

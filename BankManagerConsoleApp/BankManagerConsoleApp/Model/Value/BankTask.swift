@@ -1,11 +1,11 @@
 //
-//  BankTaskType.swift
+//  BankTask.swift
 //  BankManagerConsoleApp
 //
 //  Created by Effie on 1/31/24.
 //
 
-enum BankTaskType {
+enum BankTask {
     case deposit
     case loan
     
@@ -28,7 +28,7 @@ enum BankTaskType {
     }
 }
 
-extension BankTaskType: CaseIterable {
+extension BankTask: CaseIterable {
     static var allCasesSet: Set<Self> {
         return Set(allCases)
     }
