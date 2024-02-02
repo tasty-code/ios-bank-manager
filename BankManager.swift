@@ -25,27 +25,32 @@ struct BankManager {
     }()
     
     func main() {
-        print("""
+        var isExit: Bool = false
+        
+        while !isExit {
+            print("""
         1 : 은행 개점
         2 : 종료
         입력 :
         """, terminator: " ")
-        
-        guard let selectedMenu = readLine() else {
-            return
-        }
-        
-        switch selectedMenu {
-        case "1":
-            startBankingProcess { customer, time in
-                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer)명이며, 총 업무시간은 \(String(format: "%.2f", time))초입니다.")
+            
+            guard let selectedMenu = readLine() else {
+                return
             }
-        case "2":
-            return
-        default:
-            print("잘못된 입력입니다. 다시 입력해 주세요.")
-            main()
-            return
+            
+            switch selectedMenu {
+            case "1":
+                startBankingProcess { customer, time in
+                    print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer)명이며, 총 업무시간은 \(String(format: "%.2f", time))초입니다.")
+                }
+            case "2":
+                isExit = true
+                continue
+            default:
+                print("잘못된 입력입니다. 다시 입력해 주세요.")
+                main()
+                continue
+            }
         }
     }
     
@@ -93,7 +98,6 @@ struct BankManager {
         completionBlock.addDependency(loanCustomerBlock)
         
         OperationQueue().addOperations([depositCustomerBlock, loanCustomerBlock, completionBlock], waitUntilFinished: true)
-        main()
     }
     
     private func setupInitialInformation() -> Int {
