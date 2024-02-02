@@ -11,30 +11,25 @@ final class TicketDispenser {
     init(totalClientCount: Int) throws {
         self.ticketNumbers = try Self.componentIndices(
             totalIndexCount: totalClientCount,
-            taskTypes: BankTask.allCasesSet
+            taskTypes: BankTask.allCases
         )
     }
     
     private static func componentIndices(
         totalIndexCount: Int,
-        taskTypes: Set<BankTask>
+        taskTypes: [BankTask]
     ) throws -> [BankTask: [Int]] {
-        var result: [BankTask: [Int]] = [:]
-        guard totalIndexCount >= 1 else { return [:] }
-        var shuffled = (1...totalIndexCount).shuffled()
-        var remain = totalIndexCount
-        for (index, taskType) in taskTypes.enumerated() {
-            guard index != taskTypes.count - 1 else {
-                result.updateValue(shuffled.sorted(by: >), forKey: taskType)
-                break
-            }
-            guard let chunkSize = (0...remain).randomElement() else { throw BankManagerAppError.outOfIndex }
-            let chunk: [Int] = chunkSize == 0 ? [] : (1...chunkSize).reduce(into: []) { partialResult, _ in
-                let index = shuffled.removeLast()
-                partialResult.append(index)
-            }
-            result.updateValue(chunk.sorted(by: >), forKey: taskType)
-            remain -= chunkSize
+        var result: [BankTask: [Int]] = taskTypes.reduce(into: [:]) { partialResult, task in
+            partialResult.updateValue([], forKey: task)
+        }
+        
+        for number in 1...totalIndexCount {
+            guard let type = taskTypes.randomElement() else { throw BankManagerAppError.outOfIndex }
+            result[type]?.append(number)
+        }
+        
+        for type in taskTypes {
+            result[type]?.reverse()
         }
         return result
     }
@@ -42,13 +37,6 @@ final class TicketDispenser {
 
 extension TicketDispenser: TicketProvidable {
     func provideTicket(of taskType: BankTask) -> Int? {
-        guard
-            let indiceArrayIsEmpty = self.ticketNumbers[taskType]?.isEmpty,
-            indiceArrayIsEmpty == false
-        else {
-            return nil
-        }
-        return self.ticketNumbers[taskType]?.removeLast()
+        return self.ticketNumbers[taskType]?.popLast()
     }
 }
-
