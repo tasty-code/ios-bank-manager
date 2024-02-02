@@ -3,16 +3,16 @@ import Foundation
 
 struct Banker {
     func provideService(to customer: Customer) {
-        serviceDidStart(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
+        serviceDidStart(customerNumber: customer.waitingNumber)
         Thread.sleep(forTimeInterval: customer.requiredService.requiredTime)
-        serviceDidComplete(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
+        serviceDidComplete(customerNumber: customer.waitingNumber)
     }
     
-    private func serviceDidStart(customerNumber: Int, serviceType: String) {
-        print("\(customerNumber)번 고객 \(serviceType) 업무 시작")
+    private func serviceDidStart(customerNumber: Int) {
+        print("\(customerNumber)번 고객 업무 시작")
     }
     
-    private func serviceDidComplete(customerNumber: Int, serviceType: String) {
-        print("\(customerNumber)번 고객 \(serviceType) 업무 완료")
+    private func serviceDidComplete(customerNumber: Int) {
+        print("\(customerNumber)번 고객 업무 완료")
     }
 }
