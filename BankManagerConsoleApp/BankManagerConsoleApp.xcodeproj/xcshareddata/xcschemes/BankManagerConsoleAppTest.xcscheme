@@ -19,7 +19,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F4EDF9F32B5F749400C3E54C"
-               BuildableName = "BankManagerConsoleAppTest.xctest"
+               BuildableName = "BankManagerConsoleAppTest"
                BlueprintName = "BankManagerConsoleAppTest"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>

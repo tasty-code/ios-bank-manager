@@ -2,10 +2,10 @@
 //  Client.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/26/24.
+//  Created by Effie on 1/31/24.
 //
 
 struct Client {
     let number: Int
-    let taskType: BankTaskType
+    let task: BankTask
 }

@@ -2,7 +2,7 @@
 //  BankManagerApp.swift
 //  BankManagerConsoleApp
 //
-//  Created by Effie on 1/26/24.
+//  Created by Effie on 2/1/24.
 //
 
 final class BankManagerApp {
@@ -24,8 +24,8 @@ final class BankManagerApp {
     }
 }
 
-extension BankManagerApp {
-    private func startLoop() {
+private extension BankManagerApp {
+    func startLoop() {
         self.output.display(output: BankManagerAppMenu.allMenusPrompt)
         do {
             let input = try self.input.readInput(prompt: "입력:")
@@ -36,33 +36,38 @@ extension BankManagerApp {
         }
     }
     
-    private func handle(menu: BankManagerAppMenu) {
+    func startBank() throws {
+        guard let clientCount = (10...30).randomElement() else { throw BankManagerAppError.outOfIndex }
+        let dispenser = try TicketDispenser(totalClientCount: clientCount)
+        
+        let orders = [
+            Order(taskType: .loan, bankerCount: 1),
+            Order(taskType: .deposit, bankerCount: 2),
+        ]
+        
+        let bankManager = BankManager(
+            textOut: self.output,
+            dispenser: dispenser
+        )
+        
+        bankManager.runBank(with: orders, numberOfClient: clientCount)
+    }
+    
+    func handle(menu: BankManagerAppMenu) {
         switch menu {
         case .open:
-            startBank()
+            do {
+                try startBank()
+            } catch {
+                handle(error: error)
+//                return
+            }
         case .end:
             self.isRunning = false
         }
     }
     
-    private func startBank() {
-        let clientManager = ClientManager()
-        let bankers = [
-            Banker.init(
-                name: "1",
-                clientManager: clientManager,
-                taskOutput: output
-            ),
-        ]
-        
-        BankManager(
-            bankers: bankers,
-            clientManager: clientManager,
-            output: self.output
-        ).start()
-    }
-    
-    private func handle(error: Error) {
+    func handle(error: Error) {
         self.output.display(output: error.localizedDescription)
     }
 }
