@@ -7,11 +7,20 @@ final class Banker: PrintableMessage {
     func taskProcess(queue: Queue<Customer>, depositSemaphore: DispatchSemaphore, loanSemaphore: DispatchSemaphore) {
         while let dequeue = queue.dequeue() {
             switch dequeue.taskType {
-            case .deposit, .loan:
+            case .deposit:
+                depositSemaphore.wait()
                 printStartTaskMessage(customer: dequeue)
                 processTransaction(for: dequeue, with: dequeue.taskTime)
                 printCompleteTaskMessage(customer: dequeue)
                 customersCount += 1
+                depositSemaphore.signal()
+            case .loan:
+                loanSemaphore.wait()
+                printStartTaskMessage(customer: dequeue)
+                processTransaction(for: dequeue, with: dequeue.taskTime)
+                printCompleteTaskMessage(customer: dequeue)
+                customersCount += 1
+                loanSemaphore.signal()
             }
         }
     }

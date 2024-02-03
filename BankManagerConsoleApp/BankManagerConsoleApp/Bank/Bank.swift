@@ -31,6 +31,7 @@ final class Bank: PrintableMessage {
     private func generateCustomerQueue() {
         let waitingNumber = Int.random(in: 10...30)
         for num in 1...waitingNumber {
+            /// 대출 1명....ㅇ
             let taskType: TaskType = num % 3 == 0 ? .loan : .deposit
             customerQueue.enqueue(value: Customer(waitingNumber: num, taskType: taskType))
         }
