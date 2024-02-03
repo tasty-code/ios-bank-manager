@@ -4,12 +4,15 @@ final class Banker: PrintableMessage {
     private(set) var totalProcessingTime: TimeInterval = 0
     private(set) var customersCount = 0
     
-    func taskProcess(queue: Queue<Customer>) {
+    func taskProcess(queue: Queue<Customer>, depositSemaphore: DispatchSemaphore, loanSemaphore: DispatchSemaphore) {
         while let dequeue = queue.dequeue() {
-            printStartTaskMessage(customer: dequeue)
-            processTransaction(for: dequeue, with: dequeue.taskTime)
-            printCompleteTaskMessage(customer: dequeue)
-            customersCount += 1
+            switch dequeue.taskType {
+            case .deposit, .loan:
+                printStartTaskMessage(customer: dequeue)
+                processTransaction(for: dequeue, with: dequeue.taskTime)
+                printCompleteTaskMessage(customer: dequeue)
+                customersCount += 1
+            }
         }
     }
     
