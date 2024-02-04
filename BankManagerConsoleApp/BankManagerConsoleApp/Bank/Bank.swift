@@ -6,7 +6,8 @@ final class Bank: PrintableMessage {
     private var bankers: [Banker]
     /// 업무별로 큐를 생성해야해서 딕셔너리로 구현함.
     private var customersQueue: [BankingService: Queue<Customer>] = [:]
-    /// 예금을 처리하는 은행원이 2명이라서 동시에 큐에 접근했을때 데드락이 발생할 위험이 있어서
+    /// 예금을 처리하는 은행원이 2명이라서 동시에 큐에 접근했을때 결과가 요상해짐.
+    /// 한 번에 한 개의 접근만 할 수 있게 하기 위해서
     /// 예금처리를 위한 세마포어를 만들었고
     /// Bank를 초기화할때 main에서 세마포어 수 2로 지정해 줄거임
     private let depositSemaphore: DispatchSemaphore
@@ -45,6 +46,8 @@ final class Bank: PrintableMessage {
                     /// 세마포어의 값을 1 증가시킴
                     /// 다른 스레드들이 대기 중인 세마포어에 들어갈 수 있게 해줌
                     /// 즉 다음 예금업무를 처리할 스레드에게 턴을 넘겨준다? 뭐 그런느낌?
+                    /// 첫 번째 예금 은행원이 먼저 세마포어에 진입해서 할당받은 하나의 업무를 처리하고 나오면
+                    /// 두 번째 예금 은행원이 세마포어에 진입할 수 있는것!
                     self.depositSemaphore.signal()
                     
                 case .loan:
@@ -65,7 +68,7 @@ final class Bank: PrintableMessage {
     }
     
     private func generateCustomerQueue() {
-        let waitingNumber = Int.random(in: 12...13)
+        let waitingNumber = Int.random(in: 10...30)
         for num in 1...waitingNumber {
             /// 3의 배수인 경우 대출 업무로 고객 생성
             /// 아닌 경우 예금 업무로 고객 생성
