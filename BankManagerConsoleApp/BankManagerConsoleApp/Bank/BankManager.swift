@@ -8,7 +8,10 @@ final class BankManager {
     func openBank() {
         while true {
             print("1 : 은행개점\n2 : 종료\n입력 :", terminator: " ")
-            let choice = getUserInput()
+            guard let choice = getUserInput() else {
+                print(BankManagerError.invalidInput.message)
+                continue
+            }
             switch choice {
             case "1":
                 bank.openBank()

@@ -2,17 +2,17 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
-    let taskType: TaskType
+    let bankingService: BankingService
     let taskTime: TimeInterval
     
-    init(waitingNumber: Int, taskType: TaskType) {
+    init(waitingNumber: Int, taskType: BankingService) {
         self.waitingNumber = waitingNumber
-        self.taskType = taskType
+        self.bankingService = taskType
         self.taskTime = taskType.defaultTaskTime
     }
 }
 
-enum TaskType {
+enum BankingService: CaseIterable {
     case deposit
     case loan
     

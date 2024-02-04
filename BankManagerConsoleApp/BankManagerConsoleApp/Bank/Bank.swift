@@ -1,26 +1,34 @@
 import Foundation
 
 final class Bank: PrintableMessage {
-    private var customerQueue = Queue<Customer>()
-    private let bankers: [Banker]
-    
-    let group = DispatchGroup()
+    private var bankers: [Banker]
+    private var customersQueue: [BankingService: Queue<Customer>] = [:]
     private let depositSemaphore: DispatchSemaphore
-    private let loanSemaphore: DispatchSemaphore
+    let group = DispatchGroup()
     
-    init(bankers: [Banker], depositSemaphore: DispatchSemaphore, loanSemaphore: DispatchSemaphore) {
+    init(bankers: [Banker], depositSemaphore: DispatchSemaphore) {
         self.bankers = bankers
         self.depositSemaphore = depositSemaphore
-        self.loanSemaphore = loanSemaphore
+        for service in BankingService.allCases {
+            customersQueue[service] = Queue<Customer>()
+        }
     }
     
     func openBank() {
         generateCustomerQueue()
-        
+
         for banker in bankers {
             group.enter()
             DispatchQueue.global().async {
-                banker.taskProcess(queue: self.customerQueue, depositSemaphore: self.depositSemaphore, loanSemaphore: self.loanSemaphore)
+                switch banker.service {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    banker.taskProcess(queue: self.customersQueue[.deposit]!)
+                    self.depositSemaphore.signal()
+                    
+                case .loan:
+                    banker.taskProcess(queue: self.customersQueue[.loan]!)
+                }
                 self.group.leave()
             }
         }
@@ -29,11 +37,13 @@ final class Bank: PrintableMessage {
     }
     
     private func generateCustomerQueue() {
-        let waitingNumber = Int.random(in: 10...30)
+        let waitingNumber = Int.random(in: 12...13)
         for num in 1...waitingNumber {
             /// 대출 1명....ㅇ
-            let taskType: TaskType = num % 3 == 0 ? .loan : .deposit
-            customerQueue.enqueue(value: Customer(waitingNumber: num, taskType: taskType))
+            let taskType: BankingService = num % 3 == 0 ? .loan : .deposit
+            if let queue = customersQueue[taskType] {
+                queue.enqueue(value: Customer(waitingNumber: num, taskType: taskType))
+            }
         }
     }
     
