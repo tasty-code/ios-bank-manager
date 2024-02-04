@@ -1,11 +1,12 @@
 import Foundation
 
-func bankOpen() {
-    var bankEmployee = BankManager()
-    
-    while bankEmployee.fetchIsRunning() {
-        bankEmployee.startBusiness()
+func openBank() {
+    let bankEmployee = Bank(bankEmployeeCount: 3)
+    var bankManager = BankManager(bank: bankEmployee)
+
+    while bankManager.fetchIsRunning() {
+        bankManager.startBusiness()
     }
 }
 
-bankOpen()
+openBank()
