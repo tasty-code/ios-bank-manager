@@ -11,9 +11,9 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
     private var customerQueue: Q
     private let consoleMessage: ConsoleMessage
     private var totalCustomers: Int = 0
+    private var totalTime : Double = 0
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let loanSemaphore = DispatchSemaphore(value: 1)
-    private var totalTime : Double = 0
     
     init(customerQueue: Q, consoleMessage: ConsoleMessage) {
         self.customerQueue = customerQueue
@@ -34,7 +34,7 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
         }
     }
     
-    /// 고객 업무 완료
+    /// 고객 업무를 비동기 적으로 처리
     func processCustomer(completion: @escaping () -> Void) {
         let queue = DispatchQueue.global()
         let group = DispatchGroup()
@@ -66,6 +66,7 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
         
     }
     
+    /// 업무 처리
     func handleCustomer(_ customer: Customer) {
         switch customer.task {
         case .deposit:
@@ -85,7 +86,6 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
     
     /// 업무가 마감됨
     func closed(totalTime: Double, completion: @escaping () -> Void) {
-//        consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime)
         consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime )
         completion()
     }
