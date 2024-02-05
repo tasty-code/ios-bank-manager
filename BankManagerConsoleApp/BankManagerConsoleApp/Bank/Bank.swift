@@ -13,7 +13,7 @@ protocol BankManagerDelegate {
     func showCustomerWorkDone(customerNumber: Int, workType: String)
 }
 
-struct Bank {
+class Bank {
     private var loanWatingQueue = Queue<Customer>()
     private var depositWatingQueue = Queue<Customer>()
     
