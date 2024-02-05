@@ -51,11 +51,11 @@ struct BankManager: BankManagerDelegate {
         ConsoleView.showResult(customerCount: customerCount, intervalTime: intervalTime)
     }
 
-    func showCustomerWorkStart(customerNumber: Int) {
-        ConsoleView.showCustomerWorkStart(customerNumber: customerNumber)
+    func showCustomerWorkStart(customerNumber: Int, workType: String) {
+        ConsoleView.showCustomerWorkStart(customerNumber: customerNumber, workType: workType)
     }
 
-    func showCustomerWorkDone(customerNumber: Int) {
-        ConsoleView.showCustomerWorkDone(customerNumber: customerNumber)
+    func showCustomerWorkDone(customerNumber: Int, workType: String) {
+        ConsoleView.showCustomerWorkDone(customerNumber: customerNumber, workType: workType)
     }
 }
