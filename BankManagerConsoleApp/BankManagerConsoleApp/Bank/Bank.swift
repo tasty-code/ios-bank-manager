@@ -7,21 +7,19 @@
 
 import Foundation
 
-protocol BankManagerDelegate {
+protocol BankManagerDelegate: AnyObject {
     func showResult(customerCount: Int, intervalTime: String)
     func showCustomerWorkStart(customerNumber: Int, workType: String)
     func showCustomerWorkDone(customerNumber: Int, workType: String)
 }
 
-class Bank {
+final class Bank {
     private var loanWatingQueue = Queue<Customer>()
     private var depositWatingQueue = Queue<Customer>()
-    
     private let bankLoanClerk: BankLoanClerk = BankLoanClerk()
     private let bankDepositClerk: BankDepositClerk = BankDepositClerk()
-    
     private var handledCustomerCount = 0
-    var delegate: BankManagerDelegate?
+    weak var delegate: BankManagerDelegate?
     var group = DispatchGroup()
     
     func open() {
@@ -35,16 +33,15 @@ class Bank {
             guard let work = BankWorkType.allCases.randomElement() else { return }
             switch work {
             case .deposit:
-                depositWatingQueue.enqueue(item:  Customer(number: number))
+                depositWatingQueue.enqueue(item:  Customer(number: number, purpose: .deposit))
             case .loan:
-                loanWatingQueue.enqueue(item:  Customer(number: number))
+                loanWatingQueue.enqueue(item:  Customer(number: number, purpose: .loan))
             }
         }
     }
     
     private func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        
         let group = DispatchGroup()
         
         DispatchQueue.global().async(group: group, execute: serveLoanCustomer)

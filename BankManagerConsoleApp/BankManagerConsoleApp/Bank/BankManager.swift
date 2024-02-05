@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct BankManager: BankManagerDelegate {
+final class BankManager: BankManagerDelegate {
     private enum Menu: Int {
         case open = 1
         case close = 2
@@ -20,7 +20,7 @@ struct BankManager: BankManagerDelegate {
         self.bank.delegate = self
     }
 
-    mutating func run() {
+    func run() {
         while isRunning {
             showMenu()
             guard let input = inputMenu(),

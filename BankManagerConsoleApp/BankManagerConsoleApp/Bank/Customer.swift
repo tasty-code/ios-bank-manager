@@ -9,8 +9,10 @@ import Foundation
 
 struct Customer {
     let number: Int
+    let purpose: BankWorkType
     
-    init(number: Int) {
+    init(number: Int, purpose: BankWorkType) {
         self.number = number
+        self.purpose = purpose
     }
 }
