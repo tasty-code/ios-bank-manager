@@ -16,6 +16,10 @@ protocol BankManagerDelegate {
 struct Bank {
     private var loanWatingQueue = Queue<Customer>()
     private var depositWatingQueue = Queue<Customer>()
+    
+    private let bankLoanClerk: BankLoanClerk = BankLoanClerk()
+    private let bankDepositClerk: BankDepositClerk = BankDepositClerk()
+    
     private var handledCustomerCount = 0
     var delegate: BankManagerDelegate?
     
