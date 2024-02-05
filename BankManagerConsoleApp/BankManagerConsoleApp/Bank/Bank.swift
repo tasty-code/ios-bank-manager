@@ -32,7 +32,7 @@ class Bank {
     private func setWaitingLine() {
         handledCustomerCount = 0
         for number in 1...Int.random(in: 10...30) {
-            guard let work = Work.allCases.randomElement() else { return }
+            guard let work = BankWorkType.allCases.randomElement() else { return }
             switch work {
             case .deposit:
                 depositWatingQueue.enqueue(item:  Customer(number: number))
@@ -63,9 +63,9 @@ class Bank {
     private func serveLoanCustomer() {
         while !loanWatingQueue.isEmpty() {
             guard let customer = loanWatingQueue.dequeue() else { return }
-            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: "대출")
+            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: BankWorkType.deposit.name)
             bankLoanClerk.work(for: customer)
-            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType:  "대출")
+            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType:  BankWorkType.deposit.name)
             handledCustomerCount += 1
         }
     }
@@ -73,21 +73,10 @@ class Bank {
     private func serveDepositCustomer() {
         while !depositWatingQueue.isEmpty() {
             guard let customer = depositWatingQueue.dequeue() else { return }
-            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: "예금")
+            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: BankWorkType.loan.name)
             bankDepositClerk.work(for: customer)
-            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: "예금")
+            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: BankWorkType.loan.name)
             handledCustomerCount += 1
         }
     }
-    
-//    private func serveCustomer() {
-//        while !bankWatingQueue.isEmpty() {
-//            guard let customer = bankWatingQueue.dequeue() else { return }
-//            delegate?.showCustomerWorkStart(customerNumber: customer.number)
-//            bankLoanClerk.work(for: customer)
-//            delegate?.showCustomerWorkDone(customerNumber: customer.number)
-//            handledCustomerCount += 1
-//        }
-//    }
-    
 }

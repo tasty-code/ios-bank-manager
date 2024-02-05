@@ -13,12 +13,12 @@ protocol BankWork {
 
 struct BankLoanClerk: BankWork {
     func work(for customer: Customer) {
-        Thread.sleep(forTimeInterval: 1.1)
+        Thread.sleep(forTimeInterval: BankWorkType.loan.time)
     }
 }
 
 struct BankDepositClerk: BankWork {
     func work(for customer: Customer) {
-        Thread.sleep(forTimeInterval: 0.7)
+        Thread.sleep(forTimeInterval: BankWorkType.deposit.time)
     }
 }
