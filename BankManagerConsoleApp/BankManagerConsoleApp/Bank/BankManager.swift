@@ -25,7 +25,7 @@ extension BankManager {
         let startTime = Date()
         switch customer.service {
         case .loan:
-            let _ = await performLoanTask()
+            await performLoanTask()
         case .deposit:
             async let _ = await performDeposit()
             async let _ = await performDeposit()
@@ -40,7 +40,7 @@ extension BankManager {
     private func performLoanTask() async {
         if let customer = await customerQueue.dequeue() {
             startTask?(customer)
-            Thread.sleep(forTimeInterval: customer.service.requiredTime)
+            try? await Task.sleep(nanoseconds: UInt64(customer.service.requiredTime * 1_000_000_000))
             finishTask?(customer)
         }
     }
