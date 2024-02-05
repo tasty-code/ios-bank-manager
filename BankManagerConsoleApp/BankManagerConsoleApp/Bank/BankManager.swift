@@ -8,8 +8,8 @@
 import Foundation
 
 final class BankManager {
-    var startTask: ((Int) -> Void)?
-    var finishTask: ((Int) -> Void)?
+    var startTask: ((Customer) -> Void)?
+    var finishTask: ((Customer) -> Void)?
     
     private var customerQueue = Queue<Customer>()
 }
@@ -25,10 +25,10 @@ extension BankManager {
         let startTime = Date()
         switch customer.service {
         case .loan:
-            await performLoanTask()
+            let _ = await performLoanTask()
         case .deposit:
-            async let _ = performDeposit()
-            async let _ = performDeposit()
+            async let _ = await performDeposit()
+            async let _ = await performDeposit()
         }
         
         let endTime = Date()
@@ -39,17 +39,17 @@ extension BankManager {
 
     private func performLoanTask() async {
         if let customer = await customerQueue.dequeue() {
-            startTask?(customer.number)
-            Thread.sleep(forTimeInterval: 0.7)
-            finishTask?(customer.number)
+            startTask?(customer)
+            Thread.sleep(forTimeInterval: customer.service.requiredTime)
+            finishTask?(customer)
         }
     }
 
     private func performDeposit() async {
         if let customer = await customerQueue.dequeue() {
-            startTask?(customer.number)
-            Thread.sleep(forTimeInterval: 1.1)
-            finishTask?(customer.number)
+            startTask?(customer)
+            Thread.sleep(forTimeInterval: customer.service.requiredTime)
+            finishTask?(customer)
         }
     }
 }
