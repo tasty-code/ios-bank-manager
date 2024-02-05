@@ -4,5 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bank: BankManager = BankManager()
-bank.operate()
+var console: ConsoleManager = ConsoleManager()
+console.operate()
