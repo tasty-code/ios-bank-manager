@@ -68,14 +68,14 @@ final class Bank: PrintableMessage {
     }
     
     private func generateCustomerQueue() {
-        let waitingNumber = Int.random(in: 10...30)
+        let waitingNumber = Int.random(in: 29...30)
         for num in 1...waitingNumber {
             /// 3의 배수인 경우 대출 업무로 고객 생성
             /// 아닌 경우 예금 업무로 고객 생성
-            let taskType: BankingService = num % 3 == 0 ? .loan : .deposit
+            let randomTaskTime = BankingService.randomBankingService
             /// 업무 별로 큐에 고객 추가
-            if let queue = customersQueue[taskType] {
-                queue.enqueue(value: Customer(waitingNumber: num, taskType: taskType))
+            if let queue = customersQueue[randomTaskTime] {
+                queue.enqueue(value: Customer(waitingNumber: num, taskType: randomTaskTime))
             }
         }
     }
