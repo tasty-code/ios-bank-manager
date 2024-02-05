@@ -8,29 +8,71 @@
 import Foundation
 
 final class Bank {
-    let banker = Banker()
-    var customerQueue = Queue<Customer>()
-
+    
+    let depositBankerCount: Int
+    let loanBankerCount: Int
+    var totalDepositWorkingTime: Double = 0
+    var totalLoanWorkingTime: Double = 0
+    
+    var depositBankerQueue = Queue<Banker>()
+    var loanBankerQueue = Queue<Banker>()
+    var depositCustomerQueue = Queue<Customer>()
+    var loanCustomerQueue = Queue<Customer>()
+    
+    init(depositBankerCount: Int, loanBankerCount: Int) {
+        self.depositBankerCount = depositBankerCount
+        self.loanBankerCount = loanBankerCount
+    }
+    
     func open() {
-        print("은행 문이 열렸습니다.")
+        Messages.openBank.printMessage()
         let numberOfCustomers = Int.random(in: 10...30)
 
         print("고객 수: \(numberOfCustomers)")
-        for customerNumber in 1...numberOfCustomers {
-            let customer = Customer(number: customerNumber)
-            customerQueue.enqueue(customer)
+        
+        for _ in 1...depositBankerCount {
+            depositBankerQueue.enqueue(Banker(taskType: .deposit))
         }
-
+        for _ in 1...loanBankerCount {
+            loanBankerQueue.enqueue(Banker(taskType: .loan))
+        }
+        
+        for number in 1...numberOfCustomers {
+            guard let customer = Customer(number: number) else { return }
+            if customer.taskType == .deposit {
+                depositCustomerQueue.enqueue(customer)
+            } else if customer.taskType == .loan {
+                loanCustomerQueue.enqueue(customer)
+            }
+        }
         processCustomers()
-        let totalDurationTimeFormatted = banker.totalDuration.formattedDecimal
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalDurationTimeFormatted)초입니다.")
-        banker.totalDuration = 0.0
+        
+        let formattedTotalWorkingTime = max(totalLoanWorkingTime, totalDepositWorkingTime).formattedDecimal
+        Messages.closeBank(customerCount: numberOfCustomers, totalTime: formattedTotalWorkingTime).printMessage()
+        
     }
-
+    
     private func processCustomers() {
-        while !customerQueue.isEmpty() {
-            if let customer = customerQueue.dequeue() {
-                banker.processCustomer(customer)
+        while !depositCustomerQueue.isEmpty() || !loanCustomerQueue.isEmpty() {
+            
+            DispatchQueue.global().async { [self] in
+                if depositBankerQueue.isEmpty() == false {
+                    
+                    guard let banker = depositCustomerQueue.dequeue(), let workingTime = depositBankerQueue.dequeue()?.processCustomer(banker)
+                    else { return }
+                    totalDepositWorkingTime += workingTime
+                    depositBankerQueue.enqueue(Banker(taskType: .deposit))
+                }
+            }
+            
+            DispatchQueue.global().async { [self] in
+                if loanBankerQueue.isEmpty() == false {
+                    
+                    guard let banker = loanCustomerQueue.dequeue(), let workingTime = loanBankerQueue.dequeue()?.processCustomer(banker)
+                    else { return }
+                    loanBankerQueue.enqueue(Banker(taskType: .loan))
+                    totalLoanWorkingTime += workingTime
+                }
             }
         }
     }
