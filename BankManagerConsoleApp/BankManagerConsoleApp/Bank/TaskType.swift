@@ -4,12 +4,10 @@
 //
 //  Created by dopamint on 2/1/24.
 //
-
-import Foundation
-
 enum TaskType: CaseIterable, CustomStringConvertible {
     case loan
     case deposit
+
 }
 
 extension TaskType {
@@ -21,9 +19,10 @@ extension TaskType {
         case .deposit:
             return "예금"
         }
+    
     }
     
-    var taskTime: Float {
+    var taskTime: Double {
         switch self {
         case .loan:
             return 1.1
@@ -31,5 +30,5 @@ extension TaskType {
             return 0.7
         }
     }
-    
+
 }
