@@ -22,48 +22,36 @@ extension BankManager {
     }
 
     func performTotalTask(of customer: Customer) async -> Double {
-        var totalDuration = 0.0
-        
+        let startTime = Date()
         switch customer.service {
         case .loan:
-            totalDuration += await performLoanTask()
+            await performLoanTask()
         case .deposit:
-            
-            async let depositDuration1 = performDeposit()
-            async let depositDuration2 = performDeposit()
-            
-            totalDuration += await depositDuration1
-            totalDuration += await depositDuration2
+            async let _ = performDeposit()
+            async let _ = performDeposit()
         }
-        return totalDuration
+        
+        let endTime = Date()
+        let duration = endTime.timeIntervalSince(startTime)
+
+        return duration
     }
 
-    private func performLoanTask() async -> Double {
+    private func performLoanTask() async {
         if let customer = await customerQueue.dequeue() {
-            let startTime = Date()
             startTask?(customer.number)
             Thread.sleep(forTimeInterval: 0.7)
             finishTask?(customer.number)
-            let endTime = Date()
-            let duration = endTime.timeIntervalSince(startTime)
-            return duration
         }
-        return 0.0
     }
 
-    private func performDeposit() async -> Double {
+    private func performDeposit() async {
         if let customer = await customerQueue.dequeue() {
-            let startTime = Date()
             startTask?(customer.number)
             Thread.sleep(forTimeInterval: 1.1)
             finishTask?(customer.number)
-            let endTime = Date()
-            let duration = endTime.timeIntervalSince(startTime)
-            return duration
         }
-        return 0.0
     }
-
 }
 
 
