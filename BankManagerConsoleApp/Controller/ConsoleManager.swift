@@ -5,36 +5,37 @@ struct ConsoleManager {
     private var bankManager: BankManager = BankManager()
     
     mutating func operate() {
+        isOpen = false
         printMenuOfBank()
         do {
             let input = try selectedByUser()
-            if input == "1" {
-                isOpen = true
-                executeBankingOperation(of: input)
-            } else {
-                isOpen = false
-                print("종료 되었습니다")
-            }
-            executeBankingOperation(of: input)
+            isOpen = doorTrigger(by: input)
         } catch {
             print(error.localizedDescription)
+            operate()
+        }
+        while isOpen {
+            executeBankingOperation()
         }
     }
     
-    private mutating func executeBankingOperation(of input: String) {
-        switch input {
-        case "1":
-            customerManager.createCustomer()
-            customerManager.registerCustomer(with: customerManager.customers)
-            bankManager.createEmployee()
-            bankManager.handleCustomerTasks(with: customerManager)
-            bankManager.reportDeadlineSummary(with: customerManager)
-            operate()
-        case "2":
-            print("은행종료")
-        default:
-            break
+    private func doorTrigger(by input: String) -> Bool {
+        if input == "1" {
+            return true
+        } else {
+            print("종료되었습니다.")
+            return false
         }
+    }
+    
+    private mutating func executeBankingOperation() {
+        customerManager.resetCustomer()
+        customerManager.createCustomer()
+        customerManager.registerCustomer(with: customerManager.customers)
+        bankManager.createEmployee()
+        bankManager.handleCustomerTasks(with: customerManager)
+        bankManager.reportDeadlineSummary(with: customerManager)
+        operate()
     }
     
     private func selectedByUser() throws -> String {
