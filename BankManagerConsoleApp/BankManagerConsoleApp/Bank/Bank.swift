@@ -63,7 +63,7 @@ final class Bank {
         guard let customers = customers else { return }
         var total = 0.0
         for customer in customers {
-            let totalDuration = await bankManager.performTotalTask(of: customer)
+            let totalDuration = await bankManager.performTotalTask()
             let duration: Double = round(totalDuration * 100) / 100
             total += duration
         }
