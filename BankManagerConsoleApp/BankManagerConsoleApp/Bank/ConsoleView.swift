@@ -18,13 +18,13 @@ struct ConsoleView {
         print(resultMessage.show)
     }
     
-    static func showCustomerWorkStart(customerNumber: Int) {
-        let startMessage = BankMessage.start(customerNumber)
+    static func showCustomerWorkStart(customerNumber: Int, workType: String) {
+        let startMessage = BankMessage.start(customerNumber, workType)
         print(startMessage.show)
     }
 
-    static func showCustomerWorkDone(customerNumber: Int) {
-        let doneMessage = BankMessage.done(customerNumber)
+    static func showCustomerWorkDone(customerNumber: Int, workType: String) {
+        let doneMessage = BankMessage.done(customerNumber, workType)
         print(doneMessage.show)
     }
 }

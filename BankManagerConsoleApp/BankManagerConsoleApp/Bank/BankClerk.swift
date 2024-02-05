@@ -11,7 +11,13 @@ protocol BankWork {
     func work(for customer: Customer)
 }
 
-struct BankClerk: BankWork {
+struct BankLoanClerk: BankWork {
+    func work(for customer: Customer) {
+        Thread.sleep(forTimeInterval: 1.1)
+    }
+}
+
+struct BankDepositClerk: BankWork {
     func work(for customer: Customer) {
         Thread.sleep(forTimeInterval: 0.7)
     }
