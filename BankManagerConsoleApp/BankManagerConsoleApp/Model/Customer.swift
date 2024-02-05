@@ -6,13 +6,13 @@
 //
 
 enum TaskType {
-    case deposit, laon
+    case deposit, loan
     
     var description: String {
         switch self {
         case .deposit:
             return "예금"
-        case .laon:
+        case .loan:
             return "대출"
         }
     }
