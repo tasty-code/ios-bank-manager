@@ -41,18 +41,18 @@ final class Bank {
             throw BankError.inputError
         }
 
-        guard userChoice == startNumber else { exit(1) }
+        guard userChoice == startNumber else { return nil }
         return MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
     }
             
     private func startTask() async {
-        await alignCustomer()
+        guard let customers = customers else { return }
+        await alignCustomer(with: customers)
         await handleTask()
         await open()
     }
     
-    private func alignCustomer() async {
-        guard let customers = customers else { return }
+    private func alignCustomer(with customers: [Customer]) async {
         for customer in customers {
             await bankManager.addCustomerQueue(with: customer)
         }
@@ -71,12 +71,12 @@ final class Bank {
     }
     
     private func showProcessState() {
-        bankManager.startTask = { num in
-            print(Message.startTask(number: num).showMessage())
+        bankManager.startTask = { customer in
+            print(Message.startTask(customer.number, customer.service.rawValue).showMessage())
         }
         
-        bankManager.finishTask = { num in
-            print(Message.finishTask(number: num).showMessage())
+        bankManager.finishTask = { customer in
+            print(Message.finishTask(customer.number, customer.service.rawValue).showMessage())
         }
     }
 }
