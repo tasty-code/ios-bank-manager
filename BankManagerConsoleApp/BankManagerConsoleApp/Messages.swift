@@ -5,8 +5,6 @@
 //  Created by dopamint on 2/1/24.
 //
 
-
-
 enum Messages {
     case menu
     case exit
