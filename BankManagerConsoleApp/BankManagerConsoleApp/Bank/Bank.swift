@@ -57,17 +57,37 @@ class Bank {
             let totalTime = String(format: "%.2f", flooredDifference)
             self.delegate?.showResult(customerCount: self.handledCustomerCount, intervalTime: totalTime)
         }
-
-        delegate?.showResult(customerCount: handledCustomerCount, intervalTime: totalTime)
+        
     }
     
-    private mutating func serveCustomer() {
-        while !bankWatingQueue.isEmpty() {
-            guard let customer = bankWatingQueue.dequeue() else { return }
-            delegate?.showCustomerWorkStart(customerNumber: customer.number)
-            clerk.work(for: customer)
-            delegate?.showCustomerWorkDone(customerNumber: customer.number)
+    private func serveLoanCustomer() {
+        while !loanWatingQueue.isEmpty() {
+            guard let customer = loanWatingQueue.dequeue() else { return }
+            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: "대출")
+            bankLoanClerk.work(for: customer)
+            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType:  "대출")
             handledCustomerCount += 1
         }
     }
+
+    private func serveDepositCustomer() {
+        while !depositWatingQueue.isEmpty() {
+            guard let customer = depositWatingQueue.dequeue() else { return }
+            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: "예금")
+            bankDepositClerk.work(for: customer)
+            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: "예금")
+            handledCustomerCount += 1
+        }
+    }
+    
+//    private func serveCustomer() {
+//        while !bankWatingQueue.isEmpty() {
+//            guard let customer = bankWatingQueue.dequeue() else { return }
+//            delegate?.showCustomerWorkStart(customerNumber: customer.number)
+//            bankLoanClerk.work(for: customer)
+//            delegate?.showCustomerWorkDone(customerNumber: customer.number)
+//            handledCustomerCount += 1
+//        }
+//    }
+    
 }
