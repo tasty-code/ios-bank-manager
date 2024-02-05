@@ -9,8 +9,8 @@ import Foundation
 
 protocol BankManagerDelegate {
     func showResult(customerCount: Int, intervalTime: String)
-    func showCustomerWorkStart(customerNumber: Int)
-    func showCustomerWorkDone(customerNumber: Int)
+    func showCustomerWorkStart(customerNumber: Int, workType: String)
+    func showCustomerWorkDone(customerNumber: Int, workType: String)
 }
 
 struct Bank {
@@ -45,11 +45,18 @@ struct Bank {
     private func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
-        DispatchQueue.global().sync {
+        let group = DispatchGroup()
         
-        let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
-        let flooredDifference = floor(intervalTime * 10) / 10
-        let totalTime = String(format: "%.2f", flooredDifference)
+        DispatchQueue.global().async(group: group, execute: serveLoanCustomer)
+        DispatchQueue.global().async(group: group, execute: serveDepositCustomer)
+        
+        group.notify(queue: .global()) {
+            print("작업 끝")
+            let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
+            let flooredDifference = floor(intervalTime * 10) / 10
+            let totalTime = String(format: "%.2f", flooredDifference)
+            self.delegate?.showResult(customerCount: self.handledCustomerCount, intervalTime: totalTime)
+        }
 
         delegate?.showResult(customerCount: handledCustomerCount, intervalTime: totalTime)
     }
