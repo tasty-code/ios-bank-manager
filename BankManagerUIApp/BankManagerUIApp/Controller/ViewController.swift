@@ -1,16 +1,17 @@
 //
 //  BankManagerUIApp - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
-// 
+//
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     private let bankView = BankView()
     private var timer: Timer?
     private var initialTime = 0.000
+    private let bankManager =  BankManager(bankClerk: [.deposit: BankClerk(work: .deposit), .loan: BankClerk(work: .loan)])
     
     override func loadView() {
         view = bankView
@@ -23,6 +24,11 @@ class ViewController: UIViewController {
     }
     
     @objc func addCustomerButtonTapped() {
+        for num in 1...10 {
+            let customer = Customer(banking: Banking.allCases.randomElement(), numOfPerson: num)
+            bankView.waitStackView.addArrangedSubview(CustomerLabel(customer: customer))
+        }
+        
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
     }
     
@@ -41,7 +47,5 @@ class ViewController: UIViewController {
         bankView.taskTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliSeconds)
         initialTime += 0.001
     }
-
-
 }
 
