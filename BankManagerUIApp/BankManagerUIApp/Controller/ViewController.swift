@@ -8,9 +8,11 @@ import UIKit
 
 class ViewController: UIViewController {
     private let mainView: MainView
+    private let dataSource: BankManager
     
-    init() {
+    init(dataSource: BankManager) {
         self.mainView = MainView()
+        self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,6 +24,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         view.backgroundColor = .white
+    }
+    
+    @objc func addCustomerButtonTapped() {
+        if dataSource.isQueueRunning {
+            dataSource.addCustomer()
+            return
+        }
+        dataSource.addCustomer()
+        dataSource.startBankingProcess()
+    }
+    
+    @objc func resetService() {
+        // 타이머 초기화
+        
     }
 }
 
