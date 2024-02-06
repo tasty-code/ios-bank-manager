@@ -2,6 +2,8 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
+    static var className: String { String(describing: self) }
+    
     private var label:  UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title3)
