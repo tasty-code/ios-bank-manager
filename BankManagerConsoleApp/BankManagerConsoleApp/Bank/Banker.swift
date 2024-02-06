@@ -1,7 +1,6 @@
 import Foundation
 
 final class Banker: PrintableMessage {
-    private(set) var totalProcessingTime: TimeInterval = 0
     private(set) var customersCount = 0
     /// Banker가 초기화 될때 은행원의 업무를 지정해주기 위해 생성함.
     let service: BankingService
@@ -24,11 +23,9 @@ final class Banker: PrintableMessage {
     /// DispatchQueue.asyncAfter로 리펙토링 해....ㅂ..ㄴ.,ㄴ거야..
     private func processTransaction(for customer: Customer, with processingTime: TimeInterval) {
         Thread.sleep(forTimeInterval: processingTime)
-        totalProcessingTime += processingTime
     }
     
-    func resetProcessingTimeAndCount() {
-        totalProcessingTime = 0
+    func resetProcessingCount() {
         customersCount = 0
     }
 }

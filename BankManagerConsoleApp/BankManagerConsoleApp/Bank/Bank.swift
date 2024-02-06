@@ -23,7 +23,8 @@ final class Bank: PrintableMessage {
         }
     }
     
-    func openBank() {
+    func openBank() {            
+        let taskStartedTime: Date = Date()
         generateCustomerQueue()
         
         /// 각 은행원에 대해 병렬 처리
@@ -49,7 +50,6 @@ final class Bank: PrintableMessage {
                     /// 첫 번째 예금 은행원이 먼저 세마포어에 진입해서 할당받은 하나의 업무를 처리하고 나오면
                     /// 두 번째 예금 은행원이 세마포어에 진입할 수 있는것!
                     self.depositSemaphore.signal()
-                    
                 case .loan:
                     if let loanQueue = self.customersQueue[.loan] {
                         banker.taskProcess(queue: loanQueue)
@@ -64,7 +64,7 @@ final class Bank: PrintableMessage {
         /// wait() 메서드는 현재 스레드를 차단하므로, 주로 비동기적 작업을
         /// 수행하는 메인 스레드가 아닌 다른 스레드에서 호출해야 함!
         group.wait()
-        closeBank()
+        closeBank(totalProcessingTime: Date().timeIntervalSince(taskStartedTime))
     }
     
     private func generateCustomerQueue() {
@@ -80,16 +80,16 @@ final class Bank: PrintableMessage {
         }
     }
     
-    private func closeBank() {
+    private func closeBank(totalProcessingTime: Double) {
         let totalCustomersCount = bankers.reduce(0) { $0 + $1.customersCount }
-        let totalProcessingTime = bankers.reduce(0) { $0 + $1.totalProcessingTime }
+        
         printClosingMessage(customersCount: totalCustomersCount, totalProcessingTime: totalProcessingTime)
         resetBankers()
     }
     
     private func resetBankers() {
         for banker in bankers {
-            banker.resetProcessingTimeAndCount()
+            banker.resetProcessingCount()
         }
     }
 }
