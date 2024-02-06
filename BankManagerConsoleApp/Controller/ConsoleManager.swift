@@ -12,7 +12,7 @@ struct ConsoleManager {
         
         do {
             let input = try selectedByUser()
-            isOpen = doorTrigger(by: input)
+            isOpen = triggerBankDoor(by: input)
         } catch {
             print(error.localizedDescription)
             operate()
@@ -23,7 +23,7 @@ struct ConsoleManager {
         }
     }
     
-    private func doorTrigger(by input: String) -> Bool {
+    private func triggerBankDoor(by input: String) -> Bool {
         if input == "1" {
             return true
         } else {
@@ -33,7 +33,7 @@ struct ConsoleManager {
     }
     
     private mutating func executeBankingOperation() {
-        bankManager.createEmployees()
+        bankManager.assignEmployeeTasks()
         customerManager.createCustomers()
         customerManager.registerCustomers()
         
