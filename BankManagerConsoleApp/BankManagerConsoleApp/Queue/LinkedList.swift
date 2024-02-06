@@ -39,6 +39,12 @@ extension LinkedList {
     }
     
     func removeFirst() -> T? {
+        if front === rear {
+            let result = front
+            front = nil
+            rear = nil
+            return result?.value
+        }
         guard let currentFront = front else { return nil }
         front = front?.next
         return currentFront.value
