@@ -22,6 +22,10 @@ struct BankManager {
         queue.enqueue(element: customer)
     }
     
+    func stop() {
+        queue.clear()
+    }
+    
     func assignBank() throws {
         while let list = try? queue.dequeue(), let banking = list.banking {
             guard let customer = list as? Customer else {

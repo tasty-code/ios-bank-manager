@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @objc func addCustomerButtonTapped() {
         for num in count...count + 9 {
             let customer = Customer(banking: Banking.allCases.randomElement(), numOfPerson: num)
+            bankManager.standBy(customer: customer)
             bankView.waitStackView.addArrangedSubview(CustomerLabel(customer: customer))
         }
         
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
     }
     
     @objc func resetButtonTapped() {
+        bankManager.stop()
         
         for subView in bankView.waitStackView.arrangedSubviews {
             subView.removeFromSuperview()
@@ -45,6 +47,8 @@ class ViewController: UIViewController {
         timer = nil
         initialTime = 0.000
         bankView.taskTimeLabel.text = "업무시간 - 00:00:000"
+        
+        count = 1
     }
     
     @objc func runningTimer() {
