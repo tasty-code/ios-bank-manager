@@ -17,9 +17,9 @@ final class Banker {
     }
     
     func processCustomer(_ customer: Customer) -> Double {
-        Messages.taskStart(number: customer.number, taskType: taskType.description).printMessage()
-        Thread.sleep(forTimeInterval: duration)
-        Messages.taskDone(number: customer.number, taskType: taskType.description).printMessage()
-        return duration
+            Messages.taskStart(number: customer.number, taskType: taskType.description).printMessage()
+            Thread.sleep(forTimeInterval: duration)
+            Messages.taskDone(number: customer.number, taskType: taskType.description).printMessage()
+            return duration
     }
 }
