@@ -6,9 +6,8 @@
 
 import Foundation
 
-struct BankManager {
-    private var totalCustomers: Int = 0
-    private var totalTimeSpent: Double = 0
+class BankManager {
+    private(set) var isQueueRunning: Bool = false
     
     private let banker: Banker = Banker()
     private let depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList())
@@ -24,86 +23,51 @@ struct BankManager {
         return loanQueue
     }()
     
-    func main() {
-        var isExit: Bool = false
-        
-        while !isExit {
-            print("""
-        1 : 은행 개점
-        2 : 종료
-        입력 :
-        """, terminator: " ")
-            
-            guard let selectedMenu = readLine() else {
-                return
-            }
-            
-            switch selectedMenu {
-            case "1":
-                startBankingProcess { customer, time in
-                    print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer)명이며, 총 업무시간은 \(String(format: "%.2f", time))초입니다.")
-                }
-            case "2":
-                isExit = true
-                continue
-            default:
-                print("잘못된 입력입니다. 다시 입력해 주세요.")
-                main()
-                continue
-            }
-        }
-    }
-    
-    private func startBankingProcess(completionHandler: @escaping (_ customer: Int, _ time: Double) -> Void) {
-        let totalCustomers: Int = setupInitialInformation()
-        
+    func startBankingProcess() {
         let startTime = Date()
+        isQueueRunning = true
         
-        let depositCustomerBlock = BlockOperation {
-            while !depositCustomerQueue.isEmpty() {
-                guard let node = depositCustomerQueue.dequeue() else {
+        let depositCustomerBlock = BlockOperation { [weak self] in
+            while !(self?.depositCustomerQueue.isEmpty() ?? false) {
+                guard let node = self?.depositCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
                 let customerBlock = BlockOperation {
-                    self.banker.provideService(to: customer)
+                    self?.banker.provideService(to: customer)
                 }
-                depositQueue.addOperation(customerBlock)
-                if depositQueue.isSuspended {
-                    depositQueue.waitUntilAllOperationsAreFinished()
+                self?.depositQueue.addOperation(customerBlock)
+                if let boolean = self?.depositQueue.isSuspended, boolean {
+                    self?.depositQueue.waitUntilAllOperationsAreFinished()
                 }
             }
         }
         
-        let loanCustomerBlock = BlockOperation {
-            while !loanCustomerQueue.isEmpty() {
-                guard let node = loanCustomerQueue.dequeue() else {
+        let loanCustomerBlock = BlockOperation { [weak self] in
+            while !(self?.loanCustomerQueue.isEmpty() ?? false) {
+                guard let node = self?.loanCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
                 let customerBlock = BlockOperation {
-                    self.banker.provideService(to: customer)
+                    self?.banker.provideService(to: customer)
                 }
-                loanQueue.addOperation(customerBlock)
-                loanQueue.waitUntilAllOperationsAreFinished()
+                self?.loanQueue.addOperation(customerBlock)
+                self?.loanQueue.waitUntilAllOperationsAreFinished()
             }
         }
         
-        let completionBlock = BlockOperation {
-            let endTime = Date()
-            let duration = endTime.timeIntervalSince(startTime)
-            completionHandler(totalCustomers, duration)
+        let completionBlock = BlockOperation { [weak self] in
+            self?.toggleQueueStatus()
         }
         completionBlock.addDependency(depositCustomerBlock)
         completionBlock.addDependency(loanCustomerBlock)
         
-        OperationQueue().addOperations([depositCustomerBlock, loanCustomerBlock, completionBlock], waitUntilFinished: true)
+        OperationQueue().addOperations([depositCustomerBlock, loanCustomerBlock, completionBlock], waitUntilFinished: false)
     }
     
-    private func setupInitialInformation() -> Int {
-        let totalCustomers: Int = .random(in: 10...30)
-        
-        for i in 1...totalCustomers {
+    func addCustomer(_ count: Int = 10) {
+        for i in 1...count {
             let randomService: BankingService = BankingService.allCases.randomElement() ?? .deposit
             switch randomService {
             case .deposit:
@@ -112,7 +76,16 @@ struct BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
-        
-        return totalCustomers
+    }
+    
+    private func toggleQueueStatus() {
+        self.isQueueRunning.toggle()
+    }
+    
+    func reset() {
+        depositCustomerQueue.clear()
+        loanCustomerQueue.clear()
+        depositQueue.cancelAllOperations()
+        loanQueue.cancelAllOperations()
     }
 }
