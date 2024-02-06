@@ -73,13 +73,13 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
             consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber,
                                             task: customer.task.description)
             Thread.sleep(forTimeInterval: 0.7)
-            consoleMessage.teskEndMessage(customerNumber: customer.waitingNumber,
+            consoleMessage.taskEndMessage(customerNumber: customer.waitingNumber,
                                           task: customer.task.description)
         case .loan:
             consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber,
                                             task: customer.task.description)
             Thread.sleep(forTimeInterval: 1.1)
-            consoleMessage.teskEndMessage(customerNumber: customer.waitingNumber,
+            consoleMessage.taskEndMessage(customerNumber: customer.waitingNumber,
                                           task: customer.task.description)
         }
     }
