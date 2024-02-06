@@ -7,11 +7,9 @@
 enum TaskType: CaseIterable, CustomStringConvertible {
     case loan
     case deposit
-
 }
 
 extension TaskType {
-    
     var description: String {
         switch self {
         case .loan:
