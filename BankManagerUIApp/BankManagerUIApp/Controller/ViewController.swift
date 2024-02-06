@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     private var timer: Timer?
     private var initialTime = 0.000
     private let bankManager =  BankManager(bankClerk: [.deposit: BankClerk(work: .deposit), .loan: BankClerk(work: .loan)])
+    private var count = 1
     
     override func loadView() {
         view = bankView
@@ -24,10 +25,12 @@ class ViewController: UIViewController {
     }
     
     @objc func addCustomerButtonTapped() {
-        for num in 1...10 {
+        for num in count...count + 9 {
             let customer = Customer(banking: Banking.allCases.randomElement(), numOfPerson: num)
             bankView.waitStackView.addArrangedSubview(CustomerLabel(customer: customer))
         }
+        
+        count += 10
         
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
     }
