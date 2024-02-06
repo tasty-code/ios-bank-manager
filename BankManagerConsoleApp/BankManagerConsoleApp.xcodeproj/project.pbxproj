@@ -20,6 +20,7 @@
 		F31EDDBF2B68C7F200CBB73E /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */; };
 		F31EDDC12B68D1A900CBB73E /* BankMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31EDDC02B68D1A900CBB73E /* BankMessage.swift */; };
 		F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A904222B60AC5D001E00E7 /* LinkedList.swift */; };
+		F3CE19072B72262B000FC3F0 /* BankingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE19062B72262B000FC3F0 /* BankingList.swift */; };
 		F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		F31EDDBE2B68C7F200CBB73E /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		F31EDDC02B68D1A900CBB73E /* BankMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankMessage.swift; sourceTree = "<group>"; };
 		F3A904222B60AC5D001E00E7 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		F3CE19062B72262B000FC3F0 /* BankingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankingList.swift; path = "../../../../ios-bank-manager_temp/BankManagerConsoleApp/BankManagerConsoleApp/Enums/BankingList.swift"; sourceTree = "<group>"; };
 		F3F4F9592B621E4C0037A3AF /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 			children = (
 				F31EDDC02B68D1A900CBB73E /* BankMessage.swift */,
 				F31EDDAA2B63996700CBB73E /* Constants.swift */,
+				F3CE19062B72262B000FC3F0 /* BankingList.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				F3F4F95A2B621E4C0037A3AF /* CustomerQueue.swift in Sources */,
 				F31EDDBB2B68C6A200CBB73E /* Customer.swift in Sources */,
 				F31EDD952B63911400CBB73E /* main.swift in Sources */,
+				F3CE19072B72262B000FC3F0 /* BankingList.swift in Sources */,
 				F3A904232B60AC5D001E00E7 /* LinkedList.swift in Sources */,
 				F31EDDBD2B68C72600CBB73E /* Bank.swift in Sources */,
 				F31EDDBF2B68C7F200CBB73E /* BankClerk.swift in Sources */,
