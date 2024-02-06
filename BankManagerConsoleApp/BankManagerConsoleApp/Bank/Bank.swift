@@ -8,16 +8,16 @@
 import Foundation
 
 final class Bank {
+    private let depositBankerCount: Int
+    private let loanBankerCount: Int
+    private var totalDepositWorkingTime: Double
+    private var totalLoanWorkingTime: Double
     
-    let depositBankerCount: Int
-    let loanBankerCount: Int
-    var totalDepositWorkingTime: Double = 0
-    var totalLoanWorkingTime: Double = 0
-    
-    var depositBankerQueue = Queue<Banker>()
-    var loanBankerQueue = Queue<Banker>()
-    var depositCustomerQueue = Queue<Customer>()
-    var loanCustomerQueue = Queue<Customer>()
+    private var depositBankerQueue = Queue<Banker>()
+    private var loanBankerQueue = Queue<Banker>()
+    private var depositCustomerQueue = Queue<Customer>()
+    private var loanCustomerQueue = Queue<Customer>()
+    private let group = DispatchGroup()
     
     init(depositBankerCount: Int, loanBankerCount: Int) {
         self.depositBankerCount = depositBankerCount
