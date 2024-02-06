@@ -45,35 +45,21 @@ final class Bank {
                 loanCustomerQueue.enqueue(customer)
             }
         }
-        processCustomers()
-        
-        let formattedTotalWorkingTime = max(totalLoanWorkingTime, totalDepositWorkingTime).formattedDecimal
-        Messages.closeBank(customerCount: numberOfCustomers, totalTime: formattedTotalWorkingTime).printMessage()
-        
     }
     
-    private func processCustomers() {
-        while !depositCustomerQueue.isEmpty() || !loanCustomerQueue.isEmpty() {
-            
-            DispatchQueue.global().async { [self] in
-                if depositBankerQueue.isEmpty() == false {
-                    
-                    guard let banker = depositCustomerQueue.dequeue(), let workingTime = depositBankerQueue.dequeue()?.processCustomer(banker)
-                    else { return }
-                    totalDepositWorkingTime += workingTime
-                    depositBankerQueue.enqueue(Banker(taskType: .deposit))
+    private func processTask(banker: Banker, customer: Customer, bankerQueue: Queue<Banker>) {
+        DispatchQueue.global().async(group: group)  { [self] in
+            totalDepositWorkingTime += banker.processCustomer(customer)
+            bankerQueue.enqueue(Banker(taskType: banker.taskType))
                 }
             }
             
-            DispatchQueue.global().async { [self] in
-                if loanBankerQueue.isEmpty() == false {
-                    
-                    guard let banker = loanCustomerQueue.dequeue(), let workingTime = loanBankerQueue.dequeue()?.processCustomer(banker)
+    private func serveCustomer(bankerQueue: Queue<Banker>, customerQueue: Queue<Customer>) {
+        if bankerQueue.isEmpty() == false {
+            guard let customer = customerQueue.dequeue(),
+                  let banker = bankerQueue.dequeue()
                     else { return }
-                    loanBankerQueue.enqueue(Banker(taskType: .loan))
-                    totalLoanWorkingTime += workingTime
-                }
-            }
+            processTask(banker: banker, customer: customer, bankerQueue: bankerQueue)
         }
     }
 }
