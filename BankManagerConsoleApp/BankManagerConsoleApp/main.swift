@@ -7,7 +7,7 @@
 
 
 func operateBank() {
-    let bank = Bank(depositBankerCount: 1, loanBankerCount: 2)
+    let bank = Bank(depositBankerCount: 2, loanBankerCount: 1)
 
     while true {
         Messages.menu.printMessage()
