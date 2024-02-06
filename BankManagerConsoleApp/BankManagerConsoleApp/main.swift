@@ -1,10 +1,10 @@
 import Foundation
 
-let banker1 = Banker(service: .deposit)
-let banker2 = Banker(service: .deposit)
-let banker3 = Banker(service: .loan)
+let firstDepositBanker = Banker(service: .deposit)
+let secondDepositBanker = Banker(service: .deposit)
+let loanBanker = Banker(service: .loan)
 
-let bankers = [banker1, banker2, banker3]
+let bankers = [firstDepositBanker, secondDepositBanker, loanBanker]
 
 let depositSemaphore = DispatchSemaphore(value: 2)
 
