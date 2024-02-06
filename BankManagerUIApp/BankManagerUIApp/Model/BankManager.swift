@@ -8,10 +8,19 @@ import Foundation
 
 class BankManager {
     private(set) var isQueueRunning: Bool = false
+    private(set) var totalCustomerInQueue: [Customer] = []
     
     private let banker: Banker = Banker()
-    private let depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList())
-    private let loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList())
+    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList()) {
+        didSet {
+            totalCustomerInQueue = getTotalWaitingCustomer()
+        }
+    }
+    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList()) {
+        didSet {
+            totalCustomerInQueue = getTotalWaitingCustomer()
+        }
+    }
     private let depositQueue: OperationQueue = {
         let depositQueue = OperationQueue()
         depositQueue.maxConcurrentOperationCount = 2
@@ -24,7 +33,6 @@ class BankManager {
     }()
     
     func startBankingProcess() {
-        let startTime = Date()
         isQueueRunning = true
         
         let depositCustomerBlock = BlockOperation { [weak self] in
@@ -87,5 +95,27 @@ class BankManager {
         loanCustomerQueue.clear()
         depositQueue.cancelAllOperations()
         loanQueue.cancelAllOperations()
+    }
+    
+    func getTotalWaitingCustomerCount() -> Int {
+        return depositCustomerQueue.count() + loanCustomerQueue.count()
+    }
+    
+    private func getTotalWaitingCustomer() -> [Customer] {
+        var array: [Customer] = []
+        for i in 1...depositCustomerQueue.count() {
+            guard let customer = depositCustomerQueue.getNodeValue(at: i) else {
+                continue
+            }
+            array.append(customer)
+        }
+        for i in 1...loanCustomerQueue.count() {
+            guard let customer = loanCustomerQueue.getNodeValue(at: i) else {
+                continue
+            }
+            array.append(customer)
+        }
+        array.sort { $0.waitingNumber < $1.waitingNumber }
+        return array
     }
 }
