@@ -9,6 +9,7 @@ import Foundation
 class BankManager {
     private(set) var isQueueRunning: Bool = false
     private(set) var totalCustomerInQueue: [Customer] = []
+    private var lastCustomerNumber: Int = 0
     
     private let banker: Banker = Banker()
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList()) {
@@ -75,7 +76,7 @@ class BankManager {
     }
     
     func addCustomer(_ count: Int = 10) {
-        for i in 1...count {
+        for i in lastCustomerNumber...lastCustomerNumber + count {
             let randomService: BankingService = BankingService.allCases.randomElement() ?? .deposit
             switch randomService {
             case .deposit:
@@ -84,6 +85,7 @@ class BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
+        lastCustomerNumber += 10
     }
     
     private func toggleQueueStatus() {
@@ -91,6 +93,7 @@ class BankManager {
     }
     
     func reset() {
+        lastCustomerNumber = 0
         depositCustomerQueue.clear()
         loanCustomerQueue.clear()
         depositQueue.cancelAllOperations()
