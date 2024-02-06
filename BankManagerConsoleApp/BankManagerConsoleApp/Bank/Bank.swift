@@ -14,13 +14,19 @@ protocol BankManagerDelegate: AnyObject {
 }
 
 final class Bank {
-    private var loanWatingQueue = Queue<Customer>()
-    private var depositWatingQueue = Queue<Customer>()
+    private var waitingQueue = Queue<Customer>()
     private let bankLoanClerk: BankLoanClerk = BankLoanClerk()
     private let bankDepositClerk: BankDepositClerk = BankDepositClerk()
-    private var handledCustomerCount = 0
     weak var delegate: BankManagerDelegate?
-    var group = DispatchGroup()
+    private var handledCustomerCount = 0
+    private var loanClerksCount: Int
+    private var depositClerksCount: Int
+    private let group = DispatchGroup()
+    
+    init(loanClerksCount: Int, depositClerksCount: Int) {
+        self.loanClerksCount = loanClerksCount
+        self.depositClerksCount = depositClerksCount
+    }
     
     func open() {
          setWaitingLine()
@@ -31,48 +37,47 @@ final class Bank {
         handledCustomerCount = 0
         for number in 1...Int.random(in: 10...30) {
             guard let work = BankWorkType.allCases.randomElement() else { return }
-            switch work {
-            case .deposit:
-                depositWatingQueue.enqueue(item:  Customer(number: number, purpose: .deposit))
-            case .loan:
-                loanWatingQueue.enqueue(item:  Customer(number: number, purpose: .loan))
-            }
-        }
+            self.waitingQueue.enqueue(item: Customer(number: number, purpose: work))
+         }
     }
     
     private func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let group = DispatchGroup()
-        
-        DispatchQueue.global().async(group: group, execute: serveLoanCustomer)
-        DispatchQueue.global().async(group: group, execute: serveDepositCustomer)
-        
-        group.notify(queue: .global()) {
-            print("작업 끝")
-            let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
-            let flooredDifference = floor(intervalTime * 10) / 10
-            let totalTime = String(format: "%.2f", flooredDifference)
-            self.delegate?.showResult(customerCount: self.handledCustomerCount, intervalTime: totalTime)
-        }
-        
-    }
-    
-    private func serveLoanCustomer() {
-        while !loanWatingQueue.isEmpty() {
-            guard let customer = loanWatingQueue.dequeue() else { return }
-            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: BankWorkType.deposit.name)
-            bankLoanClerk.work(for: customer)
-            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType:  BankWorkType.deposit.name)
-            handledCustomerCount += 1
-        }
+        serveCustomer(depositClerksCount,loanClerksCount)
+        group.wait()
+        let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
+        let flooredDifference = floor(intervalTime * 10) / 10
+        let totalTime = String(format: "%.2f", flooredDifference)
+        self.delegate?.showResult(customerCount: self.handledCustomerCount, intervalTime: totalTime)
     }
 
-    private func serveDepositCustomer() {
-        while !depositWatingQueue.isEmpty() {
-            guard let customer = depositWatingQueue.dequeue() else { return }
-            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: BankWorkType.loan.name)
-            bankDepositClerk.work(for: customer)
-            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: BankWorkType.loan.name)
+    private func serveCustomer(_ loanClerksCount: Int, _ depositClerksCount: Int) {
+        let depositSemaphore = DispatchSemaphore(value: depositClerksCount)
+        let loanSemaphore = DispatchSemaphore(value: loanClerksCount)
+        while !waitingQueue.isEmpty() {
+            guard let customer = waitingQueue.dequeue() else { return }
+            switch customer.purpose {
+            case .loan:
+                loanSemaphore.wait()
+            case .deposit:
+                depositSemaphore.wait()
+            }
+
+            DispatchQueue.global().async(group: group) {
+                switch customer.purpose {
+                case .loan:
+                    self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
+                    self.bankLoanClerk.work(for: customer)
+                    loanSemaphore.signal()
+                    self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
+                    
+                case .deposit:
+                    self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
+                    self.bankDepositClerk.work(for: customer)
+                    depositSemaphore.signal()
+                    self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
+                }
+            }
             handledCustomerCount += 1
         }
     }
