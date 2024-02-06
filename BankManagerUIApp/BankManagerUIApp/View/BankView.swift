@@ -8,7 +8,7 @@
 import UIKit
 
 class BankView: UIView {
-    let addClientButton: UIButton = {
+    let addCustomerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("고객 10명 추가", for: .normal)
         button.tintColor = .blue
@@ -26,7 +26,7 @@ class BankView: UIView {
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [addClientButton, resetButton])
+        let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
