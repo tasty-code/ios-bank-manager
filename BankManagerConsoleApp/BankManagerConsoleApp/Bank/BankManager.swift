@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class BankManager: BankManagerDelegate {
+final class BankManager {
     private enum Menu: Int {
         case open = 1
         case close = 2
@@ -46,7 +46,9 @@ final class BankManager: BankManagerDelegate {
     private func inputMenu() -> String? {
         return Swift.readLine()
     }
-    
+}
+
+extension BankManager: BankManagerDelegate {
     func showResult(customerCount: Int, intervalTime: String) {
         ConsoleView.showResult(customerCount: customerCount, intervalTime: intervalTime)
     }
