@@ -33,6 +33,11 @@ class ViewController: UIViewController {
     }
     
     @objc func resetButtonTapped() {
+        
+        for subView in bankView.waitStackView.arrangedSubviews {
+            subView.removeFromSuperview()
+        }
+        
         timer?.invalidate()
         timer = nil
         initialTime = 0.000
