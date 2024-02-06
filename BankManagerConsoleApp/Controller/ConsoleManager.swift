@@ -12,7 +12,7 @@ struct ConsoleManager {
         
         do {
             let input = try selectedByUser()
-            isOpen = triggerBankDoor(by: input)
+            isOpen = triggeredBankDoorStatus(by: input)
         } catch {
             print(error.localizedDescription)
             operate()
@@ -23,7 +23,7 @@ struct ConsoleManager {
         }
     }
     
-    private func triggerBankDoor(by input: String) -> Bool {
+    private func triggeredBankDoorStatus(by input: String) -> Bool {
         if input == "1" {
             return true
         } else {
