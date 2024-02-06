@@ -54,8 +54,10 @@ extension Bank {
         depositSemaphore.wait()
         DispatchQueue.global().async(group: watingGroup) { [self] in
             guard let customer = depositWatingQueue.dequeue() else { return }
-            depositClerkFirst.depositWorking(for: customer)
+            BankManager().sendWorkingMessage("\(BankMessage.start(customer.number, "예금").description)")
+            depositClerkFirst.depositWorking()
             depositSemaphore.signal()
+            BankManager().sendWorkingMessage("\(BankMessage.done(customer.number, "예금").description)")
         }
     }
     
@@ -64,8 +66,10 @@ extension Bank {
         depositSemaphore.wait()
         DispatchQueue.global().async(group: watingGroup) { [self] in
             guard let customer = depositWatingQueue.dequeue() else { return }
-            depositClerkSecond.depositWorking(for: customer)
+            BankManager().sendWorkingMessage("\(BankMessage.start(customer.number, "예금").description)")
+            depositClerkSecond.depositWorking()
             depositSemaphore.signal()
+            BankManager().sendWorkingMessage("\(BankMessage.done(customer.number, "예금").description)")
         }
     }
     
@@ -74,8 +78,10 @@ extension Bank {
         loanSemaphore.wait()
         DispatchQueue.global().async(group: watingGroup) { [self] in
             guard let customer = loanWatingQueue.dequeue() else { return }
-            loanClerkFirst.lendWorking(for: customer)
+            BankManager().sendWorkingMessage("\(BankMessage.start(customer.number, "대출").description)")
+            loanClerkFirst.lendWorking()
             loanSemaphore.signal()
+            BankManager().sendWorkingMessage("\(BankMessage.done(customer.number, "대출").description)")
         }
     }
     
@@ -90,7 +96,13 @@ extension Bank {
         
         watingGroup.wait()
         let totalTime = caculateProcessingTime(startTime)
-        print(BankMessage.result(customerCount, totalTime).description)
+        BankManager().sendWorkingMessage("\(BankMessage.result(customerCount, totalTime).description)")
+        resetSetting()
+    }
+    
+    private func resetSetting() {
+        depositSemaphore.signal()
+        loanSemaphore.signal()
     }
     
     private func caculateProcessingTime(_ startTime: CFAbsoluteTime) -> String {
