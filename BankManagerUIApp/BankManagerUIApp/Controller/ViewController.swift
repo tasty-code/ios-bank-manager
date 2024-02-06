@@ -41,3 +41,18 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: CustomCell = tableView.dequeueReusableCell(withIdentifier: CustomCell.className, for: indexPath) as? CustomCell else {
+            return CustomCell()
+        }
+        
+        let customer = dataSource.totalCustomerInQueue[indexPath.row]
+        cell.setLabelText(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.getTotalWaitingCustomerCount()
+    }
+}
