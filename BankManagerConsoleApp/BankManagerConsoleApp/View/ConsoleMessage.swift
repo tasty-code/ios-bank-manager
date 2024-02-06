@@ -30,7 +30,7 @@ struct ConsoleMessage {
     }
     
     /// 고객 업무 완료 메시지
-    func teskEndMessage(customerNumber: Int, task: String) {
+    func taskEndMessage(customerNumber: Int, task: String) {
         print("\(customerNumber)번 고객 \(task)업무 완료")
     }
     
