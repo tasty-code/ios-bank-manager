@@ -7,13 +7,13 @@ struct CustomerManager {
     mutating func createCustomers() {
         let number = Int.random(in: 5...20)
         for ticketNumber in 1...number {
-            customers.append(Customer(ticketNumber: ticketNumber, task: Task.allCases.randomElement() ?? .대출))
+            customers.append(Customer(ticketNumber: ticketNumber, task: Task.allCases.randomElement() ?? .loan))
         }
     }
     
     mutating func registerCustomers() {
         for customer in customers {
-            if customer.task == Task.대출 {
+            if customer.task == Task.loan {
                 loanTicketMachine.enqueue(with: customer)
             } else {
                 depositTicketMachine.enqueue(with: customer)
