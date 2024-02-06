@@ -13,6 +13,7 @@ class MainView: UIView {
         addCustomerButton.setTitle("고객 10명 추가", for: .normal)
         addCustomerButton.setTitleColor(.systemBlue, for: .normal)
         addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        addCustomerButton.addTarget(nil, action: #selector(ViewController.addCustomerButtonTapped), for: .touchUpInside)
         return addCustomerButton
     }()
     private let resetButton: UIButton = {
