@@ -36,7 +36,7 @@ struct Queue<T: Equatable> {
         return linkedList.count
     }
     
-    func customerNumber(at index: Int) -> T? {
+    func getNodeValue(at index: Int) -> T? {
         return linkedList[index]?.value
     }
 }
