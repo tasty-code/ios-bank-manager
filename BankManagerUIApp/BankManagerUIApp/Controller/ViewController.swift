@@ -19,11 +19,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bankView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
-        
+        bankView.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
     }
     
     @objc func addCustomerButtonTapped() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func resetButtonTapped() {
+        timer?.invalidate()
+        timer = nil
+        initialTime = 0.000
+        bankView.taskTimeLabel.text = "업무시간 - 00:00:000"
     }
     
     @objc func runningTimer() {
