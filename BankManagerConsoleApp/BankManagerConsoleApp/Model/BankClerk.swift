@@ -8,7 +8,7 @@ import Foundation
 
 struct BankClerk {
     
-    func work(for customer: Customer) {
+    func depositWorking(for customer: Customer) {
         print(BankMessage.start(customer.number, "예금").description)
         Thread.sleep(forTimeInterval: 0.7)
         print(BankMessage.done(customer.number, "예금").description)
