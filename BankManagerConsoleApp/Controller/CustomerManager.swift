@@ -1,23 +1,33 @@
 
 struct CustomerManager {
     private(set) var customers: [Customer] = []
-    private(set) var ticketMachine = Queue<Customer>()
-    
-    mutating func createCustomer() {
-        let number = Int.random(in: 10...30)
+    var loanTicketMachine = Queue<Customer>()
+    var depositTicketMachine = Queue<Customer>()
+
+    mutating func createCustomers() {
+        let number = Int.random(in: 5...20)
         for ticketNumber in 1...number {
-            customers.append(Customer(ticketNumber: ticketNumber))
+            customers.append(Customer(ticketNumber: ticketNumber, task: Task.allCases.randomElement() ?? .대출))
         }
     }
     
-    mutating func registerCustomer(with customers: [Customer]) {
+    mutating func registerCustomers() {
         for customer in customers {
-            ticketMachine.enqueue(with: customer)
+            if customer.task == Task.대출 {
+                loanTicketMachine.enqueue(with: customer)
+            } else {
+                depositTicketMachine.enqueue(with: customer)
+            }
         }
+    }
+    
+    mutating func checkTotalCustomersNumber() -> Int {
+        return customers.count
     }
     
     mutating func resetCustomer() {
         customers = []
-        ticketMachine.clean()
+        loanTicketMachine.clean()
+        depositTicketMachine.clean()
     }
 }

@@ -4,20 +4,22 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import Foundation
+
 struct BankManager {
-    private var customerManager: CustomerManager = CustomerManager()
-    private var employees: [Employee] = []
+    var customerManager: CustomerManager = CustomerManager()
+    var 은행원1: DispatchQueue?
+    var 은행원2: DispatchQueue?
+    var 은행원3: DispatchQueue?
+    
+    init() { }
     
     func reportDeadlineSummary(with customerManager: CustomerManager) {
-        var totalTaskTime: Double { Double(customerManager.customers.count * 700) / 1000}
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerManager.customers.count)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
     }
     
-    mutating func createEmployee() {
-        employees.append(Employee())
-    }
-    
-    func handleCustomerTasks(with customerManager: CustomerManager) {
-        employees[0].handleCustomerTasks(with: customerManager.ticketMachine)
+    mutating func createEmployees() {
+        은행원1 = DispatchQueue(label: "대출1", attributes: .concurrent)
+        은행원2 = DispatchQueue(label: "예금1", attributes: .concurrent)
+        은행원3 = DispatchQueue(label: "예금2", attributes: .concurrent)
     }
 }
