@@ -10,7 +10,7 @@ import Foundation
 final class Bank {
     
     private let bankManager: BankManager
-    private var customers: [Customer]? = nil
+    private var customers = [Customer]()
     private let startNumber: Int = 1
     private let userChoiceRange: ClosedRange<Int> = 1...2
     private let customerCountRange: ClosedRange<Int> = 10...30
@@ -46,7 +46,6 @@ final class Bank {
     }
             
     private func startTask() async {
-        guard let customers = customers else { return }
         await alignCustomer(with: customers)
         await handleTask()
         await open()
@@ -60,13 +59,10 @@ final class Bank {
     
     private func handleTask() async  {
         showProcessState()
-        guard let customers = customers else { return }
         var total = 0.0
-        for customer in customers {
-            let totalDuration = await bankManager.performTotalTask()
-            let duration: Double = round(totalDuration * 100) / 100
-            total += duration
-        }
+        let totalDuration = await bankManager.performTotalTask()
+        let duration: Double = round(totalDuration * 100) / 100
+        total += duration
         print(Message.report(count: customers.count, duration: total).showMessage())
     }
     
