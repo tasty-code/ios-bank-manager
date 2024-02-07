@@ -44,8 +44,6 @@ extension BankMirror: BankIntput {
     
     func resetBank() {
         self.bankManager.clearBank()
-        self.workingList = []
-        self.waitingList = []
     }
     
     func addClients(count: Int) {

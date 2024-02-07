@@ -45,6 +45,7 @@ extension ClientManager: ClientClearable {
     func clearClients() {
         self.semaphore.wait()
         self.clientQueue.clear()
+        self.delegate?.handleClearClient()
         self.semaphore.signal()
     }
 }
