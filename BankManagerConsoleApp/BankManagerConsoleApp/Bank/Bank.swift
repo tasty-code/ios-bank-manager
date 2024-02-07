@@ -59,11 +59,9 @@ final class Bank {
     
     private func handleTask() async  {
         showProcessState()
-        var total = 0.0
-        let totalDuration = await bankManager.performTotalTask()
-        let duration: Double = round(totalDuration * 100) / 100
-        total += duration
-        print(Message.report(count: customers.count, duration: total).showMessage())
+        await bankManager.performTotalTask()
+        let duration: Double = round(bankManager.totalDuration * 100) / 100
+        print(Message.report(count: customers.count, duration: duration).showMessage())
     }
     
     private func showProcessState() {

@@ -11,6 +11,7 @@ final class BankManager {
     var startTask: ((Customer) -> Void)?
     var finishTask: ((Customer) -> Void)?
     
+    private(set) var totalDuration = 0.0
     private let loanQueue = Queue<Customer>()
     private let depositQueue = Queue<Customer>()
 }
@@ -26,17 +27,16 @@ extension BankManager {
         }
     }
 
-    func performTotalTask() async -> Double {
+    func performTotalTask() async {
         let start = Date()
         async let loanTask: () = performLoan()
         async let depositTasks: () = performDeposit()
         async let depositTasks2: () = performDeposit()
-
         await loanTask
         await depositTasks
         await depositTasks2
         let endTime = Date()
-        return endTime.timeIntervalSince(start)
+        totalDuration = endTime.timeIntervalSince(start)
     }
 
     private func performLoan() async {
