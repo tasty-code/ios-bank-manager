@@ -32,16 +32,11 @@ class MainView: UIView {
         return timerLabel
     }()
     
-    private let queueStackView: UIStackView = {
-        let queueStackView = UIStackView()
-        queueStackView.axis = .horizontal
-        queueStackView.distribution = .fillEqually
-        return queueStackView
-    }()
-    private let waitingStackView: UIStackView = {
-        let waitingStackView = UIStackView()
-        waitingStackView.axis = .vertical
-        return waitingStackView
+    private let taskLabelStackView: UIStackView = {
+        let taskLabelStackView = UIStackView()
+        taskLabelStackView.axis = .horizontal
+        taskLabelStackView.distribution = .fillEqually
+        return taskLabelStackView
     }()
     private let waitingLabel: UILabel = {
         let waitingLabel = UILabel()
@@ -52,13 +47,6 @@ class MainView: UIView {
         waitingLabel.font = .preferredFont(forTextStyle: .largeTitle)
         return waitingLabel
     }()
-    private let waitingCustomerView: CustomerView = CustomerView()
-    
-    private let progressStackView: UIStackView = {
-        let progressStackView = UIStackView()
-        progressStackView.axis = .vertical
-        return progressStackView
-    }()
     private let progressLabel: UILabel = {
         let progressLabel = UILabel()
         progressLabel.backgroundColor = .purple
@@ -68,24 +56,49 @@ class MainView: UIView {
         progressLabel.font = .preferredFont(forTextStyle: .largeTitle)
         return progressLabel
     }()
-    private let progressTableView: UITableView = UITableView()
+    
+    private let stackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    private let waitingStackView: UIStackView = {
+        let waitingStackView = UIStackView()
+        waitingStackView.axis = .vertical
+        return waitingStackView
+    }()
+    
+    private let progressStackView: UIStackView = {
+        let progressStackView = UIStackView()
+        progressStackView.axis = .vertical
+        return progressStackView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.addSubview(buttonStackView)
         self.addSubview(timerLabel)
-        self.addSubview(queueStackView)
+        self.addSubview(taskLabelStackView)
+        self.addSubview(stackView)
         
         setupButtonStackViewConstraints()
         setupTimerLabelConstraints()
-        setupQueueStackViewConstraints()
-        setupWaitingStackViewConstraints()
-        setupProgressStackViewConstraints()
+        setupTaskLabelStackViewConstraints ()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MainView {
+    func appendWaitingCustomerView() {
+        
+    }
+    
+    func appendProgressCustomerview() {
+       
     }
 }
 
@@ -107,23 +120,24 @@ extension MainView {
         timerLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
-    private func setupQueueStackViewConstraints() {
-        queueStackView.addArrangedSubview(waitingStackView)
-        queueStackView.addArrangedSubview(progressStackView)
+    private func setupTaskLabelStackViewConstraints() {
+        taskLabelStackView.addArrangedSubview(waitingLabel)
+        taskLabelStackView.addArrangedSubview(progressLabel)
         
-        queueStackView.translatesAutoresizingMaskIntoConstraints = false
-        queueStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 10).isActive = true
-        queueStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        queueStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        queueStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        taskLabelStackView.translatesAutoresizingMaskIntoConstraints = false
+        taskLabelStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 10).isActive = true
+        taskLabelStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        taskLabelStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
-    private func setupWaitingStackViewConstraints() {
-        waitingStackView.addArrangedSubview(waitingLabel)
-    }
-    
-    private func setupProgressStackViewConstraints() {
-        progressStackView.addArrangedSubview(progressLabel)
-        progressStackView.addArrangedSubview(progressTableView)
+    private func setupStackViewConstraints() {
+        stackView.addArrangedSubview(waitingStackView)
+        stackView.addArrangedSubview(progressStackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: taskLabelStackView.bottomAnchor, constant: 10).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
