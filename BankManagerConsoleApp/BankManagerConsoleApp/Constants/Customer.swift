@@ -10,4 +10,9 @@ import Foundation
 struct Customer {
     let number: Int
     let service: BankService
+    
+    init(number: Int, service: BankService) {
+        self.number = number
+        self.service = service
+    }
 }
