@@ -25,7 +25,7 @@ final class Bank {
         let userInput = readLine()
         
         do {
-            customers = try validateUserInput(with: userInput)
+            try validateUserInput(with: userInput)
             await startTask()
         } catch {
             print(Message.inputError.showMessage())
@@ -33,7 +33,7 @@ final class Bank {
         }
     }
     
-    private func validateUserInput(with userInput: String?) throws -> [Customer]? {
+    private func validateUserInput(with userInput: String?) throws {
         guard let userInput,
               let userChoice = Int(userInput),
               userChoiceRange.contains(userChoice)
@@ -41,8 +41,8 @@ final class Bank {
             throw BankError.inputError
         }
 
-        guard userChoice == startNumber else { return nil }
-        return MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
+        guard userChoice == startNumber else { return }
+        customers = MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
     }
             
     private func startTask() async {
