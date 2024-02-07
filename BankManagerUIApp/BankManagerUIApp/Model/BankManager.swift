@@ -7,8 +7,13 @@
 import Foundation
 
 class BankManager {
+    var delegate: MainView?
     private(set) var isQueueRunning: Bool = false
-    private(set) var totalCustomerInQueue: [Customer] = []
+    private(set) var totalCustomerInQueue: [Customer] = [] {
+        didSet { 
+            delegate?.reloadWaitingQueueData()
+        }
+    }
     private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
 
@@ -16,6 +21,11 @@ class BankManager {
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
     private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐")
     private let loanQueue: DispatchQueue = DispatchQueue(label: "대출업무큐")
+    
+    init() {
+        depositCustomerQueue.delegate = self
+        loanCustomerQueue.delegate = self
+    }
     
     func startBankingProcess() {
         isQueueRunning = true
@@ -74,7 +84,7 @@ class BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
-        totalCustomerInQueue = getTotalWaitingCustomer()
+        getTotalWaitingCustomer()
         customerCountToStart += 10
     }
     
@@ -94,21 +104,22 @@ class BankManager {
         return depositCustomerQueue.count() + loanCustomerQueue.count()
     }
     
-    private func getTotalWaitingCustomer() -> [Customer] {
+    func getTotalWaitingCustomer() {
         var array: [Customer] = []
-        for i in 1...depositCustomerQueue.count() {
+        // 여기 문제있을 수 있음
+        for i in 0...depositCustomerQueue.count() {
             guard let customer = depositCustomerQueue.getNodeValue(at: i) else {
                 continue
             }
             array.append(customer)
         }
-        for i in 1...loanCustomerQueue.count() {
+        for i in 0...loanCustomerQueue.count() {
             guard let customer = loanCustomerQueue.getNodeValue(at: i) else {
                 continue
             }
             array.append(customer)
         }
         array.sort { $0.waitingNumber < $1.waitingNumber }
-        return array
+        totalCustomerInQueue = array
     }
 }

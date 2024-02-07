@@ -2,6 +2,7 @@
 import Foundation
 
 class Queue<T: Equatable> {
+    var delegate: BankManager?
     private let linkedList: LinkedList<T>
     private(set) var semaphore: DispatchSemaphore
     
@@ -15,11 +16,17 @@ class Queue<T: Equatable> {
     }
     
     func enqueue(node: Node<T>) {
+        DispatchQueue.main.async {
+            self.delegate?.getTotalWaitingCustomer()
+        }
         linkedList.add(node)
     }
     
     @discardableResult
     func dequeue() -> Node<T>? {
+        DispatchQueue.main.async {
+            self.delegate?.getTotalWaitingCustomer()
+        }
         guard let firstNode = linkedList[0] else {
             return nil
         }
