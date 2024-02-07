@@ -3,9 +3,11 @@ import Foundation
 
 struct Queue<T: Equatable> {
     private let linkedList: LinkedList<T>
+    private(set) var semaphore: DispatchSemaphore
     
-    init(linkedList: LinkedList<T>) {
+    init(linkedList: LinkedList<T>, semaphoreValue: Int) {
         self.linkedList = linkedList
+        self.semaphore = DispatchSemaphore(value: semaphoreValue)
     }
     
     func isEmpty() -> Bool {

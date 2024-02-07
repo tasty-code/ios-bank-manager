@@ -9,74 +9,71 @@ import Foundation
 class BankManager {
     private(set) var isQueueRunning: Bool = false
     private(set) var totalCustomerInQueue: [Customer] = []
-    private var lastCustomerNumber: Int = 0
-    
+    private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
-    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList()) {
+
+    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2) {
         didSet {
             totalCustomerInQueue = getTotalWaitingCustomer()
         }
     }
-    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList()) {
+    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1) {
         didSet {
             totalCustomerInQueue = getTotalWaitingCustomer()
         }
     }
-    private let depositQueue: OperationQueue = {
-        let depositQueue = OperationQueue()
-        depositQueue.maxConcurrentOperationCount = 2
-        return depositQueue
-    }()
-    private let loanQueue: OperationQueue = {
-        let loanQueue = OperationQueue()
-        loanQueue.maxConcurrentOperationCount = 1
-        return loanQueue
-    }()
+    private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐")
+    private let loanQueue: DispatchQueue = DispatchQueue(label: "대출업무큐")
     
     func startBankingProcess() {
         isQueueRunning = true
         
-        let depositCustomerBlock = BlockOperation { [weak self] in
+        let depositTask = DispatchWorkItem { [weak self] in
+            let semaphore = self?.depositCustomerQueue.semaphore
             while !(self?.depositCustomerQueue.isEmpty() ?? false) {
+                semaphore?.wait()
                 guard let node = self?.depositCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
-                let customerBlock = BlockOperation {
+                let task = DispatchWorkItem {
                     self?.banker.provideService(to: customer)
+                    semaphore?.signal()
                 }
-                self?.depositQueue.addOperation(customerBlock)
-                if let boolean = self?.depositQueue.isSuspended, boolean {
-                    self?.depositQueue.waitUntilAllOperationsAreFinished()
-                }
+                self?.depositQueue.async(execute: task)
             }
         }
         
-        let loanCustomerBlock = BlockOperation { [weak self] in
+        let loanTask = DispatchWorkItem { [weak self] in
+            let semaphore = self?.loanCustomerQueue.semaphore
             while !(self?.loanCustomerQueue.isEmpty() ?? false) {
+                semaphore?.wait()
                 guard let node = self?.loanCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
-                let customerBlock = BlockOperation {
+                let task = DispatchWorkItem {
                     self?.banker.provideService(to: customer)
+                    semaphore?.signal()
                 }
-                self?.loanQueue.addOperation(customerBlock)
-                self?.loanQueue.waitUntilAllOperationsAreFinished()
+                self?.loanQueue.async(execute: task)
             }
         }
         
-        let completionBlock = BlockOperation { [weak self] in
+        let completionBlock = DispatchWorkItem { [weak self] in
             self?.toggleQueueStatus()
         }
-        completionBlock.addDependency(depositCustomerBlock)
-        completionBlock.addDependency(loanCustomerBlock)
         
-        OperationQueue().addOperations([depositCustomerBlock, loanCustomerBlock, completionBlock], waitUntilFinished: false)
+        let group: DispatchGroup = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group, execute: depositTask)
+        DispatchQueue.global().async(group: group, execute: loanTask)
+        
+        group.notify(queue: .main, work: completionBlock)
     }
     
     func addCustomer(_ count: Int = 10) {
-        for i in lastCustomerNumber...lastCustomerNumber + count {
+        for i in customerCountToStart...customerCountToStart + count {
             let randomService: BankingService = BankingService.allCases.randomElement() ?? .deposit
             switch randomService {
             case .deposit:
@@ -85,7 +82,7 @@ class BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
-        lastCustomerNumber += 10
+        customerCountToStart += 10
     }
     
     private func toggleQueueStatus() {
@@ -93,11 +90,11 @@ class BankManager {
     }
     
     func reset() {
-        lastCustomerNumber = 0
+        customerCountToStart = 0
         depositCustomerQueue.clear()
         loanCustomerQueue.clear()
-        depositQueue.cancelAllOperations()
-        loanQueue.cancelAllOperations()
+//        depositQueue.cancelAllOperations()
+//        loanQueue.cancelAllOperations()
     }
     
     func getTotalWaitingCustomerCount() -> Int {
