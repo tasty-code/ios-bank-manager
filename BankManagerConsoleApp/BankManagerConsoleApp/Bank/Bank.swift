@@ -21,8 +21,8 @@ final class Bank {
     }
     
     func open() async {
-        print(Message.default.showMessage())
-        print(Message.userInput.showMessage(), terminator: "")
+        print(Message.default.text)
+        print(Message.userInput.text, terminator: "")
         guard let userInput = readLine() else { return }
         
         do {
@@ -30,7 +30,7 @@ final class Bank {
             customers = MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
             await startTask()
         } catch {
-            print(Message.inputError.showMessage())
+            print(Message.inputError.text)
             await open()
         }
     }
@@ -64,16 +64,16 @@ final class Bank {
         showProcessState()
         await bankManager.performTotalTask()
         let duration: Double = round(bankManager.totalDuration * 100) / 100
-        print(Message.report(count: customers.count, duration: duration).showMessage())
+        print(Message.report(count: customers.count, duration: duration).text)
     }
     
     private func showProcessState() {
         bankManager.startTask = { customer in
-            print(Message.startTask(customer.number, customer.service.rawValue).showMessage())
+            print(Message.startTask(numer: customer.number, service: customer.service).text)
         }
         
         bankManager.finishTask = { customer in
-            print(Message.finishTask(customer.number, customer.service.rawValue).showMessage())
+            print(Message.finishTask(numer: customer.number, service: customer.service).text)
         }
     }
 }
