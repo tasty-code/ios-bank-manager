@@ -17,6 +17,8 @@ class CustomCell: UITableViewCell {
         self.contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
         self.contentView.heightAnchor.constraint(equalTo: label.heightAnchor, multiplier: 1.1).isActive = true
     }
     
