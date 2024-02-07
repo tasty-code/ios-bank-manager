@@ -12,16 +12,8 @@ class BankManager {
     private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
 
-    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2) {
-        didSet {
-            totalCustomerInQueue = getTotalWaitingCustomer()
-        }
-    }
-    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1) {
-        didSet {
-            totalCustomerInQueue = getTotalWaitingCustomer()
-        }
-    }
+    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
+    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
     private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐")
     private let loanQueue: DispatchQueue = DispatchQueue(label: "대출업무큐")
     
