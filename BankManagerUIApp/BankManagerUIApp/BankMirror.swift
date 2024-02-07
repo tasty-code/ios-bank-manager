@@ -37,27 +37,41 @@ final class BankMirror {
     }
 }
 
-extension BankMirror: BankManagerDequeueClientDelegate {
+extension BankMirror: BankIntput {
+    func startBank() {
+        self.bankManager.start()
+    }
+    
+    func resetBank() {
+        self.bankManager.clearBank()
+        self.workingList = []
+        self.waitingList = []
+    }
+    
+    func addClients(count: Int) {
+        self.bankManager.addClients(count: count)
+    }
+}
+
+extension BankMirror: BankManagerDelegate {
     func handleDequeueClient(client: Client) {
         removeWaitingClient(client: client)
     }
-}
-
-extension BankMirror: BankManagerEnqueueClientDelegate {
+    
     func handleEnqueueClient(client: Client) {
         addWaitingClient(client: client)
     }
-}
-
-extension BankMirror: BankManagerEndTaskDelegate {
+    
     func handleEndTask(client: Client) {
         removeWorkingClient(client: client)
     }
-}
 
-extension BankMirror: BankManagerStartTaskDelegate {
     func handleStartTask(client: Client) {
         addWorkingClient(client: client)
+    }
+
+    func handleClearClient() {
+        clearClients()
     }
 }
 
@@ -91,21 +105,12 @@ private extension BankMirror {
         self.workingList.remove(at: index)
         self.workingSemaphore.signal()
     }
-}
-
-extension BankMirror {
-    func startBank() {
-        self.bankManager.start()
-    }
     
-    func resetBank() {
-        self.bankManager.clearBank()
-        self.workingList = []
-        self.waitingList = []
-    }
-    
-    func addClients(count: Int) {
-        self.bankManager.addClients(count: count)
+    func clearClients() {
+        self.waitingSemaphore.wait()
+        self.waitingList.removeAll()
+        self.workingList.removeAll()
+        self.waitingSemaphore.signal()
     }
 }
 
@@ -122,4 +127,10 @@ private extension BankMirror {
 protocol BankOutput: AnyObject {
     func updateWaitingList(with: [Client])
     func updateWorkingList(with: [Client])
+}
+
+protocol BankIntput: AnyObject {
+    func startBank()
+    func resetBank()
+    func addClients(count: Int)
 }

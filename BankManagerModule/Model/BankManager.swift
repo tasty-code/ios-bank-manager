@@ -73,7 +73,11 @@ extension BankManager: ClientManagerDelegate {
     }
     
     func handleDequeueClient(client: Client) {
-        self.delegate?.handleEnqueueClient(client: client)
+        self.delegate?.handleDequeueClient(client: client)
+    }
+    
+    func handleClearClient() {
+        self.delegate?.handleClearClient()
     }
 }
 
@@ -95,6 +99,10 @@ protocol BankManagerDequeueClientDelegate: AnyObject {
     func handleDequeueClient(client: Client)
 }
 
+protocol BankManagerClearClientDelegate: AnyObject {
+    func handleClearClient()
+}
+
 protocol BankManagerStartTaskDelegate: AnyObject {
     func handleStartTask(client: Client)
 }
@@ -103,4 +111,4 @@ protocol BankManagerEndTaskDelegate: AnyObject {
     func handleEndTask(client: Client)
 }
 
-typealias BankManagerDelegate = BankManagerEnqueueClientDelegate & BankManagerDequeueClientDelegate & BankManagerStartTaskDelegate & BankManagerEndTaskDelegate
+typealias BankManagerDelegate = BankManagerEnqueueClientDelegate & BankManagerDequeueClientDelegate & BankManagerClearClientDelegate & BankManagerStartTaskDelegate & BankManagerEndTaskDelegate

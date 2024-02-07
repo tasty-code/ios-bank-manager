@@ -9,7 +9,7 @@ import UIKit
 final class ViewController: UIViewController {
     // MARK: Properties
     
-    private let bankMirror: BankMirror
+    private let bankMirror: BankIntput
     
     // MARK: UI Elements
     private let addClientButton: UIButton = {
@@ -80,7 +80,7 @@ final class ViewController: UIViewController {
     
     // MARK: Initializer
     
-    init(bankMirror: BankMirror) {
+    init(bankMirror: BankIntput) {
         self.bankMirror = bankMirror
         super.init(nibName: nil, bundle: nil)
     }

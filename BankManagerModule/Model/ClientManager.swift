@@ -43,7 +43,9 @@ extension ClientManager: ClientDequeuable {
 
 extension ClientManager: ClientClearable {
     func clearClients() {
+        self.semaphore.wait()
         self.clientQueue.clear()
+        self.semaphore.signal()
     }
 }
 
@@ -55,4 +57,8 @@ protocol ClientManagerDequeueClientDelegate: AnyObject {
     func handleDequeueClient(client: Client)
 }
 
-typealias ClientManagerDelegate = ClientManagerEnqueueClientDelegate & ClientManagerDequeueClientDelegate
+protocol ClientManagerClearClientDelegate: AnyObject {
+    func handleClearClient()
+}
+
+typealias ClientManagerDelegate = ClientManagerEnqueueClientDelegate & ClientManagerDequeueClientDelegate & ClientManagerClearClientDelegate
