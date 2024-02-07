@@ -10,12 +10,9 @@ import Foundation
 struct MemberFactory {
     
     static func makeCustomers(count: Int) -> [Customer] {
-        var customers = [Customer]()
-        for number in 1...count {
-            let service: BankService = Bool.random() ? .deposit : .loan
-            let customer = Customer(number: number, service: service)
-            customers.append(customer)
-        }
+        let services = (1...count).map { _ in BankService.allCases.randomElement() ?? .deposit }
+        let customers = services.enumerated().map { Customer(number: $0.offset + 1, service: $0.element) }
+        
         return customers
     }
 }
