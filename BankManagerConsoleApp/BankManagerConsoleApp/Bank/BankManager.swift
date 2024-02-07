@@ -8,31 +8,52 @@
 import Foundation
 
 final class BankManager {
-    var updateTaskState: ((TaskState) -> Void)?
+    var startTask: ((Customer) -> Void)?
+    var finishTask: ((Customer) -> Void)?
     
-    private var customerQueue = Queue<Int>()
-    private let duration = 0.7
+    private(set) var totalDuration = 0.0
+    private let loanQueue = Queue<Customer>()
+    private let depositQueue = Queue<Customer>()
 }
 
 // MARK: - Methods
 extension BankManager {
-    
-    func makeCustomerQueue(with customerCount: Int) {
-        (1...customerCount).forEach {
-            customerQueue.enqueue($0)
+
+    func addCustomerQueue(with customer: Customer) async {
+        if customer.service == .loan {
+            await loanQueue.enqueue(customer)
+        } else {
+            await depositQueue.enqueue(customer)
         }
     }
-    
-    func handleTask(completion: @escaping (Double) -> Void) {
-        var totalDuration = 0.0
-        
-        while let customerNumber = customerQueue.dequeue() {
-            updateTaskState?(.start(number: customerNumber))
-            Thread.sleep(forTimeInterval: duration)
-            updateTaskState?(.finish(number: customerNumber))
-            totalDuration += duration
+
+    func performTotalTask() async {
+        let start = Date()
+        async let loanTask: () = performLoan()
+        async let depositTasks: () = performDeposit()
+        async let depositTasks2: () = performDeposit()
+        await loanTask
+        await depositTasks
+        await depositTasks2
+        let endTime = Date()
+        totalDuration = endTime.timeIntervalSince(start)
+    }
+
+    private func performLoan() async {
+        while let customer = await loanQueue.dequeue() {
+            startTask?(customer)
+            try? await Task.sleep(nanoseconds: UInt64(customer.service.requiredTime * 1_000_000_000))
+            finishTask?(customer)
         }
-        
-        completion(totalDuration)
+    }
+
+    private func performDeposit() async {
+        while let customer = await depositQueue.dequeue() {
+            startTask?(customer)
+            try? await Task.sleep(nanoseconds: UInt64(customer.service.requiredTime * 1_000_000_000))
+            finishTask?(customer)
+        }
     }
 }
+
+

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Queue<T> {    
+actor Queue<T> {
     
     private var queue: LinkedList<T>
     
@@ -23,19 +23,19 @@ struct Queue<T> {
 // MARK: - Methods
 extension Queue {
     
-    mutating func enqueue(_ element: T) {
+    func enqueue(_ element: T) {
         queue.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         return queue.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         queue.removeAll()
     }
 
-    mutating func peek() -> T? {
+    func peek() -> T? {
         return queue.first
     }
 }

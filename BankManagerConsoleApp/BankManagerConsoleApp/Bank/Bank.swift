@@ -10,60 +10,70 @@ import Foundation
 final class Bank {
     
     private let bankManager: BankManager
-    private var customerCount: Int?
+    private var customers = [Customer]()
     private let startNumber: Int = 1
     private let userChoiceRange: ClosedRange<Int> = 1...2
     private let customerCountRange: ClosedRange<Int> = 10...30
+    private var exitInput = false
     
     init(bankManager: BankManager) {
         self.bankManager = bankManager
     }
     
-    func open() {
-        print(Message.default.showMessage())
-        print(Message.userInput.showMessage(), terminator: "")
-        
-        let userInput = readLine()
+    func open() async {
+        print(Message.default.text)
+        print(Message.userInput.text, terminator: "")
+        guard let userInput = readLine() else { return }
         
         do {
-            customerCount = try validateUserInput(with: userInput)
-            startTask()
+            try validateUserInput(with: userInput)
+            customers = MemberFactory.makeCustomers(count: Int.random(in: customerCountRange))
+            await startTask()
         } catch {
-            print(Message.inputError.showMessage())
-            open()
+            print(Message.inputError.text)
+            await open()
+        }
+    }
+            
+    private func validateUserInput(with userInput: String) throws {
+        let userChoice = Int(userInput)
+        switch userChoice {
+        case 1:
+            break
+        case 2:
+            exitInput = true
+        default:
+            throw BankError.inputError
+        }
+    }
+            
+    private func startTask() async {
+        guard exitInput == false else { return }
+        await alignCustomer(with: customers)
+        await handleTask()
+        await open()
+    }
+    
+    private func alignCustomer(with customers: [Customer]) async {
+        for customer in customers {
+            await bankManager.addCustomerQueue(with: customer)
         }
     }
     
-    private func validateUserInput(with userInput: String?) throws -> Int? {
-        guard let userInput,
-              let userChoice = Int(userInput),
-              userChoiceRange.contains(userChoice)
-        else {
-            throw BankError.inputError
-        }
-        
-        return userChoice == startNumber ? Int.random(in: customerCountRange) : nil
+    private func handleTask() async  {
+        showProcessState()
+        await bankManager.performTotalTask()
+        let duration: Double = round(bankManager.totalDuration * 100) / 100
+        print(Message.report(count: customers.count, duration: duration).text)
     }
     
     private func showProcessState() {
-        bankManager.updateTaskState = { result in
-            switch result {
-            case .start(let num):
-                print(Message.startTask(number: num).showMessage())
-            case .finish(let num):
-                print(Message.finishTask(number: num).showMessage())
-            }
+        bankManager.startTask = { customer in
+            print(Message.startTask(numer: customer.number, service: customer.service).text)
         }
-    }
-    
-    private func startTask() {
-        guard let customerCount = customerCount else { return }
-        bankManager.makeCustomerQueue(with: customerCount)
-        showProcessState()
-        bankManager.handleTask { totalDuration in
-            let duration: Double = round(totalDuration * 100) / 100
-            print(Message.report(count: customerCount, duration: duration).showMessage())
+        
+        bankManager.finishTask = { customer in
+            print(Message.finishTask(numer: customer.number, service: customer.service).text)
         }
-        open()
     }
 }
