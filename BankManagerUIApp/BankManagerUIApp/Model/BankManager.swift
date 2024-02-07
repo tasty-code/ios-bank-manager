@@ -9,7 +9,7 @@ import Foundation
 class BankManager {
     var delegate: MainView?
     private(set) var isQueueRunning: Bool = false
-    private(set) var totalCustomerInQueue: [Customer] = [] {
+    private(set) var totalWaitingInQueue: [Customer] = [] {
         didSet { 
             delegate?.reloadWaitingQueueData()
         }
@@ -120,6 +120,6 @@ class BankManager {
             array.append(customer)
         }
         array.sort { $0.waitingNumber < $1.waitingNumber }
-        totalCustomerInQueue = array
+        totalWaitingInQueue = array
     }
 }
