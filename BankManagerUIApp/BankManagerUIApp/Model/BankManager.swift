@@ -9,11 +9,7 @@ import Foundation
 class BankManager {
     var delegate: MainView?
     private(set) var isQueueRunning: Bool = false
-    private(set) var totalWaitingInQueue: [Customer] = [] {
-        didSet { 
-            delegate?.reloadWaitingQueueData()
-        }
-    }
+    private(set) var totalWaitingInQueue: [Customer] = []
     private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
 

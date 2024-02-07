@@ -2,13 +2,6 @@
 import UIKit
 
 class MainView: UIView {
-    weak var waitingQueueDataSource: UITableViewDataSource? {
-        didSet { self.waitingTableView.dataSource = self.waitingQueueDataSource }
-    }
-    weak var progressQueueDataSource: UITableViewDataSource? {
-        didSet { self.progressTableView.dataSource = self.progressQueueDataSource }
-    }
-    
     private let buttonStackView: UIStackView = {
         let buttonStackView = UIStackView()
         buttonStackView.axis = .horizontal
@@ -59,7 +52,7 @@ class MainView: UIView {
         waitingLabel.font = .preferredFont(forTextStyle: .largeTitle)
         return waitingLabel
     }()
-    private let waitingTableView: UITableView = UITableView()
+    private let waitingCustomerView: CustomerView = CustomerView()
     
     private let progressStackView: UIStackView = {
         let progressStackView = UIStackView()
@@ -89,17 +82,10 @@ class MainView: UIView {
         setupQueueStackViewConstraints()
         setupWaitingStackViewConstraints()
         setupProgressStackViewConstraints()
-        waitingTableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.className)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension MainView {
-    func reloadWaitingQueueData() {
-        waitingTableView.reloadData()
     }
 }
 
@@ -134,7 +120,6 @@ extension MainView {
     
     private func setupWaitingStackViewConstraints() {
         waitingStackView.addArrangedSubview(waitingLabel)
-        waitingStackView.addArrangedSubview(waitingTableView)
     }
     
     private func setupProgressStackViewConstraints() {
