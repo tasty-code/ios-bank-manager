@@ -54,28 +54,23 @@ final class Bank {
     private func serveCustomer(_ loanClerksCount: Int, _ depositClerksCount: Int) {
         let depositSemaphore = DispatchSemaphore(value: depositClerksCount)
         let loanSemaphore = DispatchSemaphore(value: loanClerksCount)
-        while !waitingQueue.isEmpty() {
-            guard let customer = waitingQueue.dequeue() else { return }
-            switch customer.purpose {
-            case .loan:
-                loanSemaphore.wait()
-            case .deposit:
-                depositSemaphore.wait()
-            }
-
-            DispatchQueue.global().async(group: group) {
+        
+        while let customer = self.waitingQueue.dequeue() {
+            DispatchQueue.global().async {
                 switch customer.purpose {
                 case .loan:
+                    loanSemaphore.wait()
                     self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
                     self.bankLoanClerk.work(for: customer)
-                    loanSemaphore.signal()
                     self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
+                    loanSemaphore.signal()
                     
                 case .deposit:
+                    depositSemaphore.wait()
                     self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
                     self.bankDepositClerk.work(for: customer)
-                    depositSemaphore.signal()
                     self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
+                    depositSemaphore.signal()
                 }
             }
             handledCustomerCount += 1
