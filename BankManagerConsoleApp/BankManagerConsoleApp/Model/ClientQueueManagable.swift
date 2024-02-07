@@ -6,12 +6,10 @@
 //
 
 protocol ClientEnqueuable {
-    associatedtype TaskType: Task
-    func enqueueClient(number: Int)
+    func enqueueClient(client: Client)
 }
 
 protocol ClientDequeuable {
-    associatedtype TaskType: Task
     func dequeueClient() -> Client?
 }
 

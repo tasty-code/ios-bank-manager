@@ -9,30 +9,27 @@ import Foundation
 struct BankManager {
     private let bankers: [Banker]
     
-    private let clientManager: [BankTaskType: any ClientEnqueuable]
-    
-    private let output: TextOutputDisplayable
+    private let clientManager: [BankTask: ClientEnqueuable]
     
     init(
         bankers: [Banker],
-        clientManager: [BankTaskType: any ClientEnqueuable],
-        output: TextOutputDisplayable
+        clientManager: [BankTask: ClientEnqueuable]
     ) {
         self.bankers = bankers
         self.clientManager = clientManager
-        self.output = output
     }
     
     func start() {
         makeClientList()
         let group = DispatchGroup()
-        let totalWorkTime = measure {
-            for banker in bankers {
-                banker.start(group: group)
+        DispatchQueue.global().async {
+            let totalWorkTime = measure {
+                for banker in bankers {
+                    banker.start(group: group)
+                }
+                group.wait()
             }
-            group.wait()
         }
-        summarizeDailyStatistics(totalWorkTime: totalWorkTime)
     }
 }
 
@@ -41,8 +38,9 @@ private extension BankManager {
         let numberOfClient = Int.random(in: 10...30)
         
         for number in 1...numberOfClient {
-            guard let bankTaskType = BankTaskType.random else { return }
-            self.clientManager[bankTaskType]?.enqueueClient(number: number)
+            guard let bankTaskType = BankTask.random else { return }
+            let client = Client(number: number, task: bankTaskType)
+            self.clientManager[bankTaskType]?.enqueueClient(client: client)
         }
     }
     
@@ -50,12 +48,5 @@ private extension BankManager {
         let start = Date()
         progress()
         return Date().timeIntervalSince(start)
-    }
-    
-    func summarizeDailyStatistics(totalWorkTime: Double) {
-        let numberOfClient = self.bankers.map(\.dailyClientStatistics).reduce(0, +)
-        let roundedWorkTimeString = String(format: "%.2f", totalWorkTime)
-        let output = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(roundedWorkTimeString)초입니다."
-        self.output.display(output: output)
     }
 }

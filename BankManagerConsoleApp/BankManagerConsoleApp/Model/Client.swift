@@ -7,5 +7,5 @@
 
 struct Client {
     let number: Int
-    let task: Task
+    let task: BankTask
 }
