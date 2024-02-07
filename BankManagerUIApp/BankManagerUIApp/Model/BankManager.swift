@@ -10,9 +10,14 @@ class BankManager {
     private(set) var isQueueRunning: Bool = false
     private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
+    private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     private(set) var totalWaiting: [Customer] = []
-    private(set) var totalProgress: [Customer] = []
+    private(set) var totalProgress: [Customer] = [] {
+        didSet {
+            print(totalProgress)
+        }
+    }
 
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
@@ -36,7 +41,9 @@ class BankManager {
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
+                    self?.appendCustomerToProgress(customer)
                     self?.banker.provideService(to: customer)
+                    self?.removeCustomerFromProgress(customer)
                     semaphore?.signal()
                 }
                 self?.depositQueue.async(execute: task)
@@ -52,7 +59,9 @@ class BankManager {
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
+                    self?.appendCustomerToProgress(customer)
                     self?.banker.provideService(to: customer)
+                    self?.removeCustomerFromProgress(customer)
                     semaphore?.signal()
                 }
                 self?.loanQueue.async(execute: task)
@@ -116,14 +125,20 @@ class BankManager {
     }
     
     func appendCustomerToProgress(_ customer: Customer) {
-        totalProgress.append(customer)
-        totalProgress.sort { $0.waitingNumber < $1.waitingNumber }
+        semaphore.wait()
+        var array = totalProgress
+        array.append(customer)
+        array.sort { $0.waitingNumber < $1.waitingNumber }
+        totalProgress = array
+        semaphore.signal()
     }
     
     func removeCustomerFromProgress(_ customer: Customer) {
+        semaphore.wait()
         guard let index = totalProgress.firstIndex(of: customer) else {
             return
         }
         totalProgress.remove(at: index)
+        semaphore.signal()
     }
 }
