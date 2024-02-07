@@ -5,14 +5,8 @@ class MainView: UIView {
     weak var waitingQueueDataSource: UITableViewDataSource? {
         didSet { self.waitingTableView.dataSource = self.waitingQueueDataSource }
     }
-    weak var waitingQueueDelegate: UITableViewDelegate? {
-        didSet { self.waitingTableView.delegate = self.waitingQueueDelegate }
-    }
     weak var progressQueueDataSource: UITableViewDataSource? {
         didSet { self.progressTableView.dataSource = self.progressQueueDataSource }
-    }
-    weak var progressQueueDelegate: UITableViewDelegate? {
-        didSet { self.progressTableView.delegate = self.progressQueueDelegate }
     }
     
     private let buttonStackView: UIStackView = {

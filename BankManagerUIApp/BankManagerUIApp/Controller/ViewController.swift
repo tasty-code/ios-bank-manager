@@ -27,9 +27,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         mainView.waitingQueueDataSource = self
-        mainView.waitingQueueDelegate = self
         mainView.progressQueueDataSource = self
-        mainView.progressQueueDelegate = self
     }
     
     @objc func addCustomerButtonTapped() {
