@@ -93,7 +93,7 @@ extension Bank {
             workDepositSecond()
             workLoanFirst()
         }
-        
+
         watingGroup.wait()
         let totalTime = caculateProcessingTime(startTime)
         BankManager().sendWorkingMessage("\(BankMessage.result(customerCount, totalTime).description)")
