@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08FE43F42B73972500D09BB7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE43F32B73972500D09BB7 /* Client.swift */; };
 		08FE43F62B73977A00D09BB7 /* BankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE43F52B73977A00D09BB7 /* BankTask.swift */; };
+		7796775F2B73B208007315E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796775E2B73B208007315E8 /* ViewModel.swift */; };
 		77B02E322B7306E900C3D686 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B02E312B7306E900C3D686 /* UIStackView+.swift */; };
 		77B02E342B730AD700C3D686 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B02E332B730AD700C3D686 /* Then.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		08FE43F32B73972500D09BB7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		08FE43F52B73977A00D09BB7 /* BankTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTask.swift; sourceTree = "<group>"; };
+		7796775E2B73B208007315E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		77B02E312B7306E900C3D686 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		77B02E332B730AD700C3D686 /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				08FE43F52B73977A00D09BB7 /* BankTask.swift */,
 				08FE43F32B73972500D09BB7 /* Client.swift */,
 				C7694E3E259C3E9F0053667F /* BankViewController.swift */,
+				7796775E2B73B208007315E8 /* ViewModel.swift */,
 				77B02E312B7306E900C3D686 /* UIStackView+.swift */,
 				77B02E332B730AD700C3D686 /* Then.swift */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* BankViewController.swift in Sources */,
+				7796775F2B73B208007315E8 /* ViewModel.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				08FE43F62B73977A00D09BB7 /* BankTask.swift in Sources */,
 				77B02E322B7306E900C3D686 /* UIStackView+.swift in Sources */,
