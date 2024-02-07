@@ -82,6 +82,7 @@ class BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
+        totalCustomerInQueue = getTotalWaitingCustomer()
         customerCountToStart += 10
     }
     

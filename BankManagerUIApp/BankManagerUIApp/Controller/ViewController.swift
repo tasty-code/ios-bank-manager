@@ -24,15 +24,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         view.backgroundColor = .white
+        
+        mainView.waitingQueueDataSource = self
+        mainView.waitingQueueDelegate = self
+        mainView.progressQueueDataSource = self
+        mainView.progressQueueDelegate = self
     }
     
     @objc func addCustomerButtonTapped() {
         if dataSource.isQueueRunning {
             dataSource.addCustomer()
+            mainView.reloadWaitingQueueData()
             return
         }
         dataSource.addCustomer()
         dataSource.startBankingProcess()
+        mainView.reloadWaitingQueueData()
     }
     
     @objc func resetService() {
@@ -41,18 +48,17 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: CustomCell = tableView.dequeueReusableCell(withIdentifier: CustomCell.className, for: indexPath) as? CustomCell else {
             return CustomCell()
         }
-        
         let customer = dataSource.totalCustomerInQueue[indexPath.row]
         cell.setLabelText(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.getTotalWaitingCustomerCount()
+        return dataSource.totalCustomerInQueue.count
     }
 }

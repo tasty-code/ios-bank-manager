@@ -12,6 +12,18 @@ class CustomCell: UITableViewCell {
         return label
     }()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.contentView.heightAnchor.constraint(equalTo: label.heightAnchor, multiplier: 1.1).isActive = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setLabelText(customerNumber: Int, serviceType: String) {
         self.label.text = "\(customerNumber) - \(serviceType)"
     }
