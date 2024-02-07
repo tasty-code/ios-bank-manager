@@ -63,18 +63,19 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
     }
     
     /// 업무 처리
-        case .loan:
-            consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber,
-                                            task: customer.task.description)
-            Thread.sleep(forTimeInterval: 1.1)
-            consoleMessage.taskEndMessage(customerNumber: customer.waitingNumber,
-                                          task: customer.task.description)
+    func handleCustomer(_ customer: Customer, _ queue: DispatchQueue, completion: @escaping () -> Void) {
+        self.consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber, task: customer.task.description)
+        
+        let delay = customer.task == .deposit ? 0.7 : 1.1
+        queue.asyncAfter(deadline: .now() + delay) {
+            self.consoleMessage.taskEndMessage(customerNumber: customer.waitingNumber, task: customer.task.description)
+            completion()
         }
     }
     
     /// 업무가 마감됨
     func closed(totalTime: Double, completion: @escaping () -> Void) {
-        consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime )
+        consoleMessage.bankClosingMessage(totalCustomers: totalCustomers, time: totalTime)
         completion()
     }
 }
