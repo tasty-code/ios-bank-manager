@@ -14,9 +14,9 @@ extension BankWorkType {
     var name: String {
         switch self {
         case .loan:
-            return "예금"
-        case .deposit:
             return "대출"
+        case .deposit:
+            return "예금"
         }
     }
     
