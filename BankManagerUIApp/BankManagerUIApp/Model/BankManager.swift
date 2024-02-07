@@ -7,18 +7,27 @@
 import Foundation
 
 class BankManager {
+    var delegate: MainViewDelegate?
+    private let banker: Banker = Banker()
     private(set) var isQueueRunning: Bool = false
     private var customerCountToStart: Int = 1
-    private let banker: Banker = Banker()
     private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
-    private(set) var totalWaiting: [Customer] = []
-    private(set) var totalProgress: [Customer] = [] {
+    private(set) var totalWaiting: [Customer] = [] {
         didSet {
-            print(totalProgress)
+            DispatchQueue.main.async {
+                self.delegate?.appendCustomerView(self.totalWaiting, isWaiting: true)
+            }
         }
     }
-
+    private(set) var totalProgress: [Customer] = [] {
+        didSet { 
+            DispatchQueue.main.async {
+                self.delegate?.appendCustomerView(self.totalProgress, isWaiting: false)                
+            }
+        }
+    }
+    
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
     private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐")
@@ -28,7 +37,9 @@ class BankManager {
         depositCustomerQueue.delegate = self
         loanCustomerQueue.delegate = self
     }
-    
+}
+
+extension BankManager {
     func startBankingProcess() {
         isQueueRunning = true
         
@@ -94,18 +105,6 @@ class BankManager {
         customerCountToStart += 10
     }
     
-    private func toggleQueueStatus() {
-        self.isQueueRunning.toggle()
-    }
-    
-    func reset() {
-        customerCountToStart = 0
-        depositCustomerQueue.clear()
-        loanCustomerQueue.clear()
-//        depositQueue.cancelAllOperations()
-//        loanQueue.cancelAllOperations()
-    }
-    
     func setWaitingCustomer() {
         var array: [Customer] = []
         for i in 0...depositCustomerQueue.count() {
@@ -124,7 +123,21 @@ class BankManager {
         totalWaiting = array
     }
     
-    func appendCustomerToProgress(_ customer: Customer) {
+    func reset() {
+        customerCountToStart = 0
+        depositCustomerQueue.clear()
+        loanCustomerQueue.clear()
+//        depositQueue.cancelAllOperations()
+//        loanQueue.cancelAllOperations()
+    }
+}
+
+extension BankManager {
+    private func toggleQueueStatus() {
+        self.isQueueRunning.toggle()
+    }
+    
+    private func appendCustomerToProgress(_ customer: Customer) {
         semaphore.wait()
         var array = totalProgress
         array.append(customer)
@@ -133,7 +146,7 @@ class BankManager {
         semaphore.signal()
     }
     
-    func removeCustomerFromProgress(_ customer: Customer) {
+    private func removeCustomerFromProgress(_ customer: Customer) {
         semaphore.wait()
         guard let index = totalProgress.firstIndex(of: customer) else {
             return
