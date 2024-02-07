@@ -12,6 +12,7 @@ class BankManager {
     private let banker: Banker = Banker()
     
     private(set) var totalWaiting: [Customer] = []
+    private(set) var totalProgress: [Customer] = []
 
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
@@ -112,5 +113,17 @@ class BankManager {
         }
         array.sort { $0.waitingNumber < $1.waitingNumber }
         totalWaiting = array
+    }
+    
+    func appendCustomerToProgress(_ customer: Customer) {
+        totalProgress.append(customer)
+        totalProgress.sort { $0.waitingNumber < $1.waitingNumber }
+    }
+    
+    func removeCustomerFromProgress(_ customer: Customer) {
+        guard let index = totalProgress.firstIndex(of: customer) else {
+            return
+        }
+        totalProgress.remove(at: index)
     }
 }
