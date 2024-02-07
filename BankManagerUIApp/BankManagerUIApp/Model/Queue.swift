@@ -17,7 +17,7 @@ class Queue<T: Equatable> {
     
     func enqueue(node: Node<T>) {
         DispatchQueue.main.async {
-            self.delegate?.getTotalWaitingCustomer()
+            self.delegate?.setWaitingCustomer()
         }
         linkedList.add(node)
     }
@@ -25,7 +25,7 @@ class Queue<T: Equatable> {
     @discardableResult
     func dequeue() -> Node<T>? {
         DispatchQueue.main.async {
-            self.delegate?.getTotalWaitingCustomer()
+            self.delegate?.setWaitingCustomer()
         }
         guard let firstNode = linkedList[0] else {
             return nil

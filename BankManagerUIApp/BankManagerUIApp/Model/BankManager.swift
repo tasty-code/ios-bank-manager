@@ -8,9 +8,10 @@ import Foundation
 
 class BankManager {
     private(set) var isQueueRunning: Bool = false
-    private(set) var totalWaitingInQueue: [Customer] = []
     private var customerCountToStart: Int = 1
     private let banker: Banker = Banker()
+    
+    private(set) var totalWaiting: [Customer] = []
 
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
@@ -79,7 +80,7 @@ class BankManager {
                 loanCustomerQueue.enqueue(node: Node(value: Customer(waitingNumber: i, requiredService: randomService)))
             }
         }
-        getTotalWaitingCustomer()
+        setWaitingCustomer()
         customerCountToStart += 10
     }
     
@@ -95,13 +96,8 @@ class BankManager {
 //        loanQueue.cancelAllOperations()
     }
     
-    func getTotalWaitingCustomerCount() -> Int {
-        return depositCustomerQueue.count() + loanCustomerQueue.count()
-    }
-    
-    func getTotalWaitingCustomer() {
+    func setWaitingCustomer() {
         var array: [Customer] = []
-        // 여기 문제있을 수 있음
         for i in 0...depositCustomerQueue.count() {
             guard let customer = depositCustomerQueue.getNodeValue(at: i) else {
                 continue
@@ -115,6 +111,6 @@ class BankManager {
             array.append(customer)
         }
         array.sort { $0.waitingNumber < $1.waitingNumber }
-        totalWaitingInQueue = array
+        totalWaiting = array
     }
 }
