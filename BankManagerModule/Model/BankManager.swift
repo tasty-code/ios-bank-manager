@@ -31,6 +31,14 @@ struct BankManager {
             }
         }
     }
+    
+    func resetBank() {
+        
+    }
+    
+    func addClients(count: Int) {
+        
+    }
 }
 
 private extension BankManager {

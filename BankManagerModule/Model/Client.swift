@@ -9,3 +9,9 @@ struct Client {
     let number: Int
     let task: BankTask
 }
+
+extension Client: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.number)
+    }
+}
