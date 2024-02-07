@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Queue<T: Equatable> {
+class Queue<T: Equatable> {
     private let linkedList: LinkedList<T>
     private(set) var semaphore: DispatchSemaphore
     
