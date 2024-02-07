@@ -73,7 +73,7 @@ class BankManager {
     }
     
     func addCustomer(_ count: Int = 10) {
-        for i in customerCountToStart...customerCountToStart + count {
+        for i in customerCountToStart..<customerCountToStart + count {
             let randomService: BankingService = BankingService.allCases.randomElement() ?? .deposit
             switch randomService {
             case .deposit:
