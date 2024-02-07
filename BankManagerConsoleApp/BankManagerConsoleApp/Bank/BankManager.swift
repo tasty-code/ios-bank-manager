@@ -11,8 +11,8 @@ final class BankManager {
     var startTask: ((Customer) -> Void)?
     var finishTask: ((Customer) -> Void)?
     
-    private var loanQueue = Queue<Customer>()
-    private var depositQueue = Queue<Customer>()
+    private let loanQueue = Queue<Customer>()
+    private let depositQueue = Queue<Customer>()
 }
 
 // MARK: - Methods
