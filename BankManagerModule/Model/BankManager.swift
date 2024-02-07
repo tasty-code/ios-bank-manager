@@ -6,55 +6,101 @@
 
 import Foundation
 
-struct BankManager {
+final class BankManager {
+    weak var delegate: BankManagerDelegate?
+    
     private let bankers: [Banker]
     
-    private let clientManager: [BankTask: ClientEnqueuable]
+    private let clientManagers: [BankTask: ClientEnqueuable & ClientClearable]
+    
+    private var currentClientNumber: Int
     
     init(
         bankers: [Banker],
-        clientManager: [BankTask: ClientEnqueuable]
+        clientManagers: [BankTask: ClientEnqueuable & ClientClearable]
     ) {
         self.bankers = bankers
-        self.clientManager = clientManager
+        self.clientManagers = clientManagers
+        self.currentClientNumber = 0
     }
     
     func start() {
-        makeClientList()
         let group = DispatchGroup()
         DispatchQueue.global().async {
-            let totalWorkTime = measure {
-                for banker in bankers {
+            let totalWorkTime = self.measure {
+                for banker in self.bankers {
                     banker.start(group: group)
                 }
                 group.wait()
+                self.resetClientCount()
             }
         }
     }
     
-    func resetBank() {
-        
+    func clearBank() {
+        for (_, clientManager) in self.clientManagers {
+            clientManager.clearClients()
+        }
+        resetClientCount()
     }
     
     func addClients(count: Int) {
-        
+        let types = self.clientManagers.map { $0.key }
+        for number in (currentClientNumber + 1)...(currentClientNumber + count) {
+            guard let bankTaskType = types.randomElement() else { return }
+            let client = Client(number: number, task: bankTaskType)
+            self.clientManagers[bankTaskType]?.enqueueClient(client: client)
+            self.currentClientNumber = number
+        }
     }
 }
 
 private extension BankManager {
-    func makeClientList() {
-        let numberOfClient = Int.random(in: 10...30)
-        
-        for number in 1...numberOfClient {
-            guard let bankTaskType = BankTask.random else { return }
-            let client = Client(number: number, task: bankTaskType)
-            self.clientManager[bankTaskType]?.enqueueClient(client: client)
-        }
-    }
-    
     func measure(_ progress: () -> Void) -> TimeInterval {
         let start = Date()
         progress()
         return Date().timeIntervalSince(start)
     }
+    
+    func resetClientCount() {
+        self.currentClientNumber = 0
+    }
 }
+
+extension BankManager: ClientManagerDelegate {
+    func handleEnqueueClient(client: Client) {
+        self.delegate?.handleEnqueueClient(client: client)
+    }
+    
+    func handleDequeueClient(client: Client) {
+        self.delegate?.handleEnqueueClient(client: client)
+    }
+}
+
+extension BankManager: BankerDelegate {
+    func handleStartTask(client: Client) {
+        self.delegate?.handleStartTask(client: client)
+    }
+    
+    func handleEndTask(client: Client) {
+        self.delegate?.handleEndTask(client: client)
+    }
+}
+
+protocol BankManagerEnqueueClientDelegate: AnyObject {
+    func handleEnqueueClient(client: Client)
+}
+
+protocol BankManagerDequeueClientDelegate: AnyObject {
+    func handleDequeueClient(client: Client)
+}
+
+protocol BankManagerStartTaskDelegate: AnyObject {
+    func handleStartTask(client: Client)
+}
+
+protocol BankManagerEndTaskDelegate: AnyObject {
+    func handleEndTask(client: Client)
+}
+
+typealias BankManagerDelegate = BankManagerEnqueueClientDelegate & BankManagerDequeueClientDelegate & BankManagerStartTaskDelegate & BankManagerEndTaskDelegate

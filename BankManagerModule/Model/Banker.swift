@@ -8,10 +8,12 @@
 import Foundation
 
 final class Banker {
-    private let clientManager: any ClientDequeuable
+    private let clientManager: ClientDequeuable
+    
+    weak var delegate: BankerDelegate?
     
     init(
-        clientManager: any ClientDequeuable
+        clientManager: ClientDequeuable
     ) {
         self.clientManager = clientManager
     }
@@ -33,9 +35,20 @@ private extension Banker {
     }
     
     func startTask(for client: Client) {
+        self.delegate?.handleStartTask(client: client)
     }
     
     func endTask(for client: Client) {
-
+        self.delegate?.handleEndTask(client: client)
     }
 }
+
+protocol BankerStartTaskDelegate: AnyObject {
+    func handleStartTask(client: Client)
+}
+
+protocol BankerEndTaskDelegate: AnyObject {
+    func handleEndTask(client: Client)
+}
+
+typealias BankerDelegate = BankerStartTaskDelegate & BankerEndTaskDelegate

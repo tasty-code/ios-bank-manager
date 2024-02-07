@@ -13,4 +13,8 @@ protocol ClientDequeuable {
     func dequeueClient() -> Client?
 }
 
-typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable
+protocol ClientClearable {
+    func clearClients()
+}
+
+typealias ClientQueueManagable = ClientEnqueuable & ClientDequeuable & ClientClearable

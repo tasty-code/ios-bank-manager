@@ -180,16 +180,16 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-//extension ViewController: BankOutputable {
-//    func updateWaitingList(with clients: [Client]) {
-//        DispatchQueue.main.async {
-//            self.applyUpdatedWaitingList(with: clients)
-//        }
-//    }
-//    
-//    func updateWorkingList(with clients: [Client]) {
-//        DispatchQueue.main.async {
-//            self.applyUpdatedWorkingList(with: clients)
-//        }
-//    }
-//}
+extension ViewController: BankOutput {
+    func updateWaitingList(with clients: [Client]) {
+        DispatchQueue.main.async {
+            self.applyUpdatedWaitingList(with: clients)
+        }
+    }
+    
+    func updateWorkingList(with clients: [Client]) {
+        DispatchQueue.main.async {
+            self.applyUpdatedWorkingList(with: clients)
+        }
+    }
+}

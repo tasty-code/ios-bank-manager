@@ -21,7 +21,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     static func makeViewController() -> UIViewController {
-        let tasks: [BankTask: ClientQueueManagable] = [
+        let clientManagers: [BankTask: ClientManager] = [
             .loan: ClientManager(),
             .deposit: ClientManager(),
         ]
@@ -29,40 +29,31 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let orders: [BankTask: Int] = [.loan: 2, .deposit: 3]
         
         let bankers = makeBankers(
-            tasks: tasks,
+            tasks: clientManagers,
             orders: orders
         )
         
         let bankManager = BankManager(
             bankers: bankers,
-            clientManager: tasks
+            clientManagers: clientManagers
         )
         
+        bankers.forEach { banker in banker.delegate = bankManager }
+        
+        for (_, clientManager) in clientManagers {
+            clientManager.delegate = bankManager
+        }
+        
         let mirror = BankMirror(bankManager: bankManager)
+        bankManager.delegate = mirror
+        
         let viewController = ViewController(bankMirror: mirror)
+        mirror.delegate = viewController
         return viewController
     }
     
-    func startBank() {
-        let tasks: [BankTask: ClientQueueManagable] = [
-            .loan: ClientManager(),
-            .deposit: ClientManager(),
-        ]
-        
-        let orders: [BankTask: Int] = [.loan: 2, .deposit: 3]
-        let bankers = Self.makeBankers(
-            tasks: tasks,
-            orders: orders
-        )
-        
-        let bankManager = BankManager(
-            bankers: bankers,
-            clientManager: tasks
-        )
-    }
-    
     static func makeBankers(
-        tasks: [BankTask: any ClientQueueManagable],
+        tasks: [BankTask: ClientQueueManagable],
         orders: [BankTask: Int]
     ) -> [Banker] {
         var result = [Banker]()

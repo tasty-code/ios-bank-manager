@@ -10,7 +10,7 @@ import Foundation
 final class BankMirror {
     private let bankManager: BankManager
     
-//    weak var delegate: BankOutputable?
+    weak var delegate: BankOutput?
     
     private var waitingList: [Client] {
         didSet {
@@ -37,29 +37,29 @@ final class BankMirror {
     }
 }
 
-//extension BankMirror: BankManagerDequeueClientDelegate {
-//    func handleDequeueClient(client: Client) {
-//        removeWaitingClient(client: client)
-//    }
-//}
-//
-//extension BankMirror: BankManagerEnqueueClientDelegate {
-//    func handleEnqueueClient(client: Client) {
-//        addWaitingClient(client: client)
-//    }
-//}
-//
-//extension BankMirror: BankManagerEndTaskDelegate {
-//    func handleEndTask(client: Client) {
-//        removeWorkingClient(client: client)
-//    }
-//}
-//
-//extension BankMirror: BankManagerStartTaskDelegate {
-//    func handleStartTask(client: Client) {
-//        addWorkingClient(client: client)
-//    }
-//}
+extension BankMirror: BankManagerDequeueClientDelegate {
+    func handleDequeueClient(client: Client) {
+        removeWaitingClient(client: client)
+    }
+}
+
+extension BankMirror: BankManagerEnqueueClientDelegate {
+    func handleEnqueueClient(client: Client) {
+        addWaitingClient(client: client)
+    }
+}
+
+extension BankMirror: BankManagerEndTaskDelegate {
+    func handleEndTask(client: Client) {
+        removeWorkingClient(client: client)
+    }
+}
+
+extension BankMirror: BankManagerStartTaskDelegate {
+    func handleStartTask(client: Client) {
+        addWorkingClient(client: client)
+    }
+}
 
 private extension BankMirror {
     func addWaitingClient(client: Client) {
@@ -99,7 +99,7 @@ extension BankMirror {
     }
     
     func resetBank() {
-        self.bankManager.resetBank()
+        self.bankManager.clearBank()
         self.workingList = []
         self.waitingList = []
     }
@@ -111,10 +111,15 @@ extension BankMirror {
 
 private extension BankMirror {
     func updateWaitingList() {
-//        self.delegate?.updateWaitingList(with: self.waitingList)
+        self.delegate?.updateWaitingList(with: self.waitingList)
     }
     
     func updateWorkingList() {
-//        self.delegate?.updateWorkingList(with: self.workingList)
+        self.delegate?.updateWorkingList(with: self.workingList)
     }
+}
+
+protocol BankOutput: AnyObject {
+    func updateWaitingList(with: [Client])
+    func updateWorkingList(with: [Client])
 }

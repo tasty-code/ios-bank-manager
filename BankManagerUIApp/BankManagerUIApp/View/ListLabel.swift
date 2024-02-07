@@ -27,7 +27,7 @@ final class ListLabel: UILabel {
     }
     
     func configure(client: Client) {
-        self.text = "\(client.number) - \(client.task)"
+        self.text = "\(client.number) - \(client.task.name)"
         switch client.task {
         case .deposit:
             self.textColor = .black

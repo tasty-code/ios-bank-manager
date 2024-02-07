@@ -8,6 +8,8 @@
 import Foundation
 
 final class ClientManager {
+    weak var delegate: (ClientManagerDelegate)?
+    
     private let clientQueue: Queue<Client>
     
     private let semaphore: DispatchSemaphore = .init(value: 1)
@@ -21,6 +23,7 @@ extension ClientManager: ClientEnqueuable {
     func enqueueClient(client: Client) {
         self.semaphore.wait()
         self.clientQueue.enqueue(client)
+        self.delegate?.handleEnqueueClient(client: client)
         self.semaphore.signal()
     }
 }
@@ -28,8 +31,28 @@ extension ClientManager: ClientEnqueuable {
 extension ClientManager: ClientDequeuable {
     func dequeueClient() -> Client? {
         self.semaphore.wait()
-        let result = self.clientQueue.dequeue()
+        guard let client = self.clientQueue.dequeue() else {
+            self.semaphore.signal()
+            return nil
+        }
+        self.delegate?.handleDequeueClient(client: client)
         self.semaphore.signal()
-        return result
+        return client
     }
 }
+
+extension ClientManager: ClientClearable {
+    func clearClients() {
+        self.clientQueue.clear()
+    }
+}
+
+protocol ClientManagerEnqueueClientDelegate: AnyObject {
+    func handleEnqueueClient(client: Client)
+}
+
+protocol ClientManagerDequeueClientDelegate: AnyObject {
+    func handleDequeueClient(client: Client)
+}
+
+typealias ClientManagerDelegate = ClientManagerEnqueueClientDelegate & ClientManagerDequeueClientDelegate
