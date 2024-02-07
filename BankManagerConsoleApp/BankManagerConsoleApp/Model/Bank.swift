@@ -43,38 +43,26 @@ final class Bank<Q: QueueProtocol> where Q.Element == Customer {
         for _ in 1...totalCustomers {
             guard let customer = customerQueue.dequeue() else { continue }
             
-            switch customer.task {
-            case .deposit:
-                depositSemaphore.wait()
-                queue.async(group: group) {
-                    self.handleCustomer(customer)
-                    self.depositSemaphore.signal()
-                }
-            case .loan:
-                loanSemaphore.wait()
-                queue.async (group: group){
-                    self.handleCustomer(customer)
-                    self.loanSemaphore.signal()
+            group.enter()
+            
+            let semaphore = customer.task == .deposit ? depositSemaphore : loanSemaphore
+            semaphore.wait()
+            queue.async(group: group) {
+                self.handleCustomer(customer, queue) {
+                    semaphore.signal()
+                    group.leave()
                 }
             }
         }
         
-        group.wait()
-        let endTime = DispatchTime.now()
-        totalTime = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1_000_000_000
-        completion()
-        
+        group.notify(queue: queue) {
+            let endTime = DispatchTime.now()
+            self.totalTime = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1_000_000_000
+            completion()
+        }
     }
     
     /// 업무 처리
-    func handleCustomer(_ customer: Customer) {
-        switch customer.task {
-        case .deposit:
-            consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber,
-                                            task: customer.task.description)
-            Thread.sleep(forTimeInterval: 0.7)
-            consoleMessage.taskEndMessage(customerNumber: customer.waitingNumber,
-                                          task: customer.task.description)
         case .loan:
             consoleMessage.taskStartMessage(customerNumber: customer.waitingNumber,
                                             task: customer.task.description)
