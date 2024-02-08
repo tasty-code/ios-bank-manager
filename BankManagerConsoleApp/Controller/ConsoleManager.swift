@@ -37,8 +37,7 @@ struct ConsoleManager {
     }
     
     private mutating func executeBankingOperation() {
-        customerManager.createCustomers()
-        customerManager.registerCustomers()
+        customerManager.arrangeCustomers()
         
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 1)

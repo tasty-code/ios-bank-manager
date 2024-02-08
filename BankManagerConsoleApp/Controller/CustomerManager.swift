@@ -1,13 +1,18 @@
 
 struct CustomerManager {
-    private(set) var customers: [Customer] = []
     private(set) var loanTicketMachine: Queue<Customer> = Queue<Customer>()
     private(set) var depositTicketMachine: Queue<Customer> = Queue<Customer>()
+    var customerNumber: Int {
+        return loanTicketMachine.totalLength() + depositTicketMachine.totalLength()
+    }
     
-    mutating func createCustomers() {
+    mutating func arrangeCustomers() {
         let number = Int.random(in: 10...30)
         for ticketNumber in 1...number {
-            customers.append(Customer(ticketNumber: ticketNumber, task: BankingService.allCases.randomElement() ?? .loan))
+            guard let customerChoice = BankingService.allCases.randomElement() else { return }
+            customerChoice == BankingService.loan ?
+            loanTicketMachine.enqueue(with: Customer(ticketNumber: ticketNumber, bankingService: customerChoice)) :
+            depositTicketMachine.enqueue(with: Customer(ticketNumber: ticketNumber, bankingService: customerChoice))
         }
     }
     
@@ -19,18 +24,7 @@ struct CustomerManager {
         return depositTicketMachine.dequeue()
     }
     
-    mutating func registerCustomers() {
-        for customer in customers {
-            if customer.task == BankingService.loan {
-                loanTicketMachine.enqueue(with: customer)
-            } else {
-                depositTicketMachine.enqueue(with: customer)
-            }
-        }
-    }
-    
     mutating func resetCustomer() {
-        customers = []
         loanTicketMachine.clean()
         depositTicketMachine.clean()
     }
