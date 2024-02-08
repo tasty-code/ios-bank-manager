@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     private var bankManager =  BankManager()
     private var count = 1
     private let dispatchGroup = DispatchGroup()
+    private var isRunning = false
     
     override func loadView() {
         view = bankView
@@ -45,13 +46,16 @@ class ViewController: UIViewController {
         } catch {
             print(error)
         }
+        guard isRunning == false else { return }
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
         
         guard let timer = timer else { return }
         RunLoop.main.add(timer, forMode: .common)
+        isRunning = true
         
         dispatchGroup.notify(queue: DispatchQueue.main) {
             self.timer?.invalidate()
+            self.isRunning = false
         }
     }
     
@@ -60,6 +64,9 @@ class ViewController: UIViewController {
         
         for subView in bankView.waitStackView.arrangedSubviews {
             subView.removeFromSuperview()
+        }
+        for subeView in bankView.taskStackView.arrangedSubviews {
+            subeView.removeFromSuperview()
         }
         
         timer?.invalidate()
