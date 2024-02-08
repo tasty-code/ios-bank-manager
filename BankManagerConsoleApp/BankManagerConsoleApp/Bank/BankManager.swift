@@ -9,6 +9,7 @@ import Foundation
 struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
     private let semaphore = DispatchSemaphore(value: 2)
+    private let semaphore2 = DispatchSemaphore(value: 1)
     private let dispatchQueue = DispatchQueue.global(qos: .utility)
     weak var delegate: ManageLabel?
     
@@ -44,7 +45,9 @@ struct BankManager {
     
     func assignLoan(customer: Customer, dispatchGroup: DispatchGroup) {
         dispatchQueue.async(group: dispatchGroup) {
+            semaphore2.wait()
             recieve(customer: customer)
+            semaphore2.signal()
         }
     }
     
