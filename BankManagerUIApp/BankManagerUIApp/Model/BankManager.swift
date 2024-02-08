@@ -41,7 +41,9 @@ class BankManager {
 }
 
 extension BankManager {
-    func startBankingProcess() {
+    func startBankingProcess(completion: @escaping () -> Void) {
+        let group: DispatchGroup = DispatchGroup()
+        
         let depositTask = DispatchWorkItem { [self] in
             isDepositQueueRunning = true
             let semaphore = self.depositCustomerQueue.semaphore
@@ -59,6 +61,7 @@ extension BankManager {
                 }
                 self.depositQueue.async(execute: task)
             }
+            self.isDepositQueueRunning = false
         }
         
         let loanTask = DispatchWorkItem { [self] in
@@ -78,22 +81,17 @@ extension BankManager {
                 }
                 self.loanQueue.async(execute: task)
             }
+            self.isLoanQueueRunning = false
+            DispatchQueue.main.async {
+                completion()
+            }
         }
                 
-        let depositGroup: DispatchGroup = DispatchGroup()
-        let loanGroup: DispatchGroup = DispatchGroup()
-        depositGroup.notify(queue: .main) {
-            self.isDepositQueueRunning = false
-        }
-        loanGroup.notify(queue: .main) {
-            self.isLoanQueueRunning = false
-        }
-        
         if !isDepositQueueRunning {
-            DispatchQueue.global().async(group: depositGroup, execute: depositTask)
+            DispatchQueue.global().async(group: group, execute: depositTask)
         }
         if !isLoanQueueRunning {
-            DispatchQueue.global().async(group: loanGroup, execute: loanTask)
+            DispatchQueue.global().async(group: group, execute: loanTask)
         }
     }
     

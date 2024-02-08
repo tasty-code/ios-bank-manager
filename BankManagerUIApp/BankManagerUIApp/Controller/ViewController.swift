@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     @objc func addCustomerButtonTapped() {
         countElapsedTime()
         dataSource.addCustomer()
-        dataSource.startBankingProcess()
+        dataSource.startBankingProcess(completion: stopTimer)
     }
     
     @objc func resetService() {
