@@ -11,8 +11,9 @@ class ViewController: UIViewController {
     private let bankView = BankView()
     private var timer: Timer?
     private var initialTime = 0.000
-    private let bankManager =  BankManager(bankClerk: [.deposit: BankClerk(work: .deposit), .loan: BankClerk(work: .loan)])
+    private let bankManager =  BankManager()
     private var count = 1
+    private let dispatchGroup = DispatchGroup()
     
     override func loadView() {
         view = bankView
@@ -32,7 +33,11 @@ class ViewController: UIViewController {
         }
         
         count += 10
-        
+        do {
+            try bankManager.assignBank(dispatchGroup: dispatchGroup)
+        } catch {
+            print(error)
+        }
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
     }
     

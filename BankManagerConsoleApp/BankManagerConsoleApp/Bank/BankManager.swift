@@ -8,13 +8,8 @@ import Foundation
 
 struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
-    private let bankClerk: [Banking: BankClerk]
     private let semaphore = DispatchSemaphore(value: 2)
     private let dispatchQueue = DispatchQueue.global()
-    
-    init(bankClerk: [Banking : BankClerk]) {
-        self.bankClerk = bankClerk
-    }
     
     func standBy(customer: CustomerNumbering) {
         queue.enqueue(element: customer)
