@@ -10,6 +10,7 @@ struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
     private let semaphore = DispatchSemaphore(value: 2)
     private let dispatchQueue = DispatchQueue.global(qos: .utility)
+    weak var delegate: ManageLabel?
     
     func standBy(customer: CustomerNumbering) {
         queue.enqueue(element: customer)
@@ -48,9 +49,9 @@ struct BankManager {
     }
     
     func recieve(customer: Customer) {
-        CFAbsoluteTimeGetCurrent()
+        delegate?.turn(cusomer: customer)
         paceTime(customer.banking?.pace ?? 0)
-        CFAbsoluteTimeGetCurrent()
+        delegate?.quit(cusomer: customer)
     }
     
     private func paceTime(_ pace: Double) {

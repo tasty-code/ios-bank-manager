@@ -6,12 +6,17 @@
 
 import UIKit
 
+protocol ManageLabel: AnyObject {
+    func turn(cusomer: Customer)
+    func quit(cusomer: Customer)
+}
+
 class ViewController: UIViewController {
     
     private let bankView = BankView()
     private var timer: Timer?
     private var initialTime = 0.000
-    private let bankManager =  BankManager()
+    private var bankManager =  BankManager()
     private var count = 1
     private let dispatchGroup = DispatchGroup()
     
@@ -33,6 +38,8 @@ class ViewController: UIViewController {
         }
         
         count += 10
+        
+        bankManager.delegate = self
         do {
             try bankManager.assignBank(dispatchGroup: dispatchGroup)
         } catch {
@@ -63,6 +70,30 @@ class ViewController: UIViewController {
         
         bankView.taskTimeLabel.text = String(format: "업무시간 - %02d:%02d:%03d", minutes, seconds, milliSeconds)
         initialTime += 0.001
+    }
+}
+
+extension ViewController: ManageLabel {
+    
+    func turn(cusomer: Customer) {
+        DispatchQueue.main.async {
+            let cusomerLabel = self.bankView.waitStackView.arrangedSubviews.first { view in
+                guard let cusomerLabelNumber = view as? CustomerLabel else { return  false }
+                return cusomerLabelNumber.customer.numOfPerson == cusomer.numOfPerson
+            }
+            cusomerLabel?.removeFromSuperview()
+            self.bankView.taskStackView.addArrangedSubview(CustomerLabel(customer: cusomer))
+        }
+    }
+    
+    func quit(cusomer: Customer) {
+        DispatchQueue.main.async {
+            let customerLabel = self.bankView.taskStackView.arrangedSubviews.first { view in
+                guard let cusomerLabelNumber = view as? CustomerLabel else { return false }
+                return cusomerLabelNumber.customer.numOfPerson == cusomer.numOfPerson
+            }
+            customerLabel?.removeFromSuperview()
+        }
     }
 }
 
