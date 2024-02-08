@@ -19,6 +19,10 @@ final class BankManager {
     
     private var isWorking: Bool = false
     
+    private lazy var timer = BankTimer { timeString in
+        self.delegate?.handleTimer(timeString: timeString)
+    }
+    
     init(
         bankers: [Banker],
         clientManagers: [BankTask: ClientEnqueuable & ClientClearable]
@@ -35,12 +39,14 @@ final class BankManager {
         guard self.isWorking == false else { return }
         self.isWorking = true
         
+        self.timer.start()
         DispatchQueue.global().async {
             let totalWorkTime = self.measure {
                 for banker in self.bankers {
                     banker.start(group: group)
                 }
                 group.wait()
+                self.timer.end()
                 self.resetClientCount()
                 self.isWorking = false
             }
@@ -48,6 +54,7 @@ final class BankManager {
     }
     
     func clearBank() {
+        self.timer.end()
         for (_, clientManager) in self.clientManagers {
             clientManager.clearClients()
         }
@@ -67,7 +74,6 @@ final class BankManager {
         self.bankers.forEach { banker in
             banker.start(group: group)
         }
-//        group.wait()
     }
 }
 
@@ -127,4 +133,8 @@ protocol BankManagerEndTaskDelegate: AnyObject {
     func handleEndTask(client: Client)
 }
 
-typealias BankManagerDelegate = BankManagerEnqueueClientDelegate & BankManagerDequeueClientDelegate & BankManagerClearClientDelegate & BankManagerStartTaskDelegate & BankManagerEndTaskDelegate
+protocol BankManagerTimerDelegate: AnyObject {
+    func handleTimer(timeString: String)
+}
+
+typealias BankManagerDelegate = BankManagerEnqueueClientDelegate & BankManagerDequeueClientDelegate & BankManagerClearClientDelegate & BankManagerStartTaskDelegate & BankManagerEndTaskDelegate & BankManagerTimerDelegate

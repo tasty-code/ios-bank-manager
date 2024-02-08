@@ -35,6 +35,7 @@
 		F435ABCD2B740D12009B67C5 /* ListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F435ABC12B740D12009B67C5 /* ListStackView.swift */; };
 		F435ABCE2B740D12009B67C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F435ABC32B740D12009B67C5 /* ViewController.swift */; };
 		F435ABD12B740D41009B67C5 /* BMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F435ABD02B740D41009B67C5 /* BMColor.swift */; };
+		F435ABD32B7443CB009B67C5 /* BankTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F435ABD22B7443CB009B67C5 /* BankTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		F435ABC12B740D12009B67C5 /* ListStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStackView.swift; sourceTree = "<group>"; };
 		F435ABC32B740D12009B67C5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F435ABD02B740D41009B67C5 /* BMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMColor.swift; sourceTree = "<group>"; };
+		F435ABD22B7443CB009B67C5 /* BankTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				F435ABA42B7407CB009B67C5 /* Client.swift */,
 				F435ABA52B7407CB009B67C5 /* BankManager.swift */,
 				F435ABA62B7407CB009B67C5 /* ClientManager.swift */,
+				F435ABD22B7443CB009B67C5 /* BankTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				F435ABB52B740A46009B67C5 /* BankMirror.swift in Sources */,
 				F435ABB02B7407CB009B67C5 /* Client.swift in Sources */,
 				F435ABCC2B740D12009B67C5 /* BankList.swift in Sources */,
+				F435ABD32B7443CB009B67C5 /* BankTimer.swift in Sources */,
 				F435ABC42B740D12009B67C5 /* ClientListTableView.swift in Sources */,
 				F435ABCB2B740D12009B67C5 /* TimerView.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,

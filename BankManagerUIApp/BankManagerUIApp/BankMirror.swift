@@ -24,6 +24,12 @@ final class BankMirror {
         }
     }
     
+    private var timeString: String {
+        didSet {
+            updateTime()
+        }
+    }
+    
     private var waitingSemaphore = DispatchSemaphore(value: 1)
     
     private var workingSemaphore = DispatchSemaphore(value: 1)
@@ -34,6 +40,7 @@ final class BankMirror {
         self.waitingList = []
         self.workingList = []
         self.bankManager = bankManager
+        self.timeString = "업무시간 - \("00:00:000")"
     }
 }
 
@@ -70,6 +77,10 @@ extension BankMirror: BankManagerDelegate {
 
     func handleClearClient() {
         clearClients()
+    }
+    
+    func handleTimer(timeString: String) {
+        self.timeString = timeString
     }
 }
 
@@ -120,11 +131,16 @@ private extension BankMirror {
     func updateWorkingList() {
         self.delegate?.updateWorkingList(with: self.workingList)
     }
+    
+    func updateTime() {
+        self.delegate?.updateTime(with: self.timeString)
+    }
 }
 
 protocol BankOutput: AnyObject {
     func updateWaitingList(with: [Client])
     func updateWorkingList(with: [Client])
+    func updateTime(with timeString: String)
 }
 
 protocol BankIntput: AnyObject {

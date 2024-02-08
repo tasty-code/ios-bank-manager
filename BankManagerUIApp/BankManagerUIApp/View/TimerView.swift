@@ -36,4 +36,8 @@ final class TimerView: UIView {
             self.timerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
     }
+    
+    func configure(with timeString: String) {
+        self.timerLabel.text = "업무시간 - \(timeString)"
+    }
 }

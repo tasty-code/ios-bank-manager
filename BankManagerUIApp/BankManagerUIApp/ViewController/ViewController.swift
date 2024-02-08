@@ -175,6 +175,10 @@ private extension ViewController {
         snapshot.appendItems(items, toSection: .client)
         self.workingListDataSource.apply(snapshot)
     }
+    
+    private func applyUpdatedTime(with timeString: String) {
+        self.timerView.configure(with: timeString)
+    }
 }
 
 extension ViewController: UITableViewDelegate {
@@ -193,6 +197,12 @@ extension ViewController: BankOutput {
     func updateWorkingList(with clients: [Client]) {
         DispatchQueue.main.async {
             self.applyUpdatedWorkingList(with: clients)
+        }
+    }
+    
+    func updateTime(with timeString: String) {
+        DispatchQueue.main.async {
+            self.applyUpdatedTime(with: timeString)
         }
     }
 }
