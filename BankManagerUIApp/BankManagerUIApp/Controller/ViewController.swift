@@ -28,10 +28,6 @@ class ViewController: UIViewController {
     }
     
     @objc func addCustomerButtonTapped() {
-        if dataSource.isQueueRunning {
-            dataSource.addCustomer()
-            return
-        }
         dataSource.addCustomer()
         dataSource.startBankingProcess()
     }

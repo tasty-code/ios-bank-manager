@@ -9,7 +9,8 @@ import Foundation
 class BankManager {
     var delegate: MainViewDelegate?
     private let banker: Banker = Banker()
-    private(set) var isQueueRunning: Bool = false
+    private(set) var isDepositQueueRunning: Bool = false
+    private(set) var isLoanQueueRunning: Bool = false
     private var customerCountToStart: Int = 1
     private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
@@ -41,9 +42,8 @@ class BankManager {
 
 extension BankManager {
     func startBankingProcess() {
-        isQueueRunning = true
-        
         let depositTask = DispatchWorkItem { [self] in
+            isDepositQueueRunning = true
             let semaphore = self.depositCustomerQueue.semaphore
             while !(self.depositCustomerQueue.isEmpty()) {
                 semaphore.wait()
@@ -62,6 +62,7 @@ extension BankManager {
         }
         
         let loanTask = DispatchWorkItem { [self] in
+            isLoanQueueRunning = true
             let semaphore = self.loanCustomerQueue.semaphore
             while !(self.loanCustomerQueue.isEmpty()) {
                 semaphore.wait()
@@ -78,17 +79,22 @@ extension BankManager {
                 self.loanQueue.async(execute: task)
             }
         }
-        
-        let completionBlock = DispatchWorkItem { [weak self] in
-            self?.toggleQueueStatus()
+                
+        let depositGroup: DispatchGroup = DispatchGroup()
+        let loanGroup: DispatchGroup = DispatchGroup()
+        depositGroup.notify(queue: .main) {
+            self.isDepositQueueRunning = false
+        }
+        loanGroup.notify(queue: .main) {
+            self.isLoanQueueRunning = false
         }
         
-        let group: DispatchGroup = DispatchGroup()
-        
-        DispatchQueue.global().async(group: group, execute: depositTask)
-        DispatchQueue.global().async(group: group, execute: loanTask)
-        
-        group.notify(queue: .main, work: completionBlock)
+        if !isDepositQueueRunning {
+            DispatchQueue.global().async(group: depositGroup, execute: depositTask)
+        }
+        if !isLoanQueueRunning {
+            DispatchQueue.global().async(group: loanGroup, execute: loanTask)
+        }
     }
     
     func addCustomer(_ count: Int = 10) {
@@ -104,7 +110,7 @@ extension BankManager {
         setWaitingCustomer()
         customerCountToStart += 10
     }
-    
+
     func setWaitingCustomer() {
         var array: [Customer] = []
         for i in 0...depositCustomerQueue.count() {
@@ -133,10 +139,6 @@ extension BankManager {
 }
 
 extension BankManager {
-    private func toggleQueueStatus() {
-        self.isQueueRunning.toggle()
-    }
-    
     private func appendCustomerToProgress(_ customer: Customer) {
         semaphore.wait()
         var array = totalProgress
