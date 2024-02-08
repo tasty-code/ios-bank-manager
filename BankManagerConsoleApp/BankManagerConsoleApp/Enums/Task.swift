@@ -13,7 +13,7 @@ extension Task {
         }
     }
     
-    var korean: String {
+    var decription: String {
         switch self {
         case .deposit:
             return "예금"
