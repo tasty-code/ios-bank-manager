@@ -6,12 +6,10 @@ final class Bank: PrintableMessage {
     private let depositSemaphore: DispatchSemaphore
     private let group = DispatchGroup()
     
-    init(bankers: [Banker], depositSemaphore: DispatchSemaphore) {
+    init(bankers: [Banker], depositSemaphore: DispatchSemaphore, customersQueue: [BankingService: Queue<Customer>]) {
         self.bankers = bankers
         self.depositSemaphore = depositSemaphore
-        for service in BankingService.allCases {
-            customersQueue[service] = Queue<Customer>()
-        }
+        self.customersQueue = customersQueue
     }
     
     func openBank() {
