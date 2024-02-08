@@ -7,7 +7,11 @@
 import Foundation
 
 struct BankManager {
-    var employees: [Employee]
+    private(set) var employees: [Employee]
+    
+    init(employees: [Employee]) {
+        self.employees = employees
+    }
     
     func reportDeadlineSummary(with customerManager: CustomerManager, startTime bankingServiceStart: TimeInterval, endTime bankingServiceEnd: TimeInterval) {
         let totalTime = bankingServiceEnd - bankingServiceStart
