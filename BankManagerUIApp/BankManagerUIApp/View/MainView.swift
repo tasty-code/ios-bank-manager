@@ -21,6 +21,7 @@ class MainView: UIView {
         resetButton.setTitle("초기화", for: .normal)
         resetButton.setTitleColor(.systemRed, for: .normal)
         resetButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        resetButton.addTarget(nil, action: #selector(ViewController.resetService), for: .touchUpInside)
         return resetButton
     }()
     

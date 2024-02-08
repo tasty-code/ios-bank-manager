@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     }
     
     @objc func resetService() {
-        // 타이머 초기화
-        
+        dataSource.reset()
     }
 }
