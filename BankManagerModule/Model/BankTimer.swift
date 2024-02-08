@@ -10,36 +10,40 @@ import Foundation
 final class BankTimer {
     private static let interval: TimeInterval = 0.001
     
-    private let receiver: (String) -> Void
+    private let delegate: BankTimerDelegate
     
     private var milliseconds: Int = 0
     
-    private lazy var timer: Timer = {
-        let timer = Timer.scheduledTimer(withTimeInterval: Self.interval, repeats: true) { timer in
-            self.milliseconds += 1
-            let formattedString = self.format()
-            self.receiver(formattedString)
-        }
-        return timer
-    }()
+    private var timer: Timer?
     
-    init(receiver: @escaping (String) -> Void) {
-        self.receiver = receiver
+    init(delegate: BankTimerDelegate) {
+        self.delegate = delegate
         self.milliseconds = 0
     }
     
     func start() {
-        self.timer.fire()
+        self.timer = makeTimer()
+        self.timer?.fire()
     }
     
     func end() {
-        self.timer.invalidate()
+        self.timer?.invalidate()
     }
     
     func reset() {
+        end()
         self.milliseconds = 0
         let string = format()
-        receiver(string)
+        self.delegate.handleUpdating(timeString: string)
+    }
+    
+    private func makeTimer() -> Timer {
+        let timer = Timer.scheduledTimer(withTimeInterval: Self.interval, repeats: true) { timer in
+            self.milliseconds += 1
+            let formattedString = self.format()
+            self.delegate.handleUpdating(timeString: formattedString)
+        }
+        return timer
     }
     
     private func format() -> String {
@@ -50,4 +54,8 @@ final class BankTimer {
             self.milliseconds % 1_000
         )
     }
+}
+
+protocol BankTimerDelegate {
+    func handleUpdating(timeString: String)
 }

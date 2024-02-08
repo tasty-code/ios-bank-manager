@@ -23,6 +23,7 @@ final class Banker {
     func start(group: DispatchGroup) {
         guard self.isWorking == false else { return }
         self.isWorking = true
+        
         DispatchQueue.global().async(group: group) {
             while let client = self.clientManager.dequeueClient() {
                 self.work(for: client)

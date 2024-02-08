@@ -19,9 +19,7 @@ final class BankManager {
     
     private var isWorking: Bool = false
     
-    private lazy var timer = BankTimer { timeString in
-        self.delegate?.handleTimer(timeString: timeString)
-    }
+    private lazy var timer = BankTimer(delegate: self)
     
     init(
         bankers: [Banker],
@@ -33,27 +31,26 @@ final class BankManager {
     }
     
     func start() {
-        self.group = DispatchGroup()
-        guard let group else { return }
-        
         guard self.isWorking == false else { return }
         self.isWorking = true
         
+        self.group = DispatchGroup()
+        guard let group else { return }
+        
         self.timer.start()
         DispatchQueue.global().async {
-            let totalWorkTime = self.measure {
-                for banker in self.bankers {
-                    banker.start(group: group)
-                }
-                group.wait()
-                self.timer.end()
-                self.resetClientCount()
-                self.isWorking = false
+            for banker in self.bankers {
+                banker.start(group: group)
             }
+            group.wait()
+            self.timer.end()
+            self.resetClientCount()
+            self.isWorking = false
         }
     }
     
     func clearBank() {
+        guard self.isWorking else { return }
         self.timer.reset()
         for (_, clientManager) in self.clientManagers {
             clientManager.clearClients()
@@ -70,10 +67,12 @@ final class BankManager {
             self.currentClientNumber = number
         }
         
-        guard let group else { return }
-        self.bankers.forEach { banker in
-            banker.start(group: group)
-        }
+//        self.timer.start()
+//        guard let group else { return }
+//        self.bankers.forEach { banker in
+//            banker.start(group: group)
+//        }
+        start()
     }
 }
 
@@ -110,6 +109,12 @@ extension BankManager: BankerDelegate {
     
     func handleEndTask(client: Client) {
         self.delegate?.handleEndTask(client: client)
+    }
+}
+
+extension BankManager: BankTimerDelegate {
+    func handleUpdating(timeString: String) {
+        self.delegate?.handleTimer(timeString: timeString)
     }
 }
 
