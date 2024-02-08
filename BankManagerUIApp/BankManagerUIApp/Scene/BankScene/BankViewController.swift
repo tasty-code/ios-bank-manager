@@ -9,19 +9,6 @@ import UIKit
 final class BankViewController: UIViewController {
     
     // TODO: 데이터 위치 수정 예정
-    private var waitingQueue: [Client] = [
-        Client(number: 1, bankTask: .deposit),
-        Client(number: 2, bankTask: .deposit),
-        Client(number: 3, bankTask: .deposit),
-        Client(number: 4, bankTask: .deposit),
-        Client(number: 5, bankTask: .deposit),
-        Client(number: 6, bankTask: .deposit),
-        Client(number: 7, bankTask: .deposit),
-        Client(number: 8, bankTask: .deposit),
-        Client(number: 9, bankTask: .deposit),
-        Client(number: 10, bankTask: .deposit)
-    ]
-    
     private var workingQueue: [Client] = [
         Client(number: 1, bankTask: .loan),
         Client(number: 2, bankTask: .loan),
@@ -111,11 +98,24 @@ final class BankViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private let viewModel: BankViewModel
+    
+    init(viewModel: BankViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("BankViewController Init Error!")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
         setUpTableView()
+        addButtonTarget()
+        bind()
     }
     
     private func configureUI() {
@@ -153,6 +153,25 @@ final class BankViewController: UIViewController {
             $0.dataSource = self
         }
     }
+    
+    private func addButtonTarget() {
+        addCustomerButton.addTarget(self, action: #selector(addCustommerButtonDidTap), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(resetButtonDidTap), for: .touchUpInside)
+    }
+    
+    private func bind() {
+        viewModel.waitingClients.subscribe { [weak self] _ in
+            self?.waitingQueueTableView.reloadData()
+        }
+    }
+    
+    @objc private func addCustommerButtonDidTap() {
+        viewModel.fetchData()
+    }
+    
+    @objc private func resetButtonDidTap() {
+        
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -169,7 +188,7 @@ extension BankViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case waitingQueueTableView:
-            return waitingQueue.count
+            return viewModel.waitingClients.value.count
         case workingQueueTableView:
             return workingQueue.count
         default:
@@ -183,7 +202,7 @@ extension BankViewController: UITableViewDataSource {
         
         switch tableView {
         case waitingQueueTableView:
-            cell.setUpData(data: waitingQueue[indexPath.row])
+            cell.setUpData(data: viewModel.waitingClients.value[indexPath.row])
         case workingQueueTableView:
             cell.setUpData(data: workingQueue[indexPath.row])
         default:
