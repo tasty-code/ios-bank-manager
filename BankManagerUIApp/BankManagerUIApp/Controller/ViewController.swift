@@ -47,6 +47,9 @@ class ViewController: UIViewController {
         }
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
         
+        guard let timer = timer else { return }
+        RunLoop.main.add(timer, forMode: .common)
+        
         dispatchGroup.notify(queue: DispatchQueue.main) {
             self.timer?.invalidate()
         }
