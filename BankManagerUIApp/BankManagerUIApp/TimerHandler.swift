@@ -7,8 +7,13 @@
 
 import Foundation
 
+private struct TimeUnit {
+    let hours: Int
+    let minutes: Int
+    let seconds: Int
+}
 
-final class  TimerHandler {
+final class TimerHandler {
     
     private var timer = Timer()
     private var count = 0
@@ -18,25 +23,23 @@ final class  TimerHandler {
         timer = Timer.scheduledTimer(timeInterval: 0.00001, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
     }
     
-    @objc func timerCounter() {
+    func stopTimer() {
+        timer.invalidate()
+        timeString = "00:00:00"
+    }
+    
+    @objc private func timerCounter() {
         count += 1
         let time = secondsToHoursMinutesSeconds(seconds: count)
-        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        let timeString = makeTimeString(time)
         self.timeString = timeString
     }
     
-    private func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int) {
-        return ((seconds / 3600), ((seconds % 3600) / 60),((seconds % 3600) % 60))
+    private func secondsToHoursMinutesSeconds(seconds: Int) -> TimeUnit {
+        return TimeUnit.init(hours: (seconds / 3600), minutes: ((seconds % 3600) / 60), seconds: ((seconds % 3600) % 60))
     }
     
-    private func makeTimeString(hours: Int, minutes: Int, seconds : Int) -> String {
-        var timeString = ""
-        timeString += String(format: "%02d", hours)
-        timeString += " : "
-        timeString += String(format: "%02d", minutes)
-        timeString += " : "
-        timeString += String(format: "%02d", seconds)
-        return timeString
+    private func makeTimeString(_ timeUnit: TimeUnit) -> String {
+        return String(format: "%02d:%02d:%02d", timeUnit.hours, timeUnit.minutes, timeUnit.seconds)
     }
-
 }
