@@ -29,10 +29,11 @@ class CustomerView: UIView {
     
     private func setupConstraints() {
         self.addSubview(label)
-        self.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 25).isActive = true
         self.setContentHuggingPriority(.defaultLow, for: .horizontal)
        
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         label.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9).isActive = true

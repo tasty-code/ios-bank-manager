@@ -115,7 +115,7 @@ extension MainView: MainViewDelegate {
         customers.forEach { customer in
             let customerView: CustomerView = CustomerView()
             customerView.setLabelText(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
-            if !isWaiting {
+            if customer.requiredService == .loan {
                 customerView.setLabelColor(.purple)
             }
             stackView.addArrangedSubview(customerView)
@@ -180,6 +180,7 @@ extension MainView {
         waitingStackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         waitingStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
         waitingStackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        waitingStackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
         waitingStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
         waitingStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
