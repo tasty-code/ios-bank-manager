@@ -7,9 +7,9 @@
 import Foundation
 
 struct BankManager {
-    var employee_loan: DispatchQueue?
-    var employee_deposit1: DispatchQueue?
-    var employee_deposit2: DispatchQueue?
+    var loanEmployee: DispatchQueue?
+    var depositEmployee1: DispatchQueue?
+    var depositEmployee2: DispatchQueue?
     
     init() { }
     
@@ -20,8 +20,8 @@ struct BankManager {
     }
     
     mutating func assignEmployeeTasks() {
-        employee_loan = DispatchQueue(label: "대출1", attributes: .concurrent)
-        employee_deposit1 = DispatchQueue(label: "예금1", attributes: .concurrent)
-        employee_deposit2 = DispatchQueue(label: "예금2", attributes: .concurrent)
+        loanEmployee = DispatchQueue(label: "대출1", attributes: .concurrent)
+        depositEmployee1 = DispatchQueue(label: "예금1", attributes: .concurrent)
+        depositEmployee2 = DispatchQueue(label: "예금2", attributes: .concurrent)
     }
 }

@@ -2,10 +2,11 @@
 import Foundation
 
 struct Employee {
+    
     func handleTasks(with customerManager: CustomerManager, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
         var mutableCustomerManager = customerManager
        
-        bankManager.employee_loan?.async(group: group) {
+        bankManager.loanEmployee?.async(group: group) {
             while mutableCustomerManager.loanTicketMachine.isEmpty == false {
                 guard let customer = mutableCustomerManager.dequeueLoanCustomerFromQueue() else { return }
                 guard let customerInformation = customer.askEmployeeHandleTasks() else { return }
@@ -15,7 +16,7 @@ struct Employee {
             }
         }
         
-        bankManager.employee_deposit1?.async(group: group) {
+        bankManager.depositEmployee1?.async(group: group) {
             while mutableCustomerManager.depositTicketMachine.isEmpty == false {
                 semaphore?.wait()
                 guard let customer = mutableCustomerManager.dequeueDepositCustomerFromQueue() else { return }
@@ -28,7 +29,7 @@ struct Employee {
             }
         }
    
-        bankManager.employee_deposit2?.async(group: group) {
+        bankManager.depositEmployee2?.async(group: group) {
             while mutableCustomerManager.depositTicketMachine.isEmpty == false {
                 semaphore?.wait()
                 guard let customer = mutableCustomerManager.dequeueDepositCustomerFromQueue() else { return }
