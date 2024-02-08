@@ -46,6 +46,10 @@ class ViewController: UIViewController {
             print(error)
         }
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(runningTimer), userInfo: nil, repeats: true)
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.timer?.invalidate()
+        }
     }
     
     @objc func resetButtonTapped() {
