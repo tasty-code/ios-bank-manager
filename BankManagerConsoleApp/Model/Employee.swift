@@ -2,11 +2,18 @@
 import Foundation
 
 struct Employee {
+    var loanTask: DispatchQueue?
+    var depositTask: DispatchQueue?
+    
+    init(loanTask: DispatchQueue? = nil, depositTask: DispatchQueue? = nil) {
+        self.loanTask = loanTask
+        self.depositTask = depositTask
+    }
     
     func handleTasks(with customerManager: CustomerManager, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
         var mutableCustomerManager = customerManager
        
-        bankManager.loanEmployee?.async(group: group) {
+        bankManager.employee[0].loanTask?.async(group: group) {
             while mutableCustomerManager.loanTicketMachine.isEmpty == false {
                 guard let customer = mutableCustomerManager.dequeueLoanCustomerFromQueue() else { return }
                 guard let customerInformation = customer.askEmployeeHandleTasks() else { return }
@@ -16,7 +23,7 @@ struct Employee {
             }
         }
         
-        bankManager.depositEmployee1?.async(group: group) {
+        bankManager.employee[1].depositTask?.async(group: group) {
             while mutableCustomerManager.depositTicketMachine.isEmpty == false {
                 semaphore?.wait()
                 guard let customer = mutableCustomerManager.dequeueDepositCustomerFromQueue() else { return }
@@ -29,7 +36,7 @@ struct Employee {
             }
         }
    
-        bankManager.depositEmployee2?.async(group: group) {
+        bankManager.employee[2].depositTask?.async(group: group) {
             while mutableCustomerManager.depositTicketMachine.isEmpty == false {
                 semaphore?.wait()
                 guard let customer = mutableCustomerManager.dequeueDepositCustomerFromQueue() else { return }

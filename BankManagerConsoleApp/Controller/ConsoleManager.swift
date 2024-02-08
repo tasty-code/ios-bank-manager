@@ -4,8 +4,12 @@ import Foundation
 struct ConsoleManager {
     private var isOpen: Bool = false
     private var customerManager: CustomerManager = CustomerManager()
-    private var bankManager: BankManager = BankManager()
-    
+    private var bankManager: BankManager = BankManager(employees:[
+        Employee(loanTask: DispatchQueue(label: "대출1", attributes: .concurrent)),
+        Employee(depositTask: DispatchQueue(label: "예금1", attributes: .concurrent)),
+        Employee(depositTask: DispatchQueue(label: "예금2", attributes: .concurrent))
+    ])
+
     mutating func operate() {
         isOpen = false
         printMenuOfBank()
@@ -33,7 +37,6 @@ struct ConsoleManager {
     }
     
     private mutating func executeBankingOperation() {
-        bankManager.assignEmployeeTasks()
         customerManager.createCustomers()
         customerManager.registerCustomers()
         
@@ -46,7 +49,7 @@ struct ConsoleManager {
         employees.handleTasks(with: mutableCustomerManager, bankManager: bankManager, group: group, semaphore: semaphore)
         group.wait()
         let bankingServiceEnd = Date.timeIntervalSinceReferenceDate
-        
+    
         bankManager.reportDeadlineSummary(with: customerManager, startTime: bankingServiceStart, endTime: bankingServiceEnd)
         customerManager.resetCustomer()
         operate()
