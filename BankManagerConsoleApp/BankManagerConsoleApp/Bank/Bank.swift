@@ -15,28 +15,38 @@ final class Bank: PrintableMessage {
     func openBank() {
         let taskStartedTime: Date = Date()
         generateCustomerQueue()
-        
+        processingTasks()
+        closeBank(totalProcessingTime: Date().timeIntervalSince(taskStartedTime))
+    }
+    
+    private func processingTasks() {
         for banker in bankers {
             group.enter()
-            
             DispatchQueue.global().async { [weak self] in
                 switch banker.service {
                 case .deposit:
-                    self?.depositSemaphore.wait()
-                    if let depositQueue = self?.customersQueue[.deposit] {
-                        banker.taskProcess(queue: depositQueue)
-                    }
-                    self?.depositSemaphore.signal()
+                    self?.depositTask(banker: banker)
                 case .loan:
-                    if let loanQueue = self?.customersQueue[.loan] {
-                        banker.taskProcess(queue: loanQueue)
-                    }
+                    self?.loanTask(banker: banker)
                 }
                 self?.group.leave()
             }
         }
         group.wait()
-        closeBank(totalProcessingTime: Date().timeIntervalSince(taskStartedTime))
+    }
+    
+    private func depositTask(banker: Banker) {
+        depositSemaphore.wait()
+        if let depositQueue = customersQueue[.deposit] {
+            banker.taskProcess(queue: depositQueue)
+        }
+        depositSemaphore.signal()
+    }
+    
+    private func loanTask(banker: Banker) {
+        if let loanQueue = customersQueue[.loan] {
+            banker.taskProcess(queue: loanQueue)
+        }
     }
     
     private func generateCustomerQueue() {
