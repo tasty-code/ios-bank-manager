@@ -15,6 +15,10 @@ final class BankManager {
     
     private var currentClientNumber: Int
     
+    private var group: DispatchGroup?
+    
+    private var isWorking: Bool = false
+    
     init(
         bankers: [Banker],
         clientManagers: [BankTask: ClientEnqueuable & ClientClearable]
@@ -25,7 +29,12 @@ final class BankManager {
     }
     
     func start() {
-        let group = DispatchGroup()
+        self.group = DispatchGroup()
+        guard let group else { return }
+        
+        guard self.isWorking == false else { return }
+        self.isWorking = true
+        
         DispatchQueue.global().async {
             let totalWorkTime = self.measure {
                 for banker in self.bankers {
@@ -33,6 +42,7 @@ final class BankManager {
                 }
                 group.wait()
                 self.resetClientCount()
+                self.isWorking = false
             }
         }
     }
@@ -52,6 +62,12 @@ final class BankManager {
             self.clientManagers[bankTaskType]?.enqueueClient(client: client)
             self.currentClientNumber = number
         }
+        
+        guard let group else { return }
+        self.bankers.forEach { banker in
+            banker.start(group: group)
+        }
+//        group.wait()
     }
 }
 

@@ -120,14 +120,17 @@ final class ViewController: UIViewController {
     }
     
     private func addClient(count: Int) {
+        print(self, #function)
         self.bankMirror.addClients(count: count)
     }
     
     private func runBank() {
+        print(self, #function)
         self.bankMirror.startBank()
     }
     
     private func resetBank() {
+        print(self, #function)
         self.bankMirror.resetBank()
     }
 }

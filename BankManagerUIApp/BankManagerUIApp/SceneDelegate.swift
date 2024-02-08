@@ -26,7 +26,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .deposit: ClientManager(),
         ]
         
-        let orders: [BankTask: Int] = [.loan: 2, .deposit: 3]
+        let orders: [BankTask: Int] = [.loan: 1, .deposit: 2]
         
         let bankers = makeBankers(
             tasks: clientManagers,

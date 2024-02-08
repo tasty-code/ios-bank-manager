@@ -12,6 +12,8 @@ final class Banker {
     
     weak var delegate: BankerDelegate?
     
+    private var isWorking: Bool = false
+    
     init(
         clientManager: ClientDequeuable
     ) {
@@ -19,10 +21,13 @@ final class Banker {
     }
     
     func start(group: DispatchGroup) {
+        guard self.isWorking == false else { return }
+        self.isWorking = true
         DispatchQueue.global().async(group: group) {
             while let client = self.clientManager.dequeueClient() {
                 self.work(for: client)
             }
+            self.isWorking = false
         }
     }
 }
