@@ -22,7 +22,7 @@ final class BankViewModel {
     }
     
     func fetchTimeString() {
-        timer.getTimeString = {
+        timer.timeString = {
             self.timeString.value = $0
         }
     }

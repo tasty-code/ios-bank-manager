@@ -17,7 +17,7 @@ final class BankTimer {
     
     private var timer = Timer()
     private var count = 0
-    var getTimeString: ((String) -> Void)?
+    var timeString: ((String) -> Void)?
     
     func start() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
@@ -25,14 +25,14 @@ final class BankTimer {
     
     func stop() {
         timer.invalidate()
-        getTimeString?("00:00:00")
+        timeString?("00:00:00")
     }
     
     @objc private func timerCounter() {
         count += 1
         let time = secondsToHoursMinutesSeconds(seconds: count)
         var convertedTimeString = makeTimeString(time)
-        getTimeString?(convertedTimeString)
+        timeString?(convertedTimeString)
     }
     
     private func secondsToHoursMinutesSeconds(seconds: Int) -> TimeUnit {
