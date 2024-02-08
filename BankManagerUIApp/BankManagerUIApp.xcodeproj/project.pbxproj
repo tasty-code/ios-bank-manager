@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E37814A2B74A56E002E1B11 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781412B74A56E002E1B11 /* Queue.swift */; };
-		4E37814B2B74A56E002E1B11 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781422B74A56E002E1B11 /* Bank.swift */; };
-		4E37814C2B74A56E002E1B11 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781432B74A56E002E1B11 /* BankClerk.swift */; };
 		4E37814D2B74A56E002E1B11 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781442B74A56E002E1B11 /* LinkedList.swift */; };
 		4E37814E2B74A56E002E1B11 /* Banking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781452B74A56E002E1B11 /* Banking.swift */; };
 		4E37814F2B74A56E002E1B11 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3781462B74A56E002E1B11 /* BankManager.swift */; };
@@ -45,14 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4E3781412B74A56E002E1B11 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Queue.swift; sourceTree = "<group>"; };
-		4E3781422B74A56E002E1B11 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Bank/Bank.swift; sourceTree = "<group>"; };
-		4E3781432B74A56E002E1B11 /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankClerk.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Bank/BankClerk.swift; sourceTree = "<group>"; };
-		4E3781442B74A56E002E1B11 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkedList.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/LinkedList.swift; sourceTree = "<group>"; };
+		4E3781412B74A56E002E1B11 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		4E3781442B74A56E002E1B11 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		4E3781452B74A56E002E1B11 /* Banking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Banking.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Bank/Banking.swift; sourceTree = "<group>"; };
 		4E3781462B74A56E002E1B11 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Bank/BankManager.swift; sourceTree = "<group>"; };
-		4E3781472B74A56E002E1B11 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Node.swift; sourceTree = "<group>"; };
-		4E3781482B74A56E002E1B11 /* QueueError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueueError.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/QueueError.swift; sourceTree = "<group>"; };
+		4E3781472B74A56E002E1B11 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		4E3781482B74A56E002E1B11 /* QueueError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
 		4E3781492B74A56E002E1B11 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Bank/Customer.swift; sourceTree = "<group>"; };
 		4EE77F802B7213CE005D0F76 /* BankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankView.swift; sourceTree = "<group>"; };
 		4EE77F9A2B721DDE005D0F76 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
@@ -99,17 +95,23 @@
 		4E3781402B74A55B002E1B11 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4E3781422B74A56E002E1B11 /* Bank.swift */,
-				4E3781432B74A56E002E1B11 /* BankClerk.swift */,
+				4E3781532B74D03F002E1B11 /* DataSource */,
 				4E3781452B74A56E002E1B11 /* Banking.swift */,
 				4E3781462B74A56E002E1B11 /* BankManager.swift */,
 				4E3781492B74A56E002E1B11 /* Customer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4E3781532B74D03F002E1B11 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
 				4E3781442B74A56E002E1B11 /* LinkedList.swift */,
 				4E3781472B74A56E002E1B11 /* Node.swift */,
 				4E3781412B74A56E002E1B11 /* Queue.swift */,
 				4E3781482B74A56E002E1B11 /* QueueError.swift */,
 			);
-			path = Model;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		4EE77F822B721553005D0F76 /* View */ = {
@@ -322,9 +324,7 @@
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				4E37814E2B74A56E002E1B11 /* Banking.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
-				4E37814B2B74A56E002E1B11 /* Bank.swift in Sources */,
 				4E37814F2B74A56E002E1B11 /* BankManager.swift in Sources */,
-				4E37814C2B74A56E002E1B11 /* BankClerk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
