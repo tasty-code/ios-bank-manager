@@ -25,7 +25,7 @@ final class ClientListTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getHeader() -> HeaderView {
+    func makeHeader() -> HeaderView {
         return HeaderView(type: self.type)
     }
 }

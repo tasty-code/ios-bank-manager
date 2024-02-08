@@ -96,8 +96,7 @@ final class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let count = (10...30).randomElement()!
-        addClient(count: count)
-        runBank()
+        runBank(count: count)
     }
     
     private func setButtonAction() {
@@ -116,8 +115,8 @@ final class ViewController: UIViewController {
         self.bankMirror.addClients(count: count)
     }
     
-    private func runBank() {
-        self.bankMirror.startBank()
+    private func runBank(count: Int) {
+        self.bankMirror.startBank(withCount: count)
     }
     
     private func resetBank() {
@@ -172,7 +171,7 @@ private extension ViewController {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (tableView as? ClientListTableView)?.getHeader()
+        return (tableView as? ClientListTableView)?.makeHeader()
     }
 }
 

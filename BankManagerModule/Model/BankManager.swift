@@ -30,7 +30,50 @@ final class BankManager {
         self.currentClientNumber = 0
     }
     
-    func start() {
+    func start(with count: Int) {
+        addNewClients(count: count)
+        trigger()
+    }
+    
+    func resetBank() {
+        guard self.isWorking else { return }
+        self.timer.reset()
+        for banker in bankers {
+            banker.stop()
+        }
+        self.isWorking = false
+        for (_, clientManager) in self.clientManagers {
+            clientManager.clearClients()
+        }
+        resetClientCount()
+    }
+    
+    func addClients(count: Int) {
+        addNewClients(count: count)
+        
+        if self.isWorking {
+            guard let group else { return }
+            for banker in bankers {
+                banker.start(group: group)
+            }
+        } else {
+            trigger()
+        }
+    }
+}
+
+private extension BankManager {
+    func addNewClients(count: Int) {
+        let types = self.clientManagers.map { $0.key }
+        for number in (currentClientNumber + 1)...(currentClientNumber + count) {
+            guard let bankTaskType = types.randomElement() else { return }
+            let client = Client(number: number, task: bankTaskType)
+            self.clientManagers[bankTaskType]?.enqueueClient(client: client)
+            self.currentClientNumber = number
+        }
+    }
+    
+    func trigger() {
         guard self.isWorking == false else { return }
         self.isWorking = true
         
@@ -47,32 +90,6 @@ final class BankManager {
             self.resetClientCount()
             self.isWorking = false
         }
-    }
-    
-    func clearBank() {
-        guard self.isWorking else { return }
-        self.timer.reset()
-        for (_, clientManager) in self.clientManagers {
-            clientManager.clearClients()
-        }
-        resetClientCount()
-    }
-    
-    func addClients(count: Int) {
-        let types = self.clientManagers.map { $0.key }
-        for number in (currentClientNumber + 1)...(currentClientNumber + count) {
-            guard let bankTaskType = types.randomElement() else { return }
-            let client = Client(number: number, task: bankTaskType)
-            self.clientManagers[bankTaskType]?.enqueueClient(client: client)
-            self.currentClientNumber = number
-        }
-        
-//        self.timer.start()
-//        guard let group else { return }
-//        self.bankers.forEach { banker in
-//            banker.start(group: group)
-//        }
-        start()
     }
 }
 

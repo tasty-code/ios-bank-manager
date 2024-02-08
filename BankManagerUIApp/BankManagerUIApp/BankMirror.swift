@@ -45,12 +45,12 @@ final class BankMirror {
 }
 
 extension BankMirror: BankIntput {
-    func startBank() {
-        self.bankManager.start()
+    func startBank(withCount count: Int) {
+        self.bankManager.start(with: count)
     }
     
     func resetBank() {
-        self.bankManager.clearBank()
+        self.bankManager.resetBank()
     }
     
     func addClients(count: Int) {
@@ -86,40 +86,50 @@ extension BankMirror: BankManagerDelegate {
 
 private extension BankMirror {
     func addWaitingClient(client: Client) {
-        self.waitingSemaphore.wait()
-        self.waitingList.append(client)
-        self.waitingSemaphore.signal()
+        DispatchQueue.global().async {
+            self.waitingSemaphore.wait()
+            self.waitingList.append(client)
+            self.waitingSemaphore.signal()
+        }
     }
     
     func removeWaitingClient(client: Client) {
-        self.waitingSemaphore.wait()
-        guard
-            let index = self.waitingList.firstIndex(where: { target in client == target })
-        else { return }
-        self.waitingList.remove(at: index)
-        self.waitingSemaphore.signal()
+        DispatchQueue.global().async {
+            self.waitingSemaphore.wait()
+            guard
+                let index = self.waitingList.firstIndex(where: { target in client == target })
+            else { return }
+            self.waitingList.remove(at: index)
+            self.waitingSemaphore.signal()
+        }
     }
     
     func addWorkingClient(client: Client) {
-        self.workingSemaphore.wait()
-        self.workingList.append(client)
-        self.workingSemaphore.signal()
+        DispatchQueue.global().async {
+            self.workingSemaphore.wait()
+            self.workingList.append(client)
+            self.workingSemaphore.signal()
+        }
     }
     
     func removeWorkingClient(client: Client) {
-        self.workingSemaphore.wait()
-        guard
-            let index = self.workingList.firstIndex(where: { target in client == target })
-        else { return }
-        self.workingList.remove(at: index)
-        self.workingSemaphore.signal()
+        DispatchQueue.global().async {
+            self.workingSemaphore.wait()
+            guard
+                let index = self.workingList.firstIndex(where: { target in client == target })
+            else { return }
+            self.workingList.remove(at: index)
+            self.workingSemaphore.signal()
+        }
     }
     
     func clearClients() {
-        self.waitingSemaphore.wait()
-        self.waitingList.removeAll()
-        self.workingList.removeAll()
-        self.waitingSemaphore.signal()
+        DispatchQueue.global().async {
+            self.waitingSemaphore.wait()
+            self.waitingList.removeAll()
+            self.workingList.removeAll()
+            self.waitingSemaphore.signal()
+        }
     }
 }
 
@@ -144,7 +154,7 @@ protocol BankOutput: AnyObject {
 }
 
 protocol BankIntput: AnyObject {
-    func startBank()
+    func startBank(withCount count: Int)
     func resetBank()
     func addClients(count: Int)
 }
