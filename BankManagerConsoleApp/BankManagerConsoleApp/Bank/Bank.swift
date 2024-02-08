@@ -44,9 +44,9 @@ final class Bank: PrintableMessage {
     private func generateCustomerQueue() {
         let waitingNumber = Int.random(in: 10...30)
         for num in 1...waitingNumber {
-            let randomTaskTime = BankingService.randomBankingService
-            if let queue = customersQueue[randomTaskTime] {
-                queue.enqueue(value: Customer(waitingNumber: num, taskType: randomTaskTime))
+            let randomBankingService = BankingService.randomBankingService
+            if let queue = customersQueue[randomBankingService] {
+                queue.enqueue(value: Customer(waitingNumber: num, taskType: randomBankingService))
             }
         }
     }
