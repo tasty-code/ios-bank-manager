@@ -30,7 +30,7 @@ class BankManager {
     
     private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
     private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
-    private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐")
+    private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐", attributes: .concurrent)
     private let loanQueue: DispatchQueue = DispatchQueue(label: "대출업무큐")
     
     init() {
