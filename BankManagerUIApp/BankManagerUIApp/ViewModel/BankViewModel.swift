@@ -1,5 +1,5 @@
 //
-//  BankMirror.swift
+//  BankViewModel.swift
 //  BankManagerConsoleApp
 //
 //  Created by Effie on 2/5/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BankMirror {
+final class BankViewModel {
     private let bankManager: BankManager
     
     weak var delegate: BankOutput?
@@ -44,7 +44,8 @@ final class BankMirror {
     }
 }
 
-extension BankMirror: BankIntput {
+// MARK: - BankIntput
+extension BankViewModel: BankIntput {
     func startBank(withCount count: Int) {
         self.bankManager.start(with: count)
     }
@@ -58,7 +59,8 @@ extension BankMirror: BankIntput {
     }
 }
 
-extension BankMirror: BankManagerDelegate {
+// MARK: - BankManagerDelegate
+extension BankViewModel: BankManagerDelegate {
     func handleDequeueClient(client: Client) {
         removeWaitingClient(client: client)
     }
@@ -84,7 +86,8 @@ extension BankMirror: BankManagerDelegate {
     }
 }
 
-private extension BankMirror {
+// MARK: - Private Methods
+private extension BankViewModel {
     func addWaitingClient(client: Client) {
         DispatchQueue.global().async {
             self.waitingSemaphore.wait()
@@ -133,7 +136,7 @@ private extension BankMirror {
     }
 }
 
-private extension BankMirror {
+private extension BankViewModel {
     func updateWaitingList() {
         self.delegate?.updateWaitingList(with: self.waitingList)
     }
@@ -145,16 +148,4 @@ private extension BankMirror {
     func updateTime() {
         self.delegate?.updateTime(with: self.timeString)
     }
-}
-
-protocol BankOutput: AnyObject {
-    func updateWaitingList(with: [Client])
-    func updateWorkingList(with: [Client])
-    func updateTime(with timeString: String)
-}
-
-protocol BankIntput: AnyObject {
-    func startBank(withCount count: Int)
-    func resetBank()
-    func addClients(count: Int)
 }

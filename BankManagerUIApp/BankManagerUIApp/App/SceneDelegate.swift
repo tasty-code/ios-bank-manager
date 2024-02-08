@@ -44,10 +44,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             clientManager.delegate = bankManager
         }
         
-        let mirror = BankMirror(bankManager: bankManager)
+        let mirror = BankViewModel(bankManager: bankManager)
         bankManager.delegate = mirror
         
-        let viewController = ViewController(bankMirror: mirror)
+        let viewController = BankViewController(bankMirror: mirror)
         mirror.delegate = viewController
         return viewController
     }

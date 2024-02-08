@@ -1,17 +1,17 @@
 //
-//  BankManagerUIApp - ViewController.swift
+//  BankManagerUIApp - BankViewController.swift
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
 
 import UIKit
 
-final class ViewController: UIViewController {
-    // MARK: Properties
+final class BankViewController: UIViewController {
+    // MARK: - Properties
     
-    private let bankMirror: BankIntput
+    private let viewModel: BankIntput
     
-    // MARK: UI Elements
+    // MARK: - UI Elements
     private let addClientButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setTitle("10명 추가", for: .normal)
@@ -70,10 +70,10 @@ final class ViewController: UIViewController {
     
     private lazy var workingListDataSource = ClientListDataSource(self.workingListTableView)
     
-    // MARK: Initializer
+    // MARK: - Initializers
     
     init(bankMirror: BankIntput) {
-        self.bankMirror = bankMirror
+        self.viewModel = bankMirror
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,15 +82,15 @@ final class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Lifecycle Methods
+    // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setLayout()
+        setButtonAction()
         self.waitingListTableView.delegate = self
         self.workingListTableView.delegate = self
-        setButtonAction()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,7 +98,38 @@ final class ViewController: UIViewController {
         let count = (10...30).randomElement()!
         runBank(count: count)
     }
+}
+
+// MARK: - UITableViewDelegate
+extension BankViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return (tableView as? ClientListTableView)?.makeHeader()
+    }
+}
+
+// MARK: - BankOutput
+extension BankViewController: BankOutput {
+    func updateWaitingList(with clients: [Client]) {
+        DispatchQueue.main.async {
+            self.applyUpdatedWaitingList(with: clients)
+        }
+    }
     
+    func updateWorkingList(with clients: [Client]) {
+        DispatchQueue.main.async {
+            self.applyUpdatedWorkingList(with: clients)
+        }
+    }
+    
+    func updateTime(with timeString: String) {
+        DispatchQueue.main.async {
+            self.applyUpdatedTime(with: timeString)
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension BankViewController {
     private func setButtonAction() {
         self.addClientButton.addAction(
             UIAction { _ in self.addClient(count: 10) },
@@ -111,20 +142,6 @@ final class ViewController: UIViewController {
         )
     }
     
-    private func addClient(count: Int) {
-        self.bankMirror.addClients(count: count)
-    }
-    
-    private func runBank(count: Int) {
-        self.bankMirror.startBank(withCount: count)
-    }
-    
-    private func resetBank() {
-        self.bankMirror.resetBank()
-    }
-}
-
-private extension ViewController {
     func setLayout() {
         self.view.backgroundColor = .white
         self.view.addSubview(containerView)
@@ -148,7 +165,19 @@ private extension ViewController {
         ])
     }
     
-    private func applyUpdatedWaitingList(with list: [Client]) {
+    func addClient(count: Int) {
+        
+    }
+    
+    func runBank(count: Int) {
+        self.viewModel.startBank(withCount: count)
+    }
+    
+    func resetBank() {
+        self.viewModel.resetBank()
+    }
+    
+    func applyUpdatedWaitingList(with list: [Client]) {
         var snapshot = ClientListSnapShot()
         snapshot.appendSections([.client])
         let items = list.map(ClientListItem.client)
@@ -156,7 +185,7 @@ private extension ViewController {
         self.waitingListDataSource.apply(snapshot)
     }
     
-    private func applyUpdatedWorkingList(with list: [Client]) {
+    func applyUpdatedWorkingList(with list: [Client]) {
         var snapshot = ClientListSnapShot()
         snapshot.appendSections([.client])
         let items = list.map(ClientListItem.client)
@@ -164,33 +193,7 @@ private extension ViewController {
         self.workingListDataSource.apply(snapshot)
     }
     
-    private func applyUpdatedTime(with timeString: String) {
+    func applyUpdatedTime(with timeString: String) {
         self.timerView.configure(with: timeString)
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (tableView as? ClientListTableView)?.makeHeader()
-    }
-}
-
-extension ViewController: BankOutput {
-    func updateWaitingList(with clients: [Client]) {
-        DispatchQueue.main.async {
-            self.applyUpdatedWaitingList(with: clients)
-        }
-    }
-    
-    func updateWorkingList(with clients: [Client]) {
-        DispatchQueue.main.async {
-            self.applyUpdatedWorkingList(with: clients)
-        }
-    }
-    
-    func updateTime(with timeString: String) {
-        DispatchQueue.main.async {
-            self.applyUpdatedTime(with: timeString)
-        }
     }
 }
