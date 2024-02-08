@@ -19,13 +19,13 @@ final class Bank {
     private let bankDepositClerk: BankDepositClerk = BankDepositClerk()
     weak var delegate: BankManagerDelegate?
     private var handledCustomerCount = 0
-    private var loanClerksCount: Int
-    private var depositClerksCount: Int
+    private var loanClerkCount: Int
+    private var depositClerkCount: Int
     private let group = DispatchGroup()
     
     init(loanClerksCount: Int, depositClerksCount: Int) {
-        self.loanClerksCount = loanClerksCount
-        self.depositClerksCount = depositClerksCount
+        self.loanClerkCount = loanClerksCount
+        self.depositClerkCount = depositClerksCount
     }
     
     func open() {
@@ -43,7 +43,7 @@ final class Bank {
     
     private func executeBankWork() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        serveCustomer(depositClerksCount,loanClerksCount)
+        serveCustomer(loanClerkCount, depositClerkCount)
         group.wait()
         let intervalTime = CFAbsoluteTimeGetCurrent() - startTime
         let flooredDifference = floor(intervalTime * 10) / 10
