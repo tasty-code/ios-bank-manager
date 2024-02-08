@@ -163,10 +163,18 @@ final class BankViewController: UIViewController {
         viewModel.waitingClients.subscribe { [weak self] _ in
             self?.waitingQueueTableView.reloadData()
         }
+        
+        /// Timer 비동기로 인한 UI 메인스레드 업데이트
+        DispatchQueue.main.async { [weak self] in
+            self?.viewModel.timeString.subscribe {
+                self?.timerLabel.text = $0
+            }
+        }
     }
     
     @objc private func addCustommerButtonDidTap() {
         viewModel.fetchData()
+        viewModel.start()
     }
     
     @objc private func resetButtonDidTap() {
