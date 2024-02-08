@@ -9,7 +9,7 @@ import Foundation
 struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
     private let semaphore = DispatchSemaphore(value: 2)
-    private let dispatchQueue = DispatchQueue.global()
+    private let dispatchQueue = DispatchQueue.global(qos: .utility)
     
     func standBy(customer: CustomerNumbering) {
         queue.enqueue(element: customer)
