@@ -133,8 +133,6 @@ extension BankManager {
         customerCountToStart = 0
         depositCustomerQueue.clear()
         loanCustomerQueue.clear()
-//        depositQueue.cancelAllOperations()
-//        loanQueue.cancelAllOperations()
     }
 }
 

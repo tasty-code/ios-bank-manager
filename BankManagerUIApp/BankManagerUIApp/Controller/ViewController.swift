@@ -37,12 +37,14 @@ class ViewController: UIViewController {
     
     @objc func resetService() {
         dataSource.reset()
-        if let timer = stopwatch {
-            timer.invalidate()
-            stopwatch = nil
-            elapsedTime = 0
-            mainView.setTimer("업무시간 - 00:00:000")
-        }
+        stopTimer()
+    }
+    
+    func stopTimer() {
+        stopwatch?.invalidate()
+        stopwatch = nil
+        elapsedTime = 0
+        mainView.setTimer("업무시간 - 00:00:000")
     }
     
     func countElapsedTime() {
