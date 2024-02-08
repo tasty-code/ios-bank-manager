@@ -28,7 +28,7 @@ class MainView: UIView {
     private let timerLabel: UILabel = {
         let timerLabel = UILabel()
         timerLabel.font = .preferredFont(forTextStyle: .title1)
-        timerLabel.text = "test"
+        timerLabel.text = "00:00:000"
         timerLabel.textAlignment = .center
         return timerLabel
     }()
@@ -97,6 +97,12 @@ class MainView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MainView {
+    func setTimer(_ time: String) {
+        timerLabel.text = time
     }
 }
 
