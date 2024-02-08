@@ -12,6 +12,7 @@ class CustomerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -24,5 +25,16 @@ class CustomerView: UIView {
     
     func setLabelColor(_ color: UIColor) {
         self.label.textColor = color
+    }
+    
+    private func setupConstraints() {
+        self.addSubview(label)
+        self.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        self.setContentHuggingPriority(.defaultLow, for: .horizontal)
+       
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        label.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9).isActive = true
     }
 }

@@ -14,6 +14,7 @@ class ViewController: UIViewController {
         self.mainView = MainView()
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
+        dataSource.delegate = self.mainView
     }
     
     required init?(coder: NSCoder) {

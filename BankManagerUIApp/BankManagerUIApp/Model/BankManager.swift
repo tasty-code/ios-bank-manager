@@ -43,39 +43,39 @@ extension BankManager {
     func startBankingProcess() {
         isQueueRunning = true
         
-        let depositTask = DispatchWorkItem { [weak self] in
-            let semaphore = self?.depositCustomerQueue.semaphore
-            while !(self?.depositCustomerQueue.isEmpty() ?? false) {
-                semaphore?.wait()
-                guard let node = self?.depositCustomerQueue.dequeue() else {
+        let depositTask = DispatchWorkItem { [self] in
+            let semaphore = self.depositCustomerQueue.semaphore
+            while !(self.depositCustomerQueue.isEmpty()) {
+                semaphore.wait()
+                guard let node = self.depositCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
-                    self?.appendCustomerToProgress(customer)
-                    self?.banker.provideService(to: customer)
-                    self?.removeCustomerFromProgress(customer)
-                    semaphore?.signal()
+                    self.appendCustomerToProgress(customer)
+                    self.banker.provideService(to: customer)
+                    self.removeCustomerFromProgress(customer)
+                    semaphore.signal()
                 }
-                self?.depositQueue.async(execute: task)
+                self.depositQueue.async(execute: task)
             }
         }
         
-        let loanTask = DispatchWorkItem { [weak self] in
-            let semaphore = self?.loanCustomerQueue.semaphore
-            while !(self?.loanCustomerQueue.isEmpty() ?? false) {
-                semaphore?.wait()
-                guard let node = self?.loanCustomerQueue.dequeue() else {
+        let loanTask = DispatchWorkItem { [self] in
+            let semaphore = self.loanCustomerQueue.semaphore
+            while !(self.loanCustomerQueue.isEmpty()) {
+                semaphore.wait()
+                guard let node = self.loanCustomerQueue.dequeue() else {
                     return
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
-                    self?.appendCustomerToProgress(customer)
-                    self?.banker.provideService(to: customer)
-                    self?.removeCustomerFromProgress(customer)
-                    semaphore?.signal()
+                    self.appendCustomerToProgress(customer)
+                    self.banker.provideService(to: customer)
+                    self.removeCustomerFromProgress(customer)
+                    semaphore.signal()
                 }
-                self?.loanQueue.async(execute: task)
+                self.loanQueue.async(execute: task)
             }
         }
         

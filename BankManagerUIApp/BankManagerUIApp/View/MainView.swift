@@ -60,17 +60,22 @@ class MainView: UIView {
     private let stackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
         return stackView
     }()
+    private let scrollView: UIScrollView = UIScrollView()
     private let waitingStackView: UIStackView = {
         let waitingStackView = UIStackView()
         waitingStackView.axis = .vertical
+        waitingStackView.distribution = .fill
+        waitingStackView.alignment = .center
         return waitingStackView
     }()
     
     private let progressStackView: UIStackView = {
         let progressStackView = UIStackView()
         progressStackView.axis = .vertical
+        progressStackView.distribution = .fill
         return progressStackView
     }()
     
@@ -84,7 +89,9 @@ class MainView: UIView {
         
         setupButtonStackViewConstraints()
         setupTimerLabelConstraints()
-        setupTaskLabelStackViewConstraints ()
+        setupTaskLabelStackViewConstraints()
+        setupStackViewConstraints()
+        setupScrollViewConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -92,13 +99,32 @@ class MainView: UIView {
     }
 }
 
-extension MainView {
-    func appendWaitingCustomerView() {
+protocol MainViewDelegate {
+    func appendCustomerView(_ customers: [Customer], isWaiting: Bool)
+}
+
+extension MainView: MainViewDelegate {
+    func appendCustomerView(_ customers: [Customer], isWaiting: Bool) {
+        let stackView = isWaiting ? waitingStackView : progressStackView
+            
+        stackView.arrangedSubviews.forEach { view in
+            stackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         
-    }
-    
-    func appendProgressCustomerview() {
-       
+        customers.forEach { customer in
+            let customerView: CustomerView = CustomerView()
+            customerView.setLabelText(customerNumber: customer.waitingNumber, serviceType: customer.requiredService.value)
+            if !isWaiting {
+                customerView.setLabelColor(.purple)
+            }
+            stackView.addArrangedSubview(customerView)
+        }
+        
+        let spacerView = UIView()
+        spacerView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        spacerView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        stackView.addArrangedSubview(spacerView)
     }
 }
 
@@ -108,6 +134,7 @@ extension MainView {
         buttonStackView.addArrangedSubview(resetButton)
         
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         buttonStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         buttonStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         buttonStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -115,6 +142,7 @@ extension MainView {
     
     private func setupTimerLabelConstraints() {
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         timerLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor).isActive = true
         timerLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         timerLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -125,19 +153,34 @@ extension MainView {
         taskLabelStackView.addArrangedSubview(progressLabel)
         
         taskLabelStackView.translatesAutoresizingMaskIntoConstraints = false
+        taskLabelStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         taskLabelStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 10).isActive = true
         taskLabelStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         taskLabelStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
     private func setupStackViewConstraints() {
-        stackView.addArrangedSubview(waitingStackView)
+        stackView.addArrangedSubview(scrollView)
         stackView.addArrangedSubview(progressStackView)
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         stackView.topAnchor.constraint(equalTo: taskLabelStackView.bottomAnchor, constant: 10).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    private func setupScrollViewConstraints() {
+        scrollView.addSubview(waitingStackView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+        scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        waitingStackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        waitingStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        waitingStackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        waitingStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        waitingStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
 }
