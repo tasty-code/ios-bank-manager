@@ -24,6 +24,7 @@ struct ConsoleManager {
         
         while isOpen {
             executeBankingOperation()
+            operate()
         }
     }
     
@@ -51,7 +52,6 @@ struct ConsoleManager {
     
         bankManager.reportDeadlineSummary(with: customerManager, startTime: bankingServiceStart, endTime: bankingServiceEnd)
         customerManager.resetCustomer()
-        operate()
     }
     
     private func selectedByUser() throws -> String {
