@@ -1,5 +1,5 @@
 
-enum BankingServices: CaseIterable {
+enum BankingService: CaseIterable {
     case loan
     case deposit
     
