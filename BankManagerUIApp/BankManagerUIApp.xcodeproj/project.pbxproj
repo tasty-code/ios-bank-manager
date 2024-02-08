@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08FE43F42B73972500D09BB7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE43F32B73972500D09BB7 /* Client.swift */; };
 		08FE43F62B73977A00D09BB7 /* BankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE43F52B73977A00D09BB7 /* BankTask.swift */; };
+		08FE43FE2B74611C00D09BB7 /* TimerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE43FD2B74611C00D09BB7 /* TimerHandler.swift */; };
 		7796775D2B73AB18007315E8 /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796775C2B73AB18007315E8 /* ClientTableViewCell.swift */; };
 		7796775F2B73B208007315E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796775E2B73B208007315E8 /* ViewModel.swift */; };
 		779677632B74575F007315E8 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779677622B74575F007315E8 /* UITableViewCell+.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		08FE43F32B73972500D09BB7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		08FE43F52B73977A00D09BB7 /* BankTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTask.swift; sourceTree = "<group>"; };
+		08FE43FD2B74611C00D09BB7 /* TimerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandler.swift; sourceTree = "<group>"; };
 		7796775C2B73AB18007315E8 /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
 		7796775E2B73B208007315E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		779677622B74575F007315E8 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				08FE43F32B73972500D09BB7 /* Client.swift */,
 				C7694E3E259C3E9F0053667F /* BankViewController.swift */,
 				779677622B74575F007315E8 /* UITableViewCell+.swift */,
+				08FE43FD2B74611C00D09BB7 /* TimerHandler.swift */,
 				7796775C2B73AB18007315E8 /* ClientTableViewCell.swift */,
 				7796775E2B73B208007315E8 /* ViewModel.swift */,
 				77B02E312B7306E900C3D686 /* UIStackView+.swift */,
@@ -282,6 +285,7 @@
 				08FE43F62B73977A00D09BB7 /* BankTask.swift in Sources */,
 				7796775D2B73AB18007315E8 /* ClientTableViewCell.swift in Sources */,
 				77B02E322B7306E900C3D686 /* UIStackView+.swift in Sources */,
+				08FE43FE2B74611C00D09BB7 /* TimerHandler.swift in Sources */,
 				08FE43F42B73972500D09BB7 /* Client.swift in Sources */,
 				77B02E342B730AD700C3D686 /* Then.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
