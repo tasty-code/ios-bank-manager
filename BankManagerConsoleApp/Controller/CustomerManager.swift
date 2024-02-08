@@ -7,7 +7,7 @@ struct CustomerManager {
     mutating func createCustomers() {
         let number = Int.random(in: 10...30)
         for ticketNumber in 1...number {
-            customers.append(Customer(ticketNumber: ticketNumber, task: Task.allCases.randomElement() ?? .loan))
+            customers.append(Customer(ticketNumber: ticketNumber, task: BankingServices.allCases.randomElement() ?? .loan))
         }
     }
     
@@ -21,7 +21,7 @@ struct CustomerManager {
     
     mutating func registerCustomers() {
         for customer in customers {
-            if customer.task == Task.loan {
+            if customer.task == BankingServices.loan {
                 loanTicketMachine.enqueue(with: customer)
             } else {
                 depositTicketMachine.enqueue(with: customer)

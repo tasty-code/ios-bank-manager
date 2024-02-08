@@ -1,5 +1,5 @@
 
-enum Task: CaseIterable {
+enum BankingServices: CaseIterable {
     case loan
     case deposit
     

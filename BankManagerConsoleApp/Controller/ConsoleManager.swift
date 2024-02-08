@@ -16,7 +16,7 @@ struct ConsoleManager {
         
         do {
             let input = try selectedByUser()
-            isOpen = triggeredBankDoorStatus(by: input)
+            isOpen = shouldOpenBank(by: input)
         } catch {
             print(error.localizedDescription)
             operate()
@@ -27,7 +27,7 @@ struct ConsoleManager {
         }
     }
     
-    private func triggeredBankDoorStatus(by input: String) -> Bool {
+    private func shouldOpenBank(by input: String) -> Bool {
         if input == "1" {
             return true
         } else {
