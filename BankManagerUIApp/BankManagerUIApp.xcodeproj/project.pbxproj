@@ -90,6 +90,88 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77F8FBA92B7469500085F544 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
+				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		77F8FBAA2B7469630085F544 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				77F8FBB02B746A460085F544 /* Model */,
+				77F8FBAD2B74699F0085F544 /* Constant */,
+				77F8FBAC2B74697E0085F544 /* Protocol */,
+				77F8FBAB2B74696D0085F544 /* Extension */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		77F8FBAB2B74696D0085F544 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				77B02E312B7306E900C3D686 /* UIStackView+.swift */,
+				779677622B74575F007315E8 /* UITableViewCell+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		77F8FBAC2B74697E0085F544 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7796775E2B73B208007315E8 /* ViewModel.swift */,
+				77B02E332B730AD700C3D686 /* Then.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		77F8FBAD2B74699F0085F544 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				08FE43F52B73977A00D09BB7 /* BankTask.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		77F8FBAE2B7469CF0085F544 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E43259C3EA20053667F /* Assets.xcassets */,
+				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+				C7694E48259C3EA20053667F /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		77F8FBAF2B746A1B0085F544 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				77F8FBB12B746A520085F544 /* BankScene */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		77F8FBB02B746A460085F544 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08FE43F32B73972500D09BB7 /* Client.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		77F8FBB12B746A520085F544 /* BankScene */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* BankViewController.swift */,
+				7796775C2B73AB18007315E8 /* ClientTableViewCell.swift */,
+				08FE43FD2B74611C00D09BB7 /* TimerHandler.swift */,
+			);
+			path = BankScene;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
@@ -113,20 +195,10 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
-				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				08FE43F52B73977A00D09BB7 /* BankTask.swift */,
-				08FE43F32B73972500D09BB7 /* Client.swift */,
-				C7694E3E259C3E9F0053667F /* BankViewController.swift */,
-				779677622B74575F007315E8 /* UITableViewCell+.swift */,
-				08FE43FD2B74611C00D09BB7 /* TimerHandler.swift */,
-				7796775C2B73AB18007315E8 /* ClientTableViewCell.swift */,
-				7796775E2B73B208007315E8 /* ViewModel.swift */,
-				77B02E312B7306E900C3D686 /* UIStackView+.swift */,
-				77B02E332B730AD700C3D686 /* Then.swift */,
-				C7694E43259C3EA20053667F /* Assets.xcassets */,
-				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
-				C7694E48259C3EA20053667F /* Info.plist */,
+				77F8FBA92B7469500085F544 /* App */,
+				77F8FBAA2B7469630085F544 /* Util */,
+				77F8FBAF2B746A1B0085F544 /* Scene */,
+				77F8FBAE2B7469CF0085F544 /* Resource */,
 			);
 			path = BankManagerUIApp;
 			sourceTree = "<group>";
@@ -457,7 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BankManagerUIApp/Info.plist;
+				INFOPLIST_FILE = BankManagerUIApp/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -476,7 +548,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BankManagerUIApp/Info.plist;
+				INFOPLIST_FILE = BankManagerUIApp/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
