@@ -11,8 +11,16 @@ final class ClientTableViewCell: UITableViewCell {
     
     private let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 20)
+        $0.font = .systemFont(ofSize: 20, weight: .medium)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        titleLabel.text = ""
+        titleLabel.textColor = .black
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -37,5 +45,6 @@ final class ClientTableViewCell: UITableViewCell {
     
     func setUpData(data: Client) {
         titleLabel.text = "\(data.number) - \(data.bankTask.description)"
+        titleLabel.textColor = data.bankTask == .loan ? .systemPurple : .black
     }
 }
