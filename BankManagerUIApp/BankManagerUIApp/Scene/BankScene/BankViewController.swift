@@ -178,7 +178,7 @@ final class BankViewController: UIViewController {
     }
     
     @objc private func resetButtonDidTap() {
-        
+        viewModel.stop()
     }
 }
 
