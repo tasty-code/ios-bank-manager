@@ -16,17 +16,17 @@ struct Bank {
             self.bankManager = bankManager
         }
     
-    func openBank() {
-        setCustomerCount(customer: customNum)
-        let workTime = calulateWorkTime {
-            do {
-                try bankManager.assignBank()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        closeBank(time: workTime)
-    }
+//    func openBank() {
+//        setCustomerCount(customer: customNum)
+//        let workTime = calulateWorkTime {
+//            do {
+//                try bankManager.assignBank()
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
+//        closeBank(time: workTime)
+//    }
     
     private func setCustomerCount(customer: Int) {
         (1...customer).forEach { bankManager.standBy(customer: Customer(banking: Banking.allCases.randomElement(), numOfPerson: $0)) }

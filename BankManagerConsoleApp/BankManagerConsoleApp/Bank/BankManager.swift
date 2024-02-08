@@ -9,10 +9,8 @@ import Foundation
 struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
     private let bankClerk: [Banking: BankClerk]
-    private let dispatchgroup = DispatchGroup()
     private let semaphore = DispatchSemaphore(value: 2)
-    private let loanQueue = DispatchQueue(label: "loanQueue")
-    private let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
+    private let dispatchQueue = DispatchQueue.global()
     
     init(bankClerk: [Banking : BankClerk]) {
         self.bankClerk = bankClerk
@@ -26,32 +24,41 @@ struct BankManager {
         queue.clear()
     }
     
-    func assignBank() throws {
+    func assignBank(dispatchGroup: DispatchGroup) throws {
         while let list = try? queue.dequeue(), let banking = list.banking {
             guard let customer = list as? Customer else {
                 throw QueueError.dequeueError
             }
             switch banking {
                 case .deposit:
-                    assignDeposit(customer: customer)
+                assignDeposit(customer: customer, dispatchGroup: dispatchGroup)
                 case .loan:
-                    assignLoan(customer: customer)
+                assignLoan(customer: customer, dispatchGroup: dispatchGroup)
                 }
             }
-        dispatchgroup.wait()
     }
     
-    func assignDeposit(customer: Customer) {
-        depositQueue.async(group: dispatchgroup) {
+    func assignDeposit(customer: Customer, dispatchGroup: DispatchGroup) {
+        dispatchQueue.async(group: dispatchGroup) {
             semaphore.wait()
-            bankClerk[.deposit]?.recieve(customer: customer)
+            recieve(customer: customer)
             semaphore.signal()
         }
     }
     
-    func assignLoan(customer: Customer) {
-        loanQueue.async(group: dispatchgroup) {
-            bankClerk[.loan]?.recieve(customer: customer)
+    func assignLoan(customer: Customer, dispatchGroup: DispatchGroup) {
+        dispatchQueue.async(group: dispatchGroup) {
+            recieve(customer: customer)
         }
+    }
+    
+    func recieve(customer: Customer) {
+        CFAbsoluteTimeGetCurrent()
+        paceTime(customer.banking?.pace ?? 0)
+        CFAbsoluteTimeGetCurrent()
+    }
+    
+    private func paceTime(_ pace: Double) {
+        usleep(useconds_t(pace * 1000000))
     }
 }
