@@ -56,7 +56,7 @@ final class Bank {
         let loanSemaphore = DispatchSemaphore(value: loanClerksCount)
         
         while let customer = self.waitingQueue.dequeue() {
-            DispatchQueue.global().async {
+            DispatchQueue.global().async(group: group) {
                 switch customer.purpose {
                 case .loan:
                     loanSemaphore.wait()
