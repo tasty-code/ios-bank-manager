@@ -7,6 +7,27 @@
 import UIKit
 
 final class BankViewController: UIViewController {
+    
+    // TODO: 데이터 위치 수정 예정
+    private var waitingQueue: [Client] = [
+        Client(number: 1, bankTask: .deposit),
+        Client(number: 2, bankTask: .deposit),
+        Client(number: 3, bankTask: .deposit),
+        Client(number: 4, bankTask: .deposit),
+        Client(number: 5, bankTask: .deposit),
+        Client(number: 6, bankTask: .deposit),
+        Client(number: 7, bankTask: .deposit),
+        Client(number: 8, bankTask: .deposit),
+        Client(number: 9, bankTask: .deposit),
+        Client(number: 10, bankTask: .deposit)
+    ]
+    
+    private var workingQueue: [Client] = [
+        Client(number: 1, bankTask: .loan),
+        Client(number: 2, bankTask: .loan),
+        Client(number: 3, bankTask: .loan),
+        Client(number: 4, bankTask: .loan)
+    ]
 
     private let addCustomerButton = UIButton().then {
         $0.setTitle("고객 10명 추가", for: .normal)
@@ -69,9 +90,13 @@ final class BankViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private let waitingQueueTableView = UITableView()
+    private let waitingQueueTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
-    private let workingQueueTableView = UITableView()
+    private let workingQueueTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
     private let tableStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -90,6 +115,7 @@ final class BankViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        setUpTableView()
     }
     
     private func configureUI() {
@@ -119,5 +145,51 @@ final class BankViewController: UIViewController {
             workingQueueTitleLabel.bottomAnchor.constraint(equalTo: purpleView.bottomAnchor)
         ])
     }
+    
+    private func setUpTableView() {
+        [waitingQueueTableView, workingQueueTableView].forEach {
+            $0.register(ClientTableViewCell.self, forCellReuseIdentifier: ClientTableViewCell.className)
+            $0.delegate = self
+            $0.dataSource = self
+        }
+    }
 }
 
+// MARK: - UITableViewDelegate
+extension BankViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension BankViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView {
+        case waitingQueueTableView:
+            return waitingQueue.count
+        case workingQueueTableView:
+            return workingQueue.count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ClientTableViewCell.className, for: indexPath) as? ClientTableViewCell
+        else { return UITableViewCell() }
+        
+        switch tableView {
+        case waitingQueueTableView:
+            cell.setUpData(data: waitingQueue[indexPath.row])
+        case workingQueueTableView:
+            cell.setUpData(data: workingQueue[indexPath.row])
+        default:
+            break
+        }
+        
+        return cell
+    }
+}
