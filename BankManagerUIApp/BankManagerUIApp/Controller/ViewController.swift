@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             timer.invalidate()
             stopwatch = nil
             elapsedTime = 0
-            mainView.setTimer("00:00:000")
+            mainView.setTimer("업무시간 - 00:00:000")
         }
     }
     
@@ -49,13 +49,13 @@ class ViewController: UIViewController {
         stopwatch = Timer.scheduledTimer(withTimeInterval: 0.005, repeats: true) { [weak self] timer in
             self?.elapsedTime += timer.timeInterval
             if let elapsedTime = self?.elapsedTime {
-                let minutes = Int(elapsedTime) / 60 % 60
+                let minutes = Int(elapsedTime) / 60
                 let seconds = Int(elapsedTime) % 60
                 let milliseconds = Int(elapsedTime * 1000) % 1000
                 
                 let timeString = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
                 
-                self?.mainView.setTimer(timeString)
+                self?.mainView.setTimer("업무시간 - \(timeString)")
             }
         }
     }

@@ -28,7 +28,7 @@ class MainView: UIView {
     private let timerLabel: UILabel = {
         let timerLabel = UILabel()
         timerLabel.font = .preferredFont(forTextStyle: .title1)
-        timerLabel.text = "00:00:000"
+        timerLabel.text = "업무시간 - 00:00:000"
         timerLabel.textAlignment = .center
         return timerLabel
     }()
