@@ -166,7 +166,7 @@ private extension BankViewController {
     }
     
     func addClient(count: Int) {
-        
+        self.viewModel.addClients(count: count)
     }
     
     func runBank(count: Int) {
