@@ -54,7 +54,7 @@ final class BankManager {
     }
     
     func clearBank() {
-        self.timer.end()
+        self.timer.reset()
         for (_, clientManager) in self.clientManagers {
             clientManager.clearClients()
         }

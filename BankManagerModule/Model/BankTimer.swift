@@ -12,19 +12,12 @@ final class BankTimer {
     
     private let receiver: (String) -> Void
     
-    private var current: TimeInterval
-    
     private var milliseconds: Int = 0
     
     private lazy var timer: Timer = {
         let timer = Timer.scheduledTimer(withTimeInterval: Self.interval, repeats: true) { timer in
             self.milliseconds += 1
-            let formattedString = String(
-                format: "%02d:%02d:%03d",
-                self.milliseconds / 60_000,
-                (self.milliseconds % 60_000) / 1_000,
-                self.milliseconds % 1_000
-            )
+            let formattedString = self.format()
             self.receiver(formattedString)
         }
         return timer
@@ -32,7 +25,7 @@ final class BankTimer {
     
     init(receiver: @escaping (String) -> Void) {
         self.receiver = receiver
-        self.current = 0
+        self.milliseconds = 0
     }
     
     func start() {
@@ -41,10 +34,20 @@ final class BankTimer {
     
     func end() {
         self.timer.invalidate()
-        reset()
     }
     
-    private func reset() {
-        self.current = 0
+    func reset() {
+        self.milliseconds = 0
+        let string = format()
+        receiver(string)
+    }
+    
+    private func format() -> String {
+        return String(
+            format: "%02d:%02d:%03d",
+            self.milliseconds / 60_000,
+            (self.milliseconds % 60_000) / 1_000,
+            self.milliseconds % 1_000
+        )
     }
 }

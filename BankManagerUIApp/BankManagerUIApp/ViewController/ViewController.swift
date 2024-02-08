@@ -26,13 +26,6 @@ final class ViewController: UIViewController {
         return button
     }()
     
-    private let startButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setTitle("시작", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        return button
-    }()
-    
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -41,7 +34,6 @@ final class ViewController: UIViewController {
         
         stackView.addArrangedSubview(self.addClientButton)
         stackView.addArrangedSubview(self.clearButton)
-        stackView.addArrangedSubview(self.startButton)
         return stackView
     }()
     
@@ -99,15 +91,16 @@ final class ViewController: UIViewController {
         self.waitingListTableView.delegate = self
         self.workingListTableView.delegate = self
         setButtonAction()
-        addClient(count: 5)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let count = (10...30).randomElement()!
+        addClient(count: count)
+        runBank()
     }
     
     private func setButtonAction() {
-        self.startButton.addAction(
-            UIAction { _ in self.runBank() },
-            for: .touchUpInside
-        )
-        
         self.addClientButton.addAction(
             UIAction { _ in self.addClient(count: 10) },
             for: .touchUpInside
@@ -120,17 +113,14 @@ final class ViewController: UIViewController {
     }
     
     private func addClient(count: Int) {
-        print(self, #function)
         self.bankMirror.addClients(count: count)
     }
     
     private func runBank() {
-        print(self, #function)
         self.bankMirror.startBank()
     }
     
     private func resetBank() {
-        print(self, #function)
         self.bankMirror.resetBank()
     }
 }
@@ -141,7 +131,6 @@ private extension ViewController {
         self.view.addSubview(containerView)
         self.addClientButton.translatesAutoresizingMaskIntoConstraints = false
         self.clearButton.translatesAutoresizingMaskIntoConstraints = false
-        self.startButton.translatesAutoresizingMaskIntoConstraints = false
         self.buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         self.timerView.translatesAutoresizingMaskIntoConstraints = false
         self.waitingListTableView.translatesAutoresizingMaskIntoConstraints = false
