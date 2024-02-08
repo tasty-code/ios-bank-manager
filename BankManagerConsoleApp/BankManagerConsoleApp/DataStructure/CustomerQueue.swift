@@ -5,14 +5,14 @@
 //  Created by Jin-Mac on 1/25/24.
 //
 
-struct CustomerQueue<T: Equatable> {
+class CustomerQueue<T: Equatable> {
     var list = LinkedList<T>()
     
-    mutating func enqueue(value: T) {
+    func enqueue(value: T) {
         list.append(value: value)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         let result = list.remove(at: 0)
         return result?.value
     }
@@ -21,7 +21,7 @@ struct CustomerQueue<T: Equatable> {
         return list.first()?.value
     }
     
-    mutating func clear() {
+    func clear() {
         list.removeAll()
     }
     

@@ -7,8 +7,10 @@
 
 struct Customer: Equatable {
     let number: Int
+    let task: Banking
     
-    init(number: Int) {
+    init(number: Int, task: Banking) {
         self.number = number
+        self.task = task
     }
 }

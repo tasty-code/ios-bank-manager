@@ -2,14 +2,17 @@
 //  BankClerk.swift
 //  BankManagerConsoleApp
 //
-//  Created by Jin-Mac on 1/30/24.
+//  Created by 루피, 진 on 1/30/24.
 //
 import Foundation
 
 struct BankClerk {
-    func work(for customer: Customer) {
-        print(BankMessage.start(customer.number).description)
+    
+    func depositWorking() {
         Thread.sleep(forTimeInterval: 0.7)
-        print(BankMessage.done(customer.number).description)
+    }
+    
+    func lendWorking() {
+        Thread.sleep(forTimeInterval: 1.1)
     }
 }

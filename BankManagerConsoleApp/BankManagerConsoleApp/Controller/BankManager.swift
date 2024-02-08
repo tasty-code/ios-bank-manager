@@ -2,18 +2,28 @@
 //  BankManager.swift
 //  BankManagerConsoleApp
 //
-//  Created by 김동준 on 1/30/24.
+//  Created by 루피, 진 on 1/30/24.
 //
 
-import Foundation
+protocol BankManagerProtocol {
+    func sendWorkingMessage(_ message: String)
+}
 
-struct BankManager {
-    var isRunning: Bool = true
-    var bank = Bank()
+struct BankManager: BankManagerProtocol {
+    
+    var isRunning: Bool
+    var bank: Bank
+    let bankView: BankViewProtocol
+     
+    init(isRunning: Bool = true, bank: Bank = Bank(), bankView: BankViewProtocol = BankView()) {
+        self.isRunning = isRunning
+        self.bank = bank
+        self.bankView = bankView
+    }
     
     mutating func run() {
         while isRunning {
-            print(BankMessage.bankMenu.description, terminator: "")
+            bankView.printConsolView(message: BankMessage.bankMenu.description, terminator: "")
             
             switch fetchUserInput() {
             case "1":
@@ -23,7 +33,7 @@ struct BankManager {
                 isRunning = false
                 break
             default:
-                print(BankMessage.request.description)
+                bankView.printConsolView(message: BankMessage.request.description, terminator: nil)
                 continue
             }
         }
@@ -32,5 +42,9 @@ struct BankManager {
     private func fetchUserInput() -> String {
         guard let inputText = readLine() else { return Constants.userInputError }
         return inputText
+    }
+    
+    func sendWorkingMessage(_ message: String) {
+        bankView.printConsolView(message: message, terminator: nil)
     }
 }
