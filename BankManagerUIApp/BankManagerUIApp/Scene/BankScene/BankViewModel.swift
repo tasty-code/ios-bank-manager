@@ -29,8 +29,8 @@ final class BankViewModel {
     }
     
     func fetchTimeString() {
-        timer.timeString = {
-            self.timeString.value = $0
+        timer.timeString = { [weak self] in
+            self?.timeString.value = $0
         }
     }
     
