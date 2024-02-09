@@ -25,13 +25,13 @@ struct ConsoleMessage {
     }
     
     /// 고객 업무 시작 메시지
-    func taskStartMessage(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 시작")
+    func taskStartMessage(customerNumber: Int, task: String) {
+        print("\(customerNumber)번 고객 \(task)업무 시작")
     }
     
     /// 고객 업무 완료 메시지
-    func teskEndMessage(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 완료")
+    func taskEndMessage(customerNumber: Int, task: String) {
+        print("\(customerNumber)번 고객 \(task)업무 완료")
     }
     
     /// 은행 마감 메시지
