@@ -15,8 +15,8 @@ protocol BankManagerDelegate: AnyObject {
 
 final class Bank {
     private var waitingQueue = Queue<Customer>()
-    private let bankLoanClerk: BankLoanClerk = BankLoanClerk()
-    private let bankDepositClerk: BankDepositClerk = BankDepositClerk()
+    private let bankLoanClerk: BankClerk
+    private let bankDepositClerk: BankClerk
     weak var delegate: BankManagerDelegate?
     private var handledCustomerCount = 0
     private var loanClerkCount: Int
@@ -26,6 +26,8 @@ final class Bank {
     init(loanClerksCount: Int, depositClerksCount: Int) {
         self.loanClerkCount = loanClerksCount
         self.depositClerkCount = depositClerksCount
+        self.bankLoanClerk = BankClerk(workType: .loan)
+        self.bankDepositClerk = BankClerk(workType: .deposit)
     }
     
     func open() {
@@ -56,7 +58,8 @@ final class Bank {
         let loanSemaphore = DispatchSemaphore(value: loanClerksCount)
         
         while let customer = self.waitingQueue.dequeue() {
-            DispatchQueue.global().async(group: group) {
+            DispatchQueue.global().async(group: group) { [self] in
+                group.enter()
                 switch customer.purpose {
                 case .loan:
                     loanSemaphore.wait()
@@ -72,6 +75,7 @@ final class Bank {
                     self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
                     depositSemaphore.signal()
                 }
+                group.leave()
             }
             handledCustomerCount += 1
         }
