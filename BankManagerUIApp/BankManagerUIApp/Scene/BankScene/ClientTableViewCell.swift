@@ -9,18 +9,13 @@ import UIKit
 
 final class ClientTableViewCell: UITableViewCell {
     
+    // MARK: Properties
     private let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 20)
         $0.font = .systemFont(ofSize: 20, weight: .medium)
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        titleLabel.text = ""
-        titleLabel.textColor = .black
-    }
     
+    // MARK: Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -31,6 +26,15 @@ final class ClientTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Life Cycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        titleLabel.text = nil
+        titleLabel.textColor = .black
+    }
+    
+    // MARK: Custom Methods
     private func configureUI() {
         selectionStyle = .none
         
