@@ -39,9 +39,10 @@ final class BankViewModel {
         fetchTimeString()
     }
     
-    func stop() {
-        timer.stop()
+    func reset() {
+        timer.reset()
     }
+    
     func startTask() {
         while !waitingClients.value.isEmpty {
             let client = waitingClients.value.removeFirst()

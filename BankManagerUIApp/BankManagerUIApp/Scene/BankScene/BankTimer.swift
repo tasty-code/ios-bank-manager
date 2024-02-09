@@ -23,7 +23,7 @@ final class BankTimer {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
     }
     
-    func stop() {
+    func reset() {
         timer.invalidate()
         timeString?("00:00:00")
     }
