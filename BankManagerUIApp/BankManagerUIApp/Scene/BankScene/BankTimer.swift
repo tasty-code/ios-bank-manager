@@ -31,7 +31,7 @@ final class BankTimer {
     @objc private func timerCounter() {
         count += 1
         let time = secondsToHoursMinutesSeconds(seconds: count)
-        var convertedTimeString = makeTimeString(time)
+        let convertedTimeString = makeTimeString(time)
         timeString?(convertedTimeString)
     }
     
