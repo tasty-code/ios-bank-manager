@@ -7,15 +7,8 @@
 import UIKit
 
 final class BankViewController: UIViewController {
-    
-    // TODO: 데이터 위치 수정 예정
-    private var workingQueue: [Client] = [
-        Client(number: 1, bankTask: .loan),
-        Client(number: 2, bankTask: .loan),
-        Client(number: 3, bankTask: .loan),
-        Client(number: 4, bankTask: .loan)
-    ]
 
+    // MARK: Properties
     private let addCustomerButton = UIButton().then {
         $0.setTitle("고객 10명 추가", for: .normal)
         $0.setTitleColor(.systemBlue, for: .normal)
@@ -100,6 +93,7 @@ final class BankViewController: UIViewController {
     
     private let viewModel: BankViewModel
     
+    // MARK: Initializer
     init(viewModel: BankViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -109,6 +103,7 @@ final class BankViewController: UIViewController {
         fatalError("BankViewController Init Error!")
     }
     
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,6 +113,7 @@ final class BankViewController: UIViewController {
         bind()
     }
     
+    // MARK: Custom Methods
     private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(entireStackView)
@@ -164,21 +160,22 @@ final class BankViewController: UIViewController {
             self?.waitingQueueTableView.reloadData()
         }
         
-        /// Timer 비동기로 인한 UI 메인스레드 업데이트
-        DispatchQueue.main.async { [weak self] in
-            self?.viewModel.timeString.subscribe {
-                self?.timerLabel.text = $0
-            }
+        viewModel.workingClients.subscribe { [weak self] _ in
+            self?.workingQueueTableView.reloadData()
+        }
+        
+        viewModel.timeString.subscribe { [weak self] result in
+            self?.timerLabel.text = result
         }
     }
     
+    // MARK: @objc Methods
     @objc private func addCustommerButtonDidTap() {
         viewModel.fetchData()
-        viewModel.start()
     }
     
     @objc private func resetButtonDidTap() {
-        viewModel.stop()
+        viewModel.reset()
     }
 }
 
@@ -198,7 +195,7 @@ extension BankViewController: UITableViewDataSource {
         case waitingQueueTableView:
             return viewModel.waitingClients.value.count
         case workingQueueTableView:
-            return workingQueue.count
+            return viewModel.workingClients.value.count
         default:
             return 0
         }
@@ -212,7 +209,7 @@ extension BankViewController: UITableViewDataSource {
         case waitingQueueTableView:
             cell.setUpData(data: viewModel.waitingClients.value[indexPath.row])
         case workingQueueTableView:
-            cell.setUpData(data: workingQueue[indexPath.row])
+            cell.setUpData(data: viewModel.workingClients.value[indexPath.row])
         default:
             break
         }
