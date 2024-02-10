@@ -13,7 +13,7 @@ class MainView: UIView {
         addCustomerButton.setTitle("고객 10명 추가", for: .normal)
         addCustomerButton.setTitleColor(.systemBlue, for: .normal)
         addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        addCustomerButton.addTarget(nil, action: #selector(ViewController.addCustomerButtonTapped), for: .touchUpInside)
+        addCustomerButton.addTarget(nil, action: #selector(MainViewController.addCustomerButtonTapped), for: .touchUpInside)
         return addCustomerButton
     }()
     private let resetButton: UIButton = {
@@ -21,7 +21,7 @@ class MainView: UIView {
         resetButton.setTitle("초기화", for: .normal)
         resetButton.setTitleColor(.systemRed, for: .normal)
         resetButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        resetButton.addTarget(nil, action: #selector(ViewController.resetService), for: .touchUpInside)
+        resetButton.addTarget(nil, action: #selector(MainViewController.resetService), for: .touchUpInside)
         return resetButton
     }()
     

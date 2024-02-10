@@ -6,17 +6,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MainViewController: UIViewController {
     private let mainView: MainView
-    private let dataSource: BankManager
+    private let manager: BankManager
     private var stopwatch: Timer?
     private var elapsedTime: TimeInterval = 0
     
-    init(dataSource: BankManager) {
+    init(manager: BankManager) {
         self.mainView = MainView()
-        self.dataSource = dataSource
+        self.manager = manager
         super.init(nibName: nil, bundle: nil)
-        dataSource.delegate = self.mainView
+        manager.delegate = self.mainView
     }
     
     required init?(coder: NSCoder) {
@@ -31,12 +31,12 @@ class ViewController: UIViewController {
     
     @objc func addCustomerButtonTapped() {
         countElapsedTime()
-        dataSource.addCustomer()
-        dataSource.startBankingProcess(completion: stopTimer)
+        manager.addCustomer()
+        manager.startBankingProcess(completion: stopTimer)
     }
     
     @objc func resetService() {
-        dataSource.reset()
+        manager.reset()
         stopTimer()
     }
     
