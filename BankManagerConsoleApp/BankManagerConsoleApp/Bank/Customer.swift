@@ -8,11 +8,9 @@ final class Customer {
     let number: Int
     let taskType: TaskType
     
-    init?(number: Int) {
+    init(number: Int) {
         self.number = number
-        guard let randomTaskType = TaskType.allCases.randomElement() else {
-            return nil
-        }
-        self.taskType = randomTaskType
+        self.taskType = TaskType.random()
     }
 }
+
