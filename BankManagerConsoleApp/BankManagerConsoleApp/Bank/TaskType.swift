@@ -4,7 +4,7 @@
 //
 //  Created by dopamint on 2/1/24.
 //
-enum TaskType: CaseIterable, CustomStringConvertible {
+enum TaskType {
     case loan
     case deposit
 }
@@ -17,7 +17,6 @@ extension TaskType {
         case .deposit:
             return "예금"
         }
-    
     }
     
     var taskTime: Double {
@@ -28,5 +27,8 @@ extension TaskType {
             return 0.7
         }
     }
-
+    
+    static func random() -> TaskType {
+        return Bool.random() ? .loan : .deposit
+    }
 }
