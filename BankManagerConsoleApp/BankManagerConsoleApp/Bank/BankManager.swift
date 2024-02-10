@@ -8,8 +8,8 @@ import Foundation
 
 struct BankManager {
     private let queue = Queue<CustomerNumbering>(queue: LinkedList<CustomerNumbering>())
-    private let semaphore = DispatchSemaphore(value: 2)
-    private let semaphore2 = DispatchSemaphore(value: 1)
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
     private let dispatchQueue = DispatchQueue.global(qos: .utility)
     weak var delegate: ManageLabel?
     
@@ -37,24 +37,24 @@ struct BankManager {
     
     func assignDeposit(customer: Customer, dispatchGroup: DispatchGroup) {
         dispatchQueue.async(group: dispatchGroup) {
-            semaphore.wait()
+            depositSemaphore.wait()
             recieve(customer: customer)
-            semaphore.signal()
+            depositSemaphore.signal()
         }
     }
     
     func assignLoan(customer: Customer, dispatchGroup: DispatchGroup) {
         dispatchQueue.async(group: dispatchGroup) {
-            semaphore2.wait()
+            loanSemaphore.wait()
             recieve(customer: customer)
-            semaphore2.signal()
+            loanSemaphore.signal()
         }
     }
     
     func recieve(customer: Customer) {
-        delegate?.turn(cusomer: customer)
+        delegate?.turn(customer: customer)
         paceTime(customer.banking?.pace ?? 0)
-        delegate?.quit(cusomer: customer)
+        delegate?.quit(customer: customer)
     }
     
     private func paceTime(_ pace: Double) {

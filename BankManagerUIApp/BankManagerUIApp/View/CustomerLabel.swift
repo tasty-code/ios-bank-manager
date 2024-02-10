@@ -13,14 +13,14 @@ class CustomerLabel: UILabel {
     init(customer: Customer) {
         self.customer = customer
         super.init(frame: .zero)
-        self.viewLabel()
+        self.updateLabel()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func viewLabel() {
+    func updateLabel() {
         self.text = "\(customer.numOfPerson)번 - \(customer.banking?.rawValue ?? "")"
         
         switch customer.banking {

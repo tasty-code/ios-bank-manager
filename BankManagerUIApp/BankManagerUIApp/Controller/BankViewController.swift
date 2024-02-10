@@ -7,11 +7,11 @@
 import UIKit
 
 protocol ManageLabel: AnyObject {
-    func turn(cusomer: Customer)
-    func quit(cusomer: Customer)
+    func turn(customer: Customer)
+    func quit(customer: Customer)
 }
 
-class ViewController: UIViewController {
+final class BankViewController: UIViewController {
     
     private let bankView = BankView()
     private var timer: Timer?
@@ -87,24 +87,24 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ManageLabel {
+extension BankViewController: ManageLabel {
     
-    func turn(cusomer: Customer) {
+    func turn(customer: Customer) {
         DispatchQueue.main.async {
-            let cusomerLabel = self.bankView.waitStackView.arrangedSubviews.first { view in
-                guard let cusomerLabelNumber = view as? CustomerLabel else { return  false }
-                return cusomerLabelNumber.customer.numOfPerson == cusomer.numOfPerson
+            let customerLabel = self.bankView.waitStackView.arrangedSubviews.first { view in
+                guard let customerLabelNumber = view as? CustomerLabel else { return  false }
+                return customerLabelNumber.customer.numOfPerson == customer.numOfPerson
             }
-            cusomerLabel?.removeFromSuperview()
-            self.bankView.taskStackView.addArrangedSubview(CustomerLabel(customer: cusomer))
+            customerLabel?.removeFromSuperview()
+            self.bankView.taskStackView.addArrangedSubview(CustomerLabel(customer: customer))
         }
     }
     
-    func quit(cusomer: Customer) {
+    func quit(customer: Customer) {
         DispatchQueue.main.async {
             let customerLabel = self.bankView.taskStackView.arrangedSubviews.first { view in
-                guard let cusomerLabelNumber = view as? CustomerLabel else { return false }
-                return cusomerLabelNumber.customer.numOfPerson == cusomer.numOfPerson
+                guard let customerLabelNumber = view as? CustomerLabel else { return false }
+                return customerLabelNumber.customer.numOfPerson == customer.numOfPerson
             }
             customerLabel?.removeFromSuperview()
         }
