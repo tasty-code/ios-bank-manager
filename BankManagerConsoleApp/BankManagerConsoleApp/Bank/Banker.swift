@@ -8,12 +8,10 @@
 import Foundation
 
 final class Banker {
-    let duration = 0.7
-    var totalDuration = 0.0
+
     func processCustomer(_ customer: Customer) {
-        print("\(customer.number)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: duration)
-        print("\(customer.number)번 고객 업무 끝")
-        totalDuration += duration
+        Messages.taskStart(number: customer.number, taskType: customer.taskType.description).printMessage()
+        Thread.sleep(forTimeInterval: customer.taskType.taskTime)
+        Messages.taskDone(number: customer.number, taskType: customer.taskType.description).printMessage()
     }
 }

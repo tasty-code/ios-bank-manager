@@ -5,8 +5,6 @@
 //  Created by yujaehong on 1/31/24.
 //
 
-import Foundation
-
 final class LinkedList<T> {
     var front: Node<T>?
     var rear: Node<T>?
@@ -39,6 +37,12 @@ extension LinkedList {
     }
     
     func removeFirst() -> T? {
+        if front === rear {
+            let result = front
+            front = nil
+            rear = nil
+            return result?.value
+        }
         guard let currentFront = front else { return nil }
         front = front?.next
         return currentFront.value

@@ -5,8 +5,6 @@
 //  Created by yujaehong on 1/31/24.
 //
 
-import Foundation
-
 final class Queue<T> {
     private var linkedList: LinkedList<T>
     
@@ -19,6 +17,7 @@ extension Queue {
     func enqueue(_ value: T) {
         linkedList.append(value)
     }
+    
     
     func dequeue() -> T? {
         return linkedList.removeFirst()

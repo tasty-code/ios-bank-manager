@@ -4,9 +4,6 @@
 //
 //  Created by yujaehong on 1/31/24.
 //
-
-import Foundation
-
 final class Node<T> {
     var value: T
     var next: Node?

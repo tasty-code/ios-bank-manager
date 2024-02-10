@@ -8,31 +8,55 @@
 import Foundation
 
 final class Bank {
-    let banker = Banker()
-    var customerQueue = Queue<Customer>()
 
-    func open() {
-        print("은행 문이 열렸습니다.")
-        let numberOfCustomers = Int.random(in: 10...30)
-
-        print("고객 수: \(numberOfCustomers)")
-        for customerNumber in 1...numberOfCustomers {
-            let customer = Customer(number: customerNumber)
-            customerQueue.enqueue(customer)
-        }
-
-        processCustomers()
-        let totalDurationTimeFormatted = banker.totalDuration.formattedDecimal
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalDurationTimeFormatted)초입니다.")
-        banker.totalDuration = 0.0
+    private var banker = Banker()
+    private var customerQueue = Queue<Customer>()
+    private let depositSemaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
+    private let group = DispatchGroup()
+    
+    init(depositBankerCount: Int, loanBankerCount: Int) {
+        self.depositSemaphore = DispatchSemaphore(value: depositBankerCount)
+        self.loanSemaphore = DispatchSemaphore(value: loanBankerCount)
     }
-
-    private func processCustomers() {
-        while !customerQueue.isEmpty() {
-            if let customer = customerQueue.dequeue() {
-                banker.processCustomer(customer)
+    
+    func open() {
+        let startTime = Date()
+        Messages.openBank.printMessage()
+        let numberOfCustomers = Int.random(in: 10...30)
+        
+        print("고객 수: \(numberOfCustomers)")
+        setUpCustomerQueue(count: numberOfCustomers)
+        
+        while let customer = customerQueue.dequeue() {
+            switch customer.taskType {
+            case .deposit:
+                serveCustomer(semaphore: depositSemaphore, customer: customer)
+            case .loan:
+                serveCustomer(semaphore: loanSemaphore, customer: customer)
             }
+        }
+        group.wait()
+        let endTime = Date()
+        let elapsedTime = endTime.timeIntervalSince(startTime).formattedDecimal
+        Messages.closeBank(customerCount: numberOfCustomers, totalTime: elapsedTime).printMessage()
+    }
+    
+    private func serveCustomer(semaphore: DispatchSemaphore, customer: Customer) {
+        DispatchQueue.global().async(group: group) {
+            semaphore.wait()
+            self.banker.processCustomer(customer)
+            semaphore.signal()
+        }
+    }
+    
+    private func setUpCustomerQueue(count: Int) {
+        for number in 1...count {
+            let customer = Customer(number: number)
+            customerQueue.enqueue(customer)
         }
     }
 }
+
+
 
