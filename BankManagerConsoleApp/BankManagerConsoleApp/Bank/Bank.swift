@@ -58,26 +58,30 @@ final class Bank {
         let loanSemaphore = DispatchSemaphore(value: loanClerksCount)
         
         while let customer = self.waitingQueue.dequeue() {
-            DispatchQueue.global().async(group: group) { [self] in
-                group.enter()
-                switch customer.purpose {
-                case .loan:
-                    loanSemaphore.wait()
-                    self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
-                    self.bankLoanClerk.work(for: customer)
-                    self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
-                    loanSemaphore.signal()
-                    
-                case .deposit:
-                    depositSemaphore.wait()
-                    self.delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
-                    self.bankDepositClerk.work(for: customer)
-                    self.delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
-                    depositSemaphore.signal()
-                }
-                group.leave()
+            group.enter()
+            switch customer.purpose {
+            case .loan:
+                handlePurpose(semaphore: loanSemaphore, customer: customer)
+            case .deposit:
+                handlePurpose(semaphore: depositSemaphore, customer: customer)
             }
+            group.leave()
             handledCustomerCount += 1
+        }
+    }
+    private func handlePurpose(semaphore: DispatchSemaphore, customer: Customer) {
+        DispatchQueue.global().async(group: group) { [self] in
+            semaphore.wait()
+            manageWork(with: customer)
+            semaphore.signal()
+        }
+    }
+    
+    private func manageWork(with customer: Customer) {
+        DispatchQueue.global().sync {
+            delegate?.showCustomerWorkStart(customerNumber: customer.number, workType: customer.purpose.name)
+            bankLoanClerk.work(for: customer)
+            delegate?.showCustomerWorkDone(customerNumber: customer.number, workType: customer.purpose.name)
         }
     }
 }
