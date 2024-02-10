@@ -91,23 +91,23 @@ extension BankViewController: ManageLabel {
     
     func turn(customer: Customer) {
         DispatchQueue.main.async {
-            let customerLabel = self.bankView.waitStackView.arrangedSubviews.first { view in
-                guard let customerLabelNumber = view as? CustomerLabel else { return  false }
-                return customerLabelNumber.customer.numOfPerson == customer.numOfPerson
-            }
-            customerLabel?.removeFromSuperview()
+            self.removeLabel(view: self.bankView.waitStackView, customer: customer)
             self.bankView.taskStackView.addArrangedSubview(CustomerLabel(customer: customer))
         }
     }
     
     func quit(customer: Customer) {
         DispatchQueue.main.async {
-            let customerLabel = self.bankView.taskStackView.arrangedSubviews.first { view in
-                guard let customerLabelNumber = view as? CustomerLabel else { return false }
-                return customerLabelNumber.customer.numOfPerson == customer.numOfPerson
-            }
-            customerLabel?.removeFromSuperview()
+            self.removeLabel(view: self.bankView.taskStackView, customer: customer)
         }
+    }
+    
+    private func removeLabel(view: UIStackView, customer: Customer) {
+        let customerLabel = view.arrangedSubviews.first { view in
+            guard let customerLabelNumber = view as? CustomerLabel else { return  false }
+            return customerLabelNumber.customer.numOfPerson == customer.numOfPerson
+        }
+        customerLabel?.removeFromSuperview()
     }
 }
 
