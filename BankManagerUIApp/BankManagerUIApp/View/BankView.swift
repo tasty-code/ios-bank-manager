@@ -7,91 +7,95 @@
 
 import UIKit
 
+extension UIButton {
+    convenience init(title: String, titleColor: UIColor) {
+        self.init()
+        
+        self.setTitleColor(titleColor, for: .normal)
+        self.setTitle(title, for: .normal)
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+extension UILabel {
+    convenience init(text: String, font: UIFont = .systemFont(ofSize: 20), textColor: UIColor, backgroundColor: UIColor, textAlignment: NSTextAlignment = .center) {
+        self.init()
+        
+        self.text = text
+        self.font = font
+        self.textColor = textColor
+        self.backgroundColor = backgroundColor
+        self.textAlignment = textAlignment
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+extension UIStackView {
+    convenience init(axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, alignment: UIStackView.Alignment, sapcing: CGFloat = 0, subViews: [UIView] = []) {
+        self.init()
+        
+        self.axis = axis
+        self.distribution = distribution
+        self.alignment = alignment
+        self.spacing = spacing
+        self .translatesAutoresizingMaskIntoConstraints = false
+        for subView in subViews {
+            self.addArrangedSubview(subView)
+        }
+    }
+}
+
 class BankView: UIView {
     let addCustomerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("고객 10명 추가", for: .normal)
-        button.tintColor = .blue
-        button.isEnabled = true
-        button.translatesAutoresizingMaskIntoConstraints = false
+        let button = UIButton(title: "고객 10명 추가", titleColor: .blue)
+
         return button
     }()
     
     let resetButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("초기화", for: .normal)
-        button.tintColor = .red
-        button.translatesAutoresizingMaskIntoConstraints = false
+        let button = UIButton(title: "초기화", titleColor: .red)
         return button
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+       let stackView = UIStackView(axis: .horizontal, distribution: .fillEqually, alignment: .fill, sapcing: 2, subViews: [addCustomerButton, resetButton])
+
         return stackView
     }()
     
     let taskTimeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "업무시간 - 00:00:000"
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel(text: "업무시간 - 00:00:000", textColor: .black, backgroundColor: .clear)
+        
         return label
     }()
     
     private let waitLabel: UILabel = {
-        let label = UILabel()
-        label.text = "대기중"
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.textColor  = .white
-        label.textAlignment = .center
-        label.backgroundColor = .systemGreen
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel(text: "대기중",font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemGreen)
+        
         return label
     }()
     
     private let taskLabel: UILabel = {
-        let label = UILabel()
-        label.text = "업무중"
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.textColor = .white
-        label.textAlignment = .center
-        label.backgroundColor = .systemIndigo
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel(text: "업무중",font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemIndigo)
+
         return label
     }()
     
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [waitLabel, taskLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(axis: .horizontal, distribution: .fillEqually, alignment: .fill, subViews: [waitLabel, taskLabel])
+        
         return stackView
     }()
     
     private lazy var headerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [buttonStackView, taskTimeLabel, labelStackView])
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(axis: .vertical, distribution: .fillEqually, alignment: .fill, subViews: [buttonStackView, taskTimeLabel, labelStackView])
         
         return stackView
     }()
     
     lazy var waitStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(axis: .vertical, distribution: .fill, alignment: .fill, sapcing: 10)
+
         return stackView
     }()
     
@@ -103,11 +107,8 @@ class BankView: UIView {
     }()
     
     lazy var taskStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(axis: .vertical, distribution: .fill, alignment: .fill, sapcing: 10)
+
         return stackView
     }()
     
@@ -119,11 +120,8 @@ class BankView: UIView {
     }()
     
     private lazy var footerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [waitTableView, taskTableView])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(axis: .horizontal, distribution: .fillEqually, alignment: .fill, subViews: [waitTableView, taskTableView])
+
         return stackView
     }()
     
