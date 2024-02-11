@@ -6,8 +6,8 @@
 
 import Foundation
 
-class BankManager {
-    var delegate: MainViewDelegate?
+final class BankManager {
+    var delegate: MainViewController?
     private let banker: Banker = Banker()
     private(set) var isDepositQueueRunning: Bool = false
     private(set) var isLoanQueueRunning: Bool = false
@@ -17,14 +17,14 @@ class BankManager {
     private(set) var totalWaiting: [Customer] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.delegate?.appendCustomerView(self.totalWaiting, isWaiting: true)
+                self.delegate?.showCustomerView(self.totalWaiting, isWaiting: true)
             }
         }
     }
     private(set) var totalProgress: [Customer] = [] {
         didSet { 
             DispatchQueue.main.async {
-                self.delegate?.appendCustomerView(self.totalProgress, isWaiting: false)                
+                self.delegate?.showCustomerView(self.totalProgress, isWaiting: false)
             }
         }
     }

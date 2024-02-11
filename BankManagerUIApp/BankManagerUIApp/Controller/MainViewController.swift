@@ -16,7 +16,7 @@ final class MainViewController: UIViewController {
         self.mainView = MainView()
         self.manager = manager
         super.init(nibName: nil, bundle: nil)
-        manager.delegate = self.mainView
+        manager.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -57,5 +57,11 @@ final class MainViewController: UIViewController {
             let timeString = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
             self.mainView.setTimer("업무시간 - \(timeString)")
         }
+    }
+}
+
+extension MainViewController {
+    func showCustomerView(_ customers: [Customer], isWaiting: Bool) {
+        mainView.appendCustomerView(customers, isWaiting: isWaiting)
     }
 }
