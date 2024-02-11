@@ -58,9 +58,9 @@ struct ConsoleManager {
     private func handleCustomersTasks() {
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 1)
-        bankManager.employees[0].handleLoanTasks(with: customerManager.loanTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
-        bankManager.employees[1].handleDepositTasks(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
-        bankManager.employees[2].handleDepositTasks(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[0].handleLoanTasks(atTable: 0, with: customerManager.loanTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[1].handleDepositTasks(atTable: 1, with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[2].handleDepositTasks(atTable: 2, with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
         group.wait()
     }
     
