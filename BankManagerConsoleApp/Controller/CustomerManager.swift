@@ -6,7 +6,7 @@ struct CustomerManager {
         return loanTicketMachine.totalLength() + depositTicketMachine.totalLength()
     }
     
-    mutating func arrangeCustomers() {
+    func arrangeCustomers() {
         let number = Int.random(in: 10...30)
         for ticketNumber in 1...number {
             guard let customerChoice = BankingService.allCases.randomElement() else { return }
@@ -16,15 +16,15 @@ struct CustomerManager {
         }
     }
     
-    mutating func dequeueLoanCustomerFromQueue() -> Customer? {
+    func dequeueLoanCustomerFromQueue() -> Customer? {
         return loanTicketMachine.dequeue()
     }
     
-    mutating func dequeueDepositCustomerFromQueue() -> Customer? {
+    func dequeueDepositCustomerFromQueue() -> Customer? {
         return depositTicketMachine.dequeue()
     }
     
-    mutating func resetCustomer() {
+    func resetCustomer() {
         loanTicketMachine.clean()
         depositTicketMachine.clean()
     }

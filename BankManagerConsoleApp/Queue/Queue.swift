@@ -1,17 +1,17 @@
 
-struct Queue<T: Equatable> {
+class Queue<T: Equatable> {
     private(set) var linkedList: LinkedList<T> = LinkedList()
     var isEmpty: Bool { linkedList.isEmpty }
     
-    mutating func enqueue(with item: T) {
+    func enqueue(with item: T) {
         linkedList.appendNodeAtRear(with: item)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         return linkedList.removeNodeFromFront()
     }
     
-    mutating func clean() {
+    func clean() {
         linkedList.clean()
     }
     

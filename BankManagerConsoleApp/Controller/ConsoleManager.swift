@@ -37,19 +37,11 @@ struct ConsoleManager {
         }
     }
     
-    private mutating func executeBankingOperation() {
+    private func executeBankingOperation() {
         customerManager.arrangeCustomers()
-        
-        let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 1)
-        let mutableCustomerManager = self.customerManager
-        let employees = Employee()
-        
         let bankingServiceStart = Date.timeIntervalSinceReferenceDate
-        employees.handleTasks(with: mutableCustomerManager, bankManager: bankManager, group: group, semaphore: semaphore)
-        group.wait()
+        handleCustomersTasks()
         let bankingServiceEnd = Date.timeIntervalSinceReferenceDate
-    
         bankManager.reportDeadlineSummary(with: customerManager, startTime: bankingServiceStart, endTime: bankingServiceEnd)
         customerManager.resetCustomer()
     }
@@ -59,6 +51,15 @@ struct ConsoleManager {
             throw InputError.wrongInput
         }
         return input
+    }
+    
+    private func handleCustomersTasks() {
+        let group = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 1)
+        bankManager.employees[0].handleTasksLoan(with: customerManager.loanTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[1].handleTasksDeposit(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[2].handleTasksDeposit(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        group.wait()
     }
     
     private func printMenuOfBank() {
