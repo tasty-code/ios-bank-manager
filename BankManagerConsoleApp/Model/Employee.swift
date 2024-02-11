@@ -27,8 +27,7 @@ struct Employee {
                 semaphore?.wait()
                 guard let customer = customerDepositQueue.dequeue(), let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks(), let definedCustomerTicketNumber = customerTicketNumber, let definedCustomerBankingService = customerBankingService else { return }
                 semaphore?.signal()
-                
-                guard let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks() else { return }
+           
                 print("🥵 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
                 print("🥵 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 종료")
@@ -41,7 +40,6 @@ struct Employee {
                 guard let customer = customerDepositQueue.dequeue(), let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks(), let definedCustomerTicketNumber = customerTicketNumber, let definedCustomerBankingService = customerBankingService else { return }
                 semaphore?.signal()
                 
-                guard let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks() else { return }
                 print("🥶 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
                 print("🥶 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 종료")
