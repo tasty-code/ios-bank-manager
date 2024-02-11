@@ -10,8 +10,8 @@ struct Employee {
         self.depositTask = depositTask
     }
     
-    func handleLoanTasks(atTable: Int, with customerLoanQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
-        bankManager.employees[0].loanTask?.async(group: group) {
+    func handleLoanTasks(atTable index: Int, with customerLoanQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup) {
+        bankManager.employees[index].loanTask?.async(group: group) {
             while let customer = customerLoanQueue.dequeue() {
                 guard let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks(), let definedCustomerTicketNumber = customerTicketNumber, let definedCustomerBankingService = customerBankingService else { return }
                 print("🌝 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 시작")
@@ -21,10 +21,10 @@ struct Employee {
         }
     }
     
-    func handleDepositTasks(atTable: Int, with customerDepositQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore) {
+    func handleDepositTasks(atTable index: Int, with customerDepositQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore) {
         
-        if atTable == 1 {
-            bankManager.employees[1].depositTask?.async(group: group) {
+        if index == 1 {
+            bankManager.employees[index].depositTask?.async(group: group) {
                 semaphore.wait()
                 while let customer = customerDepositQueue.dequeue() {
                     
@@ -36,8 +36,8 @@ struct Employee {
                     print("🥵 \(definedCustomerTicketNumber)번 고객 \(definedCustomerBankingService.name)업무 종료")
                 }
             }
-        } else {
-            bankManager.employees[2].depositTask?.async(group: group) {
+        } else if index == 2 {
+            bankManager.employees[index].depositTask?.async(group: group) {
                 semaphore.wait()
                 while let customer = customerDepositQueue.dequeue() {
                     guard let (customerTicketNumber, customerBankingService) = customer.askEmployeeHandleTasks(), let definedCustomerTicketNumber = customerTicketNumber, let definedCustomerBankingService = customerBankingService else { return }
