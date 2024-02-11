@@ -2,11 +2,19 @@
 struct CustomerManager {
     private(set) var loanTicketMachine: Queue<Customer> = Queue<Customer>()
     private(set) var depositTicketMachine: Queue<Customer> = Queue<Customer>()
-    var customerNumber: Int {
-        return loanTicketMachine.totalLength() + depositTicketMachine.totalLength()
+    var customerNumber = CustomerNumber(loan: 0, deposit: 0)
+    
+    var totalCustomerNumber: Int {
+        return customerNumber.loan + customerNumber.deposit
     }
     
-    func arrangeCustomers() {
+    mutating func arrangeCustomers() {
+        createCustomers()
+        customerNumber.loan = loanTicketMachine.totalLength()
+        customerNumber.deposit = depositTicketMachine.totalLength()
+    }
+    
+    func createCustomers() {
         let number = Int.random(in: 10...30)
         for ticketNumber in 1...number {
             guard let customerChoice = BankingService.allCases.randomElement() else { return }

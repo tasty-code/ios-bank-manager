@@ -37,12 +37,14 @@ struct ConsoleManager {
         }
     }
     
-    private func executeBankingOperation() {
+    private mutating func executeBankingOperation() {
         customerManager.arrangeCustomers()
+        
         let bankingServiceStart = Date.timeIntervalSinceReferenceDate
         handleCustomersTasks()
         let bankingServiceEnd = Date.timeIntervalSinceReferenceDate
-        bankManager.reportDeadlineSummary(with: customerManager, startTime: bankingServiceStart, endTime: bankingServiceEnd)
+        
+        bankManager.reportDeadlineSummary(with: customerManager.totalCustomerNumber, startTime: bankingServiceStart, endTime: bankingServiceEnd)
         customerManager.resetCustomer()
     }
     
@@ -56,9 +58,9 @@ struct ConsoleManager {
     private func handleCustomersTasks() {
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 1)
-        bankManager.employees[0].handleTasksLoan(with: customerManager.loanTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
-        bankManager.employees[1].handleTasksDeposit(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
-        bankManager.employees[2].handleTasksDeposit(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[0].handleLoanTasks(with: customerManager.loanTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[1].handleDepositTasks(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
+        bankManager.employees[2].handleDepositTasks(with: customerManager.depositTicketMachine, bankManager: bankManager, group: group, semaphore: semaphore)
         group.wait()
     }
     

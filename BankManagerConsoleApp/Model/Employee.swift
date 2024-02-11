@@ -10,7 +10,7 @@ struct Employee {
         self.depositTask = depositTask
     }
     
-    func handleTasksLoan(with customerLoanQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
+    func handleLoanTasks(with customerLoanQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
         bankManager.employees[0].loanTask?.async(group: group) {
             while customerLoanQueue.isEmpty == false {
                 guard let customer = customerLoanQueue.dequeue() else { return }
@@ -22,7 +22,7 @@ struct Employee {
         }
     }
     
-    func handleTasksDeposit(with customerDepositQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
+    func handleDepositTasks(with customerDepositQueue: Queue<Customer>, bankManager: BankManager, group: DispatchGroup, semaphore: DispatchSemaphore? = nil) {
         bankManager.employees[1].depositTask?.async(group: group) {
             while customerDepositQueue.isEmpty == false {
                 semaphore?.wait()
