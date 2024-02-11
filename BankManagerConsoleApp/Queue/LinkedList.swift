@@ -58,6 +58,7 @@ struct LinkedList<T: Equatable> {
                 return foundLocation
             }
         }
+        
         return nil
     }
 }
