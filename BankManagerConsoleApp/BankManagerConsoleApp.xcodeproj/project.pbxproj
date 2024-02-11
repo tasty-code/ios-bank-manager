@@ -102,8 +102,8 @@
 		9B2642662B68DAF0008FA05F /* Queue */ = {
 			isa = PBXGroup;
 			children = (
-				C7E61A802B6123A600D55D4A /* LinkedList.swift */,
 				C7E61A822B6123B600D55D4A /* Queue.swift */,
+				C7E61A802B6123A600D55D4A /* LinkedList.swift */,
 				C7E61A7E2B61239700D55D4A /* Node.swift */,
 			);
 			path = Queue;
