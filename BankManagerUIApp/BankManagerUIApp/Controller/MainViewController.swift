@@ -40,13 +40,13 @@ final class MainViewController: UIViewController {
         stopTimer()
     }
     
-    func stopTimer() {
+    private func stopTimer() {
         startTime = nil
         isTimerRepeats = false
         mainView.setTimer("업무시간 - 00:00:000")
     }
     
-    func countElapsedTime() {
+    private func countElapsedTime() {
         if !isTimerRepeats {
             startTime = Date()
             isTimerRepeats = true
