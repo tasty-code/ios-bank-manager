@@ -50,6 +50,7 @@ extension BankManager {
             while !(self.depositCustomerQueue.isEmpty()) {
                 semaphore.wait()
                 guard let node = self.depositCustomerQueue.dequeue() else {
+                    semaphore.signal()
                     return
                 }
                 let customer = node.value
@@ -70,6 +71,7 @@ extension BankManager {
             while !(self.loanCustomerQueue.isEmpty()) {
                 semaphore.wait()
                 guard let node = self.loanCustomerQueue.dequeue() else {
+                    semaphore.signal()
                     return
                 }
                 let customer = node.value
@@ -131,6 +133,8 @@ extension BankManager {
         customerCountToStart = 0
         depositCustomerQueue.clear()
         loanCustomerQueue.clear()
+        isDepositQueueRunning = false
+        isLoanQueueRunning = false
     }
 }
 
