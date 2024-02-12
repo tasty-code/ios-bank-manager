@@ -44,46 +44,52 @@ extension BankManager {
     func startBankingProcess(completion: @escaping () -> Void) {
         let group: DispatchGroup = DispatchGroup()
         
-        let depositTask = DispatchWorkItem { [self] in
-            isDepositQueueRunning = true
+        let depositTask = DispatchWorkItem { [weak self] in
+            self?.isDepositQueueRunning = true
             let depositSemaphore = DispatchSemaphore(value: 2)
-            while !(self.depositCustomerQueue.isEmpty()) {
+            guard let isEmpty = self?.depositCustomerQueue.isEmpty() else {
+                return
+            }
+            while !isEmpty {
                 depositSemaphore.wait()
-                guard let node = self.depositCustomerQueue.dequeue() else {
+                guard let node = self?.depositCustomerQueue.dequeue() else {
                     depositSemaphore.signal()
                     return
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
-                    self.appendCustomerToProgress(customer)
-                    self.banker.provideService(to: customer)
-                    self.removeCustomerFromProgress(customer)
+                    self?.appendCustomerToProgress(customer)
+                    self?.banker.provideService(to: customer)
+                    self?.removeCustomerFromProgress(customer)
                     depositSemaphore.signal()
                 }
-                self.depositQueue.async(execute: task)
+                self?.depositQueue.async(execute: task)
             }
-            self.isDepositQueueRunning = false
+            self?.isDepositQueueRunning = false
         }
         
-        let loanTask = DispatchWorkItem { [self] in
-            isLoanQueueRunning = true
+        let loanTask = DispatchWorkItem { [weak self] in
+            self?.isLoanQueueRunning = true
             let loanSemaphore = DispatchSemaphore(value: 1)
-            while !(self.loanCustomerQueue.isEmpty()) {
+            guard let isEmpty = self?.loanCustomerQueue.isEmpty() else {
+                return
+            }
+            while !isEmpty {
                 loanSemaphore.wait()
-                guard let node = self.loanCustomerQueue.dequeue() else {
+                guard let node = self?.loanCustomerQueue.dequeue() else {
                     loanSemaphore.signal()
                     return
                 }
                 let customer = node.value
                 let task = DispatchWorkItem {
-                    self.appendCustomerToProgress(customer)
-                    self.banker.provideService(to: customer)
-                    self.removeCustomerFromProgress(customer)
+                    self?.appendCustomerToProgress(customer)
+                    self?.banker.provideService(to: customer)
+                    self?.removeCustomerFromProgress(customer)
                     loanSemaphore.signal()
                 }
-                self.loanQueue.async(execute: task)
+                self?.loanQueue.async(execute: task)
             }
-            self.isLoanQueueRunning = false
+            self?.isLoanQueueRunning = false
             DispatchQueue.main.async {
                 completion()
             }
