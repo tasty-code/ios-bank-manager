@@ -4,11 +4,9 @@ import Foundation
 class Queue<T: Equatable> {
     var delegate: BankManager?
     private let linkedList: LinkedList<T>
-    private(set) var semaphore: DispatchSemaphore
     
-    init(linkedList: LinkedList<T>, semaphoreValue: Int) {
+    init(linkedList: LinkedList<T>) {
         self.linkedList = linkedList
-        self.semaphore = DispatchSemaphore(value: semaphoreValue)
     }
     
     func isEmpty() -> Bool {

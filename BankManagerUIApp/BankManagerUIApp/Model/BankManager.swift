@@ -29,8 +29,8 @@ final class BankManager {
         }
     }
     
-    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 2)
-    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList(), semaphoreValue: 1)
+    private var depositCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList())
+    private var loanCustomerQueue: Queue<Customer> = Queue(linkedList: LinkedList())
     private let depositQueue: DispatchQueue = DispatchQueue(label: "예금업무큐", attributes: .concurrent)
     private let loanQueue: DispatchQueue = DispatchQueue(label: "대출업무큐")
     
@@ -46,11 +46,11 @@ extension BankManager {
         
         let depositTask = DispatchWorkItem { [self] in
             isDepositQueueRunning = true
-            let semaphore = self.depositCustomerQueue.semaphore
+            let depositSemaphore = DispatchSemaphore(value: 2)
             while !(self.depositCustomerQueue.isEmpty()) {
-                semaphore.wait()
+                depositSemaphore.wait()
                 guard let node = self.depositCustomerQueue.dequeue() else {
-                    semaphore.signal()
+                    depositSemaphore.signal()
                     return
                 }
                 let customer = node.value
@@ -58,7 +58,7 @@ extension BankManager {
                     self.appendCustomerToProgress(customer)
                     self.banker.provideService(to: customer)
                     self.removeCustomerFromProgress(customer)
-                    semaphore.signal()
+                    depositSemaphore.signal()
                 }
                 self.depositQueue.async(execute: task)
             }
@@ -67,11 +67,11 @@ extension BankManager {
         
         let loanTask = DispatchWorkItem { [self] in
             isLoanQueueRunning = true
-            let semaphore = self.loanCustomerQueue.semaphore
+            let loanSemaphore = DispatchSemaphore(value: 1)
             while !(self.loanCustomerQueue.isEmpty()) {
-                semaphore.wait()
+                loanSemaphore.wait()
                 guard let node = self.loanCustomerQueue.dequeue() else {
-                    semaphore.signal()
+                    loanSemaphore.signal()
                     return
                 }
                 let customer = node.value
@@ -79,7 +79,7 @@ extension BankManager {
                     self.appendCustomerToProgress(customer)
                     self.banker.provideService(to: customer)
                     self.removeCustomerFromProgress(customer)
-                    semaphore.signal()
+                    loanSemaphore.signal()
                 }
                 self.loanQueue.async(execute: task)
             }
