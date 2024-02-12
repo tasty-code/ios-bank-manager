@@ -136,7 +136,7 @@ extension BankManager {
     }
     
     func reset() {
-        customerCountToStart = 0
+        customerCountToStart = 1
         depositCustomerQueue.clear()
         loanCustomerQueue.clear()
         isDepositQueueRunning = false
