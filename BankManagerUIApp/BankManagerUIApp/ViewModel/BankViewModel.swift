@@ -14,19 +14,19 @@ final class BankViewModel {
     
     private var waitingList: [Client] {
         didSet {
-            updateWaitingList()
+            self.delegate?.updateWaitingList(with: self.waitingList)
         }
     }
     
     private var workingList: [Client] {
         didSet {
-            updateWorkingList()
+            self.delegate?.updateWorkingList(with: self.workingList)
         }
     }
     
     private var timeString: String {
         didSet {
-            updateTime()
+            self.delegate?.updateTime(with: self.timeString)
         }
     }
     
@@ -62,41 +62,6 @@ extension BankViewModel: BankIntput {
 // MARK: - BankManagerDelegate
 extension BankViewModel: BankManagerDelegate {
     func handleDequeueClient(client: Client) {
-        removeWaitingClient(client: client)
-    }
-    
-    func handleEnqueueClient(client: Client) {
-        addWaitingClient(client: client)
-    }
-    
-    func handleEndTask(client: Client) {
-        removeWorkingClient(client: client)
-    }
-
-    func handleStartTask(client: Client) {
-        addWorkingClient(client: client)
-    }
-
-    func handleClearClient() {
-        clearClients()
-    }
-    
-    func handleTimer(timeString: String) {
-        self.timeString = timeString
-    }
-}
-
-// MARK: - Private Methods
-private extension BankViewModel {
-    func addWaitingClient(client: Client) {
-        DispatchQueue.global().async {
-            self.waitingSemaphore.wait()
-            self.waitingList.append(client)
-            self.waitingSemaphore.signal()
-        }
-    }
-    
-    func removeWaitingClient(client: Client) {
         DispatchQueue.global().async {
             self.waitingSemaphore.wait()
             guard
@@ -107,15 +72,15 @@ private extension BankViewModel {
         }
     }
     
-    func addWorkingClient(client: Client) {
+    func handleEnqueueClient(client: Client) {
         DispatchQueue.global().async {
-            self.workingSemaphore.wait()
-            self.workingList.append(client)
-            self.workingSemaphore.signal()
+            self.waitingSemaphore.wait()
+            self.waitingList.append(client)
+            self.waitingSemaphore.signal()
         }
     }
     
-    func removeWorkingClient(client: Client) {
+    func handleEndTask(client: Client) {
         DispatchQueue.global().async {
             self.workingSemaphore.wait()
             guard
@@ -126,7 +91,15 @@ private extension BankViewModel {
         }
     }
     
-    func clearClients() {
+    func handleStartTask(client: Client) {
+        DispatchQueue.global().async {
+            self.workingSemaphore.wait()
+            self.workingList.append(client)
+            self.workingSemaphore.signal()
+        }
+    }
+    
+    func handleClearClient() {
         DispatchQueue.global().async {
             self.waitingSemaphore.wait()
             self.waitingList.removeAll()
@@ -134,18 +107,8 @@ private extension BankViewModel {
             self.waitingSemaphore.signal()
         }
     }
-}
-
-private extension BankViewModel {
-    func updateWaitingList() {
-        self.delegate?.updateWaitingList(with: self.waitingList)
-    }
     
-    func updateWorkingList() {
-        self.delegate?.updateWorkingList(with: self.workingList)
-    }
-    
-    func updateTime() {
-        self.delegate?.updateTime(with: self.timeString)
+    func handleTimer(timeString: String) {
+        self.timeString = timeString
     }
 }
