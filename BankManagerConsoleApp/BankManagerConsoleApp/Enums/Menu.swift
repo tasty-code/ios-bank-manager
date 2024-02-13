@@ -3,11 +3,11 @@ enum Menu {
     case exit
     case wrongInput
     
-    init(input: Int) {
+    init(input: String) {
         switch input {
-        case 1:
+        case "1":
             self = .open
-        case 2:
+        case "2":
             self = .exit
         default:
             self = .wrongInput

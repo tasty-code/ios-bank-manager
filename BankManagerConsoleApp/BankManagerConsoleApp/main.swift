@@ -1,2 +1,2 @@
-let bank = Bank(bankManagerCount: 1)
+let bank = Bank()
 bank.process()
