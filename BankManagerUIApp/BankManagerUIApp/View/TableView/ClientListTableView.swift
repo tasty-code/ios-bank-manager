@@ -9,7 +9,6 @@ import UIKit
 
 final class ClientListTableView: UITableView {
     typealias ClientCell = ClientListTableViewCell
-    typealias DataSource = ClientListDataSource
     typealias HeaderView = ClientListHeaderView
     
     let type: BankList
