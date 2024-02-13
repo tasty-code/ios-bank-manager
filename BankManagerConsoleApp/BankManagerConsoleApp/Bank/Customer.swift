@@ -1,8 +1,13 @@
+import Foundation
+
 struct Customer {
     let waitingNumber: Int
-    let taskTime: Double = 0.7
+    var bankingService: BankingService = .deposit
+    let taskTime: TimeInterval
     
-    init(waitingNumber: Int) {
+    init(waitingNumber: Int, taskType: BankingService) {
         self.waitingNumber = waitingNumber
+        self.bankingService = taskType
+        self.taskTime = taskType.defaultTaskTime
     }
 }

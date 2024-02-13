@@ -2,10 +2,10 @@ protocol PrintableMessage { }
 
 extension PrintableMessage where Self: Banker {
     func printStartTaskMessage(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        print("\(customer.waitingNumber)번 고객 \(customer.bankingService.description) 업무 시작")
     }
     func printCompleteTaskMessage(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print("\(customer.waitingNumber)번 고객 \(customer.bankingService.description) 업무 완료")
     }
 }
 

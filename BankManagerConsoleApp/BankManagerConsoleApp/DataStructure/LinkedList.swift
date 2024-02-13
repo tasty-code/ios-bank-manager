@@ -28,6 +28,7 @@ final class LinkedList<T> {
         head = currentHead.next
         return currentHead.value
         }
+    
     func clear() {
         head = nil
         tail = nil
