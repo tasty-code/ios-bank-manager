@@ -66,7 +66,10 @@ extension BankViewModel: BankManagerDelegate {
             self.waitingSemaphore.wait()
             guard
                 let index = self.waitingList.firstIndex(where: { target in client == target })
-            else { return }
+            else {
+                self.waitingSemaphore.signal()
+                return
+            }
             self.waitingList.remove(at: index)
             self.waitingSemaphore.signal()
         }
@@ -76,7 +79,7 @@ extension BankViewModel: BankManagerDelegate {
         DispatchQueue.global().async {
             self.waitingSemaphore.wait()
             self.waitingList.append(client)
-            self.waitingSemaphore.signal()
+            self.waitingSemaphore.signal() 
         }
     }
     
@@ -85,7 +88,10 @@ extension BankViewModel: BankManagerDelegate {
             self.workingSemaphore.wait()
             guard
                 let index = self.workingList.firstIndex(where: { target in client == target })
-            else { return }
+            else {
+                self.workingSemaphore.signal()
+                return
+            }
             self.workingList.remove(at: index)
             self.workingSemaphore.signal()
         }
@@ -102,9 +108,11 @@ extension BankViewModel: BankManagerDelegate {
     func handleClearClient() {
         DispatchQueue.global().async {
             self.waitingSemaphore.wait()
+            self.workingSemaphore.wait()
             self.waitingList.removeAll()
             self.workingList.removeAll()
             self.waitingSemaphore.signal()
+            self.workingSemaphore.signal()
         }
     }
     
