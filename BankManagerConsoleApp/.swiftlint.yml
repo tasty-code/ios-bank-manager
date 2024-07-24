@@ -4,6 +4,7 @@ disabled_rules:
 - trailing_comma
 - class_delegate_protocol
 - sorted_imports
+- closure_parameter_position
 
 force_unwrapping:
   severity: error

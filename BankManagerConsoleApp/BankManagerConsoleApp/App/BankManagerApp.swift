@@ -6,68 +6,42 @@
 //
 
 final class BankManagerApp {
-    private let input: TextInputReadable
-    
-    private let output: TextOutputDisplayable
-    
-    private var isRunning: Bool = true
-    
-    init(inputHandler: TextInputReadable, outputHandler: TextOutputDisplayable) {
-        self.input = inputHandler
-        self.output = outputHandler
-    }
-    
     func start() {
-        while self.isRunning {
-            startLoop()
-        }
+        startBank()
     }
 }
 
 private extension BankManagerApp {
-    func startLoop() {
-        self.output.display(output: BankManagerAppMenu.allMenusPrompt)
-        do {
-            let input = try self.input.readInput(prompt: "입력:")
-            let menu = try BankManagerAppMenu(input: input)
-            handle(menu: menu)
-        } catch {
-            handle(error: error)
-        }
-    }
-    
-    func startBank() throws {
-        guard let clientCount = (10...30).randomElement() else { throw BankManagerAppError.outOfIndex }
-        let dispenser = try TicketDispenser(totalClientCount: clientCount)
-        
-        let orders = [
-            Order(taskType: .loan, bankerCount: 1),
-            Order(taskType: .deposit, bankerCount: 2),
+    func startBank() {
+        let tasks: [BankTask: ClientQueueManagable] = [
+            .loan: ClientManager(),
+            .deposit: ClientManager(),
         ]
-        
-        let bankManager = BankManager(
-            textOut: self.output,
-            dispenser: dispenser
+
+        let orders: [BankTask: Int] = [.loan: 2, .deposit: 3]
+        let bankers = makeBankers(
+            tasks: tasks,
+            orders: orders
         )
         
-        bankManager.runBank(with: orders, numberOfClient: clientCount)
+        BankManager(
+            bankers: bankers,
+            clientManager: tasks
+        ).start()
     }
-    
-    func handle(menu: BankManagerAppMenu) {
-        switch menu {
-        case .open:
-            do {
-                try startBank()
-            } catch {
-                handle(error: error)
-//                return
+
+    func makeBankers(
+        tasks: [BankTask: any ClientQueueManagable],
+        orders: [BankTask: Int]
+    ) -> [Banker] {
+        var result = [Banker]()
+        for (type, bankerCount) in orders {
+            (1...bankerCount).forEach { _ in
+                guard let clientManager = tasks[type] else { return }
+                let banker = Banker(clientManager: clientManager)
+                result.append(banker)
             }
-        case .end:
-            self.isRunning = false
         }
-    }
-    
-    func handle(error: Error) {
-        self.output.display(output: error.localizedDescription)
+        return result
     }
 }
